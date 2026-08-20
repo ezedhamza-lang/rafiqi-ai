@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-20T06:25:42.228Z",
+  "generatedAt": "2026-08-20T15:20:57.238Z",
   "series": [
     {
       "id": "iqra",
@@ -18,28 +18,28 @@
     {
       "id": "anisi-stories-2",
       "file": "anisi-stories-2-data.json",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "count": 25
     },
     {
       "id": "anisi-stories-ai",
       "file": "anisi-stories-ai-data.json",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "count": 20
     },
     {
       "id": "salem",
       "file": "salem-stories-data.json",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "count": 20
     },
     {
       "id": "haras-watani",
       "file": "haras-watani-stories-data.json",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "count": 100
     }
@@ -279,1155 +279,1155 @@
     {
       "id": 1,
       "title": "رِحَابُ وَرَبِيعٌ عِنْدَ بَابِ اَلْمَدْرَسَةِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 2,
       "title": "رَبِيعٌ يَلْقَى أَمِيرَةَ وَمَالِكًا",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 3,
       "title": "أَمِيرَةُ فِي طَابُورِ اَلصَّبَاحِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 4,
       "title": "رَبِيعٌ يُنْشِدُ أَمَامَ اَلسَّبُّورَةِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 5,
       "title": "رُسُومَاتٌ جَمِيلَةٌ فِي حِصَّةِ اَلرَّسْمِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 6,
       "title": "أَحْمَدُ عِنْدَ دَارِ صَدِيقِهِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 7,
       "title": "أَحْمَدُ فِي بُسْتَانِ اَلْجَدَّةِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 8,
       "title": "فِنَاءُ دَارِ اَلْجَدَّةِ نَادِرَةَ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 9,
       "title": "أَحْمَدُ يَرْسُمُ بُسْتَانًا",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 10,
       "title": "وَدَاعٌ عِنْدَ نِهَايَةِ اَلزِّيَارَةِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 11,
       "title": "فِرْدَوْسُ فِي صَبَاحِهَا",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 12,
       "title": "سَمَاحُ يَوْمَ اَلتَّلْقِيحِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 13,
       "title": "طَارِقٌ وَفِرْدَوْسُ فِي رِوَاقِ اَلْمَدْرَسَةِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 14,
       "title": "حَاتِمٌ يُرَتِّبُ غُرْفَتَهُ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 15,
       "title": "فِرْدَوْسُ تُرِي فِرَاسًا صُوَرَهَا",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 16,
       "title": "سَنَاءُ تَسْأَلُ أُمَّهَا",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 17,
       "title": "طَارِقٌ وَفَاطِمَةُ فِي طَرِيقِ المَدْرَسَةِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 18,
       "title": "حِكَايَةُ الجَدَّةِ سَلْوَى",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 19,
       "title": "زَيْنَبُ فِي مَزْرَعَةِ العَمِّ حَمْزَةَ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 20,
       "title": "الأَصْدِقَاءُ يَسْتَعِدُّونَ لِلشِّتَاءِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 21,
       "title": "زِيَارَةُ المَخْبَزَةِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 22,
       "title": "نَاجِحٌ فِي نَادِي النِّجَارَةِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 23,
       "title": "خُلُودُ فِي مَعْمَلِ الفَخَّارِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 24,
       "title": "شُكْرِي عِنْدَ النَّقَّاشِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 25,
       "title": "يَوْمُ المِهَنِ التَّقْلِيدِيَّةِ",
-      "grade": "year2",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-2"
     },
     {
       "id": 1,
       "title": "أَحْمَدُ يَكْتَشِفُ الرَّوْبُوتَ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 2,
       "title": "مَا هُوَ الذَّكَاءُ الاصْطِنَاعِيُّ؟",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 3,
       "title": "أَحْمَدُ وَالْمُسَاعِدُ الذَّكِيُّ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 4,
       "title": "أَحْمَدُ يَبْنِي رَوْبُوتًا",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 5,
       "title": "أَحْمَدُ فِي الْوَاقِعِ الافْتِرَاضِيِّ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 6,
       "title": "أَحْمَدُ وَالسَّيَّارَةُ الذَّكِيَّةُ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 7,
       "title": "أَحْمَدُ وَالْكَامِيرَا الذَّكِيَّةُ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 8,
       "title": "أَحْمَدُ وَالْفَنَّانُ الرَّقَمِيُّ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 9,
       "title": "أَحْمَدُ وَرُوبُوتُ الصَّوْتِ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 10,
       "title": "أَحْمَدُ فِي الْبَيْتِ الذَّكِيِّ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 11,
       "title": "أَحْمَدُ يَتَعَلَّمُ الْبُرْمِجَةَ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 12,
       "title": "أَحْمَدُ وَالرُّوبُوتُ الْمُتَرْجِمُ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 13,
       "title": "أَحْمَدُ وَالذَّكَاءُ الاصْطِنَاعِيُّ فِي الطِّبِّ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 14,
       "title": "أَحْمَدُ وَرُوبُوتُ الْمُوسِيقَى",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 15,
       "title": "أَحْمَدُ يَسْتَكْشِفُ الْفَضَاءَ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 16,
       "title": "أَحْمَدُ وَالرُّوبُوتُ الْمُزَارِعُ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 17,
       "title": "أَحْمَدُ وَمُعَلِّمُ الذَّكَاءِ الاصْطِنَاعِيِّ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 18,
       "title": "أَحْمَدُ وَصَدِيقُهُ الرَّوْبُوتُ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 19,
       "title": "أَحْمَدُ يَحْلُمُ بِالْمُسْتَقْبَلِ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 20,
       "title": "أَحْمَدُ بَطَلُ الذَّكَاءِ الاصْطِنَاعِيِّ",
-      "grade": "year3",
+      "grade": "year1",
       "subject": "anisi",
       "series": "anisi-stories-ai"
     },
     {
       "id": 1,
       "title": "سَالِمُ يَرْمِي الْقُمَامَةَ فِي مَكَانِهَا",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 2,
       "title": "النَّهْرُ الْمُلَوَّثُ",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 3,
       "title": "لِنَحْمِ شَجَرَةً!",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 4,
       "title": "حَدِيقَةُ الْحَيِّ النَّظِيفَةُ",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 5,
       "title": "سَالِمُ يُنَظِّفُ شَارِعَهُ",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 6,
       "title": "بَحْرُنَا الْجَمِيلُ",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 7,
       "title": "هَوَاءٌ نَقِيٌّ",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 8,
       "title": "سَالِمُ يُعِيدُ التَّدْوِيرَ",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 9,
       "title": "الطُّيُورُ فِي حَدِيقَتِنَا",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 10,
       "title": "لِنَحْفَظِ الْمِيَاهَ",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 11,
       "title": "سَالِمُ وَالْحَيَوَانَاتُ الْأَلِيفَةُ",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 12,
       "title": "حَدِيقَةُ الْمَدْرَسَةِ",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 13,
       "title": "نَظَافَةُ الْبَيْتِ",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 14,
       "title": "إِلَى أَيْنَ تَذْهَبُ الْقُمَامَةُ؟",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 15,
       "title": "سَالِمُ وَالزُّهُورُ",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 16,
       "title": "الطَّاقَةُ الشَّمْسِيَّةُ",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 17,
       "title": "سَالِمُ يَزْرَعُ شَجَرَةً",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 18,
       "title": "النَّحْلَةُ وَالْأَزْهَارُ",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 19,
       "title": "نَظَافَةُ الْمَكَانِ الْعَامِّ",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 20,
       "title": "سَالِمُ بَطَلُ الْبِيئَةِ",
-      "grade": "year4",
+      "grade": "year1",
       "subject": "anisi",
       "series": "salem"
     },
     {
       "id": 1,
       "title": "يَوْمِي الْأَوَّلُ فِي الْمَدْرَسَةِ (تُونِسُ الْعَاصِمَةُ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 2,
       "title": "سَلْمَى وَالزَّيْتُونَةُ الْمُشْرِقَةُ (فَنَاءُ الْمَدْرَسَةِ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 3,
       "title": "رَفِيقِي يَبْحَثُ عَنْ رِيشَتِهِ (دَاخِلُ الْقِسْمِ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 4,
       "title": "صَوْتٌ فِي الْقِسْمِ (الْقِسْمُ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 5,
       "title": "رَامِي يَلْعَبُ خَرْبَقَةً (فَنَاءُ الْمَدْرَسَةِ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 6,
       "title": "مِحْفَظَةُ الْأَلْوَانِ (الطَّرِيقُ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 7,
       "title": "حَلْوَيَاتُ الْجَدَّةِ زَهْرَةَ (بَيْتُ الْجَدَّةِ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 8,
       "title": "نُورَةُ النَّحْلَةُ الْمُجْتَهِدَةُ (حَدِيقَةُ الْأَزْهَارِ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 9,
       "title": "يَوْمٌ فِي الْمَدِينَةِ (مَدِينَةُ تُونِسَ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 10,
       "title": "عِيدُ الْمَدْرَسَةِ (الْمَدْرَسَةُ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 11,
       "title": "جَبَلُ زَغْوَانَ الْأَخْضَرُ (زَغْوَانُ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 12,
       "title": "فَخَّارُ نَابُل (نَابُل)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 13,
       "title": "عُصْفُورُ الْحَدِيقَةِ (حَدِيقَةٌ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 14,
       "title": "قِطَّةُ الْجَارَةِ (الْحَيُّ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 15,
       "title": "حِصَانُ الْمَزْرَعَةِ (مَزْرَعَةٌ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 16,
       "title": "بَقَرَةُ الْحَلِيبِ (مَزْرَعَةٌ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 17,
       "title": "دَجَاجَةٌ وَفِرَاخٌ (فِنَاءُ الْبَيْتِ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 18,
       "title": "سَمَكَةُ الْبُحَيْرَةِ (بُحَيْرَةٌ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 19,
       "title": "أَرْنَبُ الْغَابَةِ (غَابَةٌ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 20,
       "title": "فُرَاشَاتُ بِزَرْتَةَ (بِزَرْتَة)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 21,
       "title": "سُفَيْنَةُ الصَّيَّادِ (سُوسَة)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 22,
       "title": "الْقَلْعَةُ الْكَبِيرَةُ (الْمُنَسْتِير)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 23,
       "title": "الْمِلْحُ الْأَبْيَضُ (صَفَاقِس)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 24,
       "title": "سَمَكَةُ التُّونِ (سَاحِلٌ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 25,
       "title": "نَافِذَةُ الْمَهْدِيَّةِ (الْمَهْدِيَّة)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 26,
       "title": "قَارِبُ الْجِلْدِ (شَاطِئٌ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 27,
       "title": "نَجْمَةُ الْبَحْرِ (قَاعُ الْبَحْرِ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 28,
       "title": "طَائِرُ النَّوْرَسِ (السَّمَاءُ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 29,
       "title": "رَسْمٌ عَلَى الرَّمْلِ (الشَّاطِئُ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 30,
       "title": "شَمْسٌ وَمَوْجٌ (السَّاحِلُ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 31,
       "title": "النَّخْلَةُ وَالتَّمْرُ (قَابِس)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 32,
       "title": "الْجَمَلُ سَفِينَةُ الرَّمْلِ (تُوزَر)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 33,
       "title": "شَلَّالُ تَامَقْزَة (تُوزَر)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 34,
       "title": "بَيْتٌ مِنْ طِينٍ (قَفْصَة)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 35,
       "title": "فُلْفُلٌ حَارٌّ (قِبْلِيَّ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 36,
       "title": "رِحْلَةٌ فِي الْكَثْبَانِ (الصَّحْرَاءُ الْكُبْرَى)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 37,
       "title": "سَمَاءٌ بِلَا غُيُومٍ (تُوزَر لَيْلًا)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 38,
       "title": "مَاءُ الْعَيْنِ (وَاحَةٌ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 39,
       "title": "حِصَانُ الْبَرْبَرِيِّ (الْجَبَلُ الصَّحْرَاوِيُّ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 40,
       "title": "مَوْسِمُ تُوزَر (تُوزَر)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 41,
       "title": "غَابَةُ الْفَلَّاتِ (بِزَرْتَ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 42,
       "title": "قَمْحُ بَاجَةَ (بَاجَة)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 43,
       "title": "مَطَرُ سِلْيَانَةَ (سِلْيَانَة)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 44,
       "title": "صُخُورُ الْكَافِ (الْكَاف)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 45,
       "title": "يَنْبُوعُ جُنْدُوبَةَ (جُنْدُوبَة)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 46,
       "title": "رُومَانُ بُلَّارِجِيَّة (بَاجَة)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 47,
       "title": "سَاعَةُ الْقِرَاءَةِ (الْمَكْتَبَةُ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 48,
       "title": "لُعْبَةُ الْحَجَرِ (الْحَيُّ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 49,
       "title": "طَبِيبُ الْأَسْنَانِ (عِيَادَةٌ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 50,
       "title": "عِيدُ الْأَضْحَى (بَيْتٌ)",
-      "grade": "year5",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 51,
       "title": "سِجَادَةُ الْقَيْرَوَانِ (الْقَيْرَوَان)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 52,
       "title": "مَسْجِدُ عُقْبَةَ (الْقَيْرَوَان)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 53,
       "title": "مِقَصُ الْخَيَّاطِ (وَرْشَةٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 54,
       "title": "زَيْتُ حَمَّامَاتِ (حَمَّامَات)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 55,
       "title": "خُبْزُ التَّابُونِ (رِيفٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 56,
       "title": "حَدِيدَةُ الْحِدَادِ (سُوقٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 57,
       "title": "خَشَبُ النَّجَّارِ (وَرْشَةٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 58,
       "title": "زَلَّابِيَةُ الْعِيدِ (مَطْبَخٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 59,
       "title": "سِلَةُ الْخُوصِ (سُوقٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 60,
       "title": "نُحَاسُ الْقَيْرَوَانِ (الْقَيْرَوَان)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 61,
       "title": "سُوقُ الْأَحْدِ (تَطَاوِين)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 62,
       "title": "كُسْكُسِيُّ الْجَمْعَةِ (بَيْتٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 63,
       "title": "مَوْسِمُ مَدْنِينَ (مَدْنِين)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 64,
       "title": "بَكُورَةُ التُّمُورِ (تَطَاوِين)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 65,
       "title": "بَزَارُ الْحُبُوبِ (سُوقٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 66,
       "title": "مِلْحَفَةُ الْعَرُوسِ (خَيَّاطَةٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 67,
       "title": "حَنَّةُ الْعِيدِ (بَيْتٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 68,
       "title": "دُخُولُ الْمَدْرَسَةِ (مَدْرَسَةٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 69,
       "title": "الْمِعْرَاضُ (سَاحَةٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 70,
       "title": "صَنْدُوقُ الْمَصَاغِ (صَائِغٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 71,
       "title": "شُرْطِيُّ الْمَدِينَةِ (الشَّارِعُ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 72,
       "title": "رَجُلُ الْحِمَايَةِ الْمَدَنِيَّةِ (مَحَطَّةُ الْإِطْفَاءِ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 73,
       "title": "طَبِيبُ الْمُسْتَشْفَى (مُسْتَشْفَى)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 74,
       "title": "مُمَرِّضَةٌ رَحِيمَةٌ (عِيَادَةٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 75,
       "title": "صَيْدَلِيَّةُ الْحَيِّ (صَيْدَلِيَّةٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 76,
       "title": "رَقْمُ النَّجْدَةِ (هَاتِفٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 77,
       "title": "خُوذَةُ السَّلَامَةِ (حَدِيقَةٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 78,
       "title": "حَارِسُ الْأَمْنِ (حَدِيقَةٌ عَامَّةٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 79,
       "title": "قَارِبُ النَّجَاةِ (مَرْسَى)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 80,
       "title": "حَرَسُ الْحُدُودِ (مَنْفَذٌ حَدُودِيٌّ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 81,
       "title": "عَيْنِي تَرَى الْجَمَالَ (حَدِيقَةٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 82,
       "title": "أُذُنِي تَسْمَعُ الْأَصْوَاتَ (الْمَدْرَسَةُ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 83,
       "title": "أَنْفِي يَشُمُّ الرَّوَائِحَ (مَطْبَخٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 84,
       "title": "لِسَانِي يَتَذَوَّقُ (مَائِدَةٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 85,
       "title": "يَدِي تَلْمِسُ (غُرْفَةٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 86,
       "title": "فُسْتَانِي الْجَدِيدُ (بَيْتٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 87,
       "title": "فَطُورٌ صِحِّيٌّ (مَائِدَةُ الْفَطُورِ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 88,
       "title": "رِيَاضَةُ الصَّبَاحِ (الْمَدْرَسَةُ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 89,
       "title": "نَوْمُ الْبَكِيرِ (الْمَفْرَشُ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 90,
       "title": "مَاءُ الْعَيْنِ الصَّافِي (حَنَفِيَّةٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 91,
       "title": "خَرِيطَةُ تُونِسَ (الْقِسْمُ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 92,
       "title": "عَلَمُنَا الْأَحْمَرُ (سَاحَةُ الْمَدْرَسَةِ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 93,
       "title": "نَشِيدُ الْوَطَنِ (الْمَدْرَسَةُ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 94,
       "title": "دَفْتَرُ الذِّكْرِيَاتِ (الْقِسْمُ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 95,
       "title": "رِحْلَةُ الْقِطَارِ (قِطَارٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 96,
       "title": "جَبَلُ الشَّعَانْبِي (الْقَصْرِين)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 97,
       "title": "حَظِيرَةُ الْوَحْشِ (حَظِيرَةٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 98,
       "title": "مَتْحَفُ بَرْدُو (تُونِس)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 99,
       "title": "مَشْرُوعُ الْأَشْجَارِ (الْمَدْرَسَةُ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     },
     {
       "id": 100,
       "title": "تُونِسُ بَلَدِي (مَشْهَدٌ جَمِيلٌ)",
-      "grade": "year6",
+      "grade": "year1",
       "subject": "anisi",
       "series": "haras-watani"
     }
