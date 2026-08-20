@@ -1,0 +1,24 @@
+# التبعيات
+node_modules/
+
+# البناء والمخرجات
+frontend/dist/
+backend/coverage/
+*.log
+
+# المتغيرات والأسرار
+.env
+.env.*
+!.env.example
+
+# الملفات المرفوعة (صور/امتحانات/تسجيلات) — محتوى مستخدمين وليست كوداً
+backend/uploads/
+
+# أرشيف محتوى قرص D: (17.8GB) — محفوظ على القرص، خارج التحكم بالمصادر
+content-sources/
+
+# نظام التشغيل والمحرر
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

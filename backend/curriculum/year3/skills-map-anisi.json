@@ -1,0 +1,222 @@
+{
+  "_meta": {
+    "note": "خريطة المهارات لمادة اللغة العربية — السنة الثالثة ابتدائي، مقابلة لدروس وحدة قراءتي"
+  },
+  "lessons": {
+    "u1-l1": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص قراءة سليمة معبّرة", "أن يستخرج عناصر السرد من النص"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية التعبير"],
+      "skills": ["reading-comprehension", "reading-aloud"],
+      "indicators": ["يقرأ النص بأداء سليم", "يحدد مكان القصة وزمانها وشخصياتها"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يستخرج عناصر السرد من النص", "يحكي رحلة تسوق بأحداث مرتبة"],
+      "source": "curated"
+    },
+    "u1-l2": {
+      "learningObjectives": ["أن يستنتج المتعلّم قيمة الصدق والأمانة", "أن يقرأ النص قراءة سليمة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يستخرج صفات التاجر من النص", "يربط الأمانة بثقة الناس"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يستنتج أثر الأمانة في المجتمع", "يكتب عن بائع صادق يعرفه"],
+      "source": "curated"
+    },
+    "u1-l3": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويدرك أهمية التخطيط", "أن يميز بين الحاجات الضرورية والكمالية"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "classification"],
+      "indicators": ["يستخرج فائدة القائمة من النص", "يصنف المشتريات إلى ضرورية وغير ضرورية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب قائمة مشتريات مبررة", "يستنتج أثر الاقتصاد في المال"],
+      "source": "curated"
+    },
+    "u2-l1": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويقدّر قيمة العمل", "أن يستنتج أثر الاجتهاد على النتائج"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يستخرج أعمال الفلاح على مدار الفصول", "يربط الاجتهاد بالنتائج الجيدة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يصف يوم الفلاح في فقرتين", "يستنتج عبرة: من جد وجد"],
+      "source": "curated"
+    },
+    "u2-l2": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويرتب أحداثه", "أن يدرك رحلة الغذاء من الحقل إلى السوق"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية التعبير"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يرتب مراحل قطاف الطماطم وبيعها", "يستعمل كلمات الربط الزمنية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يعيد سرد أحداث النص مرتبة", "يستنتج قيمة تعب الفلاحين"],
+      "source": "curated"
+    },
+    "u2-l3": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويدرك خيرات بلاده", "أن يعبر عن شكره للفلاحين"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "oral-expression"],
+      "indicators": ["يحدد خيرات تونس الزراعية من النص", "يعبر عن شكره للفلاح"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب فقرة عن الزراعة في تونس", "يستنتج واجبنا تجاه الأرض"],
+      "source": "curated"
+    },
+    "u3-l1": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويتعرف على سيرة النبي ﷺ", "أن يستنتج صفاته الحميدة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يستخرج أحداثا من سيرة النبي ﷺ", "يستنتج سبب تسميته بالأمين"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يذكر صفات النبي ﷺ", "يقتدي بالصدق والأمانة"],
+      "source": "curated"
+    },
+    "u3-l2": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويستنتج خلق الرفق بالصغار", "أن يقتدي بالرسول ﷺ في تعامله"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "oral-expression"],
+      "indicators": ["يستخرج مواقف النبي ﷺ مع الصغار", "يربط الرفق بالصغار بالأخلاق النبوية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يستنتج طريقة معاملة الصغار", "يطبق الرفق في تعامله اليومي"],
+      "source": "curated"
+    },
+    "u3-l3": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويستنتج قيمة الأمانة", "أن يربط سيرة النبي ﷺ بالسلوك اليومي"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "writing"],
+      "indicators": ["يستخرج مواقف الأمانة من النص", "يربط الأمانة بالحياة المدرسية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب قصة قصيرة عن الأمانة", "يستنتج أن الأمانة خلق المسلم"],
+      "source": "curated"
+    },
+    "u4-l1": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويدرك أهمية نظافة المحيط", "أن يستنتج مسؤولية الفرد في النظافة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "environment-awareness"],
+      "indicators": ["يستخرج وسائل النظافة في الحي", "يستنتج أثر التعاون على نظافة الحي"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب فقرة عن نظافة الحي", "يشارك في حملات التنظيف"],
+      "source": "curated"
+    },
+    "u4-l2": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويدرك أضرار رمي النفايات", "أن يتبنى سلوكا بيئيا سليما"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم البيئية"],
+      "skills": ["reading-comprehension", "environment-awareness"],
+      "indicators": ["يستنتج أضرار النفايات من النص", "يحدد طرق التخلص الصحيحة منها"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب لافتة عن النظافة", "يمارس فرز النفايات ورميها في الحاوية"],
+      "source": "curated"
+    },
+    "u4-l3": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويدرك قيمة التشجير", "أن يشارك في الغرس والمحافظة على الأشجار"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم البيئية"],
+      "skills": ["reading-comprehension", "environment-awareness"],
+      "indicators": ["يستخرج فوائد الشجرة من النص", "يحدد خطوات غرس الشجرة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب فقرة عن أهمية الشجرة", "يشارك في حملة غرس الأشجار"],
+      "source": "curated"
+    },"u5-l1": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويدرك أهمية الماء للحياة", "أن يستنتج استعمالات الماء"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يستخرج استعمالات الماء من النص", "يربط الماء بحياة الكائنات"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب فقرة عن فوائد الماء", "يستنتج واجب الشكر على النعمة"],
+      "source": "curated"
+    },
+    "u5-l2": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويدرك أهمية ترشيد الماء", "أن يتبنى سلوك الاقتصاد في الماء"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "environment-awareness"],
+      "indicators": ["يستخرج طرق ترشيد الماء من النص", "يربط إهدار الماء بنقص الموارد"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب ثلاث نصائح لترشيد الماء", "يطبق ترشيد الماء في البيت والمدرسة"],
+      "source": "curated"
+    },
+    "u5-l3": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويفهم دورة الماء", "أن يرتب مراحل دورة الماء"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية التعبير"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يرتب مراحل التبخر والتكاثف والمطر", "يستعمل كلمات الربط الزمنية في الشرح"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح دورة الماء بجمل مرتبة", "يستنتج قدرة الله في الطبيعة"],
+      "source": "curated"
+    },
+    "u6-l1": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويتعرف على استعمالات الحاسوب", "أن يستعمل الحاسوب في التعلم"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية التكنولوجيا"],
+      "skills": ["reading-comprehension", "oral-expression"],
+      "indicators": ["يستخرج استعمالات الحاسوب في المدرسة", "يربط الحاسوب بالتعلم والمتعة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب فقرة عن استعمالات الحاسوب", "يستعمل الحاسوب بحكمة"],
+      "source": "curated"
+    },
+    "u6-l2": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويستعمل الحاسوب بحكمة", "أن يدرك أثر الشاشات على الصحة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم الصحية"],
+      "skills": ["reading-comprehension", "health-awareness"],
+      "indicators": ["يستخرج وقت استعمال الحاسوب من النص", "يربط كثرة الاستعمال بتعب العينين"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يحدد وقتا معقولا للاستعمال", "يستعمل الحاسوب في التعلم لا اللعب فقط"],
+      "source": "curated"
+    },
+    "u6-l3": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويدرك فوائد التكنولوجيا", "أن يستنتج استعمالات التكنولوجيا في الخدمات"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية التكنولوجيا"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يستخرج مجالات استعمال التكنولوجيا", "يربط التكنولوجيا بتوفير الوقت والجهد"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب عن آلة تساعد الإنسان", "يستنتج ضرورة الاستعمال النافع للتكنولوجيا"],
+      "source": "curated"
+    },
+    "u7-l1": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويتعرف على قواعد السلامة", "أن يطبق قواعد العبور الآمن"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية السلامة"],
+      "skills": ["reading-comprehension", "oral-expression"],
+      "indicators": ["يستخرج قواعد السلامة من النص", "يربط العبور الآمن بحماية الحياة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب ثلاث قواعد للسلامة", "يطبق قواعد العبور الآمن يوميا"],
+      "source": "curated"
+    },
+    "u7-l2": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويتعرف على إشارات المرور", "أن يستنتج معاني الأضواء الثلاثة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية السلامة"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يحدد معنى كل ضوء من النص", "يربط الإشارات بمنع الحوادث"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح معاني الإشارات", "يوصي الآخرين باحترام الإشارات"],
+      "source": "curated"
+    },
+    "u7-l3": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويستنتج خطورة اللعب في الطريق", "أن يتجنب السلوكيات الخطرة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية السلامة"],
+      "skills": ["reading-comprehension", "oral-expression"],
+      "indicators": ["يستنتج سبب كاد الحادث يقع", "يربط اللعب في الطريق بالخطر"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب نصيحة لصديق", "يختار الملعب بدل الطريق للعب"],
+      "source": "curated"
+    },
+    "u8-l1": {
+      "learningObjectives": ["أن يقرأ المتعلّم القصة ويستنتج عبرتها", "أن يحلل شخصيات القصة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية التعبير"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يحلل شخصية الأرنب والسلحفاة", "يستنتج سبب فوز السلحفاة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يعيد كتابة القصة مرتبة", "يستنتج العبرة من القصة"],
+      "source": "curated"
+    },
+    "u8-l2": {
+      "learningObjectives": ["أن يقرأ المتعلّم القصة ويستنتج قيمة العمل", "أن يربط الأحداث بالعبرة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يقارن بين سلوك النملة والجرادة", "يستنتج عاقبة الكسل"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب نهاية من إنشائه للقصة", "يستنتج ضرورة العمل قبل فوات الأوان"],
+      "source": "curated"
+    },
+    "u8-l3": {
+      "learningObjectives": ["أن يقرأ المتعلّم القصة ويستنتج جزاء الإحسان", "أن يحدد عناصر القصة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يحدد الشخصيات والأحداث", "يستنتج معنى جزاء الإحسان إحسان"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب قصة عن مساعدة صديق", "يستنتج قيمة التعاون والامتنان"],
+      "source": "curated"
+    }
+  }
+}

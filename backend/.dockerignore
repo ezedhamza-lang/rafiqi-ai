@@ -1,0 +1,8 @@
+node_modules
+dist
+uploads
+curriculum
+content
+tests
+*.log
+.env

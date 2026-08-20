@@ -1,0 +1,369 @@
+/**
+ * RTL/LTR CSS Variables & Logical Properties - Batch 6
+ * 
+ * This file provides CSS custom properties that automatically adapt
+ * to the document's direction (dir attribute). Use these instead of
+ * physical properties (left/right) for proper RTL support.
+ * 
+ * Usage:
+ *   Instead of: margin-left: auto;
+ *   Use:        margin-inline-start: auto;
+ *   
+ *   Or use our custom vars:
+ *   --margin-start: auto;
+ */
+
+/* ==================== LOGICAL PROPERTY VARIABLES ==================== */
+
+:root {
+  /* ===== Spacing (Logical) ===== */
+  --margin-start: 0;
+  --margin-end: 0;
+  --margin-inline-start: 0;
+  --margin-inline-end: 0;
+  
+  --padding-start: 0;
+  --padding-end: 0;
+  --padding-inline-start: 0;
+  --padding-inline-end: 0;
+  
+  /* ===== Positioning (Logical) ===== */
+  --position-start: auto;
+  --position-end: auto;
+  --inset-start: auto;
+  --inset-end: auto;
+  
+  /* ===== Border (Logical) ===== */
+  --border-start-width: 0;
+  --border-end-width: 0;
+  --border-start-color: transparent;
+  --border-end-color: transparent;
+  
+  /* ===== Text Alignment ===== */
+  --text-align-start: start; /* 'start' is logical, works in both directions */
+  --text-align-end: end;
+  
+  /* ===== Flexbox (Logical) ===== */
+  --flex-align-start: flex-start;
+  --flex-align-end: flex-end;
+  
+  /* ===== Float (Logical) ===== */
+  --float-start: none;
+  --float-end: none;
+  
+  /* ===== Direction-Aware Values ===== */
+  --rotate-sign: 1;       /* For transforms that need flipping */
+  --skew-sign: 1;
+  
+  /* ===== Icon Positions ===== */
+  --icon-margin-text: 0.5rem;    /* Space between icon and text */
+  --icon-position: left;         /* Default icon position */
+}
+
+/* ==================== RTL OVERRIDES ==================== */
+
+[dir='rtl'] {
+  /* In RTL, 'start' = right, 'end' = left */
+  --margin-start: margin-right;
+  --margin-end: margin-left;
+  --padding-start: padding-right;
+  --padding-end: padding-left;
+  --position-start: right;
+  --position-end: left;
+  --border-start-color: border-right-color;
+  --border-end-color: border-left-color;
+  --float-start: right;
+  --float-end: left;
+  --icon-position: right;
+  --rotate-sign: -1;  /* Flip transforms */
+}
+
+[dir='ltr'] {
+  /* In LTR, 'start' = left, 'end' = right */
+  --margin-start: margin-left;
+  --margin-end: margin-right;
+  --padding-start: padding-left;
+  --padding-end: padding-right;
+  --position-start: left;
+  --position-end: right;
+  --border-start-color: border-left-color;
+  --border-end-color: border-right-color;
+  --float-start: left;
+  --float-end: right;
+  --icon-position: left;
+  --rotate-sign: 1;
+}
+
+/* ==================== UTILITY CLASSES USING LOGICAL PROPERTIES ===== */
+
+/* Margin utilities */
+.ms-auto { margin-inline-start: auto; }
+.me-auto { margin-inline-end: auto; }
+.mx-auto { margin-inline: auto; }
+
+/* Padding utilities */
+.ps-1 { padding-inline-start: 0.25rem; }
+.ps-2 { padding-inline-start: 0.5rem; }
+.ps-3 { padding-inline-start: 1rem; }
+.pe-1 { padding-inline-end: 0.25rem; }
+.pe-2 { padding-inline-end: 0.5rem; }
+.pe-3 { padding-inline-end: 1rem; }
+
+/* Text alignment */
+.text-start { text-align: start; }
+.text-end { text-align: end; }
+.text-center { text-align: center; }
+
+/* Float */
+.float-start { float: inline-start; }
+.float-end { float: inline-end; }
+
+/* Border */
+.border-start { border-inline-start-width: 1px; }
+.border-end { border-inline-end-width: 1px; }
+.border-es { 
+  border-inline-start-width: 1px; 
+  border-inline-end-width: 1px; 
+}
+
+/* Absolute positioning */
+.position-start-0 { inset-inline-start: 0; }
+.position-end-0 { inset-inline-end: 0; }
+
+/* Flex alignment */
+.justify-start { justify-content: flex-start; }
+.justify-end { justify-content: flex-end; }
+.align-start { align-items: flex-start; }
+.align-end { align-items: flex-end; }
+
+/* ==================== COMPONENT-SPECIFIC FIXES ==================== */
+
+/* ===== NAVBAR / HEADER ===== */
+[dir='rtl'] .navbar-nav {
+  /* RTL-specific navbar adjustments */
+}
+
+[dir='ltr'] .navbar-nav {
+  /* LTR-specific navbar adjustments */
+}
+
+/* Icon + Text pattern (common in nav items) */
+.icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--icon-margin-text);
+}
+
+[dir='rtl'] .icon-text {
+  flex-direction: row-reverse; /* Icon comes after text in RTL? Adjust as needed */
+}
+
+/* ===== SIDEBAR / DRAWER ===== */
+.sidebar {
+  /* Sidebar positioning - logical properties handle direction */
+}
+
+[dir='rtl'] .sidebar {
+  /* RTL sidebar specific styles */
+  box-shadow: -4px 0 6px -1px rgba(0, 0, 0, 0.1); /* Shadow on left for RTL */
+}
+
+[dir='ltr'] .sidebar {
+  box-shadow: 4px 0 6px -1px rgba(0, 0, 0, 0.1); /* Shadow on right for LTR */
+}
+
+/* ===== CARDS ===== */
+.card-action-area {
+  position: relative;
+}
+
+.card-action-area::after {
+  content: '';
+  position: absolute;
+  inset-inline-end: 0;
+  top: 50%;
+  transform: translateY(-50%) scaleX(var(--rotate-sign));
+  /* Arrow or chevron that points inline-end */
+}
+
+/* ===== FORM ELEMENTS ===== */
+/* Input with icon */
+.input-icon-wrapper {
+  position: relative;
+}
+
+.input-icon-wrapper .input-icon {
+  position: absolute;
+  inset-inline-start: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.input-icon-wrapper input {
+  padding-inline-start: 2.5rem; /* Space for icon */
+}
+
+/* Select dropdown arrow */
+.select-wrapper::after {
+  content: '▼';
+  position: absolute;
+  inset-inline-end: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* ===== TABLES ===== */
+.table-responsive {
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/* In RTL, scrollbar should still work correctly */
+[dir='rtl'] .table-responsive {
+  direction: ltr; /* Tables often look better LTR even in RTL context */
+}
+
+[dir='rtl'] .table-responsive table {
+  direction: rtl; /* But table content should be RTL */
+}
+
+/* ===== MODAL / DIALOG ===== */
+.modal-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-dialog {
+  max-width: 90vw;
+  /* Centered - no direction-specific positioning needed */
+}
+
+/* Close button always in top-end corner */
+.modal-close-btn {
+  position: absolute;
+  inset-block-start: 0.75rem;
+  inset-inline-end: 0.75rem;
+}
+
+/* ===== TOAST NOTIFICATIONS ===== */
+.toast-container {
+  position: fixed;
+  inset-block-start: 1rem;
+  inset-inline-end: 1rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+/* ===== TOOLTIP ===== */
+.tooltip {
+  position: absolute;
+  bottom: calc(100% + 0.5rem);
+  inset-inline-start: 50%;
+  transform: translateX(-50%); /* Center horizontally regardless of direction */
+}
+
+/* ===== BREADCRUMB ===== */
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.breadcrumb-item::after {
+  content: '/';
+  margin-inline: 0.5rem;
+  color: var(--color-gray-400);
+}
+
+.breadcrumb-item:last-child::after {
+  content: none;
+}
+
+/* ===== PAGINATION ===== */
+.pagination {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.pagination-prev {
+  order: -1; /* Always first visually */
+}
+
+.pagination-next {
+  order: 99; /* Always last visually */
+}
+
+/* ===== SKELETON LOADING ===== */
+.skeleton-text {
+  height: 1em;
+  background: linear-gradient(
+    90deg,
+    var(--color-gray-200) 25%,
+    var(--color-gray-100) 50%,
+    var(--color-gray-200) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ==================== ANIMATION DIRECTION AWARENESS ==================== */
+
+/* Slide from start (right in RTL, left in LTR) */
+@keyframes slide-from-start {
+  from {
+    opacity: 0;
+    transform: translateX(calc(-20px * var(--rotate-sign)));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide from end (left in RTL, right in LTR) */
+@keyframes slide-from-end {
+  from {
+    opacity: 0;
+    transform: translateX(calc(20px * var(--rotate-sign)));
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Fade slide (for modals/drawers) */
+.animate-slide-in {
+  animation: slide-from-start 0.3s ease-out;
+}
+
+.animate-slide-out {
+  animation: slide-from-end 0.3s ease-out;
+}
+
+/* ==================== PRINT STYLES ==================== */
+
+@media print {
+  /* Ensure all logical properties resolve correctly for print */
+  body {
+    direction: inherit;
+  }
+  
+  /* Hide language switcher in print */
+  .language-switcher,
+  .language-switcher-compact,
+  .mini-lang-switch,
+  .language-dropdown {
+    display: none !important;
+  }
+}

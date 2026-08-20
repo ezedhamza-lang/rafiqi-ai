@@ -1,0 +1,95 @@
+{
+  "_meta": {
+    "note": "خريطة المهارات لمادة الإيقاظ العلمي — السنة الثالثة ابتدائي، مقابلة لفصول الكتاب"
+  },
+  "chapters": {
+    "ch1": {
+      "learningObjectives": ["أن يميّز المتعلّم بين الكائن الحيّ والجسم غير الحيّ", "أن يعدد خصائص الكائن الحي"],
+      "competencies": ["كفاية الملاحظة والتصنيف"],
+      "skills": ["classification", "scientific-observation"],
+      "indicators": ["يحدد خصائص الكائن الحي", "يصنف الأشياء إلى حية وغير حية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يصنف الكائنات والأجسام تصنيفا صحيحا", "يعلل تصنيفه بخصائص الكائن الحي"],
+      "source": "curated"
+    },
+    "ch2": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على مكونات التربة", "أن يدرك أهمية التربة للنبات"],
+      "competencies": ["كفاية الملاحظة والتجريب"],
+      "skills": ["scientific-observation", "experimentation"],
+      "indicators": ["يحدد مكونات التربة", "يربط التربة بنمو النبات"],
+      "prerequisites": [],
+      "expectedOutcomes": ["ينفذ تجربة كشف مكونات التربة", "يستنتج ضرورة حماية التربة"],
+      "source": "curated"
+    },
+    "ch3": {
+      "learningObjectives": ["أن يفهم المتعلّم مراحل دورة الماء", "أن يرتب مراحل الدورة زمنيا"],
+      "competencies": ["كفاية الملاحظة والاستقصاء"],
+      "skills": ["scientific-observation", "environment-awareness"],
+      "indicators": ["يحدد مراحل دورة الماء", "يربط التبخر بالحرارة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح دورة الماء بمراحلها", "ينفذ تجربة التبخر والتكاثف"],
+      "source": "curated"
+    },"ch4": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على أعضاء التنفس", "أن يدرك أهمية الهواء النقي"],
+      "competencies": ["كفاية الوعي الجسدي"],
+      "skills": ["body-awareness", "health-awareness"],
+      "indicators": ["يسمي أعضاء التنفس", "يربط المجهود البدني بسرعة التنفس"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح مسار الهواء في الجسم", "يتبنى سلوك التنفس في الهواء النقي"],
+      "source": "curated"
+    },
+    "ch5": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على مسار الطعام في الجسم", "أن يدرك أهمية المضغ الجيد"],
+      "competencies": ["كفاية الوعي الجسدي"],
+      "skills": ["body-awareness", "health-awareness"],
+      "indicators": ["يرتب أعضاء الهضم ترتيبا صحيحا", "يربط المضغ الجيد بالهضم السليم"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح رحلة الطعام في الجسم", "يطبق عادات الأكل السليمة"],
+      "source": "curated"
+    },
+    "ch6": {
+      "learningObjectives": ["أن يكوّن المتعلّم وجبة متوازنة", "أن يصنف الأغذية حسب وظيفتها"],
+      "competencies": ["كفاية التصنيف والوعي الصحي"],
+      "skills": ["classification", "health-awareness"],
+      "indicators": ["يصنف الأغذية إلى طاقة وبناء ووقاية", "يكوّن وجبة تشمل المجموعات الثلاث"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يبني وجبة متوازنة ليوم كامل", "يعلل أهمية الفطور الصحي"],
+      "source": "curated"
+    },"ch7": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على وسائل الوقاية من الأمراض", "أن يدرك أهمية التلقيح والنظافة"],
+      "competencies": ["كفاية الوعي الصحي"],
+      "skills": ["health-awareness", "environment-awareness"],
+      "indicators": ["يحدد وسائل الوقاية من الأمراض", "يربط النظافة بمنع انتشار الجراثيم"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يعدد وسائل الوقاية", "يطبق العادات الصحية اليومية"],
+      "source": "curated"
+    },
+    "ch8": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على خصائص المغناطيس", "أن يحدد الأشياء التي يجذبها المغناطيس"],
+      "competencies": ["كفاية التجريب والاستقصاء"],
+      "skills": ["experimentation", "classification"],
+      "indicators": ["يحدد المواد التي يجذبها المغناطيس", "يميز قطبي المغناطيس"],
+      "prerequisites": [],
+      "expectedOutcomes": ["ينفذ تجارب على جذب المغناطيس", "يستنتج استعمالات المغناطيس في الحياة"],
+      "source": "curated"
+    },
+    "ch9": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على سلوك الضوء مع الأجسام", "أن يفسر تكوّن الظل"],
+      "competencies": ["كفاية الملاحظة والاستقصاء"],
+      "skills": ["scientific-observation", "experimentation"],
+      "indicators": ["يصنف الأجسام إلى شفافة ومعتمة", "يستنتج شرط تكوّن الظل"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح تكوّن الظل", "يجرب تغيير الظل بتحريك مصدر الضوء"],
+      "source": "curated"
+    },
+    "ch10": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على فوائد الطاقة الشمسية", "أن يدرك دور الألواح الشمسية"],
+      "competencies": ["كفاية الملاحظة والاستقصاء"],
+      "skills": ["scientific-observation", "environment-awareness"],
+      "indicators": ["يحدد فوائد الشمس للإنسان والنبات", "يربط الألواح الشمسية بالكهرباء"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح فوائد الطاقة الشمسية", "يستنتج أن الطاقة الشمسية نظيفة"],
+      "source": "curated"
+    }
+  }
+}

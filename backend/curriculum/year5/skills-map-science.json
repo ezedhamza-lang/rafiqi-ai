@@ -1,0 +1,97 @@
+{
+  "_meta": {
+    "note": "خرائط المهارات - الإيقاظ العلمي"
+  },
+  "lessons": {
+    "ch1": {
+      "learningObjectives": ["يصف دورة الماء في الطبيعة", "يفسر مراحل التبخر والتكاثف والتساقط"],
+      "competencies": ["الملاحظة والوصف العلمي", "التفكير العلمي"],
+      "skills": ["scientific-observation", "experimentation", "reasoning"],
+      "indicators": ["يذكر مراحل دورة الماء بترتيب", "يربط بين حرارة الشمس وتبخر الماء", "ينجز تجربة تحاكي التكاثف"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يرسم دورة الماء بمراحلها", "يفسر تكوين الغيوم والمطر"],
+      "source": "curated"
+    },
+    "ch2": {
+      "learningObjectives": ["يتعرّف على تكاثر النبات بالبذور", "يفهم دور الزهرة في التكاثر"],
+      "competencies": ["الملاحظة العلمية", "التجريب"],
+      "skills": ["scientific-observation", "experimentation", "classification"],
+      "indicators": ["يميز أجزاء البذرة والزهرة", "يصنف النباتات حسب طرق تكاثرها", "ينبت بذرة ويلاحظ مراحل نموها"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح مراحل إنبات البذرة", "يفسر دور الحشرات في التلقيح"],
+      "source": "curated"
+    },
+    "ch3": {
+      "learningObjectives": ["يصنف الحيوانات إلى ولودة وبياضة", "يفهم عناية الحيوانات بصغارها"],
+      "competencies": ["التصنيف", "الملاحظة"],
+      "skills": ["classification", "scientific-observation", "reasoning"],
+      "indicators": ["يصنف حيوانات معروفة إلى ولودة وبياضة", "يلاحظ سلوك رعاية الصغار", "يعلل استمرار النوع بالتكاثر"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يميز بين الحيوان الولود والبياض", "يذكر أمثلة لكل نوع"],
+      "source": "curated"
+    },
+    "ch4": {
+      "learningObjectives": ["يتعرّف على مكونات الجهاز العصبي", "يفهم دور الدماغ والأعصاب"],
+      "competencies": ["الملاحظة", "الوعي الجسدي"],
+      "skills": ["body-awareness", "scientific-observation", "reasoning"],
+      "indicators": ["يسمي أعضاء الجهاز العصبي", "يربط بين الفعل الانعكاسي وسرعة الرسائل العصبية", "يختبر سرعة انعكاساته"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح وظيفة الدماغ", "يفسر الاستجابة السريعة عند لمس جسم ساخن"],
+      "source": "curated"
+    },
+    "ch5": {
+      "learningObjectives": ["يتعرّف على أصناف الأغذية", "يفهم مفهوم التوازن الغذائي"],
+      "competencies": ["الوعي الصحي", "التصنيف"],
+      "skills": ["health-awareness", "classification", "reasoning"],
+      "indicators": ["يصنف الأغذية إلى بروتينات وسكريات ودهون وفيتامينات", "يستنتج أهمية وجبة الفطور", "يحدد عواقب الإفراط في الحلويات"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يبني وجبة متوازنة", "يشرح فوائد كل صنف غذائي"],
+      "source": "curated"
+    },
+    "ch6": {
+      "learningObjectives": ["يميز حالات المادة الثلاث", "يفرق بين التغيّر الفيزيائي والكيميائي"],
+      "competencies": ["التصنيف", "التجريب"],
+      "skills": ["classification", "experimentation", "reasoning"],
+      "indicators": ["يصنف المواد إلى صلبة وسائلة وغازية", "يلاحظ ذوبان الثلج وتجمد الماء", "يميز التغيرات القابلة للرجوع عن غيرها"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يفسر انتقال الماء بين الحالات", "يفرق بين احتراق الورق وذوبان الثلج"],
+      "source": "curated"
+    },
+    "ch7": {
+      "learningObjectives": ["يدرك أن الشمس مصدر الحرارة والضوء", "يفهم انتقال الحرارة وانتشار الضوء"],
+      "competencies": ["الملاحظة", "التفكير العلمي"],
+      "skills": ["scientific-observation", "experimentation", "reasoning"],
+      "indicators": ["يلاحظ الظل وتغيره أثناء النهار", "يجرب مرور الضوء في خط مستقيم", "يستنتج دور الشمس كمصدر للطاقة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يفسر تكون الظلال", "يذكر مصادر الطاقة واستعمالاتها"],
+      "source": "curated"
+    },
+    "ch8": {
+      "learningObjectives": ["يفهم مفهوم التيار الكهربائي", "يميز الموصلات والعوازل"],
+      "competencies": ["التجريب", "التصنيف"],
+      "skills": ["experimentation", "classification", "reasoning"],
+      "indicators": ["يركب دارة كهربائية بسيطة", "يصنف أجساما إلى موصلات وعوازل", "يستنتج شروط مرور التيار"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يركب دارة تضيء المصباح", "يفسر أهمية العوازل في السلامة"],
+      "source": "curated"
+    },
+    "ch9": {
+      "learningObjectives": ["يميز بين النجم والكوكب والقمر", "يفسر تعاقب الليل والنهار والفصول"],
+      "competencies": ["الملاحظة", "التفكير العلمي"],
+      "skills": ["scientific-observation", "reasoning", "classification"],
+      "indicators": ["يصنف الأجرام السماوية", "يحاكي دوران الأرض حول نفسها", "يربط بين الدوران وتعاقب الليل والنهار"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يفسر سبب الليل والنهار", "يشرح علاقة الشمس بالقمر والأرض"],
+      "source": "curated"
+    },
+    "ch10": {
+      "learningObjectives": ["يفهم التفسير العلمي للكسوف والخسوف", "يدرك مخاطر النظر المباشر للشمس"],
+      "competencies": ["الملاحظة", "الوعي الصحي"],
+      "skills": ["scientific-observation", "reasoning", "health-awareness"],
+      "indicators": ["يمثل محاذاة الشمس والأرض والقمر", "يفرق بين الكسوف والخسوف", "يستعمل وسائل مراقبة آمنة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يفسر ظاهرة الكسوف", "يفسر ظاهرة الخسوف", "يحمي عينيه عند مراقبة الشمس"],
+      "source": "curated"
+    }
+  }
+}

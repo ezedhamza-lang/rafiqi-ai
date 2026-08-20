@@ -1,0 +1,17 @@
+{
+  "title": "قراءتي",
+  "subtitle": "السنة الثانية ابتدائي — نصوص قرائية",
+  "imageBase": null,
+  "imageExt": ".jpg",
+  "totalPages": 120,
+  "units": [
+    { "id": "u1", "title": "أسرتي", "icon": "👨‍👩‍👧", "color": "#F191C1", "startPage": 1, "endPage": 16 },
+    { "id": "u2", "title": "المدرسة", "icon": "🏫", "color": "#4A9FD8", "startPage": 17, "endPage": 28 },
+    { "id": "u3", "title": "الوطن", "icon": "🇹🇳", "color": "#E84C3D", "startPage": 29, "endPage": 38 },
+    { "id": "u4", "title": "الطبيعة والفصول — الربيع", "icon": "🌸", "color": "#7CB342", "startPage": 39, "endPage": 48 },
+    { "id": "u5", "title": "الأعياد والمناسبات", "icon": "🎉", "color": "#F39C12", "startPage": 49, "endPage": 56 },
+    { "id": "u6", "title": "الصحة والنظافة", "icon": "🪥", "color": "#2ECC71", "startPage": 57, "endPage": 66 },
+    { "id": "u7", "title": "الحيوانات", "icon": "🐄", "color": "#8E7CE0", "startPage": 67, "endPage": 78 },
+    { "id": "u8", "title": "العمل والمهن", "icon": "👨‍🌾", "color": "#E67E22", "startPage": 79, "endPage": 120 }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "_meta": {
+    "note": "خريطة المهارات لمادة الإيقاظ العلمي — السنة الثانية ابتدائي، مقابلة لفصول الكتاب"
+  },
+  "chapters": {
+    "ch1": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على مصادر الماء", "أن يدرك أهمية الماء للحياة"],
+      "competencies": ["كفاية الملاحظة والاستكشاف"],
+      "skills": ["scientific-observation", "environment-awareness"],
+      "indicators": ["يحدد مصادر الماء في الطبيعة", "يذكر استعمالات الماء في حياته اليومية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يصنف استعمالات الماء", "يقترح طرقا لترشيد استهلاك الماء"],
+      "source": "curated"
+    },
+    "ch2": {
+      "learningObjectives": ["أن يثبت المتعلّم وجود الهواء رغم عدم رؤيته", "أن يدرك أهمية الهواء النقي"],
+      "competencies": ["كفاية التجريب والاستقصاء"],
+      "skills": ["experimentation", "environment-awareness"],
+      "indicators": ["ينفذ تجربة إثبات وجود الهواء", "يميز بين الهواء النقي والملوث"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يفسر نتائج التجربة", "يستنتج دور الأشجار في تنقية الهواء"],
+      "source": "curated"
+    },
+    "ch3": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على أجزاء النبات", "أن يحدد حاجات النبات"],
+      "competencies": ["كفاية الملاحظة والاستكشاف"],
+      "skills": ["scientific-observation", "classification"],
+      "indicators": ["يسمي أجزاء النبات", "يحدد حاجات النبات للنمو"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يصنف أجزاء النبات", "ينفذ تجربة إنبات بذرة"],
+      "source": "curated"
+    },
+    "ch4": {
+      "learningObjectives": ["أن يصنّف المتعلّم الحيوانات", "أن يتعرّف على غذاء الحيوانات"],
+      "competencies": ["كفاية الملاحظة والتصنيف"],
+      "skills": ["classification", "scientific-observation"],
+      "indicators": ["يصنف الحيوانات حسب البيئة", "يربط بين الحيوان وغذائه"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يميز الحيوانات الأليفة من البرية", "يذكر فوائد الحيوانات للإنسان"],
+      "source": "curated"
+    },
+    "ch5": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على أنواع الغذاء", "أن يميز الغذاء الصحي من الضار"],
+      "competencies": ["كفاية الملاحظة والتصنيف"],
+      "skills": ["classification", "health-awareness"],
+      "indicators": ["يصنف الأغذية حسب فائدتها", "يختار الغذاء الصحي"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يذكر دور كل صنف غذائي", "يبني فطورا صحيا متوازنا"],
+      "source": "curated"
+    },
+    "ch6": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على عادات النظافة", "أن يدرك علاقة النظافة بالصحة"],
+      "competencies": ["كفاية الوعي الصحي"],
+      "skills": ["health-awareness", "scientific-observation"],
+      "indicators": ["يحدد أوقات غسل اليدين", "يستنتج دور الصابون في إزالة الجراثيم"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يطبق عادات النظافة اليومية", "يشرح كيف تنتقل الجراثيم"],
+      "source": "curated"
+    },
+    "ch7": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على الحواس الخمس", "أن يربط كل حاسة بعضوها"],
+      "competencies": ["كفاية الملاحظة والاستكشاف"],
+      "skills": ["body-awareness", "scientific-observation"],
+      "indicators": ["يسمي الحواس وأعضاءها", "يستخدم الحواس في التعرف على الأشياء"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يربط الحاسة بالعضو", "يذكر طرق حماية الحواس"],
+      "source": "curated"
+    },
+    "ch8": {
+      "learningObjectives": ["أن يميّز المتعلّم بين الأجسام المختلفة", "أن يتعرّف على حالات الماء"],
+      "competencies": ["كفاية الملاحظة والتجريب"],
+      "skills": ["experimentation", "classification"],
+      "indicators": ["يصنف الأجسام حسب صلابتها", "يميز حالات الماء الثلاث"],
+      "prerequisites": [],
+      "expectedOutcomes": ["ينفذ تجربة تحويل الماء إلى جليد", "يستنتج دور الحرارة في تغيير الحالة"],
+      "source": "curated"
+    },
+    "ch9": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على مصادر الضوء", "أن يفسر تكوّن الظل"],
+      "competencies": ["كفاية الملاحظة والاستقصاء"],
+      "skills": ["scientific-observation", "experimentation"],
+      "indicators": ["يحدد مصادر الضوء الطبيعية والاصطناعية", "يستنتج شرط تكوّن الظل"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يصنف مصادر الضوء", "يشرح تكوّن الظل خلف الجسم المعتم"],
+      "source": "curated"
+    },
+    "ch10": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على الفصول الأربعة", "أن يربط مظاهر كل فصل بخصائصه"],
+      "competencies": ["كفاية الملاحظة"],
+      "skills": ["scientific-observation", "environment-awareness"],
+      "indicators": ["يسمي الفصول الأربعة", "يربط الملابس بمظاهر كل فصل"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يذكر مظاهر كل فصل", "يسجل تغيرات الطقس يوميا"],
+      "source": "curated"
+    }
+  }
+}

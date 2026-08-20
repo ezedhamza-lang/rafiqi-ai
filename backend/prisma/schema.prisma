@@ -1,0 +1,1217 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  STUDENT
+  PARENT
+  TEACHER
+  SCHOOL_DIRECTOR
+  ADMIN
+  SUPER_ADMIN
+}
+
+enum AccountStatus {
+  PENDING_APPROVAL
+  PENDING_PAYMENT
+  ACTIVE
+  SUSPENDED
+  EXPIRED
+}
+
+enum SubscriptionType {
+  STUDENT
+  TEACHER
+}
+
+enum SubscriptionRequestStatus {
+  PENDING_APPROVAL
+  REJECTED
+  CANCELLED
+  PENDING_PAYMENT
+  ACTIVE
+  SUSPENDED
+  EXPIRED
+}
+
+enum RegistrationStatus {
+  PENDING
+  VALIDATED
+  REJECTED
+  PROCESSING
+}
+
+enum LessonSubject {
+  MATH
+  READING
+  SCIENCE
+  STORIES
+}
+
+enum ResourceKind {
+  WORKSHEET
+  HOMEWORK
+  FLASHCARDS
+  PRESENTATION
+  LESSON_PLAN
+}
+
+enum ParentDocumentStatus {
+  PENDING
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+}
+
+enum CalendarEventType {
+  HOLIDAY
+  EXAM
+  MEETING
+  ACTIVITY
+  OTHER
+}
+
+enum AssignmentStatus {
+  DRAFT
+  PUBLISHED
+  CLOSED
+}
+
+enum AssignmentSubmissionStatus {
+  SUBMITTED
+  GRADED
+}
+
+enum PaymentProvider {
+  STRIPE
+  STB
+  DEMO
+}
+
+enum PaymentIntentStatus {
+  PENDING
+  SUCCEEDED
+  FAILED
+  CANCELED
+  EXPIRED
+}
+
+enum InvoiceStatus {
+  PAID
+  REFUNDED
+  CANCELLED
+}
+
+enum DiscountType {
+  PERCENTAGE
+  AMOUNT
+}
+
+enum VideoProvider {
+  LOCAL
+  LIVEKIT
+}
+
+enum LiveSessionStatus {
+  SCHEDULED
+  LIVE
+  ENDED
+  CANCELLED
+}
+
+model User {
+  id            Int           @id @default(autoincrement())
+  firstName     String
+  lastName      String
+  email         String        @unique
+  phone         String?
+  passwordHash  String
+  role          Role          @default(PARENT)
+  accountStatus AccountStatus @default(ACTIVE)
+  xp            Int           @default(0)
+  coins         Int           @default(0)
+  level         Int           @default(1)
+  streakDays    Int           @default(0)
+  notifyEmail   Boolean       @default(false)
+  notifyPush    Boolean       @default(true)
+  notifySms     Boolean       @default(false)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  students             Student[]             @relation("ParentStudents")
+  studentAccount       Student?              @relation("StudentAccount")
+  registrations        Registration[]
+  helpRequests         HelpRequest[]
+  classesTaught        Class[]               @relation("ClassTeacher")
+  quizzes              Quiz[]
+  officialExams        OfficialExam[]
+  memos                Memo[]
+  resources            TeachingResource[]
+  annualPlans          AnnualPlan[]
+  schedules            Schedule[]            @relation("ScheduleTeacher")
+  suggestions          Suggestion[]
+  messagesSent         Message[]             @relation("MessageSender")
+  messagesRecv         Message[]             @relation("MessageRecipient")
+  notifications        Notification[]
+  subscriptions        Subscription[]
+  subscriptionRequests SubscriptionRequest[] @relation("SubscriptionRequestParent")
+  paymentsMade         Payment[]             @relation("PaymentPayer")
+  aiKey                AiKey?
+  badges               StudentBadge[]
+  activities           ActivityLog[]
+  chatMessages         StudentChat[]
+  submissions          Submission[]
+  officialSubs         OfficialSubmission[]
+  classSubjects        ClassSubject[]        @relation("ClassSubjectTeacher")
+  gameResults          GameResult[]
+  submittedExams       SubmittedExam[]       @relation("SubmittedExamStudent")
+  submittedExamsTaught SubmittedExam[]       @relation("SubmittedExamTeacher")
+  parentDocuments      ParentDocument[]      @relation("ParentDocuments")
+  attendanceRecords    AttendanceRecord[]    @relation("AttendanceStudent")
+  attendanceRecorded   AttendanceRecord[]    @relation("AttendanceRecorder")
+  calendarEvents       CalendarEvent[]
+  healthRecord         HealthRecord?
+  assignments          Assignment[]          @relation("AssignmentTeacher")
+  assignmentSubmissions AssignmentSubmission[]
+  paymentIntents       PaymentIntent[]
+  auditLogs            AuditLog[]
+  discountsCreated     DiscountCode[]        @relation("DiscountCreatedBy")
+  refundsMade          Refund[]              @relation("RefundBy")
+  anomaliesResolved    FinancialAnomaly[]    @relation("AnomalyResolvedBy")
+  liveSessions         LiveSession[]         @relation("LiveSessionTeacher")
+  liveChatMessages     LiveChatMessage[]     @relation("LiveChatSender")
+  liveRaisedHands      LiveRaisedHand[]      @relation("LiveRaisedHandUser")
+  liveScreenShares     LiveScreenShare[]     @relation("LiveScreenShareUser")
+  announcementsCreated SchoolAnnouncement[] @relation("AnnouncementCreator")
+  notificationOutbox   NotificationOutbox[]
+  adaptiveCards        AdaptiveCard[]
+  lessonProgress       LessonProgress[]
+  lessonMemos          LessonMemo[]
+  refreshTokens        RefreshToken[]
+  parentNotesSent      ParentNote[]        @relation("ParentNoteParent")
+  parentNotesAbout     ParentNote[]        @relation("ParentNoteStudent")
+  parentNotesReceived  ParentNote[]        @relation("ParentNoteTeacher")
+
+  @@index([role])
+}
+
+model RefreshToken {
+  id           Int       @id @default(autoincrement())
+  userId       Int
+  tokenHash    String    @unique
+  expiresAt    DateTime
+  revokedAt    DateTime?
+  replacedById Int?      @unique
+  createdAt    DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model ParentNote {
+  id        Int      @id @default(autoincrement())
+  parentId  Int
+  studentId Int
+  teacherId Int
+  content   String
+  reply     String?
+  readAt    DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  parent  User   @relation("ParentNoteParent", fields: [parentId], references: [id], onDelete: Cascade)
+  student User   @relation("ParentNoteStudent", fields: [studentId], references: [id], onDelete: Cascade)
+  teacher User   @relation("ParentNoteTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
+
+  @@index([teacherId, readAt])
+  @@index([studentId])
+}
+
+model Class {
+  id         Int      @id @default(autoincrement())
+  name       String
+  level      String
+  schoolYear String   @default("2026-2027")
+  teacherId  Int?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  teacher              User?                 @relation("ClassTeacher", fields: [teacherId], references: [id], onDelete: SetNull)
+  students             Student[]
+  quizzes              Quiz[]
+  exams                OfficialExam[]
+  schedules            Schedule[]
+  registrations        Registration[]
+  subscriptionRequests SubscriptionRequest[]
+  subjects             ClassSubject[]
+  submittedExams       SubmittedExam[]
+  attendanceRecords    AttendanceRecord[]
+  assignments          Assignment[]
+  liveSessions         LiveSession[]
+}
+
+model Student {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  classId       Int?
+  accountUserId Int?     @unique
+  firstName     String
+  lastName      String
+  birthDate     DateTime
+  cin           String?
+  gender        String?
+  level         String
+  schoolYear    String   @default("2026-2027")
+  schoolName    String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user          User?          @relation("ParentStudents", fields: [userId], references: [id], onDelete: Cascade)
+  account       User?          @relation("StudentAccount", fields: [accountUserId], references: [id], onDelete: SetNull)
+  class         Class?         @relation(fields: [classId], references: [id], onDelete: SetNull)
+  registrations Registration[]
+  documents     ParentDocument[]
+}
+
+model Registration {
+  id         Int                @id @default(autoincrement())
+  userId     Int
+  studentId  Int
+  classId    Int?
+  schoolYear String
+  level      String
+  status     RegistrationStatus @default(PENDING)
+  notes      String?
+  createdAt  DateTime           @default(now())
+  updatedAt  DateTime           @updatedAt
+
+  user    User    @relation(fields: [userId], references: [id])
+  student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  class   Class?  @relation(fields: [classId], references: [id], onDelete: SetNull)
+}
+
+model Announcement {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  titleEn       String?  // Batch 3.2: English translation (optional)
+  descriptionEn String? // Batch 3.2: English translation (optional)
+  imageUrl    String?
+  category    String
+  date        DateTime @default(now())
+  createdAt   DateTime @default(now())
+}
+
+model Article {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  titleEn       String?  // Batch 3.2: English translation (optional)
+  descriptionEn String? // Batch 3.2: English translation (optional)
+  imageUrl    String?
+  category    String
+  date        DateTime @default(now())
+  createdAt   DateTime @default(now())
+}
+
+model Faq {
+  id       Int    @id @default(autoincrement())
+  question String
+  answer   String
+  questionEn String? // Batch 3.2: English translation (optional)
+  answerEn  String? // Batch 3.2: English translation (optional)
+  category String @default("عام")
+  sort     Int    @default(0)
+}
+
+model Delegation {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+}
+
+model Lesson {
+  id          Int           @id @default(autoincrement())
+  subject     LessonSubject
+  title       String
+  description String
+  level       String        @default("السنة الأولى أساسي")
+  fileUrl     String?
+  order       Int           @default(0)
+  createdAt   DateTime      @default(now())
+}
+
+model Quiz {
+  id        Int      @id @default(autoincrement())
+  teacherId Int
+  classId   Int?
+  title     String
+  subject   String
+  questions Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  teacher     User         @relation(fields: [teacherId], references: [id])
+  class       Class?       @relation(fields: [classId], references: [id], onDelete: SetNull)
+  submissions Submission[]
+}
+
+model Submission {
+  id          Int      @id @default(autoincrement())
+  quizId      Int
+  studentId   Int
+  answers     Json
+  score       Float
+  totalPoints Float
+  durationSec Int?
+  createdAt   DateTime @default(now())
+
+  quiz    Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  student User @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([quizId])
+}
+
+model OfficialExam {
+  id        Int      @id @default(autoincrement())
+  teacherId Int
+  classId   Int?
+  title     String
+  subject   String
+  trimester Int?
+  fileUrl   String?
+  content   Json?
+  published Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  teacher     User                 @relation(fields: [teacherId], references: [id])
+  class       Class?               @relation(fields: [classId], references: [id], onDelete: SetNull)
+  submissions OfficialSubmission[]
+}
+
+model OfficialSubmission {
+  id           Int      @id @default(autoincrement())
+  examId       Int
+  studentId    Int
+  answers      Json?
+  score        Float?
+  aiSuggestion String?
+  status       String   @default("PENDING")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  exam    OfficialExam @relation(fields: [examId], references: [id], onDelete: Cascade)
+  student User         @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([examId])
+}
+
+model Memo {
+  id          Int      @id @default(autoincrement())
+  teacherId   Int
+  subject     String
+  level       String
+  bookTitle   String?
+  unit        String?
+  lessonTitle String
+  hash        String   @unique
+  content     Json
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  teacher User @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+
+  @@index([hash])
+}
+
+model TeachingResource {
+  id          Int          @id @default(autoincrement())
+  teacherId   Int
+  kind        ResourceKind
+  subject     String
+  level       String
+  lessonTitle String
+  title       String
+  content     Json
+  isShared    Boolean      @default(false)
+  sharedAt    DateTime?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  teacher User @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+
+  @@index([kind])
+  @@index([isShared])
+}
+
+model LessonMemo {
+  id                Int      @id @default(autoincrement())
+  teacherId         Int
+  bookId            String
+  lessonId          String
+  subject           String
+  level             String
+  lessonTitle       String
+  lessonType        String?
+  unit              String?
+  methodologyId     String
+  methodologyTitle  String?
+  hash              String   @unique
+  content           Json
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  teacher User @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+
+  @@unique([bookId, lessonId])
+  @@index([teacherId])
+  @@index([hash])
+}
+
+model AnnualPlan {
+  id        Int      @id @default(autoincrement())
+  teacherId Int
+  subject   String
+  level     String
+  title     String
+  content   Json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  teacher User @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+}
+
+model Schedule {
+  id        Int      @id @default(autoincrement())
+  classId   Int
+  day       Int
+  period    Int
+  subject   String
+  teacherId Int?
+  createdAt DateTime @default(now())
+
+  class   Class? @relation(fields: [classId], references: [id], onDelete: Cascade)
+  teacher User?  @relation("ScheduleTeacher", fields: [teacherId], references: [id], onDelete: SetNull)
+
+  @@unique([classId, day, period])
+}
+
+model Suggestion {
+  id        Int      @id @default(autoincrement())
+  teacherId Int?
+  category  String?
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+
+  teacher User? @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+}
+
+model Message {
+  id             Int       @id @default(autoincrement())
+  senderId       Int
+  recipientId    Int
+  subject        String?
+  body           String
+  attachmentUrl  String?
+  attachmentName String?
+  attachmentType String?
+  readAt         DateTime?
+  createdAt      DateTime  @default(now())
+
+  sender    User @relation("MessageSender", fields: [senderId], references: [id], onDelete: Cascade)
+  recipient User @relation("MessageRecipient", fields: [recipientId], references: [id], onDelete: Cascade)
+
+  @@index([senderId, recipientId])
+  @@index([recipientId])
+}
+
+model Notification {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  type          String
+  title         String
+  body          String?
+  link          String?
+  read          Boolean  @default(false)
+  readAt        DateTime?
+  channels      Json?
+  channelStatus Json?
+  priority      String   @default("NORMAL")
+  metadata      Json?
+  schoolAnnouncementId Int?
+  createdAt     DateTime @default(now())
+
+  user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  schoolAnnouncement SchoolAnnouncement? @relation(fields: [schoolAnnouncementId], references: [id], onDelete: SetNull)
+
+  @@index([userId, read])
+  @@index([schoolAnnouncementId])
+}
+
+model SchoolAnnouncement {
+  id          Int      @id @default(autoincrement())
+  title       String
+  body        String
+  category    String   @default("GENERAL")
+  priority    String   @default("NORMAL")
+  audience    Json
+  level       String?
+  link        String?
+  status      String   @default("PUBLISHED")
+  createdBy   Int
+  publishedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  creator       User           @relation("AnnouncementCreator", fields: [createdBy], references: [id], onDelete: Cascade)
+  notifications Notification[]
+
+  @@index([status])
+  @@index([createdBy])
+  @@index([publishedAt])
+}
+
+model NotificationOutbox {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  channel   String
+  to        String
+  subject   String?
+  body      String
+  status    String    @default("PENDING")
+  error     String?
+  createdAt DateTime  @default(now())
+  sentAt    DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
+  @@index([channel])
+}
+
+model License {
+  id         Int       @id @default(autoincrement())
+  key        String    @unique
+  entityName String
+  status     String    @default("ACTIVE")
+  createdAt  DateTime  @default(now())
+  expiresAt  DateTime?
+  revokedAt  DateTime?
+
+  @@index([status])
+}
+
+model Subscription {
+  id             Int              @id @default(autoincrement())
+  userId         Int
+  type           SubscriptionType
+  plan           String
+  schoolYear     String           @default("2026-2027")
+  startDate      DateTime
+  endDate        DateTime
+  status         AccountStatus    @default(PENDING_PAYMENT)
+  amount         Float?
+  studentId      Int?
+  renewalEnabled Boolean          @default(true)
+  cancelledAt    DateTime?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+
+  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  payments       Payment[]
+  paymentIntents PaymentIntent[]
+  invoices       Invoice[]
+  refunds        Refund[]
+
+  @@index([userId, status])
+  @@index([status, endDate])
+}
+
+model Payment {
+  id             Int      @id @default(autoincrement())
+  subscriptionId Int
+  amount         Float
+  method         String   @default("OFFLINE")
+  reference      String?
+  paidByUserId   Int
+  paidAt         DateTime @default(now())
+
+  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  paidBy       User         @relation("PaymentPayer", fields: [paidByUserId], references: [id])
+  invoice      Invoice?
+
+  @@index([subscriptionId])
+}
+
+model SubscriptionRequest {
+  id              Int                       @id @default(autoincrement())
+  parentId        Int
+  firstName       String
+  lastName        String
+  birthDate       DateTime
+  cin             String?
+  gender          String?
+  level           String
+  schoolYear      String
+  schoolName      String?
+  notes           String?
+  classId         Int?
+  status          SubscriptionRequestStatus @default(PENDING_APPROVAL)
+  rejectionReason String?
+  studentId       Int?
+  subscriptionId  Int?
+  createdAt       DateTime                  @default(now())
+  updatedAt       DateTime                  @updatedAt
+
+  parent User   @relation("SubscriptionRequestParent", fields: [parentId], references: [id], onDelete: Cascade)
+  class  Class? @relation(fields: [classId], references: [id], onDelete: SetNull)
+
+  @@index([parentId, status])
+}
+
+model AiKey {
+  id           Int      @id @default(autoincrement())
+  teacherId    Int      @unique
+  keyEncrypted String
+  provider     String   @default("gemini")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  teacher User @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+}
+
+// إعدادات النظام (مفتاح مزوّد الذكاء الاصطناعي على مستوى المنصة للمرحلة 7.3)
+model SystemSetting {
+  key       String   @id
+  value     String
+  updatedBy Int?
+  updatedAt DateTime @updatedAt
+}
+
+model Badge {
+  id          Int    @id @default(autoincrement())
+  key         String @unique
+  name        String
+  icon        String
+  description String
+  condition   Json
+
+  earned StudentBadge[]
+}
+
+model StudentBadge {
+  id        Int      @id @default(autoincrement())
+  studentId Int
+  badgeId   Int
+  earnedAt  DateTime @default(now())
+
+  student User  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  badge   Badge @relation(fields: [badgeId], references: [id], onDelete: Cascade)
+
+  @@unique([studentId, badgeId])
+}
+
+model ActivityLog {
+  id        Int      @id @default(autoincrement())
+  studentId Int
+  type      String
+  points    Int      @default(0)
+  detail    String?
+  createdAt DateTime @default(now())
+
+  student User @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+}
+
+model StudentChat {
+  id        Int      @id @default(autoincrement())
+  studentId Int
+  role      String
+  content   String
+  createdAt DateTime @default(now())
+
+  student User @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+}
+
+model HelpRequest {
+  id          Int      @id @default(autoincrement())
+  userId      Int?
+  firstName   String
+  lastName    String
+  phone       String?
+  email       String?
+  requestType String
+  delegation  String?
+  description String?
+  attachment  String?
+  status      String   @default("PENDING")
+  createdAt   DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  phone     String?
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model ClassSubject {
+  id        Int      @id @default(autoincrement())
+  classId   Int
+  subject   String
+  level     String
+  teacherId Int?
+  createdAt DateTime @default(now())
+
+  class   Class @relation(fields: [classId], references: [id], onDelete: Cascade)
+  teacher User? @relation("ClassSubjectTeacher", fields: [teacherId], references: [id], onDelete: SetNull)
+
+  @@unique([classId, subject])
+}
+
+model GameResult {
+  id          Int      @id @default(autoincrement())
+  studentId   Int
+  game        String
+  score       Int
+  correct     Int
+  total       Int
+  durationSec Int?
+  playedAt    DateTime @default(now())
+
+  student User @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+  @@index([game])
+}
+
+model SubmittedExam {
+  id        Int      @id @default(autoincrement())
+  studentId Int
+  teacherId Int?
+  classId   Int?
+  subject   String
+  examTitle String
+  fileName  String
+  fileUrl   String
+  imageUrls Json
+  status    String   @default("SENT")
+  score     Float?
+  feedback  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  student User   @relation("SubmittedExamStudent", fields: [studentId], references: [id], onDelete: Cascade)
+  teacher User?  @relation("SubmittedExamTeacher", fields: [teacherId], references: [id], onDelete: SetNull)
+  class   Class? @relation(fields: [classId], references: [id], onDelete: SetNull)
+
+  @@index([studentId])
+  @@index([teacherId, status])
+}
+
+model ParentDocument {
+  id            Int                @id @default(autoincrement())
+  parentId      Int
+  studentId     Int?
+  docType       String
+  title         String?
+  note          String?
+  fileName      String
+  fileUrl       String
+  status        ParentDocumentStatus @default(PENDING)
+  directorReply String?
+  reviewedBy    Int?
+  reviewedAt    DateTime?
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+
+  parent  User     @relation("ParentDocuments", fields: [parentId], references: [id], onDelete: Cascade)
+  student Student? @relation(fields: [studentId], references: [id], onDelete: SetNull)
+
+  @@index([parentId, status])
+  @@index([status])
+}
+
+model AttendanceRecord {
+  id         Int      @id @default(autoincrement())
+  classId    Int
+  studentId  Int
+  date       DateTime @db.Date
+  present    Boolean  @default(true)
+  note       String?
+  recordedBy Int
+  createdAt  DateTime @default(now())
+
+  class    Class @relation(fields: [classId], references: [id], onDelete: Cascade)
+  student  User  @relation("AttendanceStudent", fields: [studentId], references: [id], onDelete: Cascade)
+  recorder User  @relation("AttendanceRecorder", fields: [recordedBy], references: [id])
+
+  @@unique([classId, studentId, date])
+  @@index([studentId, date])
+}
+
+model CalendarEvent {
+  id          Int               @id @default(autoincrement())
+  title       String
+  description String?
+  type        CalendarEventType @default(OTHER)
+  date        DateTime          @db.Date
+  level       String?
+  audience    String            @default("ALL")
+  createdBy   Int
+  createdAt   DateTime          @default(now())
+
+  creator User @relation(fields: [createdBy], references: [id])
+
+  @@index([date])
+}
+
+model HealthRecord {
+  id                Int      @id @default(autoincrement())
+  studentId         Int      @unique
+  allergies         String?
+  chronicConditions String?
+  emergencyPhone    String?
+  bloodType         String?
+  notes             String?
+  updatedBy         Int?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  student User @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@index([studentId])
+}
+
+model Assignment {
+  id          Int              @id @default(autoincrement())
+  teacherId   Int
+  classId     Int?
+  subject     String
+  title       String
+  description String?
+  dueDate     DateTime?
+  questions   Json
+  status      AssignmentStatus @default(PUBLISHED)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  teacher     User                 @relation("AssignmentTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
+  class       Class?               @relation(fields: [classId], references: [id], onDelete: SetNull)
+  submissions AssignmentSubmission[]
+
+  @@index([teacherId])
+  @@index([classId])
+}
+
+model AssignmentSubmission {
+  id           Int                       @id @default(autoincrement())
+  assignmentId Int
+  studentId    Int
+  answers      Json
+  graded       Json?
+  score        Float?
+  totalPoints  Float?
+  status       AssignmentSubmissionStatus @default(SUBMITTED)
+  feedback     String?
+  gradedAt     DateTime?
+  late         Boolean                   @default(false)
+  createdAt    DateTime                  @default(now())
+  updatedAt    DateTime                  @updatedAt
+
+  assignment Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  student    User       @relation(fields: [studentId], references: [id], onDelete: Cascade)
+
+  @@unique([assignmentId, studentId])
+  @@index([studentId])
+  @@index([assignmentId])
+}
+
+model PaymentIntent {
+  id                Int                  @id @default(autoincrement())
+  subscriptionId    Int
+  userId            Int
+  provider          PaymentProvider      @default(DEMO)
+  status            PaymentIntentStatus  @default(PENDING)
+  amount            Float
+  currency          String               @default("TND")
+  providerReference String?              @unique
+  checkoutUrl       String?
+  successUrl        String?
+  cancelUrl         String?
+  metadata          Json?
+  failureMessage    String?
+  paidAt            DateTime?
+  expiresAt         DateTime?
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+
+  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([subscriptionId])
+  @@index([status])
+}
+
+model AuditLog {
+  id         Int      @id @default(autoincrement())
+  actorId    Int?
+  actorRole  String?
+  action     String
+  resource   String?
+  resourceId Int?
+  ip         String?
+  userAgent  String?
+  metadata   Json?
+  createdAt  DateTime @default(now())
+
+  actor User? @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  @@index([actorId])
+  @@index([action])
+  @@index([createdAt])
+}
+
+model Invoice {
+  id             Int           @id @default(autoincrement())
+  invoiceNumber  String?       @unique
+  subscriptionId Int
+  paymentId      Int
+  status         InvoiceStatus @default(PAID)
+  issuedAt       DateTime      @default(now())
+  amount         Float
+  discountAmount Float         @default(0)
+  taxAmount      Float         @default(0)
+  total          Float
+  discountCode   String?
+  currency       String        @default("TND")
+  pdfUrl         String?
+  createdAt      DateTime      @default(now())
+
+  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  payment      Payment      @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  refunds      Refund[]
+
+  @@unique([paymentId])
+  @@index([subscriptionId])
+  @@index([issuedAt])
+}
+
+model DiscountCode {
+  id          Int          @id @default(autoincrement())
+  code        String       @unique
+  type        DiscountType @default(PERCENTAGE)
+  value       Float
+  description String?
+  usageLimit  Int?
+  usedCount   Int          @default(0)
+  expiresAt   DateTime?
+  active      Boolean      @default(true)
+  createdBy   Int
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  creator User @relation("DiscountCreatedBy", fields: [createdBy], references: [id])
+
+  @@index([active])
+  @@index([expiresAt])
+}
+
+model Refund {
+  id             Int      @id @default(autoincrement())
+  invoiceId      Int
+  paymentId      Int?
+  subscriptionId Int
+  amount         Float
+  reason         String?
+  status         String   @default("COMPLETED")
+  refundedBy     Int
+  refundedAt     DateTime @default(now())
+  createdAt      DateTime @default(now())
+
+  invoice      Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  refundedByUser User    @relation("RefundBy", fields: [refundedBy], references: [id])
+
+  @@index([invoiceId])
+  @@index([subscriptionId])
+  @@index([refundedAt])
+}
+
+model FinancialAnomaly {
+  id          Int      @id @default(autoincrement())
+  key         String   @unique
+  type        String
+  severity    String   @default("MEDIUM")
+  title       String
+  description String?
+  subjectType String?
+  subjectId   Int?
+  metadata    Json?
+  status      String   @default("OPEN")
+  resolvedBy  Int?
+  resolvedAt  DateTime?
+  resolution  String?
+  createdAt   DateTime @default(now())
+
+  resolver User? @relation("AnomalyResolvedBy", fields: [resolvedBy], references: [id], onDelete: SetNull)
+
+  @@index([type])
+  @@index([severity])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model LiveSession {
+  id              Int                 @id @default(autoincrement())
+  teacherId       Int
+  classId         Int?
+  title           String
+  subject         String?
+  description     String?
+  provider        VideoProvider       @default(LOCAL)
+  roomName        String              @unique
+  startsAt        DateTime
+  endsAt          DateTime
+  status          LiveSessionStatus   @default(SCHEDULED)
+  maxParticipants Int                 @default(30)
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+
+  teacher    User             @relation("LiveSessionTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
+  class      Class?           @relation(fields: [classId], references: [id], onDelete: SetNull)
+  recordings LiveRecording[]
+  chatMessages LiveChatMessage[]
+  raisedHands  LiveRaisedHand[]
+  screenShares LiveScreenShare[]
+
+  @@index([teacherId])
+  @@index([classId, startsAt])
+  @@index([status])
+}
+
+model LiveRecording {
+  id                  Int       @id @default(autoincrement())
+  sessionId           Int
+  providerRecordingId String?
+  title               String
+  fileUrl             String?
+  sizeBytes           Int?
+  durationSec         Int?
+  status              String    @default("PROCESSING")
+  availableAt         DateTime?
+  createdAt           DateTime  @default(now())
+
+  session LiveSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId])
+  @@index([status])
+}
+
+model LiveChatMessage {
+  id        Int      @id @default(autoincrement())
+  sessionId Int
+  senderId  Int
+  body      String
+  createdAt DateTime @default(now())
+
+  session LiveSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  sender  User        @relation("LiveChatSender", fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId, createdAt])
+}
+
+model LiveRaisedHand {
+  id        Int       @id @default(autoincrement())
+  sessionId Int
+  userId    Int
+  status    String    @default("RAISED")
+  raisedAt  DateTime  @default(now())
+  loweredAt DateTime?
+
+  session LiveSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user    User        @relation("LiveRaisedHandUser", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, userId])
+  @@index([sessionId, status])
+}
+
+model LiveScreenShare {
+  id        Int       @id @default(autoincrement())
+  sessionId Int
+  userId    Int
+  active    Boolean   @default(false)
+  startedAt DateTime?
+  stoppedAt DateTime?
+
+  session LiveSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user    User        @relation("LiveScreenShareUser", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, userId])
+  @@index([sessionId])
+}
+
+model AdaptiveCard {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  itemKey       String
+  gradeId       String
+  subjectId     String
+  exerciseId    String
+  questionIndex Int
+  repetitions   Int      @default(0)
+  easeFactor    Float    @default(2.5)
+  intervalDays  Int      @default(0)
+  dueAt         DateTime @default(now())
+  difficulty    Int      @default(1)
+  reviewCount   Int      @default(0)
+  correctCount  Int      @default(0)
+  streak        Int      @default(0)
+  lastQuality   Int?
+  lastReviewedAt DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, itemKey])
+  @@index([userId, gradeId, subjectId, dueAt])
+  @@index([userId, gradeId, subjectId])
+}
+
+model LessonProgress {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  gradeId     String
+  subjectId   String
+  lessonId    String
+  lessonTitle String?
+  completedAt DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, gradeId, subjectId, lessonId])
+  @@index([userId, completedAt])
+  @@index([userId, gradeId, subjectId])
+}

@@ -1,0 +1,57 @@
+{
+  "title": "إنتاج كتابي",
+  "subtitle": "السنة الخامسة ابتدائي",
+  "imageBase": null,
+  "imageExt": ".jpg",
+  "totalPages": 0,
+  "units": [
+    {
+      "id": "p1",
+      "title": "الوصف",
+      "icon": "✍️",
+      "color": "#8E7CE0",
+      "startPage": 1,
+      "endPage": 10
+    },
+    {
+      "id": "p2",
+      "title": "السرد",
+      "icon": "📖",
+      "color": "#4A9FD8",
+      "startPage": 11,
+      "endPage": 20
+    },
+    {
+      "id": "p3",
+      "title": "الرسالة",
+      "icon": "💌",
+      "color": "#E07B54",
+      "startPage": 21,
+      "endPage": 30
+    },
+    {
+      "id": "p4",
+      "title": "الحوار",
+      "icon": "🗣️",
+      "color": "#E8A33D",
+      "startPage": 31,
+      "endPage": 40
+    },
+    {
+      "id": "p5",
+      "title": "القصة",
+      "icon": "🎭",
+      "color": "#C97B9F",
+      "startPage": 41,
+      "endPage": 50
+    },
+    {
+      "id": "p6",
+      "title": "التقرير",
+      "icon": "📋",
+      "color": "#6BAF6B",
+      "startPage": 51,
+      "endPage": 60
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "_meta": {
+    "note": "كتالوج المهارات الموحّد. كل مهارة لها معرّف ثابت يُستعمل في ملفّات skills-map-*.json لكل مادة، وفي وسم الموارد التعليمية والأسئلة لاحقًا. إضافة مهارة جديدة = سطر جديد هنا، دون تعديل كود."
+  },
+  "skills": [
+    { "id": "reading-decoding", "title": "القراءة (فكّ الرموز)", "domain": "لغوي" },
+    { "id": "reading-fluency", "title": "الطلاقة في القراءة", "domain": "لغوي" },
+    { "id": "comprehension", "title": "الفهم", "domain": "لغوي" },
+    { "id": "writing", "title": "الكتابة", "domain": "لغوي" },
+    { "id": "oral-expression", "title": "التعبير الشفوي", "domain": "لغوي" },
+    { "id": "number-sense", "title": "الحسّ العددي", "domain": "رياضي" },
+    { "id": "calculation", "title": "الحساب", "domain": "رياضي" },
+    { "id": "spatial-reasoning", "title": "التموقع في الفضاء", "domain": "رياضي" },
+    { "id": "set-classification", "title": "التصنيف والمجموعات", "domain": "رياضي" },
+    { "id": "problem-solving", "title": "حل المشكلات", "domain": "رياضي" },
+    { "id": "geometry", "title": "الأشكال الهندسية", "domain": "رياضي" },
+    { "id": "scientific-observation", "title": "الملاحظة العلمية", "domain": "علمي" },
+    { "id": "scientific-reasoning", "title": "الاستدلال العلمي", "domain": "علمي" },
+    { "id": "body-awareness", "title": "الوعي بالجسم والصحة", "domain": "علمي" },
+    { "id": "environment-awareness", "title": "الوعي البيئي", "domain": "علمي" }
+  ]
+}

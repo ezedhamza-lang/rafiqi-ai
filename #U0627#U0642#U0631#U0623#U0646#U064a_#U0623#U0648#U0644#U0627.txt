@@ -1,0 +1,48 @@
+==============================================
+منصة الحياة المدرسية — دليل التشغيل
+==============================================
+
+--- إذا كان هذا أول مرة تستعمل فيها هذا المجلد الجديد ---
+(يعني نسخت هذا الملف المضغوط لأول مرة على D:\school-platform-full)
+
+نفّذ هذه الأسطر مرة واحدة فقط في PowerShell:
+
+    cd D:\school-platform-full\backend
+    npm install
+    npx prisma generate
+    npx prisma db push
+    node prisma\seed.js
+
+    cd D:\school-platform-full\frontend
+    npm install
+
+بعد هذا فقط، اضغط مرتين على ملف:
+
+    تشغيل_المشروع.bat
+
+وسيفتح لك كل شيء تلقائيًا (الخادم + الواجهة + المتصفح).
+
+
+--- إذا سبق وشغّلت المشروع من قبل ولديك node_modules جاهزة ---
+
+فقط اضغط مرتين على:
+
+    تشغيل_المشروع.bat
+
+هذا كل ما تحتاجه في كل مرة لاحقًا.
+
+
+--- حسابات تجريبية للدخول ---
+
+المدير (ADMIN):     admin@education.tn / admin123
+تلميذ (STUDENT):    student@test.tn / student123
+ولي أمر (PARENT):   parent@test.tn / parent123
+أستاذ (TEACHER):    teacher@test.tn / teacher123
+مدير مدرسة:         director@test.tn / director123
+نظامي (SUPER_ADMIN): super@education.tn / super123
+
+
+--- ملاحظة مهمة ---
+
+يجب أن يكون PostgreSQL شغالاً على جهازك قبل تشغيل المشروع
+(هذا يتحقق تلقائيًا إذا كان مثبتًا كخدمة Windows تعمل عند تشغيل الجهاز).

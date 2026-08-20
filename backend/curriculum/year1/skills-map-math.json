@@ -1,0 +1,59 @@
+{
+  "_meta": {
+    "note": "خريطة مهارات مادّة الرياضيات، مفتاحها id الدرس في math-units.json. الدروس غير المذكورة هنا تُبنى تلقائيًا (source: auto) داخل SkillsEngine اعتمادًا على domain الدرس.",
+    "domainSkillFallback": {
+      "الفضاء": "spatial-reasoning",
+      "المجموعات": "set-classification",
+      "الأعداد": "number-sense",
+      "العمليات": "calculation",
+      "الأشكال الهندسية": "geometry"
+    }
+  },
+  "lessons": {
+    "mathPos1": {
+      "learningObjectives": ["يحدّد موقع شيء بالنسبة لمرجع باستعمال أمام/وراء"],
+      "competencies": ["التموقع في الفضاء المحيط"],
+      "skills": ["spatial-reasoning", "oral-expression"],
+      "indicators": ["يصف موقع شيء شفويًا بشكل صحيح في 4 من 5 محاولات"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يميّز بين أمام ووراء في وضعيات حسّية وواقعية"],
+      "source": "curated"
+    },
+    "mathSet7": {
+      "learningObjectives": ["يكوّن مجموعة عناصر حسب معيار مشترك"],
+      "competencies": ["التصنيف والتصرف في المجموعات"],
+      "skills": ["set-classification", "problem-solving"],
+      "indicators": ["يستطيع فرز 6 أشياء إلى مجموعتين حسب خاصية واحدة"],
+      "prerequisites": ["reading-decoding"],
+      "expectedOutcomes": ["يبرّر اختيار عناصر مجموعة معيّنة"],
+      "source": "curated"
+    },
+    "mathNum15": {
+      "learningObjectives": ["يعدّ ويكتب الأعداد من 0 إلى 9"],
+      "competencies": ["بناء مفهوم العدد"],
+      "skills": ["number-sense", "calculation"],
+      "indicators": ["يكتب رقمًا معطى شفويًا بشكل صحيح 8 من 10 مرات"],
+      "prerequisites": ["set-classification"],
+      "expectedOutcomes": ["يربط الرقم المكتوب بكمية العناصر المقابلة"],
+      "source": "curated"
+    },
+    "mathAdd19": {
+      "learningObjectives": ["يجمع عددين من 0 إلى 9"],
+      "competencies": ["توظيف عملية الجمع في وضعيات بسيطة"],
+      "skills": ["calculation", "problem-solving"],
+      "indicators": ["يحلّ 4 من 5 تمارين جمع بسيطة دون مساعدة"],
+      "prerequisites": ["number-sense"],
+      "expectedOutcomes": ["يستعمل الجمع لحل وضعية مشكل من محيطه اليومي"],
+      "source": "curated"
+    },
+    "mathCompare20": {
+      "learningObjectives": ["يقارن عددين ويستعمل أكبر من/أصغر من/يساوي"],
+      "competencies": ["مقارنة الأعداد وترتيبها"],
+      "skills": ["number-sense", "calculation"],
+      "indicators": ["يرتّب 3 أعداد تصاعديًا بشكل صحيح"],
+      "prerequisites": ["number-sense"],
+      "expectedOutcomes": ["يستنتج ترتيب مجموعة أعداد صغيرة دون عدّ فردي"],
+      "source": "curated"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "note": "خريطة مهارات مادّة القراءة، مفتاحها id الدرس (unitId-letter) في lessons.json. الدروس غير المذكورة هنا تُبنى تلقائيًا (source: auto) بمهارات قراءة عامّة."
+  },
+  "lessons": {
+    "unit1-ب": {
+      "learningObjectives": ["يتعرّف على حرف الباء في أول/وسط/آخر الكلمة وينطقه سليمًا"],
+      "competencies": ["فكّ الرموز الكتابية وربطها بالصوت"],
+      "skills": ["reading-decoding", "oral-expression"],
+      "indicators": ["يقرأ 5 كلمات تحتوي حرف الباء بنطق سليم"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب حرف الباء بأشكاله الثلاثة بخط مقروء"],
+      "source": "curated"
+    },
+    "unit1-ل": {
+      "learningObjectives": ["يتعرّف على حرف اللام وينطقه في سياقات مختلفة"],
+      "competencies": ["فكّ الرموز الكتابية وربطها بالصوت"],
+      "skills": ["reading-decoding", "writing"],
+      "indicators": ["يميّز حرف اللام بصريًا بين حروف أخرى متشابهة"],
+      "prerequisites": ["unit1-ب"],
+      "expectedOutcomes": ["يركّب كلمات بسيطة تحتوي الباء واللام معًا"],
+      "source": "curated"
+    }
+  }
+}

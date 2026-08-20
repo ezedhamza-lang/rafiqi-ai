@@ -1,0 +1,12 @@
+{
+  "title": "إنتاج كتابي",
+  "subtitle": "السنة الأولى ابتدائي",
+  "imageBase": null,
+  "imageExt": ".jpg",
+  "totalPages": 0,
+  "units": [
+    { "id": "p1", "title": "أنا وعائلتي", "icon": "🏠", "color": "#8E7CE0", "startPage": 1, "endPage": 10 },
+    { "id": "p2", "title": "مدرستي وأصدقائي", "icon": "🏫", "color": "#5B9FE0", "startPage": 11, "endPage": 20 },
+    { "id": "p3", "title": "ألعابي والحيوانات", "icon": "🐱", "color": "#7BC96F", "startPage": 21, "endPage": 30 }
+  ]
+}

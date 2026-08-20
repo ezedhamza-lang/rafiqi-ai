@@ -1,0 +1,148 @@
+/* ============================================================
+   Design Tokens — بوابة رفيقي للحياة المدرسية
+   Unified theme: colors, fonts, spacing, radius, shadows, z-index
+   Dark mode via [data-theme="dark"] on <html>
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+
+  /* Brand colors */
+  --primary: #0ea5e9;
+  --primary-dark: #0369a1;
+  --primary-darker: #075985;
+  --primary-light: #e0f2fe;
+  --accent: #fbbf24;
+  --accent-dark: #d97706;
+  --accent-light: #fef3c7;
+  --brand-pink: #9d174d;
+
+  /* Semantic surface colors */
+  --bg: #f6f8fb;
+  --bg-elevated: #ffffff;
+  --bg-subtle: #f1f5f9;
+  --surface: #ffffff;
+  --surface-hover: #f8fafc;
+  --border: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  /* Text colors */
+  --text: #1e293b;
+  --text-secondary: #475569;
+  --muted: #64748b;
+  --text-inverse: #ffffff;
+
+  /* Status colors */
+  --green: #16a34a;
+  --green-bg: #dcfce7;
+  --green-border: #86efac;
+  --red: #dc2626;
+  --red-bg: #fee2e2;
+  --red-border: #fecaca;
+  --yellow: #f59e0b;
+  --yellow-bg: #fef3c7;
+  --yellow-border: #fde68a;
+  --blue: #2563eb;
+  --blue-bg: #dbeafe;
+  --blue-border: #bfdbfe;
+
+  /* Typography */
+  --font-family: 'Tajawal', 'Nunito', 'Segoe UI', sans-serif;
+  --font-size-xs: 0.72rem;
+  --font-size-sm: 0.85rem;
+  --font-size-base: 0.92rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.15rem;
+  --font-size-xl: 1.4rem;
+  --font-size-xxl: 1.8rem;
+  --line-height: 1.7;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 30px rgba(15, 23, 42, 0.12);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.22);
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, #0ea5e9, #9d174d);
+  --gradient-accent: linear-gradient(90deg, #0ea5e9, #fbbf24);
+
+  /* Z-index scale */
+  --z-dropdown: 1000;
+  --z-sticky: 900;
+  --z-modal: 1000;
+  --z-toast: 1200;
+
+  /* Layout */
+  --container-max: 1240px;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  --primary: #38bdf8;
+  --primary-dark: #7dd3fc;
+  --primary-darker: #0ea5e9;
+  --primary-light: #082f49;
+  --accent: #fbbf24;
+  --accent-dark: #f59e0b;
+  --accent-light: #451a03;
+  --brand-pink: #f472b6;
+
+  --bg: #0f172a;
+  --bg-elevated: #1e293b;
+  --bg-subtle: #1e293b;
+  --surface: #1e293b;
+  --surface-hover: #273449;
+  --border: #334155;
+  --border-strong: #475569;
+
+  --text: #e2e8f0;
+  --text-secondary: #cbd5e1;
+  --muted: #94a3b8;
+  --text-inverse: #0f172a;
+
+  --green: #4ade80;
+  --green-bg: #14532d;
+  --green-border: #16a34a;
+  --red: #f87171;
+  --red-bg: #450a0a;
+  --red-border: #dc2626;
+  --yellow: #fbbf24;
+  --yellow-bg: #451a03;
+  --yellow-border: #d97706;
+  --blue: #60a5fa;
+  --blue-bg: #172554;
+  --blue-border: #1d4ed8;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow: 0 4px 30px rgba(0, 0, 0, 0.45);
+  --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.55);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.65);
+
+  --gradient-brand: linear-gradient(135deg, #0284c7, #9d174d);
+  --gradient-accent: linear-gradient(90deg, #0284c7, #f59e0b);
+}
+
+/* Focus-visible ring for keyboard accessibility */
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}

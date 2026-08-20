@@ -1,0 +1,57 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: rafiqi-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: school_user
+      POSTGRES_PASSWORD: school_pass
+      POSTGRES_DB: school_platform
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U school_user -d school_platform"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: rafiqi-api
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://school_user:school_pass@postgres:5432/school_platform?schema=public
+      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
+      PORT: 3001
+      NODE_ENV: production
+      # إصلاح أمني: عدّل هذا في الإنتاج الفعلي لدومين الواجهة الحقيقي.
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:5173,http://127.0.0.1:5173}
+    ports:
+      - "3001:3001"
+    volumes:
+      - uploads:/app/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: sh -c "npx prisma migrate deploy && node prisma/seed.js && node src/index.js"
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: rafiqi-web
+    restart: unless-stopped
+    environment:
+      VITE_PROXY_TARGET: http://api:3001
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+
+volumes:
+  pgdata:
+  uploads:

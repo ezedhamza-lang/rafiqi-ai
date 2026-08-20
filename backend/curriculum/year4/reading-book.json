@@ -1,0 +1,17 @@
+{
+  "title": "قراءتي",
+  "subtitle": "السنة الرابعة ابتدائي — نصوص قرائية",
+  "imageBase": null,
+  "imageExt": ".jpg",
+  "totalPages": 160,
+  "units": [
+    { "id": "u1", "title": "الوطن", "icon": "🇹🇳", "color": "#E05B5B", "startPage": 1, "endPage": 26 },
+    { "id": "u2", "title": "الطبيعة والبيئة", "icon": "🌿", "color": "#5CB85C", "startPage": 27, "endPage": 47 },
+    { "id": "u3", "title": "القصص والحكايات الشعبية", "icon": "📖", "color": "#F0AD4E", "startPage": 48, "endPage": 66 },
+    { "id": "u4", "title": "سيرة الرسول ﷺ والأخلاق", "icon": "🕌", "color": "#4A9FD8", "startPage": 67, "endPage": 86 },
+    { "id": "u5", "title": "العلم والعلماء", "icon": "🔬", "color": "#6B5B95", "startPage": 87, "endPage": 106 },
+    { "id": "u6", "title": "العمل والمهن", "icon": "🛠️", "color": "#E8A33D", "startPage": 107, "endPage": 124 },
+    { "id": "u7", "title": "التضامن والمساعدات", "icon": "🤝", "color": "#3CB371", "startPage": 125, "endPage": 143 },
+    { "id": "u8", "title": "الأعياد والمناسبات", "icon": "🎉", "color": "#D9534F", "startPage": 144, "endPage": 160 }
+  ]
+}

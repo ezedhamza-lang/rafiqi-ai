@@ -1,0 +1,17 @@
+{
+  "title": "قراءتي",
+  "subtitle": "السنة الثالثة ابتدائي — نصوص قرائية",
+  "imageBase": null,
+  "imageExt": ".jpg",
+  "totalPages": 96,
+  "units": [
+    { "id": "u1", "title": "نص الانطلاق في السوق", "icon": "🛒", "color": "#4A9FD8", "startPage": 1, "endPage": 14 },
+    { "id": "u2", "title": "الفلاح والعمل", "icon": "👨‍🌾", "color": "#8BC34A", "startPage": 15, "endPage": 24 },
+    { "id": "u3", "title": "الرسول قدوتنا", "icon": "🕌", "color": "#D4A017", "startPage": 25, "endPage": 34 },
+    { "id": "u4", "title": "البيئة النظيفة", "icon": "♻️", "color": "#2ECC71", "startPage": 35, "endPage": 44 },
+    { "id": "u5", "title": "الماء سرّ الحياة", "icon": "💧", "color": "#4A9FD8", "startPage": 45, "endPage": 54 },
+    { "id": "u6", "title": "الحاسوب والتكنولوجيا", "icon": "💻", "color": "#5C6BC0", "startPage": 55, "endPage": 64 },
+    { "id": "u7", "title": "الطريق والسلامة المرورية", "icon": "🚦", "color": "#E74C3C", "startPage": 65, "endPage": 74 },
+    { "id": "u8", "title": "القصص والحكايات", "icon": "📖", "color": "#F39C12", "startPage": 75, "endPage": 96 }
+  ]
+}

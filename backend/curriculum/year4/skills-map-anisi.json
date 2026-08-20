@@ -1,0 +1,286 @@
+{
+  "_meta": {
+    "note": "خريطة مهارات مادّة القراءة للسنة الرابعة، مفتاحها id الدرس في reading-units.json. الدروس غير المذكورة هنا تُبنى تلقائيًا (source: auto) بمهارات قراءة عامّة."
+  },
+  "lessons": {
+    "u1-l1": {
+      "learningObjectives": ["يقرأ النص قراءة سليمة معبّرة ويستخرج الفكرة العامة حول حبّ الوطن"],
+      "competencies": ["فهم النصوص القرائية واستخلاص المضامين"],
+      "skills": ["reading-aloud", "reading-comprehension", "text-analysis"],
+      "indicators": ["يقرأ الفقرات الثلاث بنطق سليم ويحدّد جغرافية تونس الطبيعية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يعبّر عن حبّه لوطنه في جمل مفيدة"],
+      "source": "curated"
+    },
+    "u1-l2": {
+      "learningObjectives": ["يقرأ النص ويفهم جمال فصل الربيع في تونس ويستخرج عناصر الطبيعة"],
+      "competencies": ["فهم النصوص القرائية واستخلاص المضامين"],
+      "skills": ["reading-comprehension", "vocabulary-building", "oral-expression"],
+      "indicators": ["يحدّد مظاهر الربيع في النص ويستعمل مفردات جديدة في جمل"],
+      "prerequisites": ["u1-l1"],
+      "expectedOutcomes": ["يصف جمال فصل الربيع في بلاده شفويًّا"],
+      "source": "curated"
+    },
+    "u1-l3": {
+      "learningObjectives": ["يقرأ النص ويستخرج رموز العلم التونسي ومدلولات ألوانه"],
+      "competencies": ["فهم النصوص القرائية وتحليل الرموز الوطنية"],
+      "skills": ["reading-comprehension", "text-analysis", "critical-thinking"],
+      "indicators": ["يستخرج ألوان العلم ورموزه ويشرح دلالتها"],
+      "prerequisites": ["u1-l1"],
+      "expectedOutcomes": ["يبيّن دلالة الألوان والرموز في العلم التونسي"],
+      "source": "curated"
+    },
+    "u1-l4": {
+      "learningObjectives": ["يقرأ النص ويفهم العلاقة بين الأسرة والوطن ويبدي موقفه من العائلة"],
+      "competencies": ["فهم النصوص القرائية والربط بين الأسرة والوطن"],
+      "skills": ["reading-comprehension", "oral-expression", "writing"],
+      "indicators": ["يستخلص أثر الأسرة في بناء حبّ الوطن ويجيب عن الأسئلة"],
+      "prerequisites": ["u1-l1"],
+      "expectedOutcomes": ["يحدّث عن أسرته ويقدّر قيمتها في تكوين شخصيته"],
+      "source": "curated"
+    },
+    "u2-l1": {
+      "learningObjectives": ["يقرأ النص ويتذوّق جمال الطبيعة ويستخرج صورها الوصفية"],
+      "competencies": ["تذوّق النصوص الوصفية واستخلاص الجماليات"],
+      "skills": ["reading-aloud", "reading-comprehension", "text-analysis"],
+      "indicators": ["يقرأ النص معبّرًا ويستخرج عناصر الطبيعة الموصوفة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يرسم لوحة وصفية للطبيعة بأسلوبه"],
+      "source": "curated"
+    },
+    "u2-l2": {
+      "learningObjectives": ["يقرأ النص ويستخلص أهمية الماء وسبل المحافظة عليه"],
+      "competencies": ["الوعي البيئي وفهم أهمية الموارد الطبيعية"],
+      "skills": ["reading-comprehension", "critical-thinking", "oral-expression"],
+      "indicators": ["يستخرج استعمالات الماء ويقترح سلوكات للمحافظة عليه"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يلتزم بسلوكات سليمة في استعمال الماء"],
+      "source": "curated"
+    },
+    "u2-l3": {
+      "learningObjectives": ["يقرأ النص ويفهم مفهوم البيئة وسلوكات حمايتها"],
+      "competencies": ["الوعي البيئي والتحلّي بسلوكات المواطن المسؤول"],
+      "skills": ["reading-comprehension", "critical-thinking", "text-analysis"],
+      "indicators": ["يميّز البيئة النظيفة من الملوّثة ويقترح سلوكات صحيحة"],
+      "prerequisites": ["u2-l2"],
+      "expectedOutcomes": ["يشارك في حملات حماية البيئة بوعي"],
+      "source": "curated"
+    },
+    "u2-l4": {
+      "learningObjectives": ["يقرأ النص ويستخرج فوائد الشجرة ويدرك ضرورة غرسها"],
+      "competencies": ["الوعي البيئي وإدراك العلاقة بين الإنسان والطبيعة"],
+      "skills": ["reading-comprehension", "vocabulary-building", "critical-thinking"],
+      "indicators": ["يستخرج فوائد الشجرة للإنسان والبيئة ويعلّل رعايتها"],
+      "prerequisites": ["u2-l3"],
+      "expectedOutcomes": ["يغرس شجرة ويعتني بها في محيطه"],
+      "source": "curated"
+    },
+    "u3-l1": {
+      "learningObjectives": ["يقرأ الحكاية قراءة معبّرة ويستخرج العبرة من قصة جحا"],
+      "competencies": ["فهم الحكايات الشعبية واستخلاص العبر"],
+      "skills": ["reading-aloud", "reading-comprehension", "text-analysis", "critical-thinking"],
+      "indicators": ["يعيد سرد الحكاية ويرتّب أحداثها ويستخرج العبرة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يستنتج أن الإنسان يعمل بما يراه صوابًا لا بما يقول الناس"],
+      "source": "curated"
+    },
+    "u3-l2": {
+      "learningObjectives": ["يقرأ الحكاية ويستخلص قيمة العمل والاجتهاد من قصة النملة والجرادة"],
+      "competencies": ["فهم الحكايات واستخلاص القيم"],
+      "skills": ["reading-comprehension", "text-analysis", "critical-thinking"],
+      "indicators": ["يقارن بين سلوك النملة والجرادة ويستخلص العبرة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يقدّر قيمة الاجتهاد والتخطيط للمستقبل"],
+      "source": "curated"
+    },
+    "u3-l3": {
+      "learningObjectives": ["يقرأ الحكاية ويستخلص عبرة المثابرة ويقارن بين الشخصيتين"],
+      "competencies": ["فهم الحكايات واستخلاص القيم"],
+      "skills": ["reading-comprehension", "text-analysis", "critical-thinking", "oral-expression"],
+      "indicators": ["يحدّد سبب فوز السلحفاة ويستنتج أثر التكبّر والاستهتار"],
+      "prerequisites": ["u3-l2"],
+      "expectedOutcomes": ["يتحلّى بالمثابرة ويتجنّب التكبّر في أعماله"],
+      "source": "curated"
+    },
+    "u4-l1": {
+      "learningObjectives": ["يقرأ النص ويتعرّف على ملامح من طفولة الرسول ﷺ ويقتدي به"],
+      "competencies": ["التربية القيمية والقدوة الحسنة بالنبي ﷺ"],
+      "skills": ["reading-aloud", "reading-comprehension", "vocabulary-building"],
+      "indicators": ["يستخرج ملامح طفولة النبي ﷺ ويستعمل مفردات السيرة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يعبّر عن حبّه للرسول ﷺ في جمل مفيدة"],
+      "source": "curated"
+    },
+    "u4-l2": {
+      "learningObjectives": ["يقرأ النص ويستخلص قيمة الصدق والأمانة ويطبقها في حياته"],
+      "competencies": ["التربية القيمية والتحلّي بالصدق والأمانة"],
+      "skills": ["reading-comprehension", "text-analysis", "critical-thinking"],
+      "indicators": ["يستخرج صفة الصادق الأمين ويستنتج ثمرة الصدق"],
+      "prerequisites": ["u4-l1"],
+      "expectedOutcomes": ["يتصدّق في أقواله ويردّ الأمانات إلى أصحابها"],
+      "source": "curated"
+    },
+    "u4-l3": {
+      "learningObjectives": ["يقرأ النص ويستخرج مظاهر رحمة الرسول ﷺ بالصغار"],
+      "competencies": ["التربية القيمية والاقتداء برحمة النبي ﷺ"],
+      "skills": ["reading-comprehension", "oral-expression", "critical-thinking"],
+      "indicators": ["يستخرج مواقف رحيمة من سيرة النبي ﷺ مع الأطفال"],
+      "prerequisites": ["u4-l1"],
+      "expectedOutcomes": ["يعامل الصغار والرفقاء برحمة واحترام"],
+      "source": "curated"
+    },
+    "u4-l4": {
+      "learningObjectives": ["يقرأ النص ويستخلص قيمة التسامح والعفو عند المقدرة"],
+      "competencies": ["التربية القيمية والتحلّي بالتسامح"],
+      "skills": ["reading-comprehension", "critical-thinking", "oral-expression"],
+      "indicators": ["يستخرج موقف فتح مكة ويستنتج معنى العفو عند المقدرة"],
+      "prerequisites": ["u4-l2"],
+      "expectedOutcomes": ["يسامح من أخطأ في حقّه إذا اعتذر"],
+      "source": "curated"
+    },
+    "u5-l1": {
+      "learningObjectives": ["يقرأ النص ويستخلص فضل العلم ووجوب طلبه"],
+      "competencies": ["تقدير قيمة العلم والاجتهاد في طلبه"],
+      "skills": ["reading-comprehension", "text-analysis", "vocabulary-building"],
+      "indicators": ["يستخرج الأدلة على فضل العلم ويشرحها بأسلوبه"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يجتهد في دروسه ويقرأ الكتب النافعة"],
+      "source": "curated"
+    },
+    "u5-l2": {
+      "learningObjectives": ["يقرأ النص ويتعرّف على سيرة العالم ابن سينا وإسهاماته"],
+      "competencies": ["التعرّف على سير العلماء والاقتداء بهم"],
+      "skills": ["reading-comprehension", "vocabulary-building", "text-analysis"],
+      "indicators": ["يستخرج معلومات عن ابن سينا وكتابه وأثره العلمي"],
+      "prerequisites": ["u5-l1"],
+      "expectedOutcomes": ["يقدّر دور العلماء في خدمة الإنسانية"],
+      "source": "curated"
+    },
+    "u5-l3": {
+      "learningObjectives": ["يقرأ النص ويتعرّف على إسهامات الخوارزمي في الرياضيات"],
+      "competencies": ["التعرّف على سير العلماء والاقتداء بهم"],
+      "skills": ["reading-comprehension", "vocabulary-building", "critical-thinking"],
+      "indicators": ["يستخرج إسهامات الخوارزمي ويستنتج أثرها في الحاسوب الحديث"],
+      "prerequisites": ["u5-l1"],
+      "expectedOutcomes": ["يربط بين إسهامات الخوارزمي والتقنية الحديثة"],
+      "source": "curated"
+    },
+    "u5-l4": {
+      "learningObjectives": ["يقرأ النص ويتعوّد على حبّ القراءة وتردّد المكتبة"],
+      "competencies": ["اكتساب عادة القراءة والاستفادة من المكتبة"],
+      "skills": ["reading-comprehension", "vocabulary-building", "writing"],
+      "indicators": ["يستخلص فوائد القراءة ويذكر سلوكات العناية بالكتاب"],
+      "prerequisites": ["u5-l1"],
+      "expectedOutcomes": ["يزور المكتبة بانتظام ويحافظ على الكتب"],
+      "source": "curated"
+    },
+    "u6-l1": {
+      "learningObjectives": ["يقرأ النص ويقدّر قيمة العمل والإتقان في المهن"],
+      "competencies": ["تقدير قيمة العمل والمهن"],
+      "skills": ["reading-aloud", "reading-comprehension", "vocabulary-building"],
+      "indicators": ["يستخرج صفات النجّار الماهر ويستعمل مفردات المهنة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يقدّر كلّ مهنة شريفة ويحرص على الإتقان"],
+      "source": "curated"
+    },
+    "u6-l2": {
+      "learningObjectives": ["يقرأ النص ويقدّر دور الفلّاح في توفير الغذاء"],
+      "competencies": ["تقدير دور الفلّاح في المجتمع"],
+      "skills": ["reading-comprehension", "oral-expression", "vocabulary-building"],
+      "indicators": ["يستخرج مظاهر كدح الفلّاح ويذكر منتوجات الأرض التونسية"],
+      "prerequisites": ["u6-l1"],
+      "expectedOutcomes": ["يحترم الفلّاح ويحافظ على المحاصيل"],
+      "source": "curated"
+    },
+    "u6-l3": {
+      "learningObjectives": ["يقرأ النص ويتعرّف على مهنة الطبّ وقيمتها الإنسانية"],
+      "competencies": ["تقدير المهن الإنسانية"],
+      "skills": ["reading-comprehension", "vocabulary-building", "oral-expression"],
+      "indicators": ["يستخرج صفات الدكتورة أمينة ويشرح قيمة مهنة الطبّ"],
+      "prerequisites": ["u6-l1"],
+      "expectedOutcomes": ["يقدّر جهود الأطباء ويحترم مواعيد العلاج"],
+      "source": "curated"
+    },
+    "u6-l4": {
+      "learningObjectives": ["يقرأ النص ويستخلص قيمة العمل وكرامة العامل"],
+      "competencies": ["تقدير قيمة العمل في الإسلام"],
+      "skills": ["reading-comprehension", "critical-thinking", "oral-expression"],
+      "indicators": ["يستخرج الحديث الشريف عن العمل ويستنتج أثر الكسل"],
+      "prerequisites": ["u6-l1"],
+      "expectedOutcomes": ["يؤدّي واجباته بإتقان ويحترم كلّ العاملين"],
+      "source": "curated"
+    },
+    "u7-l1": {
+      "learningObjectives": ["يقرأ النص ويستخلص قيمة التعاون وأثره في المجتمع"],
+      "competencies": ["التحلّي بروح التعاون والعمل الجماعي"],
+      "skills": ["reading-comprehension", "text-analysis", "critical-thinking"],
+      "indicators": ["يستخرج الآية الكريمة عن التعاون ويبيّن مجالاته"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يتعاون مع زملائه في الأعمال النافعة"],
+      "source": "curated"
+    },
+    "u7-l2": {
+      "learningObjectives": ["يقرأ النص ويستخلص حقوق الجار وواجباتنا نحوه"],
+      "competencies": ["التربية القيمية وحسن الجوار"],
+      "skills": ["reading-comprehension", "oral-expression", "critical-thinking"],
+      "indicators": ["يستخرج الحديث عن حقّ الجار ويقترح سلوكات حسنة تجاهه"],
+      "prerequisites": ["u7-l1"],
+      "expectedOutcomes": ["يبرّ جيرانه ويساعد المحتاجين منهم"],
+      "source": "curated"
+    },
+    "u7-l3": {
+      "learningObjectives": ["يقرأ النص ويقدّر قيمة العطاء والبذل في المجتمع"],
+      "competencies": ["التربية القيمية والتحلّي بروح العطاء"],
+      "skills": ["reading-comprehension", "critical-thinking", "writing"],
+      "indicators": ["يستخرج أشكال العطاء ويشرح معنى اليد العليا خير من اليد السفلى"],
+      "prerequisites": ["u7-l1"],
+      "expectedOutcomes": ["يشارك في أعمال الخير والتطوّع"],
+      "source": "curated"
+    },
+    "u7-l4": {
+      "learningObjectives": ["يقرأ النص ويستخلص قيمة التضامن في الأزمات"],
+      "competencies": ["الوعي بالتضامن الاجتماعي"],
+      "skills": ["reading-comprehension", "critical-thinking", "oral-expression"],
+      "indicators": ["يستخرج مظاهر التضامن ويشرح تشبيه المؤمنين بالجسد الواحد"],
+      "prerequisites": ["u7-l1"],
+      "expectedOutcomes": ["يساهم في مساعدة المتضرّرين عند الحاجة"],
+      "source": "curated"
+    },
+    "u8-l1": {
+      "learningObjectives": ["يقرأ النص ويتعرّف على مظاهر عيد الفطر وفرحته"],
+      "competencies": ["التعرّف على الأعياد الدينية ومظاهرها"],
+      "skills": ["reading-aloud", "reading-comprehension", "vocabulary-building"],
+      "indicators": ["يستخرج مظاهر عيد الفطر ويستعمل مفردات العيد"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشارك في فرحة العيد ويحسن إلى الفقراء"],
+      "source": "curated"
+    },
+    "u8-l2": {
+      "learningObjectives": ["يقرأ النص ويتعرّف على معاني عيد الأضحى وقيم التضحية"],
+      "competencies": ["التعرّف على الأعياد الدينية ومعانيها"],
+      "skills": ["reading-comprehension", "text-analysis", "critical-thinking"],
+      "indicators": ["يستخرج قصة سيدنا إبراهيم ويشرح معنى التضحية"],
+      "prerequisites": ["u8-l1"],
+      "expectedOutcomes": ["يقدّر قيمة التضحية والفداء في سبيل الله"],
+      "source": "curated"
+    },
+    "u8-l3": {
+      "learningObjectives": ["يقرأ النص ويتعرّف على ذكرى الاستقلال وقيمة الوطن"],
+      "competencies": ["التربية الوطنية وتقدير ذكرى الاستقلال"],
+      "skills": ["reading-comprehension", "text-analysis", "oral-expression"],
+      "indicators": ["يستخرج تاريخ الاستقلال وأبطال الحركة الوطنية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يعتزّ باستقلال بلاده ويحافظ على مكاسب الوطن"],
+      "source": "curated"
+    },
+    "u8-l4": {
+      "learningObjectives": ["يقرأ النص ويتعرّف على عيد الشجرة وأهمية الغرس"],
+      "competencies": ["الوعي البيئي واحترام المناسبات الوطنية"],
+      "skills": ["reading-comprehension", "critical-thinking", "vocabulary-building"],
+      "indicators": ["يستخرج موعد عيد الشجرة وفوائد الغرس"],
+      "prerequisites": ["u2-l4"],
+      "expectedOutcomes": ["يشارك في غرس الأشجار والمحافظة على الغابات"],
+      "source": "curated"
+    }
+  }
+}

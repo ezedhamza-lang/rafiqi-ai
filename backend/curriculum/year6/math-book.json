@@ -1,0 +1,53 @@
+{
+  "title": "رياضيّات — كتابي في الرياضيات",
+  "subtitle": "السّنة السّادسة من التعليم الأساسيّ",
+  "imageBase": "/assets/books/math6/",
+  "imageExt": ".jpg",
+  "totalPages": 173,
+  "_meta": {
+    "note": "حدود الفترات 1-5 مؤكَّدة (زوّدنا بها المستخدم مباشرة).",
+    "status": "مكتمل — 5/5 فترات"
+  },
+  "units": [
+    {
+      "id": "p1",
+      "title": "الفترة 1",
+      "icon": "1️⃣",
+      "color": "#5B9FE0",
+      "startPage": 4,
+      "endPage": 34
+    },
+    {
+      "id": "p2",
+      "title": "الفترة 2",
+      "icon": "2️⃣",
+      "color": "#E05C9F",
+      "startPage": 35,
+      "endPage": 66
+    },
+    {
+      "id": "p3",
+      "title": "الفترة 3",
+      "icon": "3️⃣",
+      "color": "#5CB85C",
+      "startPage": 67,
+      "endPage": 106
+    },
+    {
+      "id": "p4",
+      "title": "الفترة 4",
+      "icon": "4️⃣",
+      "color": "#F0AD4E",
+      "startPage": 107,
+      "endPage": 132
+    },
+    {
+      "id": "p5",
+      "title": "الفترة 5",
+      "icon": "5️⃣",
+      "color": "#9B59B6",
+      "startPage": 133,
+      "endPage": 173
+    }
+  ]
+}

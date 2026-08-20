@@ -1,0 +1,57 @@
+{
+  "title": "إنتاج كتابي",
+  "subtitle": "السنة السادسة ابتدائي",
+  "imageBase": null,
+  "imageExt": ".jpg",
+  "totalPages": 0,
+  "units": [
+    {
+      "id": "p1",
+      "title": "الوصف الأدبي",
+      "icon": "✍️",
+      "color": "#8E7CE0",
+      "startPage": 1,
+      "endPage": 10
+    },
+    {
+      "id": "p2",
+      "title": "السرد",
+      "icon": "📜",
+      "color": "#4A9FD8",
+      "startPage": 11,
+      "endPage": 20
+    },
+    {
+      "id": "p3",
+      "title": "الرسالة الرسمية",
+      "icon": "✉️",
+      "color": "#E05B5B",
+      "startPage": 21,
+      "endPage": 30
+    },
+    {
+      "id": "p4",
+      "title": "الحوار المسرحي",
+      "icon": "🎭",
+      "color": "#F4A340",
+      "startPage": 31,
+      "endPage": 40
+    },
+    {
+      "id": "p5",
+      "title": "التقرير",
+      "icon": "📋",
+      "color": "#5BC0BE",
+      "startPage": 41,
+      "endPage": 50
+    },
+    {
+      "id": "p6",
+      "title": "التلخيص",
+      "icon": "📚",
+      "color": "#4CAF50",
+      "startPage": 51,
+      "endPage": 60
+    }
+  ]
+}

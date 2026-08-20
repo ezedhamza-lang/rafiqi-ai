@@ -1,0 +1,89 @@
+{
+  "title": "كتابي في القراءة — أنيسي",
+  "subtitle": "السنة الأولى من التعليم الأساسي",
+  "imageBase": "/assets/books/anisi/",
+  "imageExt": ".jpg",
+  "totalPages": 113,
+  "units": [
+    {
+      "id": "u0",
+      "title": "غلاف الكتاب ومقدّمته",
+      "icon": "📕",
+      "color": "#B0B0B0",
+      "startPage": 1,
+      "endPage": 3
+    },
+    {
+      "id": "u1",
+      "title": "أنيسي في مدرستي",
+      "icon": "🏫",
+      "color": "#E4463A",
+      "startPage": 4,
+      "endPage": 15
+    },
+    {
+      "id": "u2",
+      "title": "أنيسي في أهلي",
+      "icon": "👨‍👩‍👧",
+      "color": "#3A9BE4",
+      "startPage": 16,
+      "endPage": 27
+    },
+    {
+      "id": "u3",
+      "title": "أنيسي في صحتي وسلامتي",
+      "icon": "🩺",
+      "color": "#3AC46A",
+      "startPage": 28,
+      "endPage": 39
+    },
+    {
+      "id": "u4",
+      "title": "أنيسي في فصل الشتاء",
+      "icon": "❄️",
+      "color": "#5B7FE0",
+      "startPage": 40,
+      "endPage": 51
+    },
+    {
+      "id": "u5",
+      "title": "أنيسي في عالم المهن",
+      "icon": "🧑‍🔧",
+      "color": "#E0A63A",
+      "startPage": 52,
+      "endPage": 63
+    },
+    {
+      "id": "u6",
+      "title": "أنيسي في فصل الربيع",
+      "icon": "🌸",
+      "color": "#E06AA6",
+      "startPage": 64,
+      "endPage": 75
+    },
+    {
+      "id": "u7",
+      "title": "أنيسي في عالم الحيوانات",
+      "icon": "🐾",
+      "color": "#8A5CE0",
+      "startPage": 76,
+      "endPage": 87
+    },
+    {
+      "id": "u8",
+      "title": "أنيسي في عالم القصص",
+      "icon": "📚",
+      "color": "#E0863A",
+      "startPage": 88,
+      "endPage": 112
+    },
+    {
+      "id": "u9",
+      "title": "غلاف الكتاب الخلفي",
+      "icon": "📘",
+      "color": "#B0B0B0",
+      "startPage": 113,
+      "endPage": 113
+    }
+  ]
+}

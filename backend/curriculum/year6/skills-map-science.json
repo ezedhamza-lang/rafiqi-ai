@@ -1,0 +1,99 @@
+{
+  "_meta": {
+    "note": "خرائط المهارات"
+  },
+  "chapters": {
+    "ch1": {
+      "learningObjectives": ["أن يتعرف التلميذ على أجهزة جسم الإنسان", "أن يفهم دور كل جهاز في الجسم"],
+      "competencies": ["الملاحظة العلمية لأعضاء الجسم", "الوعي بجسده وصحته"],
+      "skills": ["body-awareness", "scientific-observation", "reasoning", "experimentation"],
+      "indicators": ["يحدد أجهزة جسم الإنسان الرئيسية", "يربط بين كل جهاز ووظيفته"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح مسار الهضم والتنفس", "يفسر دور القلب والدماغ"],
+      "source": "curated"
+    }
+,
+    "ch2": {
+      "learningObjectives": ["أن يتعرف التلميذ على دورة حياة الإنسان", "أن يفهم مراحل نمو الجنين"],
+      "competencies": ["الوعي بالجسد وفهم النمو", "الملاحظة العلمية"],
+      "skills": ["body-awareness", "scientific-observation", "reasoning"],
+      "indicators": ["يرتب مراحل حياة الإنسان زمنيا", "يشرح مكان نمو الجنين ومدة الحمل"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يصف دورة حياة الإنسان", "يقدر عناية الوالدين به"],
+      "source": "curated"
+    },
+    "ch3": {
+      "learningObjectives": ["أن يتعرف التلميذ على الكائنات الدقيقة", "أن يميز بين النافع والضار منها"],
+      "competencies": ["الملاحظة بالتجريب", "الوعي الصحي والنظافة"],
+      "skills": ["scientific-observation", "health-awareness", "experimentation", "classification"],
+      "indicators": ["يصنف الكائنات الدقيقة إلى نافعة وضارة", "يشرح تجربة الخميرة والبالون"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يمارس النظافة للوقاية من الجراثيم", "يذكر أمثلة على البكتيريا النافعة"],
+      "source": "curated"
+    },
+    "ch4": {
+      "learningObjectives": ["أن يتعرف التلميذ على أصناف الأغذية", "أن يدرك أهمية الغذاء المتوازن"],
+      "competencies": ["تصنيف الأغذية", "الوعي الصحي"],
+      "skills": ["health-awareness", "classification", "scientific-observation"],
+      "indicators": ["يصنف الأغذية إلى طاقية وبنائية ووقائية", "يبني وجبة متوازنة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يختار غذاء صحيا متوازنا", "يشرح دور الفيتامينات في الجسم"],
+      "source": "curated"
+    },
+    "ch5": {
+      "learningObjectives": ["أن يتعرف التلميذ على حالات المادة", "أن يميز بين التحول الفيزيائي والكيميائي"],
+      "competencies": ["الملاحظة والتجريب", "التصنيف والاستدلال"],
+      "skills": ["scientific-observation", "classification", "experimentation", "reasoning"],
+      "indicators": ["يصنف المواد حسب حالتها", "يميز بين التحولات الفيزيائية والكيميائية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح ظاهرة الانصهار والتكاثف", "يفسر صدأ الحديد واحتراق الورق"],
+      "source": "curated"
+    },
+    "ch6": {
+      "learningObjectives": ["أن يفهم التلميذ مفهوم التفاعل الكيميائي", "أن يتعرف على دلائل حدوث التفاعل"],
+      "competencies": ["التجريب والملاحظة", "الاستدلال العلمي"],
+      "skills": ["experimentation", "scientific-observation", "reasoning"],
+      "indicators": ["يذكر دلائل التفاعل الكيميائي", "يشرح تجربة الخل مع كربونات الصوديوم"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يستنتج ظهور مواد جديدة عند التفاعل", "يتصرف بحذر مع المواد الكيميائية"],
+      "source": "curated"
+    }
+,
+    "ch7": {
+      "learningObjectives": ["أن يتعرف التلميذ على أشكال الطاقة", "أن يدرك مصادر الطاقة المتجددة"],
+      "competencies": ["الملاحظة العلمية", "الوعي البيئي"],
+      "skills": ["environment-awareness", "scientific-observation", "reasoning"],
+      "indicators": ["يصنف أشكال الطاقة بأمثلة", "يقارن بين المصادر المتجددة وغير المتجددة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يرشد استهلاك الطاقة في محيطه", "يدافع عن الطاقات النظيفة"],
+      "source": "curated"
+    },
+    "ch8": {
+      "learningObjectives": ["أن يفهم التلميذ طبيعة الضوء وانتشاره", "أن يفسر تشكل الظلال والرؤية"],
+      "competencies": ["الملاحظة والتجريب", "الاستدلال العلمي"],
+      "skills": ["scientific-observation", "experimentation", "reasoning"],
+      "indicators": ["يشرح انتشار الضوء في خطوط مستقيمة", "يفسر تغير طول الظل"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يصنع ظلالا ويتحكم فيها", "يشرح كيف نرى الأجسام"],
+      "source": "curated"
+    },
+    "ch9": {
+      "learningObjectives": ["أن يتعرف التلميذ على كواكب النظام الشمسي", "أن يحدد موقع الأرض بين الكواكب"],
+      "competencies": ["الملاحظة والتصنيف", "الاستدلال"],
+      "skills": ["scientific-observation", "classification", "reasoning"],
+      "indicators": ["يرتب الكواكب حسب بعدها عن الشمس", "يصنف الكواكب صخرية وغازية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح حركة الكواكب حول الشمس", "يفسر تعاقب الليل والنهار"],
+      "source": "curated"
+    },
+    "ch10": {
+      "learningObjectives": ["أن يفهم التلميذ سبب تعاقب الفصول", "أن يميز بين الطقس والمناخ"],
+      "competencies": ["الملاحظة العلمية", "الوعي البيئي"],
+      "skills": ["environment-awareness", "scientific-observation", "classification", "reasoning"],
+      "indicators": ["يفسر تعاقب الفصول بميلان محور الأرض", "يميز بين الطقس والمناخ"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يقرأ مظاهر كل فصل", "يسجل ملاحظات مناخية منتظمة"],
+      "source": "curated"
+    }
+  }
+}

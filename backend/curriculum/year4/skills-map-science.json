@@ -1,0 +1,97 @@
+{
+  "_meta": {
+    "note": "خريطة مهارات مادّة الإيقاظ العلمي للسنة الرابعة، مفتاحها id الفصل (chapter id) في science-book.json. الفصول غير المذكورة هنا تُبنى تلقائيًا (source: auto) بمهارة ملاحظة علمية عامّة."
+  },
+  "lessons": {
+    "ch1": {
+      "learningObjectives": ["يتعرّف على الجهاز التنفسي ومكوّناته ومسار الهواء في الجسم"],
+      "competencies": ["الوعي بالجسم وفهم وظائف أعضائه"],
+      "skills": ["body-awareness", "health-awareness", "scientific-observation"],
+      "indicators": ["يسمّي أعضاء الجهاز التنفسي ويصف مسار الهواء ويحسب عدد مرّات تنفّسه"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يربط بين الرياضة وسرعة التنفّس ويلتزم بسلوكات صحّية"],
+      "source": "curated"
+    },
+    "ch2": {
+      "learningObjectives": ["يتعرّف على الجهاز الهضمي ومراحل تحوّل الطعام في الجسم"],
+      "competencies": ["الوعي بالجسم وفهم وظائف أعضائه"],
+      "skills": ["body-awareness", "health-awareness", "scientific-observation"],
+      "indicators": ["يرتّب مراحل الهضم ويحدّد دور كلّ عضو في رحلة الطعام"],
+      "prerequisites": ["ch1"],
+      "expectedOutcomes": ["يختار غذاءً متوازنًا ويمضغ الطعام جيدًا"],
+      "source": "curated"
+    },
+    "ch3": {
+      "learningObjectives": ["يتعرّف على الجهاز الدوري ودور القلب والدم في نقل المواد"],
+      "competencies": ["الوعي بالجسم وفهم وظائف أعضائه"],
+      "skills": ["body-awareness", "health-awareness", "reasoning"],
+      "indicators": ["يصف رحلة الدم في الجسم ويحسب نبضه قبل وبعد المجهود"],
+      "prerequisites": ["ch1"],
+      "expectedOutcomes": ["يستنتج أثر الرياضة في سرعة النبض ويحافظ على صحّة قلبه"],
+      "source": "curated"
+    },
+    "ch4": {
+      "learningObjectives": ["يتعرّف على مراحل تكاثر النبات ودور البذور والزهرة في ذلك"],
+      "competencies": ["فهم دورات حياة الكائنات الحية"],
+      "skills": ["scientific-observation", "experimentation", "reasoning"],
+      "indicators": ["يصف دور الزهرة والثمار في تكوّن البذور ويرتّب مراحل الإنبات"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يُنبت بذرة ويتابع نموّها ويستخلص شروط الإنبات"],
+      "source": "curated"
+    },
+    "ch5": {
+      "learningObjectives": ["يتعرّف على مفهوم الذوبان ويميّز المواد الذائبة من غير الذائبة"],
+      "competencies": ["فهم الظواهر الكيميائية البسيطة"],
+      "skills": ["experimentation", "classification", "reasoning"],
+      "indicators": ["يصنّف مواد تذوب ومواد لا تذوب في الماء ويستنتج عوامل تسريع الذوبان"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يجري تجربة ذوبان ويعلّل النتائج"],
+      "source": "curated"
+    },
+    "ch6": {
+      "learningObjectives": ["يتعرّف على ظاهرة التمدد والانكماش بالحرارة ويفسّرها بالجزيئات"],
+      "competencies": ["فهم الظواهر الفيزيائية المرتبطة بالحرارة"],
+      "skills": ["scientific-observation", "experimentation", "reasoning"],
+      "indicators": ["يفسّر تمدد الأجسام وانكماشها ويستنتج سبب الفراغات بين قضبان السكة الحديدية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يستعمل مبدأ التمدد لفهم عمل ميزان الحرارة"],
+      "source": "curated"
+    },
+    "ch7": {
+      "learningObjectives": ["يتعرّف على الكهرباء والدائرة الكهربائية وأخطارها"],
+      "competencies": ["فهم الظواهر الكهربائية والسلوك الآمن معها"],
+      "skills": ["experimentation", "reasoning", "health-awareness"],
+      "indicators": ["يركّب دائرة كهربائية بسيطة ويحدّد شروط مرور التيار"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يتصرّف بأمان مع الأجهزة الكهربائية ويلتزم بقواعد الوقاية"],
+      "source": "curated"
+    },
+    "ch8": {
+      "learningObjectives": ["يتعرّف على مصدر الصوت وانتشاره في الأوساط المختلفة"],
+      "competencies": ["فهم الظواهر الصوتية"],
+      "skills": ["scientific-observation", "experimentation", "reasoning"],
+      "indicators": ["يربط الصوت بالاهتزاز ويستنتج أن الصوت يحتاج إلى وسط ناقل"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يحمي أذنيه من الأصوات القوية ويشرح عمل الهاتف البسيط"],
+      "source": "curated"
+    },
+    "ch9": {
+      "learningObjectives": ["يتعرّف على القوة وأثرها في الحركة ودور الاحتكاك والجاذبية"],
+      "competencies": ["فهم الظواهر الميكانيكية البسيطة"],
+      "skills": ["scientific-observation", "experimentation", "reasoning"],
+      "indicators": ["يبيّن أثر القوة في الحركة ويفسّر أثر الاحتكاك في سرعة الأجسام"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يستعمل مفهوم القوة والاحتكاك في تفسير حركات يومية"],
+      "source": "curated"
+    },
+    "ch10": {
+      "learningObjectives": ["يتعرّف على المغناطيس وخصائصه وقطبيه واستعمالاته"],
+      "competencies": ["فهم الظواهر المغناطيسية"],
+      "skills": ["scientific-observation", "experimentation", "classification", "reasoning"],
+      "indicators": ["يصنّف المواد المنجذبة إلى المغناطيس ويستنتج سلوك القطبين"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح عمل البوصلة ويصنع بوصلة بسيطة"],
+      "source": "curated"
+    }
+  }
+}

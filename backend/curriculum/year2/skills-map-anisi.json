@@ -1,0 +1,240 @@
+{
+  "_meta": {
+    "note": "خريطة المهارات لمادة اللغة العربية — السنة الثانية ابتدائي، مقابلة لدروس وحدة قراءتي"
+  },
+  "lessons": {
+    "u1-l1": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص قراءة سليمة", "أن يتعرّف على أفراد الأسرة في النص"],
+      "competencies": ["كفاية القراءة والفهم"],
+      "skills": ["reading-comprehension", "vocabulary-building"],
+      "indicators": ["يقرأ الجمل قراءة سليمة", "يجيب عن أسئلة الفهم بدقة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يستخرج أسماء أفراد الأسرة من النص", "يلخّص النص بجملة واحدة"],
+      "source": "curated"
+    },
+    "u1-l2": {
+      "learningObjectives": ["أن يصف المتعلّم بيته بجمل بسيطة", "أن يستخرج مفردات متعلقة بالبيت"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية التعبير"],
+      "skills": ["reading-comprehension", "oral-expression"],
+      "indicators": ["يحدد غرف البيت المذكورة في النص", "يستخدم مفردات البيت في جمل"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يستعمل مفردات البيت في تعبيره", "يرتب المعلومات مكانيا"],
+      "source": "curated"
+    },
+    "u1-l3": {
+      "learningObjectives": ["أن يتعاطف المتعلّم مع صورة الأم", "أن يقرأ النص قراءة معبّرة"],
+      "competencies": ["كفاية القراءة والفهم"],
+      "skills": ["reading-aloud", "reading-comprehension"],
+      "indicators": ["يقرأ النص بأداء معبّر", "يستنتج أعمال الأم من النص"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يتحدث عن أعمال أمه", "يستنتج معنى البر بالأم"],
+      "source": "curated"
+    },
+    "u1-l4": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويفهم مضامينه", "أن يستنتج قيمة العطف على الصغار"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يستخرج صفات الشخصيات", "يربط سلوك الأخ الكبير بالعطف"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يعبّر عن رأيه في سلوك عليّ", "يقترح طرقا للعطف على الصغار"],
+      "source": "curated"
+    },
+    "u2-l1": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص قراءة سليمة", "أن يصف مدرسته"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية التعبير"],
+      "skills": ["reading-comprehension", "oral-expression"],
+      "indicators": ["يحدد أماكن المدرسة المذكورة", "يصف مدرسته بجمل بسيطة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يستعمل مفردات المدرسة في جمل", "يعبّر عن شعوره تجاه مدرسته"],
+      "source": "curated"
+    },
+    "u2-l2": {
+      "learningObjectives": ["أن يتمثّل المتعلّم سلوك التلميذ المهذّب", "أن يقرأ النص قراءة سليمة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "reading-aloud"],
+      "indicators": ["يعدد آداب القسم من النص", "يقرأ الحوار قراءة معبّرة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يستنتج آداب المتعلم في القسم", "يطبق سلوك رفع اليد في القسم"],
+      "source": "curated"
+    },
+    "u2-l3": {
+      "learningObjectives": ["أن يستنتج المتعلّم قيم الصداقة", "أن يقرأ النص قراءة سليمة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يستخرج مواقف التعاون بين الصديقين", "يستنتج معنى الصداقة الحقيقية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يذكر صفات الصديق الوفي", "يتحدث عن صديقه في القسم"],
+      "source": "curated"
+    },
+    "u3-l1": {
+      "learningObjectives": ["أن يعبّر المتعلّم عن حبّه لوطنه", "أن يقرأ النص قراءة سليمة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "oral-expression"],
+      "indicators": ["يحدد مظاهر جمال تونس من النص", "يعبر عن حبه لوطنه"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يعدد معالم تونس", "يستنتج واجب المواطن تجاه وطنه"],
+      "source": "curated"
+    },
+    "u3-l2": {
+      "learningObjectives": ["أن يصف المتعلّم علم تونس", "أن يتعرّف على رمزية العلم"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية التعبير"],
+      "skills": ["reading-comprehension", "vocabulary-building"],
+      "indicators": ["يحدد ألوان العلم من النص", "يستخدم مفردات الوصف"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يصف علم بلاده شكلا ولونا", "يستنتج أن العلم رمز للوطن"],
+      "source": "curated"
+    },
+    "u3-l3": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على النشيد الوطني", "أن يقرأ النص قراءة معبّرة"],
+      "competencies": ["كفاية القراءة والفهم"],
+      "skills": ["reading-aloud", "reading-comprehension"],
+      "indicators": ["يقرأ النص بأداء معبّر", "يستخرج مكان إنشاد النشيد"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يستنتج أهمية النشيد الوطني", "يعبر عن شعوره عند إنشاد النشيد"],
+      "source": "curated"
+    },
+    "u4-l1": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويفهم مظاهر الربيع", "أن يستنتج ترتيب الفصول"],
+      "competencies": ["كفاية القراءة والفهم"],
+      "skills": ["reading-comprehension", "vocabulary-building"],
+      "indicators": ["يستخرج مظاهر الربيع من النص", "يرتب الفصول ترتيبا صحيحا"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يعدد مظاهر فصل الربيع", "يستخدم مفردات الربيع في جمل"],
+      "source": "curated"
+    },
+    "u4-l2": {
+      "learningObjectives": ["أن يصف المتعلّم الأزهار وألوانها", "أن يقرأ النص قراءة سليمة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية التعبير"],
+      "skills": ["reading-comprehension", "oral-expression"],
+      "indicators": ["يحدد ألوان الأزهار من النص", "يصف الحديقة بجمل بسيطة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يستعمل أسماء الأزهار في جمل", "يستنتج سلوك المحافظة على الأزهار"],
+      "source": "curated"
+    },
+    "u4-l3": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويدرك نعمة المطر", "أن يربط المطر بالزرع"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يستنتج فائدة المطر من النص", "يربط بين المطر ونمو الزرع"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح علاقة المطر بالزرع", "يعبر عن الشكر على نعمة المطر"],
+      "source": "curated"
+    },"u5-l1": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على مظاهر عيد الفطر", "أن يقرأ النص قراءة سليمة"],
+      "competencies": ["كفاية القراءة والفهم"],
+      "skills": ["reading-comprehension", "oral-expression"],
+      "indicators": ["يستخرج مظاهر العيد من النص", "يحكي كيف احتفل بالعيد"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يعدد مظاهر الاحتفال بالعيد", "يعبر عن فرحته بالعيد"],
+      "source": "curated"
+    },
+    "u5-l2": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويدرك قيمة التشجير", "أن يتعرّف على عيد الشجرة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "environment-awareness"],
+      "indicators": ["يشرح كيفية غرس الشجرة من النص", "يستنتج فوائد الشجرة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يعدد فوائد الشجرة", "يشارك في حملات الغرس"],
+      "source": "curated"
+    },
+    "u5-l3": {
+      "learningObjectives": ["أن يعبّر المتعلّم عن حبّه لأمّه", "أن يقرأ النص قراءة معبّرة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية التعبير"],
+      "skills": ["reading-comprehension", "writing"],
+      "indicators": ["يستخرج عبارات التهنئة من النص", "يكتب بطاقة تهنئة بسيطة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يكتب بطاقة تهنئة للأم", "يستنتج فضل الأم على أبنائها"],
+      "source": "curated"
+    },
+    "u6-l1": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على عادات نظافة الأسنان", "أن يقرأ النص قراءة سليمة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم الصحية"],
+      "skills": ["reading-comprehension", "health-awareness"],
+      "indicators": ["يحدد أوقات غسل الأسنان من النص", "يستنتج ضرر الإكثار من الحلوى"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يعدد عادات العناية بالأسنان", "يطبق عادات النظافة يوميا"],
+      "source": "curated"
+    },
+    "u6-l2": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على أهمية غسل اليدين", "أن يقرأ النص قراءة سليمة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم الصحية"],
+      "skills": ["reading-comprehension", "health-awareness"],
+      "indicators": ["يحدد أوقات غسل اليدين", "يستنتج علاقة النظافة بالوقاية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح أهمية الصابون", "يطبق قواعد نظافة اليدين"],
+      "source": "curated"
+    },
+    "u6-l3": {
+      "learningObjectives": ["أن يميّز المتعلّم بين الغذاء الصحي والضار", "أن يقرأ النص قراءة سليمة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم الصحية"],
+      "skills": ["reading-comprehension", "classification"],
+      "indicators": ["يصنف الأغذية إلى صحية وضارة", "يستنتج فوائد الخضر والفواكه"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يبني قائمة غذاء صحي", "يعلل اختياراته الغذائية"],
+      "source": "curated"
+    },
+    "u7-l1": {
+      "learningObjectives": ["أن يصف المتعلّم الأرنب شكلا وطعاما", "أن يقرأ النص قراءة سليمة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية التعبير"],
+      "skills": ["reading-comprehension", "vocabulary-building"],
+      "indicators": ["يستخرج صفات الأرنب من النص", "يحدد طعام الأرنب"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يصف الأرنب بجمل بسيطة", "يستنتج سلوك الاعتناء بالحيوان"],
+      "source": "curated"
+    },
+    "u7-l2": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويدرك حنان الأم", "أن يتعرّف على حياة الدجاجة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يستخرج مراحل فقس البيض", "يستنتج حنان الدجاجة على أفراخها"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يحكي دورة حياة الدجاجة باختصار", "يقارن بين حنان الحيوان والإنسان"],
+      "source": "curated"
+    },
+    "u7-l3": {
+      "learningObjectives": ["أن يصف المتعلّم القطّ", "أن يقرأ النص قراءة سليمة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية التعبير"],
+      "skills": ["reading-comprehension", "oral-expression"],
+      "indicators": ["يستخرج صفات القط من النص", "يتحدث عن حيوانه الأليف"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يصف القط شكلا وطعاما", "يعبر عن موقفه من الحيوانات الأليفة"],
+      "source": "curated"
+    },
+    "u7-l4": {
+      "learningObjectives": ["أن يقرأ المتعلّم النص ويتعرّف على الجمل", "أن يربط تكيّف الجمل بالصحراء"],
+      "competencies": ["كفاية القراءة والفهم"],
+      "skills": ["reading-comprehension", "text-analysis"],
+      "indicators": ["يستخرج خصائص الجمل من النص", "يستنتج سبب تسمية سفينة الصحراء"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح تكيّف الجمل مع الصحراء", "يذكر فوائد الجمل للإنسان"],
+      "source": "curated"
+    },
+    "u8-l1": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على مهنة الفلاح", "أن يقرأ النص قراءة سليمة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "oral-expression"],
+      "indicators": ["يستخرج أعمال الفلاح من النص", "يستنتج أهمية الفلاح في حياتنا"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يعدد أعمال الفلاح", "يعبر عن تقديره لمهنة الفلاح"],
+      "source": "curated"
+    },
+    "u8-l2": {
+      "learningObjectives": ["أن يتعرّف المتعلّم على مهنة الخبّاز", "أن يقرأ النص قراءة سليمة"],
+      "competencies": ["كفاية القراءة والفهم"],
+      "skills": ["reading-comprehension", "vocabulary-building"],
+      "indicators": ["يستخرج مراحل صنع الخبز", "يستخدم مفردات المهنة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يرتب مراحل صنع الخبز", "يستنتج قيمة الخبز ونعمة الله"],
+      "source": "curated"
+    },
+    "u8-l3": {
+      "learningObjectives": ["أن يقدّر المتعلّم مكانة المعلّم", "أن يقرأ النص قراءة سليمة"],
+      "competencies": ["كفاية القراءة والفهم", "كفاية القيم"],
+      "skills": ["reading-comprehension", "reading-aloud"],
+      "indicators": ["يستخرج أعمال المعلم من النص", "يستنتج صفات التلميذ المهذب"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يعبر عن احترامه للمعلم", "يذكر المهنة التي يتمناها"],
+      "source": "curated"
+    }
+  }
+}

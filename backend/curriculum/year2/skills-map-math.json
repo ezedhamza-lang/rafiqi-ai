@@ -1,0 +1,60 @@
+{
+  "_meta": {
+    "note": "خريطة مهارات مادّة الرياضيات للسنة الثانية، مفتاحها id الدرس في math-units.json. الدروس غير المذكورة هنا تُبنى تلقائيًا (source: auto) داخل SkillsEngine اعتمادًا على domain الدرس، عبر domainSkillFallback أدناه.",
+    "domainSkillFallback": {
+      "المجموعات": "set-classification",
+      "الأعداد والعمليات": "number-sense",
+      "المقادير (النقود)": "measurement",
+      "الأشكال الهندسية والخطوط": "geometry",
+      "حلّ المشكل": "problem-solving",
+      "توظيف المكتسبات وتقييمها": "self-assessment"
+    }
+  },
+  "lessons": {
+    "y2m01": {
+      "learningObjectives": ["يحدّد مجموعة ومكوّناتها ويميّز العلاقة بين مجموعتين"],
+      "competencies": ["التصرف في المجموعات ومكوّناتها"],
+      "skills": ["set-classification"],
+      "indicators": ["يحدّد عناصر مجموعة معطاة ويرمز إليها بشكل صحيح"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يميّز مجموعة عن أخرى حسب خاصيّة مشتركة"],
+      "source": "curated"
+    },
+    "y2m04": {
+      "learningObjectives": ["يجمع عددين من 0 إلى 99 بالاحتفاظ ومن دونه"],
+      "competencies": ["توظيف عملية الجمع في نطاق 0-99"],
+      "skills": ["number-sense", "calculation"],
+      "indicators": ["ينجز عملية جمع بالاحتفاظ بشكل صحيح"],
+      "prerequisites": ["number-sense"],
+      "expectedOutcomes": ["يستعمل الجمع لحل وضعية من محيطه اليومي"],
+      "source": "curated"
+    },
+    "y2m08": {
+      "learningObjectives": ["يميّز الخط المستقيم عن الخط المنحني ويرسمهما"],
+      "competencies": ["استعمال خاصيّات الأشكال الهندسية"],
+      "skills": ["geometry"],
+      "indicators": ["يرسم خطًا مستقيمًا وخطًا منحنيًا بأدوات هندسية مناسبة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يوظّف نوع الخط المناسب في وضعية رسم معطاة"],
+      "source": "curated"
+    },
+    "y2m09": {
+      "learningObjectives": ["يتصرّف في القطع النقدية المتداولة 5، 10، 20، 50"],
+      "competencies": ["التصرف في المقادير"],
+      "skills": ["measurement"],
+      "indicators": ["يمثّل مبلغًا ماليًا معطى بالقطع النقدية المناسبة"],
+      "prerequisites": ["number-sense"],
+      "expectedOutcomes": ["يستعمل القطع النقدية في وضعيات شرائية بسيطة"],
+      "source": "curated"
+    },
+    "y2m03": {
+      "learningObjectives": ["يحلّ وضعية مشكل بسيطة عبر تمثيلها برسم"],
+      "competencies": ["حلّ وضعيات مشكل دالة"],
+      "skills": ["problem-solving"],
+      "indicators": ["ينتج رسمًا يمثّل معطيات الوضعية بشكل صحيح"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يوظّف التمثيل بالرسم كأداة لفهم المشكل"],
+      "source": "curated"
+    }
+  }
+}
