@@ -64,7 +64,7 @@ router.post(
       if ((format || 'html') === 'json') return res.json(exam);
       if (format === 'docx') {
         console.log('[DEBUG generate-official] Building DOCX...');
-        const docxBuffer = await buildOfficialDocx(exam, { gradeId: gradeId || 'year1', subject: subject || 'math', trimester: Number(trimester) || 3, schoolName, teacherName: '' });
+        const docxBuffer = await buildOfficialDocx(paper, { gradeId: gradeId || 'year1', subject: subject || 'math', trimester: Number(trimester) || 3, schoolName, teacherName: '' });
         console.log('[DEBUG generate-official] DOCX built, length:', docxBuffer.length);
         const filename = `exam_${subject}_${gradeId}_T${trimester}_${Date.now()}.docx`;
         res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
