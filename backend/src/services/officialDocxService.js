@@ -1,288 +1,260 @@
 import { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, BorderStyle, AlignmentType, Header, Footer } from 'docx';
 
 const TRIMESTER_LABELS = { 1: 'الأوّل', 2: 'الثّاني', 3: 'الثّالث' };
-const SUBJECT_LABELS = {
-  math: 'رياضيات',
-  science: 'إيقاظ علمي',
-  reading: 'قراءة',
-  production: 'إنتاج كتابي',
-  handwriting: 'خط وإملاء',
-  islamic: 'تربية إسلامية',
-  french: 'لغة فرنسية',
-  english: 'لغة إنجليزية',
-  tech: 'تكنولوجيا',
-  civics: 'تربية مدنية',
-  history: 'تاريخ',
-  geography: 'جغرافيا'
-};
-
-const LEVEL_LABELS = {
-  year1: 'السنة الأولى',
-  year2: 'السنة الثانية',
-  year3: 'السنة الثالثة',
-  year4: 'السنة الرابعة',
-  year5: 'السنة الخامسة',
-  year6: 'السنة السادسة'
-};
-
 const TRIMESTER_MONTHS = { 1: 'ديسمبر', 2: 'مارس', 3: 'جوان' };
+const LEVEL_LABELS = {
+  year1: 'السنة الأولى اساسي',
+  year2: 'السنة الثانية اساسي',
+  year3: 'السنة الثالثة اساسي',
+  year4: 'السنة الرابعة اساسي',
+  year5: 'السنة الخامسة اساسي',
+  year6: 'السنة السادسة اساسي'
+};
+const SUBJECT_LABELS = {
+  math: 'الرياضيات', science: 'الإيقاظ العلمي', reading: 'القراءة',
+  production: 'الإنتاج الكتابي', handwriting: 'خط وإملاء',
+  grammar: 'قواعد اللغة', french: 'اللغة الفرنسية', english: 'اللغة الإنجليزية',
+  islamic: 'التربية الإسلامية', civics: 'التربية المدنية',
+  technology: 'التكنولوجيا', ict: 'المعلوماتية',
+  art: 'التربية التشكيلية', music: 'التربية الموسيقية',
+  pe: 'التربية البدنية'
+};
 
-function createTextRun(text, options = {}) {
-  return new TextRun({
-    text,
-    font: 'Amiri',
-    size: options.size || 24,
-    bold: options.bold || false,
-    rtl: true,
-    ...options
-  });
+function tr(text, opts = {}) {
+  return new TextRun({ text, font: 'Amiri', size: opts.size || 22, bold: !!opts.bold, rtl: true, ...opts });
 }
 
-function createParagraph(children, alignment = AlignmentType.RIGHT) {
-  return new Paragraph({
-    children,
-    alignment,
-    spacing: { after: 80, before: 40 },
-    bidirectional: true
-  });
+function p(children, align = AlignmentType.RIGHT) {
+  return new Paragraph({ children, alignment: align, spacing: { after: 60, before: 30 }, bidirectional: true });
 }
 
-function createTableCell(children, width, options = {}) {
+function cell(texts, width, opts = {}) {
+  const paras = (Array.isArray(texts) ? texts : [texts]).map(t =>
+    typeof t === 'string'
+      ? new Paragraph({ children: [tr(t, { size: opts.size || 18, bold: !!opts.bold })], alignment: AlignmentType.CENTER, bidirectional: true })
+      : t
+  );
   return new TableCell({
-    children: children.map(c => typeof c === 'string' ? new Paragraph({ children: [createTextRun(c, { size: options.size || 20, bold: options.bold })], alignment: AlignmentType.CENTER, bidirectional: true }) : c),
+    children: paras,
     width: { size: width, type: WidthType.PERCENTAGE },
     verticalAlign: 'center',
-    margins: { top: 40, bottom: 40, left: 40, right: 40 },
+    margins: { top: 30, bottom: 30, left: 30, right: 30 },
     borders: {
       top: { style: BorderStyle.SINGLE, size: 1, color: '000000' },
       bottom: { style: BorderStyle.SINGLE, size: 1, color: '000000' },
       left: { style: BorderStyle.SINGLE, size: 1, color: '000000' },
       right: { style: BorderStyle.SINGLE, size: 1, color: '000000' }
     },
-    shading: options.shading
+    shading: opts.shading ? { fill: opts.shading } : undefined
   });
 }
 
-export function buildOfficialDocx(exam, options = {}) {
-  const { gradeId = 'year1', subject = 'math', trimester = 3, schoolName = '', teacherName = '' } = options;
+function blankLine() {
+  return new Paragraph({
+    children: [tr('________________________________________________', { size: 18 })],
+    spacing: { after: 100, before: 40 },
+    bidirectional: true
+  });
+}
 
-  const levelLabel = LEVEL_LABELS[gradeId] || 'السنة الأولى';
+export async function buildOfficialDocx(exam, options = {}) {
+  const {
+    gradeId = exam.gradeId || 'year1',
+    subject = exam.subject || 'math',
+    trimester = options.trimester || 3,
+    schoolName = options.schoolName || '',
+    schoolYear = options.schoolYear || '2025-2026'
+  } = options;
+
+  const levelLabel = LEVEL_LABELS[gradeId] || 'السنة الأولى اساسي';
   const subjectLabel = SUBJECT_LABELS[subject] || subject;
   const trimesterLabel = TRIMESTER_LABELS[trimester] || 'الثّالث';
   const dateLabel = `${TRIMESTER_MONTHS[trimester] || ''} ${new Date().getFullYear()}`;
 
-  const docChildren = [];
+  const children = [];
 
-  // Header section
-  docChildren.push(
-    createParagraph([
-      createTextRun('الجمهورية التونسية', { size: 20, bold: true }),
-      createTextRun('\t\t\t'),
-      createTextRun('وزارة التربية', { size: 20, bold: true }),
-      createTextRun('\t\t\t'),
-      createTextRun('المندوبية الجهوية للتربية', { size: 18 })
-    ]),
-    createParagraph([
-      createTextRun(`مدرسة : ${schoolName || '..........................................'}`, { size: 18 })
-    ]),
-    createParagraph([
-      createTextRun(`اختبار الثلاثي ${trimesterLabel}`, { size: 24, bold: true })
-    ]),
-    createParagraph([
-      createTextRun(`السنة الدراسية: ${dateLabel}`, { size: 18 }),
-      createTextRun('\t\t\t'),
-      createTextRun(levelLabel, { size: 18 })
-    ]),
-    createParagraph([
-      createTextRun(`المادة: ${subjectLabel}`, { size: 18, bold: true }),
-      createTextRun('\t\t\t'),
-      createTextRun(`المدة: 60 دقيقة`, { size: 18 }),
-      createTextRun('\t\t\t'),
-      createTextRun(`التاريخ: ${dateLabel}`, { size: 18 })
-    ]),
-    createParagraph([
-      createTextRun('الاسم واللقب: ..................................................', { size: 20 })
-    ]),
-    createParagraph([
-      createTextRun(`القسم: ..................`, { size: 20 }),
-      createTextRun('\t\t\t'),
-      createTextRun('العدد: .... / 20', { size: 20, bold: true })
-    ]),
-    createParagraph([
-      createTextRun(`${subjectLabel} - ${levelLabel} - الثلاثي ${trimesterLabel}`, { size: 24, bold: true })
-    ], AlignmentType.CENTER),
-    createParagraph([
-      createTextRun(`حول دروس: ${exam.meta?.lessonsStr || '........................................'}`, { size: 18 })
-    ], AlignmentType.CENTER)
+  // === HEADER ===
+  children.push(
+    p([tr('الجمهورية التونسية', { size: 20, bold: true })], AlignmentType.RIGHT),
+    p([tr('وزارة التربية', { size: 20, bold: true })], AlignmentType.RIGHT),
+    p([tr('المندوبية الجهوية للتربية', { size: 18 })], AlignmentType.RIGHT),
+    p([tr(`مدرسة : ${schoolName || '..........................................'}`, { size: 18 })], AlignmentType.RIGHT),
+    p([tr(`السنة الدراسية: ${schoolYear}`, { size: 18 })], AlignmentType.RIGHT),
+    p([tr('')])
   );
 
-  // Scoring table
-  const scoringTable = new Table({
+  // === STUDENT INFO TABLE ===
+  children.push(new Table({
     rows: [
-      new TableRow({
-        children: [
-          createTableCell(['التمرين'], 10, { bold: true, size: 18, shading: 'F0F0F0' }),
-          ...exam.senods.map((_, i) => createTableCell([`${i + 1}`], 10, { bold: true, size: 18, shading: 'F0F0F0' })),
-          createTableCell(['المجموع'], 10, { bold: true, size: 18, shading: 'F0F0F0' })
-        ]
-      }),
-      new TableRow({
-        children: [
-          createTableCell(['العدد'], 10, { bold: true, size: 18, shading: 'F0F0F0' }),
-          ...exam.senods.map(() => createTableCell(['..'], 10, { size: 18 })),
-          createTableCell(['/20'], 10, { bold: true, size: 18, shading: 'F0F0F0' })
-        ]
-      }),
-      new TableRow({
-        children: [
-          createTableCell(['المعيار'], 10, { bold: true, size: 18, shading: 'F0F0F0' }),
-          ...exam.senods.map((s, i) => createTableCell([s.activities[0]?.criterion || 'معـ'], 10, { bold: true, size: 18, shading: 'F0F0F0' })),
-          createTableCell(['التميز'], 10, { bold: true, size: 18, shading: 'F0F0F0' })
-        ]
-      })
+      new TableRow({ children: [
+        cell('الاسم واللقب', 25, { bold: true, shading: 'F0F0F0' }),
+        cell('................................................', 50),
+        cell('القسم', 10, { bold: true, shading: 'F0F0F0' }),
+        cell('........', 15)
+      ]})
     ],
     width: { size: 100, type: WidthType.PERCENTAGE }
-  });
-  docChildren.push(scoringTable);
+  }));
 
-  // Exercises
-  for (let sIdx = 0; sIdx < exam.senods.length; sIdx++) {
-    const senod = exam.senods[sIdx];
-    const totalPoints = senod.activities.reduce((sum, a) => sum + (a.points || 0), 0);
-    const criterion = senod.activities[0]?.criterion || 'معـ';
+  children.push(p([tr('')]));
 
-    docChildren.push(
-      createParagraph([
-        createTextRun(`التمرين ${sIdx + 1}: نشاط (${totalPoints} نقاط)`, { size: 20, bold: true })
-      ]),
-      createParagraph([
-        createTextRun(`المعيار ${criterion} - ${criterion === 'تم' ? 'معيار التميز' : 'معايير الحد الأدنى'}`, { size: 16, bold: true })
-      ]),
-      createParagraph([
-        createTextRun(senod.text, { size: 18, bold: true })
-      ])
-    );
+  // === TITLE ===
+  children.push(
+    p([tr(`اختبار الثلاثي ${trimesterLabel}`, { size: 28, bold: true })], AlignmentType.CENTER),
+    p([tr(`المادة: ${subjectLabel} — ${levelLabel}`, { size: 22, bold: true })], AlignmentType.CENTER),
+    p([tr(`المدة: 60 دقيقة — العدد: / 20`, { size: 20 })], AlignmentType.CENTER)
+  );
 
-    for (let aIdx = 0; aIdx < senod.activities.length; aIdx++) {
-      const activity = senod.activities[aIdx];
-      docChildren.push(
-        createParagraph([
-          createTextRun(`${aIdx + 1}-${sIdx + 1} ${activity.instruction}`, { size: 18 })
-        ])
-      );
+  // === CRITERIA SCORING TABLE ===
+  const critHeader = exam.criteria.map(c =>
+    cell([c.code, tr(c.label, { size: 14 })], Math.floor(70 / exam.criteria.length), { bold: true, shading: 'E8E8E8' })
+  );
+  const critScores = exam.criteria.map(c =>
+    cell(`${c.max}`, Math.floor(70 / exam.criteria.length), { bold: true, size: 20 })
+  );
+  children.push(new Table({
+    rows: [
+      new TableRow({ children: [
+        cell('المعايير', 15, { bold: true, shading: 'F0F0F0' }),
+        ...critHeader,
+        cell('المجموع', 15, { bold: true, shading: 'F0F0F0' })
+      ]}),
+      new TableRow({ children: [
+        cell('الأعداد', 15, { bold: true, shading: 'F0F0F0' }),
+        ...critScores,
+        cell(`/ ${exam.totalScore}`, 15, { bold: true, size: 22 })
+      ]})
+    ],
+    width: { size: 100, type: WidthType.PERCENTAGE }
+  }));
 
-      if (activity.kind === 'free') {
-        for (let i = 0; i < (activity.freeLines || 3); i++) {
-          docChildren.push(
-            createParagraph([
-              createTextRun('................................................................', { size: 18 })
-            ])
-          );
-        }
-      } else {
-        if (activity.question?.options) {
-          docChildren.push(
-            createParagraph(
-              activity.question.options.map(opt => createTextRun(`⭕ ${opt}  `, { size: 18 }))
-            )
-          );
-        }
-        docChildren.push(
-          createParagraph([
-            createTextRun('................................................................', { size: 18 })
-          ])
-        );
-      }
+  children.push(p([tr('')]));
+
+  // === QUESTIONS GROUPED BY CRITERION ===
+  let questionNum = 0;
+  let currentCriterion = null;
+
+  for (const q of exam.questions) {
+    if (q.criterion !== currentCriterion) {
+      currentCriterion = q.criterion;
+      const critDef = exam.criteria.find(c => c.code === currentCriterion);
+      children.push(p([tr(`التمريــن — المعيار ${currentCriterion}${critDef ? ': ' + critDef.label : ''}`, { size: 24, bold: true })], AlignmentType.RIGHT));
     }
 
-    // Thresholds
-    const thresholds = exam.thresholds.filter(t => t.afterSenod === sIdx + 1);
-    for (const t of thresholds) {
-      docChildren.push(
-        createParagraph([
-          createTextRun(t.label, { size: 18, bold: true })
-        ], AlignmentType.CENTER)
+    questionNum++;
+    if (q.type === 'MCQ') {
+      children.push(
+        p([tr(`${questionNum}- ${q.prompt}`, { size: 20 })], AlignmentType.RIGHT)
       );
+      if (q.options && q.options.length) {
+        const optTexts = q.options.map(o => tr(`  (  )  ${o}   `, { size: 20 }));
+        children.push(p(optTexts, AlignmentType.RIGHT));
+      }
+    } else {
+      // FREE question
+      children.push(
+        p([tr(`${questionNum}- ${q.prompt}`, { size: 20 })], AlignmentType.RIGHT)
+      );
+      const lines = q.freeLines || 3;
+      for (let i = 0; i < lines; i++) {
+        children.push(blankLine());
+      }
     }
   }
 
-  // Final scoring table detail
-  docChildren.push(
-    createParagraph([
-      createTextRun('جدول إسناد الأعـــــــــــــداد', { size: 22, bold: true })
-    ], AlignmentType.CENTER)
-  );
+  // === THRESHOLD LABELS ===
+  children.push(p([tr('')]));
+  children.push(p([tr('عتبات التمكّن', { size: 22, bold: true })], AlignmentType.CENTER));
+  const thresholds = [
+    { label: 'انعدام التملك', score: '0' },
+    { label: 'دون التملك الأدنى', score: exam.criteria.map(c => `${c.code}: 1ن`).join(' | ') },
+    { label: 'التملك الأدنى', score: exam.criteria.map(c => `${c.code}: 2ن`).join(' | ') },
+    { label: 'التملك الأقصى (تميز)', score: exam.criteria.map(c => c.code === 'تم' ? 'تم: 5ن' : `${c.code}: --`).join(' | ') }
+  ];
+  children.push(new Table({
+    rows: thresholds.map(t =>
+      new TableRow({ children: [
+        cell(t.label, 35, { bold: true, shading: 'E8E8E8' }),
+        cell(t.score, 65)
+      ]})
+    ),
+    width: { size: 100, type: WidthType.PERCENTAGE }
+  }));
 
-  const finalTable = new Table({
+  // === GRADING TABLE ===
+  children.push(p([tr('')]));
+  children.push(p([tr('جدول إسناد الأعداد', { size: 22, bold: true })], AlignmentType.CENTER));
+  children.push(new Table({
     rows: [
-      new TableRow({
-        children: [
-          createTableCell(['المعايير'], 30, { bold: true, size: 18, shading: 'F0F0F0' }),
-          createTableCell(['مستويات التملك'], 70, { bold: true, size: 18, shading: 'F0F0F0' })
-        ]
-      }),
-      new TableRow({
-        children: [
-          createTableCell(['انعدام التملك'], 30, { size: 18 }),
-          createTableCell(['0 نقطة'], 70, { size: 18 })
-        ]
-      }),
-      new TableRow({
-        children: [
-          createTableCell(['دون التملك الأدنى'], 30, { size: 18 }),
-          createTableCell([exam.senods.map(s => `${s.activities[0]?.criterion}: ${s.activities[0].points || 1}ن`).join(' | ')], 70, { size: 18 })
-        ]
-      }),
-      new TableRow({
-        children: [
-          createTableCell(['التملك الأدنى'], 30, { size: 18 }),
-          createTableCell([exam.senods.map(s => `${s.activities[0]?.criterion}: ${s.activities[0].points || 2}ن`).join(' | ')], 70, { size: 18 })
-        ]
-      }),
-      new TableRow({
-        children: [
-          createTableCell(['التملك الأفصى (تميز)'], 30, { size: 18, bold: true }),
-          createTableCell([exam.senods.map(s => `${s.activities[0]?.criterion === 'تم' ? '2 نقاط' : '---'}`).join(' | ')], 70, { size: 18 })
-        ]
-      })
+      new TableRow({ children: [
+        cell('مستوى التملك', 25, { bold: true, shading: 'F0F0F0' }),
+        cell('المعايير', 75, { bold: true, shading: 'F0F0F0' })
+      ]}),
+      new TableRow({ children: [
+        cell('انعدام التملك', 25, { shading: 'FFF0F0' }),
+        cell('0 نقطة', 75)
+      ]}),
+      new TableRow({ children: [
+        cell('دون الأدنى', 25),
+        cell(exam.criteria.map(c => `${c.code}: 1ن`).join(' | '), 75)
+      ]}),
+      new TableRow({ children: [
+        cell('الأدنى', 25),
+        cell(exam.criteria.map(c => `${c.code}: 2ن`).join(' | '), 75)
+      ]}),
+      new TableRow({ children: [
+        cell('الأقصى (تميز)', 25, { bold: true }),
+        cell(exam.criteria.map(c => `${c.code}: ${c.max}ن`).join(' | '), 75)
+      ]})
     ],
     width: { size: 100, type: WidthType.PERCENTAGE }
-  });
-  docChildren.push(finalTable);
+  }));
+
+  // === FOOTER SIGNATURES ===
+  children.push(p([tr('')]));
+  children.push(p([tr('')]));
+  children.push(new Table({
+    rows: [
+      new TableRow({ children: [
+        cell([
+          tr('إمضاء التلميذ(ة)', { size: 18, bold: true }),
+          tr('\n\n................................', { size: 18 })
+        ], 33),
+        cell([
+          tr('إمضاء المعلم(ة)', { size: 18, bold: true }),
+          tr('\n\n................................', { size: 18 })
+        ], 33),
+        cell([
+          tr('ملاحظة:', { size: 16, bold: true }),
+          tr('ضعيف < 10 | مقبول 10-13 | حسن 14-16 | ممتاز 17-20', { size: 14 })
+        ], 34)
+      ]})
+    ],
+    width: { size: 100, type: WidthType.PERCENTAGE }
+  }));
 
   const doc = new Document({
     sections: [{
       properties: {
-        page: { margin: { top: 1000, right: 720, bottom: 1000, left: 720 } }
+        page: { margin: { top: 900, right: 720, bottom: 900, left: 720 } }
       },
       headers: {
         default: new Header({
-          children: [
-            new Paragraph({
-              children: [createTextRun('تونِسيوك - مولد الاختبارات الرسمي - وزارة التربية', { size: 16, bold: true })],
-              alignment: AlignmentType.CENTER
-            })
-          ]
+          children: [new Paragraph({
+            children: [tr('رفيقي — مولد الاختبارات الرسمي — وزارة التربية التونسية', { size: 14, bold: true })],
+            alignment: AlignmentType.CENTER
+          })]
         })
       },
       footers: {
         default: new Footer({
-          children: [
-            new Paragraph({
-              children: [
-                createTextRun('إمضاء الولي', { size: 18, bold: true }),
-                createTextRun('\n\n................................', { size: 18 }),
-                createTextRun('\t\t\tإمضاء المعلم(ة)', { size: 18, bold: true }),
-                createTextRun('\n\n................................', { size: 18 }),
-                createTextRun('\t\t\tملاحظة: ........................ | المقياس: ضعيف <10 | مقبول 10-13 | حسن 14-16 | ممتاز 17-20', { size: 16 })
-              ],
-              alignment: AlignmentType.CENTER,
-              spacing: { before: 400 }
-            })
-          ]
+          children: [new Paragraph({
+            children: [tr('صفحة ', { size: 14 })],
+            alignment: AlignmentType.CENTER
+          })]
         })
       },
-      children: docChildren
+      children
     }]
   });
 
