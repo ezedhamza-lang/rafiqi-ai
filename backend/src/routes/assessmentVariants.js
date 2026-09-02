@@ -301,13 +301,17 @@ router.post(
   authMiddleware,
   teacherMiddleware,
   asyncHandler(async (req, res) => {
-    const { gradeId = 'year1', subject = 'math', trimester = 't3', count = 10 } = req.body;
+    const { gradeId = 'year1', subject = 'math', trimester: rawTrimester = 3, count = 10 } = req.body;
     const teacherId = req.user.id;
+
+    // تطبيع الثلاثي: يقبل 3 أو '3' أو 't3' → يخزنه كـ 't3' للبنك
+    const trimesterNum = Number(String(rawTrimester).replace('t', ''));
+    const trimesterKey = `t${trimesterNum}`;
 
     const { getUnusedQuestions, markQuestionsAsUsed } = await import('../services/questionBankService.js');
     const { buildOfficialDocx } = await import('../services/officialDocxService.js');
 
-    const questions = getUnusedQuestions(subject, gradeId, trimester, teacherId, count);
+    const questions = getUnusedQuestions(subject, gradeId, trimesterKey, teacherId, count);
     if (!questions.length) {
       throw new ApiError(404, 'لا توجد أسئلة متاحة في البنك لهذه المادة والسنة والثلاثي');
     }
@@ -318,7 +322,7 @@ router.post(
     const exam = {
       gradeId,
       subject,
-      trimester: Number(trimester.replace('t', '')),
+      trimester: trimesterNum,
       criteria: groupQuestionsByCriteria(questions),
       questions,
       totalScore: 20,
