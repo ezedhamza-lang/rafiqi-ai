@@ -295,4 +295,162 @@ router.post(
   })
 );
 
+// ===== بنك الأسئلة - توليد اوفلاين =====
+router.post(
+  '/exams/generate-from-bank',
+  authMiddleware,
+  teacherMiddleware,
+  asyncHandler(async (req, res) => {
+    const { gradeId = 'year1', subject = 'math', trimester = 't3', count = 10 } = req.body;
+    const teacherId = req.user.id;
+
+    const { getUnusedQuestions, markQuestionsAsUsed } = await import('../services/questionBankService.js');
+    const { buildOfficialDocx } = await import('../services/officialDocxService.js');
+
+    const questions = getUnusedQuestions(subject, gradeId, trimester, teacherId, count);
+    if (!questions.length) {
+      throw new ApiError(404, 'لا توجد أسئلة متاحة في البنك لهذه المادة والسنة والثلاثي');
+    }
+
+    // تحديد الأسئلة كمستخدمة
+    markQuestionsAsUsed(teacherId, questions.map(q => q.id));
+
+    const exam = {
+      gradeId,
+      subject,
+      trimester: Number(trimester.replace('t', '')),
+      criteria: groupQuestionsByCriteria(questions),
+      questions,
+      totalScore: 20,
+      source: 'bank',
+      generatedAt: new Date().toISOString()
+    };
+
+    const format = req.body.format || 'docx';
+    if (format === 'docx') {
+      const buffer = await buildOfficialDocx(exam, {
+        gradeId,
+        subject,
+        trimester: Number(trimester.replace('t', '')),
+        schoolName: req.body.schoolName || ''
+      });
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+      res.setHeader('Content-Disposition', `attachment; filename="اختبار_${subject}_${gradeId}_${trimester}.docx"`);
+      res.send(Buffer.from(buffer));
+    } else {
+      res.json(exam);
+    }
+  })
+);
+
+// ===== توليد بالذكاء الاصطناعي =====
+router.post(
+  '/exams/generate-with-ai',
+  authMiddleware,
+  teacherMiddleware,
+  asyncHandler(async (req, res) => {
+    const { apiKey, gradeId = 'year1', subject = 'math', trimester = 't3', customPrompt } = req.body;
+
+    if (!apiKey) {
+      throw new ApiError(400, 'مفتاح API مطلوب');
+    }
+
+    const { generateWithAI, generateWithAIGeneral } = await import('../services/aiExamGenerator.js');
+    const { buildOfficialDocx } = await import('../services/officialDocxService.js');
+
+    let exam;
+    try {
+      // محاولة القالب أولاً
+      exam = await generateWithAI(apiKey, subject, gradeId, `t${trimester}`);
+    } catch (e) {
+      // إذا لم يكن هناك قالب، استخدم التوليد العام
+      exam = await generateWithAIGeneral(apiKey, subject, gradeId, `t${trimester}`, customPrompt);
+    }
+
+    const format = req.body.format || 'docx';
+    if (format === 'docx') {
+      const docxExam = {
+        ...exam,
+        criteria: groupQuestionsByCriteria(exam.questions),
+        totalScore: 20
+      };
+      const buffer = await buildOfficialDocx(docxExam, {
+        gradeId,
+        subject,
+        trimester: Number(trimester),
+        schoolName: req.body.schoolName || ''
+      });
+      res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+      res.setHeader('Content-Disposition', `attachment; filename="اختبار_${subject}_${gradeId}_T${trimester}.docx"`);
+      res.send(Buffer.from(buffer));
+    } else {
+      res.json(exam);
+    }
+  })
+);
+
+// ===== فحص مفتاح API =====
+router.post(
+  '/exams/validate-api-key',
+  authMiddleware,
+  teacherMiddleware,
+  asyncHandler(async (req, res) => {
+    const { apiKey } = req.body;
+    if (!apiKey) throw new ApiError(400, 'مفتاح API مطلوب');
+
+    const { validateAPIKey } = await import('../services/aiExamGenerator.js');
+    const result = await validateAPIKey(apiKey);
+    res.json(result);
+  })
+);
+
+// ===== إحصائيات بنك الأسئلة =====
+router.get(
+  '/exams/bank-stats',
+  authMiddleware,
+  teacherMiddleware,
+  asyncHandler(async (req, res) => {
+    const { getAvailableCombinations, getBankStats } = await import('../services/questionBankService.js');
+    const combinations = getAvailableCombinations();
+    res.json({ combinations });
+  })
+);
+
+// ===== إعادة ضبط بنك الأسئلة =====
+router.post(
+  '/exams/reset-bank',
+  authMiddleware,
+  teacherMiddleware,
+  asyncHandler(async (req, res) => {
+    const { resetUsage } = await import('../services/questionBankService.js');
+    resetUsage(req.user.id, req.body.subject);
+    res.json({ message: 'تم إعادة ضبط البنك بنجاح' });
+  })
+);
+
+// Helper: تجميع الأسئلة حسب المعايير
+function groupQuestionsByCriteria(questions) {
+  const groups = {};
+  for (const q of questions) {
+    const code = q.criteria || 'مع1';
+    if (!groups[code]) {
+      groups[code] = { code, label: code, max: 0, subCriteria: [] };
+    }
+    groups[code].max += q.points || 0;
+    if (q.subCriterion) {
+      const sub = groups[code].subCriteria.find(s => s.code === q.subCriterion);
+      if (sub) {
+        sub.max += q.points || 0;
+      } else {
+        groups[code].subCriteria.push({
+          code: q.subCriterion,
+          label: q.subCriterion,
+          max: q.points || 0
+        });
+      }
+    }
+  }
+  return Object.values(groups);
+}
+
 export default router;
