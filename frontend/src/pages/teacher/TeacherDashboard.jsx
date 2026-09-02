@@ -27,6 +27,7 @@ import LiveSessions from './LiveSessions.jsx';
 import TeacherGradebook from './TeacherGradebook.jsx';
 import TeacherLessonProgress from './TeacherLessonProgress.jsx';
 import TeacherNotes from './TeacherNotes.jsx';
+import OfficialExamGenerator from './OfficialExamGenerator.jsx';
 import CopilotCard from '../../components/CopilotCard.jsx';
 
 export default function TeacherDashboard() {
@@ -84,6 +85,7 @@ export default function TeacherDashboard() {
             <Route path="assignments" element={<Assignments classes={classes} onChanged={load} />} />
             <Route path="analytics" element={<Analytics classes={classes} onChanged={load} />} />
             <Route path="exams" element={<OfficialExams classes={classes} />} />
+            <Route path="exam-generator" element={<OfficialExamGenerator classes={classes} />} />
             <Route path="correction" element={<Correction />} />
             <Route path="class-subjects" element={<ClassSubjects classes={classes} />} />
             <Route path="results" element={<Results />} />

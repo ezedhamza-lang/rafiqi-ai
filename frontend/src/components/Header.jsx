@@ -25,6 +25,7 @@ const TEACHER_SPACE_CHILDREN = [
   { to: '/teacher/assignments', icon: 'assignment', key: 'assignments' },
   { to: '/teacher/analytics', icon: 'monitoring', key: 'analyticsExport' },
   { to: '/teacher/exams', icon: 'fact_check', key: 'officialExams' },
+  { to: '/teacher/exam-generator', icon: 'download', key: 'examGenerator' },
   { to: '/teacher/class-subjects', icon: 'category', key: 'classSubjects' },
   { to: '/teacher/correction', icon: 'grading', key: 'correction' },
   { to: '/teacher/results', icon: 'scoreboard', key: 'results' },
