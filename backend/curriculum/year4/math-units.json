@@ -1,0 +1,902 @@
+{
+  "_meta": {
+    "note": "العناوين وأرقام الصفحات (officialRef.pages) منقولة حرفيًا من جدولي 'برنامجي في الرياضيّات' (ص163) و'الفهرس التفصيلي' (ص164-165) الموجودين فعليًا في آخر الكتاب، أرسلهما المستخدم (مالك الكتاب) كصور مباشرة. ترقيم الدروس (حقل num) هو نفس ترقيم 'منزلة' المطبوع حرفيًا في الكتاب — يتضمّن فجوة حقيقية واحدة غير مفسَّرة في الفهرس المطبوع نفسه: بين الدرسين 12 و17 (لا 13-16). نفس النمط الملاحَظ في سنة ثالثة (فجوة 14-17 هناك). لم نخترع دروسًا لسدّ هذه الفجوة. الدرس 26 (\"أوظّفُ مكتسباتي وأُقيّمها\"، ص85) هو درس تقييم/توظيف حقيقي مرقّم رسميًا في الفهرس، وليس فجوة — تحقّقنا من محتواه ورقم صفحته (85) من صورة الصفحة نفسها. لا توجد إزاحة بين رقم الصفحة المطبوع ورقم ملفّ الصورة لهذا الكتاب أيضًا (تحقّقنا: ص162 المطبوعة = page-162.jpg).",
+    "axes": [
+      {
+        "id": "axCalc",
+        "title": "الأعداد والعمليات"
+      },
+      {
+        "id": "axMeasure",
+        "title": "القيس"
+      },
+      {
+        "id": "axGeo",
+        "title": "الهندسة"
+      },
+      {
+        "id": "axProblem",
+        "title": "حلّ المشكل"
+      },
+      {
+        "id": "axAssess",
+        "title": "توظيف المكتسبات وتقييمها"
+      }
+    ],
+    "officialProgramRef_note": "أُضيف حقل officialProgramRef لكل الدروس بتاريخ هذه الجلسة، مبنيّ على نصّ مقروء آلياً (pdftotext) من 'برامج المرحلة الابتدائيّة 2021-2022.pdf' ص33-34 (قسم 'السنة الرابعة' الرسمي، وليس تخميناً). تصحيح مهم: لم يطرأ أي تغيير جذري ولا تخفيف فعلي على جوهر البرنامج الرسمي لمادة الرياضيات للسنة الرابعة ابتدائي خلال الموسم 2021-2022 — الإشارات السابقة في هذا الملف إلى 'البرنامج المخفّف' لسنة 4 في مادة الرياضيات غير دقيقة ويجب عدم الاعتماد عليها؛ التخفيف الفعلي المعلن كان محصورًا في مواد ومستويات أخرى (مثلاً: السادسة في التاريخ والجغرافيا والتربية المدنية والإيقاظ العلمي والتربية التكنولوجية، والثالثة/الرابعة في الإيقاظ العلمي فقط). بالنسبة للرياضيات سنة 4، البرنامج المعتمد هو البرنامج الرسمي القياسي دون تخفيف. ملاحظة متبقّية من الجلسة السابقة ولم تُغلق بعد: لم نجد درساً مطابقاً صراحةً لـ'وحدات قيس السعات (اللتر ومضاعفاته)' ضمن مسح صفحات كتاب التلميذ 60-75 و85-100 — تحتاج تأكيداً نهائياً بصرياً، بمعزل عن مسألة التخفيف. أما دروس الكتلة/المحيط/المساحة/الزمن (y4m21, y4m23, y4m28, y4m37, y4m38) فهي موجودة في الكتاب ولا إشكال بشأنها.",
+    "capacity_lesson_note": "تصحيح (الجلسة الخامسة): الدرس y4m41 كان اعتُقِد خطأً أنه غائب عن كتاب التلميذ (بُني بمحتوى مؤلَّف في الجلسة الرابعة)، والسبب أن مسح التحقّق البصري في الجلسة الثالثة غطّى صفحات 60-75 و85-100 وتخطّى بالضبط الفجوة 76-84 — وهي نفسها فجوة ترقيم المنزلة (24-26) المذكورة في الملاحظة الأصلية أعلاه دون ربطها وقتها بمحتوى فعلي. المستخدم زوّدنا بلقطة شاشة من نسخته الخاصة تُثبت وجود الدرس عند صفحة 80 (من أصل 168 صفحة - نفس عدد صفحات نسختنا)، برقم منزلة 24، بعنوان 'أتصرّفُ في وحداتِ قيسِ السّعةِ (اللترْ وأجزاؤه)' — يمتدّ على صفحات 80 و82 و83. الملاحظة السابقة عن 'الملف2' والبرنامج الرسمي (أن السعة مذكورة بـ'مضاعفاته: الديكالتر والهكتولتر') تبقى صحيحة كوصف للبرنامج الرسمي، لكن عنوان الدرس الفعلي في الكتاب يذكر 'وأجزاؤه' (أي الأجزاء كالديسيلتر لا المضاعفات) — فرق يستحق تدقيقاً إضافياً لاحقاً لكنه لا يمسّ صحة وجود الدرس نفسه. تمّت إزالة كل المحتوى المؤلَّف (activities/contentOrigin) من الجلسة الرابعة لأنها لم تعد ضرورية: الدرس الآن مصدره الكتاب الحقيقي كبقية الدروس الأربعين.",
+    "gap_24_26_note": "إغلاق نهائي (الجلسة الخامسة): فجوة 24-26 محلولة بالكامل عبر لقطات المستخدم المباشرة: 24=y4m41 (السعة، ص80/82/83) — 25=y4m42 (حلّ المسائل، ص84) — 26=y4m43 (توظيف المكتسبات وتقييمها، ص85) — 27=y4m20 (تأكيد مطابق، ص87). لا فجوات ترقيم غير مفسَّرة متبقية في كامل سنة 4 (باستثناء فجوة 12-17 التي لم تُتحقَّق منها بعد بنفس الطريقة)."
+  },
+  "y4m01": {
+    "id": "y4m01",
+    "unitId": "p1",
+    "num": 1,
+    "title": "أُكوّنُ الأعدادَ ذاتَ 5 أرقامٍ وأفكّكُها وأركّبُها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 1,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "5"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 1",
+      "fileTitle": "توظيف العمليات على الأعداد",
+      "programPage": "33",
+      "inReducedProgram": true
+    }
+  },
+  "y4m02": {
+    "id": "y4m02",
+    "unitId": "p1",
+    "num": 2,
+    "title": "أتعرّفُ المسالكَ المختصرةَ وموقعَ عقدةٍ على الشّبكةِ",
+    "domain": "الهندسة",
+    "axisId": "axGeo",
+    "period": 1,
+    "ready": true,
+    "icon": "📐",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "9"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 3",
+      "fileTitle": "توظيف خاصيات الأشكال الهندسية",
+      "programPage": "34",
+      "inReducedProgram": true
+    }
+  },
+  "y4m03": {
+    "id": "y4m03",
+    "unitId": "p1",
+    "num": 3,
+    "title": "أتصرّفُ في القطعِ النّقديّةِ والأوراقِ الماليّةِ (كد-10د-20د)",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 1,
+    "ready": true,
+    "icon": "📏",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "13"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 2",
+      "fileTitle": "التصرف في المقادير",
+      "programPage": "34",
+      "inReducedProgram": true
+    }
+  },
+  "y4m04": {
+    "id": "y4m04",
+    "unitId": "p1",
+    "num": 4,
+    "title": "أُقارنُ الأعدادَ ذاتَ 5 أرقامٍ وأرتّبُها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 1,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "17"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 1",
+      "fileTitle": "توظيف العمليات على الأعداد",
+      "programPage": "33",
+      "inReducedProgram": true
+    }
+  },
+  "y4m05": {
+    "id": "y4m05",
+    "unitId": "p1",
+    "num": 5,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 1,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "21"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m06": {
+    "id": "y4m06",
+    "unitId": "p1",
+    "num": 6,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 1,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "22"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m07": {
+    "id": "y4m07",
+    "unitId": "p2",
+    "num": 7,
+    "title": "أتصرّفُ في الأعدادِ ذاتَ 5 أرقامٍ (بعضُ أرقامِها صفرٌ)",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 2,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "24"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m08": {
+    "id": "y4m08",
+    "unitId": "p2",
+    "num": 8,
+    "title": "أتصرّفُ في القطعِ النّقديّةِ والأوراقِ الماليّةِ (10د-20د-30د)",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 2,
+    "ready": true,
+    "icon": "📏",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "28"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 2",
+      "fileTitle": "التصرف في المقادير",
+      "programPage": "34",
+      "inReducedProgram": true
+    }
+  },
+  "y4m09": {
+    "id": "y4m09",
+    "unitId": "p2",
+    "num": 9,
+    "title": "أتعرّفُ المستقيمَ ونصفَ المستقيمِ وقطعةَ المستقيمِ",
+    "domain": "الهندسة",
+    "axisId": "axGeo",
+    "period": 2,
+    "ready": true,
+    "icon": "📐",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "32"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 3",
+      "fileTitle": "توظيف خاصيات الأشكال الهندسية",
+      "programPage": "34",
+      "inReducedProgram": true
+    }
+  },
+  "y4m10": {
+    "id": "y4m10",
+    "unitId": "p2",
+    "num": 10,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 2,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "36"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m11": {
+    "id": "y4m11",
+    "unitId": "p2",
+    "num": 11,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 2,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "37"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m12": {
+    "id": "y4m12",
+    "unitId": "p2",
+    "num": 12,
+    "title": "أُنجزُ عمليّةَ الجمعِ والطّرحِ على الأعدادِ ذاتَ 5 أرقامٍ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 2,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "39"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 1",
+      "fileTitle": "توظيف العمليات على الأعداد",
+      "programPage": "33",
+      "inReducedProgram": true
+    }
+  },
+  "y4m13": {
+    "id": "y4m13",
+    "unitId": "p3",
+    "num": 17,
+    "title": "أُنجزُ عمليّةَ الضّربِ في عقدٍ أو مائةٍ كاملةٍ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 3,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "56"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 1",
+      "fileTitle": "توظيف العمليات على الأعداد",
+      "programPage": "33",
+      "inReducedProgram": true
+    }
+  },
+  "y4m14": {
+    "id": "y4m14",
+    "unitId": "p3",
+    "num": 18,
+    "title": "أُوظّفُ التّوازيَ والتّعامدَ في تصنيفِ المضلّعاتِ ورسمِها",
+    "domain": "الهندسة",
+    "axisId": "axGeo",
+    "period": 3,
+    "ready": true,
+    "icon": "📐",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "60"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 3",
+      "fileTitle": "توظيف خاصيات الأشكال الهندسية",
+      "programPage": "34",
+      "inReducedProgram": true
+    }
+  },
+  "y4m15": {
+    "id": "y4m15",
+    "unitId": "p3",
+    "num": 19,
+    "title": "أتصرّفُ في وحداتِ قيسِ الأطوالِ (المترْ ومضاعفاتُه)",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 3,
+    "ready": true,
+    "icon": "📏",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "64"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 2",
+      "fileTitle": "التصرف في المقادير",
+      "programPage": "34",
+      "inReducedProgram": true
+    }
+  },
+  "y4m16": {
+    "id": "y4m16",
+    "unitId": "p3",
+    "num": 20,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 3,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "68"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m17": {
+    "id": "y4m17",
+    "unitId": "p3",
+    "num": 21,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 3,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "69"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m18": {
+    "id": "y4m18",
+    "unitId": "p3",
+    "num": 22,
+    "title": "أُنجزُ عمليّةَ الضّربِ في عددٍ ذي رقمينِ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 3,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "72"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 1",
+      "fileTitle": "توظيف العمليات على الأعداد",
+      "programPage": "33",
+      "inReducedProgram": true
+    }
+  },
+  "y4m19": {
+    "id": "y4m19",
+    "unitId": "p3",
+    "num": 23,
+    "title": "أرسُمُ المستطيلَ والمربّعَ باعتمادِ خاصيّاتِ الأضلاعِ والزّوايا",
+    "domain": "الهندسة",
+    "axisId": "axGeo",
+    "period": 3,
+    "ready": true,
+    "icon": "📐",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "73"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 3",
+      "fileTitle": "توظيف خاصيات الأشكال الهندسية",
+      "programPage": "34",
+      "inReducedProgram": true
+    }
+  },
+  "y4m20": {
+    "id": "y4m20",
+    "unitId": "p4",
+    "num": 27,
+    "title": "أُكوّنُ الأعدادَ ذاتَ 6 أرقامٍ وأفكّكُها وأركّبُها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 4,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "87"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 1",
+      "fileTitle": "توظيف العمليات على الأعداد",
+      "programPage": "33",
+      "inReducedProgram": true
+    }
+  },
+  "y4m21": {
+    "id": "y4m21",
+    "unitId": "p4",
+    "num": 28,
+    "title": "أتصرّفُ في وحداتِ قيسِ الكتَلِ (الكغ و الغ)",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 4,
+    "ready": true,
+    "icon": "📏",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "92"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 2",
+      "fileTitle": "التصرف في المقادير",
+      "programPage": "34",
+      "inReducedProgram": false,
+      "note": "هذا الدرس موجود في كتاب التلميذ الكامل، لكنه غير مذكور ضمن قائمة الملف الرسمية للبرنامج المخفّف 2021-2022 لسنة 4 (مستخرج حرفياً من ص33-34)."
+    }
+  },
+  "y4m22": {
+    "id": "y4m22",
+    "unitId": "p4",
+    "num": 29,
+    "title": "أُقارنُ الأعدادَ ذاتَ 6 أرقامٍ وأرتّبُها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 4,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "96"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 1",
+      "fileTitle": "توظيف العمليات على الأعداد",
+      "programPage": "33",
+      "inReducedProgram": true
+    }
+  },
+  "y4m23": {
+    "id": "y4m23",
+    "unitId": "p4",
+    "num": 30,
+    "title": "أحسُبُ قيسَ محيطِ شكلٍ مُكوَّنٍ من مستطيلاتٍ ومربّعاتٍ",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 4,
+    "ready": true,
+    "icon": "📏",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "100"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 2",
+      "fileTitle": "التصرف في المقادير",
+      "programPage": "34",
+      "inReducedProgram": false,
+      "note": "هذا الدرس موجود في كتاب التلميذ الكامل، لكنه غير مذكور ضمن قائمة الملف الرسمية للبرنامج المخفّف 2021-2022 لسنة 4 (مستخرج حرفياً من ص33-34)."
+    }
+  },
+  "y4m24": {
+    "id": "y4m24",
+    "unitId": "p4",
+    "num": 31,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 4,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "104"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m25": {
+    "id": "y4m25",
+    "unitId": "p4",
+    "num": 32,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 4,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "105"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m26": {
+    "id": "y4m26",
+    "unitId": "p4",
+    "num": 33,
+    "title": "أُنجزُ عمليّةَ الجمعِ والطّرحِ على الأعدادِ ذاتَ 6 أرقامٍ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 4,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "108"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 1",
+      "fileTitle": "توظيف العمليات على الأعداد",
+      "programPage": "33",
+      "inReducedProgram": true
+    }
+  },
+  "y4m27": {
+    "id": "y4m27",
+    "unitId": "p4",
+    "num": 34,
+    "title": "أُنجزُ عمليّةَ الضّربِ في عددٍ ذي 3 أرقامٍ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 4,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "113"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 1",
+      "fileTitle": "توظيف العمليات على الأعداد",
+      "programPage": "33",
+      "inReducedProgram": true
+    }
+  },
+  "y4m28": {
+    "id": "y4m28",
+    "unitId": "p4",
+    "num": 35,
+    "title": "أتعرّفُ مساحةَ شكلٍ مُسنّى",
+    "domain": "الهندسة",
+    "axisId": "axGeo",
+    "period": 4,
+    "ready": true,
+    "icon": "📐",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "117"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 2",
+      "fileTitle": "التصرف في المقادير",
+      "programPage": "34",
+      "inReducedProgram": false,
+      "note": "هذا الدرس موجود في كتاب التلميذ الكامل، لكنه غير مذكور ضمن قائمة الملف الرسمية للبرنامج المخفّف 2021-2022 لسنة 4 (مستخرج حرفياً من ص33-34)."
+    }
+  },
+  "y4m29": {
+    "id": "y4m29",
+    "unitId": "p4",
+    "num": 36,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 4,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "121"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m30": {
+    "id": "y4m30",
+    "unitId": "p4",
+    "num": 37,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 4,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "122"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m31": {
+    "id": "y4m31",
+    "unitId": "p5",
+    "num": 38,
+    "title": "أتصرّفُ في الأعدادِ ذاتَ 6 أرقامٍ (بعضُ أرقامِها صفرٌ)",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 5,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "125"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m32": {
+    "id": "y4m32",
+    "unitId": "p5",
+    "num": 39,
+    "title": "أتعرّفُ مضاعفاتِ عددٍ صحيحٍ طبيعيّ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 5,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "130"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 1",
+      "fileTitle": "توظيف العمليات على الأعداد",
+      "programPage": "33",
+      "inReducedProgram": true
+    }
+  },
+  "y4m33": {
+    "id": "y4m33",
+    "unitId": "p5",
+    "num": 40,
+    "title": "أتعرّفُ القسمةَ الإقليديّةَ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 5,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "135"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 1",
+      "fileTitle": "توظيف العمليات على الأعداد",
+      "programPage": "33",
+      "inReducedProgram": true
+    }
+  },
+  "y4m34": {
+    "id": "y4m34",
+    "unitId": "p5",
+    "num": 41,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 5,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "139"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m35": {
+    "id": "y4m35",
+    "unitId": "p5",
+    "num": 42,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 5,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "140"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m36": {
+    "id": "y4m36",
+    "unitId": "p5",
+    "num": 43,
+    "title": "أُنجزُ عمليّةَ القسمةِ قاسمُها عددٌ ذو رقمٍ واحدٍ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 5,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "143"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 1",
+      "fileTitle": "توظيف العمليات على الأعداد",
+      "programPage": "33",
+      "inReducedProgram": true
+    }
+  },
+  "y4m37": {
+    "id": "y4m37",
+    "unitId": "p5",
+    "num": 44,
+    "title": "أحسُبُ قيسَ مساحةِ كلٍّ من المستطيلِ والمربّعِ",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 5,
+    "ready": true,
+    "icon": "📏",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "148"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 2",
+      "fileTitle": "التصرف في المقادير",
+      "programPage": "34",
+      "inReducedProgram": false,
+      "note": "هذا الدرس موجود في كتاب التلميذ الكامل، لكنه غير مذكور ضمن قائمة الملف الرسمية للبرنامج المخفّف 2021-2022 لسنة 4 (مستخرج حرفياً من ص33-34)."
+    }
+  },
+  "y4m38": {
+    "id": "y4m38",
+    "unitId": "p5",
+    "num": 45,
+    "title": "أُحدّدُ الزّمنَ بالسّاعةِ والدّقائقِ",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 5,
+    "ready": true,
+    "icon": "📏",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "154"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 2",
+      "fileTitle": "التصرف في المقادير",
+      "programPage": "34",
+      "inReducedProgram": false,
+      "note": "هذا الدرس موجود في كتاب التلميذ الكامل، لكنه غير مذكور ضمن قائمة الملف الرسمية للبرنامج المخفّف 2021-2022 لسنة 4 (مستخرج حرفياً من ص33-34)."
+    }
+  },
+  "y4m39": {
+    "id": "y4m39",
+    "unitId": "p5",
+    "num": 46,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 5,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "159"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m40": {
+    "id": "y4m40",
+    "unitId": "p5",
+    "num": 47,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 5,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "160"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل / تقييم) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m41": {
+    "id": "y4m41",
+    "unitId": "p3",
+    "num": 24,
+    "title": "أتصرّفُ في وحداتِ قيسِ السّعةِ (اللترْ وأجزاؤه)",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 3,
+    "ready": true,
+    "icon": "🧴",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "80, 82, 83"
+    },
+    "officialProgramRef": {
+      "fileId": "الملف 2",
+      "fileTitle": "التصرف في المقادير",
+      "programPage": "34",
+      "inReducedProgram": true
+    }
+  },
+  "y4m42": {
+    "id": "y4m42",
+    "unitId": "p3",
+    "num": 25,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 3,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "84"
+    },
+    "officialProgramRef": {
+      "note": "نشاط عرضي (تدرّب على حلّ المسائل) — يخدم كلّ ملفات الفترة، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  },
+  "y4m43": {
+    "id": "y4m43",
+    "unitId": "p3",
+    "num": 26,
+    "title": "أوظّفُ مكتسباتي وأُقيّمها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 3,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س4",
+      "pages": "85"
+    },
+    "officialProgramRef": {
+      "note": "نشاط تقييمي عرضي — يخدم كلّ ملفات الفترة (الأعداد والقيس والهندسة معاً)، لا يُخصَّص لملف واحد.",
+      "inReducedProgram": null
+    }
+  }
+}

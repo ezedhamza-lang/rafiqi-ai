@@ -1,0 +1,20 @@
+{
+  "title": "رياضيّات — كتابي في الرياضيات",
+  "subtitle": "السّنة الخامسة من التعليم الأساسيّ",
+  "imageBase": "/assets/books/math5/",
+  "imageExt": ".jpg",
+  "totalPages": 168,
+  "_meta": {
+    "note": "حدود الوحدات (الفترات) مبنية على صورة 'خارطة البرنامج' (آخر صفحات الكتاب) التي أرسلها المستخدم، ومطابقة صفحة بصفحة مع نسخة الكتاب الفعلية (PDF، 168 صفحة) خلال هذه الجلسة. رقم الصفحة المطبوع = رقم صفحة الـPDF (لا إزاحة).",
+    "verifiedAgainst": "كتاب الرياضيات - السنة الخامسة من التعليم الأساسي (168 صفحة، ملف رباضيات_س5.zip) — مراجعة بصرية كاملة للفترات 1 إلى 5"
+  },
+  "units": [
+    { "id": "m0", "title": "غلاف الكتاب وتقديمه", "icon": "📗", "color": "#B0B0B0", "startPage": 1, "endPage": 3 },
+    { "id": "p1", "title": "الفترة 1", "icon": "1️⃣", "color": "#5B9FE0", "startPage": 4, "endPage": 34 },
+    { "id": "p2", "title": "الفترة 2", "icon": "2️⃣", "color": "#E05C9F", "startPage": 35, "endPage": 65 },
+    { "id": "p3", "title": "الفترة 3", "icon": "3️⃣", "color": "#5CB85C", "startPage": 66, "endPage": 97 },
+    { "id": "p4", "title": "الفترة 4", "icon": "4️⃣", "color": "#F0AD4E", "startPage": 98, "endPage": 127 },
+    { "id": "p5", "title": "الفترة 5", "icon": "5️⃣", "color": "#9B6BCE", "startPage": 128, "endPage": 167 },
+    { "id": "appendix", "title": "خارطة البرنامج", "icon": "📑", "color": "#B0B0B0", "startPage": 168, "endPage": 168 }
+  ]
+}

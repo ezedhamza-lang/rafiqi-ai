@@ -1,0 +1,17 @@
+{
+  "title": "قراءتي",
+  "subtitle": "السنة السادسة ابتدائي",
+  "imageBase": null,
+  "imageExt": ".jpg",
+  "totalPages": 0,
+  "units": [
+    { "id": "u1", "title": "الوطن والهوية", "icon": "🇹🇳", "color": "#E05B5B", "startPage": 1, "endPage": 14 },
+    { "id": "u2", "title": "البيئة والتنمية", "icon": "🌿", "color": "#4CAF50", "startPage": 15, "endPage": 28 },
+    { "id": "u3", "title": "القصص الأدبية والروايات", "icon": "📖", "color": "#F4A340", "startPage": 29, "endPage": 42 },
+    { "id": "u4", "title": "السيرة النبوية والأخلاق", "icon": "🕌", "color": "#3F8F4F", "startPage": 43, "endPage": 56 },
+    { "id": "u5", "title": "العلم والعلماء", "icon": "🔬", "color": "#4A9FD8", "startPage": 57, "endPage": 70 },
+    { "id": "u6", "title": "التضامن والمواطنة", "icon": "🤝", "color": "#8E7CE0", "startPage": 71, "endPage": 84 },
+    { "id": "u7", "title": "الإعلام والاتصال", "icon": "📰", "color": "#E0A14A", "startPage": 85, "endPage": 98 },
+    { "id": "u8", "title": "المستقبل والتكنولوجيا", "icon": "🚀", "color": "#5BC0BE", "startPage": 99, "endPage": 112 }
+  ]
+}

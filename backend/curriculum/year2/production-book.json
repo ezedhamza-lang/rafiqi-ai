@@ -1,0 +1,57 @@
+{
+  "title": "إنتاج كتابي",
+  "subtitle": "السنة الثانية ابتدائي",
+  "imageBase": null,
+  "imageExt": ".jpg",
+  "totalPages": 0,
+  "units": [
+    {
+      "id": "p1",
+      "title": "الوصف",
+      "icon": "✍️",
+      "color": "#8E7CE0",
+      "startPage": 1,
+      "endPage": 10
+    },
+    {
+      "id": "p2",
+      "title": "السرد",
+      "icon": "🗒️",
+      "color": "#4A9FD8",
+      "startPage": 11,
+      "endPage": 20
+    },
+    {
+      "id": "p3",
+      "title": "الرسالة",
+      "icon": "💌",
+      "color": "#F191C1",
+      "startPage": 21,
+      "endPage": 30
+    },
+    {
+      "id": "p4",
+      "title": "التهنئة",
+      "icon": "🎉",
+      "color": "#F39C12",
+      "startPage": 31,
+      "endPage": 40
+    },
+    {
+      "id": "p5",
+      "title": "الدعوة",
+      "icon": "📩",
+      "color": "#7CB342",
+      "startPage": 41,
+      "endPage": 50
+    },
+    {
+      "id": "p6",
+      "title": "وصف صورة",
+      "icon": "🖼️",
+      "color": "#E67E22",
+      "startPage": 51,
+      "endPage": 60
+    }
+  ]
+}

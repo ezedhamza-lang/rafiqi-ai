@@ -1,0 +1,274 @@
+{
+  "letters": [
+    {
+      "emoji": "🐐",
+      "prompt_ar": "عنزة — ما هو الحرف الأول؟",
+      "lang": "ar",
+      "options": [
+        "ع",
+        "ب",
+        "ت"
+      ],
+      "correct": 0
+    },
+    {
+      "emoji": "🌙",
+      "prompt_ar": "قمر — ما هو الحرف الأول؟",
+      "lang": "ar",
+      "options": [
+        "ك",
+        "ق",
+        "ل"
+      ],
+      "correct": 1
+    },
+    {
+      "emoji": "🐟",
+      "prompt_ar": "سمكة — ما هو الحرف الأول؟",
+      "lang": "ar",
+      "options": [
+        "ش",
+        "ص",
+        "س"
+      ],
+      "correct": 2
+    },
+    {
+      "emoji": "🍎",
+      "prompt_en": "Apple — which letter does it start with?",
+      "lang": "en",
+      "options": [
+        "B",
+        "A",
+        "C"
+      ],
+      "correct": 1
+    },
+    {
+      "emoji": "🐱",
+      "prompt_en": "Cat — which letter does it start with?",
+      "lang": "en",
+      "options": [
+        "K",
+        "S",
+        "C"
+      ],
+      "correct": 2
+    },
+    {
+      "emoji": "☀️",
+      "prompt_en": "Sun — which letter does it start with?",
+      "lang": "en",
+      "options": [
+        "F",
+        "T",
+        "S"
+      ],
+      "correct": 2
+    }
+  ],
+  "numbers": [
+    {
+      "emoji": "🍎🍎🍎",
+      "prompt_ar": "كم عدد التفاح؟",
+      "lang": "ar",
+      "options": [
+        "٢",
+        "٤",
+        "٣"
+      ],
+      "correct": 2
+    },
+    {
+      "emoji": "⭐⭐⭐⭐⭐",
+      "prompt_ar": "كم عدد النجوم؟",
+      "lang": "ar",
+      "options": [
+        "٤",
+        "٥",
+        "٦"
+      ],
+      "correct": 1
+    },
+    {
+      "emoji": "🐶🐶",
+      "prompt_en": "How many dogs?",
+      "lang": "en",
+      "options": [
+        "Three",
+        "Two",
+        "One"
+      ],
+      "correct": 1
+    },
+    {
+      "emoji": "🎈🎈🎈🎈",
+      "prompt_en": "How many balloons?",
+      "lang": "en",
+      "options": [
+        "Five",
+        "Three",
+        "Four"
+      ],
+      "correct": 2
+    },
+    {
+      "emoji": "🐣",
+      "prompt_ar": "كم عدد الكتاكيت؟",
+      "lang": "ar",
+      "options": [
+        "واحد",
+        "اثنان",
+        "ثلاثة"
+      ],
+      "correct": 0
+    },
+    {
+      "emoji": "🍇🍇🍇🍇🍇🍇",
+      "prompt_ar": "كم عدد حبات العنب؟",
+      "lang": "ar",
+      "options": [
+        "٥",
+        "٧",
+        "٦"
+      ],
+      "correct": 2
+    }
+  ],
+  "colors": [
+    {
+      "swatch": "#E24B4A",
+      "prompt_ar": "ما هو هذا اللون؟",
+      "lang": "ar",
+      "options": [
+        "أخضر",
+        "أحمر",
+        "أصفر"
+      ],
+      "correct": 1
+    },
+    {
+      "swatch": "#378ADD",
+      "prompt_en": "What color is this?",
+      "lang": "en",
+      "options": [
+        "Green",
+        "Yellow",
+        "Blue"
+      ],
+      "correct": 2
+    },
+    {
+      "swatch": "#FAC775",
+      "prompt_ar": "ما هو هذا اللون؟",
+      "lang": "ar",
+      "options": [
+        "أصفر",
+        "أحمر",
+        "بنفسجي"
+      ],
+      "correct": 0
+    },
+    {
+      "swatch": "#639922",
+      "prompt_en": "What color is this?",
+      "lang": "en",
+      "options": [
+        "Red",
+        "Green",
+        "Blue"
+      ],
+      "correct": 1
+    },
+    {
+      "swatch": "#EF9F27",
+      "prompt_ar": "ما هو هذا اللون؟",
+      "lang": "ar",
+      "options": [
+        "وردي",
+        "أزرق",
+        "برتقالي"
+      ],
+      "correct": 2
+    },
+    {
+      "swatch": "#7F77DD",
+      "prompt_en": "What color is this?",
+      "lang": "en",
+      "options": [
+        "Purple",
+        "Orange",
+        "Black"
+      ],
+      "correct": 0
+    }
+  ],
+  "vocab": [
+    {
+      "emoji": "🐘",
+      "prompt_ar": "«فيل» بالإنجليزية تعني:",
+      "lang": "ar",
+      "options": [
+        "Lion",
+        "Elephant",
+        "Mouse"
+      ],
+      "correct": 1
+    },
+    {
+      "emoji": "🦋",
+      "prompt_en": "“Butterfly” in Arabic means:",
+      "lang": "en",
+      "options": [
+        "نحلة",
+        "عصفور",
+        "فراشة"
+      ],
+      "correct": 2
+    },
+    {
+      "emoji": "🍌",
+      "prompt_en": "“Banana” in Arabic means:",
+      "lang": "en",
+      "options": [
+        "موز",
+        "تفاح",
+        "برتقال"
+      ],
+      "correct": 0
+    },
+    {
+      "emoji": "🐝",
+      "prompt_ar": "«نحلة» بالإنجليزية تعني:",
+      "lang": "ar",
+      "options": [
+        "Ant",
+        "Bee",
+        "Fly"
+      ],
+      "correct": 1
+    },
+    {
+      "emoji": "🐢",
+      "prompt_en": "“Turtle” in Arabic means:",
+      "lang": "en",
+      "options": [
+        "ضفدع",
+        "سمكة",
+        "سلحفاة"
+      ],
+      "correct": 2
+    },
+    {
+      "emoji": "🍓",
+      "prompt_ar": "«فراولة» بالإنجليزية تعني:",
+      "lang": "ar",
+      "options": [
+        "Cherry",
+        "Grape",
+        "Strawberry"
+      ],
+      "correct": 2
+    }
+  ]
+}

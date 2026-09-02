@@ -1,0 +1,73 @@
+{
+  "title": "قراءتي",
+  "subtitle": "السنة الخامسة ابتدائي",
+  "imageBase": null,
+  "imageExt": ".jpg",
+  "totalPages": 0,
+  "units": [
+    {
+      "id": "u1",
+      "title": "الوطن والتاريخ",
+      "icon": "🇹🇳",
+      "color": "#E05B5B",
+      "startPage": 1,
+      "endPage": 12
+    },
+    {
+      "id": "u2",
+      "title": "الطبيعة والبيئة",
+      "icon": "🌿",
+      "color": "#4CAF6B",
+      "startPage": 13,
+      "endPage": 24
+    },
+    {
+      "id": "u3",
+      "title": "القصص والحكايات",
+      "icon": "📖",
+      "color": "#E8A33D",
+      "startPage": 25,
+      "endPage": 36
+    },
+    {
+      "id": "u4",
+      "title": "سيرة الرسول والأخلاق",
+      "icon": "🕌",
+      "color": "#4A9FD8",
+      "startPage": 37,
+      "endPage": 48
+    },
+    {
+      "id": "u5",
+      "title": "العلم والعلماء العرب",
+      "icon": "🔭",
+      "color": "#8E7CE0",
+      "startPage": 49,
+      "endPage": 60
+    },
+    {
+      "id": "u6",
+      "title": "التضامن الاجتماعي",
+      "icon": "🤝",
+      "color": "#E07B54",
+      "startPage": 61,
+      "endPage": 72
+    },
+    {
+      "id": "u7",
+      "title": "حقوق الطفل",
+      "icon": "🧒",
+      "color": "#F0A030",
+      "startPage": 73,
+      "endPage": 84
+    },
+    {
+      "id": "u8",
+      "title": "التراث والفنون",
+      "icon": "🏺",
+      "color": "#C97B9F",
+      "startPage": 85,
+      "endPage": 96
+    }
+  ]
+}

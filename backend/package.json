@@ -1,0 +1,55 @@
+{
+  "name": "school-platform-backend",
+  "version": "1.0.0",
+  "description": "منصة الحياة المدرسية - backend",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev --name init",
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:push": "prisma db push",
+    "seed": "node prisma/seed.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src tests --max-warnings=100"
+  },
+  "dependencies": {
+    "@pdf-lib/fontkit": "^1.1.1",
+    "@prisma/client": "^5.22.0",
+    "adm-zip": "^0.6.0",
+    "arabic-reshaper": "^1.1.0",
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.8.1",
+    "cors": "^2.8.5",
+    "docx": "^9.7.1",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^7.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^9.0.6",
+    "pdf-lib": "^1.17.1",
+    "pdfkit": "^0.19.1",
+    "pino": "^10.3.1",
+    "pino-http": "^11.0.0",
+    "prisma": "^5.22.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "ws": "^8.21.3",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "eslint": "^10.8.1",
+    "pino-pretty": "^13.1.3",
+    "supertest": "^7.1.4",
+    "vitest": "^4.1.10"
+  },
+  "allowScripts": {
+    "@prisma/engines@5.22.0": true,
+    "@scarf/scarf@1.4.0": true,
+    "prisma@5.22.0": true
+  }
+}

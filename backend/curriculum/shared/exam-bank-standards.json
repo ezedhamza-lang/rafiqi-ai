@@ -1,0 +1,1392 @@
+{
+  "_meta": {
+    "note": "كتالوج معايير مرجعي على مستوى (سنة → مادة → مجال → معيار) لبناء بنك الاختبارات، وليس بديلاً عن curriculum/<grade>/skills-map-<subject>.json (المرتبط بدروس فعلية عبر SkillsEngine). هذا الملف أوسع تغطية (كل السنوات 1-6 وكل المواد الثلاث) لكنه أقل دقة: أغلب المعايير هنا indicators/questionTypes فارغة بانتظار الإثراء التدريجي، عدا مثال واحد كامل موسوم بـ relatedLessonId يطابق درسًا حقيقيًا موجودًا فعلًا. subject 'arabic' هنا أوسع من 'anisi' في registry.json (anisi = القراءة فقط في السنة الأولى)، ويغطي أيضًا مجالات لا محتوى دروس فعليًا لها بعد (قراءة/علوم للسنوات 2-6 — انظر server/constants/grades.js).",
+    "levels": [
+      "year1",
+      "year2",
+      "year3",
+      "year4",
+      "year5",
+      "year6"
+    ],
+    "subjects": [
+      "arabic",
+      "math",
+      "science"
+    ]
+  },
+  "standards": [
+    {
+      "id": "std-001",
+      "level": "year1",
+      "subject": "arabic",
+      "domain": "القراءة",
+      "criterion": "التعرّف على الحروف",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-002",
+      "level": "year1",
+      "subject": "arabic",
+      "domain": "القراءة",
+      "criterion": "قراءة المقاطع",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-003",
+      "level": "year1",
+      "subject": "arabic",
+      "domain": "القراءة",
+      "criterion": "قراءة الكلمات",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-004",
+      "level": "year1",
+      "subject": "arabic",
+      "domain": "القراءة",
+      "criterion": "فهم جمل قصيرة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-005",
+      "level": "year1",
+      "subject": "arabic",
+      "domain": "الكتابة",
+      "criterion": "رسم الحروف",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-006",
+      "level": "year1",
+      "subject": "arabic",
+      "domain": "الكتابة",
+      "criterion": "نسخ الكلمات",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-007",
+      "level": "year1",
+      "subject": "arabic",
+      "domain": "الكتابة",
+      "criterion": "كتابة جملة بسيطة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-008",
+      "level": "year1",
+      "subject": "arabic",
+      "domain": "الإملاء",
+      "criterion": "كتابة الحروف والكلمات المألوفة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-009",
+      "level": "year1",
+      "subject": "arabic",
+      "domain": "الإملاء",
+      "criterion": "التمييز بين الأصوات",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-010",
+      "level": "year1",
+      "subject": "arabic",
+      "domain": "الإنتاج الكتابي",
+      "criterion": "ترتيب صور",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-011",
+      "level": "year1",
+      "subject": "arabic",
+      "domain": "الإنتاج الكتابي",
+      "criterion": "إكمال جملة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-012",
+      "level": "year1",
+      "subject": "arabic",
+      "domain": "الإنتاج الكتابي",
+      "criterion": "التعبير عن صورة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-013",
+      "level": "year1",
+      "subject": "math",
+      "domain": "الأعداد",
+      "criterion": "العد",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-014",
+      "level": "year1",
+      "subject": "math",
+      "domain": "الأعداد",
+      "criterion": "قراءة الأعداد",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-015",
+      "level": "year1",
+      "subject": "math",
+      "domain": "الأعداد",
+      "criterion": "كتابة الأعداد",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-016",
+      "level": "year1",
+      "subject": "math",
+      "domain": "الأعداد",
+      "criterion": "المقارنة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-017",
+      "level": "year1",
+      "subject": "math",
+      "domain": "العمليات",
+      "criterion": "الجمع والطرح البسيط",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-018",
+      "level": "year1",
+      "subject": "math",
+      "domain": "الفضاء",
+      "criterion": "تحديد الموقع والاتجاه",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-019",
+      "level": "year1",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "الطول",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-020",
+      "level": "year1",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "الكتلة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-021",
+      "level": "year1",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "الزمن بشكل بسيط",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-022",
+      "level": "year1",
+      "subject": "math",
+      "domain": "الهندسة",
+      "criterion": "التعرف على الأشكال",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-023",
+      "level": "year1",
+      "subject": "science",
+      "domain": "جسم الإنسان",
+      "criterion": "الأعضاء والحواس",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-024",
+      "level": "year1",
+      "subject": "science",
+      "domain": "التغذية",
+      "criterion": "الغذاء الصحي",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-025",
+      "level": "year1",
+      "subject": "science",
+      "domain": "الكائنات",
+      "criterion": "الإنسان",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-026",
+      "level": "year1",
+      "subject": "science",
+      "domain": "الكائنات",
+      "criterion": "الحيوان",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-027",
+      "level": "year1",
+      "subject": "science",
+      "domain": "الكائنات",
+      "criterion": "النبات",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-028",
+      "level": "year1",
+      "subject": "science",
+      "domain": "المادة",
+      "criterion": "صلب",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-029",
+      "level": "year1",
+      "subject": "science",
+      "domain": "المادة",
+      "criterion": "سائل",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-030",
+      "level": "year1",
+      "subject": "science",
+      "domain": "المادة",
+      "criterion": "غاز",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-031",
+      "level": "year1",
+      "subject": "science",
+      "domain": "الحركة والقوة",
+      "criterion": "الدفع والجذب",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-032",
+      "level": "year2",
+      "subject": "arabic",
+      "domain": "القراءة",
+      "criterion": "قراءة نصوص قصيرة وفهمها",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-033",
+      "level": "year2",
+      "subject": "arabic",
+      "domain": "الفهم",
+      "criterion": "استخراج معلومات صريحة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-034",
+      "level": "year2",
+      "subject": "arabic",
+      "domain": "القواعد",
+      "criterion": "الجملة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-035",
+      "level": "year2",
+      "subject": "arabic",
+      "domain": "القواعد",
+      "criterion": "الاسم",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-036",
+      "level": "year2",
+      "subject": "arabic",
+      "domain": "القواعد",
+      "criterion": "الفعل",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-037",
+      "level": "year2",
+      "subject": "arabic",
+      "domain": "القواعد",
+      "criterion": "المفرد والجمع",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-038",
+      "level": "year2",
+      "subject": "arabic",
+      "domain": "الإملاء",
+      "criterion": "التنوين",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-039",
+      "level": "year2",
+      "subject": "arabic",
+      "domain": "الإملاء",
+      "criterion": "المد",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-040",
+      "level": "year2",
+      "subject": "arabic",
+      "domain": "الإملاء",
+      "criterion": "التاء",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-041",
+      "level": "year2",
+      "subject": "arabic",
+      "domain": "الإملاء",
+      "criterion": "الهمزات البسيطة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-042",
+      "level": "year2",
+      "subject": "arabic",
+      "domain": "الكتابة",
+      "criterion": "نسخ وكتابة جمل سليمة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-043",
+      "level": "year2",
+      "subject": "arabic",
+      "domain": "الإنتاج",
+      "criterion": "إتمام نص",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-044",
+      "level": "year2",
+      "subject": "arabic",
+      "domain": "الإنتاج",
+      "criterion": "ترتيب أحداث",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-045",
+      "level": "year2",
+      "subject": "arabic",
+      "domain": "الإنتاج",
+      "criterion": "وصف مشهد",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-046",
+      "level": "year2",
+      "subject": "math",
+      "domain": "الأعداد",
+      "criterion": "قراءة وكتابة ومقارنة الأعداد",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-047",
+      "level": "year2",
+      "subject": "math",
+      "domain": "العمليات",
+      "criterion": "ينجز عملية جمع صحيحة",
+      "indicators": [
+        "يفهم المعطيات",
+        "يختار العملية المناسبة",
+        "ينجز الحساب",
+        "يتحقق من النتيجة"
+      ],
+      "questionTypes": [
+        "direct_calculation",
+        "image_counting",
+        "word_problem",
+        "missing_number"
+      ],
+      "skill": "addition",
+      "relatedLessonId": "y2m04",
+      "note": "مثال كامل التفصيل يوضّح الشكل المستهدف لبقية المعايير — أُثري لاحقًا معيارًا معيارًا"
+    },
+    {
+      "id": "std-048",
+      "level": "year2",
+      "subject": "math",
+      "domain": "المسائل",
+      "criterion": "فهم الوضعية واختيار العملية",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-049",
+      "level": "year2",
+      "subject": "math",
+      "domain": "النقود",
+      "criterion": "حساب المبلغ",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-050",
+      "level": "year2",
+      "subject": "math",
+      "domain": "النقود",
+      "criterion": "الثمن",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-051",
+      "level": "year2",
+      "subject": "math",
+      "domain": "النقود",
+      "criterion": "الباقي",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-052",
+      "level": "year2",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "الطول",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-053",
+      "level": "year2",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "الزمن",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-054",
+      "level": "year2",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "الكتلة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-055",
+      "level": "year2",
+      "subject": "math",
+      "domain": "الهندسة",
+      "criterion": "الأشكال والإنشاء",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-056",
+      "level": "year2",
+      "subject": "science",
+      "domain": "الإنسان",
+      "criterion": "النمو",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-057",
+      "level": "year2",
+      "subject": "science",
+      "domain": "الإنسان",
+      "criterion": "التغذية",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-058",
+      "level": "year2",
+      "subject": "science",
+      "domain": "الإنسان",
+      "criterion": "النظافة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-059",
+      "level": "year2",
+      "subject": "science",
+      "domain": "الحيوان",
+      "criterion": "التغذية",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-060",
+      "level": "year2",
+      "subject": "science",
+      "domain": "الحيوان",
+      "criterion": "النمو",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-061",
+      "level": "year2",
+      "subject": "science",
+      "domain": "الحيوان",
+      "criterion": "التنقل",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-062",
+      "level": "year2",
+      "subject": "science",
+      "domain": "النبات",
+      "criterion": "النمو والحاجات",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-063",
+      "level": "year2",
+      "subject": "science",
+      "domain": "التنفس",
+      "criterion": "الإنسان والحيوان",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-064",
+      "level": "year2",
+      "subject": "science",
+      "domain": "المادة",
+      "criterion": "حالات المادة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-065",
+      "level": "year3",
+      "subject": "arabic",
+      "domain": "القراءة",
+      "criterion": "الطلاقة والفهم",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-066",
+      "level": "year3",
+      "subject": "arabic",
+      "domain": "الفهم",
+      "criterion": "استخراج المعلومات والاستنتاج",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-067",
+      "level": "year3",
+      "subject": "arabic",
+      "domain": "القواعد",
+      "criterion": "أنواع الجمل",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-068",
+      "level": "year3",
+      "subject": "arabic",
+      "domain": "القواعد",
+      "criterion": "الاسم والفعل",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-069",
+      "level": "year3",
+      "subject": "arabic",
+      "domain": "القواعد",
+      "criterion": "المذكر والمؤنث",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-070",
+      "level": "year3",
+      "subject": "arabic",
+      "domain": "الصرف",
+      "criterion": "المفرد والجمع",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-071",
+      "level": "year3",
+      "subject": "arabic",
+      "domain": "الصرف",
+      "criterion": "تصريف الأفعال",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-072",
+      "level": "year3",
+      "subject": "arabic",
+      "domain": "الإملاء",
+      "criterion": "قواعد إملائية متنوعة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-073",
+      "level": "year3",
+      "subject": "arabic",
+      "domain": "الإنتاج",
+      "criterion": "كتابة فقرة مترابطة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-074",
+      "level": "year3",
+      "subject": "math",
+      "domain": "الأعداد",
+      "criterion": "الأعداد الأكبر والتمثيلات",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-075",
+      "level": "year3",
+      "subject": "math",
+      "domain": "العمليات",
+      "criterion": "الجمع والطرح والضرب والقسمة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-076",
+      "level": "year3",
+      "subject": "math",
+      "domain": "المسائل",
+      "criterion": "اختيار استراتيجية الحل",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-077",
+      "level": "year3",
+      "subject": "math",
+      "domain": "الكسور",
+      "criterion": "التعرف على الكسور البسيطة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-078",
+      "level": "year3",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "الطول",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-079",
+      "level": "year3",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "الكتلة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-080",
+      "level": "year3",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "السعة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-081",
+      "level": "year3",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "الزمن",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-082",
+      "level": "year3",
+      "subject": "math",
+      "domain": "الهندسة",
+      "criterion": "الأشكال",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-083",
+      "level": "year3",
+      "subject": "math",
+      "domain": "الهندسة",
+      "criterion": "المحيط",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-084",
+      "level": "year3",
+      "subject": "math",
+      "domain": "الهندسة",
+      "criterion": "التناظر",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-085",
+      "level": "year3",
+      "subject": "science",
+      "domain": "الجسم",
+      "criterion": "وظائف الجسم والحواس",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-086",
+      "level": "year3",
+      "subject": "science",
+      "domain": "التغذية",
+      "criterion": "الغذاء والتوازن الغذائي",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-087",
+      "level": "year3",
+      "subject": "science",
+      "domain": "الكائنات",
+      "criterion": "تصنيف ومقارنة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-088",
+      "level": "year3",
+      "subject": "science",
+      "domain": "البيئة",
+      "criterion": "الوسط والعلاقات",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-089",
+      "level": "year3",
+      "subject": "science",
+      "domain": "المادة والطاقة",
+      "criterion": "خصائص وتحولات بسيطة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-090",
+      "level": "year4",
+      "subject": "arabic",
+      "domain": "القراءة",
+      "criterion": "فهم النصوص السردية والوصفية",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-091",
+      "level": "year4",
+      "subject": "arabic",
+      "domain": "التحليل",
+      "criterion": "تحديد الشخصيات والأحداث والأفكار",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-092",
+      "level": "year4",
+      "subject": "arabic",
+      "domain": "القواعد",
+      "criterion": "الجملة الاسمية والفعلية ومكوناتها",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-093",
+      "level": "year4",
+      "subject": "arabic",
+      "domain": "الصرف",
+      "criterion": "تصريف الأفعال",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-094",
+      "level": "year4",
+      "subject": "arabic",
+      "domain": "الإملاء",
+      "criterion": "تطبيق القواعد الإملائية",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-095",
+      "level": "year4",
+      "subject": "arabic",
+      "domain": "الإنتاج",
+      "criterion": "كتابة نص منظم",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-096",
+      "level": "year4",
+      "subject": "math",
+      "domain": "الأعداد",
+      "criterion": "الأعداد الكبيرة والقيمة المكانية",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-097",
+      "level": "year4",
+      "subject": "math",
+      "domain": "العمليات",
+      "criterion": "العمليات الأربع",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-098",
+      "level": "year4",
+      "subject": "math",
+      "domain": "المسائل",
+      "criterion": "تحليل المعطيات والمطلوب",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-099",
+      "level": "year4",
+      "subject": "math",
+      "domain": "الكسور",
+      "criterion": "المقارنة والعمليات البسيطة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-100",
+      "level": "year4",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "المساحة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-101",
+      "level": "year4",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "المحيط",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-102",
+      "level": "year4",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "الزمن",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-103",
+      "level": "year4",
+      "subject": "math",
+      "domain": "الهندسة",
+      "criterion": "إنشاء الأشكال",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-104",
+      "level": "year4",
+      "subject": "science",
+      "domain": "جسم الإنسان",
+      "criterion": "الوظائف الحيوية",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-105",
+      "level": "year4",
+      "subject": "science",
+      "domain": "الحيوان والنبات",
+      "criterion": "التكيف والتغذية",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-106",
+      "level": "year4",
+      "subject": "science",
+      "domain": "البيئة",
+      "criterion": "التوازن والعلاقات",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-107",
+      "level": "year4",
+      "subject": "science",
+      "domain": "المادة",
+      "criterion": "التحولات والخصائص",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-108",
+      "level": "year4",
+      "subject": "science",
+      "domain": "الطاقة",
+      "criterion": "مصادر واستعمالات بسيطة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-109",
+      "level": "year5",
+      "subject": "arabic",
+      "domain": "القراءة",
+      "criterion": "الفهم العميق والتحليل",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-110",
+      "level": "year5",
+      "subject": "arabic",
+      "domain": "التعبير",
+      "criterion": "تنظيم الأفكار والاستدلال",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-111",
+      "level": "year5",
+      "subject": "arabic",
+      "domain": "النحو",
+      "criterion": "الوظائف الإعرابية",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-112",
+      "level": "year5",
+      "subject": "arabic",
+      "domain": "الصرف",
+      "criterion": "الأفعال والمشتقات",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-113",
+      "level": "year5",
+      "subject": "arabic",
+      "domain": "الإملاء",
+      "criterion": "تطبيق القواعد",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-114",
+      "level": "year5",
+      "subject": "arabic",
+      "domain": "الإنتاج",
+      "criterion": "كتابة نص متكامل",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-115",
+      "level": "year5",
+      "subject": "math",
+      "domain": "الأعداد",
+      "criterion": "الأعداد الطبيعية والعشرية",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-116",
+      "level": "year5",
+      "subject": "math",
+      "domain": "العمليات",
+      "criterion": "الحساب الدقيق والاستراتيجيات",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-117",
+      "level": "year5",
+      "subject": "math",
+      "domain": "الكسور",
+      "criterion": "المقارنة والعمليات",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-118",
+      "level": "year5",
+      "subject": "math",
+      "domain": "التناسب",
+      "criterion": "النسبة والتناسب",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-119",
+      "level": "year5",
+      "subject": "math",
+      "domain": "المسائل",
+      "criterion": "حل وضعيات مركبة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-120",
+      "level": "year5",
+      "subject": "math",
+      "domain": "الهندسة",
+      "criterion": "المحيط والمساحة والمجسمات",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-121",
+      "level": "year5",
+      "subject": "science",
+      "domain": "الإنسان",
+      "criterion": "أجهزة الجسم ووظائفها",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-122",
+      "level": "year5",
+      "subject": "science",
+      "domain": "الصحة",
+      "criterion": "الوقاية والتغذية",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-123",
+      "level": "year5",
+      "subject": "science",
+      "domain": "البيئة",
+      "criterion": "الموارد والتوازن البيئي",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-124",
+      "level": "year5",
+      "subject": "science",
+      "domain": "المادة",
+      "criterion": "التحولات والخلائط",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-125",
+      "level": "year5",
+      "subject": "science",
+      "domain": "الطاقة",
+      "criterion": "أشكال الطاقة وتحولاتها",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-126",
+      "level": "year6",
+      "subject": "arabic",
+      "domain": "القراءة",
+      "criterion": "التحليل والنقد والاستنتاج",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-127",
+      "level": "year6",
+      "subject": "arabic",
+      "domain": "الفهم",
+      "criterion": "الربط بين الأفكار واستخلاص المعاني",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-128",
+      "level": "year6",
+      "subject": "arabic",
+      "domain": "القواعد",
+      "criterion": "توظيف القواعد في سياقات مختلفة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-129",
+      "level": "year6",
+      "subject": "arabic",
+      "domain": "الصرف",
+      "criterion": "التوظيف والتحويل",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-130",
+      "level": "year6",
+      "subject": "arabic",
+      "domain": "الإملاء",
+      "criterion": "الكتابة الصحيحة في نصوص كاملة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-131",
+      "level": "year6",
+      "subject": "arabic",
+      "domain": "الإنتاج",
+      "criterion": "إنتاج نص منظم ومتماسك",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-132",
+      "level": "year6",
+      "subject": "math",
+      "domain": "الأعداد",
+      "criterion": "الأعداد الطبيعية والعشرية والكسور",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-133",
+      "level": "year6",
+      "subject": "math",
+      "domain": "العمليات",
+      "criterion": "إتقان العمليات الأربع",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-134",
+      "level": "year6",
+      "subject": "math",
+      "domain": "التناسب",
+      "criterion": "النسبة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-135",
+      "level": "year6",
+      "subject": "math",
+      "domain": "التناسب",
+      "criterion": "التناسب",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-136",
+      "level": "year6",
+      "subject": "math",
+      "domain": "التناسب",
+      "criterion": "النسبة المئوية",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-137",
+      "level": "year6",
+      "subject": "math",
+      "domain": "المسائل",
+      "criterion": "حل وضعيات مركبة متعددة الخطوات",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-138",
+      "level": "year6",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "المساحة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-139",
+      "level": "year6",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "الحجم",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-140",
+      "level": "year6",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "السرعة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-141",
+      "level": "year6",
+      "subject": "math",
+      "domain": "القياس",
+      "criterion": "الزمن",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-142",
+      "level": "year6",
+      "subject": "math",
+      "domain": "الهندسة",
+      "criterion": "الإنشاء",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-143",
+      "level": "year6",
+      "subject": "math",
+      "domain": "الهندسة",
+      "criterion": "المحيط",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-144",
+      "level": "year6",
+      "subject": "math",
+      "domain": "الهندسة",
+      "criterion": "المساحة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-145",
+      "level": "year6",
+      "subject": "math",
+      "domain": "الهندسة",
+      "criterion": "المجسمات",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-146",
+      "level": "year6",
+      "subject": "science",
+      "domain": "جسم الإنسان",
+      "criterion": "الأجهزة والوظائف",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-147",
+      "level": "year6",
+      "subject": "science",
+      "domain": "الصحة",
+      "criterion": "الوقاية ونمط الحياة الصحي",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-148",
+      "level": "year6",
+      "subject": "science",
+      "domain": "البيئة",
+      "criterion": "حماية البيئة والتنمية المستدامة",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-149",
+      "level": "year6",
+      "subject": "science",
+      "domain": "المادة",
+      "criterion": "التغيرات والتحولات",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-150",
+      "level": "year6",
+      "subject": "science",
+      "domain": "الطاقة",
+      "criterion": "مصادر الطاقة وتحولاتها",
+      "indicators": [],
+      "questionTypes": []
+    },
+    {
+      "id": "std-151",
+      "level": "year6",
+      "subject": "science",
+      "domain": "التكنولوجيا",
+      "criterion": "استعمالات التكنولوجيا في الحياة",
+      "indicators": [],
+      "questionTypes": []
+    }
+  ]
+}

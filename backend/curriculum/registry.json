@@ -1,0 +1,489 @@
+{
+ "_meta": {
+  "note": "هذا الملف هو نقطة الدخول الوحيدة لمحرّك المناهج (CurriculumEngine). إضافة سنة دراسية أو مادة جديدة تتمّ بإضافة عنصر هنا وملفّات JSON مرافقة داخل curriculum/<gradeDir>/ — دون أي تعديل في كود الخادم.",
+  "schemaVersion": 4,
+  "changelog": {
+   "3": "إضافة \"levels\" (المرحلة التعليمية: ابتدائي/إعدادي/ثانوي) و\"tracks\" (الشعبة، تخصّ الثانوي فقط) كعنصرين صريحين. كل grade أصبح يحمل levelId إجباري وtrack اختياري.",
+   "4": "إضافة \"countries\" (الدفعة 3 — فجوة المنهج): فهرس الأسواق المتاحة. dir=null يعني المحتوى في هذا المجلد مباشرة (تونس، الافتراضي الحالي دون أي نقل ملفات). أي سوق جديد لاحقاً يُضاف كعنصر هنا بـ dir يشير لمجلد فرعي backend/curriculum/<dir>/ يحوي registry.json + content/ خاصّين به (محتوى بديل كامل، لا دمج) — دون تعديل كود الخادم. لا يوجد أي سوق آخر بعد؛ هذا فقط تجهيز البنية (نفس مبدأ tracks في schemaVersion 3: لا نختلق محتوى)."
+  }
+ },
+ "_countriesNote": "فهرس الأسواق. لا تحذف عنصر تونس (default:true) — هو الذي يجعل كل الاستدعاءات القديمة بلا معامل country تعمل كما كانت بالضبط.",
+ "countries": [
+  {
+   "code": "TN",
+   "title": "تونس",
+   "dir": null,
+   "default": true
+  }
+ ],
+ "country": "TN",
+ "curriculum": "المنهج التونسي",
+ "levels": [
+  {
+   "id": "primary",
+   "title": "التعليم الابتدائي",
+   "order": 1
+  },
+  {
+   "id": "college",
+   "title": "التعليم الإعدادي",
+   "order": 2
+  },
+  {
+   "id": "lycee",
+   "title": "التعليم الثانوي",
+   "order": 3
+  }
+ ],
+ "_tracksNote": "الشعبة (track) تخصّ التعليم الثانوي فقط (عادة من السنة 2 ثانوي). لا يوجد محتوى لأي شعبة بعد — الكتالوج هنا فقط تجهيز للبنية (انظر قاعدة المشروع في ROADMAP.md: لا نختلق محتوى، بس نجهّز الشكل).",
+ "tracks": [
+  {
+   "id": "sciences",
+   "title": "علوم تجريبية"
+  },
+  {
+   "id": "math",
+   "title": "رياضيات"
+  },
+  {
+   "id": "lettres",
+   "title": "آداب"
+  },
+  {
+   "id": "economie",
+   "title": "اقتصاد وتصرف"
+  },
+  {
+   "id": "tech",
+   "title": "علوم تقنية"
+  },
+  {
+   "id": "info",
+   "title": "علوم إعلامية"
+  }
+ ],
+ "grades": [
+  {
+   "id": "year1",
+   "title": "السنة الأولى ابتدائي",
+   "order": 1,
+   "levelId": "primary",
+   "track": null,
+   "dir": "year1",
+   "subjects": [
+    {
+     "id": "math",
+     "title": "رياضيات",
+     "aliases": [
+      "رياضيات",
+      "الرياضيات",
+      "math",
+      "maths"
+     ],
+     "bookFile": "mathbook-book.json",
+     "lessonsFile": "math-units.json",
+     "skillsMapFile": "skills-map-math.json",
+     "adapter": "math"
+    },
+    {
+     "id": "anisi",
+     "title": "قراءة",
+     "aliases": [
+      "قراءة",
+      "أنيسي",
+      "anisi",
+      "reading"
+     ],
+     "bookFile": "anisi-book.json",
+     "lessonsFile": "anisi-lessons-full.json",
+     "skillsMapFile": "skills-map-anisi.json",
+     "adapter": "anisi"
+    },
+    {
+     "id": "science",
+     "title": "ايقاظ علمي",
+     "aliases": [
+      "ايقاظ علمي",
+      "إيقاظ علمي",
+      "علوم",
+      "science"
+     ],
+     "bookFile": "science-book.json",
+     "lessonsFile": null,
+     "skillsMapFile": "skills-map-science.json",
+     "adapter": "science"
+    },
+    {
+     "id": "production",
+     "title": "إنتاج كتابي",
+     "aliases": [
+      "إنتاج كتابي",
+      "إنتاج",
+      "production",
+      "writing"
+     ],
+     "bookFile": "production-book.json",
+     "lessonsFile": "production-units.json",
+     "skillsMapFile": "skills-map-production.json",
+     "adapter": "production"
+    },
+    {
+     "id": "islamic",
+     "title": "التربية الإسلامية",
+     "aliases": [
+      "تربية اسلامية",
+      "إسلامية",
+      "تربية إسلامية"
+     ],
+     "bookFile": "islamic-book.json",
+     "adapter": "islamic"
+    },
+    {
+     "id": "tech",
+     "title": "التربية التقنية",
+     "aliases": [
+      "تربية تقنية",
+      "تقنية"
+     ],
+     "bookFile": "tech-book.json",
+     "adapter": "tech"
+    }
+   ]
+  },
+  {
+   "id": "year2",
+   "title": "السنة الثانية ابتدائي",
+   "order": 2,
+   "levelId": "primary",
+   "track": null,
+   "dir": "year2",
+   "subjects": [
+    {
+     "id": "math",
+     "title": "رياضيات",
+     "aliases": [
+      "رياضيات",
+      "الرياضيات",
+      "math",
+      "maths"
+     ],
+     "bookFile": "mathbook-book.json",
+     "lessonsFile": "math-units.json",
+     "skillsMapFile": "skills-map-math.json",
+     "adapter": "math"
+    },
+    {
+     "id": "anisi",
+     "title": "قراءة",
+     "aliases": [
+      "قراءة",
+      "أنيس",
+      "anisi",
+      "reading",
+      "arabic"
+     ],
+     "bookFile": "reading-book.json",
+     "lessonsFile": "reading-units.json",
+     "skillsMapFile": "skills-map-anisi.json",
+     "adapter": "anisi"
+    },
+    {
+     "id": "science",
+     "title": "ايقاظ علمي",
+     "aliases": [
+      "ايقاظ علمي",
+      "إيقاظ علمي",
+      "علوم",
+      "science"
+     ],
+     "bookFile": "science-book.json",
+     "lessonsFile": null,
+     "skillsMapFile": "skills-map-science.json",
+     "adapter": "science"
+    },
+    {
+     "id": "production",
+     "title": "إنتاج كتابي",
+     "aliases": [
+      "إنتاج كتابي",
+      "إنتاج",
+      "production",
+      "writing"
+     ],
+     "bookFile": "production-book.json",
+     "lessonsFile": "production-units.json",
+     "skillsMapFile": "skills-map-production.json",
+     "adapter": "production"
+    }
+   ]
+  },
+  {
+   "id": "year3",
+   "title": "السنة الثالثة ابتدائي",
+   "order": 3,
+   "levelId": "primary",
+   "track": null,
+   "dir": "year3",
+   "subjects": [
+    {
+     "id": "math",
+     "title": "رياضيات",
+     "aliases": [
+      "رياضيات",
+      "الرياضيات",
+      "math",
+      "maths"
+     ],
+     "bookFile": "mathbook-book.json",
+     "lessonsFile": "math-units.json",
+     "skillsMapFile": "skills-map-math.json",
+     "adapter": "math"
+    },
+    {
+     "id": "anisi",
+     "title": "قراءة",
+     "aliases": [
+      "قراءة",
+      "أنيس",
+      "anisi",
+      "reading",
+      "arabic"
+     ],
+     "bookFile": "reading-book.json",
+     "lessonsFile": "reading-units.json",
+     "skillsMapFile": "skills-map-anisi.json",
+     "adapter": "anisi"
+    },
+    {
+     "id": "science",
+     "title": "ايقاظ علمي",
+     "aliases": [
+      "ايقاظ علمي",
+      "إيقاظ علمي",
+      "علوم",
+      "science"
+     ],
+     "bookFile": "science-book.json",
+     "lessonsFile": null,
+     "skillsMapFile": "skills-map-science.json",
+     "adapter": "science"
+    },
+    {
+     "id": "production",
+     "title": "إنتاج كتابي",
+     "aliases": [
+      "إنتاج كتابي",
+      "إنتاج",
+      "production",
+      "writing"
+     ],
+     "bookFile": "production-book.json",
+     "lessonsFile": "production-units.json",
+     "skillsMapFile": "skills-map-production.json",
+     "adapter": "production"
+    }
+   ]
+  },
+  {
+   "id": "year4",
+   "title": "السنة الرابعة ابتدائي",
+   "order": 4,
+   "levelId": "primary",
+   "track": null,
+   "dir": "year4",
+   "subjects": [
+    {
+     "id": "math",
+     "title": "رياضيات",
+     "aliases": [
+      "رياضيات",
+      "الرياضيات",
+      "math",
+      "maths"
+     ],
+     "bookFile": "mathbook-book.json",
+     "lessonsFile": "math-units.json",
+     "skillsMapFile": "skills-map-math.json",
+     "adapter": "math"
+    },
+    {
+     "id": "anisi",
+     "title": "قراءة",
+     "aliases": [
+      "قراءة",
+      "أنيس",
+      "anisi",
+      "reading",
+      "arabic"
+     ],
+     "bookFile": "reading-book.json",
+     "lessonsFile": "reading-units.json",
+     "skillsMapFile": "skills-map-anisi.json",
+     "adapter": "anisi"
+    },
+    {
+     "id": "science",
+     "title": "ايقاظ علمي",
+     "aliases": [
+      "ايقاظ علمي",
+      "إيقاظ علمي",
+      "علوم",
+      "science"
+     ],
+     "bookFile": "science-book.json",
+     "lessonsFile": null,
+     "skillsMapFile": "skills-map-science.json",
+     "adapter": "science"
+    },
+    {
+     "id": "production",
+     "title": "إنتاج كتابي",
+     "aliases": [
+      "إنتاج كتابي",
+      "إنتاج",
+      "production",
+      "writing"
+     ],
+     "bookFile": "production-book.json",
+     "lessonsFile": "production-units.json",
+     "skillsMapFile": "skills-map-production.json",
+     "adapter": "production"
+    }
+   ]
+  },
+  {
+   "id": "year5",
+   "title": "السنة الخامسة ابتدائي",
+   "order": 5,
+   "levelId": "primary",
+   "track": null,
+   "dir": "year5",
+   "subjects": [
+    {
+     "id": "math",
+     "title": "رياضيات",
+     "aliases": [
+      "رياضيات",
+      "الرياضيات",
+      "math",
+      "maths"
+     ],
+     "bookFile": "mathbook-book.json",
+     "lessonsFile": "math-units.json",
+     "skillsMapFile": "skills-map-math.json",
+     "adapter": "math"
+    },
+    {
+     "id": "anisi",
+     "title": "قراءة",
+     "aliases": [
+      "قراءة",
+      "أنيس",
+      "anisi",
+      "reading",
+      "arabic"
+     ],
+     "bookFile": "reading-book.json",
+     "lessonsFile": "reading-units.json",
+     "skillsMapFile": "skills-map-anisi.json",
+     "adapter": "anisi"
+    },
+    {
+     "id": "science",
+     "title": "ايقاظ علمي",
+     "aliases": [
+      "ايقاظ علمي",
+      "إيقاظ علمي",
+      "علوم",
+      "science"
+     ],
+     "bookFile": "science-book.json",
+     "lessonsFile": null,
+     "skillsMapFile": "skills-map-science.json",
+     "adapter": "science"
+    },
+    {
+     "id": "production",
+     "title": "إنتاج كتابي",
+     "aliases": [
+      "إنتاج كتابي",
+      "إنتاج",
+      "production",
+      "writing"
+     ],
+     "bookFile": "production-book.json",
+     "lessonsFile": "production-units.json",
+     "skillsMapFile": "skills-map-production.json",
+     "adapter": "production"
+    }
+   ]
+  },
+  {
+   "id": "year6",
+   "title": "السنة السادسة ابتدائي",
+   "order": 6,
+   "levelId": "primary",
+   "track": null,
+   "dir": "year6",
+   "subjects": [
+    {
+     "id": "math",
+     "title": "رياضيات",
+     "aliases": [
+      "رياضيات",
+      "الرياضيات",
+      "math",
+      "maths"
+     ],
+     "adapter": "generic",
+     "bookFile": "math-book.json",
+     "lessonsFile": "math-lessons.json",
+     "skillsMapFile": "skills-map-math.json"
+    },
+    {
+     "id": "anisi",
+     "title": "قراءة",
+     "aliases": [
+      "قراءة",
+      "أنيس",
+      "anisi",
+      "reading",
+      "arabic"
+     ],
+     "bookFile": "reading-book.json",
+     "lessonsFile": "reading-units.json",
+     "skillsMapFile": "skills-map-anisi.json",
+     "adapter": "anisi"
+    },
+    {
+     "id": "science",
+     "title": "ايقاظ علمي",
+     "aliases": [
+      "ايقاظ علمي",
+      "إيقاظ علمي",
+      "علوم",
+      "science"
+     ],
+     "bookFile": "science-book.json",
+     "lessonsFile": null,
+     "skillsMapFile": "skills-map-science.json",
+     "adapter": "science"
+    },
+    {
+     "id": "production",
+     "title": "إنتاج كتابي",
+     "aliases": [
+      "إنتاج كتابي",
+      "إنتاج",
+      "production",
+      "writing"
+     ],
+     "bookFile": "production-book.json",
+     "lessonsFile": "production-units.json",
+     "skillsMapFile": "skills-map-production.json",
+     "adapter": "production"
+    }
+   ]
+  }
+ ]
+}

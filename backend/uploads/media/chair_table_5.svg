@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" width="400" height="280">
+  <rect width="400" height="280" rx="16" fill="#dbeafe"/>
+  <!-- Table -->
+  <rect x="140" y="120" width="120" height="12" rx="3" fill="#92400e" stroke="#78350f" stroke-width="3"/>
+  <rect x="150" y="132" width="8" height="40" rx="2" fill="#78350f"/>
+  <rect x="242" y="132" width="8" height="40" rx="2" fill="#78350f"/>
+  <!-- Chair outside (to the right) -->
+  <rect x="270" y="115" width="70" height="50" rx="6" fill="#f59e0b" stroke="#d97706" stroke-width="3"/>
+  <rect x="270" y="105" width="70" height="18" rx="4" fill="#fbbf24" stroke="#d97706" stroke-width="2"/>
+  <text x="200" y="240" text-anchor="middle" font-size="14" font-weight="700" fill="#1e3a8a" font-family="Arial">الكرسي خارج الطاولة</text>
+</svg>

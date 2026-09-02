@@ -1,0 +1,400 @@
+/* ============================================================
+   Dark mode overrides + A11y + Mobile-first improvements
+   for existing legacy styles (pages use shared class names).
+   Applies only when [data-theme='dark'] is set on <html>.
+   ============================================================ */
+
+/* ---------- Base surfaces ---------- */
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+a { color: inherit; }
+
+[data-theme='dark'] body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+[data-theme='dark'] .bg-subtle,
+[data-theme='dark'] .dash-sidebar,
+[data-theme='dark'] .dash-content,
+[data-theme='dark'] .panel,
+[data-theme='dark'] .card,
+[data-theme='dark'] .service-card,
+[data-theme='dark'] .faq-card,
+[data-theme='dark'] .faq-question,
+[data-theme='dark'] .auth-card,
+[data-theme='dark'] .demo-accounts,
+[data-theme='dark'] .lesson-books,
+[data-theme='dark'] .lesson-item,
+[data-theme='dark'] .card-item,
+[data-theme='dark'] .chat-bubble,
+[data-theme='dark'] .conv-list,
+[data-theme='dark'] .msg-compose,
+[data-theme='dark'] .mini-stat,
+[data-theme='dark'] .question-editor,
+[data-theme='dark'] .memo-view,
+[data-theme='dark'] .exam-preview,
+[data-theme='dark'] .student-profile-card,
+[data-theme='dark'] .slide-card,
+[data-theme='dark'] .schedule-cell,
+[data-theme='dark'] .quiz-question,
+[data-theme='dark'] .quiz-option,
+[data-theme='dark'] .story-card,
+[data-theme='dark'] .modal,
+[data-theme='dark'] .book-link,
+[data-theme='dark'] .stage-item,
+[data-theme='dark'] .card-form,
+[data-theme='dark'] .dropzone,
+[data-theme='dark'] .subject-tab {
+  background: var(--surface);
+}
+
+[data-theme='dark'] .table-wrap,
+[data-theme='dark'] .schedule-grid,
+[data-theme='dark'] .conv-list,
+[data-theme='dark'] .msg-compose {
+  border-color: var(--border);
+}
+
+[data-theme='dark'] th,
+[data-theme='dark'] .data-table th {
+  background: var(--bg-subtle);
+  color: var(--primary);
+}
+
+[data-theme='dark'] tr:hover td,
+[data-theme='dark'] .data-table tr:hover td {
+  background: var(--surface-hover);
+}
+
+[data-theme='dark'] .card p,
+[data-theme='dark'] .faq-answer p,
+[data-theme='dark'] .faq-question {
+  color: var(--text-secondary);
+}
+
+[data-theme='dark'] .dash-sidebar a {
+  color: var(--text-secondary);
+}
+[data-theme='dark'] .dash-sidebar a:hover {
+  background: var(--bg-subtle);
+  color: var(--primary);
+}
+[data-theme='dark'] .dash-sidebar a.active {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+[data-theme='dark'] .dropdown-menu li a {
+  color: var(--text);
+}
+[data-theme='dark'] .dropdown-menu li a:hover {
+  background: var(--bg-subtle);
+}
+
+[data-theme='dark'] .form-group input,
+[data-theme='dark'] .form-group select,
+[data-theme='dark'] .form-group textarea,
+[data-theme='dark'] .search-input,
+[data-theme='dark'] .chat-input-row input,
+[data-theme='dark'] .msg-compose textarea,
+[data-theme='dark'] .option-field input,
+[data-theme='dark'] .viewer-page-input,
+[data-theme='dark'] .game-input,
+[data-theme='dark'] .grade-input {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+[data-theme='dark'] .form-group input:focus,
+[data-theme='dark'] .form-group select:focus,
+[data-theme='dark'] .form-group textarea:focus {
+  border-color: var(--primary);
+  background: var(--surface);
+}
+
+[data-theme='dark'] .empty-state,
+[data-theme='dark'] .empty {
+  background: var(--bg-subtle);
+  border-color: var(--border);
+  color: var(--muted);
+}
+
+[data-theme='dark'] .flashcard {
+  background: var(--bg-subtle);
+}
+
+[data-theme='dark'] .slide-card {
+  background: linear-gradient(135deg, #1e3a5f, #2f4a7d);
+}
+
+[data-theme='dark'] .ai-key-card {
+  background: linear-gradient(135deg, #0c2e52, #1d4ed8);
+}
+
+[data-theme='dark'] .game-toast {
+  background: var(--gradient-accent);
+}
+
+[data-theme='dark'] .letter-tile,
+[data-theme='dark'] .memory-card.up {
+  background: var(--surface);
+  color: var(--text);
+}
+
+[data-theme='dark'] .memory-card {
+  background: var(--gradient-accent);
+}
+
+[data-theme='dark'] .plan-html {
+  color: var(--text);
+}
+[data-theme='dark'] .plan-html th,
+[data-theme='dark'] .plan-html td {
+  border-color: var(--border);
+}
+
+[data-theme='dark'] .chat-msg.assistant .chat-bubble {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+[data-theme='dark'] .chat-msg.user .chat-bubble {
+  background: var(--primary);
+  color: #fff;
+}
+
+[data-theme='dark'] .conv-item.active {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+
+[data-theme='dark'] .xp-badge,
+[data-theme='dark'] .profile-xp .xp-badge {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+[data-theme='dark'] .stat-chip {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--primary);
+}
+
+[data-theme='dark'] .teacher-tabs a {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-secondary);
+}
+
+[data-theme='dark'] .teacher-tabs a:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+[data-theme='dark'] .card-item.done {
+  background: var(--bg-subtle);
+}
+
+[data-theme='dark'] .muted {
+  color: var(--muted);
+}
+
+/* Form success/error dark variants */
+[data-theme='dark'] .form-success {
+  background: var(--green-bg);
+  color: var(--green);
+  border-color: var(--green-border);
+}
+[data-theme='dark'] .form-error {
+  background: var(--red-bg);
+  color: var(--red);
+  border-color: var(--red-border);
+}
+
+/* Badges dark variants */
+[data-theme='dark'] .badge.good {
+  background: var(--green-bg);
+  color: var(--green);
+  border-color: var(--green-border);
+}
+[data-theme='dark'] .badge.warn {
+  background: var(--yellow-bg);
+  color: var(--accent-dark);
+  border-color: var(--yellow-border);
+}
+[data-theme='dark'] .badge.bad {
+  background: var(--red-bg);
+  color: var(--red);
+  border-color: var(--red-border);
+}
+
+/* ---------- A11y: skip link ---------- */
+.skip-link {
+  position: absolute;
+  inset-inline-start: -9999px;
+  top: 0;
+  z-index: 2000;
+  background: var(--primary);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 10px 10px;
+  font-weight: 800;
+}
+
+.skip-link:focus {
+  inset-inline-start: 1rem;
+}
+
+/* Screen-reader-only helper */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- A11y: mobile touch targets ---------- */
+@media (max-width: 768px) {
+  .btn,
+  .ui-btn,
+  .nav-toggle,
+  .icon-btn {
+    min-height: 44px;
+  }
+
+  .service-card,
+  .book-link,
+  .dash-sidebar a,
+  .dropdown-menu li a {
+    min-height: 44px;
+  }
+}
+
+/* ---------- Mobile-first fixes ---------- */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.9rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.7rem;
+  }
+
+  .service-card {
+    padding: 1rem 0.7rem;
+  }
+
+  .service-card h4 {
+    font-size: 0.82rem;
+  }
+
+  .hero {
+    padding: 4rem 1rem 3rem;
+  }
+
+  .auth-card {
+    padding: 1.6rem;
+  }
+
+  .header-top,
+  .navbar {
+    padding: 0.5rem 0.9rem;
+  }
+
+  .brand img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .brand-text h6 {
+    font-size: 0.8rem;
+  }
+
+  .dash-content {
+    padding: 1.1rem;
+  }
+
+  .panel {
+    padding: 1rem;
+  }
+
+  .ui-card-head,
+  .panel-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-title {
+    font-size: 1.35rem;
+  }
+
+  /* Tables become horizontally scrollable cards */
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  .stats-grid,
+  .twin-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-actions .btn {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 375px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .header-actions .btn {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.78rem;
+  }
+
+  .stats-grid,
+  .twin-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Ensure horizontal overflow never breaks layout */
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+
+html {
+  overflow-x: hidden;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

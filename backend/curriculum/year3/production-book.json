@@ -1,0 +1,57 @@
+{
+  "title": "إنتاج كتابي",
+  "subtitle": "السنة الثالثة ابتدائي",
+  "imageBase": null,
+  "imageExt": ".jpg",
+  "totalPages": 0,
+  "units": [
+    {
+      "id": "p1",
+      "title": "الوصف الخارجي والداخلي",
+      "icon": "🔍",
+      "color": "#8E7CE0",
+      "startPage": 1,
+      "endPage": 10
+    },
+    {
+      "id": "p2",
+      "title": "السرد بأحداث مرتبة",
+      "icon": "📖",
+      "color": "#4A9FD8",
+      "startPage": 11,
+      "endPage": 20
+    },
+    {
+      "id": "p3",
+      "title": "الرسالة",
+      "icon": "💌",
+      "color": "#F191C1",
+      "startPage": 21,
+      "endPage": 30
+    },
+    {
+      "id": "p4",
+      "title": "القصة المصوّرة",
+      "icon": "🖼️",
+      "color": "#F39C12",
+      "startPage": 31,
+      "endPage": 40
+    },
+    {
+      "id": "p5",
+      "title": "الإعلان",
+      "icon": "📢",
+      "color": "#E74C3C",
+      "startPage": 41,
+      "endPage": 50
+    },
+    {
+      "id": "p6",
+      "title": "الملخّص",
+      "icon": "📝",
+      "color": "#2ECC71",
+      "startPage": 51,
+      "endPage": 60
+    }
+  ]
+}

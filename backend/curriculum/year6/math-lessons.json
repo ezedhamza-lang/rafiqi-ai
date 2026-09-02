@@ -1,0 +1,827 @@
+{
+  "_meta": {
+    "subject": "math",
+    "grade": "year6",
+    "status": "الفترات 1، 2، 3، 4 و5 جاهزة (دروس 1-61) — البرنامج مكتمل",
+    "generatedFrom": "خارطة البرنامج (ص.174 من كتاب الرياضيات س6) التي أكّدها المستخدم بصريًا، مطابقة مع أرقام الصفحات التي زوّدنا بها المستخدم مباشرة (الفترة 1: ص.4 إلى ص.34)",
+    "note": "الفترة 1: ص.4-34. الفترة 2: ص.35-66. الفترة 3: ص.67-106. الفترة 4: ص.107-132. الفترة 5: ص.133-173."
+  },
+  "y6m01": {
+    "id": "y6m01",
+    "unitId": "p1",
+    "num": 1,
+    "title": "أُوَظّفُ الجمعَ والطّرحَ في مجموعةِ الأعدادِ العشريّةِ",
+    "domain": "الأعداد والعمليات",
+    "period": 1,
+    "isPrerequisiteReview": true,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "4-34"
+    }
+  },
+  "y6m02": {
+    "id": "y6m02",
+    "unitId": "p1",
+    "num": 2,
+    "title": "أتصرّفُ في وحداتِ قيسِ المساحةِ",
+    "domain": "القياس",
+    "period": 1,
+    "isPrerequisiteReview": true,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "4-34"
+    }
+  },
+  "y6m03": {
+    "id": "y6m03",
+    "unitId": "p1",
+    "num": 3,
+    "title": "أُوَظّفُ الضّربَ والقسمةَ في مجموعةِ الأعدادِ العشريّةِ",
+    "domain": "الأعداد والعمليات",
+    "period": 1,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "4-34"
+    }
+  },
+  "y6m04": {
+    "id": "y6m04",
+    "unitId": "p1",
+    "num": 4,
+    "title": "أُوَظّفُ التّعامدَ والتّوازيَ ومنصّفَ الزّاويةِ في البناءاتِ الهندسيّةِ",
+    "domain": "الهندسة",
+    "period": 1,
+    "isPrerequisiteReview": true,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "4-34"
+    }
+  },
+  "y6m05": {
+    "id": "y6m05",
+    "unitId": "p1",
+    "num": 5,
+    "title": "أُوَظّفُ الجمعَ والطّرحَ والضّربَ على الأعدادِ الّتي تقيسُ الزّمنَ",
+    "domain": "القياس",
+    "period": 1,
+    "isPrerequisiteReview": true,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "4-34"
+    }
+  },
+  "y6m06": {
+    "id": "y6m06",
+    "unitId": "p1",
+    "num": 6,
+    "title": "أتدرّبُ على حلّ المسائلِ",
+    "domain": "حل مسائل",
+    "period": 1,
+    "isPrerequisiteReview": true,
+    "isPracticeUnit": true,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "4-34"
+    }
+  },
+  "y6m07": {
+    "id": "y6m07",
+    "unitId": "p1",
+    "num": 7,
+    "title": "أبني زوايا أقيستُها بالدّرجةِ: 90 – 45 – 30 – 60 – 120 – 15",
+    "domain": "الهندسة",
+    "period": 1,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "4-34"
+    }
+  },
+  "y6m08": {
+    "id": "y6m08",
+    "unitId": "p1",
+    "num": 8,
+    "title": "أبني مثلّثًا استنادًا إلى أقيسةِ الأضلاعِ والزّوايا",
+    "domain": "الهندسة",
+    "period": 1,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "4-34"
+    }
+  },
+  "y6m09": {
+    "id": "y6m09",
+    "unitId": "p1",
+    "num": 9,
+    "title": "أتعرّفُ شبهَ المنحرفِ وأرسمُهُ",
+    "domain": "الهندسة",
+    "period": 1,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "4-34"
+    }
+  },
+  "y6m10": {
+    "id": "y6m10",
+    "unitId": "p1",
+    "num": 10,
+    "title": "أتدرّبُ على حلّ المسائلِ",
+    "domain": "حل مسائل",
+    "period": 1,
+    "isPrerequisiteReview": false,
+    "isPracticeUnit": true,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "4-34"
+    }
+  },
+  "y6m11": {
+    "id": "y6m11",
+    "unitId": "p1",
+    "num": 11,
+    "title": "أُوَظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "تقييم",
+    "period": 1,
+    "isPrerequisiteReview": false,
+    "isAssessmentUnit": true,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "4-34"
+    }
+  },
+  "y6m12": {
+    "id": "y6m12",
+    "unitId": "p1",
+    "num": 12,
+    "title": "أتسلّى",
+    "domain": "أنشطة ترفيهية",
+    "period": 1,
+    "isPrerequisiteReview": false,
+    "isFunUnit": true,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "4-34"
+    }
+  },
+  "y6m13": {
+    "id": "y6m13",
+    "unitId": "p2",
+    "num": 13,
+    "title": "أتعرّفُ مضاعفاتٍ مشتركةً لعددين صحيحين طبيعيّين فأكثرَ",
+    "domain": "الأعداد والعمليات",
+    "period": 2,
+    "isPrerequisiteReview": true,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "35-66"
+    }
+  },
+  "y6m14": {
+    "id": "y6m14",
+    "unitId": "p2",
+    "num": 14,
+    "title": "أُوَظّفُ التّناسبَ في السّلّمِ",
+    "domain": "التناسب",
+    "period": 2,
+    "isPrerequisiteReview": true,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "35-66"
+    }
+  },
+  "y6m15": {
+    "id": "y6m15",
+    "unitId": "p2",
+    "num": 15,
+    "title": "أتعرّفُ متوازياتِ الأضلاعِ وخاصّياتِها",
+    "domain": "الهندسة",
+    "period": 2,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "35-66"
+    }
+  },
+  "y6m16": {
+    "id": "y6m16",
+    "unitId": "p2",
+    "num": 16,
+    "title": "أتدرّبُ على حلّ المسائلِ",
+    "domain": "حل مسائل",
+    "period": 2,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "35-66"
+    },
+    "isPracticeUnit": true
+  },
+  "y6m17": {
+    "id": "y6m17",
+    "unitId": "p2",
+    "num": 17,
+    "title": "أرسمُ متوازياتِ الأضلاعِ وأبنيها",
+    "domain": "الهندسة",
+    "period": 2,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "35-66"
+    }
+  },
+  "y6m18": {
+    "id": "y6m18",
+    "unitId": "p2",
+    "num": 18,
+    "title": "أُكَوّنُ الأعدادَ الكسريّةَ وأكتبُها وأقرؤُها",
+    "domain": "الأعداد والعمليات",
+    "period": 2,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "35-66"
+    }
+  },
+  "y6m19": {
+    "id": "y6m19",
+    "unitId": "p2",
+    "num": 19,
+    "title": "أُفكّكُ الأعدادَ الكسريّةَ وأُرَكّبُها",
+    "domain": "الأعداد والعمليات",
+    "period": 2,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "35-66"
+    }
+  },
+  "y6m20": {
+    "id": "y6m20",
+    "unitId": "p2",
+    "num": 20,
+    "title": "أحسبُ قيسَ محيطِ دائرةٍ",
+    "domain": "القياس",
+    "period": 2,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "35-66"
+    }
+  },
+  "y6m21": {
+    "id": "y6m21",
+    "unitId": "p2",
+    "num": 21,
+    "title": "أتدرّبُ على حلّ المسائلِ",
+    "domain": "حل مسائل",
+    "period": 2,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "35-66"
+    },
+    "isPracticeUnit": true
+  },
+  "y6m22": {
+    "id": "y6m22",
+    "unitId": "p2",
+    "num": 22,
+    "title": "أُوَظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "تقييم",
+    "period": 2,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "35-66"
+    },
+    "isAssessmentUnit": true
+  },
+  "y6m23": {
+    "id": "y6m23",
+    "unitId": "p2",
+    "num": 23,
+    "title": "أتسلّى",
+    "domain": "أنشطة ترفيهية",
+    "period": 2,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "35-66"
+    },
+    "isFunUnit": true
+  },
+  "y6m24": {
+    "id": "y6m24",
+    "unitId": "p3",
+    "num": 24,
+    "title": "أحسبُ محيطَ شكلٍ مركّبٍ من الأشكالِ المدروسةِ",
+    "domain": "الهندسة",
+    "period": 3,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "67-106"
+    }
+  },
+  "y6m25": {
+    "id": "y6m25",
+    "unitId": "p3",
+    "num": 25,
+    "title": "أتعرّفُ قابليّةَ قسمةِ عددٍ صحيحٍ طبيعيٍّ على 2 و5",
+    "domain": "الأعداد والعمليات",
+    "period": 3,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "67-106"
+    }
+  },
+  "y6m26": {
+    "id": "y6m26",
+    "unitId": "p3",
+    "num": 26,
+    "title": "أتعرّفُ قابليّةَ قسمةِ عددٍ صحيحٍ طبيعيٍّ على 3 و9",
+    "domain": "الأعداد والعمليات",
+    "period": 3,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "67-106"
+    }
+  },
+  "y6m27": {
+    "id": "y6m27",
+    "unitId": "p3",
+    "num": 27,
+    "title": "أتدرّبُ على حلّ المسائلِ",
+    "domain": "حل مسائل",
+    "period": 3,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "67-106"
+    },
+    "isPracticeUnit": true
+  },
+  "y6m28": {
+    "id": "y6m28",
+    "unitId": "p3",
+    "num": 28,
+    "title": "أكتبُ عددًا كسريًّا بطرقٍ مختلفةٍ",
+    "domain": "الأعداد والعمليات",
+    "period": 3,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "67-106"
+    }
+  },
+  "y6m29": {
+    "id": "y6m29",
+    "unitId": "p3",
+    "num": 29,
+    "title": "أقارنُ الأعدادَ الكسريّةَ وأرتّبُها",
+    "domain": "الأعداد والعمليات",
+    "period": 3,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "67-106"
+    }
+  },
+  "y6m30": {
+    "id": "y6m30",
+    "unitId": "p3",
+    "num": 30,
+    "title": "أتدرّبُ على حلّ المسائلِ",
+    "domain": "حل مسائل",
+    "period": 3,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "67-106"
+    },
+    "isPracticeUnit": true
+  },
+  "y6m31": {
+    "id": "y6m31",
+    "unitId": "p3",
+    "num": 31,
+    "title": "أتعرّفُ الأعدادَ الكسريّةَ العشريّةَ وأكتبُها بطرقٍ مختلفةٍ",
+    "domain": "الأعداد والعمليات",
+    "period": 3,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "67-106"
+    }
+  },
+  "y6m32": {
+    "id": "y6m32",
+    "unitId": "p3",
+    "num": 32,
+    "title": "أُوَظّفُ التّناسبَ في تعرّفِ النّسبةِ المئويّةِ",
+    "domain": "التناسب",
+    "period": 3,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "67-106"
+    }
+  },
+  "y6m33": {
+    "id": "y6m33",
+    "unitId": "p3",
+    "num": 33,
+    "title": "أحسبُ قيسَ مساحةِ المثلّثِ",
+    "domain": "القياس",
+    "period": 3,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "67-106"
+    }
+  },
+  "y6m34": {
+    "id": "y6m34",
+    "unitId": "p3",
+    "num": 34,
+    "title": "أتدرّبُ على حلّ المسائلِ",
+    "domain": "حل مسائل",
+    "period": 3,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "67-106"
+    },
+    "isPracticeUnit": true
+  },
+  "y6m35": {
+    "id": "y6m35",
+    "unitId": "p3",
+    "num": 35,
+    "title": "أُوَظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "تقييم",
+    "period": 3,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "67-106"
+    },
+    "isAssessmentUnit": true
+  },
+  "y6m36": {
+    "id": "y6m36",
+    "unitId": "p3",
+    "num": 36,
+    "title": "أتسلّى",
+    "domain": "أنشطة ترفيهية",
+    "period": 3,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "67-106"
+    },
+    "isFunUnit": true
+  },
+  "y6m37": {
+    "id": "y6m37",
+    "unitId": "p4",
+    "num": 37,
+    "title": "أُوَظّفُ التّناسبَ في حسابِ النّسبةِ المئويّةِ",
+    "domain": "التناسب",
+    "period": 4,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "107-132"
+    }
+  },
+  "y6m38": {
+    "id": "y6m38",
+    "unitId": "p4",
+    "num": 38,
+    "title": "أحسبُ مساحةَ متوازي أضلاعٍ (متوازي الأضلاعِ، المعيّن، المستطيل، المربّع)",
+    "domain": "القياس",
+    "period": 4,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "107-132"
+    }
+  },
+  "y6m39": {
+    "id": "y6m39",
+    "unitId": "p4",
+    "num": 39,
+    "title": "أتدرّبُ على حلّ المسائلِ",
+    "domain": "حل مسائل",
+    "period": 4,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "107-132"
+    },
+    "isPracticeUnit": true
+  },
+  "y6m40": {
+    "id": "y6m40",
+    "unitId": "p4",
+    "num": 40,
+    "title": "أتصرّفُ في مجموعةِ الأعدادِ الكسريّةِ",
+    "domain": "الأعداد والعمليات",
+    "period": 4,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "107-132"
+    }
+  },
+  "y6m41": {
+    "id": "y6m41",
+    "unitId": "p4",
+    "num": 41,
+    "title": "أحسبُ قيسَ مساحةِ شبهِ المنحرفِ",
+    "domain": "القياس",
+    "period": 4,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "107-132"
+    }
+  },
+  "y6m42": {
+    "id": "y6m42",
+    "unitId": "p4",
+    "num": 42,
+    "title": "أجمعُ الأعدادَ الكسريّةَ وأطرحُها",
+    "domain": "الأعداد والعمليات",
+    "period": 4,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "107-132"
+    }
+  },
+  "y6m43": {
+    "id": "y6m43",
+    "unitId": "p4",
+    "num": 43,
+    "title": "أتدرّبُ على حلّ المسائلِ",
+    "domain": "حل مسائل",
+    "period": 4,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "107-132"
+    },
+    "isPracticeUnit": true
+  },
+  "y6m44": {
+    "id": "y6m44",
+    "unitId": "p4",
+    "num": 44,
+    "title": "أُوَظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "تقييم",
+    "period": 4,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "107-132"
+    },
+    "isAssessmentUnit": true
+  },
+  "y6m45": {
+    "id": "y6m45",
+    "unitId": "p4",
+    "num": 45,
+    "title": "أتسلّى",
+    "domain": "أنشطة ترفيهية",
+    "period": 4,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "107-132"
+    },
+    "isFunUnit": true
+  },
+  "y6m46": {
+    "id": "y6m46",
+    "unitId": "p5",
+    "num": 46,
+    "title": "أحسبُ قيسَ مساحةِ القرصِ الدّائريِّ",
+    "domain": "القياس",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    }
+  },
+  "y6m47": {
+    "id": "y6m47",
+    "unitId": "p5",
+    "num": 47,
+    "title": "أُنجزُ عمليّةَ ضربِ عددٍ كسريٍّ في عددٍ صحيحٍ",
+    "domain": "الأعداد والعمليات",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    }
+  },
+  "y6m48": {
+    "id": "y6m48",
+    "unitId": "p5",
+    "num": 48,
+    "title": "أتدرّبُ على حلّ المسائلِ",
+    "domain": "حل مسائل",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    },
+    "isPracticeUnit": true
+  },
+  "y6m49": {
+    "id": "y6m49",
+    "unitId": "p5",
+    "num": 49,
+    "title": "أُوَظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "تقييم",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    },
+    "isAssessmentUnit": true
+  },
+  "y6m50": {
+    "id": "y6m50",
+    "unitId": "p5",
+    "num": 50,
+    "title": "أحسبُ قيسَ مساحةِ شكلٍ مركّبٍ من الأشكالِ المدروسةِ",
+    "domain": "القياس",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    }
+  },
+  "y6m51": {
+    "id": "y6m51",
+    "unitId": "p5",
+    "num": 51,
+    "title": "أُوَظّفُ التّناسبَ في حسابِ معدّلِ السّرعةِ والمسافةِ",
+    "domain": "التناسب",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    }
+  },
+  "y6m52": {
+    "id": "y6m52",
+    "unitId": "p5",
+    "num": 52,
+    "title": "أتدرّبُ على حلّ المسائلِ",
+    "domain": "حل مسائل",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    },
+    "isPracticeUnit": true
+  },
+  "y6m53": {
+    "id": "y6m53",
+    "unitId": "p5",
+    "num": 53,
+    "title": "أُوَظّفُ التّناسبَ في حسابِ معدّلِ السّرعةِ والمسافةِ والزّمنِ",
+    "domain": "التناسب",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    }
+  },
+  "y6m54": {
+    "id": "y6m54",
+    "unitId": "p5",
+    "num": 54,
+    "title": "أتعرّفُ كلاًّ من متوازي المستطيلاتِ والمكعّبِ وأنشرُهما وأصنعُهما",
+    "domain": "الهندسة",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    }
+  },
+  "y6m55": {
+    "id": "y6m55",
+    "unitId": "p5",
+    "num": 55,
+    "title": "أتدرّبُ على حلّ المسائلِ",
+    "domain": "حل مسائل",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    },
+    "isPracticeUnit": true
+  },
+  "y6m56": {
+    "id": "y6m56",
+    "unitId": "p5",
+    "num": 56,
+    "title": "أُوَظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "تقييم",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    },
+    "isAssessmentUnit": true
+  },
+  "y6m57": {
+    "id": "y6m57",
+    "unitId": "p5",
+    "num": 57,
+    "title": "أُوَظّفُ الجمعَ والطّرحَ والضّربَ على الأعدادِ الكسريّةِ",
+    "domain": "الأعداد والعمليات",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    }
+  },
+  "y6m58": {
+    "id": "y6m58",
+    "unitId": "p5",
+    "num": 58,
+    "title": "أحسبُ قيسَ المساحةِ الجانبيّةِ وقيسَ المساحةِ الجمليّةِ لكلٍّ من متوازي المستطيلاتِ والمكعّبِ",
+    "domain": "القياس",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    }
+  },
+  "y6m59": {
+    "id": "y6m59",
+    "unitId": "p5",
+    "num": 59,
+    "title": "أتدرّبُ على حلّ المسائلِ",
+    "domain": "حل مسائل",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    },
+    "isPracticeUnit": true
+  },
+  "y6m60": {
+    "id": "y6m60",
+    "unitId": "p5",
+    "num": 60,
+    "title": "أُوَظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "تقييم",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    },
+    "isAssessmentUnit": true
+  },
+  "y6m61": {
+    "id": "y6m61",
+    "unitId": "p5",
+    "num": 61,
+    "title": "أتسلّى",
+    "domain": "أنشطة ترفيهية",
+    "period": 5,
+    "isPrerequisiteReview": false,
+    "officialRef": {
+      "source": "كتاب الرياضيات س6",
+      "periodPages": "133-173"
+    },
+    "isFunUnit": true
+  }
+}

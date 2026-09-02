@@ -1,0 +1,31 @@
+# ===== مخطط النشر على Render.com (Blueprint) =====
+# يُنشئ: قاعدة بيانات Postgres + خدمة ويب (Docker) تخدم المنصة كاملة
+# الاستعمال: في Render → New + → Blueprint → اختر المستودع → Apply
+
+services:
+  - type: web
+    name: rafiqi-platform
+    runtime: docker
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ALLOWED_ORIGINS
+        value: https://rafiqi-platform.onrender.com,https://www.rafiqi-platform.onrender.com
+      - key: DATABASE_URL
+        sync: false
+        # يُضبط يدوياً في Render Dashboard → Environment → DATABASE_URL
+        # القيمة من Neon (pooled): postgresql://neondb_owner:***@ep-purple-grass-...neon.tech/neondb?sslmode=require
+
+# تمت الهجرة إلى Neon المجاني الدائم (3GB) — لا حاجة لقاعدة Render المؤقتة
+# للتراجع: أعد fromDatabase: {name: rafiqi-db, property: connectionString} وأعد قسم databases أدناه
+# databases:
+#   - name: rafiqi-db
+#     databaseName: school_platform
+#     user: school_user
+#     plan: free

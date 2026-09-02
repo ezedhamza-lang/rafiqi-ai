@@ -1,0 +1,717 @@
+{
+  "_meta": {
+    "note": "العناوين وأرقام الصفحات (officialRef.pages) منقولة حرفيًا من جدولي 'برنامجي في الرياضيات' (ص174) و'الفهرس التفصيلي' (ص175) الموجودين فعليًا في آخر الكتاب نفسه، تأكّدنا منهما بصور مقرَّبة من المستخدم (مالك الكتاب) وليس تخمينًا. ترقيم الدروس (حقل num) هو نفس ترقيم 'منزلة' المطبوع في الكتاب حرفيًا — يتضمّن فجوة حقيقية غير مفسَّرة بين الدرسين 13 و18 (لا يوجد درس مرقّم 14 إلى 17 في الفهرس المطبوع نفسه؛ صفحة 176 آخر الكتاب فارغة/غلاف خلفي، تأكّد المستخدم من ذلك). لم نخترع دروسًا لسدّ هذه الفجوة. لا توجد إزاحة بين رقم الصفحة المطبوع ورقم ملفّ الصورة لهذا الكتاب (خلافًا لسنة ثانية) — تحقّقنا فعليًا أن ص172 المطبوعة = page-172.jpg.",
+    "axes": [
+      {
+        "id": "axCalc",
+        "title": "الأعداد والعمليات"
+      },
+      {
+        "id": "axMeasure",
+        "title": "القيس"
+      },
+      {
+        "id": "axGeo",
+        "title": "الهندسة"
+      },
+      {
+        "id": "axProblem",
+        "title": "حلّ المشكل"
+      },
+      {
+        "id": "axAssess",
+        "title": "توظيف المكتسبات وتقييمها"
+      }
+    ]
+  },
+  "y3m01": {
+    "id": "y3m01",
+    "unitId": "p1",
+    "num": 1,
+    "title": "أُكوّنُ الأعدادَ ذاتَ 4 أرقامٍ وأقرَؤُها وأكتُبُها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 1,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "5"
+    }
+  },
+  "y3m02": {
+    "id": "y3m02",
+    "unitId": "p1",
+    "num": 2,
+    "title": "أتعرّفُ الشّبكةَ ومكوّناتِها",
+    "domain": "الهندسة",
+    "axisId": "axGeo",
+    "period": 1,
+    "ready": true,
+    "icon": "📐",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "8"
+    }
+  },
+  "y3m03": {
+    "id": "y3m03",
+    "unitId": "p1",
+    "num": 3,
+    "title": "أتعرّفُ العلاقةَ بينَ المترْ والسّنتيمترْ",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 1,
+    "ready": true,
+    "icon": "📏",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "12"
+    }
+  },
+  "y3m04": {
+    "id": "y3m04",
+    "unitId": "p1",
+    "num": 4,
+    "title": "أطرَحُ بالزّيادَةِ (1)",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 1,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "15"
+    }
+  },
+  "y3m05": {
+    "id": "y3m05",
+    "unitId": "p1",
+    "num": 5,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 1,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "18"
+    }
+  },
+  "y3m06": {
+    "id": "y3m06",
+    "unitId": "p1",
+    "num": 6,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 1,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "19"
+    }
+  },
+  "y3m07": {
+    "id": "y3m07",
+    "unitId": "p2",
+    "num": 7,
+    "title": "أُكوّنُ الآلافَ الكاملةَ وأقرَؤُها وأكتُبُها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 2,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "21"
+    }
+  },
+  "y3m08": {
+    "id": "y3m08",
+    "unitId": "p2",
+    "num": 8,
+    "title": "أتعرّفُ المسالكَ على الشّبكةِ وأرسمُها",
+    "domain": "الهندسة",
+    "axisId": "axGeo",
+    "period": 2,
+    "ready": true,
+    "icon": "📐",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "24"
+    }
+  },
+  "y3m09": {
+    "id": "y3m09",
+    "unitId": "p2",
+    "num": 9,
+    "title": "أفكّكُ الأعدادَ الكاملةَ وأركّبُها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 2,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "29"
+    }
+  },
+  "y3m10": {
+    "id": "y3m10",
+    "unitId": "p2",
+    "num": 10,
+    "title": "أطرَحُ بالزّيادَةِ (2)",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 2,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "33"
+    }
+  },
+  "y3m11": {
+    "id": "y3m11",
+    "unitId": "p2",
+    "num": 11,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 2,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "36"
+    }
+  },
+  "y3m12": {
+    "id": "y3m12",
+    "unitId": "p2",
+    "num": 12,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 2,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "37"
+    }
+  },
+  "y3m13": {
+    "id": "y3m13",
+    "unitId": "p2",
+    "num": 13,
+    "title": "أُكوّنُ الأعدادَ ذاتَ 4 أرقامٍ وأقرَؤُها وأكتُبُها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 2,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "40"
+    }
+  },
+  "y3m14": {
+    "id": "y3m14",
+    "unitId": "p3",
+    "num": 18,
+    "title": "أُكوّنُ الأعدادَ ذاتَ 4 أرقامٍ (بعضُ أرقامِها صفرٌ) وأكتُبُها وأقرَؤُها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 3,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "56"
+    }
+  },
+  "y3m15": {
+    "id": "y3m15",
+    "unitId": "p3",
+    "num": 19,
+    "title": "أرسُمُ المُضلّعاتِ على الشّبكةِ وأُصنّفُها",
+    "domain": "الهندسة",
+    "axisId": "axGeo",
+    "period": 3,
+    "ready": true,
+    "icon": "📐",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "61"
+    }
+  },
+  "y3m16": {
+    "id": "y3m16",
+    "unitId": "p3",
+    "num": 20,
+    "title": "أفكّكُ الأعدادَ الكاملةَ ذاتَ 4 أرقامٍ وأركّبُها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 3,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "64"
+    }
+  },
+  "y3m17": {
+    "id": "y3m17",
+    "unitId": "p3",
+    "num": 21,
+    "title": "أتعرّفُ فكرةَ جُزءٍ من عددينِ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 3,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "67"
+    }
+  },
+  "y3m18": {
+    "id": "y3m18",
+    "unitId": "p3",
+    "num": 22,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 3,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "71"
+    }
+  },
+  "y3m19": {
+    "id": "y3m19",
+    "unitId": "p3",
+    "num": 23,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 3,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "74"
+    }
+  },
+  "y3m20": {
+    "id": "y3m20",
+    "unitId": "p3",
+    "num": 24,
+    "title": "أُقارنُ الأعدادَ ذاتَ 4 أرقامٍ وأُرتّبُها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 3,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "76"
+    }
+  },
+  "y3m21": {
+    "id": "y3m21",
+    "unitId": "p3",
+    "num": 25,
+    "title": "أوظّفُ خاصيّاتِ الضّربِ في حسابِ جُداءِ عددينِ (كلٌّ منهما أصغرُ من 6)",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 3,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "79"
+    }
+  },
+  "y3m22": {
+    "id": "y3m22",
+    "unitId": "p3",
+    "num": 26,
+    "title": "أتصرّفُ في القطعِ النّقديّةِ والورقةِ الماليّةِ من فئةِ 1 د",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 3,
+    "ready": true,
+    "icon": "📏",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "83"
+    }
+  },
+  "y3m23": {
+    "id": "y3m23",
+    "unitId": "p3",
+    "num": 27,
+    "title": "أوظّفُ خاصيّاتِ الضّربِ في حسابِ جُداءِ عددينِ (أحدُهما عقدٌ/مائةٌ كاملةٌ/ألفٌ كاملةٌ)",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 3,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "88"
+    }
+  },
+  "y3m24": {
+    "id": "y3m24",
+    "unitId": "p3",
+    "num": 28,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 3,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "92"
+    }
+  },
+  "y3m25": {
+    "id": "y3m25",
+    "unitId": "p3",
+    "num": 29,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 3,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "94"
+    }
+  },
+  "y3m26": {
+    "id": "y3m26",
+    "unitId": "p4",
+    "num": 30,
+    "title": "أتصرّفُ في الأعدادِ ذاتَ 4 أرقامٍ من 0 إلى 9999",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 4,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "98"
+    }
+  },
+  "y3m27": {
+    "id": "y3m27",
+    "unitId": "p4",
+    "num": 31,
+    "title": "أُنجزُ عمليّةَ الضّربِ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 4,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "102"
+    }
+  },
+  "y3m28": {
+    "id": "y3m28",
+    "unitId": "p4",
+    "num": 32,
+    "title": "أتعرّفُ مضاعفاتِ المترْ ومضاعفاتِ اللترْ",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 4,
+    "ready": true,
+    "icon": "📏",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "107"
+    }
+  },
+  "y3m29": {
+    "id": "y3m29",
+    "unitId": "p4",
+    "num": 33,
+    "title": "أتعرّفُ الزّاويةَ وأرسمُها",
+    "domain": "الهندسة",
+    "axisId": "axGeo",
+    "period": 4,
+    "ready": true,
+    "icon": "📐",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "112"
+    }
+  },
+  "y3m30": {
+    "id": "y3m30",
+    "unitId": "p4",
+    "num": 34,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 4,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "116"
+    }
+  },
+  "y3m31": {
+    "id": "y3m31",
+    "unitId": "p4",
+    "num": 35,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 4,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "118"
+    }
+  },
+  "y3m32": {
+    "id": "y3m32",
+    "unitId": "p4",
+    "num": 36,
+    "title": "أوظّفُ خاصيّاتِ الضّربِ في حسابِ جُداءِ عددينِ (2) (أحدُهما أصغرُ من 6)",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 4,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "120"
+    }
+  },
+  "y3m33": {
+    "id": "y3m33",
+    "unitId": "p4",
+    "num": 37,
+    "title": "أتصرّفُ في القطعِ النّقديّةِ والورقةِ الماليّةِ من فئةِ 5 د",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 4,
+    "ready": true,
+    "icon": "📏",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "124"
+    }
+  },
+  "y3m34": {
+    "id": "y3m34",
+    "unitId": "p4",
+    "num": 38,
+    "title": "أُصنّفُ الزّوايا حسبَ فتحاتِها وأرسمُها",
+    "domain": "الهندسة",
+    "axisId": "axGeo",
+    "period": 4,
+    "ready": true,
+    "icon": "📐",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "127"
+    }
+  },
+  "y3m35": {
+    "id": "y3m35",
+    "unitId": "p4",
+    "num": 39,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 4,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "131"
+    }
+  },
+  "y3m36": {
+    "id": "y3m36",
+    "unitId": "p4",
+    "num": 40,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 4,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "133"
+    }
+  },
+  "y3m37": {
+    "id": "y3m37",
+    "unitId": "p5",
+    "num": 41,
+    "title": "أوظّفُ خاصيّاتِ الضّربِ في حسابِ جُداءِ عددينِ (3)",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 5,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "136"
+    }
+  },
+  "y3m38": {
+    "id": "y3m38",
+    "unitId": "p5",
+    "num": 42,
+    "title": "أتصرّفُ في العلاقةِ العشريّةِ بينَ وحداتِ القيسِ (الأطوال/السّعات)",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 5,
+    "ready": true,
+    "icon": "📏",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "141"
+    }
+  },
+  "y3m39": {
+    "id": "y3m39",
+    "unitId": "p5",
+    "num": 43,
+    "title": "أتعرّفُ خاصيّاتِ كلٍّ من المستطيلِ والمربّعِ",
+    "domain": "الهندسة",
+    "axisId": "axGeo",
+    "period": 5,
+    "ready": true,
+    "icon": "📐",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "144"
+    }
+  },
+  "y3m40": {
+    "id": "y3m40",
+    "unitId": "p5",
+    "num": 44,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 5,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "150"
+    }
+  },
+  "y3m41": {
+    "id": "y3m41",
+    "unitId": "p5",
+    "num": 45,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 5,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "152"
+    }
+  },
+  "y3m42": {
+    "id": "y3m42",
+    "unitId": "p5",
+    "num": 46,
+    "title": "أتعرّفُ العلاقةَ بينَ اليومِ والشّهرِ والسّنةِ",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 5,
+    "ready": true,
+    "icon": "📏",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "154"
+    }
+  },
+  "y3m43": {
+    "id": "y3m43",
+    "unitId": "p5",
+    "num": 47,
+    "title": "أحسُبُ قيسَ محيطِ مُضلّعٍ",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 5,
+    "ready": true,
+    "icon": "📏",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "159"
+    }
+  },
+  "y3m44": {
+    "id": "y3m44",
+    "unitId": "p5",
+    "num": 48,
+    "title": "أحسُبُ قيسَ محيطِ كلٍّ من المستطيلِ والمربّعِ",
+    "domain": "القيس",
+    "axisId": "axMeasure",
+    "period": 5,
+    "ready": true,
+    "icon": "📏",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "162"
+    }
+  },
+  "y3m45": {
+    "id": "y3m45",
+    "unitId": "p5",
+    "num": 49,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 5,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "166"
+    }
+  },
+  "y3m46": {
+    "id": "y3m46",
+    "unitId": "p5",
+    "num": 50,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 5,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س3",
+      "pages": "168"
+    }
+  }
+}

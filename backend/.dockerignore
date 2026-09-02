@@ -1,0 +1,8 @@
+node_modules
+dist
+tests
+*.log
+.env
+uploads/documents
+uploads/exams
+uploads/recordings

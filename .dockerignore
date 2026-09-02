@@ -1,0 +1,11 @@
+**/node_modules
+**/.git
+**/.env
+**/*.log
+backend/tests
+backend/uploads/documents
+backend/uploads/exams
+backend/uploads/recordings
+docs
+*.md
+!README.md

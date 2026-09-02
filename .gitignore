@@ -1,0 +1,30 @@
+# التبعيات
+node_modules/
+
+# البناء والمخرجات
+# (frontend/dist يُلتزم عمداً — النشر يستعمله جاهزاً بلا بناء داخل الحاوية)
+backend/coverage/
+*.log
+
+# المتغيرات والأسرار
+.env
+.env.*
+!.env.example
+كلمات-السر.md
+
+# الملفات المرفوعة — محتوى مستخدمين متغير لا يُلتزم
+# لكن محتوى الدروس الثابت (صور الكراس والمواد) يُلتزم ليصل مع صورة Docker في النشر
+backend/uploads/*
+!backend/uploads/media/
+!backend/uploads/svg/
+!backend/uploads/intaj/
+!backend/uploads/islamic/
+!backend/uploads/tech/
+!backend/uploads/science/
+
+
+# نظام التشغيل والمحرر
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

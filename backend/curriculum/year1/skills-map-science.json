@@ -1,0 +1,16 @@
+{
+  "_meta": {
+    "note": "خريطة مهارات مادّة الإيقاظ العلمي، مفتاحها id الفصل (chapter id) في science-book.json. الفصول غير المذكورة هنا تُبنى تلقائيًا (source: auto) بمهارة ملاحظة علمية عامّة."
+  },
+  "lessons": {
+    "ch1": {
+      "learningObjectives": ["يتعرّف على أعضاء جسمه الرئيسية ووظيفة كل منها"],
+      "competencies": ["الوعي بالجسم وبناء صورة إيجابية عنه"],
+      "skills": ["body-awareness", "scientific-observation"],
+      "indicators": ["يسمّي 5 أعضاء من جسمه ووظيفة كل منها"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يربط بين عضو من الجسم ووظيفته في الحياة اليومية"],
+      "source": "curated"
+    }
+  }
+}

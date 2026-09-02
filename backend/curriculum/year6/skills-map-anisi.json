@@ -1,0 +1,263 @@
+{
+  "_meta": {
+    "note": "خرائط المهارات"
+  },
+  "lessons": {
+    "u1-l1": {
+      "learningObjectives": ["أن يقرأ التلميذ نص العلم رمز الوطن قراءة سليمة", "أن يستخرج الرموز الوطنية وأهميتها"],
+      "competencies": ["فهم النص المقروء واستخلاص الفكرة العامة", "التعبير عن مشاعر الفخر والانتماء الوطني"],
+      "skills": ["reading-comprehension", "reading-aloud", "oral-expression", "critical-thinking"],
+      "indicators": ["يقرأ النص بطلاقة مع احترام علامات الوقف", "يجيب عن أسئلة الفهم ويستخرج الرموز الوطنية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يقرأ نصوصا وطنية قراءة معبرة", "يعبر شفهيا عن حبه لوطنه ورموزه"],
+      "source": "curated"
+    },
+    "u1-l2": {
+      "learningObjectives": ["أن يكتشف التلميذ معالم تونس الطبيعية والتاريخية", "أن يتعرف على مفردات الرحلة والطبيعة"],
+      "competencies": ["فهم النص واستخلاص المعلومات", "بناء رصيد لغوي جديد"],
+      "skills": ["reading-comprehension", "reading-aloud", "vocabulary-building"],
+      "indicators": ["يحدد معالم المدن المذكورة في النص", "يوظف المفردات الجديدة في جمل مفيدة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يصف مناطق تونس شفهيا", "يكتب فقرة عن رحلة ممتعة"],
+      "source": "curated"
+    },
+    "u1-l3": {
+      "learningObjectives": ["أن يتعرف التلميذ على الحرف التقليدية التونسية", "أن يدرك قيمة التراث ويقدره"],
+      "competencies": ["فهم النص وتحليل مضمونه الثقافي", "التعبير عن قيم التراث"],
+      "skills": ["reading-comprehension", "vocabulary-building", "text-analysis", "oral-expression"],
+      "indicators": ["يستخرج الحرف التقليدية المذكورة", "يحلل علاقة الأجداد بالحرف اليدوية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يتحدث عن حرفة تقليدية يعرفها", "يكتب فقرة عن قيمة التراث"],
+      "source": "curated"
+    },
+    "u1-l4": {
+      "learningObjectives": ["أن يدرك التلميذ مكانة اللغة العربية", "أن يعتز بلغته ويحرص على سلامتها"],
+      "competencies": ["القراءة الجهرية السليمة", "الكتابة الصحيحة والخط الجميل"],
+      "skills": ["reading-aloud", "vocabulary-building", "writing"],
+      "indicators": ["يقرأ فقرات الاحتفال قراءة معبرة", "يكتب جملات صحيحة بالعربية الفصحى"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يلقي كلمة قصيرة بالعربية الفصحى", "يحسن إملاءه وخطه"],
+      "source": "curated"
+    },
+    "u2-l1": {
+      "learningObjectives": ["أن يتعرف التلميذ على شجرة الزيتون وأهميتها", "أن يستنتج العبرة من النص"],
+      "competencies": ["فهم النص واستنتاج المعاني", "تنمية التفكير النقدي"],
+      "skills": ["reading-comprehension", "vocabulary-building", "critical-thinking"],
+      "indicators": ["يجيب عن أسئلة الفهم بدقة", "يستنتج سبب عمق جذور الزيتون"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح أهمية الزيتون للاقتصاد التونسي", "يستخلص العبرة من كلام الجد"],
+      "source": "curated"
+    },
+    "u2-l2": {
+      "learningObjectives": ["أن يدرك التلميذ أهمية الماء للحياة", "أن يتعرف على طرق ترشيد الاستهلاك"],
+      "competencies": ["فهم النص واستخلاص المعلومات", "تحليل النص وتأويله"],
+      "skills": ["reading-comprehension", "reading-aloud", "text-analysis"],
+      "indicators": ["يستخرج أهمية الماء من النص", "يقترح أفكارا لترشيد استهلاك الماء"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يتبنى سلوكات صديقة للبيئة", "ينصح أقرانه بعدم إهدار الماء"],
+      "source": "curated"
+    }
+,
+    "u2-l3": {
+      "learningObjectives": ["أن يدرك التلميذ خطورة حرائق الغابات", "أن يتعرف على سبل الوقاية منها"],
+      "competencies": ["فهم النص واستخلاص المعلومات", "تنمية التفكير النقدي"],
+      "skills": ["reading-comprehension", "critical-thinking", "oral-expression"],
+      "indicators": ["يستخرج أسباب الحريق من النص", "يقترح طرقا للوقاية من الحرائق"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يحذر أقرانه من إشعال النار في الغابات", "يشارك في حملات التوعية البيئية"],
+      "source": "curated"
+    },
+    "u2-l4": {
+      "learningObjectives": ["أن يتعرف التلميذ على مفهوم تدوير النفايات", "أن يدرك فوائده البيئية والاقتصادية"],
+      "competencies": ["فهم النص وتحليله", "الكتابة الإبداعية"],
+      "skills": ["reading-comprehension", "text-analysis", "writing"],
+      "indicators": ["يستخرج أفكار النص حول التدوير", "يكتب فقرة عن أهمية إعادة الاستعمال"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يفرز النفايات في بيته ومدرسته", "يقترح مشاريع بيئية مدرسية"],
+      "source": "curated"
+    },
+    "u3-l1": {
+      "learningObjectives": ["أن يقرأ التلميذ القصة قراءة متأنية", "أن يستنتج العبرة من أحداثها"],
+      "competencies": ["فهم النص السردي وتحليله", "التعبير الشفهي عن مضمون القصة"],
+      "skills": ["reading-comprehension", "text-analysis", "critical-thinking", "oral-expression"],
+      "indicators": ["يرتب أحداث القصة زمنيا", "يستنتج العبرة من خاتمة القصة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يعيد سرد القصة بأسلوبه", "يستخلص قيمة العمل والاجتهاد"],
+      "source": "curated"
+    },
+    "u3-l2": {
+      "learningObjectives": ["أن يفهم التلميذ أحداث القصة ودلالاتها", "أن يقدر الإحسان إلى الحيوان"],
+      "competencies": ["فهم النص السردي", "الكتابة الإبداعية"],
+      "skills": ["reading-comprehension", "text-analysis", "writing"],
+      "indicators": ["يستخرج الشخصيات والأحداث الرئيسية", "يكتب نهاية أخرى للقصة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح معنى الجزاء من جنس العمل", "يكتب قصة قصيرة عن الإحسان"],
+      "source": "curated"
+    },
+    "u3-l3": {
+      "learningObjectives": ["أن يستخرج التلميذ أحداث القصة مرتبة زمنيا", "أن يستخلص دروس الحذر والانتباه"],
+      "competencies": ["فهم النص السردي وتنظيم أحداثه", "القراءة الجهرية المعبرة"],
+      "skills": ["reading-comprehension", "reading-aloud", "text-analysis"],
+      "indicators": ["يرتب أحداث مغامرة ياسمين", "يعيد سرد القصة شفهيا بتسلسل"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يبدي سلوك الحذر في الأماكن المزدحمة", "ينصح أقرانه بالبقاء قرب الأهل"],
+      "source": "curated"
+    },
+    "u3-l4": {
+      "learningObjectives": ["أن يدرك التلميذ متعة القراءة", "أن يقدر قيمة الكتاب في حياته"],
+      "competencies": ["فهم النص وتحويله إلى سلوك", "الكتابة الإبداعية"],
+      "skills": ["reading-comprehension", "vocabulary-building", "writing", "critical-thinking"],
+      "indicators": ["يستخرج تحول هشام من كره القراءة إلى حبها", "يبرر أهمية القراءة في بناء الشخصية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يطور عادة القراءة اليومية", "يكتب تعليقا على كتاب قرأه"],
+      "source": "curated"
+    }
+,
+    "u4-l1": {
+      "learningObjectives": ["أن يستخلص التلميذ قيمة الصدق", "أن يدرك عاقبة الكذب والاعتراف بالخطأ"],
+      "competencies": ["فهم النص واستخلاص القيم", "تنمية التفكير النقدي والأخلاقي"],
+      "skills": ["reading-comprehension", "critical-thinking", "oral-expression"],
+      "indicators": ["يحدد موقف أنس من الكذب", "يبرر اعتراف أنس بخطئه"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يستشهد بالحديث النبوي في الصدق", "يتصرف بصدق في مواقف حياته"],
+      "source": "curated"
+    },
+    "u4-l2": {
+      "learningObjectives": ["أن يدرك التلميذ قيمة الأمانة", "أن يتعرف على موقف النبي الكريم من الأمانة"],
+      "competencies": ["فهم النص واستخلاص القيم", "القراءة الجهرية السليمة"],
+      "skills": ["reading-comprehension", "reading-aloud", "writing"],
+      "indicators": ["يستخرج تصرف علي مع المحفظة", "يكتب فقرة عن الأمانة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يرد الحقوق إلى أصحابها", "يذكر حديث أد الأمانة"],
+      "source": "curated"
+    },
+    "u4-l3": {
+      "learningObjectives": ["أن يفهم التلميذ أن التسامح قوة", "أن يتعرف على موقف النبي من أهل الطائف"],
+      "competencies": ["فهم النص وتحليل القيم", "التعبير الشفهي عن الرأي"],
+      "skills": ["reading-comprehension", "critical-thinking", "oral-expression"],
+      "indicators": ["يستخلص معنى التسامح من النص", "يعبر عن رأيه في فضل التسامح"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يغفر لأصدقائه زلاتهم", "يدعو إلى التسامح بين الزملاء"],
+      "source": "curated"
+    },
+    "u4-l4": {
+      "learningObjectives": ["أن يدرك التلميذ فضل حسن الجوار", "أن يتعرف على واجبات الجار تجاه جاره"],
+      "competencies": ["فهم النص واستخلاص القيم", "التحليل النصي"],
+      "skills": ["reading-comprehension", "vocabulary-building", "text-analysis"],
+      "indicators": ["يستخرج صور حسن الجوار من النص", "يحلل العلاقة بين العائلتين"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يساعد جيرانه الجدد عند الحاجة", "يشرح مثل الجار قبل الدار"],
+      "source": "curated"
+    },
+    "u5-l1": {
+      "learningObjectives": ["أن يتعرف التلميذ على شخصية ابن خلدون", "أن يدرك مكانته العالمية في علم الاجتماع"],
+      "competencies": ["فهم النص واستخلاص المعلومات", "تنمية الفضول العلمي والفخر بالهوية"],
+      "skills": ["reading-comprehension", "vocabulary-building", "critical-thinking", "text-analysis"],
+      "indicators": ["يستخرج مراحل حياة ابن خلدون", "يشرح لماذا يعتبر مؤسس علم الاجتماع"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يقدم بطاقة تعريف عن ابن خلدون", "يفتخر بالعلماء التونسيين"],
+      "source": "curated"
+    },
+    "u5-l2": {
+      "learningObjectives": ["أن يتعرف التلميذ على إسهامات ابن الهيثم", "أن يفهم أهمية التجربة في البحث العلمي"],
+      "competencies": ["فهم النص واستخلاص المعلومات", "القراءة الجهرية المعبرة"],
+      "skills": ["reading-comprehension", "reading-aloud", "critical-thinking"],
+      "indicators": ["يشرح تجارب ابن الهيثم على الضوء", "يقارن بين نظريتي الرؤية القديمة والجديدة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشرح عمل آلة التصوير المظلمة", "يقلد العلماء في الصبر على التجربة"],
+      "source": "curated"
+    },
+    "u5-l3": {
+      "learningObjectives": ["أن يتعرف التلميذ على شخصية ابن سينا", "أن يدرك إسهامات كتاب القانون في الطب"],
+      "competencies": ["فهم النص واستخلاص المعلومات", "الكتابة الإبداعية"],
+      "skills": ["reading-comprehension", "text-analysis", "writing"],
+      "indicators": ["يستخرج مؤلفات ابن سينا الرئيسية", "يكتب فقرة عن أهمية الطب"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يتحدث عن قانون ابن سينا في الطب", "يقدر قيمة العلم في خدمة الإنسان"],
+      "source": "curated"
+    }
+,
+    "u6-l1": {
+      "learningObjectives": ["أن يتعرف التلميذ على قيمة التضامن مع الجيران", "أن يدرك واجب العناية بكبار السن"],
+      "competencies": ["فهم النص واستخلاص القيم", "التعبير الشفهي عن المشاعر"],
+      "skills": ["reading-comprehension", "oral-expression", "critical-thinking"],
+      "indicators": ["يستخرج صور التضامن في النص", "يعبر عن موقفه من مساعدة الجيران"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يزور كبار السن في محيطه", "يساعد جيرانه عند الحاجة"],
+      "source": "curated"
+    },
+    "u6-l2": {
+      "learningObjectives": ["أن يدرك التلميذ قيمة التضامن بين التلاميذ", "أن يتعرف على أشكال العمل التضامني"],
+      "competencies": ["فهم النص واستخلاص القيم", "الكتابة الإبداعية"],
+      "skills": ["reading-comprehension", "writing", "oral-expression"],
+      "indicators": ["يستخرج أنشطة نادي التضامن", "يكتب فقرة عن العطاء"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشارك في الأنشطة التضامنية المدرسية", "يقترح مبادرات تضامنية جديدة"],
+      "source": "curated"
+    },
+    "u6-l3": {
+      "learningObjectives": ["أن يتعرف التلميذ على مفهوم المواطنة", "أن يميز بين حقوق المواطن وواجباته"],
+      "competencies": ["فهم النص وتحليل المفاهيم", "تنمية التفكير النقدي"],
+      "skills": ["reading-comprehension", "text-analysis", "critical-thinking"],
+      "indicators": ["يعدد حقوق المواطن وواجباته", "يحلل مفهوم المواطنة بأمثلة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يحافظ على الممتلكات العامة", "يشارك في الحياة العامة المدرسية"],
+      "source": "curated"
+    },
+    "u7-l1": {
+      "learningObjectives": ["أن يتعرف التلميذ على العمل الصحفي المدرسي", "أن يدرك أهمية العمل الجماعي"],
+      "competencies": ["فهم النص واستخلاص المعلومات", "الكتابة الصحفية البسيطة"],
+      "skills": ["reading-comprehension", "writing", "text-analysis"],
+      "indicators": ["يستخرج مهام فريق الجريدة", "يكتب خبرا مدرسيا قصيرا"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يساهم في جريدة الحائط", "يتعاون مع زملائه في العمل الجماعي"],
+      "source": "curated"
+    },
+    "u7-l2": {
+      "learningObjectives": ["أن يتعرف التلميذ على دور الإذاعة المدرسية", "أن يتدرب على حسن الإلقاء"],
+      "competencies": ["القراءة الجهرية والإلقاء", "التعبير الشفهي الواضح"],
+      "skills": ["reading-aloud", "oral-expression", "reading-comprehension"],
+      "indicators": ["يلقي فقرات الإذاعة بإيقاع سليم", "يحسن إعداد الفقرات وتنظيمها"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يقدم فقرة في الإذاعة المدرسية", "ينقل المعلومة بدقة ووضوح"],
+      "source": "curated"
+    },
+    "u7-l3": {
+      "learningObjectives": ["أن يدرك التلميذ خطورة الإشاعات", "أن يتدرب على التحقق من المعلومات"],
+      "competencies": ["فهم النص وتحليل المواقف", "تنمية التفكير النقدي"],
+      "skills": ["reading-comprehension", "critical-thinking", "text-analysis"],
+      "indicators": ["يميز بين الخبر الصحيح والإشاعة", "يذكر خطوات التحقق من الخبر"],
+      "prerequisites": [],
+      "expectedOutcomes": ["لا ينشر خبرا دون تحقق", "يسأل عن مصدر المعلومة قبل تصديقها"],
+      "source": "curated"
+    }
+,
+    "u8-l1": {
+      "learningObjectives": ["أن يتعرف التلميذ على عالم الروبوتات", "أن يفهم أهمية البرمجة في المستقبل"],
+      "competencies": ["فهم النص واستخلاص المعلومات", "تنمية الفضول العلمي والتكنولوجي"],
+      "skills": ["reading-comprehension", "critical-thinking", "vocabulary-building"],
+      "indicators": ["يستخرج أجزاء الروبوت من النص", "يشرح كيفية عمل الروبوت"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يشارك في أنشطة البرمجة البسيطة", "يتحدث عن مهن المستقبل"],
+      "source": "curated"
+    },
+    "u8-l2": {
+      "learningObjectives": ["أن يتعرف التلميذ على الذكاء الاصطناعي", "أن يدرك حسنات استخدامه وسيئاته"],
+      "competencies": ["فهم النص وتحليل المفاهيم", "تنمية التفكير النقدي"],
+      "skills": ["reading-comprehension", "critical-thinking", "text-analysis", "oral-expression"],
+      "indicators": ["يذكر أمثلة على الذكاء الاصطناعي من حياته", "يناقش مسؤولية الإنسان في استخدام الآلة"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يستخدم التكنولوجيا استخداما مسؤولا", "يعبر عن رأيه في الذكاء الاصطناعي"],
+      "source": "curated"
+    },
+    "u8-l3": {
+      "learningObjectives": ["أن يتعرف التلميذ على الطاقة الشمسية", "أن يدرك فوائدها على البيئة والاقتصاد"],
+      "competencies": ["فهم النص واستخلاص المعلومات", "تنمية الوعي البيئي"],
+      "skills": ["reading-comprehension", "vocabulary-building", "critical-thinking"],
+      "indicators": ["يشرح كيفية عمل الألواح الشمسية", "يبين فوائد الطاقة الشمسية"],
+      "prerequisites": [],
+      "expectedOutcomes": ["يقتصد في استهلاك الطاقة", "يدافع عن الطاقات المتجددة"],
+      "source": "curated"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 280" width="400" height="280">
+  <rect width="400" height="280" rx="16" fill="#fef3c7"/>
+  <!-- Table -->
+  <rect x="120" y="150" width="160" height="12" rx="3" fill="#92400e" stroke="#78350f" stroke-width="3"/>
+  <rect x="130" y="162" width="8" height="40" rx="2" fill="#78350f"/>
+  <rect x="262" y="162" width="8" height="40" rx="2" fill="#78350f"/>
+  <!-- Chair behind table (partially hidden) -->
+  <rect x="145" y="105" width="70" height="50" rx="6" fill="#f59e0b" stroke="#d97706" stroke-width="3"/>
+  <rect x="145" y="95" width="70" height="18" rx="4" fill="#fbbf24" stroke="#d97706" stroke-width="2"/>
+  <rect x="150" y="155" width="6" height="20" rx="2" fill="#78350f"/>
+  <rect x="204" y="155" width="6" height="20" rx="2" fill="#78350f"/>
+  <text x="200" y="240" text-anchor="middle" font-size="14" font-weight="700" fill="#92400e" font-family="Arial">الكرسي وراء الطاولة</text>
+</svg>

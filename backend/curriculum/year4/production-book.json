@@ -1,0 +1,57 @@
+{
+  "title": "إنتاج كتابي",
+  "subtitle": "السنة الرابعة ابتدائي",
+  "imageBase": null,
+  "imageExt": ".jpg",
+  "totalPages": 0,
+  "units": [
+    {
+      "id": "p1",
+      "title": "السرد",
+      "icon": "✍️",
+      "color": "#8E7CE0",
+      "startPage": 1,
+      "endPage": 10
+    },
+    {
+      "id": "p2",
+      "title": "الوصف",
+      "icon": "🎨",
+      "color": "#F191C1",
+      "startPage": 11,
+      "endPage": 20
+    },
+    {
+      "id": "p3",
+      "title": "الرسالة",
+      "icon": "✉️",
+      "color": "#5B9FE0",
+      "startPage": 21,
+      "endPage": 30
+    },
+    {
+      "id": "p4",
+      "title": "الحوار",
+      "icon": "💬",
+      "color": "#4A9FD8",
+      "startPage": 31,
+      "endPage": 40
+    },
+    {
+      "id": "p5",
+      "title": "القصة",
+      "icon": "📖",
+      "color": "#F0AD4E",
+      "startPage": 41,
+      "endPage": 50
+    },
+    {
+      "id": "p6",
+      "title": "التقرير",
+      "icon": "📋",
+      "color": "#5CB85C",
+      "startPage": 51,
+      "endPage": 60
+    }
+  ]
+}

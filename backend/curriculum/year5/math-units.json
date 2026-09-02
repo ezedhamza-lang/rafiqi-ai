@@ -1,0 +1,972 @@
+{
+  "_meta": {
+    "note": "العناوين وأرقام الصفحات منقولة حرفيًا من صورة 'خارطة البرنامج' (آخر صفحات كتاب الرياضيات س5) التي أرسلها المستخدم. البناء يتّبع نفس هيكلة سنة 4 (unitId/num/title/domain/axisId/period/officialRef). تحديث هذه الجلسة: تمّ تحميل الكتاب المدرسي الفعلي لسنة 5 (PDF، 168 صفحة، ملف رباضيات_س5.zip) وتمّ ترقيم صفحاته إلى صور (100dpi) ومراجعتها بصريًا صفحة بصفحة بالكامل للفترات 2 إلى 5 (الصفحات 66-167، أي 52 درسًا، أرقام الدروس 24 إلى 63) — بالإضافة إلى الفترة 1 التي كانت قد رُوجعت في جلسة سابقة (ص4، 8، 30). النتيجة: تطابق تام بين رقم/عنوان كل درس المطبوع فعليًا في رأس كل صفحة من الكتاب وبين ما هو مُدرَج في هذا الملف (title/num/pages) — لم تُكتشف أي فجوة أو خطأ ترقيم أو عنوان مغاير خلال هذه المراجعة. ملاحظة تقنية: استخراج النص الآلي (pdftotext) من هذا الملف غير صالح لأن الكتاب يستخدم خطًا عربيًا مخصّصًا يُنتج ترميزًا مشوَّهًا؛ لذلك اعتُمدت المقارنة البصرية (rasterisation + مطابقة يدوية) حصرًا، بنفس منهجية سنة 4. الفجوة المتبقية الوحيدة: حقل officialProgramRef (الإحالة إلى وثيقة 'برامج المرحلة الابتدائية 2021-2022' الرسمية، قسم السنة الخامسة) لم يُضَف بعد لأي درس — لأن وثيقة البرنامج الرسمي الخاصة بسنة 5 لم تُرفَق أو تُفحص في أي جلسة حتى الآن (بحث الويب لم يعثر على نسخة PDF مباشرة قابلة للجلب). يتطلّب إتمامها من المستخدم رفع تلك الوثيقة (أو تحديد رابط PDF مباشر لها)، وعندها تُستخرج مقاطع السنة الخامسة نصيًا (pdftotext) بنفس طريقة سنة 4 بدل التخمين. تصنيف domain/axisId اعتُمد آليًا من الكلمات المفتاحية في عنوان كل درس (نفس منطق سنة 4)، ويستحسن تدقيقه لاحقًا عند فحص محتوى كل درس بالكامل (وليس فقط عنوانه) — وهذا يتطلّب مراجعة إضافية غير بصرية للعنوان فقط.",
+    "axes": [
+      {
+        "id": "axCalc",
+        "title": "الأعداد والعمليات"
+      },
+      {
+        "id": "axMeasure",
+        "title": "القيس"
+      },
+      {
+        "id": "axGeo",
+        "title": "الهندسة"
+      },
+      {
+        "id": "axProblem",
+        "title": "حلّ المشكل"
+      },
+      {
+        "id": "axAssess",
+        "title": "توظيف المكتسبات وتقييمها"
+      }
+    ]
+  },
+  "y5m01": {
+    "id": "y5m01",
+    "unitId": "p1",
+    "num": 1,
+    "title": "أُكوّنُ الأعدادَ ذاتَ 7 أرقامٍ فأكثر وأكتبها وأقرؤها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 1,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "4"
+    }
+  },
+  "y5m02": {
+    "id": "y5m02",
+    "unitId": "p1",
+    "num": 2,
+    "title": "أُحدّدُ إحداثيات عقدةٍ على الشّبكةِ",
+    "domain": "الهندسة",
+    "axisId": "axGeo",
+    "period": 1,
+    "ready": true,
+    "icon": "📐",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "8"
+    }
+  },
+  "y5m03": {
+    "id": "y5m03",
+    "unitId": "p1",
+    "num": 3,
+    "title": "أفكّكُ الأعدادَ ذاتَ 7 أرقامٍ فأكثر وأركّبها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 1,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "11"
+    }
+  },
+  "y5m04": {
+    "id": "y5m04",
+    "unitId": "p1",
+    "num": 4,
+    "title": "أُقارنُ الأعدادَ ذاتَ 7 أرقامٍ فأكثر وأرتّبها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 1,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "14"
+    }
+  },
+  "y5m05": {
+    "id": "y5m05",
+    "unitId": "p1",
+    "num": 5,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 1,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "17"
+    }
+  },
+  "y5m06": {
+    "id": "y5m06",
+    "unitId": "p1",
+    "num": 6,
+    "title": "أرسُمُ صورةَ شكلٍ على الشّبكةِ باستعمالِ التّناظرِ المحوريِّ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 1,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "19"
+    }
+  },
+  "y5m07": {
+    "id": "y5m07",
+    "unitId": "p1",
+    "num": 7,
+    "title": "أوظّفُ الجمعَ والطّرحَ والضّربَ على الأعدادِ الصّحيحةِ الطّبيعيّةِ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 1,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "23"
+    }
+  },
+  "y5m08": {
+    "id": "y5m08",
+    "unitId": "p1",
+    "num": 8,
+    "title": "أوظّفُ القسمةَ على الأعدادِ الصّحيحةِ الطّبيعيّةِ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 1,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "26"
+    }
+  },
+  "y5m09": {
+    "id": "y5m09",
+    "unitId": "p1",
+    "num": 9,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 1,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "30"
+    }
+  },
+  "y5m10": {
+    "id": "y5m10",
+    "unitId": "p1",
+    "num": 10,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 1,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "31"
+    }
+  },
+  "y5m11": {
+    "id": "y5m11",
+    "unitId": "p1",
+    "num": 11,
+    "title": "أتسلّى",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 1,
+    "ready": true,
+    "icon": "🎲",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "33"
+    }
+  },
+  "y5m12": {
+    "id": "y5m12",
+    "unitId": "p2",
+    "num": 12,
+    "title": "أُنجزُ عمليّةَ قسمةٍ على عددٍ ذي رقمٍ واحدٍ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 2,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "35"
+    }
+  },
+  "y5m13": {
+    "id": "y5m13",
+    "unitId": "p2",
+    "num": 13,
+    "title": "أتصرّفُ في وحداتِ قيسِ الكتَلِ (القنطار والطّن)",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 2,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "39"
+    }
+  },
+  "y5m14": {
+    "id": "y5m14",
+    "unitId": "p2",
+    "num": 14,
+    "title": "أتعرّفُ الدّائرةَ والقرصَ الدّائريَّ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 2,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "42"
+    }
+  },
+  "y5m15": {
+    "id": "y5m15",
+    "unitId": "p2",
+    "num": 15,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 2,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "47"
+    }
+  },
+  "y5m16": {
+    "id": "y5m16",
+    "unitId": "p2",
+    "num": 16,
+    "title": "أرسُمُ الموسّطَ العموديَّ لقطعةِ مستقيمٍ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 2,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "48"
+    }
+  },
+  "y5m17": {
+    "id": "y5m17",
+    "unitId": "p2",
+    "num": 17,
+    "title": "أُنجزُ عمليّةَ قسمةٍ على عددٍ ذي 3 أرقامٍ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 2,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "51"
+    }
+  },
+  "y5m18": {
+    "id": "y5m18",
+    "unitId": "p2",
+    "num": 18,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 2,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "54"
+    }
+  },
+  "y5m19": {
+    "id": "y5m19",
+    "unitId": "p2",
+    "num": 19,
+    "title": "أوظّفُ الدّائرةَ في البناءاتِ الهندسيّةِ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 2,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "55"
+    }
+  },
+  "y5m20": {
+    "id": "y5m20",
+    "unitId": "p2",
+    "num": 20,
+    "title": "أرسُمُ المستقيماتِ المتعامدةَ والمستقيماتِ المتوازيةَ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 2,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "57"
+    }
+  },
+  "y5m21": {
+    "id": "y5m21",
+    "unitId": "p2",
+    "num": 21,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 2,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "61"
+    }
+  },
+  "y5m22": {
+    "id": "y5m22",
+    "unitId": "p2",
+    "num": 22,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 2,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "63"
+    }
+  },
+  "y5m23": {
+    "id": "y5m23",
+    "unitId": "p2",
+    "num": 23,
+    "title": "أتسلّى",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 2,
+    "ready": true,
+    "icon": "🎲",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "65"
+    }
+  },
+  "y5m24": {
+    "id": "y5m24",
+    "unitId": "p3",
+    "num": 24,
+    "title": "أتعرّفُ سلسلتينِ من الأعدادِ الصّحيحةِ الطّبيعيّةِ المتناسبةِ طردًا",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 3,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "66"
+    }
+  },
+  "y5m25": {
+    "id": "y5m25",
+    "unitId": "p3",
+    "num": 25,
+    "title": "أُكوّنُ الأعدادَ الكسريّةَ وأكتبها وأقرؤها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 3,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "70"
+    }
+  },
+  "y5m26": {
+    "id": "y5m26",
+    "unitId": "p3",
+    "num": 26,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 3,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "75"
+    }
+  },
+  "y5m27": {
+    "id": "y5m27",
+    "unitId": "p3",
+    "num": 27,
+    "title": "أتصرّفُ في وحداتِ قيسِ المساحةِ: المترُ المربّعُ وأجزاؤُه",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 3,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "76"
+    }
+  },
+  "y5m28": {
+    "id": "y5m28",
+    "unitId": "p3",
+    "num": 28,
+    "title": "أتصرّفُ في وحداتِ قيسِ المساحةِ: المترُ المربّعُ ومضاعفاتُه",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 3,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "80"
+    }
+  },
+  "y5m29": {
+    "id": "y5m29",
+    "unitId": "p3",
+    "num": 29,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 3,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "83"
+    }
+  },
+  "y5m30": {
+    "id": "y5m30",
+    "unitId": "p3",
+    "num": 30,
+    "title": "أرسُمُ الزّوايا وأقيسُها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 3,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "84"
+    }
+  },
+  "y5m31": {
+    "id": "y5m31",
+    "unitId": "p3",
+    "num": 31,
+    "title": "أرسُمُ مُنصّفَ الزّاويةِ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 3,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "87"
+    }
+  },
+  "y5m32": {
+    "id": "y5m32",
+    "unitId": "p3",
+    "num": 32,
+    "title": "أتصرّفُ في وحداتِ القيسِ الفلاحيّةِ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 3,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "90"
+    }
+  },
+  "y5m33": {
+    "id": "y5m33",
+    "unitId": "p3",
+    "num": 33,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 3,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "93"
+    }
+  },
+  "y5m34": {
+    "id": "y5m34",
+    "unitId": "p3",
+    "num": 34,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 3,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "95"
+    }
+  },
+  "y5m35": {
+    "id": "y5m35",
+    "unitId": "p3",
+    "num": 35,
+    "title": "أتسلّى",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 3,
+    "ready": true,
+    "icon": "🎲",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "97"
+    }
+  },
+  "y5m36": {
+    "id": "y5m36",
+    "unitId": "p4",
+    "num": 36,
+    "title": "أُكوّنُ الأعدادَ العشريّةَ وأكتبها وأقرؤها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 4,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "98"
+    }
+  },
+  "y5m37": {
+    "id": "y5m37",
+    "unitId": "p4",
+    "num": 37,
+    "title": "أفكّكُ الأعدادَ العشريّةَ وأركّبها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 4,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "102"
+    }
+  },
+  "y5m38": {
+    "id": "y5m38",
+    "unitId": "p4",
+    "num": 38,
+    "title": "أُقارنُ الأعدادَ العشريّةَ وأرتّبها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 4,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "105"
+    }
+  },
+  "y5m39": {
+    "id": "y5m39",
+    "unitId": "p4",
+    "num": 39,
+    "title": "أتصرّفُ في الأعدادِ العشريّةِ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 4,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "108"
+    }
+  },
+  "y5m40": {
+    "id": "y5m40",
+    "unitId": "p4",
+    "num": 40,
+    "title": "أجمَعُ الأعدادَ العشريّةَ وأطرحُها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 4,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "110"
+    }
+  },
+  "y5m41": {
+    "id": "y5m41",
+    "unitId": "p4",
+    "num": 41,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 4,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "114"
+    }
+  },
+  "y5m42": {
+    "id": "y5m42",
+    "unitId": "p4",
+    "num": 42,
+    "title": "أتصرّفُ في وحداتِ قيسِ الزّمنِ: السّاعة - الدّقيقة - الثّانية",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 4,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "117"
+    }
+  },
+  "y5m43": {
+    "id": "y5m43",
+    "unitId": "p4",
+    "num": 43,
+    "title": "أُنجزُ عمليّتَيِ الجمعِ والطّرحِ على وحداتِ قيسِ الزّمنِ: السّاعة - الدّقيقة - الثّانية",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 4,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "118"
+    }
+  },
+  "y5m44": {
+    "id": "y5m44",
+    "unitId": "p4",
+    "num": 44,
+    "title": "أُنجزُ عمليّتَيِ الجمعِ والطّرحِ على الأعدادِ الّتي تقيسُ الزّمنَ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 4,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "120"
+    }
+  },
+  "y5m45": {
+    "id": "y5m45",
+    "unitId": "p4",
+    "num": 45,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 4,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "124"
+    }
+  },
+  "y5m46": {
+    "id": "y5m46",
+    "unitId": "p4",
+    "num": 46,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 4,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "125"
+    }
+  },
+  "y5m47": {
+    "id": "y5m47",
+    "unitId": "p4",
+    "num": 47,
+    "title": "أتسلّى",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 4,
+    "ready": true,
+    "icon": "🎲",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "127"
+    }
+  },
+  "y5m48": {
+    "id": "y5m48",
+    "unitId": "p5",
+    "num": 48,
+    "title": "أُنجزُ عمليّةَ ضربِ عددٍ عشريٍّ × عددٍ صحيحٍ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 5,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "128"
+    }
+  },
+  "y5m49": {
+    "id": "y5m49",
+    "unitId": "p5",
+    "num": 49,
+    "title": "أُنجزُ عمليّةَ ضربِ عددٍ عشريٍّ × عددٍ عشريٍّ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 5,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "131"
+    }
+  },
+  "y5m50": {
+    "id": "y5m50",
+    "unitId": "p5",
+    "num": 50,
+    "title": "أُنجزُ عمليّاتِ الجمعِ والطّرحِ والضّربِ في مجموعةِ الأعدادِ العشريّةِ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 5,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "134"
+    }
+  },
+  "y5m51": {
+    "id": "y5m51",
+    "unitId": "p5",
+    "num": 51,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 5,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "136"
+    }
+  },
+  "y5m52": {
+    "id": "y5m52",
+    "unitId": "p5",
+    "num": 52,
+    "title": "أُقسّمُ عددًا عشريًّا على عددٍ صحيحٍ طبيعيٍّ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 5,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "138"
+    }
+  },
+  "y5m53": {
+    "id": "y5m53",
+    "unitId": "p5",
+    "num": 53,
+    "title": "أرسُمُ كلاًّ من المستطيلِ والمربّعِ اعتمادًا إلى القطرينِ والمحاورِ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 5,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "141"
+    }
+  },
+  "y5m54": {
+    "id": "y5m54",
+    "unitId": "p5",
+    "num": 54,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 5,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "145"
+    }
+  },
+  "y5m55": {
+    "id": "y5m55",
+    "unitId": "p5",
+    "num": 55,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 5,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "147"
+    }
+  },
+  "y5m56": {
+    "id": "y5m56",
+    "unitId": "p5",
+    "num": 56,
+    "title": "أُقسّمُ عددًا صحيحًا طبيعيًّا على عددٍ آخرَ صحيحٍ طبيعيٍّ: الخارجُ عددٌ عشريٌّ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 5,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "149"
+    }
+  },
+  "y5m57": {
+    "id": "y5m57",
+    "unitId": "p5",
+    "num": 57,
+    "title": "أُنجزُ عمليّةَ قسمةٍ قاسمُها عددٌ عشريٌّ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 5,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "152"
+    }
+  },
+  "y5m58": {
+    "id": "y5m58",
+    "unitId": "p5",
+    "num": 58,
+    "title": "أتعرّفُ المثلّثاتِ بأنواعِها وأرسمُها وأُسمّيها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 5,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "154"
+    }
+  },
+  "y5m59": {
+    "id": "y5m59",
+    "unitId": "p5",
+    "num": 59,
+    "title": "أتعرّفُ ارتفاعاتِ المثلّثِ وأرسمُها",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 5,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "158"
+    }
+  },
+  "y5m60": {
+    "id": "y5m60",
+    "unitId": "p5",
+    "num": 60,
+    "title": "أُنجزُ عمليّةَ الضّربِ على الأعدادِ الّتي تقيسُ الزّمنَ",
+    "domain": "الأعداد والعمليات",
+    "axisId": "axCalc",
+    "period": 5,
+    "ready": true,
+    "icon": "🔢",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "162"
+    }
+  },
+  "y5m61": {
+    "id": "y5m61",
+    "unitId": "p5",
+    "num": 61,
+    "title": "أتدرّبُ على حلّ المسائل",
+    "domain": "حلّ المشكل",
+    "axisId": "axProblem",
+    "period": 5,
+    "ready": true,
+    "icon": "🧠",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "164"
+    }
+  },
+  "y5m62": {
+    "id": "y5m62",
+    "unitId": "p5",
+    "num": 62,
+    "title": "أوظّفُ مكتسباتي وأُقيّمُها",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 5,
+    "ready": true,
+    "icon": "✅",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "165"
+    }
+  },
+  "y5m63": {
+    "id": "y5m63",
+    "unitId": "p5",
+    "num": 63,
+    "title": "أتسلّى",
+    "domain": "توظيف المكتسبات وتقييمها",
+    "axisId": "axAssess",
+    "period": 5,
+    "ready": true,
+    "icon": "🎲",
+    "officialRef": {
+      "source": "كتاب الرياضيات س5",
+      "pages": "167"
+    }
+  }
+}

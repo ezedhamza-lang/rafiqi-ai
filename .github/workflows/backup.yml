@@ -1,0 +1,35 @@
+name: daily-backup-free
+
+on:
+  schedule:
+    - cron: "0 2 * * *" # 02:00 UTC يومياً
+  workflow_dispatch: {} # تشغيل يدوي من GitHub
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Postgres client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+      - name: Dump Neon DB (gzip)
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          set -e
+          if [ -z "$DATABASE_URL" ]; then echo "DATABASE_URL secret missing" && exit 1; fi
+          TS=$(date +%F)
+          pg_dump "$DATABASE_URL" | gzip > "backup-neon-$TS.sql.gz"
+          ls -lh backup-*.sql.gz
+          echo "size=$(stat -c%s backup-neon-$TS.sql.gz)" >> $GITHUB_OUTPUT
+
+      - name: Upload artifact (90 days)
+        uses: actions/upload-artifact@v4
+        with:
+          name: backup-neon-${{ github.run_number }}
+          path: backup-*.sql.gz
+          retention-days: 90
+          if-no-files-found: error

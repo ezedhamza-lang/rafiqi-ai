@@ -1,0 +1,239 @@
+/**
+ * Batch 4: RTL/LTR Direction-Aware Styles
+ * 
+ * This file contains CSS rules that automatically adapt based on
+ * the document's `dir` attribute (set by i18n provider).
+ * 
+ * Usage: Import this file in your main CSS or index.jsx:
+ *   import './styles/rtl.css';
+ */
+
+/* ==================== LAYOUT ADJUSTMENTS ==================== */
+
+/* RTL: Flip margins and paddings that were hardcoded for LTR */
+[dir='rtl'] .margin-left-auto {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+[dir='ltr'] .margin-right-auto {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* ==================== FLEXBOX DIRECTION AWARENESS ==================== */
+
+/* Row direction with automatic flipping */
+.flex-row-rtl-aware {
+  display: flex;
+  flex-direction: row;
+}
+
+/* In RTL, reverse the visual order for icon+text patterns */
+[dir='rtl'] .icon-text-row {
+  flex-direction: row-reverse;
+}
+
+/* ==================== TEXT ALIGNMENT ==================== */
+
+/* Default text alignment based on direction */
+[dir='rtl'] .text-start {
+  text-align: right;
+}
+
+[dir='ltr'] .text-start {
+  text-align: left;
+}
+
+[dir='rtl'] .text-end {
+  text-align: left;
+}
+
+[dir='ltr'] .text-end {
+  text-align: right;
+}
+
+/* ==================== BORDER AWARENESS ==================== */
+
+/* Border sides that should follow text direction */
+[dir='rtl'] .border-start {
+  border-right: var(--border-width, 1px) solid var(--border-color, currentColor);
+  border-left: none;
+}
+
+[dir='ltr'] .border-start {
+  border-left: var(--border-width, 1px) solid var(--border-color, currentColor);
+  border-right: none;
+}
+
+[dir='rtl'] .border-end {
+  border-left: var(--border-width, 1px) solid var(--border-color, currentColor);
+  border-right: none;
+}
+
+[dir='ltr'] .border-end {
+  border-right: var(--border-width, 1px) solid var(--border-color, currentColor);
+  border-left: none;
+}
+
+/* ==================== POSITIONING AWARENESS ==================== */
+
+/* Absolute positioning that follows direction */
+[dir='rtl'] .position-start {
+  right: 0;
+  left: auto;
+}
+
+[dir='ltr'] .position-start {
+  left: 0;
+  right: auto;
+}
+
+[dir='rtl'] .position-end {
+  left: 0;
+  right: auto;
+}
+
+[dir='ltr'] .position-end {
+  right: 0;
+  left: auto;
+}
+
+/* ==================== SPECIFIC COMPONENT FIXES ==================== */
+
+/* Toast notifications - position correctly */
+[dir='rtl'] .ui-toast-container {
+  transform: translateX(50%);
+}
+
+[dir='ltr'] .ui-toast-container {
+  transform: translateX(-50%);
+}
+
+/* Switch component thumb position */
+[dir='rtl'] .ui-switch .thumb {
+  transform: translateX(-100%);
+}
+
+[dir='ltr'] .ui-switch .thumb {
+  transform: translateX(0%);
+}
+
+/* Table alignment */
+[dir='rtl'] table th,
+[dir='rtl'] table td {
+  text-align: right;
+}
+
+[dir='ltr'] table th,
+[dir='ltr'] table td {
+  text-align: left;
+}
+
+/* Number inputs should remain LTR even in RTL contexts */
+[dir='rtl'] input[type="number"],
+[dir='rtl'] input[type="tel"],
+[dir='rtl'] input[type="date"],
+[dir='rtl'] .currency-display,
+[dir='rtl'] .percentage-display {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+/* Code blocks and technical content should remain LTR */
+[dir='rtl'] pre,
+[dir='rtl'] code,
+[dir='rtl'] .code-block,
+[dir='rtl'] .technical-content {
+  direction: ltr;
+  text-align: left;
+}
+
+/* ==================== ANIMATION FLIPPING ==================== */
+
+/* Slide animations that respect direction */
+/* Note: We use different animation names for RTL/LTR since @keyframes can't be nested in [dir] selectors */
+
+/* LTR: Slide from left (default) */
+@keyframes slide-in-from-start {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-from-end {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* RTL: Slide from right (reversed) */
+@keyframes slide-in-from-start-rtl {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-from-end-rtl {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Apply RTL animations when dir=rtl */
+[dir='rtl'] .animate-slide-in-from-start {
+  animation-name: slide-in-from-start-rtl;
+}
+
+[dir='rtl'] .animate-slide-in-from-end {
+  animation-name: slide-in-from-end-rtl;
+}
+
+/* ==================== SCROLLBAR POSITIONING ==================== */
+
+/* Scrollbar appears on the "end" side */
+[dir='rtl'] .custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+[dir='rtl'] .custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+[dir='rtl'] .custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(128, 128, 128, 0.5);
+  border-radius: 4px;
+}
+
+/* ==================== PRINT STYLES ==================== */
+
+@media print {
+  /* Ensure proper direction in print */
+  [dir='rtl'] body {
+    direction: rtl;
+  }
+  
+  [dir='ltr'] body {
+    direction: ltr;
+  }
+}

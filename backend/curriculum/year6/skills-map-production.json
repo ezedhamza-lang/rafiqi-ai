@@ -1,0 +1,287 @@
+{
+  "_meta": {
+    "note": "خرائط المهارات للإنتاج الكتابي year6"
+  },
+  "lessons": {
+    "p1-l1": {
+      "learningObjectives": [
+        "أن يصف التلميذ مكانا وصفا دقيقا مراعيا الترتيب والانتقال بين أجزائه."
+      ],
+      "competencies": [
+        "إنتاج كتابي"
+      ],
+      "skills": [
+        "writing",
+        "text-organization"
+      ],
+      "indicators": [
+        "ينتج نصاً واضحاً ومنظماً"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "نص كتابي متماسك"
+      ],
+      "source": "curated"
+    },
+    "p1-l2": {
+      "learningObjectives": [
+        "أن يصف التلميذ شخصا من محيطه واصفا ملامحه وطبعه وأخلاقه."
+      ],
+      "competencies": [
+        "إنتاج كتابي"
+      ],
+      "skills": [
+        "writing",
+        "text-organization"
+      ],
+      "indicators": [
+        "ينتج نصاً واضحاً ومنظماً"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "نص كتابي متماسك"
+      ],
+      "source": "curated"
+    },
+    "p1-l3": {
+      "learningObjectives": [
+        "أن يصف التلميذ مشهدا طبيعيا وصفا حيا بالحواس والصور الفنية."
+      ],
+      "competencies": [
+        "إنتاج كتابي"
+      ],
+      "skills": [
+        "writing",
+        "text-organization"
+      ],
+      "indicators": [
+        "ينتج نصاً واضحاً ومنظماً"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "نص كتابي متماسك"
+      ],
+      "source": "curated"
+    },
+    "p2-l1": {
+      "learningObjectives": [
+        "أن يتعرف التلميذ على عناصر القصة: الشخصيات والأحداث والمكان والزمان."
+      ],
+      "competencies": [
+        "إنتاج كتابي"
+      ],
+      "skills": [
+        "writing",
+        "text-organization"
+      ],
+      "indicators": [
+        "ينتج نصاً واضحاً ومنظماً"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "نص كتابي متماسك"
+      ],
+      "source": "curated"
+    },
+    "p2-l2": {
+      "learningObjectives": [
+        "أن يرتب التلميذ الأحداث ترتيبا زمنيا منطقيا مع استعمال الروابط الزمنية."
+      ],
+      "competencies": [
+        "إنتاج كتابي"
+      ],
+      "skills": [
+        "writing",
+        "text-organization"
+      ],
+      "indicators": [
+        "ينتج نصاً واضحاً ومنظماً"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "نص كتابي متماسك"
+      ],
+      "source": "curated"
+    },
+    "p2-l3": {
+      "learningObjectives": [
+        "أن ينهي التلميذ قصته بخاتمة مشوقة تعبر عن العبرة أو تترك أثرا."
+      ],
+      "competencies": [
+        "إنتاج كتابي"
+      ],
+      "skills": [
+        "writing",
+        "text-organization"
+      ],
+      "indicators": [
+        "ينتج نصاً واضحاً ومنظماً"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "نص كتابي متماسك"
+      ],
+      "source": "curated"
+    },
+    "p3-l1": {
+      "learningObjectives": [
+        "أن يتعرف التلميذ على مكونات الرسالة الرسمية وترتيبها."
+      ],
+      "competencies": [
+        "إنتاج كتابي"
+      ],
+      "skills": [
+        "writing",
+        "text-organization"
+      ],
+      "indicators": [
+        "ينتج نصاً واضحاً ومنظماً"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "نص كتابي متماسك"
+      ],
+      "source": "curated"
+    },
+    "p3-l2": {
+      "learningObjectives": [
+        "أن يكتب التلميذ رسالة رسمية صحيحة البنية واضحة المضمون."
+      ],
+      "competencies": [
+        "إنتاج كتابي"
+      ],
+      "skills": [
+        "writing",
+        "text-organization"
+      ],
+      "indicators": [
+        "ينتج نصاً واضحاً ومنظماً"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "نص كتابي متماسك"
+      ],
+      "source": "curated"
+    },
+    "p4-l1": {
+      "learningObjectives": [
+        "أن يتعرف التلميذ على عناصر الحوار المسرحي: الشخصيات والملابسات والملاحظات."
+      ],
+      "competencies": [
+        "إنتاج كتابي"
+      ],
+      "skills": [
+        "writing",
+        "text-organization"
+      ],
+      "indicators": [
+        "ينتج نصاً واضحاً ومنظماً"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "نص كتابي متماسك"
+      ],
+      "source": "curated"
+    },
+    "p4-l2": {
+      "learningObjectives": [
+        "أن يكتب التلميذ مشهدا مسرحيا كاملا بعناصر متكاملة."
+      ],
+      "competencies": [
+        "إنتاج كتابي"
+      ],
+      "skills": [
+        "writing",
+        "text-organization"
+      ],
+      "indicators": [
+        "ينتج نصاً واضحاً ومنظماً"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "نص كتابي متماسك"
+      ],
+      "source": "curated"
+    },
+    "p5-l1": {
+      "learningObjectives": [
+        "أن يتعرف التلميذ على مكونات التقرير: العنوان والمقدمة والجسم والخاتمة."
+      ],
+      "competencies": [
+        "إنتاج كتابي"
+      ],
+      "skills": [
+        "writing",
+        "text-organization"
+      ],
+      "indicators": [
+        "ينتج نصاً واضحاً ومنظماً"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "نص كتابي متماسك"
+      ],
+      "source": "curated"
+    },
+    "p5-l2": {
+      "learningObjectives": [
+        "أن يكتب التلميذ تقريرا واضحا عن نشاط حقيقي أو افتراضي."
+      ],
+      "competencies": [
+        "إنتاج كتابي"
+      ],
+      "skills": [
+        "writing",
+        "text-organization"
+      ],
+      "indicators": [
+        "ينتج نصاً واضحاً ومنظماً"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "نص كتابي متماسك"
+      ],
+      "source": "curated"
+    },
+    "p6-l1": {
+      "learningObjectives": [
+        "أن يتعرف التلميذ على قواعد التلخيص وأساليبه."
+      ],
+      "competencies": [
+        "إنتاج كتابي"
+      ],
+      "skills": [
+        "writing",
+        "text-organization"
+      ],
+      "indicators": [
+        "ينتج نصاً واضحاً ومنظماً"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "نص كتابي متماسك"
+      ],
+      "source": "curated"
+    },
+    "p6-l2": {
+      "learningObjectives": [
+        "أن يلخص التلميذ نصا سرديا مع الحفاظ على تسلسل الأحداث."
+      ],
+      "competencies": [
+        "إنتاج كتابي"
+      ],
+      "skills": [
+        "writing",
+        "text-organization"
+      ],
+      "indicators": [
+        "ينتج نصاً واضحاً ومنظماً"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "نص كتابي متماسك"
+      ],
+      "source": "curated"
+    }
+  }
+}
