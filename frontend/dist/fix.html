@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head><meta charset="UTF-8"><title>إصلاح ذاكرة المنصة</title>
+<style>body{font-family:'Segoe UI',Tahoma,Arial;background:#f6f8fc;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}
+.box{background:#fff;border-radius:14px;padding:32px 40px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.08)}
+button{background:#3b6fd4;color:#fff;border:none;padding:12px 28px;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer}
+p{color:#555}</style></head>
+<body><div class="box">
+<h2>🔧 إصلاح ذاكرة المتصفح</h2>
+<p id="st">جارٍ مسح الذاكرة المؤقتة القديمة...</p>
+<button onclick="location='/'">العودة للمنصة</button>
+</div>
+<script>
+(async () => {
+  try {
+    const regs = await navigator.serviceWorker.getRegistrations();
+    for (const r of regs) await r.unregister();
+    const keys = await caches.keys();
+    for (const k of keys) await caches.delete(k);
+    document.getElementById('st').textContent = '✓ تم المسح بنجاح — اضغط «العودة للمنصة»';
+  } catch (e) {
+    document.getElementById('st').textContent = 'حدث خطأ: ' + e.message;
+  }
+})();
+</script></body></html>

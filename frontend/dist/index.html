@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>بوابة رفيقي للحياة المدرسية</title>
+    <meta name="description" content="بوابة رفيقي للحياة المدرسية — منصة تونسية رقمية للتلاميذ والأولياء والأساتذة والإدارة" />
+    <meta name="theme-color" content="#0ea5e9" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/png" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="رفيقي" />
+    
+    <!-- Batch 6: Pre-load theme & language settings to prevent flash -->
+    <script>
+      (function () {
+        try {
+          // Theme initialization (existing)
+          var stored = localStorage.getItem('rafiqi-theme');
+          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = stored === 'light' || stored === 'dark' ? stored : prefersDark ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+          
+          // Batch 6: Language/Direction initialization (NEW)
+          // This prevents FOUC (Flash of Unstyled Content) on page load
+          var langStorage = localStorage.getItem('rafiqi-lang');
+          var validLangs = ['ar', 'en'];
+          var lang = validLangs.includes(langStorage) ? langStorage : 'ar';
+          var dir = lang === 'ar' ? 'rtl' : 'ltr';
+          
+          document.documentElement.setAttribute('lang', lang);
+          document.documentElement.setAttribute('dir', dir);
+          
+          // Add direction class for CSS targeting
+          document.documentElement.className = document.documentElement.className.replace(/\b(dir-\w+)\b/g, '') + ' dir-' + dir;
+        } catch (e) {
+          // Silently fail - defaults in HTML will be used
+        }
+      })();
+    </script>
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Fonts: Noto Naskh Arabic (school-book style, clear tashkeel), Tajawal fallback, Nunito for Latin -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    
+    <!-- Material Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    
+    <!-- Batch 6: Critical CSS for RTL/LTR transition (inline for performance) -->
+    <style>
+      /* Prevent flash during direction change */
+      html[dir='rtl'] { font-family: 'Noto Naskh Arabic', 'Tajawal', sans-serif; }
+      html[dir='ltr'] { font-family: 'Nunito', 'Tajawal', sans-serif; }
+      
+      /* Smooth direction transitions */
+      .direction-changing * {
+        transition: none !important;
+      }
+      
+      /* Loading state while i18n initializes */
+      .i18n-loading {
+        visibility: visible;
+      }
+      
+      .i18n-ready {
+        visibility: visible;
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-Bc_mFBxl.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-react-CnR7Qp4K.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-5VPwbwrU.css">
+  </head>
+  <body>
+    <!-- Batch 6: Loading fallback - shown until React hydrates -->
+    <div id="loading-fallback" style="
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      font-family: 'Noto Naskh Arabic', 'Tajawal', sans-serif;
+      z-index: 9999;
+    ">
+      <div style="text-align: center;">
+        <div style="
+          width: 48px;
+          height: 48px;
+          margin: 0 auto 1rem;
+          border: 4px solid #bfdbfe;
+          border-top-color: #0ea5e9;
+          border-radius: 50%;
+          animation: spin 1s linear infinite;
+        "></div>
+        <p style="color: #0369a1; margin: 0; font-weight: 500;">جارٍ التحميل...</p>
+      </div>
+    </div>
+    
+    <style>
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+    
+    <!-- React root -->
+    <div id="root"></div>
+    
+    <!-- Batch 6: Remove loading fallback after React mounts -->
+    <script>
+      // إخفاء شاشة التحميل بأمان: عند جاهزية الصفحة أو بعد 4 ثوانٍ قصوى
+      // (حتى لو تعطلت خطوط/موارد خارجية لا تبقى الشاشة عالقة)
+      (function () {
+        var hidden = false;
+        function hide() {
+          if (hidden) return;
+          hidden = true;
+          var fallback = document.getElementById('loading-fallback');
+          if (fallback) {
+            fallback.style.opacity = '0';
+            fallback.style.transition = 'opacity 0.3s ease';
+            setTimeout(function () { fallback.remove(); }, 300);
+          }
+        }
+        if (document.readyState !== 'loading') setTimeout(hide, 100);
+        else document.addEventListener('DOMContentLoaded', function () { setTimeout(hide, 100); });
+        setTimeout(hide, 4000);
+        window.addEventListener('load', function () { setTimeout(hide, 100); });
+      })();
+    </script>
+    
+    <!-- Main app entry point -->
+  </body>
+</html>
