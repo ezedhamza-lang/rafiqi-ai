@@ -9,6 +9,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BANK_DIR = path.join(__dirname, '..', '..', 'data', 'question-bank');
 const USAGE_FILE = path.join(BANK_DIR, 'usage-log.json');
+const SAVED_FILE = path.join(BANK_DIR, 'saved-questions.json');
 
 // Ensure directory exists
 if (!fs.existsSync(BANK_DIR)) {
@@ -892,6 +893,76 @@ function saveUsageLog(log) {
   fs.writeFileSync(USAGE_FILE, JSON.stringify(log, null, 2), 'utf8');
 }
 
+// ===== نظام حفظ الأسئلة المولّدة بالذكاء الاصطناعي =====
+// يحفظ الأسئلة المولّدة في ملف JSON ليعاد استخدامها لاحقاً بدون ذكاء اصطناعي
+
+function loadSavedQuestions() {
+  try {
+    if (fs.existsSync(SAVED_FILE)) {
+      return JSON.parse(fs.readFileSync(SAVED_FILE, 'utf8'));
+    }
+  } catch (e) {
+    // ignore
+  }
+  return {};
+}
+
+function saveSavedQuestions(data) {
+  fs.writeFileSync(SAVED_FILE, JSON.stringify(data, null, 2), 'utf8');
+}
+
+/**
+ * يحفظ أسئلة مولّدة بالذكاء الاصطناعي في البنك
+ * @param {string} subject - المادة
+ * @param {string} gradeId - السنة
+ * @param {string} trimester - الثلاثي (t1, t2, t3)
+ * @param {Array} questions - مصفوفة الأسئلة
+ * @returns {number} عدد الأسئلة المحفوظة فعلاً (بعد استبعاد المكررة)
+ */
+export function addQuestionsToBank(subject, gradeId, trimester, questions) {
+  const saved = loadSavedQuestions();
+  const key = `${subject}-${gradeId}-${trimester}`;
+
+  if (!saved[key]) {
+    saved[key] = [];
+  }
+
+  const existingIds = new Set(saved[key].map(q => q.id));
+  let added = 0;
+
+  for (const q of questions) {
+    if (!existingIds.has(q.id)) {
+      saved[key].push({
+        ...q,
+        source: 'ai',
+        savedAt: new Date().toISOString()
+      });
+      existingIds.add(q.id);
+      added++;
+    }
+  }
+
+  if (added > 0) {
+    saveSavedQuestions(saved);
+  }
+
+  return added;
+}
+
+/**
+ * يجلب إحصائيات الأسئلة المحفوظة
+ */
+export function getSavedStats() {
+  const saved = loadSavedQuestions();
+  let totalSaved = 0;
+  const byCombo = {};
+  for (const [key, questions] of Object.entries(saved)) {
+    totalSaved += questions.length;
+    byCombo[key] = questions.length;
+  }
+  return { totalSaved, byCombo };
+}
+
 /**
  * يجلب أسئلة غير مستخدمة لمادة وسنة وثلاثي محددين
  * @param {string} subject - المادة (math, reading, science, etc.)
@@ -902,7 +973,13 @@ function saveUsageLog(log) {
  * @returns {Array} مصفوفة الأسئلة
  */
 export function getUnusedQuestions(subject, gradeId, trimester, teacherId, count = 10) {
-  const bank = QUESTION_BANK[subject]?.[gradeId]?.[trimester] || [];
+  // دمج الأسئلة الثابتة + المحفوظة من الذكاء الاصطناعي
+  const staticBank = QUESTION_BANK[subject]?.[gradeId]?.[trimester] || [];
+  const saved = loadSavedQuestions();
+  const savedKey = `${subject}-${gradeId}-${trimester}`;
+  const savedBank = saved[savedKey] || [];
+  const bank = [...staticBank, ...savedBank];
+
   if (bank.length === 0) return [];
 
   const usage = loadUsageLog();
@@ -915,7 +992,10 @@ export function getUnusedQuestions(subject, gradeId, trimester, teacherId, count
   // إذا لم تبق أسئلة غير مستخدمة، نعيد البدء من الأول
   if (unused.length === 0) {
     if (usage[teacherKey]) {
-      usage[teacherKey] = usage[teacherKey].filter(id => !id.startsWith(`${subject.slice(0,2)}-${gradeId.slice(-1)}-${trimester}`));
+      usage[teacherKey] = usage[teacherKey].filter(id => {
+        const prefix = `${subject.slice(0,2)}-${gradeId.slice(-1)}-${trimester}`;
+        return !id.startsWith(prefix) && !id.startsWith('ai-');
+      });
       saveUsageLog(usage);
     }
     return getUnusedQuestions(subject, gradeId, trimester, teacherId, count);
@@ -998,18 +1078,47 @@ export function getBankStats(subject, gradeId, trimester) {
  */
 export function getAvailableCombinations() {
   const combinations = [];
+  const seen = new Set();
 
+  // الأسئلة الثابتة
   for (const [subject, years] of Object.entries(QUESTION_BANK)) {
     for (const [gradeId, trimesters] of Object.entries(years)) {
       for (const [trimester, questions] of Object.entries(trimesters)) {
         if (questions.length > 0) {
+          const key = `${subject}-${gradeId}-${trimester}`;
+          seen.add(key);
           combinations.push({
             subject,
             gradeId,
             trimester,
-            questionCount: questions.length
+            questionCount: questions.length,
+            source: 'static'
           });
         }
+      }
+    }
+  }
+
+  // الأسئلة المحفوظة من الذكاء الاصطناعي
+  const saved = loadSavedQuestions();
+  for (const [key, questions] of Object.entries(saved)) {
+    if (questions.length > 0) {
+      const [subject, gradeId, trimester] = key.split('-');
+      if (seen.has(key)) {
+        // زيادة العدد في الموجود
+        const existing = combinations.find(c => c.subject === subject && c.gradeId === gradeId && c.trimester === trimester);
+        if (existing) {
+          existing.questionCount += questions.length;
+          existing.source = 'mixed';
+        }
+      } else {
+        combinations.push({
+          subject,
+          gradeId,
+          trimester,
+          questionCount: questions.length,
+          source: 'ai'
+        });
       }
     }
   }

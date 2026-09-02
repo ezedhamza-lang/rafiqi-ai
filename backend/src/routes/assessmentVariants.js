@@ -361,14 +361,23 @@ router.post(
 
     const { generateWithAI, generateWithAIGeneral } = await import('../services/aiExamGenerator.js');
     const { buildOfficialDocx } = await import('../services/officialDocxService.js');
+    const { addQuestionsToBank } = await import('../services/questionBankService.js');
+
+    const trimesterKey = `t${Number(trimester)}`;
 
     let exam;
     try {
       // محاولة القالب أولاً
-      exam = await generateWithAI(apiKey, subject, gradeId, `t${trimester}`);
+      exam = await generateWithAI(apiKey, subject, gradeId, trimesterKey);
     } catch (e) {
       // إذا لم يكن هناك قالب، استخدم التوليد العام
-      exam = await generateWithAIGeneral(apiKey, subject, gradeId, `t${trimester}`, customPrompt);
+      exam = await generateWithAIGeneral(apiKey, subject, gradeId, trimesterKey, customPrompt);
+    }
+
+    // حفظ الأسئلة في البنك تلقائياً لاستخدامها لاحقاً
+    let savedCount = 0;
+    if (exam.questions && exam.questions.length > 0) {
+      savedCount = addQuestionsToBank(subject, gradeId, trimesterKey, exam.questions);
     }
 
     const format = req.body.format || 'docx';
@@ -388,7 +397,7 @@ router.post(
       res.setHeader('Content-Disposition', `attachment; filename="اختبار_${subject}_${gradeId}_T${trimester}.docx"`);
       res.send(Buffer.from(buffer));
     } else {
-      res.json(exam);
+      res.json({ ...exam, savedToBank: savedCount });
     }
   })
 );
@@ -414,9 +423,10 @@ router.get(
   authMiddleware,
   teacherMiddleware,
   asyncHandler(async (req, res) => {
-    const { getAvailableCombinations, getBankStats } = await import('../services/questionBankService.js');
+    const { getAvailableCombinations, getBankStats, getSavedStats } = await import('../services/questionBankService.js');
     const combinations = getAvailableCombinations();
-    res.json({ combinations });
+    const savedStats = getSavedStats();
+    res.json({ combinations, savedStats });
   })
 );
 
