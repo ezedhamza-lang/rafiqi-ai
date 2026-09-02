@@ -227,7 +227,7 @@ export function generateStandardsExam({ gradeId = 'year1', subject = 'math', see
   const objectiveSum = questions.filter((q) => q.type === 'MCQ').reduce((s, q) => s + q.points, 0);
   if (!crit_free_only(preset) && objectiveSum > 0) {
     const factor = (totalMax - freePoints(questions)) / objectiveSum;
-    for (const q of questions) if (q.type === 'MCQ') q.points = Math.round(q.points * factor * 2) / 2;
+    for (const q of questions) if (q.type === 'MCQ') Object.assign(q, { points: Math.round(q.points * factor * 2) / 2 });
   }
 
   return {

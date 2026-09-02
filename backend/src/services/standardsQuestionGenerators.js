@@ -46,8 +46,241 @@ const NUMBER_WORDS_100 = [
 ];
 
 export const GENERATORS = {
-  // ================= السنة الأولى (موجودة مسبقاً) =================
-  // ... (المولدات الحالية للسنة الأولى تبقى كما هي)
+  // ================= السنة الأولى - قراءة =================
+  'std-001': (rand) => {
+    const letters = ['ب','ت','ث','ج','ح','خ','د','ذ','ر','ز','س','ش','ص','ض','ط','ظ','ع','غ','ف','ق','ك','ل','م','ن','ه','و','ي'];
+    const letter = pick(rand, letters);
+    const wrongs = letters.filter(l => l !== letter);
+    const { options, correctOption } = buildOptions(rand, letter, wrongs);
+    return { prompt: `أي حرفٍ هذا: «${letter}»؟`, options, correctOption };
+  },
+  'std-002': (rand) => {
+    const combos = [
+      { combo: 'با', parts: ['ب','ا'] }, { combo: 'تا', parts: ['ت','ا'] },
+      { combo: 'جا', parts: ['ج','ا'] }, { combo: 'حا', parts: ['ح','ا'] },
+      { combo: 'كا', parts: ['ك','ا'] }, { combo: 'لا', parts: ['ل','ا'] },
+      { combo: 'ما', parts: ['م','ا'] }, { combo: 'نا', parts: ['ن','ا'] },
+      { combo: 'بي', parts: ['ب','ي'] }, { combo: 'تي', parts: ['ت','ي'] },
+    ];
+    const c = pick(rand, combos);
+    const wrongs = combos.filter(x => x.combo !== c.combo).map(x => x.combo);
+    const { options, correctOption } = buildOptions(rand, c.combo, wrongs);
+    return { prompt: `ما هو هذا المقطع: «${c.combo}»؟`, options, correctOption };
+  },
+  'std-003': (rand) => {
+    const words = [
+      { word: 'كِتَاب', meaning: 'نقرأ فيه الدروس' },
+      { word: 'قَلَم', meaning: 'نكتب به' },
+      { word: 'مِفْتَاح', meaning: 'يفتح الباب' },
+      { word: 'تِفَّاحَة', meaning: 'فاكهة حمراء' },
+      { word: 'نَجْمَة', meaning: 'تلمع في السماء ليلاً' },
+      { word: 'وَرْدَة', meaning: 'زهرة جميلة' },
+    ];
+    const w = pick(rand, words);
+    const wrongs = words.filter(x => x.word !== w.word).map(x => x.word);
+    const { options, correctOption } = buildOptions(rand, w.word, wrongs);
+    return { prompt: `أي كلمة تعني: «${w.meaning}»؟`, options, correctOption };
+  },
+  'std-004': (rand) => {
+    const sentences = [
+      { s: 'يأكلُ الطفلُ التفاحةَ.', q: 'ماذا يأكلُ الطفلُ؟', a: 'التفاحةَ', w: ['الخبزَ', 'الحليبَ', 'التفاحةَ'] },
+      { s: 'ترسمُ ليلى بيتاً.', q: 'ماذا ترسمُ ليلى؟', a: 'بيتاً', w: ['شجرةً', 'بيتاً', 'قطةً'] },
+      { s: 'يلعبُ سامي في الحديقةِ.', q: 'أين يلعبُ سامي؟', a: 'في الحديقة', w: ['في المدرسة', 'في البيت', 'في الحديقة'] },
+    ];
+    const s = pick(rand, sentences);
+    const { options, correctOption } = buildOptions(rand, s.a, s.w);
+    return { prompt: `اقرأ: «${s.s}» — ${s.q}`, options, correctOption };
+  },
+
+  // ================= السنة الأولى - رياضيات =================
+  'std-013': (rand) => {
+    const n = ri(rand, 1, 9);
+    const nums = Array.from({length: 9}, (_, i) => String(i + 1));
+    const { options, correctOption } = buildOptions(rand, n, nums);
+    return { prompt: `كم عدد الكُتل: ${'■'.repeat(n)}؟`, options, correctOption };
+  },
+  'std-014': (rand) => {
+    const n = ri(rand, 1, 9);
+    const nums = Array.from({length: 9}, (_, i) => String(i + 1));
+    const { options, correctOption } = buildOptions(rand, n, nums);
+    const word = NUMBER_WORDS[n] || String(n);
+    return { prompt: `اكتب العدد «${n}» بالحروف`, options, correctOption };
+  },
+  'std-015': (rand) => {
+    const n = ri(rand, 10, 20);
+    const nums = [10,11,12,13,14,15,16,17,18,19,20].map(String);
+    const { options, correctOption } = buildOptions(rand, n, nums);
+    const word = NUMBER_WORDS_100[n] || String(n);
+    return { prompt: `اكتب العدد «${n}» بالحروف`, options, correctOption };
+  },
+  'std-016': (rand) => {
+    const a = ri(rand, 1, 5);
+    const b = ri(rand, 1, 9 - a);
+    const wrongs = [a + b - 1, a + b + 1, a + b + 2].filter(x => x > 0 && x !== a + b);
+    const nums = [String(a + b), ...wrongs.map(String)].slice(0, 3);
+    const { options, correctOption } = buildOptions(rand, a + b, nums);
+    return { prompt: `${a} + ${b} = ؟`, options, correctOption };
+  },
+  'std-017': (rand) => {
+    const a = ri(rand, 3, 9);
+    const b = ri(rand, 1, a - 1);
+    const wrongs = [a - b - 1, a - b + 1, a - b + 2].filter(x => x >= 0 && x !== a - b);
+    const nums = [String(a - b), ...wrongs.map(String)].slice(0, 3);
+    const { options, correctOption } = buildOptions(rand, a - b, nums);
+    return { prompt: `${a} − ${b} = ؟`, options, correctOption };
+  },
+  'std-018': (rand) => {
+    const pairs = [
+      { a: '3', b: '5', answer: '5' }, { a: '7', b: '2', answer: '7' },
+      { a: '4', b: '8', answer: '8' }, { a: '6', b: '1', answer: '6' },
+    ];
+    const p = pick(rand, pairs);
+    const { options, correctOption } = buildOptions(rand, p.answer, [p.a, p.b, String(ri(rand, 1, 9))]);
+    return { prompt: `أي عدد أكبر: ${p.a} أو ${p.b}؟`, options, correctOption };
+  },
+  'std-019': (rand) => {
+    const shapes = [
+      { shape: 'المربع', sides: '4', opts: ['3', '4', '5'] },
+      { shape: 'المثلث', sides: '3', opts: ['3', '4', '5'] },
+      { shape: 'الدائرة', sides: '0', opts: ['0', '4', '2'] },
+    ];
+    const s = pick(rand, shapes);
+    const { options, correctOption } = buildOptions(rand, s.sides, s.opts);
+    return { prompt: `كم أضلاع ${s.shape}؟`, options, correctOption };
+  },
+  'std-020': (rand) => {
+    const colors = [
+      { q: 'لون السماء', a: 'أزرق', w: ['أحمر', 'أزرق', 'أخضر'] },
+      { q: 'لون العشب', a: 'أخضر', w: ['أحمر', 'أزرق', 'أخضر'] },
+      { q: 'لون الشمس', a: 'أصفر', w: ['أصفر', 'أزرق', 'أسود'] },
+    ];
+    const c = pick(rand, colors);
+    const { options, correctOption } = buildOptions(rand, c.a, c.w);
+    return { prompt: `${c.q} هو لون:`, options, correctOption };
+  },
+  'std-021': (rand) => {
+    const items = [
+      { q: 'أطول من: العمود أطول من ___', a: 'القلم', w: ['الbuilding', 'القلم', 'الكتاب'] },
+      { q: 'أقصر من: الورقة أقصر من ___', a: 'الكتاب', w: ['القلم', 'الكتاب', 'الطاولة'] },
+      { q: 'يكون أكبر: ___ أكبر من ___', a: 'الفيل أكبر من القط', w: ['الفيل أكبر من القط', 'القط أكبر من الفيل', 'هما متساويان'] },
+    ];
+    const c = pick(rand, items);
+    const { options, correctOption } = buildOptions(rand, c.a, c.w);
+    return { prompt: c.q, options, correctOption };
+  },
+  'std-022': (rand) => {
+    const times = [
+      { q: 'في الصباح، نستيقظ ونأكل ___', a: 'الفطور', w: ['الفطور', 'العشاء', 'الغداء'] },
+      { q: 'عند الظهير، نأكل ___', a: 'الغداء', w: ['الفطور', 'الغداء', 'العشاء'] },
+      { q: 'عند المساء، نأكل ___', a: 'العشاء', w: ['الفطور', 'الغداء', 'العشاء'] },
+    ];
+    const t = pick(rand, times);
+    const { options, correctOption } = buildOptions(rand, t.a, t.w);
+    return { prompt: t.q, options, correctOption };
+  },
+
+  // ================= السنة الأولى - إيقاظ علمي =================
+  'std-023': (rand) => {
+    const parts = [
+      { q: 'نبصر بها', a: 'العينان', w: ['العينان', 'الأذنان', 'اليدان'] },
+      { q: 'نسمع بها', a: 'الأذنان', w: ['العينان', 'الأذنان', 'الفم'] },
+      { q: 'نتذوق بها', a: 'الفم', w: ['الأنف', 'الفم', 'العينان'] },
+      { q: 'نشم بها', a: 'الأنف', w: ['الأنف', 'الفم', 'العينان'] },
+    ];
+    const p = pick(rand, parts);
+    const { options, correctOption } = buildOptions(rand, p.a, p.w);
+    return { prompt: `${p.q} — ما هو العضو؟`, options, correctOption };
+  },
+  'std-024': (rand) => {
+    const foods = [
+      { q: '哪种 هو طعام صحي؟', a: 'التفاحة', w: ['التفاحة', 'الشيبس', 'المثلجات'] },
+      { q: 'أي طعام يiben nutrients نحتاج؟', a: 'الحليب', w: ['الماء', 'الحليب', 'العلك'] },
+    ];
+    const f = pick(rand, [
+      { q: 'أي من هذه صحي للأكل؟', a: 'التفاحة', w: ['التفاحة', 'علك النعناع', 'المثلجات'] },
+      { q: 'ما نشرب لل sức khoẻ؟', a: 'الماء', w: ['الماء', 'العلك', 'الشيبس'] },
+    ]);
+    const { options, correctOption } = buildOptions(rand, f.a, f.w);
+    return { prompt: f.q, options, correctOption };
+  },
+  'std-025': (rand) => {
+    const actions = [
+      { q: 'الجري حركة ____', a: 'سريعة', w: ['سريعة', 'بطيئة', 'ثابتة'] },
+      { q: 'المشي حركة ____', a: 'بطيئة', w: ['سريعة', 'بطيئة', 'هادئة'] },
+      { q: 'القفز حركة ____', a: 'سريعة', w: ['بطيئة', 'سريعة', 'ثابتة'] },
+    ];
+    const a = pick(rand, actions);
+    const { options, correctOption } = buildOptions(rand, a.a, a.w);
+    return { prompt: a.q, options, correctOption };
+  },
+  'std-026': (rand) => {
+    const animals = [
+      { q: 'القط ___ في الليل', a: 'يصحو', w: ['يصحو', 'ينام', 'يطير'] },
+      { q: 'الدجاج ___ في الصباح', a: 'يصرخ', w: ['يصرخ', 'ينام', 'يسبح'] },
+    ];
+    const a = pick(rand, [
+      { q: 'ماذا يفعل القطة في الليل؟', a: 'تصطاد', w: ['تصطاد', 'تنام', 'تطير'] },
+      { q: 'ماذا يفعل الدجاج في الصباح؟', a: 'يصيح', w: ['يصيح', 'ينام', 'يسبح'] },
+      { q: 'ماذا يفعل الحصان؟', a: 'يركض', w: ['يركض', 'يطير', 'يسبح'] },
+    ]);
+    const { options, correctOption } = buildOptions(rand, a.a, a.w);
+    return { prompt: a.q, options, correctOption };
+  },
+  'std-027': (rand) => {
+    const seasons = [
+      { q: 'في ____ نلبس معطفاً', a: 'الشتاء', w: ['الشتاء', 'الصيف', 'الربيع'] },
+      { q: 'في ____ الجو حار', a: 'الصيف', w: ['الصيف', 'الشتاء', 'الخريف'] },
+      { q: 'في ____ تتساقط الأوراق', a: 'الخريف', w: ['الخريف', 'الصيف', 'الربيع'] },
+    ];
+    const s = pick(rand, seasons);
+    const { options, correctOption } = buildOptions(rand, s.a, s.w);
+    return { prompt: s.q, options, correctOption };
+  },
+  'std-028': (rand) => {
+    const body = [
+      { q: 'نمشي بـ', a: 'القدمين', w: ['القدمين', 'اليدين', 'الرأس'] },
+      { q: 'نحمل الأشياء بـ', a: 'اليدين', w: ['اليدين', 'القدمين', 'الرأس'] },
+      { q: 'نفكر بـ', a: 'الدماغ', w: ['الدماغ', 'القلب', 'المعدة'] },
+    ];
+    const b = pick(rand, body);
+    const { options, correctOption } = buildOptions(rand, b.a, b.w);
+    return { prompt: b.q, options, correctOption };
+  },
+  'std-029': (rand) => {
+    const materials = [
+      { q: 'الماء سائل', a: 'صحيح', w: ['صحيح', 'خطأ'] },
+      { q: 'الحجر صلب', a: 'صحيح', w: ['صحيح', 'خطأ'] },
+      { q: 'الهواء صلب', a: 'خطأ', w: ['صحيح', 'خطأ'] },
+    ];
+    const m = pick(rand, materials);
+    const { options, correctOption } = buildOptions(rand, m.a, m.w);
+    return { prompt: `صح أم خطأ: ${m.q}؟`, options, correctOption };
+  },
+  'std-030': (rand) => {
+    const plants = [
+      { q: 'النبات يحتاج إلى ___', a: 'الماء والشمس', w: ['الماء والشمس', 'الظلام فقط', 'الملح'] },
+      { q: 'الأوراق ____', a: 'خضراء', w: ['خضراء', 'زرقاء', 'حمراء'] },
+    ];
+    const p = pick(rand, [
+      { q: 'ماذا يحتاج النبات لينمو؟', a: 'الماء والشمس', w: ['الماء والشمس', 'الظلام', 'الملح'] },
+      { q: 'ما لون أوراق النبات العادي؟', a: 'أخضر', w: ['أخضر', 'أزرق', 'بنفسجي'] },
+    ]);
+    const { options, correctOption } = buildOptions(rand, p.a, p.w);
+    return { prompt: p.q, options, correctOption };
+  },
+  'std-031': (rand) => {
+    const time = [
+      { q: 'اليوم فيه ___ ساعات', a: '24', w: ['12', '24', '30'] },
+      { q: 'الليلة ___ من النهار', a: 'أطول', w: ['أطول', 'أقصر', 'مساوية'] },
+    ];
+    const t = pick(rand, [
+      { q: 'كم ساعة في اليوم؟', a: '24', w: ['12', '24', '30'] },
+      { q: 'كم يوم في الأسبوع؟', a: '7', w: ['5', '7', '10'] },
+      { q: 'كم شهر في السنة؟', a: '12', w: ['10', '12', '15'] },
+    ]);
+    const { options, correctOption } = buildOptions(rand, t.a, t.w);
+    return { prompt: t.q, options, correctOption };
+  },
 
   // ================= السنة الثانية - قراءة (Reading) =================
   'std2-rd-01': (rand) => {
@@ -245,8 +478,8 @@ export const GENERATORS = {
     return { prompt: `في العدد ${n}، كم عدد ${label}؟`, options, correctOption };
   },
   'std2-mt-02': (rand) => {
-    const a = ri(rand, 10, 99);
-    const b = ri(rand, 10, 99);
+    let a = ri(rand, 10, 99);
+    let b = ri(rand, 10, 99);
     const op = rand() > 0.5 ? '+' : '-';
     if (op === '-' && a < b) [a, b] = [b, a]; // ensure positive
     const answer = op === '+' ? a + b : a - b;
@@ -255,8 +488,8 @@ export const GENERATORS = {
     return { prompt: `احسب: ${a} ${op} ${b} = ؟`, options, correctOption };
   },
   'std2-mt-03': (rand) => {
-    const a = ri(rand, 10, 50);
-    const b = ri(rand, 10, 50);
+    let a = ri(rand, 10, 50);
+    let b = ri(rand, 10, 50);
     if (a < b) [a, b] = [b, a];
     const answer = a - b;
     const wrong = [answer + 5, answer - 5, a + b, b - a].filter(x => x > 0 && x !== answer);
