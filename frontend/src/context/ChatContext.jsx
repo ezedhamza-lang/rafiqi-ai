@@ -36,10 +36,7 @@ export function ChatProvider({ children }) {
     const connect = () => {
       const token = getToken();
       const proto = window.location.protocol === 'https:' ? 'wss' : 'ws';
-      // إرسال التوكن عبر Sec-WebSocket-Protocol (لا يظهر في السجلات) مع تراجع لـ query للتوافق
-      ws = token
-        ? new WebSocket(`${proto}://${window.location.host}/ws`, [`Bearer ${token}`])
-        : new WebSocket(`${proto}://${window.location.host}/ws`);
+      ws = new WebSocket(`${proto}://${window.location.host}/ws?token=${encodeURIComponent(token || '')}`);
       wsRef.current = ws;
 
       ws.onopen = () => {
