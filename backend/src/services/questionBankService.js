@@ -894,12 +894,7 @@ function loadUsageLog() {
 }
 
 function saveUsageLog(log) {
-  try {
-    fs.mkdirSync(BANK_DIR, { recursive: true });
-    fs.writeFileSync(USAGE_FILE, JSON.stringify(log, null, 2), 'utf8');
-  } catch (e) {
-    console.warn('[questionBank] Could not save usage log:', e.message);
-  }
+  fs.writeFileSync(USAGE_FILE, JSON.stringify(log, null, 2), 'utf8');
 }
 
 // ===== نظام حفظ الأسئلة المولّدة بالذكاء الاصطناعي =====
@@ -917,12 +912,7 @@ function loadSavedQuestions() {
 }
 
 function saveSavedQuestions(data) {
-  try {
-    fs.mkdirSync(BANK_DIR, { recursive: true });
-    fs.writeFileSync(SAVED_FILE, JSON.stringify(data, null, 2), 'utf8');
-  } catch (e) {
-    console.warn('[questionBank] Could not save questions:', e.message);
-  }
+  fs.writeFileSync(SAVED_FILE, JSON.stringify(data, null, 2), 'utf8');
 }
 
 /**
