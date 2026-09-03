@@ -332,12 +332,18 @@ router.post(
 
     const format = req.body.format || 'docx';
     if (format === 'docx') {
-      const buffer = await buildOfficialDocx(exam, {
-        gradeId,
-        subject,
-        trimester: trimesterNum,
-        schoolName: req.body.schoolName || ''
-      });
+      let buffer;
+      try {
+        buffer = await buildOfficialDocx(exam, {
+          gradeId,
+          subject,
+          trimester: trimesterNum,
+          schoolName: req.body.schoolName || ''
+        });
+      } catch (docxErr) {
+        console.error('[generate-from-bank] buildOfficialDocx error:', docxErr.message, docxErr.stack);
+        throw new ApiError(500, `DOCX build error: ${docxErr.message}`);
+      }
       res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
       res.setHeader('Content-Disposition', `attachment; filename="اختبار_${subject}_${gradeId}_${trimesterKey}.docx"`);
       res.send(Buffer.from(buffer));
