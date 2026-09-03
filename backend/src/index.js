@@ -200,9 +200,9 @@ async function start() {
   });
   startRenewalScheduler();
   startParentInsightScheduler();
-  server.listen(PORT, () => {
-    console.log(`API server listening on http://localhost:${PORT}`);
-    console.log(`Swagger docs available on http://localhost:${PORT}/api-docs`);
+  server.listen(PORT, '0.0.0.0', () => {
+    console.log(`API server listening on http://0.0.0.0:${PORT}`);
+    console.log(`Swagger docs available on http://0.0.0.0:${PORT}/api-docs`);
   });
 }
 
