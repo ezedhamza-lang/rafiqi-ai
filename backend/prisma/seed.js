@@ -128,9 +128,17 @@ async function main() {
     });
   }
 
-  await prisma.lesson.deleteMany({});
+  try {
+    await prisma.lesson.deleteMany({});
+  } catch (e) {
+    console.warn('Could not delete lessons:', e.message);
+  }
   for (const l of lessons) {
-    await prisma.lesson.create({ data: l });
+    try {
+      await prisma.lesson.create({ data: l });
+    } catch (e) {
+      console.warn('Lesson create skipped:', e.message);
+    }
   }
 
   const demoUsers = [
@@ -206,146 +214,174 @@ async function main() {
   ];
   const createdClasses = {};
   for (const c of classes) {
-    const existingClass = await prisma.class.findFirst({
-      where: { name: c.name, level: c.level, schoolYear: c.schoolYear || '2026-2027' }
-    });
-    if (existingClass) {
-      createdClasses[c.name] = existingClass;
-      continue;
+    try {
+      const existingClass = await prisma.class.findFirst({
+        where: { name: c.name, level: c.level }
+      });
+      if (existingClass) {
+        createdClasses[c.name] = existingClass;
+        continue;
+      }
+      const created = await prisma.class.create({ data: c });
+      createdClasses[c.name] = created;
+    } catch (e) {
+      console.warn('Class create skipped:', c.name, e.message);
+      const fallback = await prisma.class.findFirst({ where: { name: c.name } });
+      if (fallback) createdClasses[c.name] = fallback;
     }
-    const created = await prisma.class.create({ data: c });
-    createdClasses[c.name] = created;
   }
 
   const parent = users['parent@test.tn'];
   const studentAccount = users['student@test.tn'];
-  const existingStudent = await prisma.student.findUnique({
-    where: { accountUserId: studentAccount.id }
-  });
-  const student = existingStudent
-    ? await prisma.student.update({
-        where: { id: existingStudent.id },
+
+  let student;
+  try {
+    const existingStudent = await prisma.student.findUnique({
+      where: { accountUserId: studentAccount.id }
+    });
+    student = existingStudent
+      ? await prisma.student.update({
+          where: { id: existingStudent.id },
+          data: {
+            userId: parent.id,
+            classId: createdClasses['قسم السنة الأولى أ']?.id,
+            firstName: 'أحمد',
+            lastName: 'التلميذ',
+            birthDate: new Date('2019-03-15'),
+            cin: '00000000',
+            gender: 'ذكر',
+            level: 'السنة الأولى أساسي',
+            schoolYear: '2026-2027',
+            schoolName: 'المدرسة الابتدائية النموذجية'
+          }
+        })
+      : await prisma.student.create({
+          data: {
+            userId: parent.id,
+            accountUserId: studentAccount.id,
+            classId: createdClasses['قسم السنة الأولى أ']?.id,
+            firstName: 'أحمد',
+            lastName: 'التلميذ',
+            birthDate: new Date('2019-03-15'),
+            cin: '00000000',
+            gender: 'ذكر',
+            level: 'السنة الأولى أساسي',
+            schoolYear: '2026-2027',
+            schoolName: 'المدرسة الابتدائية النموذجية'
+          }
+        });
+  } catch (e) {
+    console.warn('Student upsert failed:', e.message);
+  }
+
+  try {
+    const existingSub = await prisma.subscription.findFirst({
+      where: { userId: studentAccount.id, schoolYear: '2026-2027' }
+    });
+    if (!existingSub && student) {
+      const sub = await prisma.subscription.create({
         data: {
-          userId: parent.id,
-          classId: createdClasses['قسم السنة الأولى أ'].id,
-          firstName: 'أحمد',
-          lastName: 'التلميذ',
-          birthDate: new Date('2019-03-15'),
-          cin: '00000000',
-          gender: 'ذكر',
-          level: 'السنة الأولى أساسي',
+          userId: studentAccount.id,
+          type: 'STUDENT',
+          plan: 'اشتراك تلميذ',
           schoolYear: '2026-2027',
-          schoolName: 'المدرسة الابتدائية النموذجية'
+          startDate: new Date('2026-09-01'),
+          endDate: new Date('2027-06-30'),
+          status: 'ACTIVE',
+          amount: 147,
+          studentId: student.id
         }
-      })
-    : await prisma.student.create({
+      });
+      await prisma.payment.create({
         data: {
-          userId: parent.id,
-          accountUserId: studentAccount.id,
-          classId: createdClasses['قسم السنة الأولى أ'].id,
-          firstName: 'أحمد',
-          lastName: 'التلميذ',
-          birthDate: new Date('2019-03-15'),
-          cin: '00000000',
-          gender: 'ذكر',
+          subscriptionId: sub.id,
+          amount: 147,
+          method: 'OFFLINE',
+          paidByUserId: users['admin@education.tn'].id
+        }
+      });
+    }
+  } catch (e) {
+    console.warn('Subscription/Payment upsert failed:', e.message);
+  }
+
+  try {
+    const pendingReq = await prisma.subscriptionRequest.findFirst({
+      where: { parentId: parent.id, firstName: 'مريم' }
+    });
+    if (!pendingReq) {
+      await prisma.subscriptionRequest.create({
+        data: {
+          parentId: parent.id,
+          firstName: 'مريم',
+          lastName: 'التلميذة',
+          birthDate: new Date('2020-05-10'),
+          cin: '12345678',
+          gender: 'أنثى',
           level: 'السنة الأولى أساسي',
           schoolYear: '2026-2027',
           schoolName: 'المدرسة الابتدائية النموذجية'
         }
       });
-
-  const existingSub = await prisma.subscription.findFirst({
-    where: { userId: studentAccount.id, schoolYear: '2026-2027' }
-  });
-  if (!existingSub) {
-    const sub = await prisma.subscription.create({
-      data: {
-        userId: studentAccount.id,
-        type: 'STUDENT',
-        plan: 'اشتراك تلميذ',
-        schoolYear: '2026-2027',
-        startDate: new Date('2026-09-01'),
-        endDate: new Date('2027-06-30'),
-        status: 'ACTIVE',
-        amount: 147,
-        studentId: student.id
-      }
-    });
-    await prisma.payment.create({
-      data: {
-        subscriptionId: sub.id,
-        amount: 147,
-        method: 'OFFLINE',
-        paidByUserId: users['admin@education.tn'].id
-      }
-    });
+    }
+  } catch (e) {
+    console.warn('SubscriptionRequest upsert failed:', e.message);
   }
 
-  const pendingReq = await prisma.subscriptionRequest.findFirst({
-    where: { parentId: parent.id, firstName: 'مريم' }
-  });
-  if (!pendingReq) {
-    await prisma.subscriptionRequest.create({
-      data: {
-        parentId: parent.id,
-        firstName: 'مريم',
-        lastName: 'التلميذة',
-        birthDate: new Date('2020-05-10'),
-        cin: '12345678',
-        gender: 'أنثى',
-        level: 'السنة الأولى أساسي',
-        schoolYear: '2026-2027',
-        schoolName: 'المدرسة الابتدائية النموذجية'
-      }
+  try {
+    const demoAssignment = await prisma.assignment.findFirst({
+      where: { teacherId: users['teacher@test.tn'].id, title: 'واجب: الأعداد من 0 إلى 9' }
     });
+    if (!demoAssignment) {
+      await prisma.assignment.create({
+        data: {
+          teacherId: users['teacher@test.tn'].id,
+          classId: createdClasses['قسم السنة الأولى أ']?.id,
+          subject: 'MATH',
+          title: 'واجب: الأعداد من 0 إلى 9',
+          description: 'أنجز التمارين المرفقة وارسِل إجاباتك قبل الموعد المحدد.',
+          dueDate: new Date('2026-10-15T16:00:00'),
+          status: 'PUBLISHED',
+          questions: [
+            {
+              id: 'q1',
+              type: 'MCQ',
+              prompt: 'كم عدد الأصابع في اليد الواحدة؟',
+              points: 2,
+              options: ['4', '5', '6'],
+              correctOption: '1'
+            },
+            {
+              id: 'q2',
+              type: 'TRUE_FALSE',
+              prompt: 'العدد 9 أكبر من العدد 7.',
+              points: 1,
+              correctAnswer: 'TRUE'
+            },
+            {
+              id: 'q3',
+              type: 'FILL_BLANK',
+              prompt: 'أكمل: 3 + 2 = ...',
+              points: 1,
+              correctAnswer: '5'
+            }
+          ]
+        }
+      });
+    }
+  } catch (e) {
+    console.warn('Assignment upsert failed:', e.message);
   }
 
-  const demoAssignment = await prisma.assignment.findFirst({
-    where: { teacherId: users['teacher@test.tn'].id, title: 'واجب: الأعداد من 0 إلى 9' }
-  });
-  if (!demoAssignment) {
-    await prisma.assignment.create({
-      data: {
-        teacherId: users['teacher@test.tn'].id,
-        classId: createdClasses['قسم السنة الأولى أ'].id,
-        subject: 'MATH',
-        title: 'واجب: الأعداد من 0 إلى 9',
-        description: 'أنجز التمارين المرفقة وارسِل إجاباتك قبل الموعد المحدد.',
-        dueDate: new Date('2026-10-15T16:00:00'),
-        status: 'PUBLISHED',
-        questions: [
-          {
-            id: 'q1',
-            type: 'MCQ',
-            prompt: 'كم عدد الأصابع في اليد الواحدة؟',
-            points: 2,
-            options: ['4', '5', '6'],
-            correctOption: '1'
-          },
-          {
-            id: 'q2',
-            type: 'TRUE_FALSE',
-            prompt: 'العدد 9 أكبر من العدد 7.',
-            points: 1,
-            correctAnswer: 'TRUE'
-          },
-          {
-            id: 'q3',
-            type: 'FILL_BLANK',
-            prompt: 'أكمل: 3 + 2 = ...',
-            points: 1,
-            correctAnswer: '5'
-          }
-        ]
-      }
+  try {
+    await prisma.license.upsert({
+      where: { key: 'R1F1Q1I-2026-DEMO' },
+      update: { entityName: 'المدرسة النموذجية التجريبية', status: 'ACTIVE' },
+      create: { key: 'R1F1Q1I-2026-DEMO', entityName: 'المدرسة النموذجية التجريبية', status: 'ACTIVE' }
     });
+  } catch (e) {
+    console.warn('License upsert failed:', e.message);
   }
-
-  await prisma.license.upsert({
-    where: { key: 'R1F1Q1I-2026-DEMO' },
-    update: { entityName: 'المدرسة النموذجية التجريبية', status: 'ACTIVE' },
-    create: { key: 'R1F1Q1I-2026-DEMO', entityName: 'المدرسة النموذجية التجريبية', status: 'ACTIVE' }
-  });
 
   console.log('Seeding finished.');
 }

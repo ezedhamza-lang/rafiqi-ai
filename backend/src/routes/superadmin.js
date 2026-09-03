@@ -471,4 +471,107 @@ router.put('/schools/:id/status', superAdminMiddleware, asyncHandler(async (req,
   res.json(school);
 }));
 
+/**
+ * @swagger
+ * /api/superadmin/bulk-users:
+ *   post:
+ *     summary: إنشاء حقول جماعية (طلاب + معلمين + أولياء)
+ *     tags: [superadmin]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               count:
+ *                 type: integer
+ *                 default: 1000
+ *     responses:
+ *       200:
+ *         description: تم الإنشاء
+ */
+router.post('/bulk-users', superAdminMiddleware, asyncHandler(async (req, res) => {
+  const bcryptjs = await import('bcryptjs');
+  const count = Math.min(Number(req.body?.count) || 1000, 5000);
+
+  const school = await prisma.school.upsert({
+    where: { code: 'SCH-BULK' },
+    update: {},
+    create: { name: 'مدرسة جماعية', code: 'SCH-BULK', status: 'ACTIVE' }
+  });
+
+  let parentsCreated = 0;
+  let teachersCreated = 0;
+  let studentsCreated = 0;
+  const parentIds = [];
+
+  for (let i = 1; i <= count; i++) {
+    const email = `parent${i}@test.tn`;
+    const existing = await prisma.user.findUnique({ where: { email } });
+    if (existing) { parentIds.push(existing.id); continue; }
+    const hash = await bcryptjs.default.hash('parent123', 10);
+    const user = await prisma.user.create({
+      data: { firstName: `ولي ${i}`, lastName: 'التجريبي', email, phone: `5000000${String(i).slice(-3)}`, passwordHash: hash, role: 'PARENT', schoolId: school.id }
+    });
+    parentIds.push(user.id);
+    parentsCreated++;
+  }
+
+  for (let i = 1; i <= count; i++) {
+    const email = `teacher${i}@test.tn`;
+    const existing = await prisma.user.findUnique({ where: { email } });
+    if (existing) { continue; }
+    const hash = await bcryptjs.default.hash('teacher123', 10);
+    await prisma.user.create({
+      data: { firstName: `معلم ${i}`, lastName: 'التجريبي', email, phone: `5100000${String(i).slice(-3)}`, passwordHash: hash, role: 'TEACHER', schoolId: school.id }
+    });
+    teachersCreated++;
+  }
+
+  const levels = ['السنة الأولى أساسي', 'السنة الثانية أساسي', 'السنة الثالثة أساسي'];
+  for (let i = 1; i <= count; i++) {
+    const email = `student${i}@test.tn`;
+    const existing = await prisma.user.findUnique({ where: { email } });
+    if (existing) { continue; }
+    const hash = await bcryptjs.default.hash('student123', 10);
+    const studentUser = await prisma.user.create({
+      data: { firstName: `تلميذ ${i}`, lastName: 'التجريبي', email, phone: `5200000${String(i).slice(-3)}`, passwordHash: hash, role: 'STUDENT', schoolId: school.id }
+    });
+    const level = levels[i % 3];
+    const className = `قسم ${level.slice(0, 12)} ${i}`;
+    let cls = await prisma.class.findFirst({ where: { name: className, level } });
+    if (!cls) {
+      cls = await prisma.class.create({ data: { name: className, level, schoolId: school.id, schoolYear: '2026-2027' } });
+    }
+    const parentId = parentIds[(i - 1) % parentIds.length];
+    await prisma.student.create({
+      data: {
+        userId: parentId,
+        accountUserId: studentUser.id,
+        classId: cls.id,
+        firstName: `تلميذ ${i}`,
+        lastName: 'التجريبي',
+        birthDate: new Date(2015 + (i % 10), (i % 12), (i % 28) + 1),
+        cin: `${10000000 + i}`,
+        gender: i % 2 === 0 ? 'ذكر' : 'أنثى',
+        level,
+        schoolYear: '2026-2027',
+        schoolName: 'مدرسة جماعية'
+      }
+    });
+    studentsCreated++;
+  }
+
+  res.json({
+    message: `تم إنشاء ${parentsCreated} ولي + ${teachersCreated} معلم + ${studentsCreated} تلميذ`,
+    parentsCreated,
+    teachersCreated,
+    studentsCreated,
+    schoolCode: 'SCH-BULK'
+  });
+}));
+
 export default router;

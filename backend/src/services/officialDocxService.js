@@ -243,8 +243,8 @@ export async function buildOfficialDocx(exam, options = {}) {
 
   for (const q of exam.questions) {
     // عنوان المعيار الجديد
-    if (q.criterion !== currentCriterion) {
-      currentCriterion = q.criterion;
+    if ((q.criteria || q.criterion) !== currentCriterion) {
+      currentCriterion = q.criteria || q.criterion;
       const critDef = exam.criteria?.find(c => c.code === currentCriterion);
 
       children.push(new Paragraph({
@@ -443,8 +443,7 @@ export async function buildOfficialDocx(exam, options = {}) {
 // ============ دوال عرض الأسئلة ============
 
 function renderMCQ(children, q, num) {
-  // السؤال
-  children.push(p([tr(`${num}- ${q.prompt}`, { size: 20 })]));
+  children.push(p([tr(`${num}- ${q.content || q.prompt}`, { size: 20 })]));
 
   // الخيارات
   if (q.options && q.options.length > 0) {
@@ -456,7 +455,7 @@ function renderMCQ(children, q, num) {
 }
 
 function renderVerticalOperation(children, q, num) {
-  children.push(p([tr(`${num}- ${q.prompt}`, { size: 20 })]));
+  children.push(p([tr(`${num}- ${q.content || q.prompt}`, { size: 20 })]));
 
   // العمليات العمودية
   const op = q.operation || (q.type.includes('ADD') ? 'add' : 'subtract');
@@ -470,7 +469,7 @@ function renderVerticalOperation(children, q, num) {
 }
 
 function renderCoinQuestion(children, q, num) {
-  children.push(p([tr(`${num}- ${q.prompt}`, { size: 20 })]));
+  children.push(p([tr(`${num}- ${q.content || q.prompt}`, { size: 20 })]));
 
   if (q.coins && Array.isArray(q.coins)) {
     const coinStr = q.coins.map(c => {
@@ -487,7 +486,7 @@ function renderCoinQuestion(children, q, num) {
 }
 
 function renderMatching(children, q, num) {
-  children.push(p([tr(`${num}- ${q.prompt}`, { size: 20 })]));
+  children.push(p([tr(`${num}- ${q.content || q.prompt}`, { size: 20 })]));
 
   if (q.pairs && q.pairs.length > 0) {
     const leftCol = q.pairs.map(p => p.left);
@@ -503,12 +502,12 @@ function renderMatching(children, q, num) {
 }
 
 function renderFillBlank(children, q, num) {
-  children.push(p([tr(`${num}- ${q.prompt}`, { size: 20 })]));
+  children.push(p([tr(`${num}- ${q.content || q.prompt}`, { size: 20 })]));
   children.push(answerLine());
 }
 
 function renderHandwriting(children, q, num) {
-  children.push(p([tr(`${num}- ${q.prompt}`, { size: 20 })]));
+  children.push(p([tr(`${num}- ${q.content || q.prompt}`, { size: 20 })]));
   for (let i = 0; i < (q.freeLines || 3); i++) {
     children.push(answerLine());
   }
