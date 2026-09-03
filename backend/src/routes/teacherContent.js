@@ -4,6 +4,7 @@ import { authMiddleware, teacherMiddleware } from '../auth.js';
 import { buildMemo, rebuildMemo } from '../services/memoService.js';
 import { buildResource, rebuildResource } from '../services/resourceService.js';
 import { getBankExam, buildExamContent, officialExamSummary } from '../services/officialExamService.js';
+import { buildOfficialDocx, prepareExamForDocx } from '../services/officialDocxService.js';
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 import {
@@ -713,6 +714,167 @@ router.put('/exams/:id/submissions/:subId', teacherMiddleware, validateParams(ex
     }
   });
   res.json({ ok: true });
+}));
+
+/**
+ * @swagger
+ * /api/teacher/exams/{id}/docx:
+ *   get:
+ *     summary: تصدير اختبار رسمي كملف Word (.docx)
+ *     tags: [teacher-content]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: integer }
+ *     responses:
+ *       200:
+ *         description: ملف Word
+ *         content:
+ *           application/vnd.openxmlformats-officedocument.wordprocessingml.document:
+ *             schema:
+ *               type: string
+ *               format: binary
+ *       404:
+ *         description: الاختبار غير موجود
+ */
+router.get('/exams/:id/docx', teacherMiddleware, validateParams(teacherContentIdParamSchema), asyncHandler(async (req, res) => {
+  const exam = await prisma.officialExam.findFirst({
+    where: { id: Number(req.params.id), teacherId: req.user.id }
+  });
+  if (!exam) throw new ApiError(404, 'الاختبار غير موجود');
+
+  const docxData = prepareExamForDocx(exam.content, {
+    subject: exam.subject,
+    level: exam.class?.level,
+    trimester: exam.trimester,
+    durationMinutes: exam.content?.durationMinutes
+  });
+
+  if (!docxData) throw new ApiError(400, 'بيانات الاختبار غير صالحة');
+
+  const buffer = await buildOfficialDocx(docxData, {
+    school: req.user.school || '',
+    teacherName: `${req.user.firstName || ''} ${req.user.lastName || ''}`.trim(),
+    studentName: '................................',
+    studentClass: exam.class?.name || '...........',
+    date: new Date().toLocaleDateString('ar-TN')
+  });
+
+  const filename = `exam-${exam.id}-${Date.now()}.docx`;
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+  res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+  res.send(Buffer.from(buffer));
+}));
+
+/**
+ * @swagger
+ * /api/teacher/exams/generate-docx:
+ *   post:
+ *     summary: إنشاء اختبار رسمي وتصديره كملف Word (.docx) مباشرة
+ *     tags: [teacher-content]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [subject]
+ *             properties:
+ *               subject: { type: string }
+ *               level: { type: integer }
+ *               trimester: { type: integer }
+ *               title: { type: string }
+ *               durationMinutes: { type: integer }
+ *               content: { type: object }
+ *     responses:
+ *       200:
+ *         description: ملف Word
+ *       400:
+ *         description: بيانات غير صالحة
+ */
+router.post('/exams/generate-docx', teacherMiddleware, asyncHandler(async (req, res) => {
+  const { subject, level, trimester, title, durationMinutes, content: examContent, classId } = req.body;
+
+  if (!subject) throw new ApiError(400, 'المادة مطلوبة');
+
+  const docxData = prepareExamForDocx(examContent || {}, {
+    subject,
+    level,
+    trimester,
+    durationMinutes: durationMinutes || 60,
+    title
+  });
+
+  if (!docxData) throw new ApiError(400, 'بيانات الاختبار غير صالحة');
+
+  // If classId provided, find class info
+  let classInfo = null;
+  if (classId) {
+    classInfo = await prisma.class.findUnique({ where: { id: Number(classId) } });
+  }
+
+  const buffer = await buildOfficialDocx(docxData, {
+    school: req.user.school || '',
+    teacherName: `${req.user.firstName || ''} ${req.user.lastName || ''}`.trim(),
+    studentName: '................................',
+    studentClass: classInfo?.name || '...........',
+    date: new Date().toLocaleDateString('ar-TN')
+  });
+
+  const filename = `exam-${subject}-${Date.now()}.docx`;
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+  res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+  res.send(Buffer.from(buffer));
+}));
+
+/**
+ * @swagger
+ * /api/teacher/exams/{id}/preview-docx:
+ *   get:
+ *     summary: معاينة اختبار رسمي كملف Word
+ *     tags: [teacher-content]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: integer }
+ *     responses:
+ *       200:
+ *         description: ملف Word للمعاينة
+ */
+router.get('/exams/:id/preview-docx', teacherMiddleware, validateParams(teacherContentIdParamSchema), asyncHandler(async (req, res) => {
+  const exam = await prisma.officialExam.findFirst({
+    where: { id: Number(req.params.id), teacherId: req.user.id }
+  });
+  if (!exam) throw new ApiError(404, 'الاختبار غير موجود');
+
+  const docxData = prepareExamForDocx(exam.content, {
+    subject: exam.subject,
+    level: exam.class?.level,
+    trimester: exam.trimester
+  });
+
+  if (!docxData) throw new ApiError(400, 'بيانات الاختبار غير صالحة');
+
+  const buffer = await buildOfficialDocx(docxData, {
+    school: req.user.school || '',
+    teacherName: `${req.user.firstName || ''} ${req.user.lastName || ''}`.trim(),
+    studentName: '................................',
+    studentClass: exam.class?.name || '...........',
+    date: new Date().toLocaleDateString('ar-TN')
+  });
+
+  const filename = `preview-${exam.id}.docx`;
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+  res.setHeader('Content-Disposition', `inline; filename="${filename}"`);
+  res.send(Buffer.from(buffer));
 }));
 
 export default router;
