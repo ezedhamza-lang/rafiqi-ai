@@ -6,3 +6,7 @@ content
 tests
 *.log
 .env
+rafiqi
+tmp*
+*.tmp
+scripts
