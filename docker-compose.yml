@@ -19,7 +19,7 @@ services:
 
   api:
     build:
-      context: ./backend
+      context: .
       dockerfile: Dockerfile
     container_name: rafiqi-api
     restart: unless-stopped
