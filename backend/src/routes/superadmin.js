@@ -471,4 +471,63 @@ router.put('/schools/:id/status', superAdminMiddleware, asyncHandler(async (req,
   res.json(school);
 }));
 
+router.post('/bulk-users', superAdminMiddleware, asyncHandler(async (req, res) => {
+  const bcrypt = await import('bcrypt');
+  const existingTeacherCount = await prisma.user.count({ where: { role: 'TEACHER' } });
+  if (existingTeacherCount > 10) {
+    return res.json({ message: `Already seeded (${existingTeacherCount} teachers exist). Skipped.`, skipped: true });
+  }
+
+  const FIRST_NAMES_MALE = ['محمد', 'أحمد', 'علي', 'عمر', 'يوسف', 'إبراهيم', 'خالد', 'حسين', 'حسن', 'عبدالله', 'بلال', 'ياسين', 'أمير', 'ماهر', 'طارق', 'سعيد', 'منصف', 'نورالدين', 'سامي', 'وليد'];
+  const FIRST_NAMES_FEMALE = ['فاطمة', 'أمينة', 'خديجة', 'نورة', 'سارة', 'مريم', 'هدى', 'ليلى', 'حسناء', 'ندى', 'منى', 'رشا', 'إيمان', 'أسماء', 'رقية', 'سناء', 'نبيلة', 'لطيفة', 'عائشة', 'آمنة'];
+  const LAST_NAMES = ['بن أحمد', 'بن محمد', 'بن علي', 'ben Salah', 'ben Ali', 'ben Brahim', 'Trabelsi', 'Cherif', 'Mansour', 'Bouazizi', 'Jaziri', 'Khelifi', 'Dridi', 'Masmoudi', 'Gharbi', 'Mebarki', 'Souissi', 'Ferjani'];
+  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  const hash = await bcrypt.hash('password123', 10);
+
+  let totalCreated = 0;
+  for (const role of ['PARENT', 'TEACHER', 'STUDENT']) {
+    const count = role === 'STUDENT' ? 1000 : 1000;
+    const prefix = role === 'PARENT' ? '20003' : role === 'TEACHER' ? '20002' : '20001';
+    const emails = [];
+    const users = [];
+    for (let i = 1; i <= count; i++) {
+      const male = Math.random() < 0.5;
+      const email = `${role.toLowerCase()}${i}@test.tn`;
+      emails.push(email);
+      users.push({
+        firstName: male ? pick(FIRST_NAMES_MALE) : pick(FIRST_NAMES_FEMALE),
+        lastName: pick(LAST_NAMES),
+        email,
+        phone: `${prefix}${String(i).padStart(4, '0')}`,
+        passwordHash: hash,
+        role,
+      });
+    }
+    await prisma.user.createMany({ data: users, skipDuplicates: true });
+    totalCreated += count;
+  }
+
+  const parentIds = (await prisma.user.findMany({ where: { role: 'PARENT' }, select: { id: true } })).map(p => p.id);
+  const classIds = (await prisma.class.findMany({ select: { id: true } })).map(c => c.id);
+
+  const allStudents = await prisma.user.findMany({ where: { role: 'STUDENT' }, select: { id: true, firstName: true, lastName: true, email: true } });
+  const studentRecords = allStudents.map((u, i) => ({
+    accountUserId: u.id,
+    userId: pick(parentIds),
+    firstName: u.firstName,
+    lastName: u.lastName,
+    birthDate: new Date(2014 + Math.floor(Math.random() * 7), Math.floor(Math.random() * 12), 1 + Math.floor(Math.random() * 28)),
+    gender: u.email.includes('0') ? 'ذكر' : 'أنثى',
+    level: 'السنة الأولى أساسي',
+    schoolYear: '2026-2027',
+    schoolName: 'المدرسة النموذجية',
+    classId: classIds.length > 0 ? pick(classIds) : null,
+  }));
+  if (studentRecords.length > 0) {
+    await prisma.student.createMany({ data: studentRecords, skipDuplicates: true });
+  }
+
+  res.json({ message: `Created: ${totalCreated} users + ${studentRecords.length} student records`, totalCreated, students: studentRecords.length });
+}));
+
 export default router;
