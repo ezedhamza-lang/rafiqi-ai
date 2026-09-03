@@ -98,6 +98,16 @@ app.use('/api/payments', paymentRoutes);
 
 app.use(express.json({ limit: config.bodyLimit }));
 
+// فحص الصحة — تستعمله منصات النشر (Render healthCheckPath) — مع فحص DB خفيف
+app.get(['/api/health', '/health'], async (_req, res) => {
+  try {
+    await prisma.$queryRaw`SELECT 1`;
+    res.json({ status: 'ok', db: 'up', uptime: Math.round(process.uptime()), at: new Date().toISOString() });
+  } catch {
+    res.status(503).json({ status: 'degraded', db: 'down', uptime: Math.round(process.uptime()), at: new Date().toISOString() });
+  }
+});
+
 // Batch 4: Global locale middleware - extracts ?lang= from all requests
 app.use(localeMiddleware);
 
