@@ -19,33 +19,42 @@ const PUBLIC_NAV = [
 const MESSAGES_NAV = { to: '/messages', icon: 'mail', key: 'messages', unread: true };
 const NOTIF_NAV = { to: '/message-center', icon: 'notifications_active', key: 'notifications', notif: true };
 
+const TEACHER_DROPDOWN_CATEGORIES = [
+  { id: 'assessment', label: 'التقييم والاختبارات', color: '#ef4444', icon: 'grading' },
+  { id: 'results', label: 'النتائج والإحصائيات', color: '#22c55e', icon: 'analytics' },
+  { id: 'content', label: 'المحتوى والتدريس', color: '#3b82f6', icon: 'school' },
+  { id: 'classroom', label: 'الفصل الدراسي', color: '#f59e0b', icon: 'groups' },
+  { id: 'tools', label: 'الأدوات والتواصل', color: '#8b5cf6', icon: 'smart_toy' },
+  { id: 'settings', label: 'إعدادات', color: '#6b7280', icon: 'settings' }
+];
+
 const TEACHER_SPACE_CHILDREN = [
-  { to: '/teacher', end: true, icon: 'analytics', key: 'unitAnalysis' },
-  { to: '/teacher/quizzes', icon: 'quiz', key: 'quizzes' },
-  { to: '/teacher/assignments', icon: 'assignment', key: 'assignments' },
-  { to: '/teacher/analytics', icon: 'monitoring', key: 'analyticsExport' },
-  { to: '/teacher/exams', icon: 'fact_check', key: 'officialExams' },
-  { to: '/teacher/exam-generator', icon: 'download', key: 'examGenerator' },
-  { to: '/teacher/class-subjects', icon: 'category', key: 'classSubjects' },
-  { to: '/teacher/correction', icon: 'grading', key: 'correction' },
-  { to: '/teacher/results', icon: 'scoreboard', key: 'results' },
-  { to: '/teacher/averages', icon: 'percent', key: 'averages' },
-  { to: '/teacher/gradebook', icon: 'menu_book', key: 'gradebook' },
-  { to: '/teacher/lesson-progress', icon: 'fact_check', key: 'lessonProgress' },
-  { to: '/teacher/notes', icon: 'rate_review', key: 'teacherNotes' },
-  { to: '/teacher/memos', icon: 'description', key: 'memos' },
-  { to: '/teacher/resources', icon: 'folder_special', key: 'resources' },
-  { to: '/teacher/library', icon: 'local_library', key: 'library' },
-  { to: '/teacher/lesson-plan', icon: 'calendar_month', key: 'lessonPlan' },
-  { to: '/teacher/plans', icon: 'event_note', key: 'annualPlans' },
-  { to: '/teacher/attendance', icon: 'fact_check', key: 'attendance' },
-  { to: '/teacher/health', icon: 'favorite', key: 'health' },
-  { to: '/teacher/ai', icon: 'smart_toy', key: 'teacherAI' },
-  { to: '/teacher/schedules', icon: 'calendar_view_week', key: 'schedules' },
-  { to: '/teacher/live', icon: 'live_tv', key: 'live' },
-  { to: '/teacher/suggestions', icon: 'lightbulb', key: 'suggestions' },
-  { to: '/payment', icon: 'payments', key: 'payment' },
-  { to: '/help', icon: 'support_agent', key: 'help', divider: true }
+  { to: '/teacher', end: true, icon: 'analytics', key: 'unitAnalysis', category: 'assessment' },
+  { to: '/teacher/quizzes', icon: 'quiz', key: 'quizzes', category: 'assessment' },
+  { to: '/teacher/exams', icon: 'fact_check', key: 'officialExams', category: 'assessment' },
+  { to: '/teacher/exam-generator', icon: 'download', key: 'examGenerator', category: 'assessment' },
+  { to: '/teacher/correction', icon: 'grading', key: 'correction', category: 'assessment' },
+  { to: '/teacher/results', icon: 'scoreboard', key: 'results', category: 'results' },
+  { to: '/teacher/averages', icon: 'percent', key: 'averages', category: 'results' },
+  { to: '/teacher/gradebook', icon: 'menu_book', key: 'gradebook', category: 'results' },
+  { to: '/teacher/analytics', icon: 'monitoring', key: 'analyticsExport', category: 'results' },
+  { to: '/teacher/class-subjects', icon: 'category', key: 'classSubjects', category: 'content' },
+  { to: '/teacher/lesson-plan', icon: 'calendar_month', key: 'lessonPlan', category: 'content' },
+  { to: '/teacher/plans', icon: 'event_note', key: 'annualPlans', category: 'content' },
+  { to: '/teacher/lesson-progress', icon: 'fact_check', key: 'lessonProgress', category: 'content' },
+  { to: '/teacher/resources', icon: 'folder_special', key: 'resources', category: 'content' },
+  { to: '/teacher/library', icon: 'local_library', key: 'library', category: 'content' },
+  { to: '/teacher/assignments', icon: 'assignment', key: 'assignments', category: 'classroom' },
+  { to: '/teacher/attendance', icon: 'fact_check', key: 'attendance', category: 'classroom' },
+  { to: '/teacher/notes', icon: 'rate_review', key: 'teacherNotes', category: 'classroom' },
+  { to: '/teacher/memos', icon: 'description', key: 'memos', category: 'classroom' },
+  { to: '/teacher/health', icon: 'favorite', key: 'health', category: 'classroom' },
+  { to: '/teacher/ai', icon: 'smart_toy', key: 'teacherAI', category: 'tools' },
+  { to: '/teacher/schedules', icon: 'calendar_view_week', key: 'schedules', category: 'tools' },
+  { to: '/teacher/live', icon: 'live_tv', key: 'live', category: 'tools' },
+  { to: '/teacher/suggestions', icon: 'lightbulb', key: 'suggestions', category: 'tools' },
+  { to: '/payment', icon: 'payments', key: 'payment', category: 'settings' },
+  { to: '/help', icon: 'support_agent', key: 'help', divider: true, category: 'settings' }
 ];
 
 const SUPERADMIN_SPACE_CHILDREN = [
@@ -53,23 +62,31 @@ const SUPERADMIN_SPACE_CHILDREN = [
   { to: '/help', icon: 'support_agent', key: 'help', divider: true }
 ];
 
+const STUDENT_DROPDOWN_CATEGORIES = [
+  { id: 'home', label: 'ملخصي', color: '#3b82f6', icon: 'home' },
+  { id: 'learning', label: 'التعلم والدراسة', color: '#22c55e', icon: 'menu_book' },
+  { id: 'activities', label: 'النشاطات والترفيه', color: '#f59e0b', icon: 'sports_esports' },
+  { id: 'ai', label: 'الذكاء الاصطناعي', color: '#8b5cf6', icon: 'smart_toy' },
+  { id: 'settings', label: 'إعدادات', color: '#6b7280', icon: 'settings' }
+];
+
 const STUDENT_SPACE_CHILDREN = [
-  { to: '/student-space', end: true, icon: 'home', key: 'mySummary' },
-  { to: '/student-space/subjects', icon: 'menu_book', key: 'mySubjects' },
-  { to: '/student-space/quizzes', icon: 'quiz', key: 'myQuizzes' },
-  { to: '/student-space/assignments', icon: 'assignment', key: 'myAssignments' },
-  { to: '/student-space/routine', icon: 'today', key: 'myRoutine' },
-  { to: '/student-space/flashcards', icon: 'style', key: 'myFlashcards' },
-  { to: '/student-space/live', icon: 'live_tv', key: 'myLive' },
-  { to: '/student-space/paper-exam', icon: 'document_scanner', key: 'paperExam' },
-  { to: '/student-space/play', icon: 'sports_esports', key: 'playZone' },
-  { to: '/student-space/books', icon: 'auto_stories', key: 'myBooks' },
-  { to: '/student-space/stories', icon: 'library_books', key: 'storyLibrary' },
-  { to: '/student-space/calendar', icon: 'calendar_month', key: 'schoolCalendar' },
-  { to: '/student-space/refeeqi', icon: 'smart_toy', key: 'askRefeeqi' },
-  { to: '/student-space/twin', icon: 'insights', key: 'digitalTwin' },
-  { to: '/student-space/schedule', icon: 'calendar_view_week', key: 'mySchedule' },
-  { to: '/help', icon: 'support_agent', key: 'help', divider: true }
+  { to: '/student-space', end: true, icon: 'home', key: 'mySummary', category: 'home' },
+  { to: '/student-space/subjects', icon: 'menu_book', key: 'mySubjects', category: 'learning' },
+  { to: '/student-space/quizzes', icon: 'quiz', key: 'myQuizzes', category: 'learning' },
+  { to: '/student-space/assignments', icon: 'assignment', key: 'myAssignments', category: 'learning' },
+  { to: '/student-space/flashcards', icon: 'style', key: 'myFlashcards', category: 'learning' },
+  { to: '/student-space/paper-exam', icon: 'document_scanner', key: 'paperExam', category: 'learning' },
+  { to: '/student-space/routine', icon: 'today', key: 'myRoutine', category: 'activities' },
+  { to: '/student-space/live', icon: 'live_tv', key: 'myLive', category: 'activities' },
+  { to: '/student-space/play', icon: 'sports_esports', key: 'playZone', category: 'activities' },
+  { to: '/student-space/books', icon: 'auto_stories', key: 'myBooks', category: 'activities' },
+  { to: '/student-space/stories', icon: 'library_books', key: 'storyLibrary', category: 'activities' },
+  { to: '/student-space/calendar', icon: 'calendar_month', key: 'schoolCalendar', category: 'activities' },
+  { to: '/student-space/schedule', icon: 'calendar_view_week', key: 'mySchedule', category: 'activities' },
+  { to: '/student-space/refeeqi', icon: 'smart_toy', key: 'askRefeeqi', category: 'ai' },
+  { to: '/student-space/twin', icon: 'insights', key: 'digitalTwin', category: 'ai' },
+  { to: '/help', icon: 'support_agent', key: 'help', divider: true, category: 'settings' }
 ];
 
 const DIRECTOR_SPACE_CHILDREN = [
@@ -88,35 +105,42 @@ const DIRECTOR_FINANCE_CHILDREN = [
 
 const DIRECTOR_HELP_CHILD = { to: '/help', icon: 'support_agent', key: 'help', divider: true };
 
+const PARENT_DROPDOWN_CATEGORIES = [
+  { id: 'dashboard', label: 'لوحة التحكم', color: '#3b82f6', icon: 'dashboard' },
+  { id: 'monitoring', label: 'متابعة الطفل', color: '#22c55e', icon: 'monitoring' },
+  { id: 'admin', label: 'الإدارة والتسجيل', color: '#f59e0b', icon: 'admin_panel_settings' },
+  { id: 'settings', label: 'إعدادات', color: '#6b7280', icon: 'settings' }
+];
+
 const PARENT_SPACE_CHILDREN = [
-  { to: '/parent', end: true, icon: 'family_restroom', key: 'parentSpace' },
-  { to: '/parent/assignments', icon: 'assignment', key: 'parentAssignments' },
-  { to: '/parent/live', icon: 'live_tv', key: 'parentLive' },
-  { to: '/parent/analytics', icon: 'monitoring', key: 'analytics' },
-  { to: '/parent/notes', icon: 'rate_review', key: 'parentNotes' },
-  { to: '/dashboard', icon: 'dashboard', key: 'indicatorsSummary' },
-  { to: '/students', icon: 'groups', key: 'myChildren' },
-  { to: '/registration', icon: 'person_add', key: 'newRegistration' },
-  { to: '/my-requests', icon: 'folder_open', key: 'myRequests' },
-  { to: '/payment', icon: 'payments', key: 'payment' },
-  { to: '/help', icon: 'support_agent', key: 'help' }
+  { to: '/parent', end: true, icon: 'family_restroom', key: 'parentSpace', category: 'dashboard' },
+  { to: '/dashboard', icon: 'dashboard', key: 'indicatorsSummary', category: 'dashboard' },
+  { to: '/parent/analytics', icon: 'monitoring', key: 'analytics', category: 'monitoring' },
+  { to: '/parent/assignments', icon: 'assignment', key: 'parentAssignments', category: 'monitoring' },
+  { to: '/parent/live', icon: 'live_tv', key: 'parentLive', category: 'monitoring' },
+  { to: '/parent/notes', icon: 'rate_review', key: 'parentNotes', category: 'monitoring' },
+  { to: '/students', icon: 'groups', key: 'myChildren', category: 'admin' },
+  { to: '/registration', icon: 'person_add', key: 'newRegistration', category: 'admin' },
+  { to: '/my-requests', icon: 'folder_open', key: 'myRequests', category: 'admin' },
+  { to: '/payment', icon: 'payments', key: 'payment', category: 'settings' },
+  { to: '/help', icon: 'support_agent', key: 'help', category: 'settings' }
 ];
 
 const ROLE_NAV = {
   TEACHER: [
     { to: '/', icon: 'home', key: 'home' },
-    { to: '/teacher', icon: 'co_present', key: 'teacherSpace', children: TEACHER_SPACE_CHILDREN },
+    { to: '/teacher', icon: 'co_present', key: 'teacherSpace', children: TEACHER_SPACE_CHILDREN, categories: TEACHER_DROPDOWN_CATEGORIES },
     NOTIF_NAV,
     MESSAGES_NAV
   ],
   STUDENT: [
     { to: '/', icon: 'home', key: 'home' },
-    { to: '/student-space', icon: 'school', key: 'studentSpace', children: STUDENT_SPACE_CHILDREN },
+    { to: '/student-space', icon: 'school', key: 'studentSpace', children: STUDENT_SPACE_CHILDREN, categories: STUDENT_DROPDOWN_CATEGORIES },
     NOTIF_NAV
   ],
   PARENT: [
     { to: '/', icon: 'home', key: 'home' },
-    { to: '/parent', icon: 'family_restroom', key: 'parentSpace', children: PARENT_SPACE_CHILDREN },
+    { to: '/parent', icon: 'family_restroom', key: 'parentSpace', children: PARENT_SPACE_CHILDREN, categories: PARENT_DROPDOWN_CATEGORIES },
     NOTIF_NAV,
     MESSAGES_NAV
   ],
@@ -327,7 +351,39 @@ export default function Header() {
                   <span className="material-icons dropdown-caret" aria-hidden="true">expand_more</span>
                 </button>
                 <ul className="dropdown-menu">
-                  {item.children.map((child) => (
+                  {item.categories && (
+                    (() => {
+                      let lastCat = null;
+                      return item.children.map((child) => {
+                        const catDef = child.category ? item.categories.find(c => c.id === child.category) : null;
+                        const showCatHeader = catDef && catDef.id !== lastCat;
+                        if (showCatHeader) lastCat = catDef.id;
+                        return (
+                          <li key={child.to} className={child.divider ? 'dropdown-divider' : ''}>
+                            {showCatHeader && (
+                              <div className="dropdown-cat-header" style={{ '--cat-color': catDef.color }}>
+                                <span className="material-icons" style={{ fontSize: 15 }}>{catDef.icon}</span>
+                                <span>{catDef.label}</span>
+                              </div>
+                            )}
+                            <NavLink
+                              to={child.to}
+                              end={child.end}
+                              className={({ isActive }) => (isActive ? 'active' : '')}
+                              onClick={() => {
+                                setMenuOpen(false);
+                                setOpenDropdown(null);
+                              }}
+                            >
+                              <span className="material-icons" aria-hidden="true">{child.icon}</span>
+                              {t(`nav.${child.key}`)}
+                            </NavLink>
+                          </li>
+                        );
+                      });
+                    })()
+                  )}
+                  {!item.categories && item.children.map((child) => (
                     <li key={child.to} className={child.divider ? 'dropdown-divider' : ''}>
                       <NavLink
                         to={child.to}
