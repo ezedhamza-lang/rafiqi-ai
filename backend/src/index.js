@@ -313,18 +313,23 @@ setupWs(server);
 
 async function start() {
   await prisma.$connect();
-  await runRenewalSweep().catch((err) => {
-    logger.error({ err }, 'initial renewal sweep failed');
-  });
-  await runParentInsightSweep().catch((err) => {
-    logger.error({ err }, 'initial parent insight sweep failed');
-  });
-  startRenewalScheduler();
-  startParentInsightScheduler();
+
   server.listen(PORT, () => {
     logger.info(`API server listening on http://localhost:${PORT}`);
     logger.info(`Swagger docs available on http://localhost:${PORT}/api-docs`);
   });
+
+  // Run sweeps in background AFTER server starts — do NOT block health check
+  setTimeout(() => {
+    runRenewalSweep().catch((err) => {
+      logger.error({ err }, 'initial renewal sweep failed');
+    });
+    runParentInsightSweep().catch((err) => {
+      logger.error({ err }, 'initial parent insight sweep failed');
+    });
+    startRenewalScheduler();
+    startParentInsightScheduler();
+  }, 5000);
 }
 
 if (config.nodeEnv !== 'test') {
