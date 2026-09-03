@@ -10,6 +10,7 @@ import { generateOfflineQuiz } from '../services/offlineQuizGeneratorService.js'
 import { generateStandardsExam, CRITERIA_PRESETS } from '../services/standardsExamService.js';
 import { assembleOfficialExam, renderOfficialHtml } from '../services/officialExamTemplateService.js';
 import { buildOfficialDocx } from '../services/officialDocxService.js';
+import { getUnusedQuestions, markQuestionsAsUsed, addQuestionsToBank } from '../services/questionBankService.js';
 
 const router = Router();
 
@@ -301,54 +302,58 @@ router.post(
   authMiddleware,
   teacherMiddleware,
   asyncHandler(async (req, res) => {
-    const { gradeId = 'year1', subject = 'math', trimester: rawTrimester = 3, count = 10 } = req.body;
-    const teacherId = req.user.id;
+    try {
+      const { gradeId = 'year1', subject = 'math', trimester: rawTrimester = 3, count = 10 } = req.body;
+      const teacherId = req.user.id;
 
-    // تطبيع الثلاثي: يقبل 3 أو '3' أو 't3' → يخزنه كـ 't3' للبنك
-    const trimesterNum = Number(String(rawTrimester).replace('t', ''));
-    const trimesterKey = `t${trimesterNum}`;
+      // تطبيع الثلاثي: يقبل 3 أو '3' أو 't3' → يخزنه كـ 't3' للبنك
+      const trimesterNum = Number(String(rawTrimester).replace('t', ''));
+      const trimesterKey = `t${trimesterNum}`;
 
-    const { getUnusedQuestions, markQuestionsAsUsed } = await import('../services/questionBankService.js');
-    const { buildOfficialDocx } = await import('../services/officialDocxService.js');
-
-    const questions = getUnusedQuestions(subject, gradeId, trimesterKey, teacherId, count);
-    if (!questions.length) {
-      throw new ApiError(404, 'لا توجد أسئلة متاحة في البنك لهذه المادة والسنة والثلاثي');
-    }
-
-    // تحديد الأسئلة كمستخدمة
-    markQuestionsAsUsed(teacherId, questions.map(q => q.id));
-
-    const exam = {
-      gradeId,
-      subject,
-      trimester: trimesterNum,
-      criteria: groupQuestionsByCriteria(questions),
-      questions,
-      totalScore: 20,
-      source: 'bank',
-      generatedAt: new Date().toISOString()
-    };
-
-    const format = req.body.format || 'docx';
-    if (format === 'docx') {
-      let buffer;
-      try {
-        buffer = await buildOfficialDocx(exam, {
-          gradeId,
-          subject,
-          trimester: trimesterNum,
-          schoolName: req.body.schoolName || ''
-        });
-      } catch (docxErr) {
-        console.error('[generate-from-bank] buildOfficialDocx error:', docxErr.message, docxErr.stack);
-        throw new ApiError(500, `DOCX build error: ${docxErr.message}`);
+      const questions = getUnusedQuestions(subject, gradeId, trimesterKey, teacherId, count);
+      if (!questions.length) {
+        throw new ApiError(404, 'لا توجد أسئلة متاحة في البنك لهذه المادة والسنة والثلاثي');
       }
-      res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-      res.setHeader('Content-Disposition', `attachment; filename="اختبار_${subject}_${gradeId}_${trimesterKey}.docx"`);
-      res.send(Buffer.from(buffer));
-    } else {
-      res.json(exam);
+
+      // تحديد الأسئلة كمستخدمة
+      markQuestionsAsUsed(teacherId, questions.map(q => q.id));
+
+      const exam = {
+        gradeId,
+        subject,
+        trimester: trimesterNum,
+        criteria: groupQuestionsByCriteria(questions),
+        questions,
+        totalScore: 20,
+        source: 'bank',
+        generatedAt: new Date().toISOString()
+      };
+
+      const format = req.body.format || 'docx';
+      if (format === 'docx') {
+        let buffer;
+        try {
+          buffer = await buildOfficialDocx(exam, {
+            gradeId,
+            subject,
+            trimester: trimesterNum,
+            schoolName: req.body.schoolName || ''
+          });
+        } catch (docxErr) {
+          console.error('[generate-from-bank] buildOfficialDocx error:', docxErr.message, docxErr.stack);
+          throw new ApiError(500, `DOCX build error: ${docxErr.message}`);
+        }
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+        res.setHeader('Content-Disposition', `attachment; filename="اختبار_${subject}_${gradeId}_${trimesterKey}.docx"`);
+        res.send(Buffer.from(buffer));
+      } else {
+        res.json(exam);
+      }
+    } catch (err) {
+      console.error('[generate-from-bank] FULL ERROR:', err);
+      if (!res.headersSent) {
+        res.status(500).json({ error: err.message || 'Internal server error', details: err.stack });
+      }
     }
   })
 );
@@ -366,8 +371,6 @@ router.post(
     }
 
     const { generateWithAI, generateWithAIGeneral } = await import('../services/aiExamGenerator.js');
-    const { buildOfficialDocx } = await import('../services/officialDocxService.js');
-    const { addQuestionsToBank } = await import('../services/questionBankService.js');
 
     const trimesterKey = `t${Number(trimester)}`;
 
