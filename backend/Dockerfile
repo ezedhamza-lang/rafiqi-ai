@@ -12,4 +12,4 @@ COPY backend/ .
 
 EXPOSE 3001
 
-CMD ["node", "src/index.js"]
+CMD ["sh", "-c", "npx prisma migrate deploy --advisory-lock-timeout=30000 && node prisma/seed.js && node src/index.js"]
