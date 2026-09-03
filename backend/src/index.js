@@ -191,19 +191,32 @@ const server = http.createServer(app);
 setupWs(server);
 
 async function start() {
-  await prisma.$connect();
-  await runRenewalSweep().catch((err) => {
-    console.error('initial renewal sweep failed:', err.message);
+  // STEP 1 — open the port FIRST so the hosting platform detects
+  // the service immediately, even if the database is slow to wake up.
+  await new Promise((resolve, reject) => {
+    server.on('error', reject);
+    server.listen(PORT, '0.0.0.0', () => {
+      console.log(`API server listening on http://0.0.0.0:${PORT}`);
+      console.log(`Swagger docs available on http://0.0.0.0:${PORT}/api-docs`);
+      resolve();
+    });
   });
-  await runParentInsightSweep().catch((err) => {
-    console.error('initial parent insight sweep failed:', err.message);
-  });
-  startRenewalScheduler();
-  startParentInsightScheduler();
-  server.listen(PORT, '0.0.0.0', () => {
-    console.log(`API server listening on http://0.0.0.0:${PORT}`);
-    console.log(`Swagger docs available on http://0.0.0.0:${PORT}/api-docs`);
-  });
+  // STEP 2 — database work runs AFTER the port is open.
+  // Any failure here is only logged and can never crash or block startup.
+  prisma.$connect()
+    .then(() => runRenewalSweep().catch((err) => {
+      console.error('initial renewal sweep failed:', err.message);
+    }))
+    .then(() => runParentInsightSweep().catch((err) => {
+      console.error('initial parent insight sweep failed:', err.message);
+    }))
+    .then(() => {
+      startRenewalScheduler();
+      startParentInsightScheduler();
+    })
+    .catch((err) => {
+      console.error('background startup tasks failed:', err.message);
+    });
 }
 
 if (config.nodeEnv !== 'test') {
