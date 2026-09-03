@@ -335,11 +335,11 @@ router.post(
       const buffer = await buildOfficialDocx(exam, {
         gradeId,
         subject,
-        trimester: Number(trimester.replace('t', '')),
+        trimester: trimesterNum,
         schoolName: req.body.schoolName || ''
       });
       res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-      res.setHeader('Content-Disposition', `attachment; filename="اختبار_${subject}_${gradeId}_${trimester}.docx"`);
+      res.setHeader('Content-Disposition', `attachment; filename="اختبار_${subject}_${gradeId}_${trimesterKey}.docx"`);
       res.send(Buffer.from(buffer));
     } else {
       res.json(exam);
