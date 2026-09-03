@@ -1,689 +1,419 @@
-import {
-  Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
-  AlignmentType, WidthType, BorderStyle, HeadingLevel, TableLayoutType,
-  ShadingType, VerticalAlign, PageOrientation, TabStopType, TabStopPosition,
-  UnderlineType, ImageRun, HorizontalPositionAlign, HorizontalPositionRelativeFrom,
-  VerticalPositionAlign, VerticalPositionRelativeFrom, NumberFormat
-} from 'docx';
+import JSZip from 'jszip';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-/* ══════════════════════════════════════════════════════════════════════════
-   CONSTANTS — Tunisian Ministry of Education Exam Template
-   ══════════════════════════════════════════════════════════════════════════ */
+const SUBJECT_MAP = {
+  arabic: 'اللغة العربية', french: 'اللغة الفرنسية', english: 'اللغة الإنجليزية',
+  math: 'الرياضيات', science: 'العلوم الطبيعية', 'history-geography': 'التاريخ والجغرافيا',
+  islamic: 'التربية الإسلامية', civic: 'التربية المدنية', art: 'التربية التشكيلية',
+  music: 'التربية الموسيقية', pe: 'التربية البدنية', technology: 'التكنولوجيا'
+};
 
-const ARABIC_FONT = 'Simplified Arabic';
-const FONT_SIZE = { small: 18, normal: 22, large: 24, title: 28 };
-const PT_TO_EMU = 12700;
-const BORDER_THIN = { style: BorderStyle.SINGLE, size: 1, color: '000000' };
-const BORDER_NONE = { style: BorderStyle.NONE, size: 0 };
-const CELL_FULL_BORDER = { top: BORDER_THIN, bottom: BORDER_THIN, left: BORDER_THIN, right: BORDER_THIN };
-const CELL_NO_BORDER = { top: BORDER_NONE, bottom: BORDER_NONE, left: BORDER_NONE, right: BORDER_NONE };
+const LEVEL_NAMES = {
+  1: 'السنة الأولى أساسي', 2: 'السنة الثانية أساسي', 3: 'السنة الثالثة أساسي',
+  4: 'السنة الرابعة أساسي', 5: 'السنة الخامسة أساسي', 6: 'السنة السادسة أساسي'
+};
 
-const MASTERY_LEVELS = [
-  { key: 'none', label: 'انعدام التملك', symbol: '---' },
-  { key: 'below', label: 'دون التملك الأدنى', symbol: '--+' },
-  { key: 'min', label: 'التملك الأدنى', symbol: '-++' },
-  { key: 'max', label: 'التملك الأقصى', symbol: '+++' }
-];
-
-const DEFAULT_CRITERIA_PRESETS = {
-  'arabic': [
+const DEFAULT_CRITERIA = {
+  arabic: [
     { id: 'القراءة', label: 'القراءة', mastery: { none: 0, below: 1, min: 2, max: 3 } },
     { id: 'الكتابة', label: 'الكتابة', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
     { id: 'المعالجة اللغوية', label: 'المعالجة اللغوية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
   ],
-  'math': [
+  math: [
     { id: 'المفاهيم الرياضية', label: 'المفاهيم الرياضية', mastery: { none: 0, below: 1, min: 2, max: 3 } },
     { id: 'المهارات الحسابية', label: 'المهارات الحسابية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
     { id: 'حل المسائل', label: 'حل المسائل', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
   ],
-  'science': [
+  science: [
     { id: 'المفاهيم العلمية', label: 'المفاهيم العلمية', mastery: { none: 0, below: 1, min: 2, max: 3 } },
     { id: 'المهارات العلمية', label: 'المهارات العلمية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
     { id: 'المعالجة العلمية', label: 'المعالجة العلمية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
   ],
-  'french': [
+  french: [
     { id: 'القراءة', label: 'القراءة', mastery: { none: 0, below: 1, min: 2, max: 3 } },
     { id: 'الكتابة', label: 'الكتابة', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
     { id: 'المعالجة اللغوية', label: 'المعالجة اللغوية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
-  ],
-  'history-geography': [
-    { id: 'المفاهيم', label: 'المفاهيم', mastery: { none: 0, below: 1, min: 2, max: 3 } },
-    { id: 'المهارات', label: 'المهارات', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
-    { id: 'المعالجة', label: 'المعالجة', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
   ]
 };
 
-const SUBJECT_MAP = {
-  'arabic': 'اللغة العربية',
-  'french': 'اللغة الفرنسية',
-  'english': 'اللغة الإنجليزية',
-  'math': 'الرياضيات',
-  'science': 'العلوم الطبيعية',
-  'history-geography': 'التاريخ والجغرافيا',
-  'islamic': 'التربية الإسلامية',
-  'civic': 'التربية المدنية',
-  'art': 'التربية التشكيلية',
-  'music': 'التربية الموسيقية',
-  'pe': 'التربية البدنية',
-  'technology': 'التكنولوجيا'
-};
+function esc(text) {
+  return String(text ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
 
-const LEVEL_NAMES = {
-  1: 'السنة الأولى أساسي',
-  2: 'السنة الثانية أساسي',
-  3: 'السنة الثالثة أساسي',
-  4: 'السنة الرابعة أساسي',
-  5: 'السنة الخامسة أساسي',
-  6: 'السنة السادسة أساسي'
-};
+function dottedLine(n = 30) { return '\u00B7'.repeat(n); }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   HELPER FUNCTIONS
-   ══════════════════════════════════════════════════════════════════════════ */
+const FONT = 'Simplified Arabic';
+const RTL = 'rtl';
 
-function txt(text, opts = {}) {
-  return new TextRun({
-    text: String(text ?? ''),
-    font: ARABIC_FONT,
-    size: opts.size || FONT_SIZE.normal,
-    bold: opts.bold || false,
-    italics: opts.italics || false,
-    underline: opts.underline ? { type: UnderlineType.SINGLE } : undefined,
-    color: opts.color || '000000',
-    ...opts
+function run(text, opts = {}) {
+  const r = [`<w:r><w:rPr><w:rFonts w:ascii="${FONT}" w:hAnsi="${FONT}" w:cs="${FONT}"/><w:sz w:val="${opts.sz || 22}"/><w:szCs w:val="${opts.sz || 22}"/>`];
+  if (opts.bold) r.push('<w:b/><w:bCs/>');
+  if (opts.italics) r.push('<w:i/><w:iCs/>');
+  if (opts.underline) r.push('<w:u w:val="single"/>');
+  if (opts.color) r.push(`<w:color w:val="${opts.color}"/>`);
+  r.push(`</w:rPr><w:t xml:space="preserve">${esc(text)}</w:t></w:r>`);
+  return r.join('');
+}
+
+function paragraph(children, opts = {}) {
+  const pPr = [`<w:pPr><w:pStyle w:val="Normal"/>`];
+  pPr.push(`<w:jc w:val="${opts.align || 'right'}"/>`);
+  pPr.push(`<w:rPr><w:rFonts w:ascii="${FONT}" w:hAnsi="${FONT}" w:cs="${FONT}"/><w:sz w:val="${opts.sz || 22}"/><w:szCs w:val="${opts.sz || 22}"/>`);
+  if (opts.bold) pPr.push('<w:b/><w:bCs/>');
+  pPr.push('</w:rPr>');
+  if (opts.spacing) pPr.push(`<w:spacing w:before="${opts.spacing.before || 0}" w:after="${opts.spacing.after || 80}" w:line="${opts.spacing.line || 276}" w:lineRule="auto"/>`);
+  if (opts.indent) pPr.push(`<w:ind w:right="${opts.indent}" w:left="${opts.indentLeft || 0}"/>`);
+  if (opts.pageBreakBefore) pPr.push('<w:pageBreakBefore/>');
+  pPr.push('</w:pPr>');
+  return `<w:p>${pPr.join('')}${children.join('')}</w:p>`;
+}
+
+function cell(text, opts = {}) {
+  const cellPr = ['<w:tcPr>'];
+  if (opts.width) cellPr.push(`<w:tcW w:w="${opts.width}" w:type="dxa"/>`);
+  cellPr.push(`<w:vAlign w:val="${opts.vAlign || 'center'}"/>`);
+  if (opts.shading) cellPr.push(`<w:shd w:val="clear" w:color="auto" w:fill="${opts.shading}"/>`);
+  if (opts.columnSpan) cellPr.push(`<w:gridSpan w:val="${opts.columnSpan}"/>`);
+  cellPr.push('<w:tcBorders>');
+  ['top', 'bottom', 'start', 'end'].forEach(side => {
+    cellPr.push(`<w:${side} w:val="single" w:sz="4" w:space="0" w:color="000000"/>`);
   });
+  cellPr.push('</w:tcBorders>');
+  cellPr.push('<w:textDirection w:val="lr"/>');
+  cellPr.push('</w:tcPr>');
+
+  const align = opts.align || 'center';
+  const pContent = [run(text, { sz: opts.sz || 20, bold: opts.bold })];
+  const pPr = `<w:pPr><w:jc w:val="${align}"/><w:spacing w:before="40" w:after="40"/></w:pPr>`;
+
+  return `<w:tc>${cellPr.join('')}${pPr}${pContent.join('')}</w:tc>`;
 }
 
-function para(children, opts = {}) {
-  const runs = typeof children === 'string'
-    ? [txt(children, opts.runOpts)]
-    : Array.isArray(children) ? children : [children];
-  return new Paragraph({
-    children: runs,
-    alignment: opts.alignment || AlignmentType.RIGHT,
-    direction: 'rtl',
-    spacing: opts.spacing || { after: 80, line: 276 },
-    indent: opts.indent,
-    ...opts.paraOpts
+function table(rows, opts = {}) {
+  const tblPr = [`<w:tblPr><w:tblStyle w:val="TableGrid"/>`];
+  tblPr.push(`<w:tblW w:w="${opts.width || 9000}" w:type="dxa"/>`);
+  tblPr.push('<w:tblBorders>');
+  ['top', 'bottom', 'start', 'end', 'insideH', 'insideV'].forEach(side => {
+    tblPr.push(`<w:${side} w:val="single" w:sz="4" w:space="0" w:color="000000"/>`);
   });
+  tblPr.push('</w:tblBorders>');
+  tblPr.push('<w:tblLayout w:type="fixed"/>');
+  tblPr.push('</w:tblPr>');
+
+  const tblGrid = rows[0] ? rows[0].map(() => '<w:gridCol w:w="1500"/>').join('') : '';
+  const tblRows = rows.map(r => `<w:tr>${r.join('')}</w:tr>`).join('');
+
+  return `<w:tbl>${tblPr.join('')}${tblGrid ? `<w:tblGrid>${tblGrid}</w:tblGrid>` : ''}${tblRows}</w:tbl>`;
 }
 
-function emptyPara(count = 1) {
-  const paras = [];
-  for (let i = 0; i < count; i++) {
-    paras.push(new Paragraph({ children: [txt('')], spacing: { after: 0 } }));
-  }
-  return paras;
+function emptyPara() {
+  return `<w:p><w:pPr><w:spacing w:before="0" w:after="0"/></w:pPr></w:p>`;
 }
 
-function cellBorder(opts = {}) {
-  return {
-    top: opts.top || BORDER_THIN,
-    bottom: opts.bottom || BORDER_THIN,
-    left: opts.left || BORDER_THIN,
-    right: opts.right || BORDER_THIN
-  };
-}
-
-function textCell(text, opts = {}) {
-  return new TableCell({
-    children: [para([txt(text, { size: opts.size || FONT_SIZE.normal, bold: opts.bold })], {
-      alignment: opts.alignment || AlignmentType.CENTER,
-      spacing: { after: 0 }
-    })],
-    verticalAlign: VerticalAlign.CENTER,
-    borders: opts.borders || CELL_FULL_BORDER,
-    shading: opts.shading ? { type: ShadingType.CLEAR, fill: opts.shading } : undefined,
-    width: opts.width ? { size: opts.width, type: WidthType.DXA } : undefined,
-    columnSpan: opts.columnSpan,
-    rowSpan: opts.rowSpan,
-    margins: { top: 40, bottom: 40, left: 80, right: 80 }
-  });
-}
-
-function dottedLine(length = 40) {
-  return '·'.repeat(length);
-}
-
-function answerLine(length = 30) {
-  return dottedLine(length);
-}
-
-/* ══════════════════════════════════════════════════════════════════════════
-   HEADER — Matches official Ministry template exactly
-   ══════════════════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════
+   BUILD HEADER
+   ══════════════════════════════════════════════════════════════════ */
 
 function buildHeader(context = {}) {
   const school = context.school || 'المدرسة الإبتدائية';
-  const examType = context.examType || 'تقويم مكتسبات التلاميذ';
-  const subject = context.subjectLabel || SUBJECT_MAP[context.subject] || context.subject || '';
-  const level = context.levelName || LEVEL_NAMES[context.level] || context.level || '';
+  const subjectLabel = SUBJECT_MAP[context.subject] || context.subject || '';
+  const levelLabel = LEVEL_NAMES[context.level] || context.level || '';
   const trimester = context.trimester ? `الفصل ${context.trimester}` : '';
   const date = context.date || new Date().toLocaleDateString('ar-TN');
   const duration = context.durationMinutes || 60;
+  const teacher = context.teacherName || '...........';
   const studentName = context.studentName || '................................';
   const studentClass = context.studentClass || '................................';
 
-  const headerTable = new Table({
-    width: { size: 100, type: WidthType.PERCENTAGE },
-    layout: TableLayoutType.FIXED,
-    rows: [
-      // Row 1: School name | Exam type | Subject/Date
-      new TableRow({
-        children: [
-          textCell(school, { bold: true, width: 3000 }),
-          textCell(`${examType}\n${subject}${trimester ? ' — ' + trimester : ''}`, { bold: true, width: 5000 }),
-          textCell(date, { width: 2000 })
-        ],
-        tableHeader: true
-      }),
-      // Row 2: Level | Teacher | Duration
-      new TableRow({
-        children: [
-          textCell(`المستوى والقسم: ${level}`, { width: 3000 }),
-          textCell(`المعلم واللقب: ${context.teacherName || '...........'}`, { width: 5000 }),
-          textCell(`التوقيت: ${duration} دقيقة`, { width: 2000 })
-        ]
-      }),
-      // Row 3: Student name | Class | Level
-      new TableRow({
-        children: [
-          textCell(`الاسم واللقب: ${studentName}`, { width: 5000 }),
-          textCell(`القسم: ${studentClass}`, { width: 3000 }),
-          textCell(`المستوى: ${level}`, { width: 2000 })
-        ]
-      })
-    ],
-    borders: CELL_FULL_BORDER
-  });
-
-  return headerTable;
-}
-
-/* ══════════════════════════════════════════════════════════════════════════
-   QUESTION RENDERERS — Each type matches real exam format
-   ══════════════════════════════════════════════════════════════════════════ */
-
-function renderPassage(passage) {
-  if (!passage?.text) return [];
-  const elements = [];
-  elements.push(para([txt(passage.text, { bold: false })], {
-    alignment: AlignmentType.RIGHT,
-    spacing: { after: 120, line: 300 },
-    indent: { left: 400, right: 400 }
-  }));
-  return elements;
-}
-
-function renderQuestionHeader(sندIndex, text, points) {
-  const elements = [];
-  const headerChildren = [
-    txt(`السند ${sندIndex}: `, { bold: true, size: FONT_SIZE.large }),
-    txt(text, { size: FONT_SIZE.normal })
+  const rows = [
+    [cell(school, { bold: true, width: 3000 }), cell(`تقويم مكتسبات التلاميذ\n${subjectLabel}${trimester ? ' — ' + trimester : ''}`, { bold: true, width: 4500 }), cell(date, { width: 2000 })],
+    [cell(`المستوى والقسم: ${levelLabel}`, { width: 3000 }), cell(`المعلم واللقب: ${teacher}`, { width: 4500 }), cell(`التوقيت: ${duration} د`, { width: 2000 })],
+    [cell(`الاسم واللقب: ${studentName}`, { width: 4500 }), cell(`القسم: ${studentClass}`, { width: 2500 }), cell(`المستوى: ${levelLabel}`, { width: 2000 })]
   ];
-  if (points !== undefined) {
-    headerChildren.push(txt(`  (${points} مع)`, { size: FONT_SIZE.small, bold: true }));
-  }
-  elements.push(para(headerChildren, {
-    alignment: AlignmentType.RIGHT,
-    spacing: { after: 100, before: 200 }
-  }));
-  return elements;
+
+  return table(rows, { width: 9500 });
 }
 
-function renderSubQuestion(label, instruction, question, markColumn, subIndex) {
-  const elements = [];
-  const labelChildren = [
-    txt(`${label}: `, { bold: true, size: FONT_SIZE.normal }),
-    txt(instruction, { size: FONT_SIZE.normal })
-  ];
-  elements.push(para(labelChildren, {
-    alignment: AlignmentType.RIGHT,
-    spacing: { after: 60 }
-  }));
+/* ══════════════════════════════════════════════════════════════════
+   BUILD QUESTIONS
+   ══════════════════════════════════════════════════════════════════ */
 
-  // Render based on question type
+function buildPassage(passage) {
+  if (!passage?.text) return '';
+  return paragraph([run(passage.text)], { spacing: { after: 120, line: 300 }, indent: 400 });
+}
+
+function buildSectionHeader(index, title) {
+  return paragraph([run(`السند ${index}: `, { bold: true, sz: 24 }), run(title || '', { sz: 22 })], { spacing: { before: 200, after: 100 } });
+}
+
+function buildSubQuestion(label, instruction, question, subIndex) {
+  const elements = [];
+
+  elements.push(paragraph([run(`${label}: `, { bold: true, sz: 22 }), run(instruction, { sz: 22 })], { spacing: { after: 60 } }));
+
   if (question.type === 'MCQ') {
-    elements.push(...renderMCQ(question, subIndex));
+    elements.push(...buildMCQ(question));
   } else if (question.type === 'TRUE_FALSE') {
-    elements.push(...renderTrueFalse(question, subIndex));
+    elements.push(...buildTrueFalse(question));
   } else if (question.type === 'FILL_BLANK') {
-    elements.push(...renderFillBlank(question, subIndex));
+    elements.push(...buildFillBlank(question));
   } else if (question.type === 'MATCHING') {
-    elements.push(...renderMatching(question, subIndex));
+    elements.push(...buildMatching(question));
   } else if (question.type === 'ORDERING') {
-    elements.push(...renderOrdering(question, subIndex));
-  } else if (question.type === 'OPEN' || question.type === 'SENTENCE' || question.type === 'WORD_ANALYSIS') {
-    elements.push(...renderOpen(question, subIndex));
+    elements.push(...buildOrdering(question));
   } else {
-    elements.push(...renderOpen(question, subIndex));
+    elements.push(...buildOpen(question));
   }
 
-  return elements;
+  return elements.join('');
 }
 
-/* --- MCQ (اختيار من متعدد) --- */
-function renderMCQ(question, subIndex) {
-  const elements = [];
-  const options = question.options || ['أ', 'ب', 'ج', 'د'];
-  const promptText = question.prompt || question.text || '';
-
-  if (promptText) {
-    elements.push(para([txt(promptText)], {
-      alignment: AlignmentType.RIGHT,
-      spacing: { after: 60 }
-    }));
-  }
-
-  // Visual MCQ with symbols (▲ △ ○ □)
-  if (question.visual) {
-    // For visual MCQ like year1 math - images with arrows
-    const symbols = ['▲', '△', '○', '□'];
-    options.forEach((opt, i) => {
-      elements.push(para([
-        txt(`  ${symbols[i]}  `, { bold: true }),
-        txt(typeof opt === 'string' ? opt : opt.text || '', {})
-      ], {
-        alignment: AlignmentType.RIGHT,
-        spacing: { after: 40 },
-        indent: { right: 600 }
-      }));
-    });
-  } else {
-    // Standard MCQ with ▲ arrows or checkboxes
-    const symbols = ['▲', '▲', '▲', '▲'];
-    options.forEach((opt, i) => {
-      const optText = typeof opt === 'string' ? opt : opt.text || '';
-      elements.push(para([
-        txt(`  ${symbols[i]}  `, { bold: true }),
-        txt(optText, {})
-      ], {
-        alignment: AlignmentType.RIGHT,
-        spacing: { after: 40 },
-        indent: { right: 600 }
-      }));
-    });
-  }
-
-  return elements;
-}
-
-/* --- TRUE/FALSE (صحيح/خطأ) --- */
-function renderTrueFalse(question, subIndex) {
-  const elements = [];
-  const statements = question.statements || [{ text: question.prompt || question.text || '', correct: question.correct }];
-
-  statements.forEach((stmt, i) => {
-    const stmtText = typeof stmt === 'string' ? stmt : stmt.text || '';
-    elements.push(para([
-      txt(`  ${i + 1})  `, { bold: true }),
-      txt(stmtText, {}),
-      txt('   (  ) صحيح     (  ) خطأ', { size: FONT_SIZE.small, bold: true })
-    ], {
-      alignment: AlignmentType.RIGHT,
-      spacing: { after: 60 },
-      indent: { right: 400 }
-    }));
+function buildMCQ(q) {
+  const prompt = q.prompt || q.text || '';
+  const options = q.options || ['أ', 'ب', 'ج'];
+  const lines = [];
+  if (prompt) lines.push(paragraph([run(prompt)], { spacing: { after: 60 }, indent: 400 }));
+  options.forEach((opt, i) => {
+    const text = typeof opt === 'string' ? opt : opt.text || '';
+    lines.push(paragraph([run(`  ▲  `, { bold: true }), run(text)], { spacing: { after: 40 }, indent: 600 }));
   });
-
-  return elements;
+  return lines.join('');
 }
 
-/* --- FILL IN THE BLANK (ملء الفراغات) --- */
-function renderFillBlank(question, subIndex) {
-  const elements = [];
-  const items = question.items || [{ text: question.prompt || question.text || '' }];
+function buildTrueFalse(q) {
+  const stmts = q.statements || [{ text: q.prompt || q.text || '' }];
+  return stmts.map((s, i) => {
+    const text = typeof s === 'string' ? s : s.text || '';
+    return paragraph([run(`  ${i + 1})  `, { bold: true }), run(text), run('   (  ) صحيح     (  ) خطأ', { sz: 20, bold: true })], { spacing: { after: 60 }, indent: 400 });
+  }).join('');
+}
 
-  items.forEach((item, i) => {
+function buildFillBlank(q) {
+  const items = q.items || [{ text: q.prompt || q.text || '' }];
+  return items.map((item, i) => {
     const text = typeof item === 'string' ? item : item.text || '';
-    // Split by ____ or ___ to find blanks
     const parts = text.split(/_{3,}/);
     if (parts.length > 1) {
-      const children = [txt(`  ${i + 1})  `, { bold: true })];
+      const children = [run(`  ${i + 1})  `, { bold: true })];
       parts.forEach((part, j) => {
-        children.push(txt(part, {}));
-        if (j < parts.length - 1) {
-          children.push(txt(dottedLine(15), { underline: true }));
-        }
+        children.push(run(part));
+        if (j < parts.length - 1) children.push(run(dottedLine(15), { underline: true }));
       });
-      elements.push(para(children, {
-        alignment: AlignmentType.RIGHT,
-        spacing: { after: 60 },
-        indent: { right: 400 }
-      }));
-    } else {
-      elements.push(para([
-        txt(`  ${i + 1})  `, { bold: true }),
-        txt(text, {}),
-        txt(`   ${dottedLine(20)}`, { underline: true })
-      ], {
-        alignment: AlignmentType.RIGHT,
-        spacing: { after: 60 },
-        indent: { right: 400 }
-      }));
+      return paragraph(children, { spacing: { after: 60 }, indent: 400 });
     }
-  });
-
-  return elements;
+    return paragraph([run(`  ${i + 1})  `, { bold: true }), run(text), run(`   ${dottedLine(20)}`, { underline: true })], { spacing: { after: 60 }, indent: 400 });
+  }).join('');
 }
 
-/* --- MATCHING (ربط) --- */
-function renderMatching(question, subIndex) {
-  const elements = [];
-  const left = question.leftItems || [];
-  const right = question.rightItems || [];
-
-  if (question.prompt) {
-    elements.push(para([txt(question.prompt)], {
-      alignment: AlignmentType.RIGHT,
-      spacing: { after: 80 }
-    }));
-  }
-
-  // Create matching table
-  const maxRows = Math.max(left.length, right.length);
+function buildMatching(q) {
+  const left = q.leftItems || [];
+  const right = q.rightItems || [];
+  const lines = [];
+  if (q.prompt) lines.push(paragraph([run(q.prompt)], { spacing: { after: 80 } }));
+  const maxLen = Math.max(left.length, right.length);
   const rows = [];
-  for (let i = 0; i < maxRows; i++) {
-    rows.push(new TableRow({
-      children: [
-        textCell(left[i] ? `${i + 1}) ${left[i]}` : '', { width: 4500, alignment: AlignmentType.RIGHT }),
-        textCell('', { width: 1000 }),
-        textCell(right[i] ? `${String.fromCharCode(1571 + i)}) ${right[i]}` : '', { width: 4500, alignment: AlignmentType.RIGHT })
-      ]
-    }));
+  for (let i = 0; i < maxLen; i++) {
+    rows.push([
+      cell(left[i] ? `${i + 1}) ${left[i]}` : '', { width: 4000, align: 'right' }),
+      cell('', { width: 1000 }),
+      cell(right[i] ? `${String.fromCharCode(1571 + i)}) ${right[i]}` : '', { width: 4000, align: 'right' })
+    ]);
   }
-
-  const matchTable = new Table({
-    width: { size: 100, type: WidthType.PERCENTAGE },
-    layout: TableLayoutType.FIXED,
-    rows,
-    borders: CELL_FULL_BORDER
-  });
-
-  elements.push(matchTable);
-  return elements;
+  lines.push(table(rows, { width: 9000 }));
+  return lines.join('');
 }
 
-/* --- ORDERING (ترتيب) --- */
-function renderOrdering(question, subIndex) {
-  const elements = [];
-  const items = question.items || question.orderItems || [];
-
-  if (question.prompt) {
-    elements.push(para([txt(question.prompt)], {
-      alignment: AlignmentType.RIGHT,
-      spacing: { after: 80 }
-    }));
-  }
-
+function buildOrdering(q) {
+  const items = q.items || q.orderItems || [];
+  const lines = [];
+  if (q.prompt) lines.push(paragraph([run(q.prompt)], { spacing: { after: 80 } }));
   items.forEach((item, i) => {
     const text = typeof item === 'string' ? item : item.text || '';
-    elements.push(para([
-      txt(`  ${i + 1})  `, { bold: true }),
-      txt(text, {}),
-      txt(`   ${dottedLine(10)}`, { underline: true })
-    ], {
-      alignment: AlignmentType.RIGHT,
-      spacing: { after: 40 },
-      indent: { right: 400 }
-    }));
+    lines.push(paragraph([run(`  ${i + 1})  `, { bold: true }), run(text), run(`   ${dottedLine(10)}`, { underline: true })], { spacing: { after: 40 }, indent: 400 }));
   });
-
-  return elements;
+  return lines.join('');
 }
 
-/* --- OPEN / SENTENCE / WORD_ANALYSIS ( WALL / جمل / تحليل كلمة) --- */
-function renderOpen(question, subIndex) {
-  const elements = [];
-  const prompt = question.prompt || question.text || '';
-  const lineCount = question.answerLines || 3;
-
-  if (prompt) {
-    elements.push(para([txt(prompt)], {
-      alignment: AlignmentType.RIGHT,
-      spacing: { after: 80 }
-    }));
-  }
-
-  // Word analysis table
-  if (question.type === 'WORD_ANALYSIS' && question.tableHeaders) {
-    const headerRow = new TableRow({
-      children: question.tableHeaders.map(h => textCell(h, { bold: true, shading: 'D9E2F3' }))
-    });
-    const dataRows = (question.tableData || []).map(row =>
-      new TableRow({
-        children: row.map(cell => textCell(cell || '', {}))
-      })
-    );
-    const analysisTable = new Table({
-      width: { size: 100, type: WidthType.PERCENTAGE },
-      layout: TableLayoutType.FIXED,
-      rows: [headerRow, ...dataRows],
-      borders: CELL_FULL_BORDER
-    });
-    elements.push(analysisTable);
-    return elements;
-  }
-
-  // Answer lines
+function buildOpen(q) {
+  const prompt = q.prompt || q.text || '';
+  const lineCount = q.answerLines || 3;
+  const lines = [];
+  if (prompt) lines.push(paragraph([run(prompt)], { spacing: { after: 80 } }));
   for (let i = 0; i < lineCount; i++) {
-    elements.push(para([txt(dottedLine(60), { underline: true })], {
-      alignment: AlignmentType.RIGHT,
-      spacing: { after: 40 },
-      indent: { right: 200 }
-    }));
+    lines.push(paragraph([run(dottedLine(60), { underline: true })], { spacing: { after: 40 }, indent: 200 }));
   }
-
-  return elements;
+  return lines.join('');
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   CRITERIA TABLE — Grading rubric at end of exam
-   ══════════════════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════
+   BUILD CRITERIA TABLE
+   ══════════════════════════════════════════════════════════════════ */
 
 function buildCriteriaTable(criteria) {
-  if (!criteria || criteria.length === 0) return null;
+  if (!criteria?.length) return '';
 
-  // Title row
-  const titleRow = new TableRow({
-    children: [
-      textCell('جدول إسناد الأعداد', { bold: true, columnSpan: 6, shading: 'D9E2F3' })
-    ]
-  });
+  const titleRow = [cell('جدول إسناد الأعداد', { bold: true, width: 9000, columnSpan: 6, shading: 'D9E2F3' })];
 
-  // Header row
-  const headerRow = new TableRow({
-    children: [
-      textCell('المعيار', { bold: true, shading: 'D9E2F3', width: 3000 }),
-      textCell('انعدام التملك\n(---)', { bold: true, size: FONT_SIZE.small, shading: 'D9E2F3', width: 1500 }),
-      textCell('دون التملك الأدنى\n(--+)', { bold: true, size: FONT_SIZE.small, shading: 'D9E2F3', width: 1500 }),
-      textCell('التملك الأدنى\n(-++)', { bold: true, size: FONT_SIZE.small, shading: 'D9E2F3', width: 1500 }),
-      textCell('التملك الأقصى\n(+++)', { bold: true, size: FONT_SIZE.small, shading: 'D9E2F3', width: 1500 }),
-      textCell('المجموع', { bold: true, shading: 'D9E2F3', width: 1500 })
-    ]
-  });
+  const headerRow = [
+    cell('المعيار', { bold: true, width: 2500, shading: 'D9E2F3' }),
+    cell('انعدام التملك\n(---)', { bold: true, sz: 16, width: 1300, shading: 'D9E2F3' }),
+    cell('دون التملك\n(--+)', { bold: true, sz: 16, width: 1300, shading: 'D9E2F3' }),
+    cell('التملك الأدنى\n(-++)', { bold: true, sz: 16, width: 1300, shading: 'D9E2F3' }),
+    cell('التملك الأقصى\n(+++)', { bold: true, sz: 16, width: 1300, shading: 'D9E2F3' }),
+    cell('المجموع', { bold: true, width: 1300, shading: 'D9E2F3' })
+  ];
 
-  // Data rows
   const dataRows = criteria.map(c => {
     const m = c.mastery || {};
-    const maxScore = m.max || 0;
-    return new TableRow({
-      children: [
-        textCell(c.label || c.id || '', { width: 3000, alignment: AlignmentType.RIGHT }),
-        textCell(String(m.none ?? 0), { width: 1500 }),
-        textCell(String(m.below ?? 0), { width: 1500 }),
-        textCell(String(m.min ?? 0), { width: 1500 }),
-        textCell(String(m.max ?? 0), { width: 1500 }),
-        textCell(String(maxScore), { bold: true, width: 1500 })
-      ]
-    });
+    return [
+      cell(c.label || c.id || '', { width: 2500, align: 'right' }),
+      cell(String(m.none ?? 0), { width: 1300 }),
+      cell(String(m.below ?? 0), { width: 1300 }),
+      cell(String(m.min ?? 0), { width: 1300 }),
+      cell(String(m.max ?? 0), { width: 1300 }),
+      cell(String(m.max ?? 0), { bold: true, width: 1300 })
+    ];
   });
 
-  // Total row
-  const totalMax = criteria.reduce((sum, c) => sum + (c.mastery?.max || 0), 0);
-  const totalRow = new TableRow({
-    children: [
-      textCell('المجموع الكلي', { bold: true, shading: 'E2EFDA', width: 3000 }),
-      textCell('', { shading: 'E2EFDA', width: 1500 }),
-      textCell('', { shading: 'E2EFDA', width: 1500 }),
-      textCell('', { shading: 'E2EFDA', width: 1500 }),
-      textCell(String(totalMax), { bold: true, shading: 'E2EFDA', width: 1500 }),
-      textCell(`${totalMax} / 20`, { bold: true, shading: 'E2EFDA', width: 1500 })
-    ]
-  });
+  const totalMax = criteria.reduce((s, c) => s + (c.mastery?.max || 0), 0);
+  const totalRow = [
+    cell('المجموع الكلي', { bold: true, width: 2500, shading: 'E2EFDA' }),
+    cell('', { width: 1300, shading: 'E2EFDA' }),
+    cell('', { width: 1300, shading: 'E2EFDA' }),
+    cell('', { width: 1300, shading: 'E2EFDA' }),
+    cell(String(totalMax), { bold: true, width: 1300, shading: 'E2EFDA' }),
+    cell(`${totalMax} / 20`, { bold: true, width: 1300, shading: 'E2EFDA' })
+  ];
 
-  return new Table({
-    width: { size: 100, type: WidthType.PERCENTAGE },
-    layout: TableLayoutType.FIXED,
-    rows: [titleRow, headerRow, ...dataRows, totalRow],
-    borders: CELL_FULL_BORDER
-  });
+  return paragraph([run('')], { spacing: { before: 200 } }) + table([titleRow, headerRow, ...dataRows, totalRow], { width: 9000 });
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   MARKS COLUMN — Right-side marking grid
-   ══════════════════════════════════════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════════════════
+   GENERATE DOCX
+   ══════════════════════════════════════════════════════════════════ */
 
-function buildMarksColumn(questions) {
-  // Group questions by their main section
-  const sections = [];
-  let currentSection = null;
-
-  questions.forEach((q, i) => {
-    if (q.section !== currentSection) {
-      currentSection = q.section || Math.floor(i / 3) + 1;
-      sections.push({ id: currentSection, marks: [] });
-    }
-    sections[sections.length - 1].marks.push(q.points || 1);
-  });
-
-  return sections;
+function buildDocumentXml(bodyContent) {
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas"
+            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+            xmlns:o="urn:schemas-microsoft-com:office:office"
+            xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+            xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"
+            xmlns:v="urn:schemas-microsoft-com:vml"
+            xmlns:wp14="http://schemas.microsoft.com/office/word/2010/wordprocessingDrawing"
+            xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"
+            xmlns:w10="urn:schemas-microsoft-com:office:word"
+            xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+            xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
+            xmlns:wpg="http://schemas.microsoft.com/office/word/2010/wordprocessingGroup"
+            xmlns:wpi="http://schemas.microsoft.com/office/word/2010/wordprocessingInk"
+            xmlns:wne="http://schemas.microsoft.com/office/word/2006/wordml"
+            xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"
+            mc:Ignorable="w14 wp14">
+  <w:body>
+    <w:sectPr>
+      <w:pgSz w:w="11906" w:h="16838"/>
+      <w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="720" w:footer="720" w:gutter="0"/>
+      <w:cols w:space="720"/>
+    </w:sectPr>
+    ${bodyContent}
+  </w:body>
+</w:document>`;
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   MAIN BUILD FUNCTION — Assembles complete exam document
-   ══════════════════════════════════════════════════════════════════════════ */
+function buildContentTypes() {
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+  <Default Extension="xml" ContentType="application/xml"/>
+  <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+  <Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
+</Types>`;
+}
+
+function buildRels() {
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>
+</Relationships>`;
+}
+
+function buildDocRels() {
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>
+</Relationships>`;
+}
+
+function buildStyles() {
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:style w:type="paragraph" w:default="1" w:styleId="Normal">
+    <w:name w:val="Normal"/>
+    <w:rPr><w:rFonts w:ascii="${FONT}" w:hAnsi="${FONT}" w:cs="${FONT}"/><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr>
+  </w:style>
+</w:styles>`;
+}
 
 export async function buildOfficialDocx(examData, context = {}) {
   const {
-    title,
-    subject,
-    level,
-    trimester,
-    questions = [],
-    criteria: rawCriteria,
-    passages = [],
-    durationMinutes = 60,
-    totalPoints = 20
+    title, subject, level, trimester,
+    questions = [], criteria: rawCriteria,
+    passages = [], durationMinutes = 60, totalPoints = 20
   } = examData;
 
-  // Resolve criteria
   const subjectKey = typeof subject === 'string' ? subject.toLowerCase().replace(/[^a-z-]/g, '') : '';
-  const criteria = rawCriteria || DEFAULT_CRITERIA_PRESETS[subjectKey] || DEFAULT_CRITERIA_PRESETS['arabic'];
+  const criteria = rawCriteria || DEFAULT_CRITERIA[subjectKey] || DEFAULT_CRITERIA.arabic;
 
-  const children = [];
+  const bodyParts = [];
 
-  // 1. Header table
-  children.push(buildHeader({
-    ...context,
-    subject,
-    level,
-    trimester,
-    durationMinutes,
-    subjectLabel: SUBJECT_MAP[subjectKey] || subject,
-    levelName: LEVEL_NAMES[level] || context.levelName
+  bodyParts.push(buildHeader({
+    ...context, subject, level, trimester, durationMinutes
   }));
+  bodyParts.push(emptyPara());
 
-  children.push(new Paragraph({ children: [txt('')], spacing: { after: 120 } }));
-
-  // 2. Passages (reading texts)
   passages.forEach(p => {
-    children.push(...renderPassage(p));
-    children.push(new Paragraph({ children: [txt('')], spacing: { after: 80 } }));
+    bodyParts.push(buildPassage(p));
+    bodyParts.push(emptyPara());
   });
 
-  // 3. Questions
-  let mainIndex = 0;
-  let subCounters = {};
+  let mainIdx = 0;
+  const subCounters = {};
 
-  questions.forEach((q, globalIndex) => {
-    const mainId = q.section || q.mainIndex || Math.floor(globalIndex / 3) + 1;
-    if (!subCounters[mainId]) {
-      subCounters[mainId] = 0;
-      mainIndex++;
-    }
+  questions.forEach((q, gi) => {
+    const mainId = q.section || q.mainIndex || Math.floor(gi / 3) + 1;
+    if (!subCounters[mainId]) { subCounters[mainId] = 0; mainIdx++; }
     subCounters[mainId]++;
-    const subIndex = subCounters[mainId];
 
-    // Main section header (Sند)
-    if (subIndex === 1) {
-      children.push(...renderQuestionHeader(mainId, q.sectionTitle || q.title || '', q.sectionPoints));
+    if (subCounters[mainId] === 1) {
+      bodyParts.push(buildSectionHeader(mainId, q.sectionTitle || q.title || ''));
     }
 
-    // Sub-question (Commentary/Exercise)
-    const label = q.label || `التعليمة ${mainId}-${subIndex}`;
-    children.push(...renderSubQuestion(label, q.instruction || '', q, q.points, subIndex));
-
-    // Add space between sub-questions
-    children.push(new Paragraph({ children: [txt('')], spacing: { after: 80 } }));
+    const label = q.label || `التعليمة ${mainId}-${subCounters[mainId]}`;
+    bodyParts.push(buildSubQuestion(label, q.instruction || '', q, subCounters[mainId]));
+    bodyParts.push(emptyPara());
   });
 
-  // 4. Answer lines for open questions (if needed)
-  const hasOpenQuestions = questions.some(q => q.type === 'OPEN' || q.type === 'SENTENCE');
-  if (hasOpenQuestions) {
-    children.push(new Paragraph({ children: [txt('')], spacing: { after: 120 } }));
-  }
+  bodyParts.push(paragraph([run('')], { pageBreakBefore: true }));
+  bodyParts.push(buildCriteriaTable(criteria));
 
-  // 5. Page break before criteria table
-  children.push(new Paragraph({
-    children: [txt('')],
-    pageBreakBefore: true
-  }));
+  const bodyXml = bodyParts.join('\n');
+  const documentXml = buildDocumentXml(bodyXml);
 
-  // 6. Criteria table at the end
-  const criteriaTable = buildCriteriaTable(criteria);
-  if (criteriaTable) {
-    children.push(criteriaTable);
-  }
+  const zip = new JSZip();
+  zip.file('[Content_Types].xml', buildContentTypes());
+  zip.file('_rels/.rels', buildRels());
+  zip.file('word/_rels/document.xml.rels', buildDocRels());
+  zip.file('word/document.xml', documentXml);
+  zip.file('word/styles.xml', buildStyles());
 
-  // Build the document
-  const doc = new Document({
-    creator: 'منصة رفيقي — مولّد الاختبارات',
-    title: title || 'اختبار رسمي',
-    description: `اختبار ${SUBJECT_MAP[subjectKey] || subject} — ${LEVEL_NAMES[level] || ''}`,
-    sections: [{
-      properties: {
-        page: {
-          size: {
-            orientation: PageOrientation.PORTRAIT,
-            width: 11906, // A4 width in twips
-            height: 16838  // A4 height in twips
-          },
-          margin: {
-            top: 1134,    // ~2cm
-            right: 1134,
-            bottom: 1134,
-            left: 1134
-          }
-        }
-      },
-      children
-    }]
-  });
-
-  // Generate buffer
-  const buffer = await Packer.toBuffer(doc);
-  return buffer;
+  return zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
 }
-
-/* ══════════════════════════════════════════════════════════════════════════
-   EXAM CONTENT BUILDER — Converts generic exam data to DOCX-ready format
-   ══════════════════════════════════════════════════════════════════════════ */
 
 export function prepareExamForDocx(content, context = {}) {
   if (!content) return null;
@@ -696,20 +426,11 @@ export function prepareExamForDocx(content, context = {}) {
     instruction: q.instruction || q.prompt || q.text || '',
     prompt: q.prompt || q.text || '',
     type: q.type || 'OPEN',
-    options: q.options,
-    correct: q.correct,
-    correctAnswer: q.correctAnswer,
-    orderItems: q.orderItems,
-    points: q.points || 1,
-    sectionPoints: q.sectionPoints,
+    options: q.options, correct: q.correct, correctAnswer: q.correctAnswer,
+    orderItems: q.orderItems, points: q.points || 1,
     answerLines: q.answerLines || 3,
-    items: q.items,
-    leftItems: q.leftItems,
-    rightItems: q.rightItems,
-    statements: q.statements,
-    visual: q.visual,
-    tableHeaders: q.tableHeaders,
-    tableData: q.tableData
+    items: q.items, leftItems: q.leftItems, rightItems: q.rightItems,
+    statements: q.statements, visual: q.visual
   }));
 
   return {
@@ -717,16 +438,11 @@ export function prepareExamForDocx(content, context = {}) {
     subject: content.subject || context.subject,
     level: content.level || context.level,
     trimester: content.trimester || context.trimester,
-    questions,
-    criteria: content.criteria,
+    questions, criteria: content.criteria,
     passages: content.passages || [],
     durationMinutes: content.durationMinutes || context.durationMinutes || 60,
     totalPoints: content.totalPoints || 20
   };
 }
 
-/* ══════════════════════════════════════════════════════════════════════════
-   EXPORTS
-   ══════════════════════════════════════════════════════════════════════════ */
-
-export { buildCriteriaTable, MASTERY_LEVELS, DEFAULT_CRITERIA_PRESETS, SUBJECT_MAP, LEVEL_NAMES };
+export { SUBJECT_MAP, LEVEL_NAMES, DEFAULT_CRITERIA };

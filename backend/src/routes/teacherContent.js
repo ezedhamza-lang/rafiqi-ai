@@ -4,7 +4,19 @@ import { authMiddleware, teacherMiddleware } from '../auth.js';
 import { buildMemo, rebuildMemo } from '../services/memoService.js';
 import { buildResource, rebuildResource } from '../services/resourceService.js';
 import { getBankExam, buildExamContent, officialExamSummary } from '../services/officialExamService.js';
-import { buildOfficialDocx, prepareExamForDocx } from '../services/officialDocxService.js';
+// Dynamic import for docx service — loaded lazily to avoid crashing server if docx package unavailable
+let _docxService = null;
+async function getDocxService() {
+  if (!_docxService) {
+    try {
+      _docxService = await import('../services/officialDocxService.js');
+    } catch (e) {
+      console.error('Failed to load officialDocxService:', e.message);
+      throw new Error('خدمة تصدير Word غير متوفرة حالياً');
+    }
+  }
+  return _docxService;
+}
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 import {
@@ -741,6 +753,7 @@ router.put('/exams/:id/submissions/:subId', teacherMiddleware, validateParams(ex
  *         description: الاختبار غير موجود
  */
 router.get('/exams/:id/docx', teacherMiddleware, validateParams(teacherContentIdParamSchema), asyncHandler(async (req, res) => {
+  const { buildOfficialDocx, prepareExamForDocx } = await getDocxService();
   const exam = await prisma.officialExam.findFirst({
     where: { id: Number(req.params.id), teacherId: req.user.id }
   });
@@ -798,6 +811,7 @@ router.get('/exams/:id/docx', teacherMiddleware, validateParams(teacherContentId
  *         description: بيانات غير صالحة
  */
 router.post('/exams/generate-docx', teacherMiddleware, asyncHandler(async (req, res) => {
+  const { buildOfficialDocx, prepareExamForDocx } = await getDocxService();
   const { subject, level, trimester, title, durationMinutes, content: examContent, classId } = req.body;
 
   if (!subject) throw new ApiError(400, 'المادة مطلوبة');
@@ -850,6 +864,7 @@ router.post('/exams/generate-docx', teacherMiddleware, asyncHandler(async (req, 
  *         description: ملف Word للمعاينة
  */
 router.get('/exams/:id/preview-docx', teacherMiddleware, validateParams(teacherContentIdParamSchema), asyncHandler(async (req, res) => {
+  const { buildOfficialDocx, prepareExamForDocx } = await getDocxService();
   const exam = await prisma.officialExam.findFirst({
     where: { id: Number(req.params.id), teacherId: req.user.id }
   });
