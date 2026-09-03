@@ -1006,13 +1006,14 @@ export function getUnusedQuestions(subject, gradeId, trimester, teacherId, count
   // إذا لم تبق أسئلة غير مستخدمة، نعيد البدء من الأول
   if (unused.length === 0) {
     if (usage[teacherKey]) {
-      usage[teacherKey] = usage[teacherKey].filter(id => {
-        const prefix = `${subject.slice(0,2)}-${gradeId.slice(-1)}-${trimester}`;
-        return !id.startsWith(prefix) && !id.startsWith('ai-');
-      });
+      const resetIds = bank.map(q => q.id);
+      usage[teacherKey] = usage[teacherKey].filter(id => !resetIds.includes(id));
       saveUsageLog(usage);
     }
-    return getUnusedQuestions(subject, gradeId, trimester, teacherId, count);
+    const freshUnused = bank.filter(q => !((usage[teacherKey] || []).includes(q.id)));
+    if (freshUnused.length === 0) return [];
+    const shuffled2 = freshUnused.sort(() => Math.random() - 0.5);
+    return shuffled2.slice(0, Math.min(count, shuffled2.length));
   }
 
   // اختيار عشوائي من الأسئلة غير المستخدمة
