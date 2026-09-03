@@ -12,4 +12,4 @@ COPY backend/ .
 
 EXPOSE 3001
 
-CMD ["sh", "-c", "export DATABASE_URL=\"${DATABASE_URL}${DATABASE_URL##*\\?*}&advisory_lock_timeout=30\" && (npx prisma migrate deploy && node prisma/seed.js) & node src/index.js"]
+CMD ["sh", "-c", "export DATABASE_URL=\"${DATABASE_URL}${DATABASE_URL##*\\?*}&advisory_lock_timeout=30000\" && (npx prisma migrate deploy && node prisma/seed.js) & node src/index.js"]
