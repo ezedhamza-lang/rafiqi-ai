@@ -1,6 +1,7 @@
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  advisory_lock_timeout = 30000
 }
 
 generator client {
