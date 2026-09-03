@@ -218,106 +218,110 @@ async function main() {
   }
 
   // === BULK DEMO USERS (1000 students + 1000 teachers + 1000 parents) ===
-  const FIRST_NAMES_MALE = ['محمد', 'أحمد', 'علي', 'عمر', 'يوسف', 'إبراهيم', 'خالد', 'حسين', 'حسن', 'عبدالله', 'عمر', 'بلال', 'ياسين', 'أمير', 'ماهر', 'طارق', 'سعيد', 'منصف', 'نورالدين', 'سامي'];
-  const FIRST_NAMES_FEMALE = ['فاطمة', 'أمينة', 'خديجة', 'نورة', 'سارة', 'مريم', 'هدى', 'ليلى', 'حسناء', '.nda', 'منى', 'رشا', 'هدى', 'إيمان', 'أسماء', 'رقية', ' سناء', 'نبيلة', 'لطيفة', 'عائشة'];
-  const LAST_NAMES_BULK = ['بن أحمد', 'بن محمد', 'بن علي', 'بن عمر', 'بن يوسف', 'الحسني', 'الroudhaoui', 'ben Salah', 'ben Ali', 'ben Brahim', 'Trabelsi', 'Cherif', 'Mansour', 'Bouazizi', 'Jaziri', 'Khelifi', 'Dridi', 'Masmoudi', 'Gharbi', 'Mebarki', 'Souissi', 'Bougrine', 'Ferjani', 'Haj Ali'];
+  const existingTeacherCount = await prisma.user.count({ where: { role: 'TEACHER' } });
+  if (existingTeacherCount > 10) {
+    console.log(`Bulk users already exist (${existingTeacherCount} teachers found). Skipping bulk creation.`);
+  } else {
+    const FIRST_NAMES_MALE = ['محمد', 'أحمد', 'علي', 'عمر', 'يوسف', 'إبراهيم', 'خالد', 'حسين', 'حسن', 'عبدالله', 'بلال', 'ياسين', 'أمير', 'ماهر', 'طارق', 'سعيد', 'منصف', 'نورالدين', 'سامي', 'وليد'];
+    const FIRST_NAMES_FEMALE = ['فاطمة', 'أمينة', 'خديجة', 'نورة', 'سارة', 'مريم', 'هدى', 'ليلى', 'حسناء', 'ندى', 'منى', 'رشا', 'إيمان', 'أسماء', 'رقية', 'سناء', 'نبيلة', 'لطيفة', 'عائشة', 'ymes'];
+    const LAST_NAMES_BULK = ['بن أحمد', 'بن محمد', 'بن علي', 'بن عمر', 'بن يوسف', 'الحسني', 'الroudhaoui', 'ben Salah', 'ben Ali', 'ben Brahim', 'Trabelsi', 'Cherif', 'Mansour', 'Bouazizi', 'Jaziri', 'Khelifi', 'Dridi', 'Masmoudi', 'Gharbi', 'Mebarki', 'Souissi', 'Bougrine', 'Ferjani', 'Haj Ali'];
 
-  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
-  const BULK_BATCH = 100;
-  const bulkHash = await bcrypt.hash('password123', 10);
-  const classIds = Object.values(createdClasses).map((c) => c.id);
+    const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+    const BULK_BATCH = 100;
+    const bulkHash = await bcrypt.hash('password123', 10);
+    const classIds = Object.values(createdClasses).map((c) => c.id);
 
-  // --- Create 1000 parent users ---
-  console.log('Creating 1000 parent users...');
-  for (let i = 0; i < 1000; i += BULK_BATCH) {
-    const batch = [];
-    const count = Math.min(BULK_BATCH, 1000 - i);
-    for (let j = 0; j < count; j++) {
-      const idx = i + j + 1;
-      const male = Math.random() < 0.5;
-      batch.push({
-        firstName: male ? pick(FIRST_NAMES_MALE) : pick(FIRST_NAMES_FEMALE),
-        lastName: pick(LAST_NAMES_BULK),
-        email: `parent${idx}@test.tn`,
-        phone: `20003${String(idx).padStart(4, '0')}`,
-        passwordHash: bulkHash,
-        role: 'PARENT',
-      });
+    // --- Create 1000 parent users ---
+    console.log('Creating 1000 parent users...');
+    for (let i = 0; i < 1000; i += BULK_BATCH) {
+      const batch = [];
+      const count = Math.min(BULK_BATCH, 1000 - i);
+      for (let j = 0; j < count; j++) {
+        const idx = i + j + 1;
+        const male = Math.random() < 0.5;
+        batch.push({
+          firstName: male ? pick(FIRST_NAMES_MALE) : pick(FIRST_NAMES_FEMALE),
+          lastName: pick(LAST_NAMES_BULK),
+          email: `parent${idx}@test.tn`,
+          phone: `20003${String(idx).padStart(4, '0')}`,
+          passwordHash: bulkHash,
+          role: 'PARENT',
+        });
+      }
+      await prisma.user.createMany({ data: batch, skipDuplicates: true });
     }
-    await prisma.user.createMany({ data: batch, skipDuplicates: true });
-    console.log(`  Parents created: ${Math.min(i + BULK_BATCH, 1000)}/1000`);
-  }
+    console.log('  Parents done');
 
-  // --- Create 1000 teacher users ---
-  console.log('Creating 1000 teacher users...');
-  for (let i = 0; i < 1000; i += BULK_BATCH) {
-    const batch = [];
-    const count = Math.min(BULK_BATCH, 1000 - i);
-    for (let j = 0; j < count; j++) {
-      const idx = i + j + 1;
-      const male = Math.random() < 0.5;
-      batch.push({
-        firstName: male ? pick(FIRST_NAMES_MALE) : pick(FIRST_NAMES_FEMALE),
-        lastName: pick(LAST_NAMES_BULK),
-        email: `teacher${idx}@test.tn`,
-        phone: `20002${String(idx).padStart(4, '0')}`,
-        passwordHash: bulkHash,
-        role: 'TEACHER',
-      });
+    // --- Create 1000 teacher users ---
+    console.log('Creating 1000 teacher users...');
+    for (let i = 0; i < 1000; i += BULK_BATCH) {
+      const batch = [];
+      const count = Math.min(BULK_BATCH, 1000 - i);
+      for (let j = 0; j < count; j++) {
+        const idx = i + j + 1;
+        const male = Math.random() < 0.5;
+        batch.push({
+          firstName: male ? pick(FIRST_NAMES_MALE) : pick(FIRST_NAMES_FEMALE),
+          lastName: pick(LAST_NAMES_BULK),
+          email: `teacher${idx}@test.tn`,
+          phone: `20002${String(idx).padStart(4, '0')}`,
+          passwordHash: bulkHash,
+          role: 'TEACHER',
+        });
+      }
+      await prisma.user.createMany({ data: batch, skipDuplicates: true });
     }
-    await prisma.user.createMany({ data: batch, skipDuplicates: true });
-    console.log(`  Teachers created: ${Math.min(i + BULK_BATCH, 1000)}/1000`);
-  }
+    console.log('  Teachers done');
 
-  // --- Create 1000 student users + Student records ---
-  console.log('Creating 1000 student users...');
-  const parentIds = (await prisma.user.findMany({ where: { role: 'PARENT' }, select: { id: true } })).map((p) => p.id);
+    // --- Create 1000 student users + Student records ---
+    console.log('Creating 1000 student users...');
+    const parentIds = (await prisma.user.findMany({ where: { role: 'PARENT' }, select: { id: true } })).map((p) => p.id);
 
-  for (let i = 0; i < 1000; i += BULK_BATCH) {
-    const count = Math.min(BULK_BATCH, 1000 - i);
-    const batchUsers = [];
-    const genderByEmail = {};
+    for (let i = 0; i < 1000; i += BULK_BATCH) {
+      const count = Math.min(BULK_BATCH, 1000 - i);
+      const batchUsers = [];
+      const genderByEmail = {};
 
-    for (let j = 0; j < count; j++) {
-      const idx = i + j + 1;
-      const male = Math.random() < 0.5;
-      const email = `student${idx}@test.tn`;
-      genderByEmail[email] = male;
-      batchUsers.push({
-        firstName: male ? pick(FIRST_NAMES_MALE) : pick(FIRST_NAMES_FEMALE),
-        lastName: pick(LAST_NAMES_BULK),
-        email,
-        phone: `20001${String(idx).padStart(4, '0')}`,
-        passwordHash: bulkHash,
-        role: 'STUDENT',
+      for (let j = 0; j < count; j++) {
+        const idx = i + j + 1;
+        const male = Math.random() < 0.5;
+        const email = `student${idx}@test.tn`;
+        genderByEmail[email] = male;
+        batchUsers.push({
+          firstName: male ? pick(FIRST_NAMES_MALE) : pick(FIRST_NAMES_FEMALE),
+          lastName: pick(LAST_NAMES_BULK),
+          email,
+          phone: `20001${String(idx).padStart(4, '0')}`,
+          passwordHash: bulkHash,
+          role: 'STUDENT',
+        });
+      }
+
+      await prisma.user.createMany({ data: batchUsers, skipDuplicates: true });
+
+      const createdUsers = await prisma.user.findMany({
+        where: { email: { in: batchUsers.map((u) => u.email) } },
+        select: { id: true, firstName: true, lastName: true, email: true },
       });
+
+      const studentRecords = createdUsers.map((u) => ({
+        accountUserId: u.id,
+        userId: pick(parentIds),
+        firstName: u.firstName,
+        lastName: u.lastName,
+        birthDate: new Date(2014 + Math.floor(Math.random() * 7), Math.floor(Math.random() * 12), 1 + Math.floor(Math.random() * 28)),
+        gender: genderByEmail[u.email] ? 'ذكر' : 'أنثى',
+        level: 'السنة الأولى أساسي',
+        schoolYear: '2026-2027',
+        schoolName: 'المدرسة النموذجية',
+        classId: pick(classIds),
+      }));
+
+      await prisma.student.createMany({ data: studentRecords, skipDuplicates: true });
     }
-
-    await prisma.user.createMany({ data: batchUsers, skipDuplicates: true });
-
-    const createdUsers = await prisma.user.findMany({
-      where: { email: { in: batchUsers.map((u) => u.email) } },
-      select: { id: true, firstName: true, lastName: true, email: true },
-    });
-
-    const studentRecords = createdUsers.map((u) => ({
-      accountUserId: u.id,
-      userId: pick(parentIds),
-      firstName: u.firstName,
-      lastName: u.lastName,
-      birthDate: new Date(2014 + Math.floor(Math.random() * 7), Math.floor(Math.random() * 12), 1 + Math.floor(Math.random() * 28)),
-      gender: genderByEmail[u.email] ? 'ذكر' : 'أنثى',
-      level: 'السنة الأولى أساسي',
-      schoolYear: '2026-2027',
-      schoolName: 'المدرسة النموذجية',
-      classId: pick(classIds),
-    }));
-
-    await prisma.student.createMany({ data: studentRecords, skipDuplicates: true });
-    console.log(`  Students created: ${Math.min(i + BULK_BATCH, 1000)}/1000`);
+    console.log('  Students done');
+    console.log('Bulk demo users finished: 1000 students, 1000 teachers, 1000 parents');
   }
-
-  console.log('Bulk demo users finished: 1000 students, 1000 teachers, 1000 parents');
 
   const parent = users['parent@test.tn'];
   const studentAccount = users['student@test.tn'];
