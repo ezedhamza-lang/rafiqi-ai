@@ -1,4 +1,7 @@
-FROM node:20-bullseye-slim
+FROM node:20-alpine
+
+# Install OpenSSL 1.1 compatibility for Prisma 5.22
+RUN apk add --no-cache openssl1.1-compat
 
 WORKDIR /app
 
