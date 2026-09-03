@@ -1,14 +1,13 @@
 // ===== خدمة بناء ملفات DOCX الرسمية =====
 // تطابق كامل مع النموذج الرسمي لتونس
 // - جدول رئيسي (المدرسة + المادة + معلومات التلميذ)
-// - جدول معايير مع تجزئة (مع1أ، مع1ب، مع2أ1...)
-// - أسئلة متنوعة مع خطوط إجابة
-// - جدول إسناد الأعداد مع 4 مستويات تملك
+// - أسئلة متنوعة مع خطوط إجابة كافية
+// - جدول المعايير في نهاية الصفحة
+// - جدول إسناد الأعداد
 
-import { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, BorderStyle, AlignmentType, VerticalAlign, HeadingLevel } from 'docx';
+import { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell, WidthType, BorderStyle, AlignmentType, VerticalAlign } from 'docx';
 
 const TRIMESTER_LABELS = { 1: 'الأوّل', 2: 'الثّاني', 3: 'الثّالث' };
-const TRIMESTER_MONTHS = { 1: 'ديسمبر', 2: 'مارس', 3: 'جوان' };
 const LEVEL_LABELS = {
   year1: 'السنة الأولى أساسي',
   year2: 'السنة الثانية أساسي',
@@ -18,24 +17,13 @@ const LEVEL_LABELS = {
   year6: 'السنة السادسة أساسي'
 };
 const SUBJECT_LABELS = {
-  math: 'الرياضيات',
-  science: 'الإيقاظ العلمي',
-  reading: 'القراءة',
-  production: 'الإنتاج الكتابي',
-  handwriting: 'خط وإملاء',
-  grammar: 'قواعد اللغة',
-  french: 'اللغة الفرنسية',
-  english: 'اللغة الإنجليزية',
-  islamic: 'التربية الإسلامية',
-  civics: 'التربية المدنية',
-  technology: 'التكنولوجيا',
-  ict: 'المعلوماتية',
-  art: 'التربية التشكيلية',
-  music: 'التربية الموسيقية',
-  pe: 'التربية البدنية'
+  math: 'الرياضيات', science: 'الإيقاظ العلمي', reading: 'القراءة',
+  production: 'الإنتاج الكتابي', handwriting: 'خط وإملاء',
+  grammar: 'قواعد اللغة', french: 'اللغة الفرنسية', english: 'اللغة الإنجليزية',
+  islamic: 'التربية الإسلامية', civics: 'التربية المدنية',
+  technology: 'التكنولوجيا', ict: 'المعلوماتية',
+  art: 'التربية التشكيلية', music: 'التربية الموسيقية', pe: 'التربية البدنية'
 };
-
-// ============ دوال مساعدة ============
 
 function tr(text, opts = {}) {
   return new TextRun({
@@ -65,6 +53,12 @@ function answerLine() {
     children: [tr('_______________________________________________', { size: 18 })],
     spacing: { after: 80, before: 20 }
   });
+}
+
+function answerLines(count = 2) {
+  const lines = [];
+  for (let i = 0; i < count; i++) lines.push(answerLine());
+  return lines;
 }
 
 function cell(text, widthPct, opts = {}) {
@@ -101,6 +95,18 @@ function cellMultiLine(lines, widthPct, opts = {}) {
   });
 }
 
+function cellBold(text, widthPct) {
+  return cell(text, widthPct, { bold: true });
+}
+
+function sectionTitle(text) {
+  return new Paragraph({
+    children: [tr(text, { size: 24, bold: true })],
+    alignment: AlignmentType.CENTER,
+    spacing: { before: 160, after: 100 }
+  });
+}
+
 // ============ البناء الرئيسي ============
 
 export async function buildOfficialDocx(exam, options = {}) {
@@ -109,30 +115,24 @@ export async function buildOfficialDocx(exam, options = {}) {
     subject = exam.subject || 'math',
     trimester = options.trimester || 3,
     schoolName = options.schoolName || '',
-    teacherName = options.teacherName || '',
     className = options.className || '',
-    schoolYear = options.schoolYear || '2025-2026'
+    schoolYear = options.schoolYear || '2026-2027'
   } = options;
 
   const levelLabel = LEVEL_LABELS[gradeId] || 'السنة الأولى أساسي';
   const subjectLabel = SUBJECT_LABELS[subject] || subject;
   const trimesterLabel = TRIMESTER_LABELS[trimester] || 'الثالث';
   const totalScore = exam.totalScore || 20;
+  const questions = exam.questions || [];
 
   const children = [];
 
   // ═══════════════════════════════════════════
-  // 1. الجدول الرئيسي (Header Table)
+  // 1. الجدول الرئيسي (Header)
   // ═══════════════════════════════════════════
-  ///format: 
-  // | اسم المدرسة | عنوان الاختبار والمادة | المعلومات |
-  // |             |                         | الاسم واللقب |
-  // |             |                         | القسم |
-  // |             |                         | العدد /20 |
 
   const headerTable = new Table({
     rows: [
-      // الصف الأول: العناوين
       new TableRow({
         children: [
           cellMultiLine([
@@ -160,22 +160,39 @@ export async function buildOfficialDocx(exam, options = {}) {
   children.push(emptyLine());
 
   // ═══════════════════════════════════════════
-  // 2. جدول المعايير مع التجزئة
+  // 2. الأسئلة مع خطوط إجابة كافية
   // ═══════════════════════════════════════════
-  // يعرض كل معيار وتجزئاته مع النقاط
 
-  if (exam.criteria && exam.criteria.length > 0) {
-    const criteriaHeader = new Paragraph({
-      children: [tr('جدول المعايير', { size: 22, bold: true })],
-      alignment: AlignmentType.CENTER,
-      spacing: { after: 100 }
-    });
-    children.push(criteriaHeader);
+  for (const q of questions) {
+    // عنوان السؤال
+    const questionText = q.content || q.prompt || '';
+    const num = children._qNum ? ++children._qNum : (children._qNum = 1);
 
-    // بناء صفوف جدول المعايير
+    // المعيار والتجزئة فوق السؤال
+    const metaParts = [];
+    if (q.criteria || q.criterion) metaParts.push(`المعيار: ${q.criteria || q.criterion}`);
+    if (q.subCriterion) metaParts.push(`التجزئة: ${q.subCriterion}`);
+    if (metaParts.length > 0) {
+      children.push(p([tr(metaParts.join('  —  '), { size: 16 })], { before: 40, after: 20 }));
+    }
+
+    // السؤال الرئيسي
+    children.push(p([tr(`_${num}. ${questionText}`, { size: 20, bold: true })], { before: 80, after: 40 }));
+
+    // العرض حسب النوع
+    renderQuestionByType(children, q, num);
+    children.push(emptyLine());
+  }
+
+  // ═══════════════════════════════════════════
+  // 3. جدول المعايير في نهاية الصفحة
+  // ═══════════════════════════════════════════
+
+  const criteria = exam.criteria || groupQuestionsByCriteria(questions);
+  if (criteria.length > 0) {
+    children.push(sectionTitle('جدول المعايير'));
+
     const critRows = [];
-
-    // صف رؤوس الأعمدة: المعيار | التجزئة | النقاط
     critRows.push(new TableRow({
       children: [
         cell('المعيار', 20, { bold: true }),
@@ -185,24 +202,19 @@ export async function buildOfficialDocx(exam, options = {}) {
       ]
     }));
 
-    // صفوف كل معيار وتجزئاته
-    for (const crit of exam.criteria) {
+    for (const crit of criteria) {
       if (crit.subCriteria && crit.subCriteria.length > 0) {
         for (let i = 0; i < crit.subCriteria.length; i++) {
           const sub = crit.subCriteria[i];
           const cells = [];
-
           if (i === 0) {
-            // أول سطر يحتوي على رمز المعيار الرئيسي
             cells.push(cellMultiLine([crit.code, crit.label], 20, { bold: true }));
           } else {
             cells.push(cell('', 20));
           }
-
           cells.push(cellMultiLine([sub.code, sub.label], 50, { align: AlignmentType.RIGHT }));
           cells.push(cell(`${sub.max}`, 15));
           cells.push(cell(i === 0 ? `${crit.max}` : '', 15));
-
           critRows.push(new TableRow({ children: cells }));
         }
       } else {
@@ -217,181 +229,67 @@ export async function buildOfficialDocx(exam, options = {}) {
       }
     }
 
-    // صف المجموع الكلي
     critRows.push(new TableRow({
-      children: [
-        cellBold('المجموع الكلي', 20),
-        cell('', 50),
-        cell('', 15),
-        cellBold(`/ ${totalScore}`, 15)
-      ]
+      children: [cellBold('المجموع الكلي', 20), cell('', 50), cell('', 15), cellBold(`/ ${totalScore}`, 15)]
     }));
 
-    children.push(new Table({
-      rows: critRows,
-      width: { size: 100, type: WidthType.PERCENTAGE }
-    }));
+    children.push(new Table({ rows: critRows, width: { size: 100, type: WidthType.PERCENTAGE } }));
     children.push(emptyLine());
   }
 
   // ═══════════════════════════════════════════
-  // 3. الأسئلة
+  // 4. جدول إسناد الأعداد
   // ═══════════════════════════════════════════
 
-  let currentCriterion = null;
-  let questionNum = 0;
+  if (criteria.length > 0) {
+    children.push(sectionTitle('جدول إسناد الأعداد'));
 
-  for (const q of exam.questions) {
-    // عنوان المعيار الجديد
-    if ((q.criteria || q.criterion) !== currentCriterion) {
-      currentCriterion = q.criteria || q.criterion;
-      const critDef = exam.criteria?.find(c => c.code === currentCriterion);
+    const totalSub = criteria.reduce((sum, c) => sum + (c.subCriteria?.length || 1), 0);
+    const subColWidth = Math.floor(70 / Math.max(totalSub, 1));
 
-      children.push(new Paragraph({
-        children: [
-          tr(`المعيار ${currentCriterion}`, { size: 22, bold: true }),
-          tr(critDef ? `: ${critDef.label}` : '', { size: 20 })
-        ],
-        alignment: AlignmentType.RIGHT,
-        spacing: { before: 120, after: 60 }
-      }));
-
-      // خط فاصل
-      children.push(new Paragraph({
-        children: [tr('─'.repeat(60), { size: 16 })],
-        alignment: AlignmentType.CENTER,
-        spacing: { after: 60 }
-      }));
-    }
-
-    questionNum++;
-
-    // تجزئة المعيار الفرعي
-    if (q.subCriterion) {
-      children.push(new Paragraph({
-        children: [
-          tr(`[${q.subCriterion}]`, { size: 18, bold: true }),
-          tr(q.subCriterionLabel ? ` ${q.subCriterionLabel}` : '', { size: 18 })
-        ],
-        alignment: AlignmentType.RIGHT,
-        spacing: { before: 60, after: 30 }
-      }));
-    }
-
-    // نوع السؤال
-    switch (q.type) {
-      case 'MCQ':
-      case 'TRUE_FALSE':
-        renderMCQ(children, q, questionNum);
-        break;
-      case 'VERTICAL_OP':
-      case 'VERTICAL_ADD':
-      case 'VERTICAL_SUB':
-        renderVerticalOperation(children, q, questionNum);
-        break;
-      case 'COIN':
-      case 'COIN_COUNT':
-        renderCoinQuestion(children, q, questionNum);
-        break;
-      case 'MATCHING':
-        renderMatching(children, q, questionNum);
-        break;
-      case 'FILL_BLANK':
-        renderFillBlank(children, q, questionNum);
-        break;
-      case 'COPY':
-      case 'LETTERS':
-        renderHandwriting(children, q, questionNum);
-        break;
-      case 'WORD_PROBLEM':
-        renderWordProblem(children, q, questionNum);
-        break;
-      case 'ORDER':
-        renderOrdering(children, q, questionNum);
-        break;
-      case 'SHAPE':
-        renderShape(children, q, questionNum);
-        break;
-      case 'FREE':
-      case 'OPINION':
-      case 'STORY_ORDER':
-      case 'STORY_COMPLETE':
-      case 'PICTURE_DESC':
-      case 'SENTENCE_COMPLETE':
-      case 'PERSONAL_WRITE':
-        renderFreeResponse(children, q, questionNum);
-        break;
-      default:
-        renderGenericQuestion(children, q, questionNum);
-    }
-  }
-
-  // ═══════════════════════════════════════════
-  // 4. جدول إسناد الأعداد (Scoring Grid)
-  // ═══════════════════════════════════════════
-
-  children.push(emptyLine());
-  children.push(new Paragraph({
-    children: [tr('جدول إسناد الأعداد', { size: 24, bold: true })],
-    alignment: AlignmentType.CENTER,
-    spacing: { before: 200, after: 100 }
-  }));
-
-  if (exam.criteria && exam.criteria.length > 0) {
     const gridRows = [];
-
-    // صف الرؤوس
     const headerCells = [cell('مستوى التملك', 20, { bold: true })];
-    for (const crit of exam.criteria) {
+    for (const crit of criteria) {
       if (crit.subCriteria && crit.subCriteria.length > 0) {
         for (const sub of crit.subCriteria) {
-          headerCells.push(cell(sub.code, Math.floor(70 / exam.criteria.reduce((sum, c) => sum + (c.subCriteria?.length || 1), 0)), { bold: true, size: 14 }));
+          headerCells.push(cell(sub.code, subColWidth, { bold: true, size: 14 }));
         }
       } else {
-        headerCells.push(cell(crit.code, Math.floor(70 / exam.criteria.length), { bold: true }));
+        headerCells.push(cell(crit.code, Math.floor(70 / criteria.length), { bold: true }));
       }
     }
     headerCells.push(cell('المجموع', 10, { bold: true }));
     gridRows.push(new TableRow({ children: headerCells }));
 
-    // صفوف مستويات التملك
     const levels = [
-      { label: 'انعدام التملك', code: '---', points: () => 0 },
-      { label: 'دون التملك الأدنى', code: '+--', points: (crit) => Math.round(crit.max * 0.3) },
-      { label: 'التملك الأدنى', code: '++-', points: (crit) => Math.round(crit.max * 0.6) },
-      { label: 'التملك الأقصى', code: '+++', points: (crit) => crit.max }
+      { label: 'انعدام التملك', code: '---', calc: () => 0 },
+      { label: 'دون التملك الأدنى', code: '+--', calc: (m) => Math.round(m * 0.3) },
+      { label: 'التملك الأدنى', code: '++-', calc: (m) => Math.round(m * 0.6) },
+      { label: 'التملك الأقصى', code: '+++', calc: (m) => m }
     ];
 
     for (const level of levels) {
       const rowCells = [cellMultiLine([level.code, level.label], 20, { size: 14 })];
       let total = 0;
-
-      for (const crit of exam.criteria) {
+      for (const crit of criteria) {
         if (crit.subCriteria && crit.subCriteria.length > 0) {
           for (const sub of crit.subCriteria) {
-            const subMax = sub.max;
-            const subPoints = level.code === '---' ? 0 :
-              level.code === '+--' ? Math.round(subMax * 0.3) :
-              level.code === '++-' ? Math.round(subMax * 0.6) :
-              subMax;
-            total += subPoints;
-            rowCells.push(cell(`${subPoints}`, Math.floor(70 / exam.criteria.reduce((sum, c) => sum + (c.subCriteria?.length || 1), 0)), { size: 14 }));
+            const pts = level.calc(sub.max);
+            total += pts;
+            rowCells.push(cell(`${pts}`, subColWidth, { size: 14 }));
           }
         } else {
-          const critPoints = level.points(crit);
-          total += critPoints;
-          rowCells.push(cell(`${critPoints}`, Math.floor(70 / exam.criteria.length), { size: 14 }));
+          const pts = level.calc(crit.max);
+          total += pts;
+          rowCells.push(cell(`${pts}`, Math.floor(70 / criteria.length), { size: 14 }));
         }
       }
-
       rowCells.push(cell(`${total}`, 10, { size: 14, bold: level.code === '+++' }));
       gridRows.push(new TableRow({ children: rowCells }));
     }
 
-    children.push(new Table({
-      rows: gridRows,
-      width: { size: 100, type: WidthType.PERCENTAGE }
-    }));
+    children.push(new Table({ rows: gridRows, width: { size: 100, type: WidthType.PERCENTAGE } }));
+    children.push(emptyLine());
   }
 
   // ═══════════════════════════════════════════
@@ -399,19 +297,12 @@ export async function buildOfficialDocx(exam, options = {}) {
   // ═══════════════════════════════════════════
 
   children.push(emptyLine());
-  children.push(emptyLine());
-
   children.push(new Table({
     rows: [new TableRow({
       children: [
         cell('إمضاء التلميذ(ة)', 30, { bold: true }),
         cell('إمضاء المعلّم(ة)', 30, { bold: true }),
-        cellMultiLine([
-          'ضعيف: 0-9',
-          'مقبول: 10-13',
-          'حسن: 14-16',
-          'ممتاز: 17-20'
-        ], 40, { size: 14 })
+        cellMultiLine(['ضعيف: 0-9', 'مقبول: 10-13', 'حسن: 14-16', 'ممتاز: 17-20'], 40, { size: 14 })
       ]
     })],
     width: { size: 100, type: WidthType.PERCENTAGE }
@@ -425,12 +316,7 @@ export async function buildOfficialDocx(exam, options = {}) {
     sections: [{
       properties: {
         page: {
-          margin: {
-            top: 720,     // 1.27 cm
-            right: 720,
-            bottom: 720,
-            left: 720
-          }
+          margin: { top: 720, right: 720, bottom: 720, left: 720 }
         }
       },
       children
@@ -440,130 +326,189 @@ export async function buildOfficialDocx(exam, options = {}) {
   return Packer.toBuffer(doc);
 }
 
-// ============ دوال عرض الأسئلة ============
+// ============ عرض الأسئلة حسب النوع ============
 
-function renderMCQ(children, q, num) {
-  children.push(p([tr(`${num}- ${q.content || q.prompt}`, { size: 20 })]));
+function renderQuestionByType(children, q, num) {
+  const type = q.type || 'MCQ';
+  const content = q.content || q.prompt || '';
 
-  // الخيارات
+  switch (type) {
+    case 'MCQ':
+    case 'TRUE_FALSE':
+      renderMCQ(children, q);
+      break;
+
+    case 'VERTICAL_OP':
+    case 'VERTICAL_ADD':
+    case 'VERTICAL_SUB':
+      renderVertical(children, q);
+      break;
+
+    case 'COIN':
+    case 'COIN_COUNT':
+      renderCoin(children, q);
+      break;
+
+    case 'MATCHING':
+      renderMatching(children, q);
+      break;
+
+    case 'FILL_BLANK':
+      renderFillBlank(children, q);
+      break;
+
+    case 'COPY':
+    case 'LETTERS':
+      renderHandwriting(children, q);
+      break;
+
+    case 'WORD_PROBLEM':
+      renderWordProblem(children, q);
+      break;
+
+    case 'ORDER':
+    case 'COMPARE':
+      renderOrderOrCompare(children, q);
+      break;
+
+    case 'SHAPE':
+    case 'COUNTING':
+    case 'NUMBER_READ':
+    case 'SEQUENCE':
+    case 'MULTIPLY_TABLE':
+    case 'FRACTION':
+    case 'MEASURE':
+    case 'GEOMETRY':
+    default:
+      renderGeneric(children, q);
+      break;
+  }
+}
+
+// ===== MCQ / TRUE_FALSE =====
+function renderMCQ(children, q) {
   if (q.options && q.options.length > 0) {
     for (const opt of q.options) {
-      children.push(p([tr(`    (  )  ${opt}`, { size: 20 })], { indent: 200 }));
+      children.push(p([tr(`  (    )   ${opt}`, { size: 20 })], { indent: 200, after: 30 }));
     }
   }
-  children.push(emptyLine());
-}
-
-function renderVerticalOperation(children, q, num) {
-  children.push(p([tr(`${num}- ${q.content || q.prompt}`, { size: 20 })]));
-
-  // العمليات العمودية
-  const op = q.operation || (q.type.includes('ADD') ? 'add' : 'subtract');
-  const symbol = op === 'add' ? '+' : '-';
-
-  children.push(p([tr(`${q.operand1}`, { size: 22 })], { align: AlignmentType.LEFT, indent: 400 }));
-  children.push(p([tr(`${symbol} ${q.operand2}`, { size: 22 })], { align: AlignmentType.LEFT, indent: 400 }));
-  children.push(p([tr('───────', { size: 20 })], { align: AlignmentType.LEFT, indent: 400 }));
-  children.push(p([tr('(       )', { size: 20 })], { align: AlignmentType.LEFT, indent: 400 }));
-  children.push(emptyLine());
-}
-
-function renderCoinQuestion(children, q, num) {
-  children.push(p([tr(`${num}- ${q.content || q.prompt}`, { size: 20 })]));
-
-  if (q.coins && Array.isArray(q.coins)) {
-    const coinStr = q.coins.map(c => {
-      if (typeof c === 'object') {
-        return `${c.count} × ${c.value} مليم`;
-      }
-      return `${c} مليم`;
-    }).join('  +  ');
-    children.push(p([tr(coinStr, { size: 20 })], { indent: 200 }));
+  // TRUE_FALSE: إذا لم يكن هناك خيارات، نضع صح/خطأ
+  if (q.type === 'TRUE_FALSE' && (!q.options || q.options.length === 0)) {
+    children.push(p([tr('  (    )   صحيح', { size: 20 })], { indent: 200, after: 30 }));
+    children.push(p([tr('  (    )   خطأ', { size: 20 })], { indent: 200, after: 30 }));
   }
-
-  children.push(p([tr('المجموع: (       ) مليم', { size: 20 })], { indent: 200 }));
-  children.push(emptyLine());
-}
-
-function renderMatching(children, q, num) {
-  children.push(p([tr(`${num}- ${q.content || q.prompt}`, { size: 20 })]));
-
-  if (q.pairs && q.pairs.length > 0) {
-    const leftCol = q.pairs.map(p => p.left);
-    const rightCol = [...q.pairs].sort(() => 0.5 - Math.random()).map(p => p.right);
-
-    for (let i = 0; i < q.pairs.length; i++) {
-      children.push(p([
-        tr(`    ${leftCol[i]}  ───────  ${rightCol[i] || '..............'}`, { size: 20 })
-      ], { indent: 200 }));
-    }
-  }
-  children.push(emptyLine());
-}
-
-function renderFillBlank(children, q, num) {
-  children.push(p([tr(`${num}- ${q.content || q.prompt}`, { size: 20 })]));
   children.push(answerLine());
 }
 
-function renderHandwriting(children, q, num) {
-  children.push(p([tr(`${num}- ${q.content || q.prompt}`, { size: 20 })]));
+// ===== العمليات العمودية =====
+function renderVertical(children, q) {
+  const op = q.operation || (q.type.includes('ADD') ? 'add' : 'subtract');
+  const symbol = op === 'add' ? '+' : '-';
+  const n1 = q.operand1 || '';
+  const n2 = q.operand2 || '';
+
+  children.push(p([tr(`${n1}`, { size: 22 })], { align: AlignmentType.RIGHT, indent: 400 }));
+  children.push(p([tr(`${symbol} ${n2}`, { size: 22 })], { align: AlignmentType.RIGHT, indent: 400 }));
+  children.push(p([tr('────────', { size: 20 })], { align: AlignmentType.RIGHT, indent: 400 }));
+  children.push(p([tr('(               )', { size: 20 })], { align: AlignmentType.RIGHT, indent: 400 }));
+  children.push(answerLine());
+}
+
+// ===== العملات =====
+function renderCoin(children, q) {
+  if (q.coins && Array.isArray(q.coins)) {
+    const coinStr = q.coins.map(c => {
+      if (typeof c === 'object') return `${c.count} × ${c.value} مليم`;
+      return `${c} مليم`;
+    }).join('   +   ');
+    children.push(p([tr(coinStr, { size: 20 })], { indent: 200, after: 60 }));
+  } else {
+    // رسم نصي للعملات
+    children.push(p([tr(' ○ ○ ○   ○ ○   ○', { size: 24 })], { indent: 200, after: 40 }));
+  }
+  children.push(p([tr('المجموع:  (               )  مليم', { size: 20 })], { indent: 200 }));
+  children.push(answerLine());
+}
+
+// ===== الربط =====
+function renderMatching(children, q) {
+  if (q.pairs && q.pairs.length > 0) {
+    const leftCol = q.pairs.map(p => p.left || p[0]);
+    const rightCol = [...q.pairs].sort(() => 0.5 - Math.random()).map(p => p.right || p[1]);
+    for (let i = 0; i < leftCol.length; i++) {
+      children.push(p([
+        tr(`  ${leftCol[i]}  ────────────  ${rightCol[i] || '..............'}`, { size: 20 })
+      ], { indent: 200, after: 40 }));
+    }
+  } else {
+    for (let i = 0; i < 3; i++) {
+      children.push(p([tr(`  ..............  ────────────  ..............`, { size: 20 })], { indent: 200, after: 40 }));
+    }
+  }
+  children.push(answerLine());
+}
+
+// ===== ملء الفراغات =====
+function renderFillBlank(children, q) {
+  children.push(answerLine());
+}
+
+// ===== الخط / النسخ =====
+function renderHandwriting(children, q) {
   for (let i = 0; i < (q.freeLines || 3); i++) {
     children.push(answerLine());
   }
 }
 
-function renderWordProblem(children, q, num) {
-  children.push(p([tr(`${num}- ${q.content || q.prompt}`, { size: 20 })]));
-
+// ===== مسألة كلمة =====
+function renderWordProblem(children, q) {
   if (q.subQuestions && q.subQuestions.length > 0) {
     for (let i = 0; i < q.subQuestions.length; i++) {
       const sub = q.subQuestions[i];
       children.push(p([
-        tr(`    ${String.fromCharCode(1571 + i)}- ${sub.text}`, { size: 18 })
-      ], { indent: 200 }));
+        tr(`    ${String.fromCharCode(1571 + i)}- ${sub.text}`, { size: 20 })
+      ], { indent: 200, before: 40, after: 20 }));
       children.push(answerLine());
     }
   } else {
-    children.push(answerLine());
-    children.push(answerLine());
+    children.push(answerLines(3));
   }
 }
 
-function renderOrdering(children, q, num) {
-  children.push(p([tr(`${num}- ${q.prompt || q.content}`, { size: 20 })]));
-  children.push(p([tr('(       )  ◄  (       )  ◄  (       )', { size: 20 })], { indent: 200 }));
-  children.push(emptyLine());
-}
-
-function renderShape(children, q, num) {
-  children.push(p([tr(`${num}- ${q.prompt || q.content}`, { size: 20 })]));
-  if (q.options && q.options.length > 0) {
-    const optStr = q.options.map(o => `(  )  ${o}`).join('        ');
-    children.push(p([tr(optStr, { size: 20 })], { indent: 200 }));
-  }
-  children.push(emptyLine());
-}
-
-function renderFreeResponse(children, q, num) {
-  children.push(p([tr(`${num}- ${q.prompt || q.content}`, { size: 20 })]));
-  for (let i = 0; i < (q.freeLines || 4); i++) {
-    children.push(answerLine());
-  }
-}
-
-function renderGenericQuestion(children, q, num) {
-  children.push(p([tr(`${num}- ${q.prompt || q.content}`, { size: 20 })]));
-
-  if (q.options && q.options.length > 0) {
-    const optStr = q.options.map(o => `(  )  ${o}`).join('        ');
-    children.push(p([tr(optStr, { size: 20 })], { indent: 200 }));
+// ===== الترتيب / المقارنة =====
+function renderOrderOrCompare(children, q) {
+  if (q.type === 'COMPARE') {
+    children.push(p([tr('(    )  ؟  (    )', { size: 20 })], { indent: 200, after: 40 }));
   } else {
-    children.push(answerLine());
+    // ترتيب من الأصغر إلى الأكبر
+    for (let i = 0; i < 3; i++) {
+      children.push(p([tr(`(${i + 1})  ____________`, { size: 20 })], { indent: 200, after: 30 }));
+    }
   }
-  children.push(emptyLine());
+  children.push(answerLine());
 }
 
-function cellBold(text, widthPct) {
-  return cell(text, widthPct, { bold: true });
+// ===== عام (COUNTING, SHAPE, SEQUENCE, etc.) =====
+function renderGeneric(children, q) {
+  children.push(answerLine());
+  children.push(answerLine());
 }
+
+// ============ تجميع المعايير ============
+
+function groupQuestionsByCriteria(questions) {
+  const groups = {};
+  for (const q of questions) {
+    const code = q.criteria || q.criterion || 'مع1';
+    if (!groups[code]) groups[code] = { code, label: code, max: 0, subCriteria: [] };
+    groups[code].max += q.points || 0;
+    if (q.subCriterion) {
+      const sub = groups[code].subCriteria.find(s => s.code === q.subCriterion);
+      if (sub) { sub.max += q.points || 0; }
+      else { groups[code].subCriteria.push({ code: q.subCriterion, label: q.subCriterion, max: q.points || 0 }); }
+    }
+  }
+  return Object.values(groups);
+}
+
+export { groupQuestionsByCriteria };
