@@ -12,8 +12,12 @@ const USAGE_FILE = path.join(BANK_DIR, 'usage-log.json');
 const SAVED_FILE = path.join(BANK_DIR, 'saved-questions.json');
 
 // Ensure directory exists
-if (!fs.existsSync(BANK_DIR)) {
-  fs.mkdirSync(BANK_DIR, { recursive: true });
+try {
+  if (!fs.existsSync(BANK_DIR)) {
+    fs.mkdirSync(BANK_DIR, { recursive: true });
+  }
+} catch (e) {
+  console.warn('[questionBank] Could not create bank directory:', e.message);
 }
 
 // ===== بنك الأسئلة الرسمية =====
