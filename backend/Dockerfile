@@ -21,4 +21,4 @@ COPY frontend/dist /app/frontend/dist
 
 EXPOSE 3001
 
-CMD ["sh", "-c", "npx prisma migrate deploy && (node prisma/seed.js &) && exec node src/index.js"]
+CMD ["sh", "-c", "npx prisma migrate deploy && node prisma/seed.js && node src/index.js"]
