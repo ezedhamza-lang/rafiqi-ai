@@ -25,7 +25,7 @@ const TIME_BLOCKS = [
   { label: '15:00 - 17:00', start: '15:00', end: '17:00' }
 ];
 
-const DAYS = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'];
+const DAYS = ['الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
 
 function getSubjectColor(name) {
   return SUBJECTS.find((s) => s.name === name)?.color || '#94a3b8';
