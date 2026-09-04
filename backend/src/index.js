@@ -247,6 +247,17 @@ async function start() {
   // STEP 2 — database work runs AFTER the port is open.
   // Any failure here is only logged and can never crash or block startup.
   prisma.$connect()
+    .then(() => prisma.$executeRaw`CREATE TABLE IF NOT EXISTS "SubjectDistribution" (
+      "id" SERIAL PRIMARY KEY,
+      "classId" INTEGER NOT NULL UNIQUE,
+      "grade" INTEGER NOT NULL,
+      "subjects" JSONB NOT NULL,
+      "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "updatedAt" TIMESTAMP(3) NOT NULL,
+      FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE CASCADE
+    )`).catch((err) => {
+      console.error('SubjectDistribution table check failed:', err.message);
+    })
     .then(() => runRenewalSweep().catch((err) => {
       console.error('initial renewal sweep failed:', err.message);
     }))
