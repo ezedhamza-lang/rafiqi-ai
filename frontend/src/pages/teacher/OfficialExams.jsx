@@ -628,25 +628,6 @@ export default function OfficialExams({ classes }) {
             <textarea value={draft.content.instructions || ''} onChange={(e) => setDraft({ ...draft, content: { ...draft.content, instructions: e.target.value } })} placeholder={t('teacherSpace.officialExams.instructionsPlaceholder')} />
           </div>
           <div className="form-group">
-            <label>{t('teacherSpace.officialExams.gradingScaleLabel')}</label>
-            <textarea
-              value={(draft.content.grading || []).map((g) => `${g.label} | ${g.points}`).join('\n')}
-              onChange={(e) =>
-                setDraft({
-                  ...draft,
-                  content: {
-                    ...draft.content,
-                    grading: e.target.value.split('\n').map((line) => {
-                      const [label, points] = line.split('|').map((s) => s.trim());
-                      return { label: label || '', points: Number(points) || 1 };
-                    }).filter((g) => g.label)
-                  }
-                })
-              }
-              placeholder={t('teacherSpace.officialExams.gradingScalePlaceholder')}
-            />
-          </div>
-          <div className="form-group">
             <label>{t('teacherSpace.officialExams.passagesLabel')}</label>
             {(draft.content.passages || []).map((p, i) => (
               <div key={p.id || i} className="card-item">
@@ -830,18 +811,6 @@ export default function OfficialExams({ classes }) {
             <div className="form-group">
               <label>{t('teacherSpace.officialExams.criteriaTableLabel')}</label>
               <CriteriaTable criteria={active.content.criteria} t={t} />
-            </div>
-          )}
-
-          {active.content?.grading && (
-            <div className="grading-scale">
-              <h5>{t('teacherSpace.officialExams.gradingScaleTitle')}</h5>
-              {active.content.grading.map((g, i) => (
-                <div key={i} className="grading-row">
-                  <span>{g.label}</span>
-                  <span>{g.points} {t('teacherSpace.officialExams.pointsSuffix')}</span>
-                </div>
-              ))}
             </div>
           )}
 
