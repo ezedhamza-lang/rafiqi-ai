@@ -8,8 +8,6 @@ import { getStudentLevel } from '../services/studentLevelService.js';
 import { validateBody } from '../middleware/validate.js';
 import { z } from 'zod';
 
-const router = Router();
-
 const submitLessonSchema = z.object({
   lessonId: z.string().min(1),
   lessonTitle: z.string().optional(),
