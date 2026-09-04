@@ -31,6 +31,7 @@ const TEACHER_SPACE_CHILDREN = [
 
   { group: 'subjects', groupLabel: 'المواد والمحتوى', groupIcon: 'category', groupColor: '#8b5cf6' },
   { to: '/teacher/class-subjects', icon: 'category', key: 'classSubjects' },
+  { to: '/teacher/worksheets', icon: 'article', key: 'teacherWorksheets' },
   { to: '/teacher/correction', icon: 'grading', key: 'correction' },
 
   { group: 'results', groupLabel: 'النتائج والتقارير', groupIcon: 'scoreboard', groupColor: '#10b981' },

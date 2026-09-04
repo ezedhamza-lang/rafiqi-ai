@@ -27,6 +27,7 @@ import LiveSessions from './LiveSessions.jsx';
 import TeacherGradebook from './TeacherGradebook.jsx';
 import TeacherLessonProgress from './TeacherLessonProgress.jsx';
 import TeacherNotes from './TeacherNotes.jsx';
+import TeacherWorksheets from './TeacherWorksheets.jsx';
 
 export default function TeacherDashboard() {
   const { user } = useAuth();
@@ -98,6 +99,7 @@ export default function TeacherDashboard() {
             <Route path="ai" element={<TeacherAI />} />
             <Route path="schedules" element={<Schedules classes={classes} />} />
             <Route path="live" element={<LiveSessions />} />
+            <Route path="worksheets" element={<TeacherWorksheets />} />
             <Route path="suggestions" element={<Suggestions />} />
           </Routes>
         </div>
