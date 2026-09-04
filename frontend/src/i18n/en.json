@@ -2058,7 +2058,8 @@
       "critNoneLabel": "None",
       "critBelowLabel": "Below",
       "critMinLabel": "Min",
-      "critMaxLabel": "Max"
+      "critMaxLabel": "Max",
+      "critExcLabel": "Excellence criterion"
     },
     "annualPlans": {
       "title": "Annual Plans",

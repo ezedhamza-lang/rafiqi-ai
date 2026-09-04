@@ -2058,7 +2058,8 @@
       "critNoneLabel": "انعدام",
       "critBelowLabel": "دون الأدنى",
       "critMinLabel": "الأدنى",
-      "critMaxLabel": "الأقصى"
+      "critMaxLabel": "الأقصى",
+      "critExcLabel": "معيار تميز"
     },
     "annualPlans": {
       "title": "التخطيطات السنوية",

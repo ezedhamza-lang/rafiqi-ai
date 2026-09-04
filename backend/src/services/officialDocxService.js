@@ -36,26 +36,45 @@ const TRIMESTER_NAMES = {
   1: 'الثلاثي الأول', 2: 'الثلاثي الثاني', 3: 'الثلاثي الثالث'
 };
 
+/* Official Tunisian criteria (Ministry grids — Gabès referential):
+   معايير الحد الأدنى (minimum, total 15) + معيار التميز (excellence, 5) = 20.
+   Mastery symbols: [---] none, [+---] below, [-++] min, [+++] max. */
 const DEFAULT_CRITERIA = {
   arabic: [
-    { id: 'مع1', label: 'القراءة والفهم', mastery: { none: 0, below: 1, min: 2, max: 3 } },
-    { id: 'مع2', label: 'اللغة والقواعد', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
-    { id: 'مع3', label: 'الإنتاج الكتابي', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
+    { id: 'مع1', label: 'القراءة الجهرية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
+    { id: 'مع2', label: 'معالجة النص', mastery: { none: 0, below: 2, min: 4, max: 6 } },
+    { id: 'مع3', label: 'التصرف في النص وإبداء الرأي', excellence: true, mastery: { none: 0, below: 1, min: 2.5, max: 4.5 } }
   ],
   math: [
-    { id: 'مع1', label: 'المفاهيم الرياضية', mastery: { none: 0, below: 1, min: 2, max: 3 } },
-    { id: 'مع2', label: 'المهارات الحسابية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
-    { id: 'مع3', label: 'حل المسائل', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
+    { id: 'مع1', label: 'التأويل الملائم', mastery: { none: 0, below: 1, min: 2, max: 3 } },
+    { id: 'مع2', label: 'صحة الحساب', mastery: { none: 0, below: 2, min: 4, max: 6 } },
+    { id: 'مع3', label: 'الصحيح لوحدات القيس', mastery: { none: 0, below: 1, min: 2, max: 3 } },
+    { id: 'مع4', label: 'خصائص الأشكال الهندسية', mastery: { none: 0, below: 1, min: 2, max: 3 } },
+    { id: 'مع5', label: 'الدقة', excellence: true, mastery: { none: 0, below: 1, min: 3, max: 5 } }
   ],
   science: [
-    { id: 'مع1', label: 'المفاهيم العلمية', mastery: { none: 0, below: 1, min: 2, max: 3 } },
-    { id: 'مع2', label: 'المهارات العلمية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
-    { id: 'مع3', label: 'المعالجة العلمية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
+    { id: 'مع1', label: 'تحليل وضعية', mastery: { none: 0, below: 1.5, min: 3, max: 5 } },
+    { id: 'مع2', label: 'تعليل إجابة', mastery: { none: 0, below: 1.5, min: 3, max: 5 } },
+    { id: 'مع3', label: 'إصلاح خطأ', mastery: { none: 0, below: 1, min: 2.5, max: 5 } },
+    { id: 'مع4', label: 'التميز العلمي', excellence: true, mastery: { none: 0, below: 1, min: 2, max: 5 } }
   ],
   french: [
-    { id: 'مع1', label: 'القراءة والفهم', mastery: { none: 0, below: 1, min: 2, max: 3 } },
-    { id: 'مع2', label: 'اللغة والقواعد', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
-    { id: 'مع3', label: 'الإنتاج الكتابي', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
+    { id: 'مع1', label: 'الفهم القرائي', mastery: { none: 0, below: 1.5, min: 3, max: 5 } },
+    { id: 'مع2', label: 'اللغة والمفردات', mastery: { none: 0, below: 1.5, min: 3, max: 5 } },
+    { id: 'مع3', label: 'الإنتاج الكتابي', mastery: { none: 0, below: 1, min: 2.5, max: 5 } },
+    { id: 'مع4', label: 'التميز اللغوي', excellence: true, mastery: { none: 0, below: 1, min: 2, max: 5 } }
+  ],
+  islamic: [
+    { id: 'مع1', label: 'الحفظ والاستظهار', mastery: { none: 0, below: 1.5, min: 3, max: 5 } },
+    { id: 'مع2', label: 'الفهم', mastery: { none: 0, below: 1.5, min: 3, max: 5 } },
+    { id: 'مع3', label: 'السلوك والقيم', mastery: { none: 0, below: 1, min: 2.5, max: 5 } },
+    { id: 'مع4', label: 'التميز', excellence: true, mastery: { none: 0, below: 1, min: 2, max: 5 } }
+  ],
+  production: [
+    { id: 'مع1', label: 'الملاءمة', mastery: { none: 0, below: 1, min: 2, max: 3 } },
+    { id: 'مع2', label: 'سلامة بناء النص', mastery: { none: 0, below: 2, min: 4, max: 6 } },
+    { id: 'مع3', label: 'التصرف في نمط الكتابة', mastery: { none: 0, below: 2, min: 4, max: 6 } },
+    { id: 'مع4', label: 'الثراء والطرافة', excellence: true, mastery: { none: 0, below: 1, min: 2, max: 5 } }
   ]
 };
 
@@ -430,20 +449,33 @@ function buildCriteriaTable(criteria) {
     return row;
   };
 
-  const labelRow = cellXml(cellPara('معايير الحد الأدنى', { bold: true, sz: 24 }), { width: 9500, columnSpan: n + 2, shading: 'E2EFDA' });
+  const minCriteria = criteria.filter((c) => !c.excellence);
+  const excCriteria = criteria.filter((c) => c.excellence);
+  const spanAll = n + 2;
 
-  const rows = [titleRow, headerRow];
-  criteria.forEach((c) => {
+  const sectionRow = (label) => cellXml(cellPara(label, { bold: true, sz: 24 }), { width: 9500, columnSpan: spanAll, shading: 'E2EFDA' });
+
+  const labelRowsFor = (list) => list.map((c) => {
     let r = cellXml(cellPara(c.label || c.id || '', { sz: 24, align: 'right' }), { width: 2500 });
     for (let i = 0; i < n; i++) r += cellXml(cellPara('', { sz: 24 }), { width: colW });
     r += cellXml(cellPara('', { sz: 24 }), { width: 1200 });
-    rows.push(r);
+    return r;
   });
-  rows.push(labelRow);
-  rows.push(levelRow('---', 'none'));
-  rows.push(levelRow('--+', 'below'));
-  rows.push(levelRow('-++', 'min'));
-  rows.push(levelRow('+++', 'max'));
+
+  const rows = [titleRow, headerRow];
+  if (excCriteria.length > 0 && minCriteria.length > 0) {
+    rows.push(sectionRow('معايير الحد الأدنى'));
+    rows.push(...labelRowsFor(minCriteria));
+    rows.push(sectionRow('معيار التميز'));
+    rows.push(...labelRowsFor(excCriteria));
+  } else {
+    rows.push(...labelRowsFor(criteria));
+  }
+  rows.push(sectionRow('عتبات التملك'));
+  rows.push(levelRow('[---]', 'none'));
+  rows.push(levelRow('[+---]', 'below'));
+  rows.push(levelRow('[-++]', 'min'));
+  rows.push(levelRow('[+++]', 'max'));
 
   const totalMax = criteria.reduce((s, c) => s + (Number(c.mastery?.max) || 0), 0);
   let totalRow = cellXml(cellPara('المجموع', { bold: true, sz: 26 }), { width: 2500, shading: 'E2EFDA' });

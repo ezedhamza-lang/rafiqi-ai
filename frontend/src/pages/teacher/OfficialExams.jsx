@@ -790,6 +790,10 @@ export default function OfficialExams({ classes }) {
                     <label>ID</label>
                     <input value={c.id || ''} onChange={(e) => updateCriterion(i, { id: e.target.value })} />
                   </div>
+                  <div className="form-group">
+                    <label>{t('teacherSpace.officialExams.critExcLabel')}</label>
+                    <input type="checkbox" checked={!!c.excellence} onChange={(e) => updateCriterion(i, { excellence: e.target.checked })} />
+                  </div>
                   <div className="form-group grow">
                     <label>{t('teacherSpace.officialExams.criteriaCol')}</label>
                     <input value={c.label || ''} onChange={(e) => updateCriterion(i, { label: e.target.value })} placeholder={t('teacherSpace.officialExams.critLabelPh')} />
