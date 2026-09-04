@@ -156,12 +156,12 @@ router.get('/schedules', teacherMiddleware, asyncHandler(async (req, res) => {
     select: { id: true }
   });
   const classIds = classes.map((c) => c.id);
-  const schedules = await prisma.schedule.findMany({
+  const distributions = await prisma.subjectDistribution.findMany({
     where: { classId: { in: classIds } },
     include: { class: { select: { id: true, name: true } } },
-    orderBy: [{ day: 'asc' }, { period: 'asc' }]
+    orderBy: { grade: 'asc' }
   });
-  res.json(schedules);
+  res.json(distributions);
 }));
 
 /**
@@ -199,12 +199,12 @@ router.put('/schedules/:classId', teacherMiddleware, validateParams(classIdParam
   const cls = await prisma.class.findFirst({ where: { id: classId, teacherId: req.user.id } });
   if (!cls) throw new ApiError(404, 'القسم غير موجود');
 
-  const { grade, subjects } = req.body;
+  const { grade, subjects, timetable } = req.body;
 
   await prisma.subjectDistribution.upsert({
     where: { classId },
-    update: { grade, subjects },
-    create: { classId, grade, subjects }
+    update: { grade, subjects, timetable: timetable || undefined },
+    create: { classId, grade, subjects, timetable: timetable || undefined }
   });
 
   res.json({ ok: true, count: subjects?.length || 0 });

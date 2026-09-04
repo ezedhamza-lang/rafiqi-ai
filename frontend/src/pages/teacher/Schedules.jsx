@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 
@@ -90,11 +90,18 @@ const GRADE_SUBJECTS = {
 };
 
 const GRADE_NAMES = ['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة'];
+const DAYS = ['الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+
+const DURATION_OPTIONS = [25, 30, 40, 55];
 
 function formatHours(h) {
   if (h === 0.5) return '30 دقيقة';
   if (h === 0.67) return '40 دقيقة';
   return `${h} س`;
+}
+
+function makeDefaultGrid(numPeriods) {
+  return DAYS.map(() => Array.from({ length: numPeriods }, () => ({ subject: '', duration: 55 })));
 }
 
 export default function Schedules({ classes }) {
@@ -106,6 +113,27 @@ export default function Schedules({ classes }) {
   const [subjects, setSubjects] = useState(() => JSON.parse(JSON.stringify(GRADE_SUBJECTS[1])));
   const [editingCell, setEditingCell] = useState(null);
   const [editValue, setEditValue] = useState('');
+
+  const [numPeriods, setNumPeriods] = useState(6);
+  const [timetable, setTimetable] = useState(() => makeDefaultGrid(6));
+  const [editingTimetable, setEditingTimetable] = useState(null);
+  const [activeTab, setActiveTab] = useState('distribution');
+
+  useEffect(() => {
+    if (!classId) return;
+    api.get('/teacher/schedules').then((data) => {
+      const match = data.find((s) => s.classId === Number(classId));
+      if (match?.class) {
+        const foundGrade = match.grade || 1;
+        setGrade(foundGrade);
+        setSubjects(match.subjects || JSON.parse(JSON.stringify(GRADE_SUBJECTS[foundGrade])));
+      }
+      if (match?.timetable) {
+        setTimetable(match.timetable.grid || makeDefaultGrid(match.timetable.periods || 6));
+        setNumPeriods(match.timetable.periods || 6);
+      }
+    }).catch(() => {});
+  }, [classId]);
 
   const changeGrade = (g) => {
     setGrade(g);
@@ -161,11 +189,31 @@ export default function Schedules({ classes }) {
     });
   };
 
+  const changeNumPeriods = (n) => {
+    setNumPeriods(n);
+    setTimetable((prev) => {
+      const newGrid = DAYS.map((_, dayIdx) => {
+        const oldRow = prev[dayIdx] || [];
+        return Array.from({ length: n }, (_, i) => oldRow[i] || { subject: '', duration: 55 });
+      });
+      return newGrid;
+    });
+  };
+
+  const setTimetableCell = (dayIdx, periodIdx, field, value) => {
+    setTimetable((prev) => {
+      const newGrid = prev.map((row) => [...row]);
+      newGrid[dayIdx][periodIdx] = { ...newGrid[dayIdx][periodIdx], [field]: value };
+      return newGrid;
+    });
+  };
+
   const save = async () => {
     setError('');
     if (!isValid) { setError(`يجب أن يكون المجموع ${required} ساعة حسب القرار الوزاري`); return; }
     try {
-      const res = await api.put(`/teacher/schedules/${classId}`, { grade, subjects });
+      const timetableData = { periods: numPeriods, grid: timetable };
+      const res = await api.put(`/teacher/schedules/${classId}`, { grade, subjects, timetable: timetableData });
       setSaved(res);
     } catch (err) {
       setError(err.message);
@@ -177,12 +225,15 @@ export default function Schedules({ classes }) {
     if (e.key === 'Escape') setEditingCell(null);
   };
 
-  const groups = [...new Set(subjects.map((s) => s.group))];
+  const getSubjectColor = (name) => {
+    const found = subjects.find((s) => s.name === name);
+    return found?.color || '#64748b';
+  };
 
   return (
     <div className="panel">
       <div className="panel-head">
-        <h3>📋 جدول توزيع المواد</h3>
+        <h3>📋 جدول توزيع المواد والأسبوعية</h3>
         <div className="btn-group">
           <select value={grade} onChange={(e) => changeGrade(Number(e.target.value))}>
             {[1,2,3,4,5,6].map((g) => (
@@ -200,93 +251,193 @@ export default function Schedules({ classes }) {
       {error && <div style={{ padding: '0.8rem', background: '#ffebee', border: '2px solid #ef5350', borderRadius: '10px', color: '#c62828', fontWeight: 800, fontSize: '0.9rem', textAlign: 'center', marginBottom: '0.8rem' }}>⚠️ {error}</div>}
       {saved && <div className="form-success">{t('teacherSpace.schedules.savedMsg', { n: saved.count })}</div>}
 
-      <div style={{ padding: '1rem', borderRadius: '12px', border: `3px solid ${isValid ? '#4caf50' : '#ef5350'}`, background: isValid ? '#e8f5e9' : '#ffebee', textAlign: 'center', marginBottom: '1rem' }}>
-        <div style={{ fontSize: '0.85rem', color: isValid ? '#2e7d32' : '#c62828', fontWeight: 700, marginBottom: '0.3rem' }}>
-          {isValid ? '✅ عدد الساعات صحيح' : '⚠️ عدد الساعات غير مطابق للقرار الوزاري'}
-        </div>
-        <div style={{ fontSize: '1.3rem', fontWeight: 900, color: isValid ? '#1b5e20' : '#b71c1c' }}>
-          {totalHours} / {required} ساعة
-        </div>
-        {!isValid && (
-          <div style={{ fontSize: '0.82rem', color: '#c62828', marginTop: '0.3rem', fontWeight: 700 }}>
-            اصلح الجدول! يجب أن يكون المجموع {required} ساعة
+      <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+        <button onClick={() => setActiveTab('distribution')} style={{ flex: 1, padding: '0.7rem', borderRadius: activeTab === 'distribution' ? '10px' : '10px', border: 'none', background: activeTab === 'distribution' ? '#1a237e' : '#e0e0e0', color: activeTab === 'distribution' ? '#fff' : '#333', fontWeight: 800, fontSize: '0.9rem', cursor: 'pointer', transition: 'all 0.2s' }}>
+          📊 توزيع المواد
+        </button>
+        <button onClick={() => setActiveTab('timetable')} style={{ flex: 1, padding: '0.7rem', borderRadius: '10px', border: 'none', background: activeTab === 'timetable' ? '#1a237e' : '#e0e0e0', color: activeTab === 'timetable' ? '#fff' : '#333', fontWeight: 800, fontSize: '0.9rem', cursor: 'pointer', transition: 'all 0.2s' }}>
+          🗓️ الجدول الأسبوعي
+        </button>
+      </div>
+
+      {activeTab === 'distribution' && (
+        <>
+          <div style={{ padding: '1rem', borderRadius: '12px', border: `3px solid ${isValid ? '#4caf50' : '#ef5350'}`, background: isValid ? '#e8f5e9' : '#ffebee', textAlign: 'center', marginBottom: '1rem' }}>
+            <div style={{ fontSize: '0.85rem', color: isValid ? '#2e7d32' : '#c62828', fontWeight: 700, marginBottom: '0.3rem' }}>
+              {isValid ? '✅ عدد الساعات صحيح' : '⚠️ عدد الساعات غير مطابق للقرار الوزاري'}
+            </div>
+            <div style={{ fontSize: '1.3rem', fontWeight: 900, color: isValid ? '#1b5e20' : '#b71c1c' }}>
+              {totalHours} / {required} ساعة
+            </div>
+            {!isValid && (
+              <div style={{ fontSize: '0.82rem', color: '#c62828', marginTop: '0.3rem', fontWeight: 700 }}>
+                اصلح الجدول! يجب أن يكون المجموع {required} ساعة
+              </div>
+            )}
           </div>
-        )}
-      </div>
 
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', border: '3px solid #1a237e', borderRadius: '12px', overflow: 'hidden' }}>
-          <thead>
-            <tr>
-              <th style={{ background: '#1a237e', color: '#fff', padding: '12px 6px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', width: '40px' }}>#</th>
-              <th style={{ background: '#1a237e', color: '#fff', padding: '12px 8px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', width: '40px' }}>اللون</th>
-              <th style={{ background: '#1a237e', color: '#fff', padding: '12px 8px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', textAlign: 'right' }}>المادة</th>
-              <th style={{ background: '#1a237e', color: '#fff', padding: '12px 8px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', width: '110px' }}>الساعات</th>
-              <th style={{ background: '#1a237e', color: '#fff', padding: '12px 8px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', width: '80px' }}>إجراءات</th>
-            </tr>
-          </thead>
-          <tbody>
-            {subjects.map((sub, idx) => (
-              <tr key={idx} style={{ background: idx % 2 === 0 ? '#fff' : '#f8f9ff' }}>
-                <td style={{ padding: '8px 6px', border: '2px solid #c5cae9', textAlign: 'center', fontWeight: 800, color: '#1a237e', fontSize: '0.85rem' }}>{idx + 1}</td>
-                <td style={{ padding: '8px 6px', border: '2px solid #c5cae9', textAlign: 'center' }}>
-                  {editingCell?.idx === idx && editingCell?.field === 'color' ? (
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2px' }}>
-                      <input type="color" value={editValue} onChange={(e) => setEditValue(e.target.value)}
-                        style={{ width: '30px', height: '28px', border: 'none', cursor: 'pointer', padding: 0 }} />
-                      <button onClick={saveEdit} style={{ background: '#4caf50', color: '#fff', border: 'none', borderRadius: '4px', padding: '2px 6px', cursor: 'pointer', fontSize: '0.7rem' }}>✓</button>
-                    </div>
-                  ) : (
-                    <span onClick={() => startEdit(idx, 'color')} style={{ cursor: 'pointer', display: 'inline-block', width: '24px', height: '24px', borderRadius: '50%', background: sub.color, border: '2px solid #fff', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }} />
-                  )}
-                </td>
-                <td style={{ padding: '8px 10px', border: '2px solid #c5cae9', textAlign: 'right' }}>
-                  {editingCell?.idx === idx && editingCell?.field === 'name' ? (
-                    <input type="text" value={editValue} onChange={(e) => setEditValue(e.target.value)} onKeyDown={handleKeyDown} onBlur={saveEdit}
-                      autoFocus style={{ width: '100%', padding: '4px 8px', border: '2px solid #3b82f6', borderRadius: '6px', fontSize: '0.9rem', fontWeight: 700 }} />
-                  ) : (
-                    <span onClick={() => startEdit(idx, 'name')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.92rem', color: '#333', padding: '4px 8px', borderRadius: '4px', display: 'inline-block' }}>
-                      {sub.name}
-                    </span>
-                  )}
-                </td>
-                <td style={{ padding: '8px 6px', border: '2px solid #c5cae9', textAlign: 'center' }}>
-                  {editingCell?.idx === idx && editingCell?.field === 'hours' ? (
-                    <input type="number" value={editValue} onChange={(e) => setEditValue(e.target.value)} onKeyDown={handleKeyDown} onBlur={saveEdit} min={0} max={40} step={0.5}
-                      autoFocus style={{ width: '70px', padding: '4px', border: '2px solid #3b82f6', borderRadius: '6px', textAlign: 'center', fontSize: '0.9rem', fontWeight: 700 }} />
-                  ) : (
-                    <span onClick={() => startEdit(idx, 'hours')} style={{ cursor: 'pointer', padding: '4px 10px', borderRadius: '8px', background: sub.color + '15', border: `1px solid ${sub.color}30`, fontWeight: 900, fontSize: '0.9rem', color: sub.color, display: 'inline-block' }}>
-                      {formatHours(sub.hours)}
-                    </span>
-                  )}
-                </td>
-                <td style={{ padding: '6px 4px', border: '2px solid #c5cae9', textAlign: 'center' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2px' }}>
-                    <button onClick={() => moveSubject(idx, -1)} disabled={idx === 0} style={{ background: idx === 0 ? '#e0e0e0' : '#1a237e', color: '#fff', border: 'none', borderRadius: '4px', padding: '4px 6px', cursor: idx === 0 ? 'default' : 'pointer', fontSize: '0.7rem', opacity: idx === 0 ? 0.4 : 1 }}>▲</button>
-                    <button onClick={() => moveSubject(idx, 1)} disabled={idx === subjects.length - 1} style={{ background: idx === subjects.length - 1 ? '#e0e0e0' : '#1a237e', color: '#fff', border: 'none', borderRadius: '4px', padding: '4px 6px', cursor: idx === subjects.length - 1 ? 'default' : 'pointer', fontSize: '0.7rem', opacity: idx === subjects.length - 1 ? 0.4 : 1 }}>▼</button>
-                    <button onClick={() => removeSubject(idx)} style={{ background: '#ef5350', color: '#fff', border: 'none', borderRadius: '4px', padding: '4px 6px', cursor: 'pointer', fontSize: '0.7rem' }}>✕</button>
-                  </div>
-                </td>
-              </tr>
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', border: '3px solid #1a237e', borderRadius: '12px', overflow: 'hidden' }}>
+              <thead>
+                <tr>
+                  <th style={{ background: '#1a237e', color: '#fff', padding: '12px 6px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', width: '40px' }}>#</th>
+                  <th style={{ background: '#1a237e', color: '#fff', padding: '12px 8px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', width: '40px' }}>اللون</th>
+                  <th style={{ background: '#1a237e', color: '#fff', padding: '12px 8px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', textAlign: 'right' }}>المادة</th>
+                  <th style={{ background: '#1a237e', color: '#fff', padding: '12px 8px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', width: '110px' }}>الساعات</th>
+                  <th style={{ background: '#1a237e', color: '#fff', padding: '12px 8px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', width: '80px' }}>إجراءات</th>
+                </tr>
+              </thead>
+              <tbody>
+                {subjects.map((sub, idx) => (
+                  <tr key={idx} style={{ background: idx % 2 === 0 ? '#fff' : '#f8f9ff' }}>
+                    <td style={{ padding: '8px 6px', border: '2px solid #c5cae9', textAlign: 'center', fontWeight: 800, color: '#1a237e', fontSize: '0.85rem' }}>{idx + 1}</td>
+                    <td style={{ padding: '8px 6px', border: '2px solid #c5cae9', textAlign: 'center' }}>
+                      {editingCell?.idx === idx && editingCell?.field === 'color' ? (
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2px' }}>
+                          <input type="color" value={editValue} onChange={(e) => setEditValue(e.target.value)}
+                            style={{ width: '30px', height: '28px', border: 'none', cursor: 'pointer', padding: 0 }} />
+                          <button onClick={saveEdit} style={{ background: '#4caf50', color: '#fff', border: 'none', borderRadius: '4px', padding: '2px 6px', cursor: 'pointer', fontSize: '0.7rem' }}>✓</button>
+                        </div>
+                      ) : (
+                        <span onClick={() => startEdit(idx, 'color')} style={{ cursor: 'pointer', display: 'inline-block', width: '24px', height: '24px', borderRadius: '50%', background: sub.color, border: '2px solid #fff', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }} />
+                      )}
+                    </td>
+                    <td style={{ padding: '8px 10px', border: '2px solid #c5cae9', textAlign: 'right' }}>
+                      {editingCell?.idx === idx && editingCell?.field === 'name' ? (
+                        <input type="text" value={editValue} onChange={(e) => setEditValue(e.target.value)} onKeyDown={handleKeyDown} onBlur={saveEdit}
+                          autoFocus style={{ width: '100%', padding: '4px 8px', border: '2px solid #3b82f6', borderRadius: '6px', fontSize: '0.9rem', fontWeight: 700 }} />
+                      ) : (
+                        <span onClick={() => startEdit(idx, 'name')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.92rem', color: '#333', padding: '4px 8px', borderRadius: '4px', display: 'inline-block' }}>
+                          {sub.name}
+                        </span>
+                      )}
+                    </td>
+                    <td style={{ padding: '8px 6px', border: '2px solid #c5cae9', textAlign: 'center' }}>
+                      {editingCell?.idx === idx && editingCell?.field === 'hours' ? (
+                        <input type="number" value={editValue} onChange={(e) => setEditValue(e.target.value)} onKeyDown={handleKeyDown} onBlur={saveEdit} min={0} max={40} step={0.5}
+                          autoFocus style={{ width: '70px', padding: '4px', border: '2px solid #3b82f6', borderRadius: '6px', textAlign: 'center', fontSize: '0.9rem', fontWeight: 700 }} />
+                      ) : (
+                        <span onClick={() => startEdit(idx, 'hours')} style={{ cursor: 'pointer', padding: '4px 10px', borderRadius: '8px', background: sub.color + '15', border: `1px solid ${sub.color}30`, fontWeight: 900, fontSize: '0.9rem', color: sub.color, display: 'inline-block' }}>
+                          {formatHours(sub.hours)}
+                        </span>
+                      )}
+                    </td>
+                    <td style={{ padding: '6px 4px', border: '2px solid #c5cae9', textAlign: 'center' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2px' }}>
+                        <button onClick={() => moveSubject(idx, -1)} disabled={idx === 0} style={{ background: idx === 0 ? '#e0e0e0' : '#1a237e', color: '#fff', border: 'none', borderRadius: '4px', padding: '4px 6px', cursor: idx === 0 ? 'default' : 'pointer', fontSize: '0.7rem', opacity: idx === 0 ? 0.4 : 1 }}>▲</button>
+                        <button onClick={() => moveSubject(idx, 1)} disabled={idx === subjects.length - 1} style={{ background: idx === subjects.length - 1 ? '#e0e0e0' : '#1a237e', color: '#fff', border: 'none', borderRadius: '4px', padding: '4px 6px', cursor: idx === subjects.length - 1 ? 'default' : 'pointer', fontSize: '0.7rem', opacity: idx === subjects.length - 1 ? 0.4 : 1 }}>▼</button>
+                        <button onClick={() => removeSubject(idx)} style={{ background: '#ef5350', color: '#fff', border: 'none', borderRadius: '4px', padding: '4px 6px', cursor: 'pointer', fontSize: '0.7rem' }}>✕</button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+                <tr style={{ background: isValid ? '#e8eaf6' : '#ffebee' }}>
+                  <td colSpan={3} style={{ padding: '12px', border: '2px solid #1a237e', textAlign: 'center', fontWeight: 900, fontSize: '1rem', color: '#1a237e' }}>المجموع</td>
+                  <td style={{ padding: '12px', border: '2px solid #1a237e', textAlign: 'center', fontWeight: 900, fontSize: '1.1rem', color: isValid ? '#1a237e' : '#ef5350' }}>
+                    {totalHours} / {required}
+                  </td>
+                  <td style={{ border: '2px solid #1a237e' }}></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <button onClick={addSubject} style={{ marginTop: '0.8rem', width: '100%', padding: '0.6rem', background: '#1a237e', color: '#fff', border: 'none', borderRadius: '10px', cursor: 'pointer', fontWeight: 800, fontSize: '0.9rem' }}>
+            + إضافة مادة جديدة
+          </button>
+
+          <p className="muted note" style={{ marginTop: '0.8rem', fontSize: '0.82rem' }}>
+            💡 انقر على اسم المادة أو عدد الساعات أو اللون لتعديله. استخدم ▲▼ للترتيب و ✕ للحذف.
+          </p>
+        </>
+      )}
+
+      {activeTab === 'timetable' && (
+        <>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.8rem', marginBottom: '1rem', flexWrap: 'wrap' }}>
+            <label style={{ fontWeight: 800, fontSize: '0.9rem', color: '#1a237e' }}>عدد الحصص في اليوم:</label>
+            {[4,5,6,7,8].map((n) => (
+              <button key={n} onClick={() => changeNumPeriods(n)} style={{ padding: '6px 14px', borderRadius: '8px', border: numPeriods === n ? '2px solid #1a237e' : '2px solid #ccc', background: numPeriods === n ? '#1a237e' : '#fff', color: numPeriods === n ? '#fff' : '#333', fontWeight: 800, fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s' }}>
+                {n} حصص
+              </button>
             ))}
-            <tr style={{ background: isValid ? '#e8eaf6' : '#ffebee' }}>
-              <td colSpan={3} style={{ padding: '12px', border: '2px solid #1a237e', textAlign: 'center', fontWeight: 900, fontSize: '1rem', color: '#1a237e' }}>المجموع</td>
-              <td style={{ padding: '12px', border: '2px solid #1a237e', textAlign: 'center', fontWeight: 900, fontSize: '1.1rem', color: isValid ? '#1a237e' : '#ef5350' }}>
-                {totalHours} / {required}
-              </td>
-              <td style={{ border: '2px solid #1a237e' }}></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          </div>
 
-      <button onClick={addSubject} style={{ marginTop: '0.8rem', width: '100%', padding: '0.6rem', background: '#1a237e', color: '#fff', border: 'none', borderRadius: '10px', cursor: 'pointer', fontWeight: 800, fontSize: '0.9rem' }}>
-        + إضافة مادة جديدة
-      </button>
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', border: '3px solid #1a237e', borderRadius: '12px', overflow: 'hidden', minWidth: '700px' }}>
+              <thead>
+                <tr>
+                  <th style={{ background: '#1a237e', color: '#fff', padding: '10px 6px', fontSize: '0.8rem', fontWeight: 800, border: '2px solid #1a237e', width: '35px' }}>الحصة</th>
+                  {DAYS.map((day) => (
+                    <th key={day} style={{ background: '#1a237e', color: '#fff', padding: '10px 6px', fontSize: '0.8rem', fontWeight: 800, border: '2px solid #1a237e', textAlign: 'center' }}>{day}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {Array.from({ length: numPeriods }, (_, periodIdx) => (
+                  <tr key={periodIdx} style={{ background: periodIdx % 2 === 0 ? '#fff' : '#f8f9ff' }}>
+                    <td style={{ padding: '6px', border: '2px solid #c5cae9', textAlign: 'center', fontWeight: 800, color: '#1a237e', fontSize: '0.8rem', background: '#e8eaf6' }}>
+                      <div style={{ fontWeight: 800 }}>حصة {periodIdx + 1}</div>
+                    </td>
+                    {DAYS.map((_, dayIdx) => {
+                      const cell = timetable[dayIdx]?.[periodIdx] || { subject: '', duration: 55 };
+                      const isEdit = editingTimetable?.day === dayIdx && editingTimetable?.period === periodIdx;
+                      const cellColor = getSubjectColor(cell.subject);
 
-      <p className="muted note" style={{ marginTop: '0.8rem', fontSize: '0.82rem' }}>
-        💡 انقر على اسم المادة أو عدد الساعات أو اللون لتعديله. استخدم ▲▼ للترتيب و ✕ للحذف.
-      </p>
+                      return (
+                        <td key={dayIdx} style={{ padding: '4px', border: '2px solid #c5cae9', textAlign: 'center', position: 'relative' }}>
+                          {isEdit ? (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '3px', alignItems: 'center' }}>
+                              <select
+                                value={cell.subject}
+                                onChange={(e) => setTimetableCell(dayIdx, periodIdx, 'subject', e.target.value)}
+                                style={{ width: '100%', padding: '3px', border: '2px solid #3b82f6', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700, textAlign: 'center' }}
+                              >
+                                <option value="">—</option>
+                                {subjects.map((s) => (
+                                  <option key={s.name} value={s.name}>{s.name}</option>
+                                ))}
+                              </select>
+                              <select
+                                value={cell.duration}
+                                onChange={(e) => setTimetableCell(dayIdx, periodIdx, 'duration', Number(e.target.value))}
+                                style={{ width: '100%', padding: '3px', border: '2px solid #3b82f6', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700, textAlign: 'center' }}
+                              >
+                                {DURATION_OPTIONS.map((d) => (
+                                  <option key={d} value={d}>{d} دقيقة</option>
+                                ))}
+                              </select>
+                              <button onClick={() => setEditingTimetable(null)} style={{ background: '#4caf50', color: '#fff', border: 'none', borderRadius: '4px', padding: '2px 8px', cursor: 'pointer', fontSize: '0.7rem', fontWeight: 700 }}>✓</button>
+                            </div>
+                          ) : (
+                            <div
+                              onClick={() => setEditingTimetable({ day: dayIdx, period: periodIdx })}
+                              style={{ cursor: 'pointer', minHeight: '50px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '2px', padding: '4px', borderRadius: '6px', border: `2px solid ${cell.subject ? cellColor + '40' : '#e0e0e0'}`, background: cell.subject ? cellColor + '10' : '#fafafa', transition: 'all 0.2s' }}
+                            >
+                              {cell.subject ? (
+                                <>
+                                  <span style={{ fontWeight: 800, fontSize: '0.78rem', color: cellColor, lineHeight: 1.2 }}>{cell.subject}</span>
+                                  <span style={{ fontSize: '0.68rem', color: '#666', fontWeight: 700 }}>{cell.duration} دقيقة</span>
+                                </>
+                              ) : (
+                                <span style={{ fontSize: '0.75rem', color: '#bbb', fontWeight: 700 }}>+ أضف</span>
+                              )}
+                            </div>
+                          )}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <p className="muted note" style={{ marginTop: '0.8rem', fontSize: '0.82rem' }}>
+            💡 انقر على أي خلية لتعديل المادة والمدة. اضغط ✓ للحفظ.
+          </p>
+        </>
+      )}
     </div>
   );
 }

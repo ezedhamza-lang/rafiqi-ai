@@ -252,10 +252,11 @@ async function start() {
       "classId" INTEGER NOT NULL UNIQUE,
       "grade" INTEGER NOT NULL,
       "subjects" JSONB NOT NULL,
+      "timetable" JSONB,
       "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
       "updatedAt" TIMESTAMP(3) NOT NULL,
       FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE CASCADE
-    )`).catch((err) => {
+    )`).then(() => prisma.$executeRaw`ALTER TABLE "SubjectDistribution" ADD COLUMN IF NOT EXISTS "timetable" JSONB`).catch((err) => {
       console.error('SubjectDistribution table check failed:', err.message);
     })
     .then(() => runRenewalSweep().catch((err) => {
