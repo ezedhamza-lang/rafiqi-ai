@@ -139,7 +139,11 @@ async function main() {
     { firstName: 'محمد', lastName: 'الولي', email: 'parent@test.tn', phone: '20000002', password: 'parent123', role: 'PARENT' },
     { firstName: 'فاطمة', lastName: 'المعلمة', email: 'teacher@test.tn', phone: '20000003', password: 'teacher123', role: 'TEACHER' },
     { firstName: 'خالد', lastName: 'مدير المدرسة', email: 'director@test.tn', phone: '20000004', password: 'director123', role: 'SCHOOL_DIRECTOR' },
-    { firstName: 'نظامي', lastName: 'المنصة', email: 'super@education.tn', phone: '70017033', password: 'super123', role: 'SUPER_ADMIN' }
+    { firstName: 'نظامي', lastName: 'المنصة', email: 'super@education.tn', phone: '70017033', password: 'super123', role: 'SUPER_ADMIN' },
+    // حساب الاستكشاف: دور تلميذ عمداً بلا سجل في جدول Student (لا قسم ولا مستوى)،
+    // فيرى محتوى كل المستويات س1-س6 (القفل يُرفع عند غياب المستوى فقط).
+    // التكليفات/الاختبارات المرتبطة بالقسم تعيد له قائمة فارغة بأمان.
+    { firstName: 'مستكشف', lastName: 'المنصة', email: 'explorer@test.tn', phone: '20000005', password: 'explorer123', role: 'STUDENT' }
   ];
 
   const users = {};
@@ -210,22 +214,18 @@ async function main() {
   const existingStudent = await prisma.student.findUnique({
     where: { accountUserId: studentAccount.id }
   });
-  // حساب الاستكشاف التجريبي: تلميذ بلا قسم (classId فارغ ومستوى فارغ) ليرى
-  // محتوى كل المستويات (س1-س6) في فضاء التلميذ — القفل بالمستوى يُرفع فقط
-  // عند غياب المستوى (انظر studentLevelService + ‏StudentBooks). التكليفات
-  // والاختبارات المرتبطة بالقسم تعيد له قائمة فارغة بأمان.
   const student = existingStudent
     ? await prisma.student.update({
         where: { id: existingStudent.id },
         data: {
           userId: parent.id,
-          classId: null,
+          classId: createdClasses['قسم السنة الأولى أ'].id,
           firstName: 'أحمد',
           lastName: 'التلميذ',
           birthDate: new Date('2019-03-15'),
           cin: '00000000',
           gender: 'ذكر',
-          level: '',
+          level: 'السنة الأولى أساسي',
           schoolYear: '2026-2027',
           schoolName: 'المدرسة الابتدائية النموذجية'
         }
@@ -234,13 +234,13 @@ async function main() {
         data: {
           userId: parent.id,
           accountUserId: studentAccount.id,
-          classId: null,
+          classId: createdClasses['قسم السنة الأولى أ'].id,
           firstName: 'أحمد',
           lastName: 'التلميذ',
           birthDate: new Date('2019-03-15'),
           cin: '00000000',
           gender: 'ذكر',
-          level: '',
+          level: 'السنة الأولى أساسي',
           schoolYear: '2026-2027',
           schoolName: 'المدرسة الابتدائية النموذجية'
         }

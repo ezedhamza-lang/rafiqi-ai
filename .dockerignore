@@ -9,7 +9,6 @@ rafiqi
 *.log
 .env
 backend/uploads
-backend/curriculum
 backend/tests
 backend/tmp*
 backend/*.tmp
