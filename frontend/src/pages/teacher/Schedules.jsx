@@ -249,6 +249,15 @@ export default function Schedules({ classes }) {
     return found?.color || '#64748b';
   };
 
+  const timetableSubjects = (() => {
+    const seen = new Set();
+    return subjects.filter((s) => {
+      if (seen.has(s.group)) return false;
+      seen.add(s.group);
+      return true;
+    }).map((s) => ({ name: s.group, color: s.color }));
+  })();
+
   return (
     <div className="panel">
       <div className="panel-head">
@@ -418,7 +427,7 @@ export default function Schedules({ classes }) {
                                 style={{ width: '100%', padding: '3px', border: '2px solid #3b82f6', borderRadius: '4px', fontSize: '0.75rem', fontWeight: 700, textAlign: 'center' }}
                               >
                                 <option value="">—</option>
-                                {subjects.map((s) => (
+                                {timetableSubjects.map((s) => (
                                   <option key={s.name} value={s.name}>{s.name}</option>
                                 ))}
                               </select>
