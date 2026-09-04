@@ -21,13 +21,12 @@ const SUBJECTS = [
   { name: 'التنشيط', color: '#0d9488' }
 ];
 
-const PERIOD_TIMES = [
-  { start: '08:00', end: '08:45' },
-  { start: '08:50', end: '09:35' },
-  { start: '09:40', end: '10:25' },
-  { start: '10:45', end: '11:30' },
-  { start: '11:35', end: '12:20' },
-  { start: '14:00', end: '14:45' }
+const TIME_BLOCKS = [
+  { label: '08:00 - 10:00', start: '08:00', end: '10:00' },
+  { label: '10:00 - 12:00', start: '10:00', end: '12:00' },
+  { label: '12:00 - 13:00', start: '12:00', end: '13:00' },
+  { label: '13:00 - 15:00', start: '13:00', end: '15:00' },
+  { label: '15:00 - 17:00', start: '15:00', end: '17:00' }
 ];
 
 const DAYS = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'];
@@ -39,7 +38,7 @@ function getSubjectColor(name) {
 export default function Schedules({ classes }) {
   const { t } = useI18n();
   const [classId, setClassId] = useState('');
-  const [grid, setGrid] = useState(Array.from({ length: 6 }, () => Array(6).fill({ filled: false, subject: '' })));
+  const [grid, setGrid] = useState(Array.from({ length: 6 }, () => Array(5).fill({ filled: false, subject: '' })));
   const [saved, setSaved] = useState(null);
   const [error, setError] = useState('');
   const scheduleRef = useRef(null);
@@ -51,9 +50,9 @@ export default function Schedules({ classes }) {
         if (list.length > 0) {
           const first = list[0].class;
           setClassId(String(first.id));
-          const g = Array.from({ length: 6 }, () => Array(6).fill({ filled: false, subject: '' }));
+          const g = Array.from({ length: 6 }, () => Array(5).fill({ filled: false, subject: '' }));
           list.forEach((s) => {
-            g[s.day][s.period] = { filled: true, subject: s.subject };
+            if (s.day < 6 && s.period < 5) g[s.day][s.period] = { filled: true, subject: s.subject };
           });
           setGrid(g);
         }
@@ -67,9 +66,9 @@ export default function Schedules({ classes }) {
 
   const loadClass = async (id) => {
     const list = await api.get('/teacher/schedules');
-    const g = Array.from({ length: 6 }, () => Array(6).fill({ filled: false, subject: '' }));
+    const g = Array.from({ length: 6 }, () => Array(5).fill({ filled: false, subject: '' }));
     list.filter((s) => s.class.id === Number(id)).forEach((s) => {
-      g[s.day][s.period] = { filled: true, subject: s.subject };
+      if (s.day < 6 && s.period < 5) g[s.day][s.period] = { filled: true, subject: s.subject };
     });
     setGrid(g);
     setSaved(null);
@@ -104,19 +103,18 @@ export default function Schedules({ classes }) {
     if (!content) return;
     const w = window.open('', '_blank');
     w.document.write(`
-      <html dir="rtl"><head><title>جدول الأوقات</title>
+      <html dir="rtl"><head><title>جدول توزيع المواد</title>
       <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap');
         body { font-family: 'Tajawal', Arial, sans-serif; padding: 20px; }
-        h2 { text-align: center; color: #1a237e; margin-bottom: 5px; }
-        .subtitle { text-align: center; color: #666; font-size: 14px; margin-bottom: 20px; }
+        h2 { text-align: center; color: #e91e63; margin-bottom: 5px; font-size: 20px; }
         table { width: 100%; border-collapse: collapse; }
-        th, td { border: 2px solid #1a237e; padding: 10px; text-align: center; font-size: 13px; }
-        th { background: #1a237e; color: #fff; font-weight: 800; }
-        .day-header { background: #e8eaf6; font-weight: 800; color: #1a237e; }
-        @media print { .no-print { display: none; } }
+        th, td { border: 2px solid #e91e63; padding: 12px 8px; text-align: center; font-size: 14px; }
+        th { background: #fce4ec; color: #c2185b; font-weight: 800; }
+        td.day-cell { background: #fce4ec; font-weight: 800; color: #c2185b; }
+        @media print { body { padding: 10mm; } }
       </style></head><body>
-      <h2>جدول الأوقات الأسبوعي</h2>
-      <p class="subtitle">السنة الدراسية 2026-2027</p>
+      <h2>جدول توزيع المواد</h2>
       ${content.innerHTML}
       <script>window.onload=function(){window.print();}<\/script>
       </body></html>
@@ -127,7 +125,7 @@ export default function Schedules({ classes }) {
   return (
     <div className="panel">
       <div className="panel-head">
-        <h3>{t('teacherSpace.schedules.title')}</h3>
+        <h3>📋 جدول توزيع المواد</h3>
         <div className="btn-group">
           <select value={classId} onChange={(e) => { setClassId(e.target.value); loadClass(e.target.value); }}>
             <option value="">{t('teacherSpace.schedules.selectClass')}</option>
@@ -144,32 +142,36 @@ export default function Schedules({ classes }) {
       {saved && <div className="form-success">{t('teacherSpace.schedules.savedMsg', { n: saved.count })}</div>}
 
       <div ref={scheduleRef} style={{ overflowX: 'auto' }}>
-        <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '700px' }}>
+        <table style={{
+          width: '100%',
+          borderCollapse: 'collapse',
+          minWidth: '650px',
+          border: '3px solid #e91e63',
+          borderRadius: '12px',
+          overflow: 'hidden'
+        }}>
           <thead>
             <tr>
               <th style={{
-                background: '#1a237e',
-                color: '#fff',
-                padding: '12px 10px',
-                fontSize: '0.9rem',
+                background: 'linear-gradient(135deg, #fce4ec, #f8bbd0)',
+                color: '#c2185b',
+                padding: '14px 10px',
+                fontSize: '1rem',
                 fontWeight: 800,
-                border: '2px solid #1a237e',
-                width: '100px'
-              }}>اليوم / الفترات</th>
-              {PERIOD_TIMES.map((pt, i) => (
+                border: '2px solid #e91e63',
+                width: '90px'
+              }}></th>
+              {TIME_BLOCKS.map((tb, i) => (
                 <th key={i} style={{
-                  background: i < 3 ? '#1a237e' : i === 3 ? '#c62828' : '#4a148c',
-                  color: '#fff',
-                  padding: '10px 8px',
-                  fontSize: '0.82rem',
+                  background: 'linear-gradient(135deg, #fce4ec, #f8bbd0)',
+                  color: '#c2185b',
+                  padding: '12px 8px',
+                  fontSize: '0.88rem',
                   fontWeight: 800,
-                  border: '2px solid #1a237e',
-                  minWidth: '90px'
+                  border: '2px solid #e91e63',
+                  minWidth: '100px'
                 }}>
-                  <span>الفترة {i + 1}</span>
-                  <span style={{ display: 'block', fontSize: '0.72rem', opacity: 0.85, marginTop: '2px' }}>
-                    {pt.start} - {pt.end}
-                  </span>
+                  {tb.label}
                 </th>
               ))}
             </tr>
@@ -178,33 +180,30 @@ export default function Schedules({ classes }) {
             {DAYS.map((day, di) => (
               <tr key={di}>
                 <td style={{
-                  background: '#e8eaf6',
-                  color: '#1a237e',
+                  background: 'linear-gradient(135deg, #fce4ec, #f8bbd0)',
+                  color: '#c2185b',
                   fontWeight: 800,
-                  padding: '12px 8px',
-                  fontSize: '0.9rem',
-                  border: '2px solid #c5cae9',
+                  padding: '14px 8px',
+                  fontSize: '0.95rem',
+                  border: '2px solid #e91e63',
                   textAlign: 'center'
                 }}>
-                  <span style={{ display: 'block' }}>{day}</span>
-                  <span style={{ fontSize: '0.7rem', color: '#666', fontWeight: 400 }}>
-                    {PERIOD_TIMES[0].start} - {PERIOD_TIMES[5].end}
-                  </span>
+                  {day}
                 </td>
-                {[0, 1, 2, 3, 4, 5].map((pi) => {
+                {[0, 1, 2, 3, 4].map((pi) => {
                   const cell = grid[di][pi];
                   return (
                     <td
                       key={pi}
                       onClick={() => toggleCell(di, pi)}
                       style={{
-                        border: '2px solid #c5cae9',
-                        padding: '8px 6px',
+                        border: '2px solid #e91e63',
+                        padding: '10px 6px',
                         textAlign: 'center',
                         cursor: 'pointer',
-                        background: cell.filled ? getSubjectColor(cell.subject) + '18' : '#fff',
+                        background: cell.filled ? getSubjectColor(cell.subject) + '15' : '#fff',
                         transition: 'all 0.2s ease',
-                        position: 'relative'
+                        minHeight: '50px'
                       }}
                     >
                       {cell.filled ? (
@@ -239,7 +238,7 @@ export default function Schedules({ classes }) {
                           }} />
                         </div>
                       ) : (
-                        <span style={{ color: '#cbd5e1', fontSize: '1.2rem' }}>+</span>
+                        <span style={{ color: '#f48fb1', fontSize: '1.3rem' }}>+</span>
                       )}
                     </td>
                   );
@@ -250,8 +249,8 @@ export default function Schedules({ classes }) {
         </table>
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1rem', padding: '0.8rem', background: '#f8fafc', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
-        <span style={{ fontWeight: 800, fontSize: '0.85rem', color: '#1a237e', width: '100%', marginBottom: '0.3rem' }}>المواد (وفق القرار الوزاري 151 لسنة 2026):</span>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1rem', padding: '0.8rem', background: '#fce4ec', borderRadius: '12px', border: '2px solid #f48fb1' }}>
+        <span style={{ fontWeight: 800, fontSize: '0.88rem', color: '#c2185b', width: '100%', marginBottom: '0.3rem' }}>📦 المواد الدراسية (القرار الوزاري 151 - 2026):</span>
         {SUBJECTS.map((s) => (
           <span key={s.name} style={{
             display: 'inline-flex',
@@ -261,9 +260,9 @@ export default function Schedules({ classes }) {
             borderRadius: '999px',
             fontSize: '0.75rem',
             fontWeight: 700,
-            background: s.color + '15',
+            background: s.color + '18',
             color: s.color,
-            border: `1px solid ${s.color}30`
+            border: `1px solid ${s.color}35`
           }}>
             <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: s.color }} />
             {s.name}
@@ -271,19 +270,7 @@ export default function Schedules({ classes }) {
         ))}
       </div>
 
-      <div style={{ marginTop: '0.8rem', padding: '0.8rem', background: '#fffbeb', borderRadius: '10px', border: '1px solid #fde68a', fontSize: '0.82rem', color: '#92400e' }}>
-        <strong>⏰ أوقات الحصص (النظام العادي):</strong>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.3rem', marginTop: '0.4rem' }}>
-          {PERIOD_TIMES.map((pt, i) => (
-            <span key={i}>الفترة {i + 1}: {pt.start} - {pt.end}</span>
-          ))}
-        </div>
-        <div style={{ marginTop: '0.3rem', fontSize: '0.75rem', color: '#b45309' }}>
-          ⚠️ الاستراحة الصباحية: 10:25 - 10:45 (بعد الفترة الثالثة)
-        </div>
-      </div>
-
-      <p className="muted note" style={{ marginTop: '0.8rem' }}>
+      <p className="muted note" style={{ marginTop: '0.8rem', fontSize: '0.82rem' }}>
         💡 انقر على خلية فارغة لإضافة مادة. اختر المادة من القائمة. اضغط على طباعة للحصول على نسخة PDF.
       </p>
     </div>
