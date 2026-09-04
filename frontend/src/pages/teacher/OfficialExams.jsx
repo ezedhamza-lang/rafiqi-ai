@@ -171,6 +171,20 @@ export default function OfficialExams({ classes }) {
     }
   };
 
+  const uploadExamImage = async (file) => {
+    const fd = new FormData();
+    fd.append('image', file);
+    const token = localStorage.getItem('school_token');
+    const res = await fetch('/api/teacher/exams/upload-image', {
+      method: 'POST',
+      headers: token ? { Authorization: 'Bearer ' + token } : {},
+      body: fd
+    });
+    if (!res.ok) throw new Error('upload failed');
+    const data = await res.json();
+    return data.url;
+  };
+
   const startEdit = (exam) => {
     setDraft({
       title: exam.title || '',
@@ -187,6 +201,52 @@ export default function OfficialExams({ classes }) {
     setEditingId(null);
     setDraft({ title: '', subject: 'math', classId: '', trimester: 1, content: {} });
     setView('list');
+  };
+
+  const updateQuestion = (idx, patch) => {
+    const questions = [...(draft.content.questions || [])];
+    questions[idx] = { ...questions[idx], ...patch };
+    setDraft({ ...draft, content: { ...draft.content, questions } });
+  };
+
+  const addQuestion = () => {
+    const questions = [...(draft.content.questions || [])];
+    questions.push({
+      id: 'q' + Date.now(),
+      criterion: 'مع1',
+      type: 'OPEN',
+      prompt: '',
+      instruction: '',
+      label: '',
+      options: [],
+      points: 1,
+      answerLines: 4
+    });
+    setDraft({ ...draft, content: { ...draft.content, questions } });
+  };
+
+  const removeQuestion = (idx) => {
+    const questions = [...(draft.content.questions || [])];
+    questions.splice(idx, 1);
+    setDraft({ ...draft, content: { ...draft.content, questions } });
+  };
+
+  const updatePassage = (idx, patch) => {
+    const passages = [...(draft.content.passages || [])];
+    passages[idx] = { ...passages[idx], ...patch };
+    setDraft({ ...draft, content: { ...draft.content, passages } });
+  };
+
+  const addPassage = () => {
+    const passages = [...(draft.content.passages || [])];
+    passages.push({ id: 'p' + Date.now(), title: '', text: '' });
+    setDraft({ ...draft, content: { ...draft.content, passages } });
+  };
+
+  const removePassage = (idx) => {
+    const passages = [...(draft.content.passages || [])];
+    passages.splice(idx, 1);
+    setDraft({ ...draft, content: { ...draft.content, passages } });
   };
 
   const generateAi = async (e) => {
@@ -531,6 +591,123 @@ export default function OfficialExams({ classes }) {
               }
               placeholder={t('teacherSpace.officialExams.gradingScalePlaceholder')}
             />
+          </div>
+          <div className="form-group">
+            <label>{t('teacherSpace.officialExams.passagesLabel')}</label>
+            {(draft.content.passages || []).map((p, i) => (
+              <div key={p.id || i} className="card-item">
+                <div className="form-row">
+                  <div className="form-group grow">
+                    <input value={p.title || ''} onChange={(e) => updatePassage(i, { title: e.target.value })} placeholder={t('teacherSpace.officialExams.passageTitlePh')} />
+                  </div>
+                  <button type="button" className="btn btn-danger btn-sm" onClick={() => removePassage(i)}>×</button>
+                </div>
+                <textarea value={p.text || ''} rows="3" onChange={(e) => updatePassage(i, { text: e.target.value })} placeholder={t('teacherSpace.officialExams.passageTextPh')} />
+                <div className="form-row">
+                  <div className="form-group grow">
+                    <input value={p.image || p.visual || ''} onChange={(e) => updatePassage(i, { image: e.target.value, visual: e.target.value })} placeholder="/uploads/exams/..." />
+                  </div>
+                  <label className="btn btn-sm">
+                    {t('teacherSpace.officialExams.uploadImage')}
+                    <input type="file" accept="image/png,image/jpeg" hidden onChange={async (e) => {
+                      const f = e.target.files && e.target.files[0];
+                      if (!f) return;
+                      try {
+                        const url = await uploadExamImage(f);
+                        updatePassage(i, { image: url, visual: url });
+                      } catch (err) {
+                        setError(err.message);
+                      }
+                      e.target.value = '';
+                    }} />
+                  </label>
+                </div>
+                {(p.image || p.visual) && (
+                  <img src={p.image || p.visual} alt="" style={{ maxWidth: '160px', maxHeight: '120px', marginTop: '4px' }} />
+                )}
+              </div>
+            ))}
+            <button type="button" className="btn btn-sm" onClick={addPassage}>+ {t('teacherSpace.officialExams.addPassage')}</button>
+          </div>
+          <div className="form-group">
+            <label>{t('teacherSpace.officialExams.questionsLabel', { n: (draft.content.questions || []).length })}</label>
+            {(draft.content.questions || []).map((q, i) => (
+              <div key={q.id || i} className="card-item">
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>{t('teacherSpace.officialExams.qTypeLabel')}</label>
+                    <select value={q.type || 'OPEN'} onChange={(e) => updateQuestion(i, { type: e.target.value })}>
+                      {['MCQ', 'TRUE_FALSE', 'FILL_BLANK', 'MATCHING', 'ORDERING', 'EXTRACT', 'OPEN'].map((tp) => (
+                        <option key={tp} value={tp}>{tp}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label>{t('teacherSpace.officialExams.qPointsLabel')}</label>
+                    <input type="number" min="0.5" step="0.5" value={q.points ?? 1} onChange={(e) => updateQuestion(i, { points: Number(e.target.value) })} />
+                  </div>
+                  <div className="form-group grow">
+                    <label>{t('teacherSpace.officialExams.qLabelLabel')}</label>
+                    <input value={q.label || ''} onChange={(e) => updateQuestion(i, { label: e.target.value })} placeholder="التعليمة 1-1" />
+                  </div>
+                  <button type="button" className="btn btn-danger btn-sm" onClick={() => removeQuestion(i)}>×</button>
+                </div>
+                <div className="form-group">
+                  <label>{t('teacherSpace.officialExams.qImageLabel')}</label>
+                  <div className="form-row">
+                    <div className="form-group grow">
+                      <input value={q.visual || q.image || ''} onChange={(e) => updateQuestion(i, { visual: e.target.value, image: e.target.value })} placeholder="/uploads/exams/..." />
+                    </div>
+                    <label className="btn btn-sm">
+                      {t('teacherSpace.officialExams.uploadImage')}
+                      <input type="file" accept="image/png,image/jpeg" hidden onChange={async (e) => {
+                        const f = e.target.files && e.target.files[0];
+                        if (!f) return;
+                        try {
+                          const url = await uploadExamImage(f);
+                          updateQuestion(i, { visual: url, image: url });
+                        } catch (err) {
+                          setError(err.message);
+                        }
+                        e.target.value = '';
+                      }} />
+                    </label>
+                    {(q.visual || q.image) && (
+                      <button type="button" className="btn btn-danger btn-sm" onClick={() => updateQuestion(i, { visual: '', image: '' })}>×</button>
+                    )}
+                  </div>
+                  {(q.visual || q.image) && (
+                    <img src={q.visual || q.image} alt="" style={{ maxWidth: '160px', maxHeight: '120px', marginTop: '4px' }} />
+                  )}
+                </div>
+                <div className="form-group">
+                  <label>{t('teacherSpace.officialExams.qInstructionLabel')}</label>
+                  <input value={q.instruction || ''} onChange={(e) => updateQuestion(i, { instruction: e.target.value })} />
+                </div>
+                <div className="form-group">
+                  <label>{t('teacherSpace.officialExams.qPromptLabel')}</label>
+                  <textarea value={q.prompt || q.text || ''} rows="2" onChange={(e) => updateQuestion(i, { prompt: e.target.value })} />
+                </div>
+                {(q.type === 'MCQ' || q.type === 'EXTRACT') && (
+                  <div className="form-group">
+                    <label>{t('teacherSpace.officialExams.qOptionsLabel')}</label>
+                    <textarea
+                      value={(q.options || []).join('\n')}
+                      rows="3"
+                      onChange={(e) => updateQuestion(i, { options: e.target.value.split('\n').map((x) => x.trim()).filter(Boolean) })}
+                      placeholder="خيار 1&#10;خيار 2&#10;خيار 3"
+                    />
+                  </div>
+                )}
+                {(q.type === 'OPEN') && (
+                  <div className="form-group">
+                    <label>{t('teacherSpace.officialExams.qLinesLabel')}</label>
+                    <input type="number" min="1" max="12" value={q.answerLines ?? 4} onChange={(e) => updateQuestion(i, { answerLines: Number(e.target.value) })} />
+                  </div>
+                )}
+              </div>
+            ))}
+            <button type="button" className="btn btn-sm" onClick={addQuestion}>+ {t('teacherSpace.officialExams.addQuestion')}</button>
           </div>
           <button className="btn btn-primary" type="submit">
             {t('teacherSpace.officialExams.saveExam')}

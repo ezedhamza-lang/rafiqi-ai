@@ -2036,7 +2036,9 @@
       "aiNoKey": "Add your Gemini API key first, then try again",
       "aiSaved": "Auto-saved to bank",
       "updateExam": "Save changes",
-      "cancelEdit": "Cancel editing"
+      "cancelEdit": "Cancel editing",
+      "qImageLabel": "Question image (optional)",
+      "uploadImage": "Upload image"
     },
     "annualPlans": {
       "title": "Annual Plans",

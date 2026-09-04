@@ -65,6 +65,81 @@ function esc(text) {
 
 function dottedLine(n = 40) { return '.'.repeat(n); }
 
+/* ── Image support: embed local images (uploads/, images/, media/) ── */
+const BACKEND_ROOT = path.join(__dirname, '..', '..');
+const EMU_PER_PX = 9525;
+const MAX_IMG_W_PX = 420;
+const MAX_IMG_H_PX = 300;
+
+function resolveLocalImage(visual) {
+  if (!visual || typeof visual !== 'string') return null;
+  const v = visual.trim();
+  if (/^https?:\/\//i.test(v) || /^data:/i.test(v)) return null;
+  const rel = v.startsWith('/') ? v.slice(1) : v;
+  if (rel.includes('..')) return null;
+  const abs = path.join(BACKEND_ROOT, rel);
+  try {
+    if (!fs.existsSync(abs) || !fs.statSync(abs).isFile()) return null;
+    const ext = path.extname(abs).toLowerCase();
+    if (!['.png', '.jpg', '.jpeg'].includes(ext)) return null;
+    return { abs, ext: ext === '.jpeg' ? '.jpg' : ext };
+  } catch {
+    return null;
+  }
+}
+
+function imageDimensions(abs, ext) {
+  try {
+    const buf = fs.readFileSync(abs);
+    if (ext === '.png' && buf.length > 24 && buf.readUInt32BE(16) > 0 && buf.readUInt32BE(20) > 0) {
+      return { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20), buf };
+    }
+    if (ext === '.jpg') {
+      let i = 2;
+      while (i + 8 < buf.length) {
+        if (buf[i] !== 0xFF) break;
+        const marker = buf[i + 1];
+        if (marker >= 0xC0 && marker <= 0xC3) {
+          return { w: buf.readUInt16BE(i + 7), h: buf.readUInt16BE(i + 5), buf };
+        }
+        const len = buf.readUInt16BE(i + 2);
+        if (len < 2) break;
+        i += 2 + len;
+      }
+      return { w: 300, h: 200, buf };
+    }
+    return { w: 300, h: 200, buf };
+  } catch {
+    return null;
+  }
+}
+
+function collectVisuals(passages, questions) {
+  const seen = new Map();
+  const list = [];
+  const consider = (visual) => {
+    if (!visual || seen.has(visual)) return;
+    const resolved = resolveLocalImage(visual);
+    if (!resolved) return;
+    const dims = imageDimensions(resolved.abs, resolved.ext);
+    if (!dims) return;
+    const scale = Math.min(1, MAX_IMG_W_PX / dims.w, MAX_IMG_H_PX / dims.h);
+    const wPx = Math.max(40, Math.round(dims.w * scale));
+    const hPx = Math.max(40, Math.round(dims.h * scale));
+    seen.set(visual, list.length);
+    list.push({ visual, ...resolved, buf: dims.buf, wPx, hPx, rid: `rIdImg${list.length + 1}` });
+  };
+  (passages || []).forEach((p) => { if (p && typeof p === 'object') { consider(p.image || p.visual); } });
+  (questions || []).forEach((q) => consider(q.visual || q.image));
+  return { list, indexOf: (v) => seen.get(v) };
+}
+
+function imageParagraph(img, docPrId) {
+  const cx = img.wPx * EMU_PER_PX;
+  const cy = img.hPx * EMU_PER_PX;
+  return `<w:p><w:pPr><w:jc w:val="center"/><w:spacing w:before="80" w:after="80"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="${FONT_BODY}" w:hAnsi="${FONT_BODY}" w:cs="${FONT_BODY}"/><w:sz w:val="20"/><w:szCs w:val="20"/></w:rPr><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0"><wp:extent cx="${cx}" cy="${cy}"/><wp:docPr id="${docPrId}" name="exam-img-${docPrId}"/><wp:cNvGraphicFramePr/><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="${docPrId}" name="exam-img-${docPrId}"/><pic:cNvPicPr/></pic:nvPicPr><pic:blipFill><a:blip r:embed="${img.rid}"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="${cx}" cy="${cy}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>`;
+}
+
 // Official fonts: Andalus for headings, Traditional Arabic for body
 const FONT_TITLE = 'Andalus';
 const FONT_BODY = 'Traditional Arabic';
@@ -386,6 +461,8 @@ function buildCriteriaTable(criteria) {
 function buildDocumentXml(bodyContent) {
   return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas"
+            xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"
+            xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"
             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
             xmlns:o="urn:schemas-microsoft-com:office:office"
             xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
@@ -413,7 +490,10 @@ function buildDocumentXml(bodyContent) {
 </w:document>`;
 }
 
-function buildContentTypes() {
+function buildContentTypes(images = []) {
+  const imgOverrides = images.map((img, i) =>
+    `  <Override PartName="/word/media/image${i + 1}${img.ext}" ContentType="image/${img.ext === '.png' ? 'png' : 'jpeg'}"/>`
+  ).join('\n');
   return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
   <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
@@ -421,6 +501,7 @@ function buildContentTypes() {
   <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
   <Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
   <Override PartName="/word/fontTable.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml"/>
+${imgOverrides}
 </Types>`;
 }
 
@@ -431,11 +512,15 @@ function buildRels() {
 </Relationships>`;
 }
 
-function buildDocRels() {
+function buildDocRels(images = []) {
+  const imgRels = images.map((img, i) =>
+    `  <Relationship Id="${img.rid}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/image${i + 1}${img.ext}"/>`
+  ).join('\n');
   return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
   <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>
   <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable" Target="fontTable.xml"/>
+${imgRels}
 </Relationships>`;
 }
 
@@ -485,6 +570,14 @@ export async function buildOfficialDocx(examData, context = {}) {
   const subjectKey = typeof subject === 'string' ? subject.toLowerCase().replace(/[^a-z-]/g, '') : '';
   const criteria = rawCriteria || DEFAULT_CRITERIA[subjectKey] || DEFAULT_CRITERIA.arabic;
 
+  const { list: images, indexOf: imageIndexOf } = collectVisuals(passages, questions);
+  let docPrId = 10;
+  const imgParaFor = (visual) => {
+    const idx = visual ? imageIndexOf(visual) : undefined;
+    if (idx === undefined) return '';
+    return imageParagraph(images[idx], ++docPrId);
+  };
+
   const bodyParts = [];
 
   bodyParts.push(buildHeader({
@@ -496,6 +589,10 @@ export async function buildOfficialDocx(examData, context = {}) {
     const text = typeof p === 'string' ? p : (p.text || '');
     const pTitle = typeof p === 'object' ? (p.title || '') : '';
     if (pTitle) bodyParts.push(buildSanad(i + 1, pTitle));
+    if (p && typeof p === 'object') {
+      const ip = imgParaFor(p.image || p.visual);
+      if (ip) bodyParts.push(ip);
+    }
     bodyParts.push(paragraph([run(text, { sz: 28 })], { after: 100 }));
     bodyParts.push(emptyPara());
   });
@@ -515,6 +612,8 @@ export async function buildOfficialDocx(examData, context = {}) {
       if (hasOwnPrompt && instruction && q.type && (q.type || '').toUpperCase() !== 'OPEN') {
         // instruction shown above via header; body renders prompt/options
       }
+      const qImg = imgParaFor(q.visual || q.image);
+      if (qImg) bodyParts.push(qImg);
       const bodyQ = { ...q };
       if (!hasOwnPrompt) bodyQ.prompt = '';
       else if (!bodyQ.prompt && !bodyQ.text && instruction) bodyQ.prompt = instruction;
@@ -529,9 +628,12 @@ export async function buildOfficialDocx(examData, context = {}) {
   const documentXml = buildDocumentXml(bodyXml);
 
   const zip = new JSZip();
-  zip.file('[Content_Types].xml', buildContentTypes());
+  zip.file('[Content_Types].xml', buildContentTypes(images));
   zip.file('_rels/.rels', buildRels());
-  zip.file('word/_rels/document.xml.rels', buildDocRels());
+  zip.file('word/_rels/document.xml.rels', buildDocRels(images));
+  images.forEach((img, i) => {
+    zip.file(`word/media/image${i + 1}${img.ext}`, img.buf);
+  });
   zip.file('word/document.xml', documentXml);
   zip.file('word/styles.xml', buildStyles());
   zip.file('word/fontTable.xml', buildFontTable());
@@ -554,7 +656,7 @@ export function prepareExamForDocx(content, context = {}) {
     orderItems: q.orderItems, points: q.points || 1,
     answerLines: q.answerLines || 4,
     items: q.items, leftItems: q.leftItems, rightItems: q.rightItems,
-    statements: q.statements, visual: q.visual
+    statements: q.statements, visual: q.visual || q.image, image: q.image || q.visual
   }));
 
   return {

@@ -1,4 +1,8 @@
 import { Router } from 'express';
+import multer from 'multer';
+import path from 'path';
+import fs from 'fs';
+import { fileURLToPath } from 'url';
 import prisma from '../db.js';
 import { authMiddleware, teacherMiddleware } from '../auth.js';
 import { buildMemo, rebuildMemo } from '../services/memoService.js';
@@ -36,6 +40,43 @@ import {
 
 const router = Router();
 router.use(authMiddleware);
+
+const __tcDirname = path.dirname(fileURLToPath(import.meta.url));
+const EXAM_IMG_DIR = path.join(__tcDirname, '../../uploads/exams');
+if (!fs.existsSync(EXAM_IMG_DIR)) {
+  fs.mkdirSync(EXAM_IMG_DIR, { recursive: true });
+}
+const examImgUpload = multer({
+  storage: multer.diskStorage({
+    destination: (_req, _file, cb) => cb(null, EXAM_IMG_DIR),
+    filename: (_req, file, cb) => {
+      const ext = (file.originalname.match(/\.(jpg|jpeg|png)$/i) || [])[1] || 'png';
+      cb(null, `exam-img-${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext.toLowerCase()}`);
+    }
+  }),
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (_req, file, cb) => {
+    const ok = /image\/(jpeg|png|jpg)/.test(file.mimetype) || /\.(jpg|jpeg|png)$/i.test(file.originalname);
+    cb(null, ok);
+  }
+});
+
+/**
+ * @swagger
+ * /api/teacher/exams/upload-image:
+ *   post:
+ *     summary: رفع صورة لسؤال امتحان (تُضمَّن في ملف Word)
+ *     tags: [teacher-content]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: رابط الصورة
+ */
+router.post('/exams/upload-image', teacherMiddleware, examImgUpload.single('image'), asyncHandler(async (req, res) => {
+  if (!req.file) throw new ApiError(400, 'اختر صورة بصيغة PNG أو JPG');
+  res.json({ url: `/uploads/exams/${req.file.filename}` });
+}));
 
 /**
  * @swagger

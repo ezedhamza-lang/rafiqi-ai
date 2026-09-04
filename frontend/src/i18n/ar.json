@@ -2036,7 +2036,9 @@
       "aiNoKey": "أضف مفتاح Gemini الخاص بك أولاً ثم حاول مجددا",
       "aiSaved": "تم الحفظ تلقائيا في البنك",
       "updateExam": "حفظ التعديلات",
-      "cancelEdit": "إلغاء التعديل"
+      "cancelEdit": "إلغاء التعديل",
+      "qImageLabel": "صورة السؤال (اختياري)",
+      "uploadImage": "رفع صورة"
     },
     "annualPlans": {
       "title": "التخطيطات السنوية",
