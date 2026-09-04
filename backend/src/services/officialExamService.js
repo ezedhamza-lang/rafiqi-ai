@@ -245,3 +245,24 @@ export function officialExamSummary(content) {
     durationMinutes: content?.durationMinutes || 45
   };
 }
+
+/**
+ * يحفظ امتحانًا مولّدًا بالذكاء الاصطناعي في بنك الاختبارات الرسمية
+ * لإعادة استخدامه لاحقًا دون اتصال. يتجنب التكرار عبر المعرف.
+ * يعيد true عند الحفظ، false إذا كان موجودًا مسبقًا أو تعذّر الحفظ.
+ */
+export function saveAiExamToBank(bankExam) {
+  try {
+    if (!bankExam || !bankExam.id) return false;
+    const bank = loadOfficialExamBank();
+    const exams = Array.isArray(bank.exams) ? bank.exams : [];
+    if (exams.some((e) => e.id === bankExam.id)) return false;
+    exams.push(bankExam);
+    bank.exams = exams;
+    cache = bank;
+    fs.writeFileSync(BANK_PATH, JSON.stringify(bank, null, 2), 'utf8');
+    return true;
+  } catch {
+    return false;
+  }
+}

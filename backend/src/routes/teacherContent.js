@@ -3,7 +3,8 @@ import prisma from '../db.js';
 import { authMiddleware, teacherMiddleware } from '../auth.js';
 import { buildMemo, rebuildMemo } from '../services/memoService.js';
 import { buildResource, rebuildResource } from '../services/resourceService.js';
-import { getBankExam, buildExamContent, officialExamSummary } from '../services/officialExamService.js';
+import { getBankExam, buildExamContent, officialExamSummary, saveAiExamToBank } from '../services/officialExamService.js';
+import { generateQuizQuestions } from '../services/aiService.js';
 // Dynamic import for docx service — loaded lazily to avoid crashing server if docx package unavailable
 let _docxService = null;
 async function getDocxService() {
@@ -544,6 +545,118 @@ router.post('/exams/instantiate', teacherMiddleware, asyncHandler(async (req, re
     }
   });
   res.status(201).json({ ...exam, summary: officialExamSummary(content) });
+}));
+
+/**
+ * @swagger
+ * /api/teacher/exams/generate-ai:
+ *   post:
+ *     summary: توليد اختبار بالذكاء الاصطناعي (مفتاح Gemini الخاص بالأستاذ) وحفظه في البنك
+ *     tags: [teacher-content]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [subject]
+ *             properties:
+ *               subject: { type: string }
+ *               level: { type: string }
+ *               trimester: { type: integer }
+ *               title: { type: string }
+ *               lessonTitle: { type: string }
+ *               count: { type: integer }
+ *               classId: { type: integer }
+ *               durationMinutes: { type: integer }
+ *     responses:
+ *       201:
+ *         description: الاختبار المولد
+ *       400:
+ *         description: بيانات غير صالحة أو مفتاح Gemini مفقود
+ */
+router.post('/exams/generate-ai', teacherMiddleware, asyncHandler(async (req, res) => {
+  const { subject, level, trimester, title, lessonTitle, count, classId, durationMinutes } = req.body || {};
+  if (!subject) throw new ApiError(400, 'المادة مطلوبة');
+
+  let aiQuestions = null;
+  try {
+    aiQuestions = await generateQuizQuestions(req.user.id, {
+      subject,
+      level: level || '',
+      lessonTitle: lessonTitle || title || '',
+      count: Math.min(Math.max(Number(count) || 6, 1), 15)
+    });
+  } catch (e) {
+    aiQuestions = null;
+  }
+  if (!aiQuestions || !Array.isArray(aiQuestions) || aiQuestions.length === 0) {
+    throw new ApiError(400, 'تعذر التوليد: أضف مفتاح Gemini الخاص بك أولاً ثم حاول مجددا');
+  }
+
+  const questions = aiQuestions.map((q, i) => ({
+    id: `ai-q${i + 1}`,
+    criterion: `مع${(i % 3) + 1}`,
+    type: ['MCQ', 'TRUE_FALSE', 'FILL_BLANK'].includes(q.type) ? q.type : 'MCQ',
+    prompt: q.prompt || q.text || '',
+    options: q.options,
+    correct: q.correct ?? q.correctOption,
+    correctAnswer: q.correctAnswer,
+    points: q.points || 1
+  }));
+
+  const criteria = [
+    { id: 'مع1', label: 'الفهم', mastery: { none: 0, below: 1, min: 2, max: 3 } },
+    { id: 'مع2', label: 'اللغة', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
+    { id: 'مع3', label: 'الإنتاج', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
+  ];
+
+  const content = {
+    header: 'الجمهورية التونسية — وزارة التربية',
+    school: req.user.school || '',
+    date: new Date().getFullYear() + '/' + (new Date().getFullYear() + 1),
+    durationMinutes: durationMinutes || 60,
+    totalPoints: 20,
+    source: 'ai-generated',
+    criteria,
+    passages: [],
+    questions
+  };
+
+  const exam = await prisma.officialExam.create({
+    data: {
+      teacherId: req.user.id,
+      title: title || `اختبار ${subject} — بالذكاء الاصطناعي`,
+      subject,
+      classId: classId ? Number(classId) : null,
+      trimester: trimester ? Number(trimester) : null,
+      content
+    }
+  });
+
+  // حفظ تلقائي في بنك الاختبارات لإعادة الاستخدام دون اتصال
+  let savedToBank = false;
+  try {
+    savedToBank = saveAiExamToBank({
+      id: `ai-${exam.id}-${Date.now()}`,
+      level: typeof level === 'string' ? level : '',
+      subject,
+      trimester: trimester ? Number(trimester) : null,
+      title: exam.title,
+      durationMinutes: content.durationMinutes,
+      totalPoints: 20,
+      source: 'ai-generated',
+      criteria,
+      passages: [],
+      questions: questions.map((q) => ({ ...q }))
+    });
+  } catch {
+    savedToBank = false;
+  }
+
+  res.status(201).json({ ...exam, summary: officialExamSummary(content), savedToBank });
 }));
 
 /**

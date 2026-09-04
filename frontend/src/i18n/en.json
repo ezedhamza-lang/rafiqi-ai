@@ -2024,7 +2024,19 @@
         "below": "Below minimum",
         "min": "Minimum mastery",
         "max": "Maximum mastery"
-      }
+      },
+      "downloadWord": "Download Word",
+      "edit": "Edit",
+      "aiBtn": "Generate with AI",
+      "aiTitle": "Generate exam with AI",
+      "lessonLabel": "Lesson",
+      "lessonPlaceholder": "Lesson title (optional)",
+      "countLabel": "Number of questions",
+      "generateAiBtn": "Generate exam",
+      "aiNoKey": "Add your Gemini API key first, then try again",
+      "aiSaved": "Auto-saved to bank",
+      "updateExam": "Save changes",
+      "cancelEdit": "Cancel editing"
     },
     "annualPlans": {
       "title": "Annual Plans",

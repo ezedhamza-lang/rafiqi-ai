@@ -16,7 +16,10 @@ const SUBJECTS = [
   { code: 'anisi', label: 'القراءة' },
   { code: 'science', label: 'الإيقاظ العلمي' },
   { code: 'production', label: 'الإنتاج الكتابي' },
-  { code: 'handwriting', label: 'الخط والإملاء' }
+  { code: 'handwriting', label: 'الخط والإملاء' },
+  { code: 'arabic', label: 'اللغة العربية' },
+  { code: 'french', label: 'اللغة الفرنسية' },
+  { code: 'islamic', label: 'التربية الإسلامية' }
 ];
 
 function CriteriaTable({ criteria, t }) {
@@ -58,6 +61,10 @@ export default function OfficialExams({ classes }) {
   const [active, setActive] = useState(null);
   const [error, setError] = useState('');
   const [draft, setDraft] = useState({ title: '', subject: 'math', classId: '', trimester: 1, content: {} });
+  const [editingId, setEditingId] = useState(null);
+  const [aiForm, setAiForm] = useState({ subject: 'arabic', level: 'year3', trimester: 1, title: '', lessonTitle: '', count: 6, classId: '', durationMinutes: 60 });
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiResult, setAiResult] = useState(null);
 
   const load = useCallback(() => {
     api
@@ -106,13 +113,25 @@ export default function OfficialExams({ classes }) {
   const submit = async (e) => {
     e.preventDefault();
     try {
-      await api.post('/teacher/exams', {
-        title: draft.title,
-        subject: draft.subject,
-        classId: draft.classId ? Number(draft.classId) : undefined,
-        trimester: Number(draft.trimester),
-        content: { ...draft.content, header: 'الجمهورية التونسية — وزارة التربية' }
-      });
+      if (editingId) {
+        await api.put(`/teacher/exams/${editingId}`, {
+          title: draft.title,
+          subject: draft.subject,
+          classId: draft.classId ? Number(draft.classId) : undefined,
+          trimester: Number(draft.trimester),
+          content: draft.content
+        });
+        setEditingId(null);
+      } else {
+        await api.post('/teacher/exams', {
+          title: draft.title,
+          subject: draft.subject,
+          classId: draft.classId ? Number(draft.classId) : undefined,
+          trimester: Number(draft.trimester),
+          content: { ...draft.content, header: 'الجمهورية التونسية — وزارة التربية' }
+        });
+      }
+      setDraft({ title: '', subject: 'math', classId: '', trimester: 1, content: {} });
       load();
       setView('list');
       setActive(null);
@@ -131,6 +150,70 @@ export default function OfficialExams({ classes }) {
     load();
   };
 
+  const downloadDocx = async (exam, inline) => {
+    try {
+      const res = await fetch(`/api/teacher/exams/${exam.id}/${inline ? 'preview-docx' : 'docx'}`, {
+        headers: { Authorization: 'Bearer ' + localStorage.getItem('school_token') }
+      });
+      if (!res.ok) throw new Error('download failed');
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `exam-${exam.id}.docx`;
+      if (inline) a.target = '_blank';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const startEdit = (exam) => {
+    setDraft({
+      title: exam.title || '',
+      subject: exam.subject || 'math',
+      classId: exam.classId ? String(exam.classId) : '',
+      trimester: exam.trimester || 1,
+      content: exam.content || {}
+    });
+    setEditingId(exam.id);
+    setView('create');
+  };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setDraft({ title: '', subject: 'math', classId: '', trimester: 1, content: {} });
+    setView('list');
+  };
+
+  const generateAi = async (e) => {
+    e.preventDefault();
+    setAiLoading(true);
+    setError('');
+    setAiResult(null);
+    try {
+      const data = await api.post('/teacher/exams/generate-ai', {
+        subject: aiForm.subject,
+        level: aiForm.level,
+        trimester: Number(aiForm.trimester),
+        title: aiForm.title || undefined,
+        lessonTitle: aiForm.lessonTitle || undefined,
+        count: Number(aiForm.count) || 6,
+        classId: aiForm.classId ? Number(aiForm.classId) : undefined,
+        durationMinutes: Number(aiForm.durationMinutes) || 60
+      });
+      setAiResult(data);
+      load();
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
   const subjectLabel = (code) => SUBJECTS.find((s) => s.code === code)?.label || code;
   const levelLabel = (code) => LEVELS.find((l) => l.code === code)?.label || code;
 
@@ -144,6 +227,9 @@ export default function OfficialExams({ classes }) {
           </button>
           <button className="btn" onClick={() => { setView('create'); setActive(null); }}>
             {t('teacherSpace.officialExams.manualBtn')}
+          </button>
+          <button className="btn" onClick={() => { setView('ai'); setActive(null); }}>
+            {t('teacherSpace.officialExams.aiBtn')}
           </button>
           {view !== 'list' && (
             <button className="btn" onClick={() => setView('list')}>
@@ -184,6 +270,12 @@ export default function OfficialExams({ classes }) {
                     <td className="actions">
                       <button className="btn btn-sm" onClick={() => { setActive(e); setView('preview'); }}>
                         {t('teacherSpace.officialExams.preview')}
+                      </button>
+                      <button className="btn btn-sm" onClick={() => downloadDocx(e, false)}>
+                        {t('teacherSpace.officialExams.downloadWord')}
+                      </button>
+                      <button className="btn btn-sm" onClick={() => startEdit(e)}>
+                        {t('teacherSpace.officialExams.edit')}
                       </button>
                       <button className="btn btn-sm" onClick={() => togglePublish(e)}>
                         {e.published ? t('teacherSpace.officialExams.unpublish') : t('teacherSpace.officialExams.publish')}
@@ -321,6 +413,69 @@ export default function OfficialExams({ classes }) {
         </div>
       )}
 
+      {view === 'ai' && (
+        <form className="card-form" onSubmit={generateAi}>
+          <h4>{t('teacherSpace.officialExams.aiTitle')}</h4>
+          <div className="form-row">
+            <div className="form-group grow">
+              <label>{t('teacherSpace.officialExams.subjectLabel')}</label>
+              <select value={aiForm.subject} onChange={(e) => setAiForm({ ...aiForm, subject: e.target.value })}>
+                {SUBJECTS.map((s) => (
+                  <option key={s.code} value={s.code}>{s.label}</option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
+              <label>{t('teacherSpace.officialExams.yearLabel')}</label>
+              <select value={aiForm.level} onChange={(e) => setAiForm({ ...aiForm, level: e.target.value })}>
+                {LEVELS.map((l) => (
+                  <option key={l.code} value={l.code}>{l.label}</option>
+                ))}
+              </select>
+            </div>
+            <div className="form-group">
+              <label>{t('teacherSpace.officialExams.trimesterLabel')}</label>
+              <select value={aiForm.trimester} onChange={(e) => setAiForm({ ...aiForm, trimester: e.target.value })}>
+                <option value="1">{t('teacherSpace.officialExams.trimesters.1')}</option>
+                <option value="2">{t('teacherSpace.officialExams.trimesters.2')}</option>
+                <option value="3">{t('teacherSpace.officialExams.trimesters.3')}</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label>{t('teacherSpace.officialExams.countLabel')}</label>
+              <input type="number" min="1" max="15" value={aiForm.count} onChange={(e) => setAiForm({ ...aiForm, count: e.target.value })} />
+            </div>
+          </div>
+          <div className="form-row">
+            <div className="form-group grow">
+              <label>{t('teacherSpace.officialExams.examTitleLabel')}</label>
+              <input value={aiForm.title} onChange={(e) => setAiForm({ ...aiForm, title: e.target.value })} placeholder={t('teacherSpace.officialExams.examTitleLabel')} />
+            </div>
+            <div className="form-group grow">
+              <label>{t('teacherSpace.officialExams.lessonLabel')}</label>
+              <input value={aiForm.lessonTitle} onChange={(e) => setAiForm({ ...aiForm, lessonTitle: e.target.value })} placeholder={t('teacherSpace.officialExams.lessonPlaceholder')} />
+            </div>
+          </div>
+          <button className="btn btn-primary" type="submit" disabled={aiLoading}>
+            {aiLoading ? '...' : t('teacherSpace.officialExams.generateAiBtn')}
+          </button>
+          {aiResult && (
+            <div className="card-item">
+              <h5>{aiResult.title}</h5>
+              <p className="sub">{t('teacherSpace.officialExams.questionsLabel', { n: aiResult.content?.questions?.length || 0 })} {aiResult.savedToBank ? '— ' + t('teacherSpace.officialExams.aiSaved') : ''}</p>
+              <div className="btn-group">
+                <button type="button" className="btn btn-sm" onClick={() => { setActive(aiResult); setView('preview'); }}>
+                  {t('teacherSpace.officialExams.preview')}
+                </button>
+                <button type="button" className="btn btn-sm" onClick={() => downloadDocx(aiResult, false)}>
+                  {t('teacherSpace.officialExams.downloadWord')}
+                </button>
+              </div>
+            </div>
+          )}
+        </form>
+      )}
+
       {view === 'create' && (
         <form className="card-form" onSubmit={submit}>
           <div className="form-row">
@@ -444,9 +599,14 @@ export default function OfficialExams({ classes }) {
             <label>{t('teacherSpace.officialExams.instructionsLabel')}</label>
             <p>{active.content?.instructions}</p>
           </div>
-          <button className="btn btn-secondary" onClick={() => window.print()}>
-            {t('teacherSpace.officialExams.printOfficial')}
-          </button>
+          <div className="btn-group">
+            <button className="btn btn-primary" onClick={() => downloadDocx(active, false)}>
+              {t('teacherSpace.officialExams.downloadWord')}
+            </button>
+            <button className="btn btn-secondary" onClick={() => window.print()}>
+              {t('teacherSpace.officialExams.printOfficial')}
+            </button>
+          </div>
         </div>
       )}
     </div>

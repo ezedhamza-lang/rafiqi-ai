@@ -41431,6 +41431,7782 @@
           ]
         }
       ]
+    },
+    {
+      "id": "year3-t1-math-gen1",
+      "level": "year3",
+      "subject": "math",
+      "trimester": 1,
+      "title": "اختبار الرياضيات — السنة الثالثة — الثلاثي 1",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q1",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 245 + 132 = ...",
+          "options": [
+            "377",
+            "367",
+            "387"
+          ],
+          "correct": "377",
+          "points": 1
+        },
+        {
+          "id": "q2",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 500 - 175 = ...",
+          "options": [
+            "325",
+            "335",
+            "315"
+          ],
+          "correct": "325",
+          "points": 1
+        },
+        {
+          "id": "q3",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ناتج 4 × 6 هو:",
+          "options": [
+            "24",
+            "20",
+            "28"
+          ],
+          "correct": "24",
+          "points": 1
+        },
+        {
+          "id": "q4",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ناتج 3 × 7 هو:",
+          "options": [
+            "21",
+            "24",
+            "18"
+          ],
+          "correct": "21",
+          "points": 1
+        },
+        {
+          "id": "q5",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أي شكل له 4 أضلاع متساوية؟",
+          "options": [
+            "المربع",
+            "المثلث",
+            "الدائرة"
+          ],
+          "correct": "المربع",
+          "points": 1
+        },
+        {
+          "id": "q6",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "1 متر يساوي:",
+          "options": [
+            "100 صم",
+            "10 صم",
+            "1000 صم"
+          ],
+          "correct": "100 صم",
+          "points": 1
+        },
+        {
+          "id": "q7",
+          "criterion": "مع2",
+          "type": "OPEN",
+          "prompt": "اشترى سامي 3 علب أقلام، في كل علبة 5 أقلام. ما عدد الأقلام الجملي؟",
+          "answerLines": 4,
+          "points": 3
+        },
+        {
+          "id": "q8",
+          "criterion": "مع3",
+          "type": "ORDER",
+          "prompt": "رتب الأعداد التالية من الأصغر إلى الأكبر:",
+          "orderItems": [
+            "12",
+            "7",
+            "25",
+            "9"
+          ],
+          "points": 1
+        },
+        {
+          "id": "q9",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: نصف العدد 20 هو ___",
+          "correctAnswer": "10",
+          "points": 1
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المفاهيم والمهارات",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "حل المسائل",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الدقة والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t1-arabic-gen1",
+      "level": "year3",
+      "subject": "arabic",
+      "trimester": 1,
+      "title": "اختبار اللغة العربية — السنة الثالثة — الثلاثي 1",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "التعاون",
+          "text": "في يوم من أيام الربيع، خرج أطفال الحيّ لتنظيف الحديقة. أحضر أحمد مكنسة، وأحضرت سلمى كيسا كبيرا، وتعاون الجميع بفرح. في المساء أصبحت الحديقة نظيفة وجميلة، فشكرهم الجيران جميعا."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q10",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما الفكرة العامة للنص؟",
+          "options": [
+            "قيمة إنسانية نبيلة",
+            "رحلة إلى البحر",
+            "لعبة جديدة"
+          ],
+          "correct": "قيمة إنسانية نبيلة",
+          "points": 1
+        },
+        {
+          "id": "q11",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "أحداث النص واقعية ومفيدة.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q12",
+          "criterion": "مع1",
+          "type": "EXTRACT",
+          "prompt": "استخرج من النص جملة تدل على الفرح.",
+          "options": [
+            "جملة الفرح من النص"
+          ],
+          "correctAnswer": "جملة الفرح من النص",
+          "points": 1
+        },
+        {
+          "id": "q13",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "ضع الكلمة المناسبة: التلميذ ___ درسه.",
+          "correctAnswer": "حفظ",
+          "points": 1
+        },
+        {
+          "id": "q14",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "ضد كلمة «الفرح» هو:",
+          "options": [
+            "الحزن",
+            "اللعب",
+            "النوم"
+          ],
+          "correct": "الحزن",
+          "points": 1
+        },
+        {
+          "id": "q15",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "اجمع الكلمة التالية: «قلم» → ___",
+          "correctAnswer": "أقلام",
+          "points": 1
+        },
+        {
+          "id": "q16",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "أنتج فقرة من خمسة أسطر تتحدث فيها عن خلق تحبه.",
+          "answerLines": 5,
+          "points": 3
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t1-science-gen1",
+      "level": "year3",
+      "subject": "science",
+      "trimester": 1,
+      "title": "اختبار العلوم — السنة الثالثة — الثلاثي 1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "حواسي الخمس",
+          "text": "أنعم الله علينا بخمس حواس: البصر نرى به الأشياء، والسمع نسمع به الأصوات، والشم نشم به الروائح، والذوق نتذوق به الطعام، واللمس نحس به الأشياء."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q17",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "حاسة نرى بها الأشياء هي:",
+          "options": [
+            "البصر",
+            "السمع",
+            "الشم"
+          ],
+          "correct": "البصر",
+          "points": 1
+        },
+        {
+          "id": "q18",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "يحتاج النبات إلى الماء لينمو.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q19",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "يتكون النبات من الجذر و___ والأوراق.",
+          "correctAnswer": "الساق",
+          "points": 1
+        },
+        {
+          "id": "q20",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "فصل تتفتح فيه الأزهار هو:",
+          "options": [
+            "الربيع",
+            "الشتاء",
+            "الخريف"
+          ],
+          "correct": "الربيع",
+          "points": 1
+        },
+        {
+          "id": "q21",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "فسّر الظاهرة التالية في سطرين: حواسي الخمس",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المعارف العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "المنهجية العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "التطبيق والاستنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t1-french-gen1",
+      "level": "year3",
+      "subject": "french",
+      "trimester": 1,
+      "title": "اختبار الفرنسية — السنة الثالثة — الثلاثي 1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "Bonjour !",
+          "text": "Bonjour ! Je m’appelle Sami. J’ai huit ans. J’habite à Tunis. J’aime l’école et mes amis."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q22",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Comment s’appelle le garçon ?",
+          "options": [
+            "Sami",
+            "Ali",
+            "Karim"
+          ],
+          "correct": "Sami",
+          "points": 1
+        },
+        {
+          "id": "q23",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "Le ciel est bleu.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q24",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "Ma ___ est maîtresse.",
+          "correctAnswer": "mère",
+          "points": 1
+        },
+        {
+          "id": "q25",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Le soleil est :",
+          "options": [
+            "jaune",
+            "vert",
+            "rouge"
+          ],
+          "correct": "jaune",
+          "points": 1
+        },
+        {
+          "id": "q26",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "Écris deux phrases pour te présenter. / اكتب جملتين لتقديم نفسك بالفرنسية.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t1-islamic-gen1",
+      "level": "year3",
+      "subject": "islamic",
+      "trimester": 1,
+      "title": "اختبار التربية الإسلامية — السنة الثالثة — الثلاثي 1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "الوضوء",
+          "text": "الوضوء طهارة يستعد بها المسلم للصلاة. نغسل اليدين والوجه والذراعين، ونمسح الرأس، ونغسل الرجلين. قال رسول الله صلى الله عليه وسلم: الطهور شطر الإيمان."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q27",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما موضوع النص؟",
+          "options": [
+            "الوضوء",
+            "قصة خيالية",
+            "رحلة مدرسية"
+          ],
+          "correct": "الوضوء",
+          "points": 1
+        },
+        {
+          "id": "q28",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "مضمون النص مفيد للمسلم.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q29",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: قال رسول الله صلى الله عليه وسلم: «___» (من النص)",
+          "correctAnswer": "حسب النص",
+          "points": 1
+        },
+        {
+          "id": "q30",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "الخلق المستفاد من النص هو:",
+          "options": [
+            "خلق حسن",
+            "خلق سيئ",
+            "لا شيء"
+          ],
+          "correct": "خلق حسن",
+          "points": 1
+        },
+        {
+          "id": "q31",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اذكر عملا صالحا تقوم به اقتداء بما في النص.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t1-production-gen1",
+      "level": "year3",
+      "subject": "production",
+      "trimester": 1,
+      "title": "اختبار الإنتاج الكتابي — السنة الثالثة — الثلاثي 1",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q32",
+          "criterion": "مع1",
+          "type": "ORDER",
+          "prompt": "رتب الجمل التالية لتكوّن فقرة سليمة:",
+          "orderItems": [
+            "جملة البداية",
+            "جملة الوسط",
+            "جملة الخاتمة"
+          ],
+          "points": 2
+        },
+        {
+          "id": "q33",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل بعلامة الترقيم المناسبة: ذهبت إلى المدرسة ___",
+          "correctAnswer": "،",
+          "points": 1
+        },
+        {
+          "id": "q34",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اكتب ثلاث جمل تصف فيها مدرستك.",
+          "answerLines": 8,
+          "points": 5
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "التنظيم والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والقواعد",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج والإبداع",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 6
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t2-math-gen1",
+      "level": "year3",
+      "subject": "math",
+      "trimester": 2,
+      "title": "اختبار الرياضيات — السنة الثالثة — الثلاثي 2",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q35",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 245 + 132 = ...",
+          "options": [
+            "377",
+            "367",
+            "387"
+          ],
+          "correct": "377",
+          "points": 1
+        },
+        {
+          "id": "q36",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 500 - 175 = ...",
+          "options": [
+            "325",
+            "335",
+            "315"
+          ],
+          "correct": "325",
+          "points": 1
+        },
+        {
+          "id": "q37",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ناتج 4 × 6 هو:",
+          "options": [
+            "24",
+            "20",
+            "28"
+          ],
+          "correct": "24",
+          "points": 1
+        },
+        {
+          "id": "q38",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ناتج 3 × 7 هو:",
+          "options": [
+            "21",
+            "24",
+            "18"
+          ],
+          "correct": "21",
+          "points": 1
+        },
+        {
+          "id": "q39",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أي شكل له 4 أضلاع متساوية؟",
+          "options": [
+            "المربع",
+            "المثلث",
+            "الدائرة"
+          ],
+          "correct": "المربع",
+          "points": 1
+        },
+        {
+          "id": "q40",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "1 متر يساوي:",
+          "options": [
+            "100 صم",
+            "10 صم",
+            "1000 صم"
+          ],
+          "correct": "100 صم",
+          "points": 1
+        },
+        {
+          "id": "q41",
+          "criterion": "مع2",
+          "type": "OPEN",
+          "prompt": "اشترى سامي 3 علب أقلام، في كل علبة 5 أقلام. ما عدد الأقلام الجملي؟",
+          "answerLines": 4,
+          "points": 3
+        },
+        {
+          "id": "q42",
+          "criterion": "مع3",
+          "type": "ORDER",
+          "prompt": "رتب الأعداد التالية من الأصغر إلى الأكبر:",
+          "orderItems": [
+            "12",
+            "7",
+            "25",
+            "9"
+          ],
+          "points": 1
+        },
+        {
+          "id": "q43",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: نصف العدد 20 هو ___",
+          "correctAnswer": "10",
+          "points": 1
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المفاهيم والمهارات",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "حل المسائل",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الدقة والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t2-arabic-gen1",
+      "level": "year3",
+      "subject": "arabic",
+      "trimester": 2,
+      "title": "اختبار اللغة العربية — السنة الثالثة — الثلاثي 2",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "الصدق",
+          "text": "وجد كريم محفظة في ساحة المدرسة، فأخذها إلى المعلم دون تردد. سأل المعلم التلاميذ فتعرّف صاحبها عليها. فرح التلميذ وشكر كريما، وقال المعلم: الصدق من أجمل الأخلاق."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q44",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما الفكرة العامة للنص؟",
+          "options": [
+            "قيمة إنسانية نبيلة",
+            "رحلة إلى البحر",
+            "لعبة جديدة"
+          ],
+          "correct": "قيمة إنسانية نبيلة",
+          "points": 1
+        },
+        {
+          "id": "q45",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "أحداث النص واقعية ومفيدة.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q46",
+          "criterion": "مع1",
+          "type": "EXTRACT",
+          "prompt": "استخرج من النص جملة تدل على الفرح.",
+          "options": [
+            "جملة الفرح من النص"
+          ],
+          "correctAnswer": "جملة الفرح من النص",
+          "points": 1
+        },
+        {
+          "id": "q47",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "ضع الكلمة المناسبة: التلميذ ___ درسه.",
+          "correctAnswer": "حفظ",
+          "points": 1
+        },
+        {
+          "id": "q48",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "ضد كلمة «الفرح» هو:",
+          "options": [
+            "الحزن",
+            "اللعب",
+            "النوم"
+          ],
+          "correct": "الحزن",
+          "points": 1
+        },
+        {
+          "id": "q49",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "اجمع الكلمة التالية: «قلم» → ___",
+          "correctAnswer": "أقلام",
+          "points": 1
+        },
+        {
+          "id": "q50",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "أنتج فقرة من خمسة أسطر تتحدث فيها عن خلق تحبه.",
+          "answerLines": 5,
+          "points": 3
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t2-science-gen1",
+      "level": "year3",
+      "subject": "science",
+      "trimester": 2,
+      "title": "اختبار العلوم — السنة الثالثة — الثلاثي 2",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "النبات",
+          "text": "يحتاج النبات إلى الماء والهواء وضوء الشمس لينمو. يتكون النبات من الجذر والساق والأوراق والأزهار والثمار."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q51",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "حاسة نرى بها الأشياء هي:",
+          "options": [
+            "البصر",
+            "السمع",
+            "الشم"
+          ],
+          "correct": "البصر",
+          "points": 1
+        },
+        {
+          "id": "q52",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "يحتاج النبات إلى الماء لينمو.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q53",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "يتكون النبات من الجذر و___ والأوراق.",
+          "correctAnswer": "الساق",
+          "points": 1
+        },
+        {
+          "id": "q54",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "فصل تتفتح فيه الأزهار هو:",
+          "options": [
+            "الربيع",
+            "الشتاء",
+            "الخريف"
+          ],
+          "correct": "الربيع",
+          "points": 1
+        },
+        {
+          "id": "q55",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "فسّر الظاهرة التالية في سطرين: النبات",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المعارف العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "المنهجية العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "التطبيق والاستنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t2-french-gen1",
+      "level": "year3",
+      "subject": "french",
+      "trimester": 2,
+      "title": "اختبار الفرنسية — السنة الثالثة — الثلاثي 2",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "Les couleurs",
+          "text": "Le ciel est bleu. Le soleil est jaune. Les arbres sont verts. La fleur est rouge."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q56",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Comment s’appelle le garçon ?",
+          "options": [
+            "Sami",
+            "Ali",
+            "Karim"
+          ],
+          "correct": "Sami",
+          "points": 1
+        },
+        {
+          "id": "q57",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "Le ciel est bleu.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q58",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "Ma ___ est maîtresse.",
+          "correctAnswer": "mère",
+          "points": 1
+        },
+        {
+          "id": "q59",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Le soleil est :",
+          "options": [
+            "jaune",
+            "vert",
+            "rouge"
+          ],
+          "correct": "jaune",
+          "points": 1
+        },
+        {
+          "id": "q60",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "Écris deux phrases pour te présenter. / اكتب جملتين لتقديم نفسك بالفرنسية.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t2-islamic-gen1",
+      "level": "year3",
+      "subject": "islamic",
+      "trimester": 2,
+      "title": "اختبار التربية الإسلامية — السنة الثالثة — الثلاثي 2",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "سورة الإخلاص",
+          "text": "قال الله تعالى: قل هو الله أحد، الله الصمد، لم يلد ولم يولد، ولم يكن له كفوا أحد. سورة الإخلاص تعدل ثلث القرآن لما فيها من توحيد الله."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q61",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما موضوع النص؟",
+          "options": [
+            "سورة الإخلاص",
+            "قصة خيالية",
+            "رحلة مدرسية"
+          ],
+          "correct": "سورة الإخلاص",
+          "points": 1
+        },
+        {
+          "id": "q62",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "مضمون النص مفيد للمسلم.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q63",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: قال رسول الله صلى الله عليه وسلم: «___» (من النص)",
+          "correctAnswer": "حسب النص",
+          "points": 1
+        },
+        {
+          "id": "q64",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "الخلق المستفاد من النص هو:",
+          "options": [
+            "خلق حسن",
+            "خلق سيئ",
+            "لا شيء"
+          ],
+          "correct": "خلق حسن",
+          "points": 1
+        },
+        {
+          "id": "q65",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اذكر عملا صالحا تقوم به اقتداء بما في النص.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t2-production-gen1",
+      "level": "year3",
+      "subject": "production",
+      "trimester": 2,
+      "title": "اختبار الإنتاج الكتابي — السنة الثالثة — الثلاثي 2",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q66",
+          "criterion": "مع1",
+          "type": "ORDER",
+          "prompt": "رتب الجمل التالية لتكوّن فقرة سليمة:",
+          "orderItems": [
+            "جملة البداية",
+            "جملة الوسط",
+            "جملة الخاتمة"
+          ],
+          "points": 2
+        },
+        {
+          "id": "q67",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل بعلامة الترقيم المناسبة: ذهبت إلى المدرسة ___",
+          "correctAnswer": "،",
+          "points": 1
+        },
+        {
+          "id": "q68",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اكتب فقرة قصيرة عن حيوانك المفضل.",
+          "answerLines": 8,
+          "points": 5
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "التنظيم والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والقواعد",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج والإبداع",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 6
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t3-math-gen1",
+      "level": "year3",
+      "subject": "math",
+      "trimester": 3,
+      "title": "اختبار الرياضيات — السنة الثالثة — الثلاثي 3",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q69",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 245 + 132 = ...",
+          "options": [
+            "377",
+            "367",
+            "387"
+          ],
+          "correct": "377",
+          "points": 1
+        },
+        {
+          "id": "q70",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 500 - 175 = ...",
+          "options": [
+            "325",
+            "335",
+            "315"
+          ],
+          "correct": "325",
+          "points": 1
+        },
+        {
+          "id": "q71",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ناتج 4 × 6 هو:",
+          "options": [
+            "24",
+            "20",
+            "28"
+          ],
+          "correct": "24",
+          "points": 1
+        },
+        {
+          "id": "q72",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ناتج 3 × 7 هو:",
+          "options": [
+            "21",
+            "24",
+            "18"
+          ],
+          "correct": "21",
+          "points": 1
+        },
+        {
+          "id": "q73",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أي شكل له 4 أضلاع متساوية؟",
+          "options": [
+            "المربع",
+            "المثلث",
+            "الدائرة"
+          ],
+          "correct": "المربع",
+          "points": 1
+        },
+        {
+          "id": "q74",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "1 متر يساوي:",
+          "options": [
+            "100 صم",
+            "10 صم",
+            "1000 صم"
+          ],
+          "correct": "100 صم",
+          "points": 1
+        },
+        {
+          "id": "q75",
+          "criterion": "مع2",
+          "type": "OPEN",
+          "prompt": "اشترى سامي 3 علب أقلام، في كل علبة 5 أقلام. ما عدد الأقلام الجملي؟",
+          "answerLines": 4,
+          "points": 3
+        },
+        {
+          "id": "q76",
+          "criterion": "مع3",
+          "type": "ORDER",
+          "prompt": "رتب الأعداد التالية من الأصغر إلى الأكبر:",
+          "orderItems": [
+            "12",
+            "7",
+            "25",
+            "9"
+          ],
+          "points": 1
+        },
+        {
+          "id": "q77",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: نصف العدد 20 هو ___",
+          "correctAnswer": "10",
+          "points": 1
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المفاهيم والمهارات",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "حل المسائل",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الدقة والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t3-arabic-gen1",
+      "level": "year3",
+      "subject": "arabic",
+      "trimester": 3,
+      "title": "اختبار اللغة العربية — السنة الثالثة — الثلاثي 3",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "المطر",
+          "text": "في فصل الشتاء تتساقط الأمطار بغزارة، فتمتلئ الأودية وتخضرّ الحقول. يفرح الفلاحون بالمطر لأنه يسقي الزرع، ويلعب الأطفال فرحين تحت زخّاته الخفيفة."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q78",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما الفكرة العامة للنص؟",
+          "options": [
+            "قيمة إنسانية نبيلة",
+            "رحلة إلى البحر",
+            "لعبة جديدة"
+          ],
+          "correct": "قيمة إنسانية نبيلة",
+          "points": 1
+        },
+        {
+          "id": "q79",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "أحداث النص واقعية ومفيدة.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q80",
+          "criterion": "مع1",
+          "type": "EXTRACT",
+          "prompt": "استخرج من النص جملة تدل على الفرح.",
+          "options": [
+            "جملة الفرح من النص"
+          ],
+          "correctAnswer": "جملة الفرح من النص",
+          "points": 1
+        },
+        {
+          "id": "q81",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "ضع الكلمة المناسبة: التلميذ ___ درسه.",
+          "correctAnswer": "حفظ",
+          "points": 1
+        },
+        {
+          "id": "q82",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "ضد كلمة «الفرح» هو:",
+          "options": [
+            "الحزن",
+            "اللعب",
+            "النوم"
+          ],
+          "correct": "الحزن",
+          "points": 1
+        },
+        {
+          "id": "q83",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "اجمع الكلمة التالية: «قلم» → ___",
+          "correctAnswer": "أقلام",
+          "points": 1
+        },
+        {
+          "id": "q84",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "أنتج فقرة من خمسة أسطر تتحدث فيها عن خلق تحبه.",
+          "answerLines": 5,
+          "points": 3
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t3-science-gen1",
+      "level": "year3",
+      "subject": "science",
+      "trimester": 3,
+      "title": "اختبار العلوم — السنة الثالثة — الثلاثي 3",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "فصول السنة",
+          "text": "فصول السنة أربعة: الربيع حيث تتفتح الأزهار، والصيف حيث تشتد الحرارة، والخريف حيث تتساقط الأوراق، والشتاء حيث يشتد البرد وتنزل الأمطار."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q85",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "حاسة نرى بها الأشياء هي:",
+          "options": [
+            "البصر",
+            "السمع",
+            "الشم"
+          ],
+          "correct": "البصر",
+          "points": 1
+        },
+        {
+          "id": "q86",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "يحتاج النبات إلى الماء لينمو.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q87",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "يتكون النبات من الجذر و___ والأوراق.",
+          "correctAnswer": "الساق",
+          "points": 1
+        },
+        {
+          "id": "q88",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "فصل تتفتح فيه الأزهار هو:",
+          "options": [
+            "الربيع",
+            "الشتاء",
+            "الخريف"
+          ],
+          "correct": "الربيع",
+          "points": 1
+        },
+        {
+          "id": "q89",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "فسّر الظاهرة التالية في سطرين: فصول السنة",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المعارف العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "المنهجية العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "التطبيق والاستنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t3-french-gen1",
+      "level": "year3",
+      "subject": "french",
+      "trimester": 3,
+      "title": "اختبار الفرنسية — السنة الثالثة — الثلاثي 3",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "Ma famille",
+          "text": "Mon père est médecin. Ma mère est maîtresse. J’ai un frère et une sœur. Nous sommes une famille heureuse."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q90",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Comment s’appelle le garçon ?",
+          "options": [
+            "Sami",
+            "Ali",
+            "Karim"
+          ],
+          "correct": "Sami",
+          "points": 1
+        },
+        {
+          "id": "q91",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "Le ciel est bleu.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q92",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "Ma ___ est maîtresse.",
+          "correctAnswer": "mère",
+          "points": 1
+        },
+        {
+          "id": "q93",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Le soleil est :",
+          "options": [
+            "jaune",
+            "vert",
+            "rouge"
+          ],
+          "correct": "jaune",
+          "points": 1
+        },
+        {
+          "id": "q94",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "Écris deux phrases pour te présenter. / اكتب جملتين لتقديم نفسك بالفرنسية.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t3-islamic-gen1",
+      "level": "year3",
+      "subject": "islamic",
+      "trimester": 3,
+      "title": "اختبار التربية الإسلامية — السنة الثالثة — الثلاثي 3",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "الصدق",
+          "text": "الصدق خلق جميل يحبه الله ورسوله. الصادق محبوب عند الناس وموفق في حياته. قال رسول الله صلى الله عليه وسلم: عليكم بالصدق فإن الصدق يهدي إلى البر."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q95",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما موضوع النص؟",
+          "options": [
+            "الصدق",
+            "قصة خيالية",
+            "رحلة مدرسية"
+          ],
+          "correct": "الصدق",
+          "points": 1
+        },
+        {
+          "id": "q96",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "مضمون النص مفيد للمسلم.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q97",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: قال رسول الله صلى الله عليه وسلم: «___» (من النص)",
+          "correctAnswer": "حسب النص",
+          "points": 1
+        },
+        {
+          "id": "q98",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "الخلق المستفاد من النص هو:",
+          "options": [
+            "خلق حسن",
+            "خلق سيئ",
+            "لا شيء"
+          ],
+          "correct": "خلق حسن",
+          "points": 1
+        },
+        {
+          "id": "q99",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اذكر عملا صالحا تقوم به اقتداء بما في النص.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-t3-production-gen1",
+      "level": "year3",
+      "subject": "production",
+      "trimester": 3,
+      "title": "اختبار الإنتاج الكتابي — السنة الثالثة — الثلاثي 3",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q100",
+          "criterion": "مع1",
+          "type": "ORDER",
+          "prompt": "رتب الجمل التالية لتكوّن فقرة سليمة:",
+          "orderItems": [
+            "جملة البداية",
+            "جملة الوسط",
+            "جملة الخاتمة"
+          ],
+          "points": 2
+        },
+        {
+          "id": "q101",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل بعلامة الترقيم المناسبة: ذهبت إلى المدرسة ___",
+          "correctAnswer": "،",
+          "points": 1
+        },
+        {
+          "id": "q102",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "صف يومك في المدرسة في خمسة أسطر.",
+          "answerLines": 8,
+          "points": 5
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "التنظيم والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والقواعد",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج والإبداع",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 6
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t1-math-gen1",
+      "level": "year4",
+      "subject": "math",
+      "trimester": 1,
+      "title": "اختبار الرياضيات — السنة الرابعة — الثلاثي 1",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q103",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 125 × 8 = ...",
+          "options": [
+            "1000",
+            "900",
+            "1100"
+          ],
+          "correct": "1000",
+          "points": 1
+        },
+        {
+          "id": "q104",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 96 ÷ 8 = ...",
+          "options": [
+            "12",
+            "11",
+            "13"
+          ],
+          "correct": "12",
+          "points": 1
+        },
+        {
+          "id": "q105",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الكسر الذي يمثل النصف هو:",
+          "options": [
+            "1/2",
+            "1/4",
+            "1/3"
+          ],
+          "correct": "1/2",
+          "points": 1
+        },
+        {
+          "id": "q106",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "محيط مربع طول ضلعه 5 صم هو:",
+          "options": [
+            "20 صم",
+            "25 صم",
+            "15 صم"
+          ],
+          "correct": "20 صم",
+          "points": 1
+        },
+        {
+          "id": "q107",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ناتج 7 × 9 هو:",
+          "options": [
+            "63",
+            "56",
+            "72"
+          ],
+          "correct": "63",
+          "points": 1
+        },
+        {
+          "id": "q108",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الساعة الثالثة والنصف تعني:",
+          "options": [
+            "3:30",
+            "3:15",
+            "4:30"
+          ],
+          "correct": "3:30",
+          "points": 1
+        },
+        {
+          "id": "q109",
+          "criterion": "مع2",
+          "type": "OPEN",
+          "prompt": "في مكتبة المدرسة 240 كتابا، أعار التلاميذ 135 كتابا. كم بقي في المكتبة؟",
+          "answerLines": 4,
+          "points": 3
+        },
+        {
+          "id": "q110",
+          "criterion": "مع3",
+          "type": "ORDER",
+          "prompt": "رتب الأعداد التالية من الأصغر إلى الأكبر:",
+          "orderItems": [
+            "12",
+            "7",
+            "25",
+            "9"
+          ],
+          "points": 1
+        },
+        {
+          "id": "q111",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: نصف العدد 20 هو ___",
+          "correctAnswer": "10",
+          "points": 1
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المفاهيم والمهارات",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "حل المسائل",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الدقة والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t1-arabic-gen1",
+      "level": "year4",
+      "subject": "arabic",
+      "trimester": 1,
+      "title": "اختبار اللغة العربية — السنة الرابعة — الثلاثي 1",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "النحلة النشيطة",
+          "text": "تخرج النحلة كل صباح باحثة عن رحيق الأزهار، وتتنقل من زهرة إلى زهرة دون كلل. تجمع الرحيق وتعود به إلى الخلية حيث يتحوّل عسلا شهيا. قال الأب لابنه: كن مثل النحلة نشيطا ونافعا."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q112",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما الفكرة العامة للنص؟",
+          "options": [
+            "قيمة إنسانية نبيلة",
+            "رحلة إلى البحر",
+            "لعبة جديدة"
+          ],
+          "correct": "قيمة إنسانية نبيلة",
+          "points": 1
+        },
+        {
+          "id": "q113",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "أحداث النص واقعية ومفيدة.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q114",
+          "criterion": "مع1",
+          "type": "EXTRACT",
+          "prompt": "استخرج من النص جملة تدل على الفرح.",
+          "options": [
+            "جملة الفرح من النص"
+          ],
+          "correctAnswer": "جملة الفرح من النص",
+          "points": 1
+        },
+        {
+          "id": "q115",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "ضع الكلمة المناسبة: التلميذ ___ درسه.",
+          "correctAnswer": "حفظ",
+          "points": 1
+        },
+        {
+          "id": "q116",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "ضد كلمة «الفرح» هو:",
+          "options": [
+            "الحزن",
+            "اللعب",
+            "النوم"
+          ],
+          "correct": "الحزن",
+          "points": 1
+        },
+        {
+          "id": "q117",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "اجمع الكلمة التالية: «قلم» → ___",
+          "correctAnswer": "أقلام",
+          "points": 1
+        },
+        {
+          "id": "q118",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "أنتج فقرة من خمسة أسطر تتحدث فيها عن خلق تحبه.",
+          "answerLines": 5,
+          "points": 3
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t1-science-gen1",
+      "level": "year4",
+      "subject": "science",
+      "trimester": 1,
+      "title": "اختبار العلوم — السنة الرابعة — الثلاثي 1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "الماء",
+          "text": "يوجد الماء في الطبيعة في ثلاث حالات: صلبة كالجليد، وسائلة كالماء الذي نشربه، وغازية كبخار الماء. يتبخر الماء بالحرارة ويتكاثف بالبرودة."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q119",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الحالة الغازية للماء هي:",
+          "options": [
+            "البخار",
+            "الجليد",
+            "الماء"
+          ],
+          "correct": "البخار",
+          "points": 1
+        },
+        {
+          "id": "q120",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "الحشرات من الحيوانات الفقارية.",
+          "correctAnswer": "خطأ",
+          "points": 1
+        },
+        {
+          "id": "q121",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أحمي أسناني بتنظيفها بـ___ والمعجون.",
+          "correctAnswer": "الفرشاة",
+          "points": 1
+        },
+        {
+          "id": "q122",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الحيوان الذي يتغذى على النباتات يسمى:",
+          "options": [
+            "عاشبا",
+            "لاحما",
+            "كالشا"
+          ],
+          "correct": "عاشبا",
+          "points": 1
+        },
+        {
+          "id": "q123",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "فسّر الظاهرة التالية في سطرين: الماء",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المعارف العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "المنهجية العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "التطبيق والاستنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t1-french-gen1",
+      "level": "year4",
+      "subject": "french",
+      "trimester": 1,
+      "title": "اختبار الفرنسية — السنة الرابعة — الثلاثي 1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "L’école",
+          "text": "Mon école est grande et belle. Il y a une cour, des classes et une bibliothèque. La maîtresse est gentille. J’apprends à lire, à écrire et à compter."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q124",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Que fait le chat ?",
+          "options": [
+            "Il miaule",
+            "Il aboie",
+            "Il chante"
+          ],
+          "correct": "Il miaule",
+          "points": 1
+        },
+        {
+          "id": "q125",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "Il y a huit jours dans la semaine.",
+          "correctAnswer": "خطأ",
+          "points": 1
+        },
+        {
+          "id": "q126",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "Le poisson ___ dans l’eau.",
+          "correctAnswer": "nage",
+          "points": 1
+        },
+        {
+          "id": "q127",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "La maîtresse est :",
+          "options": [
+            "gentille",
+            "méchante",
+            "absente"
+          ],
+          "correct": "gentille",
+          "points": 1
+        },
+        {
+          "id": "q128",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "Écris deux phrases pour te présenter. / اكتب جملتين لتقديم نفسك بالفرنسية.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t1-islamic-gen1",
+      "level": "year4",
+      "subject": "islamic",
+      "trimester": 1,
+      "title": "اختبار التربية الإسلامية — السنة الرابعة — الثلاثي 1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "الصلاة",
+          "text": "الصلاة عماد الدين وهي أول ما يحاسب عليه العبد يوم القيامة. الصلوات المفروضة خمس في اليوم: الفجر والظهر والعصر والمغرب والعشاء. من حافظ عليها نال رضا الله."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q129",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما موضوع النص؟",
+          "options": [
+            "الصلاة",
+            "قصة خيالية",
+            "رحلة مدرسية"
+          ],
+          "correct": "الصلاة",
+          "points": 1
+        },
+        {
+          "id": "q130",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "مضمون النص مفيد للمسلم.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q131",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: قال رسول الله صلى الله عليه وسلم: «___» (من النص)",
+          "correctAnswer": "حسب النص",
+          "points": 1
+        },
+        {
+          "id": "q132",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "الخلق المستفاد من النص هو:",
+          "options": [
+            "خلق حسن",
+            "خلق سيئ",
+            "لا شيء"
+          ],
+          "correct": "خلق حسن",
+          "points": 1
+        },
+        {
+          "id": "q133",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اذكر عملا صالحا تقوم به اقتداء بما في النص.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t1-production-gen1",
+      "level": "year4",
+      "subject": "production",
+      "trimester": 1,
+      "title": "اختبار الإنتاج الكتابي — السنة الرابعة — الثلاثي 1",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q134",
+          "criterion": "مع1",
+          "type": "ORDER",
+          "prompt": "رتب الجمل التالية لتكوّن فقرة سليمة:",
+          "orderItems": [
+            "جملة البداية",
+            "جملة الوسط",
+            "جملة الخاتمة"
+          ],
+          "points": 2
+        },
+        {
+          "id": "q135",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل بعلامة الترقيم المناسبة: ذهبت إلى المدرسة ___",
+          "correctAnswer": "،",
+          "points": 1
+        },
+        {
+          "id": "q136",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اكتب فقرة تصف فيها فصل الربيع.",
+          "answerLines": 8,
+          "points": 5
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "التنظيم والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والقواعد",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج والإبداع",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 6
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t2-math-gen1",
+      "level": "year4",
+      "subject": "math",
+      "trimester": 2,
+      "title": "اختبار الرياضيات — السنة الرابعة — الثلاثي 2",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q137",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 125 × 8 = ...",
+          "options": [
+            "1000",
+            "900",
+            "1100"
+          ],
+          "correct": "1000",
+          "points": 1
+        },
+        {
+          "id": "q138",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 96 ÷ 8 = ...",
+          "options": [
+            "12",
+            "11",
+            "13"
+          ],
+          "correct": "12",
+          "points": 1
+        },
+        {
+          "id": "q139",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الكسر الذي يمثل النصف هو:",
+          "options": [
+            "1/2",
+            "1/4",
+            "1/3"
+          ],
+          "correct": "1/2",
+          "points": 1
+        },
+        {
+          "id": "q140",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "محيط مربع طول ضلعه 5 صم هو:",
+          "options": [
+            "20 صم",
+            "25 صم",
+            "15 صم"
+          ],
+          "correct": "20 صم",
+          "points": 1
+        },
+        {
+          "id": "q141",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ناتج 7 × 9 هو:",
+          "options": [
+            "63",
+            "56",
+            "72"
+          ],
+          "correct": "63",
+          "points": 1
+        },
+        {
+          "id": "q142",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الساعة الثالثة والنصف تعني:",
+          "options": [
+            "3:30",
+            "3:15",
+            "4:30"
+          ],
+          "correct": "3:30",
+          "points": 1
+        },
+        {
+          "id": "q143",
+          "criterion": "مع2",
+          "type": "OPEN",
+          "prompt": "في مكتبة المدرسة 240 كتابا، أعار التلاميذ 135 كتابا. كم بقي في المكتبة؟",
+          "answerLines": 4,
+          "points": 3
+        },
+        {
+          "id": "q144",
+          "criterion": "مع3",
+          "type": "ORDER",
+          "prompt": "رتب الأعداد التالية من الأصغر إلى الأكبر:",
+          "orderItems": [
+            "12",
+            "7",
+            "25",
+            "9"
+          ],
+          "points": 1
+        },
+        {
+          "id": "q145",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: نصف العدد 20 هو ___",
+          "correctAnswer": "10",
+          "points": 1
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المفاهيم والمهارات",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "حل المسائل",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الدقة والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t2-arabic-gen1",
+      "level": "year4",
+      "subject": "arabic",
+      "trimester": 2,
+      "title": "اختبار اللغة العربية — السنة الرابعة — الثلاثي 2",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "مدينتي",
+          "text": "أعيش في مدينة جميلة على شاطئ البحر، شوارعها نظيفة وحدائقها خضراء. فيها مدرستي التي أحبها ومعلمون يعلموننا بحب. أحلم أن أصبح مهندسا لأبني مدينتي أجمل."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q146",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما الفكرة العامة للنص؟",
+          "options": [
+            "قيمة إنسانية نبيلة",
+            "رحلة إلى البحر",
+            "لعبة جديدة"
+          ],
+          "correct": "قيمة إنسانية نبيلة",
+          "points": 1
+        },
+        {
+          "id": "q147",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "أحداث النص واقعية ومفيدة.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q148",
+          "criterion": "مع1",
+          "type": "EXTRACT",
+          "prompt": "استخرج من النص جملة تدل على الفرح.",
+          "options": [
+            "جملة الفرح من النص"
+          ],
+          "correctAnswer": "جملة الفرح من النص",
+          "points": 1
+        },
+        {
+          "id": "q149",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "ضع الكلمة المناسبة: التلميذ ___ درسه.",
+          "correctAnswer": "حفظ",
+          "points": 1
+        },
+        {
+          "id": "q150",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "ضد كلمة «الفرح» هو:",
+          "options": [
+            "الحزن",
+            "اللعب",
+            "النوم"
+          ],
+          "correct": "الحزن",
+          "points": 1
+        },
+        {
+          "id": "q151",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "اجمع الكلمة التالية: «قلم» → ___",
+          "correctAnswer": "أقلام",
+          "points": 1
+        },
+        {
+          "id": "q152",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "أنتج فقرة من خمسة أسطر تتحدث فيها عن خلق تحبه.",
+          "answerLines": 5,
+          "points": 3
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t2-science-gen1",
+      "level": "year4",
+      "subject": "science",
+      "trimester": 2,
+      "title": "اختبار العلوم — السنة الرابعة — الثلاثي 2",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "الحيوانات",
+          "text": "تنقسم الحيوانات إلى فقارية لها عمود فقري كالقط والطير والسمك، ولافقارية كالحشرات والديدان. وتتغذى الحيوانات العاشبة على النباتات واللاحمة على اللحوم."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q153",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الحالة الغازية للماء هي:",
+          "options": [
+            "البخار",
+            "الجليد",
+            "الماء"
+          ],
+          "correct": "البخار",
+          "points": 1
+        },
+        {
+          "id": "q154",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "الحشرات من الحيوانات الفقارية.",
+          "correctAnswer": "خطأ",
+          "points": 1
+        },
+        {
+          "id": "q155",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أحمي أسناني بتنظيفها بـ___ والمعجون.",
+          "correctAnswer": "الفرشاة",
+          "points": 1
+        },
+        {
+          "id": "q156",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الحيوان الذي يتغذى على النباتات يسمى:",
+          "options": [
+            "عاشبا",
+            "لاحما",
+            "كالشا"
+          ],
+          "correct": "عاشبا",
+          "points": 1
+        },
+        {
+          "id": "q157",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "فسّر الظاهرة التالية في سطرين: الحيوانات",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المعارف العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "المنهجية العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "التطبيق والاستنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t2-french-gen1",
+      "level": "year4",
+      "subject": "french",
+      "trimester": 2,
+      "title": "اختبار الفرنسية — السنة الرابعة — الثلاثي 2",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "Les animaux",
+          "text": "Le chat miaule. Le chien aboie. L’oiseau chante. Le poisson nage dans l’eau. J’aime les animaux."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q158",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Que fait le chat ?",
+          "options": [
+            "Il miaule",
+            "Il aboie",
+            "Il chante"
+          ],
+          "correct": "Il miaule",
+          "points": 1
+        },
+        {
+          "id": "q159",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "Il y a huit jours dans la semaine.",
+          "correctAnswer": "خطأ",
+          "points": 1
+        },
+        {
+          "id": "q160",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "Le poisson ___ dans l’eau.",
+          "correctAnswer": "nage",
+          "points": 1
+        },
+        {
+          "id": "q161",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "La maîtresse est :",
+          "options": [
+            "gentille",
+            "méchante",
+            "absente"
+          ],
+          "correct": "gentille",
+          "points": 1
+        },
+        {
+          "id": "q162",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "Écris deux phrases pour te présenter. / اكتب جملتين لتقديم نفسك بالفرنسية.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t2-islamic-gen1",
+      "level": "year4",
+      "subject": "islamic",
+      "trimester": 2,
+      "title": "اختبار التربية الإسلامية — السنة الرابعة — الثلاثي 2",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "بر الوالدين",
+          "text": "أمرنا الله ببر الوالدين والإحسان إليهما. قال تعالى: وبالوالدين إحسانا. فأطع والديك واسمع كلامهما وساعدهما في البيت تكن من الفائزين."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q163",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما موضوع النص؟",
+          "options": [
+            "بر الوالدين",
+            "قصة خيالية",
+            "رحلة مدرسية"
+          ],
+          "correct": "بر الوالدين",
+          "points": 1
+        },
+        {
+          "id": "q164",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "مضمون النص مفيد للمسلم.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q165",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: قال رسول الله صلى الله عليه وسلم: «___» (من النص)",
+          "correctAnswer": "حسب النص",
+          "points": 1
+        },
+        {
+          "id": "q166",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "الخلق المستفاد من النص هو:",
+          "options": [
+            "خلق حسن",
+            "خلق سيئ",
+            "لا شيء"
+          ],
+          "correct": "خلق حسن",
+          "points": 1
+        },
+        {
+          "id": "q167",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اذكر عملا صالحا تقوم به اقتداء بما في النص.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t2-production-gen1",
+      "level": "year4",
+      "subject": "production",
+      "trimester": 2,
+      "title": "اختبار الإنتاج الكتابي — السنة الرابعة — الثلاثي 2",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q168",
+          "criterion": "مع1",
+          "type": "ORDER",
+          "prompt": "رتب الجمل التالية لتكوّن فقرة سليمة:",
+          "orderItems": [
+            "جملة البداية",
+            "جملة الوسط",
+            "جملة الخاتمة"
+          ],
+          "points": 2
+        },
+        {
+          "id": "q169",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل بعلامة الترقيم المناسبة: ذهبت إلى المدرسة ___",
+          "correctAnswer": "،",
+          "points": 1
+        },
+        {
+          "id": "q170",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "احك قصة قصيرة عن رحلة قمت بها مع عائلتك.",
+          "answerLines": 8,
+          "points": 5
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "التنظيم والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والقواعد",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج والإبداع",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 6
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t3-math-gen1",
+      "level": "year4",
+      "subject": "math",
+      "trimester": 3,
+      "title": "اختبار الرياضيات — السنة الرابعة — الثلاثي 3",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q171",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 125 × 8 = ...",
+          "options": [
+            "1000",
+            "900",
+            "1100"
+          ],
+          "correct": "1000",
+          "points": 1
+        },
+        {
+          "id": "q172",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 96 ÷ 8 = ...",
+          "options": [
+            "12",
+            "11",
+            "13"
+          ],
+          "correct": "12",
+          "points": 1
+        },
+        {
+          "id": "q173",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الكسر الذي يمثل النصف هو:",
+          "options": [
+            "1/2",
+            "1/4",
+            "1/3"
+          ],
+          "correct": "1/2",
+          "points": 1
+        },
+        {
+          "id": "q174",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "محيط مربع طول ضلعه 5 صم هو:",
+          "options": [
+            "20 صم",
+            "25 صم",
+            "15 صم"
+          ],
+          "correct": "20 صم",
+          "points": 1
+        },
+        {
+          "id": "q175",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ناتج 7 × 9 هو:",
+          "options": [
+            "63",
+            "56",
+            "72"
+          ],
+          "correct": "63",
+          "points": 1
+        },
+        {
+          "id": "q176",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الساعة الثالثة والنصف تعني:",
+          "options": [
+            "3:30",
+            "3:15",
+            "4:30"
+          ],
+          "correct": "3:30",
+          "points": 1
+        },
+        {
+          "id": "q177",
+          "criterion": "مع2",
+          "type": "OPEN",
+          "prompt": "في مكتبة المدرسة 240 كتابا، أعار التلاميذ 135 كتابا. كم بقي في المكتبة؟",
+          "answerLines": 4,
+          "points": 3
+        },
+        {
+          "id": "q178",
+          "criterion": "مع3",
+          "type": "ORDER",
+          "prompt": "رتب الأعداد التالية من الأصغر إلى الأكبر:",
+          "orderItems": [
+            "12",
+            "7",
+            "25",
+            "9"
+          ],
+          "points": 1
+        },
+        {
+          "id": "q179",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: نصف العدد 20 هو ___",
+          "correctAnswer": "10",
+          "points": 1
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المفاهيم والمهارات",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "حل المسائل",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الدقة والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t3-arabic-gen1",
+      "level": "year4",
+      "subject": "arabic",
+      "trimester": 3,
+      "title": "اختبار اللغة العربية — السنة الرابعة — الثلاثي 3",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "الكتاب",
+          "text": "الكتاب صديق وفيّ لا يخون صاحبه أبدا. من يقرأ كثيرا تتسع مداركه ويغنى فكره. خصص كل يوم وقتا للقراءة وستجد نفسك أكثر علما وثقافة."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q180",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما الفكرة العامة للنص؟",
+          "options": [
+            "قيمة إنسانية نبيلة",
+            "رحلة إلى البحر",
+            "لعبة جديدة"
+          ],
+          "correct": "قيمة إنسانية نبيلة",
+          "points": 1
+        },
+        {
+          "id": "q181",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "أحداث النص واقعية ومفيدة.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q182",
+          "criterion": "مع1",
+          "type": "EXTRACT",
+          "prompt": "استخرج من النص جملة تدل على الفرح.",
+          "options": [
+            "جملة الفرح من النص"
+          ],
+          "correctAnswer": "جملة الفرح من النص",
+          "points": 1
+        },
+        {
+          "id": "q183",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "ضع الكلمة المناسبة: التلميذ ___ درسه.",
+          "correctAnswer": "حفظ",
+          "points": 1
+        },
+        {
+          "id": "q184",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "ضد كلمة «الفرح» هو:",
+          "options": [
+            "الحزن",
+            "اللعب",
+            "النوم"
+          ],
+          "correct": "الحزن",
+          "points": 1
+        },
+        {
+          "id": "q185",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "اجمع الكلمة التالية: «قلم» → ___",
+          "correctAnswer": "أقلام",
+          "points": 1
+        },
+        {
+          "id": "q186",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "أنتج فقرة من خمسة أسطر تتحدث فيها عن خلق تحبه.",
+          "answerLines": 5,
+          "points": 3
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t3-science-gen1",
+      "level": "year4",
+      "subject": "science",
+      "trimester": 3,
+      "title": "اختبار العلوم — السنة الرابعة — الثلاثي 3",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "صحتي",
+          "text": "لأحافظ على صحتي أتناول غذاء متوازنا وأمارس الرياضة وأنام مبكرا. وأنظف أسناني بالفرشاة والمعجون بعد كل وجبة لأحميها من التسوس."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q187",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الحالة الغازية للماء هي:",
+          "options": [
+            "البخار",
+            "الجليد",
+            "الماء"
+          ],
+          "correct": "البخار",
+          "points": 1
+        },
+        {
+          "id": "q188",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "الحشرات من الحيوانات الفقارية.",
+          "correctAnswer": "خطأ",
+          "points": 1
+        },
+        {
+          "id": "q189",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أحمي أسناني بتنظيفها بـ___ والمعجون.",
+          "correctAnswer": "الفرشاة",
+          "points": 1
+        },
+        {
+          "id": "q190",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الحيوان الذي يتغذى على النباتات يسمى:",
+          "options": [
+            "عاشبا",
+            "لاحما",
+            "كالشا"
+          ],
+          "correct": "عاشبا",
+          "points": 1
+        },
+        {
+          "id": "q191",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "فسّر الظاهرة التالية في سطرين: صحتي",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المعارف العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "المنهجية العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "التطبيق والاستنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t3-french-gen1",
+      "level": "year4",
+      "subject": "french",
+      "trimester": 3,
+      "title": "اختبار الفرنسية — السنة الرابعة — الثلاثي 3",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "Les jours",
+          "text": "Il y a sept jours dans la semaine : lundi, mardi, mercredi, jeudi, vendredi, samedi et dimanche. Le vendredi, je vais à la mosquée."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q192",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Que fait le chat ?",
+          "options": [
+            "Il miaule",
+            "Il aboie",
+            "Il chante"
+          ],
+          "correct": "Il miaule",
+          "points": 1
+        },
+        {
+          "id": "q193",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "Il y a huit jours dans la semaine.",
+          "correctAnswer": "خطأ",
+          "points": 1
+        },
+        {
+          "id": "q194",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "Le poisson ___ dans l’eau.",
+          "correctAnswer": "nage",
+          "points": 1
+        },
+        {
+          "id": "q195",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "La maîtresse est :",
+          "options": [
+            "gentille",
+            "méchante",
+            "absente"
+          ],
+          "correct": "gentille",
+          "points": 1
+        },
+        {
+          "id": "q196",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "Écris deux phrases pour te présenter. / اكتب جملتين لتقديم نفسك بالفرنسية.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t3-islamic-gen1",
+      "level": "year4",
+      "subject": "islamic",
+      "trimester": 3,
+      "title": "اختبار التربية الإسلامية — السنة الرابعة — الثلاثي 3",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "شهر رمضان",
+          "text": "رمضان شهر الصيام والقرآن، يصوم فيه المسلمون من الفجر إلى المغرب. فيه ليلة القدر وهي خير من ألف شهر. نكثر فيه من الصدقة وقراءة القرآن."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q197",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما موضوع النص؟",
+          "options": [
+            "شهر رمضان",
+            "قصة خيالية",
+            "رحلة مدرسية"
+          ],
+          "correct": "شهر رمضان",
+          "points": 1
+        },
+        {
+          "id": "q198",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "مضمون النص مفيد للمسلم.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q199",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: قال رسول الله صلى الله عليه وسلم: «___» (من النص)",
+          "correctAnswer": "حسب النص",
+          "points": 1
+        },
+        {
+          "id": "q200",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "الخلق المستفاد من النص هو:",
+          "options": [
+            "خلق حسن",
+            "خلق سيئ",
+            "لا شيء"
+          ],
+          "correct": "خلق حسن",
+          "points": 1
+        },
+        {
+          "id": "q201",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اذكر عملا صالحا تقوم به اقتداء بما في النص.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year4-t3-production-gen1",
+      "level": "year4",
+      "subject": "production",
+      "trimester": 3,
+      "title": "اختبار الإنتاج الكتابي — السنة الرابعة — الثلاثي 3",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q202",
+          "criterion": "مع1",
+          "type": "ORDER",
+          "prompt": "رتب الجمل التالية لتكوّن فقرة سليمة:",
+          "orderItems": [
+            "جملة البداية",
+            "جملة الوسط",
+            "جملة الخاتمة"
+          ],
+          "points": 2
+        },
+        {
+          "id": "q203",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل بعلامة الترقيم المناسبة: ذهبت إلى المدرسة ___",
+          "correctAnswer": "،",
+          "points": 1
+        },
+        {
+          "id": "q204",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "صف صديقك المفضل في فقرة.",
+          "answerLines": 8,
+          "points": 5
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "التنظيم والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والقواعد",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج والإبداع",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 6
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t1-math-gen1",
+      "level": "year5",
+      "subject": "math",
+      "trimester": 1,
+      "title": "اختبار الرياضيات — السنة الخامسة — الثلاثي 1",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q205",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 12.5 + 7.75 = ...",
+          "options": [
+            "20.25",
+            "19.25",
+            "20.75"
+          ],
+          "correct": "20.25",
+          "points": 1
+        },
+        {
+          "id": "q206",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 3/4 + 1/4 = ...",
+          "options": [
+            "1",
+            "4/8",
+            "2/4"
+          ],
+          "correct": "1",
+          "points": 1
+        },
+        {
+          "id": "q207",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "مساحة مستطيل طوله 8 وعرضه 5 هي:",
+          "options": [
+            "40",
+            "26",
+            "13"
+          ],
+          "correct": "40",
+          "points": 1
+        },
+        {
+          "id": "q208",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 250 × 4 = ...",
+          "options": [
+            "1000",
+            "900",
+            "1100"
+          ],
+          "correct": "1000",
+          "points": 1
+        },
+        {
+          "id": "q209",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الكسر العشري 0.5 يساوي:",
+          "options": [
+            "1/2",
+            "1/4",
+            "1/5"
+          ],
+          "correct": "1/2",
+          "points": 1
+        },
+        {
+          "id": "q210",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "1 كغ يساوي:",
+          "options": [
+            "1000 غ",
+            "100 غ",
+            "10 غ"
+          ],
+          "correct": "1000 غ",
+          "points": 1
+        },
+        {
+          "id": "q211",
+          "criterion": "مع2",
+          "type": "OPEN",
+          "prompt": "قطع قطار مسافة 180 كم في 3 ساعات. ما معدّل سرعته في الساعة؟",
+          "answerLines": 4,
+          "points": 3
+        },
+        {
+          "id": "q212",
+          "criterion": "مع3",
+          "type": "ORDER",
+          "prompt": "رتب الأعداد التالية من الأصغر إلى الأكبر:",
+          "orderItems": [
+            "12",
+            "7",
+            "25",
+            "9"
+          ],
+          "points": 1
+        },
+        {
+          "id": "q213",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: نصف العدد 20 هو ___",
+          "correctAnswer": "10",
+          "points": 1
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المفاهيم والمهارات",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "حل المسائل",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الدقة والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t1-arabic-gen1",
+      "level": "year5",
+      "subject": "arabic",
+      "trimester": 1,
+      "title": "اختبار اللغة العربية — السنة الخامسة — الثلاثي 1",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "البيئة مسؤوليتنا",
+          "text": "البيئة هي بيتنا الكبير الذي نعيش فيه، هواء نتنفسه وماء نشربه وأرض نزرعها. لكن التلوث يهدد هذا البيت بسبب دخان المصانع ورمي النفايات. علينا جميعا أن نحمي بيئتنا بزرع الأشجار وترشيد استهلاك الماء."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q214",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما الفكرة العامة للنص؟",
+          "options": [
+            "قيمة إنسانية نبيلة",
+            "رحلة إلى البحر",
+            "لعبة جديدة"
+          ],
+          "correct": "قيمة إنسانية نبيلة",
+          "points": 1
+        },
+        {
+          "id": "q215",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "أحداث النص واقعية ومفيدة.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q216",
+          "criterion": "مع1",
+          "type": "EXTRACT",
+          "prompt": "استخرج من النص جملة تدل على الفرح.",
+          "options": [
+            "جملة الفرح من النص"
+          ],
+          "correctAnswer": "جملة الفرح من النص",
+          "points": 1
+        },
+        {
+          "id": "q217",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "ضع الكلمة المناسبة: التلميذ ___ درسه.",
+          "correctAnswer": "حفظ",
+          "points": 1
+        },
+        {
+          "id": "q218",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "ضد كلمة «الفرح» هو:",
+          "options": [
+            "الحزن",
+            "اللعب",
+            "النوم"
+          ],
+          "correct": "الحزن",
+          "points": 1
+        },
+        {
+          "id": "q219",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "اجمع الكلمة التالية: «قلم» → ___",
+          "correctAnswer": "أقلام",
+          "points": 1
+        },
+        {
+          "id": "q220",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "أنتج فقرة من خمسة أسطر تتحدث فيها عن خلق تحبه.",
+          "answerLines": 5,
+          "points": 3
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t1-science-gen1",
+      "level": "year5",
+      "subject": "science",
+      "trimester": 1,
+      "title": "اختبار العلوم — السنة الخامسة — الثلاثي 1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "جسم الإنسان",
+          "text": "يتكون جسم الإنسان من أجهزة متكاملة: الجهاز الهضمي يهضم الطعام، والجهاز التنفسي يزود الجسم بالأكسجين، والجهاز الدوري ينقل الدم، والجهاز العصبي يتحكم في كل شيء."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q221",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الجهاز الذي يهضم الطعام هو:",
+          "options": [
+            "الهضمي",
+            "التنفسي",
+            "العصبي"
+          ],
+          "correct": "الهضمي",
+          "points": 1
+        },
+        {
+          "id": "q222",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "تتكاثر النباتات الزهرية بالبذور.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q223",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "ينقل الدم في الجسم جهاز ___ الدوري.",
+          "correctAnswer": "الجهاز",
+          "points": 1
+        },
+        {
+          "id": "q224",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "من أسباب تلوث الهواء:",
+          "options": [
+            "دخان المصانع",
+            "زراعة الأشجار",
+            "ترشيد الماء"
+          ],
+          "correct": "دخان المصانع",
+          "points": 1
+        },
+        {
+          "id": "q225",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "فسّر الظاهرة التالية في سطرين: جسم الإنسان",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المعارف العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "المنهجية العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "التطبيق والاستنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t1-french-gen1",
+      "level": "year5",
+      "subject": "french",
+      "trimester": 1,
+      "title": "اختبار الفرنسية — السنة الخامسة — الثلاثي 1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "Le printemps",
+          "text": "Au printemps, les fleurs s’ouvrent et les oiseaux chantent. Il fait beau. Les enfants jouent dans le jardin. C’est ma saison préférée."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q226",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Au printemps, les oiseaux :",
+          "options": [
+            "chantent",
+            "dorment",
+            "partent"
+          ],
+          "correct": "chantent",
+          "points": 1
+        },
+        {
+          "id": "q227",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "Le marchand est malhonnête.",
+          "correctAnswer": "خطأ",
+          "points": 1
+        },
+        {
+          "id": "q228",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "Nous ___ au football ensemble.",
+          "correctAnswer": "jouons",
+          "points": 1
+        },
+        {
+          "id": "q229",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Yassine est :",
+          "options": [
+            "sérieux",
+            "paresseux",
+            "absent"
+          ],
+          "correct": "sérieux",
+          "points": 1
+        },
+        {
+          "id": "q230",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "Écris deux phrases pour te présenter. / اكتب جملتين لتقديم نفسك بالفرنسية.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t1-islamic-gen1",
+      "level": "year5",
+      "subject": "islamic",
+      "trimester": 1,
+      "title": "اختبار التربية الإسلامية — السنة الخامسة — الثلاثي 1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "أركان الإسلام",
+          "text": "بني الإسلام على خمسة أركان: الشهادتان وإقام الصلاة وإيتاء الزكاة وصوم رمضان وحج البيت لمن استطاع إليه سبيلا. من أتى بها كاملة كان مسلما حقا."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q231",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما موضوع النص؟",
+          "options": [
+            "أركان الإسلام",
+            "قصة خيالية",
+            "رحلة مدرسية"
+          ],
+          "correct": "أركان الإسلام",
+          "points": 1
+        },
+        {
+          "id": "q232",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "مضمون النص مفيد للمسلم.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q233",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: قال رسول الله صلى الله عليه وسلم: «___» (من النص)",
+          "correctAnswer": "حسب النص",
+          "points": 1
+        },
+        {
+          "id": "q234",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "الخلق المستفاد من النص هو:",
+          "options": [
+            "خلق حسن",
+            "خلق سيئ",
+            "لا شيء"
+          ],
+          "correct": "خلق حسن",
+          "points": 1
+        },
+        {
+          "id": "q235",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اذكر عملا صالحا تقوم به اقتداء بما في النص.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t1-production-gen1",
+      "level": "year5",
+      "subject": "production",
+      "trimester": 1,
+      "title": "اختبار الإنتاج الكتابي — السنة الخامسة — الثلاثي 1",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q236",
+          "criterion": "مع1",
+          "type": "ORDER",
+          "prompt": "رتب الجمل التالية لتكوّن فقرة سليمة:",
+          "orderItems": [
+            "جملة البداية",
+            "جملة الوسط",
+            "جملة الخاتمة"
+          ],
+          "points": 2
+        },
+        {
+          "id": "q237",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل بعلامة الترقيم المناسبة: ذهبت إلى المدرسة ___",
+          "correctAnswer": "،",
+          "points": 1
+        },
+        {
+          "id": "q238",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اكتب فقرة تتحدث فيها عن أهمية النظافة.",
+          "answerLines": 8,
+          "points": 5
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "التنظيم والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والقواعد",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج والإبداع",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 6
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t2-math-gen1",
+      "level": "year5",
+      "subject": "math",
+      "trimester": 2,
+      "title": "اختبار الرياضيات — السنة الخامسة — الثلاثي 2",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q239",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 12.5 + 7.75 = ...",
+          "options": [
+            "20.25",
+            "19.25",
+            "20.75"
+          ],
+          "correct": "20.25",
+          "points": 1
+        },
+        {
+          "id": "q240",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 3/4 + 1/4 = ...",
+          "options": [
+            "1",
+            "4/8",
+            "2/4"
+          ],
+          "correct": "1",
+          "points": 1
+        },
+        {
+          "id": "q241",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "مساحة مستطيل طوله 8 وعرضه 5 هي:",
+          "options": [
+            "40",
+            "26",
+            "13"
+          ],
+          "correct": "40",
+          "points": 1
+        },
+        {
+          "id": "q242",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 250 × 4 = ...",
+          "options": [
+            "1000",
+            "900",
+            "1100"
+          ],
+          "correct": "1000",
+          "points": 1
+        },
+        {
+          "id": "q243",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الكسر العشري 0.5 يساوي:",
+          "options": [
+            "1/2",
+            "1/4",
+            "1/5"
+          ],
+          "correct": "1/2",
+          "points": 1
+        },
+        {
+          "id": "q244",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "1 كغ يساوي:",
+          "options": [
+            "1000 غ",
+            "100 غ",
+            "10 غ"
+          ],
+          "correct": "1000 غ",
+          "points": 1
+        },
+        {
+          "id": "q245",
+          "criterion": "مع2",
+          "type": "OPEN",
+          "prompt": "قطع قطار مسافة 180 كم في 3 ساعات. ما معدّل سرعته في الساعة؟",
+          "answerLines": 4,
+          "points": 3
+        },
+        {
+          "id": "q246",
+          "criterion": "مع3",
+          "type": "ORDER",
+          "prompt": "رتب الأعداد التالية من الأصغر إلى الأكبر:",
+          "orderItems": [
+            "12",
+            "7",
+            "25",
+            "9"
+          ],
+          "points": 1
+        },
+        {
+          "id": "q247",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: نصف العدد 20 هو ___",
+          "correctAnswer": "10",
+          "points": 1
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المفاهيم والمهارات",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "حل المسائل",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الدقة والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t2-arabic-gen1",
+      "level": "year5",
+      "subject": "arabic",
+      "trimester": 2,
+      "title": "اختبار اللغة العربية — السنة الخامسة — الثلاثي 2",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "العمل عبادة",
+          "text": "خلق الله الإنسان ليعمل ويجتهد في هذه الحياة. فالعامل الذي يتقن عمله محبوب عند الله وعند الناس. لا فرق بين عامل النظافة والطبيب ما دام كل منهما مخلصا في عمله نافعا لوطنه."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q248",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما الفكرة العامة للنص؟",
+          "options": [
+            "قيمة إنسانية نبيلة",
+            "رحلة إلى البحر",
+            "لعبة جديدة"
+          ],
+          "correct": "قيمة إنسانية نبيلة",
+          "points": 1
+        },
+        {
+          "id": "q249",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "أحداث النص واقعية ومفيدة.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q250",
+          "criterion": "مع1",
+          "type": "EXTRACT",
+          "prompt": "استخرج من النص جملة تدل على الفرح.",
+          "options": [
+            "جملة الفرح من النص"
+          ],
+          "correctAnswer": "جملة الفرح من النص",
+          "points": 1
+        },
+        {
+          "id": "q251",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "ضع الكلمة المناسبة: التلميذ ___ درسه.",
+          "correctAnswer": "حفظ",
+          "points": 1
+        },
+        {
+          "id": "q252",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "ضد كلمة «الفرح» هو:",
+          "options": [
+            "الحزن",
+            "اللعب",
+            "النوم"
+          ],
+          "correct": "الحزن",
+          "points": 1
+        },
+        {
+          "id": "q253",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "اجمع الكلمة التالية: «قلم» → ___",
+          "correctAnswer": "أقلام",
+          "points": 1
+        },
+        {
+          "id": "q254",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "أنتج فقرة من خمسة أسطر تتحدث فيها عن خلق تحبه.",
+          "answerLines": 5,
+          "points": 3
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t2-science-gen1",
+      "level": "year5",
+      "subject": "science",
+      "trimester": 2,
+      "title": "اختبار العلوم — السنة الخامسة — الثلاثي 2",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "التكاثر عند النبات",
+          "text": "تتكاثر النباتات الزهرية بالبذور التي توجد داخل الثمار. تنتقل حبوب اللقاح من زهرة إلى أخرى بفعل الرياح أو الحشرات فيتم التلقيح ثم تتكون الثمار."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q255",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الجهاز الذي يهضم الطعام هو:",
+          "options": [
+            "الهضمي",
+            "التنفسي",
+            "العصبي"
+          ],
+          "correct": "الهضمي",
+          "points": 1
+        },
+        {
+          "id": "q256",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "تتكاثر النباتات الزهرية بالبذور.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q257",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "ينقل الدم في الجسم جهاز ___ الدوري.",
+          "correctAnswer": "الجهاز",
+          "points": 1
+        },
+        {
+          "id": "q258",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "من أسباب تلوث الهواء:",
+          "options": [
+            "دخان المصانع",
+            "زراعة الأشجار",
+            "ترشيد الماء"
+          ],
+          "correct": "دخان المصانع",
+          "points": 1
+        },
+        {
+          "id": "q259",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "فسّر الظاهرة التالية في سطرين: التكاثر عند النبات",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المعارف العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "المنهجية العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "التطبيق والاستنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t2-french-gen1",
+      "level": "year5",
+      "subject": "french",
+      "trimester": 2,
+      "title": "اختبار الفرنسية — السنة الخامسة — الثلاثي 2",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "Le marché",
+          "text": "Le samedi, je vais au marché avec ma mère. Nous achetons des légumes, des fruits et du pain. Le marchand est honnête et souriant."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q260",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Au printemps, les oiseaux :",
+          "options": [
+            "chantent",
+            "dorment",
+            "partent"
+          ],
+          "correct": "chantent",
+          "points": 1
+        },
+        {
+          "id": "q261",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "Le marchand est malhonnête.",
+          "correctAnswer": "خطأ",
+          "points": 1
+        },
+        {
+          "id": "q262",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "Nous ___ au football ensemble.",
+          "correctAnswer": "jouons",
+          "points": 1
+        },
+        {
+          "id": "q263",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Yassine est :",
+          "options": [
+            "sérieux",
+            "paresseux",
+            "absent"
+          ],
+          "correct": "sérieux",
+          "points": 1
+        },
+        {
+          "id": "q264",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "Écris deux phrases pour te présenter. / اكتب جملتين لتقديم نفسك بالفرنسية.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t2-islamic-gen1",
+      "level": "year5",
+      "subject": "islamic",
+      "trimester": 2,
+      "title": "اختبار التربية الإسلامية — السنة الخامسة — الثلاثي 2",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "الزكاة",
+          "text": "الزكاة حق الفقراء في مال الأغنياء، تطهر المال وتنميه وتقوي روابط المحبة بين المسلمين. تعطى للفقراء والمساكين وابن السبيل."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q265",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما موضوع النص؟",
+          "options": [
+            "الزكاة",
+            "قصة خيالية",
+            "رحلة مدرسية"
+          ],
+          "correct": "الزكاة",
+          "points": 1
+        },
+        {
+          "id": "q266",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "مضمون النص مفيد للمسلم.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q267",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: قال رسول الله صلى الله عليه وسلم: «___» (من النص)",
+          "correctAnswer": "حسب النص",
+          "points": 1
+        },
+        {
+          "id": "q268",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "الخلق المستفاد من النص هو:",
+          "options": [
+            "خلق حسن",
+            "خلق سيئ",
+            "لا شيء"
+          ],
+          "correct": "خلق حسن",
+          "points": 1
+        },
+        {
+          "id": "q269",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اذكر عملا صالحا تقوم به اقتداء بما في النص.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t2-production-gen1",
+      "level": "year5",
+      "subject": "production",
+      "trimester": 2,
+      "title": "اختبار الإنتاج الكتابي — السنة الخامسة — الثلاثي 2",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q270",
+          "criterion": "مع1",
+          "type": "ORDER",
+          "prompt": "رتب الجمل التالية لتكوّن فقرة سليمة:",
+          "orderItems": [
+            "جملة البداية",
+            "جملة الوسط",
+            "جملة الخاتمة"
+          ],
+          "points": 2
+        },
+        {
+          "id": "q271",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل بعلامة الترقيم المناسبة: ذهبت إلى المدرسة ___",
+          "correctAnswer": "،",
+          "points": 1
+        },
+        {
+          "id": "q272",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "احك عن موقف تعلمت منه درسا لن تنساه.",
+          "answerLines": 8,
+          "points": 5
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "التنظيم والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والقواعد",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج والإبداع",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 6
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t3-math-gen1",
+      "level": "year5",
+      "subject": "math",
+      "trimester": 3,
+      "title": "اختبار الرياضيات — السنة الخامسة — الثلاثي 3",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q273",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 12.5 + 7.75 = ...",
+          "options": [
+            "20.25",
+            "19.25",
+            "20.75"
+          ],
+          "correct": "20.25",
+          "points": 1
+        },
+        {
+          "id": "q274",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 3/4 + 1/4 = ...",
+          "options": [
+            "1",
+            "4/8",
+            "2/4"
+          ],
+          "correct": "1",
+          "points": 1
+        },
+        {
+          "id": "q275",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "مساحة مستطيل طوله 8 وعرضه 5 هي:",
+          "options": [
+            "40",
+            "26",
+            "13"
+          ],
+          "correct": "40",
+          "points": 1
+        },
+        {
+          "id": "q276",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 250 × 4 = ...",
+          "options": [
+            "1000",
+            "900",
+            "1100"
+          ],
+          "correct": "1000",
+          "points": 1
+        },
+        {
+          "id": "q277",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الكسر العشري 0.5 يساوي:",
+          "options": [
+            "1/2",
+            "1/4",
+            "1/5"
+          ],
+          "correct": "1/2",
+          "points": 1
+        },
+        {
+          "id": "q278",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "1 كغ يساوي:",
+          "options": [
+            "1000 غ",
+            "100 غ",
+            "10 غ"
+          ],
+          "correct": "1000 غ",
+          "points": 1
+        },
+        {
+          "id": "q279",
+          "criterion": "مع2",
+          "type": "OPEN",
+          "prompt": "قطع قطار مسافة 180 كم في 3 ساعات. ما معدّل سرعته في الساعة؟",
+          "answerLines": 4,
+          "points": 3
+        },
+        {
+          "id": "q280",
+          "criterion": "مع3",
+          "type": "ORDER",
+          "prompt": "رتب الأعداد التالية من الأصغر إلى الأكبر:",
+          "orderItems": [
+            "12",
+            "7",
+            "25",
+            "9"
+          ],
+          "points": 1
+        },
+        {
+          "id": "q281",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: نصف العدد 20 هو ___",
+          "correctAnswer": "10",
+          "points": 1
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المفاهيم والمهارات",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "حل المسائل",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الدقة والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t3-arabic-gen1",
+      "level": "year5",
+      "subject": "arabic",
+      "trimester": 3,
+      "title": "اختبار اللغة العربية — السنة الخامسة — الثلاثي 3",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "تونس الخضراء",
+          "text": "تونس بلاد جميلة تقع في شمال إفريقيا، تشتهر بزيتونها وتمورها وشواطئها الذهبية. مرت بتاريخ عريق منذ قرطاج إلى اليوم. أبناؤها مجدّون يحبون العلم والعمل من أجل مستقبل أفضل."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q282",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما الفكرة العامة للنص؟",
+          "options": [
+            "قيمة إنسانية نبيلة",
+            "رحلة إلى البحر",
+            "لعبة جديدة"
+          ],
+          "correct": "قيمة إنسانية نبيلة",
+          "points": 1
+        },
+        {
+          "id": "q283",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "أحداث النص واقعية ومفيدة.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q284",
+          "criterion": "مع1",
+          "type": "EXTRACT",
+          "prompt": "استخرج من النص جملة تدل على الفرح.",
+          "options": [
+            "جملة الفرح من النص"
+          ],
+          "correctAnswer": "جملة الفرح من النص",
+          "points": 1
+        },
+        {
+          "id": "q285",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "ضع الكلمة المناسبة: التلميذ ___ درسه.",
+          "correctAnswer": "حفظ",
+          "points": 1
+        },
+        {
+          "id": "q286",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "ضد كلمة «الفرح» هو:",
+          "options": [
+            "الحزن",
+            "اللعب",
+            "النوم"
+          ],
+          "correct": "الحزن",
+          "points": 1
+        },
+        {
+          "id": "q287",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "اجمع الكلمة التالية: «قلم» → ___",
+          "correctAnswer": "أقلام",
+          "points": 1
+        },
+        {
+          "id": "q288",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "أنتج فقرة من خمسة أسطر تتحدث فيها عن خلق تحبه.",
+          "answerLines": 5,
+          "points": 3
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t3-science-gen1",
+      "level": "year5",
+      "subject": "science",
+      "trimester": 3,
+      "title": "اختبار العلوم — السنة الخامسة — الثلاثي 3",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "حماية البيئة",
+          "text": "التلوث يهدد حياتنا: دخان المصانع يلوث الهواء، والنفايات تلوث التربة والماء. لحماية البيئة نزرع الأشجار ونرشد استهلاك الماء ونعيد تدوير النفايات."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q289",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الجهاز الذي يهضم الطعام هو:",
+          "options": [
+            "الهضمي",
+            "التنفسي",
+            "العصبي"
+          ],
+          "correct": "الهضمي",
+          "points": 1
+        },
+        {
+          "id": "q290",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "تتكاثر النباتات الزهرية بالبذور.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q291",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "ينقل الدم في الجسم جهاز ___ الدوري.",
+          "correctAnswer": "الجهاز",
+          "points": 1
+        },
+        {
+          "id": "q292",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "من أسباب تلوث الهواء:",
+          "options": [
+            "دخان المصانع",
+            "زراعة الأشجار",
+            "ترشيد الماء"
+          ],
+          "correct": "دخان المصانع",
+          "points": 1
+        },
+        {
+          "id": "q293",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "فسّر الظاهرة التالية في سطرين: حماية البيئة",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المعارف العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "المنهجية العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "التطبيق والاستنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t3-french-gen1",
+      "level": "year5",
+      "subject": "french",
+      "trimester": 3,
+      "title": "اختبار الفرنسية — السنة الخامسة — الثلاثي 3",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "Mon ami",
+          "text": "Mon ami s’appelle Yassine. Il est sérieux et travailleur. Nous jouons au football ensemble. Je l’aime beaucoup."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q294",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Au printemps, les oiseaux :",
+          "options": [
+            "chantent",
+            "dorment",
+            "partent"
+          ],
+          "correct": "chantent",
+          "points": 1
+        },
+        {
+          "id": "q295",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "Le marchand est malhonnête.",
+          "correctAnswer": "خطأ",
+          "points": 1
+        },
+        {
+          "id": "q296",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "Nous ___ au football ensemble.",
+          "correctAnswer": "jouons",
+          "points": 1
+        },
+        {
+          "id": "q297",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Yassine est :",
+          "options": [
+            "sérieux",
+            "paresseux",
+            "absent"
+          ],
+          "correct": "sérieux",
+          "points": 1
+        },
+        {
+          "id": "q298",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "Écris deux phrases pour te présenter. / اكتب جملتين لتقديم نفسك بالفرنسية.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t3-islamic-gen1",
+      "level": "year5",
+      "subject": "islamic",
+      "trimester": 3,
+      "title": "اختبار التربية الإسلامية — السنة الخامسة — الثلاثي 3",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "سيرة النبي",
+          "text": "ولد رسول الله صلى الله عليه وسلم في مكة عام الفيل، ونشأ يتيما، وعمل بالتجارة، ثم نزل عليه الوحي وهو في الأربعين، فدعا الناس إلى التوحيد ثلاثة وعشرين عاما."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q299",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما موضوع النص؟",
+          "options": [
+            "سيرة النبي",
+            "قصة خيالية",
+            "رحلة مدرسية"
+          ],
+          "correct": "سيرة النبي",
+          "points": 1
+        },
+        {
+          "id": "q300",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "مضمون النص مفيد للمسلم.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q301",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: قال رسول الله صلى الله عليه وسلم: «___» (من النص)",
+          "correctAnswer": "حسب النص",
+          "points": 1
+        },
+        {
+          "id": "q302",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "الخلق المستفاد من النص هو:",
+          "options": [
+            "خلق حسن",
+            "خلق سيئ",
+            "لا شيء"
+          ],
+          "correct": "خلق حسن",
+          "points": 1
+        },
+        {
+          "id": "q303",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اذكر عملا صالحا تقوم به اقتداء بما في النص.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year5-t3-production-gen1",
+      "level": "year5",
+      "subject": "production",
+      "trimester": 3,
+      "title": "اختبار الإنتاج الكتابي — السنة الخامسة — الثلاثي 3",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q304",
+          "criterion": "مع1",
+          "type": "ORDER",
+          "prompt": "رتب الجمل التالية لتكوّن فقرة سليمة:",
+          "orderItems": [
+            "جملة البداية",
+            "جملة الوسط",
+            "جملة الخاتمة"
+          ],
+          "points": 2
+        },
+        {
+          "id": "q305",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل بعلامة الترقيم المناسبة: ذهبت إلى المدرسة ___",
+          "correctAnswer": "،",
+          "points": 1
+        },
+        {
+          "id": "q306",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "صف قريتك أو مدينتك لزائر يزورها أول مرة.",
+          "answerLines": 8,
+          "points": 5
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "التنظيم والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والقواعد",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج والإبداع",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 6
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t1-math-gen1",
+      "level": "year6",
+      "subject": "math",
+      "trimester": 1,
+      "title": "اختبار الرياضيات — السنة السادسة — الثلاثي 1",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q307",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 25% من 200 هو:",
+          "options": [
+            "50",
+            "25",
+            "75"
+          ],
+          "correct": "50",
+          "points": 1
+        },
+        {
+          "id": "q308",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 3.75 × 100 = ...",
+          "options": [
+            "375",
+            "37.5",
+            "3750"
+          ],
+          "correct": "375",
+          "points": 1
+        },
+        {
+          "id": "q309",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "حجم مكعب حرفه 3 صم هو:",
+          "options": [
+            "27 صم³",
+            "9 صم³",
+            "18 صم³"
+          ],
+          "correct": "27 صم³",
+          "points": 1
+        },
+        {
+          "id": "q310",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "معدل الأعداد 10 و 20 و 30 هو:",
+          "options": [
+            "20",
+            "15",
+            "25"
+          ],
+          "correct": "20",
+          "points": 1
+        },
+        {
+          "id": "q311",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "إذا كان 3 كغ تفاح بـ 9 دنانير، فثمن الكغ الواحد:",
+          "options": [
+            "3 دنانير",
+            "6 دنانير",
+            "12 دينارا"
+          ],
+          "correct": "3 دنانير",
+          "points": 1
+        },
+        {
+          "id": "q312",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الكسر 7/10 بالكتابة العشرية هو:",
+          "options": [
+            "0.7",
+            "0.07",
+            "7.0"
+          ],
+          "correct": "0.7",
+          "points": 1
+        },
+        {
+          "id": "q313",
+          "criterion": "مع2",
+          "type": "OPEN",
+          "prompt": "وفّر تلميذ 15 دينارا كل أسبوع. كم يوفّر في 8 أسابيع؟",
+          "answerLines": 4,
+          "points": 3
+        },
+        {
+          "id": "q314",
+          "criterion": "مع3",
+          "type": "ORDER",
+          "prompt": "رتب الأعداد التالية من الأصغر إلى الأكبر:",
+          "orderItems": [
+            "12",
+            "7",
+            "25",
+            "9"
+          ],
+          "points": 1
+        },
+        {
+          "id": "q315",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: نصف العدد 20 هو ___",
+          "correctAnswer": "10",
+          "points": 1
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المفاهيم والمهارات",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "حل المسائل",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الدقة والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t1-arabic-gen1",
+      "level": "year6",
+      "subject": "arabic",
+      "trimester": 1,
+      "title": "اختبار اللغة العربية — السنة السادسة — الثلاثي 1",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "العلم نور",
+          "text": "بالعلم ترتقي الأمم وتتقدّم الشعوب، فهو السلاح الذي يحرر الإنسان من الجهل والظلام. أنفقت الدول المتقدمة أموالا طائلة على البحث العلمي فحصدت التطور والازدهار. وعلينا نحن أن نجعل العلم طريقنا إلى المستقبل."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q316",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما الفكرة العامة للنص؟",
+          "options": [
+            "قيمة إنسانية نبيلة",
+            "رحلة إلى البحر",
+            "لعبة جديدة"
+          ],
+          "correct": "قيمة إنسانية نبيلة",
+          "points": 1
+        },
+        {
+          "id": "q317",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "أحداث النص واقعية ومفيدة.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q318",
+          "criterion": "مع1",
+          "type": "EXTRACT",
+          "prompt": "استخرج من النص جملة تدل على الفرح.",
+          "options": [
+            "جملة الفرح من النص"
+          ],
+          "correctAnswer": "جملة الفرح من النص",
+          "points": 1
+        },
+        {
+          "id": "q319",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "ضع الكلمة المناسبة: التلميذ ___ درسه.",
+          "correctAnswer": "حفظ",
+          "points": 1
+        },
+        {
+          "id": "q320",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "ضد كلمة «الفرح» هو:",
+          "options": [
+            "الحزن",
+            "اللعب",
+            "النوم"
+          ],
+          "correct": "الحزن",
+          "points": 1
+        },
+        {
+          "id": "q321",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "اجمع الكلمة التالية: «قلم» → ___",
+          "correctAnswer": "أقلام",
+          "points": 1
+        },
+        {
+          "id": "q322",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "أنتج فقرة من خمسة أسطر تتحدث فيها عن خلق تحبه.",
+          "answerLines": 5,
+          "points": 3
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t1-science-gen1",
+      "level": "year6",
+      "subject": "science",
+      "trimester": 1,
+      "title": "اختبار العلوم — السنة السادسة — الثلاثي 1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "الطاقة",
+          "text": "الطاقة ضرورية لكل نشاط في حياتنا. منها طاقة شمسية نأخذها من الشمس، وطاقة كهربائية نستعملها في الإنارة، وطاقة حركية وغذائية. يجب ترشيد استهلاك الطاقة لأن بعض مصادرها تنفد."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q323",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "مصدر الطاقة الشمسية هو:",
+          "options": [
+            "الشمس",
+            "البترول",
+            "الفحم"
+          ],
+          "correct": "الشمس",
+          "points": 1
+        },
+        {
+          "id": "q324",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "تستمد الأرض نورها من القمر.",
+          "correctAnswer": "خطأ",
+          "points": 1
+        },
+        {
+          "id": "q325",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "تدور الأرض حول ___ مرة كل سنة.",
+          "correctAnswer": "الشمس",
+          "points": 1
+        },
+        {
+          "id": "q326",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "من حالات المادة:",
+          "options": [
+            "الصلبة",
+            "السرعة",
+            "اللون"
+          ],
+          "correct": "الصلبة",
+          "points": 1
+        },
+        {
+          "id": "q327",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "فسّر الظاهرة التالية في سطرين: الطاقة",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المعارف العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "المنهجية العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "التطبيق والاستنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t1-french-gen1",
+      "level": "year6",
+      "subject": "french",
+      "trimester": 1,
+      "title": "اختبار الفرنسية — السنة السادسة — الثلاثي 1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "La Tunisie",
+          "text": "La Tunisie est un beau pays d’Afrique du Nord. Sa capitale est Tunis. On y parle l’arabe et le français. Ses plages sont magnifiques et son histoire est très riche."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q328",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "La capitale de la Tunisie est :",
+          "options": [
+            "Tunis",
+            "Alger",
+            "Rabat"
+          ],
+          "correct": "Tunis",
+          "points": 1
+        },
+        {
+          "id": "q329",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "La santé n’est pas importante.",
+          "correctAnswer": "خطأ",
+          "points": 1
+        },
+        {
+          "id": "q330",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "Je dois bien ___ à l’école.",
+          "correctAnswer": "travailler",
+          "points": 1
+        },
+        {
+          "id": "q331",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Pour la santé, il faut :",
+          "options": [
+            "faire du sport",
+            "veiller tard",
+            "manger des bonbons"
+          ],
+          "correct": "faire du sport",
+          "points": 1
+        },
+        {
+          "id": "q332",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "Écris deux phrases pour te présenter. / اكتب جملتين لتقديم نفسك بالفرنسية.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t1-islamic-gen1",
+      "level": "year6",
+      "subject": "islamic",
+      "trimester": 1,
+      "title": "اختبار التربية الإسلامية — السنة السادسة — الثلاثي 1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "أركان الإيمان",
+          "text": "أركان الإيمان ستة: الإيمان بالله وملائكته وكتبه ورسله واليوم الآخر والقدر خيره وشره. المؤمن الحق من آمن بها جميعا وعمل بمقتضاها."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q333",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما موضوع النص؟",
+          "options": [
+            "أركان الإيمان",
+            "قصة خيالية",
+            "رحلة مدرسية"
+          ],
+          "correct": "أركان الإيمان",
+          "points": 1
+        },
+        {
+          "id": "q334",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "مضمون النص مفيد للمسلم.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q335",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: قال رسول الله صلى الله عليه وسلم: «___» (من النص)",
+          "correctAnswer": "حسب النص",
+          "points": 1
+        },
+        {
+          "id": "q336",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "الخلق المستفاد من النص هو:",
+          "options": [
+            "خلق حسن",
+            "خلق سيئ",
+            "لا شيء"
+          ],
+          "correct": "خلق حسن",
+          "points": 1
+        },
+        {
+          "id": "q337",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اذكر عملا صالحا تقوم به اقتداء بما في النص.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t1-production-gen1",
+      "level": "year6",
+      "subject": "production",
+      "trimester": 1,
+      "title": "اختبار الإنتاج الكتابي — السنة السادسة — الثلاثي 1",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q338",
+          "criterion": "مع1",
+          "type": "ORDER",
+          "prompt": "رتب الجمل التالية لتكوّن فقرة سليمة:",
+          "orderItems": [
+            "جملة البداية",
+            "جملة الوسط",
+            "جملة الخاتمة"
+          ],
+          "points": 2
+        },
+        {
+          "id": "q339",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل بعلامة الترقيم المناسبة: ذهبت إلى المدرسة ___",
+          "correctAnswer": "،",
+          "points": 1
+        },
+        {
+          "id": "q340",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اكتب مقالا صغيرا عن أهمية العلم في تقدم الأمم.",
+          "answerLines": 8,
+          "points": 5
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "التنظيم والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والقواعد",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج والإبداع",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 6
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t2-math-gen1",
+      "level": "year6",
+      "subject": "math",
+      "trimester": 2,
+      "title": "اختبار الرياضيات — السنة السادسة — الثلاثي 2",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q341",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 25% من 200 هو:",
+          "options": [
+            "50",
+            "25",
+            "75"
+          ],
+          "correct": "50",
+          "points": 1
+        },
+        {
+          "id": "q342",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 3.75 × 100 = ...",
+          "options": [
+            "375",
+            "37.5",
+            "3750"
+          ],
+          "correct": "375",
+          "points": 1
+        },
+        {
+          "id": "q343",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "حجم مكعب حرفه 3 صم هو:",
+          "options": [
+            "27 صم³",
+            "9 صم³",
+            "18 صم³"
+          ],
+          "correct": "27 صم³",
+          "points": 1
+        },
+        {
+          "id": "q344",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "معدل الأعداد 10 و 20 و 30 هو:",
+          "options": [
+            "20",
+            "15",
+            "25"
+          ],
+          "correct": "20",
+          "points": 1
+        },
+        {
+          "id": "q345",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "إذا كان 3 كغ تفاح بـ 9 دنانير، فثمن الكغ الواحد:",
+          "options": [
+            "3 دنانير",
+            "6 دنانير",
+            "12 دينارا"
+          ],
+          "correct": "3 دنانير",
+          "points": 1
+        },
+        {
+          "id": "q346",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الكسر 7/10 بالكتابة العشرية هو:",
+          "options": [
+            "0.7",
+            "0.07",
+            "7.0"
+          ],
+          "correct": "0.7",
+          "points": 1
+        },
+        {
+          "id": "q347",
+          "criterion": "مع2",
+          "type": "OPEN",
+          "prompt": "وفّر تلميذ 15 دينارا كل أسبوع. كم يوفّر في 8 أسابيع؟",
+          "answerLines": 4,
+          "points": 3
+        },
+        {
+          "id": "q348",
+          "criterion": "مع3",
+          "type": "ORDER",
+          "prompt": "رتب الأعداد التالية من الأصغر إلى الأكبر:",
+          "orderItems": [
+            "12",
+            "7",
+            "25",
+            "9"
+          ],
+          "points": 1
+        },
+        {
+          "id": "q349",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: نصف العدد 20 هو ___",
+          "correctAnswer": "10",
+          "points": 1
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المفاهيم والمهارات",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "حل المسائل",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الدقة والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t2-arabic-gen1",
+      "level": "year6",
+      "subject": "arabic",
+      "trimester": 2,
+      "title": "اختبار اللغة العربية — السنة السادسة — الثلاثي 2",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "التسامح",
+          "text": "التسامح خلق كريم يدعو إلى العفو عند المقدرة ونبذ الحقد والكراهية. به تعيش المجتمعات في سلام ووئام، وبه تُبنى الصداقات وتدوم. قال رسول الله صلى الله عليه وسلم: ارحموا من في الأرض يرحمكم من في السماء."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q350",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما الفكرة العامة للنص؟",
+          "options": [
+            "قيمة إنسانية نبيلة",
+            "رحلة إلى البحر",
+            "لعبة جديدة"
+          ],
+          "correct": "قيمة إنسانية نبيلة",
+          "points": 1
+        },
+        {
+          "id": "q351",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "أحداث النص واقعية ومفيدة.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q352",
+          "criterion": "مع1",
+          "type": "EXTRACT",
+          "prompt": "استخرج من النص جملة تدل على الفرح.",
+          "options": [
+            "جملة الفرح من النص"
+          ],
+          "correctAnswer": "جملة الفرح من النص",
+          "points": 1
+        },
+        {
+          "id": "q353",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "ضع الكلمة المناسبة: التلميذ ___ درسه.",
+          "correctAnswer": "حفظ",
+          "points": 1
+        },
+        {
+          "id": "q354",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "ضد كلمة «الفرح» هو:",
+          "options": [
+            "الحزن",
+            "اللعب",
+            "النوم"
+          ],
+          "correct": "الحزن",
+          "points": 1
+        },
+        {
+          "id": "q355",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "اجمع الكلمة التالية: «قلم» → ___",
+          "correctAnswer": "أقلام",
+          "points": 1
+        },
+        {
+          "id": "q356",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "أنتج فقرة من خمسة أسطر تتحدث فيها عن خلق تحبه.",
+          "answerLines": 5,
+          "points": 3
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t2-science-gen1",
+      "level": "year6",
+      "subject": "science",
+      "trimester": 2,
+      "title": "اختبار العلوم — السنة السادسة — الثلاثي 2",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "المادة",
+          "text": "كل ما يحيط بنا مادة لها كتلة وحجم. توجد المادة في ثلاث حالات: صلبة وسائلة وغازية، وتتحول من حالة إلى أخرى بالتسخين أو التبريد."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q357",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "مصدر الطاقة الشمسية هو:",
+          "options": [
+            "الشمس",
+            "البترول",
+            "الفحم"
+          ],
+          "correct": "الشمس",
+          "points": 1
+        },
+        {
+          "id": "q358",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "تستمد الأرض نورها من القمر.",
+          "correctAnswer": "خطأ",
+          "points": 1
+        },
+        {
+          "id": "q359",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "تدور الأرض حول ___ مرة كل سنة.",
+          "correctAnswer": "الشمس",
+          "points": 1
+        },
+        {
+          "id": "q360",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "من حالات المادة:",
+          "options": [
+            "الصلبة",
+            "السرعة",
+            "اللون"
+          ],
+          "correct": "الصلبة",
+          "points": 1
+        },
+        {
+          "id": "q361",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "فسّر الظاهرة التالية في سطرين: المادة",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المعارف العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "المنهجية العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "التطبيق والاستنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t2-french-gen1",
+      "level": "year6",
+      "subject": "french",
+      "trimester": 2,
+      "title": "اختبار الفرنسية — السنة السادسة — الثلاثي 2",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "Le travail",
+          "text": "Mon père travaille dur pour notre famille. Ma mère s’occupe de la maison. Moi, je dois bien travailler à l’école pour réussir dans la vie."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q362",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "La capitale de la Tunisie est :",
+          "options": [
+            "Tunis",
+            "Alger",
+            "Rabat"
+          ],
+          "correct": "Tunis",
+          "points": 1
+        },
+        {
+          "id": "q363",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "La santé n’est pas importante.",
+          "correctAnswer": "خطأ",
+          "points": 1
+        },
+        {
+          "id": "q364",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "Je dois bien ___ à l’école.",
+          "correctAnswer": "travailler",
+          "points": 1
+        },
+        {
+          "id": "q365",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Pour la santé, il faut :",
+          "options": [
+            "faire du sport",
+            "veiller tard",
+            "manger des bonbons"
+          ],
+          "correct": "faire du sport",
+          "points": 1
+        },
+        {
+          "id": "q366",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "Écris deux phrases pour te présenter. / اكتب جملتين لتقديم نفسك بالفرنسية.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t2-islamic-gen1",
+      "level": "year6",
+      "subject": "islamic",
+      "trimester": 2,
+      "title": "اختبار التربية الإسلامية — السنة السادسة — الثلاثي 2",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "القرآن الكريم",
+          "text": "القرآن كلام الله المنزل على رسوله، وهو آخر الكتب السماوية وأعظمها. فيه هداية الناس في الدنيا والآخرة. من قرأه وتدبره وعمل به نال السعادة."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q367",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما موضوع النص؟",
+          "options": [
+            "القرآن الكريم",
+            "قصة خيالية",
+            "رحلة مدرسية"
+          ],
+          "correct": "القرآن الكريم",
+          "points": 1
+        },
+        {
+          "id": "q368",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "مضمون النص مفيد للمسلم.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q369",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: قال رسول الله صلى الله عليه وسلم: «___» (من النص)",
+          "correctAnswer": "حسب النص",
+          "points": 1
+        },
+        {
+          "id": "q370",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "الخلق المستفاد من النص هو:",
+          "options": [
+            "خلق حسن",
+            "خلق سيئ",
+            "لا شيء"
+          ],
+          "correct": "خلق حسن",
+          "points": 1
+        },
+        {
+          "id": "q371",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اذكر عملا صالحا تقوم به اقتداء بما في النص.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t2-production-gen1",
+      "level": "year6",
+      "subject": "production",
+      "trimester": 2,
+      "title": "اختبار الإنتاج الكتابي — السنة السادسة — الثلاثي 2",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q372",
+          "criterion": "مع1",
+          "type": "ORDER",
+          "prompt": "رتب الجمل التالية لتكوّن فقرة سليمة:",
+          "orderItems": [
+            "جملة البداية",
+            "جملة الوسط",
+            "جملة الخاتمة"
+          ],
+          "points": 2
+        },
+        {
+          "id": "q373",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل بعلامة الترقيم المناسبة: ذهبت إلى المدرسة ___",
+          "correctAnswer": "،",
+          "points": 1
+        },
+        {
+          "id": "q374",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "احك قصة تعبر عن قيمة التسامح بين الناس.",
+          "answerLines": 8,
+          "points": 5
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "التنظيم والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والقواعد",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج والإبداع",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 6
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t3-math-gen1",
+      "level": "year6",
+      "subject": "math",
+      "trimester": 3,
+      "title": "اختبار الرياضيات — السنة السادسة — الثلاثي 3",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q375",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 25% من 200 هو:",
+          "options": [
+            "50",
+            "25",
+            "75"
+          ],
+          "correct": "50",
+          "points": 1
+        },
+        {
+          "id": "q376",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أحسب: 3.75 × 100 = ...",
+          "options": [
+            "375",
+            "37.5",
+            "3750"
+          ],
+          "correct": "375",
+          "points": 1
+        },
+        {
+          "id": "q377",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "حجم مكعب حرفه 3 صم هو:",
+          "options": [
+            "27 صم³",
+            "9 صم³",
+            "18 صم³"
+          ],
+          "correct": "27 صم³",
+          "points": 1
+        },
+        {
+          "id": "q378",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "معدل الأعداد 10 و 20 و 30 هو:",
+          "options": [
+            "20",
+            "15",
+            "25"
+          ],
+          "correct": "20",
+          "points": 1
+        },
+        {
+          "id": "q379",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "إذا كان 3 كغ تفاح بـ 9 دنانير، فثمن الكغ الواحد:",
+          "options": [
+            "3 دنانير",
+            "6 دنانير",
+            "12 دينارا"
+          ],
+          "correct": "3 دنانير",
+          "points": 1
+        },
+        {
+          "id": "q380",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الكسر 7/10 بالكتابة العشرية هو:",
+          "options": [
+            "0.7",
+            "0.07",
+            "7.0"
+          ],
+          "correct": "0.7",
+          "points": 1
+        },
+        {
+          "id": "q381",
+          "criterion": "مع2",
+          "type": "OPEN",
+          "prompt": "وفّر تلميذ 15 دينارا كل أسبوع. كم يوفّر في 8 أسابيع؟",
+          "answerLines": 4,
+          "points": 3
+        },
+        {
+          "id": "q382",
+          "criterion": "مع3",
+          "type": "ORDER",
+          "prompt": "رتب الأعداد التالية من الأصغر إلى الأكبر:",
+          "orderItems": [
+            "12",
+            "7",
+            "25",
+            "9"
+          ],
+          "points": 1
+        },
+        {
+          "id": "q383",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: نصف العدد 20 هو ___",
+          "correctAnswer": "10",
+          "points": 1
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المفاهيم والمهارات",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "حل المسائل",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الدقة والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t3-arabic-gen1",
+      "level": "year6",
+      "subject": "arabic",
+      "trimester": 3,
+      "title": "اختبار اللغة العربية — السنة السادسة — الثلاثي 3",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "الوقت كالسيف",
+          "text": "الوقت أثمن ما يملك الإنسان، إن أحسن استغلاله نجح وتفوق، وإن أضاعه ندم وخسر. فاجعل لك برنامجا يوميا توزع فيه وقتك بين الدراسة واللعب والراحة، ولا تؤجل عمل اليوم إلى الغد."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q384",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما الفكرة العامة للنص؟",
+          "options": [
+            "قيمة إنسانية نبيلة",
+            "رحلة إلى البحر",
+            "لعبة جديدة"
+          ],
+          "correct": "قيمة إنسانية نبيلة",
+          "points": 1
+        },
+        {
+          "id": "q385",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "أحداث النص واقعية ومفيدة.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q386",
+          "criterion": "مع1",
+          "type": "EXTRACT",
+          "prompt": "استخرج من النص جملة تدل على الفرح.",
+          "options": [
+            "جملة الفرح من النص"
+          ],
+          "correctAnswer": "جملة الفرح من النص",
+          "points": 1
+        },
+        {
+          "id": "q387",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "ضع الكلمة المناسبة: التلميذ ___ درسه.",
+          "correctAnswer": "حفظ",
+          "points": 1
+        },
+        {
+          "id": "q388",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "ضد كلمة «الفرح» هو:",
+          "options": [
+            "الحزن",
+            "اللعب",
+            "النوم"
+          ],
+          "correct": "الحزن",
+          "points": 1
+        },
+        {
+          "id": "q389",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "اجمع الكلمة التالية: «قلم» → ___",
+          "correctAnswer": "أقلام",
+          "points": 1
+        },
+        {
+          "id": "q390",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "أنتج فقرة من خمسة أسطر تتحدث فيها عن خلق تحبه.",
+          "answerLines": 5,
+          "points": 3
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t3-science-gen1",
+      "level": "year6",
+      "subject": "science",
+      "trimester": 3,
+      "title": "اختبار العلوم — السنة السادسة — الثلاثي 3",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "المجموعة الشمسية",
+          "text": "تدور الأرض حول الشمس مرة كل سنة، وحول نفسها مرة كل يوم فيتعاقب الليل والنهار. القمر يدور حول الأرض ويستمد نوره من الشمس."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q391",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "مصدر الطاقة الشمسية هو:",
+          "options": [
+            "الشمس",
+            "البترول",
+            "الفحم"
+          ],
+          "correct": "الشمس",
+          "points": 1
+        },
+        {
+          "id": "q392",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "تستمد الأرض نورها من القمر.",
+          "correctAnswer": "خطأ",
+          "points": 1
+        },
+        {
+          "id": "q393",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "تدور الأرض حول ___ مرة كل سنة.",
+          "correctAnswer": "الشمس",
+          "points": 1
+        },
+        {
+          "id": "q394",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "من حالات المادة:",
+          "options": [
+            "الصلبة",
+            "السرعة",
+            "اللون"
+          ],
+          "correct": "الصلبة",
+          "points": 1
+        },
+        {
+          "id": "q395",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "فسّر الظاهرة التالية في سطرين: المجموعة الشمسية",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المعارف العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "المنهجية العلمية",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "التطبيق والاستنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t3-french-gen1",
+      "level": "year6",
+      "subject": "french",
+      "trimester": 3,
+      "title": "اختبار الفرنسية — السنة السادسة — الثلاثي 3",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "La santé",
+          "text": "Pour être en bonne santé, il faut manger des légumes et des fruits, boire de l’eau, faire du sport et dormir tôt. La santé est un trésor."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q396",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "La capitale de la Tunisie est :",
+          "options": [
+            "Tunis",
+            "Alger",
+            "Rabat"
+          ],
+          "correct": "Tunis",
+          "points": 1
+        },
+        {
+          "id": "q397",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "La santé n’est pas importante.",
+          "correctAnswer": "خطأ",
+          "points": 1
+        },
+        {
+          "id": "q398",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "Je dois bien ___ à l’école.",
+          "correctAnswer": "travailler",
+          "points": 1
+        },
+        {
+          "id": "q399",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "Pour la santé, il faut :",
+          "options": [
+            "faire du sport",
+            "veiller tard",
+            "manger des bonbons"
+          ],
+          "correct": "faire du sport",
+          "points": 1
+        },
+        {
+          "id": "q400",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "Écris deux phrases pour te présenter. / اكتب جملتين لتقديم نفسك بالفرنسية.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t3-islamic-gen1",
+      "level": "year6",
+      "subject": "islamic",
+      "trimester": 3,
+      "title": "اختبار التربية الإسلامية — السنة السادسة — الثلاثي 3",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "حسن الخلق",
+          "text": "حسن الخلق من أعظم ما يتقرب به العبد إلى الله. قال رسول الله صلى الله عليه وسلم: إنما بعثت لأتمم مكارم الأخلاق. فكن صادقا أمينا متواضعا محسنا إلى الناس."
+        }
+      ],
+      "questions": [
+        {
+          "id": "q401",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما موضوع النص؟",
+          "options": [
+            "حسن الخلق",
+            "قصة خيالية",
+            "رحلة مدرسية"
+          ],
+          "correct": "حسن الخلق",
+          "points": 1
+        },
+        {
+          "id": "q402",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "مضمون النص مفيد للمسلم.",
+          "correctAnswer": "صحيح",
+          "points": 1
+        },
+        {
+          "id": "q403",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل: قال رسول الله صلى الله عليه وسلم: «___» (من النص)",
+          "correctAnswer": "حسب النص",
+          "points": 1
+        },
+        {
+          "id": "q404",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "الخلق المستفاد من النص هو:",
+          "options": [
+            "خلق حسن",
+            "خلق سيئ",
+            "لا شيء"
+          ],
+          "correct": "خلق حسن",
+          "points": 1
+        },
+        {
+          "id": "q405",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اذكر عملا صالحا تقوم به اقتداء بما في النص.",
+          "answerLines": 3,
+          "points": 2
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الفهم والقراءة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 5,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والمفردات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج",
+          "mastery": {
+            "none": 0,
+            "below": 3,
+            "min": 6,
+            "max": 4
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
+    },
+    {
+      "id": "year6-t3-production-gen1",
+      "level": "year6",
+      "subject": "production",
+      "trimester": 3,
+      "title": "اختبار الإنتاج الكتابي — السنة السادسة — الثلاثي 3",
+      "durationMinutes": 60,
+      "totalPoints": 20,
+      "passages": [],
+      "questions": [
+        {
+          "id": "q406",
+          "criterion": "مع1",
+          "type": "ORDER",
+          "prompt": "رتب الجمل التالية لتكوّن فقرة سليمة:",
+          "orderItems": [
+            "جملة البداية",
+            "جملة الوسط",
+            "جملة الخاتمة"
+          ],
+          "points": 2
+        },
+        {
+          "id": "q407",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "أكمل بعلامة الترقيم المناسبة: ذهبت إلى المدرسة ___",
+          "correctAnswer": "،",
+          "points": 1
+        },
+        {
+          "id": "q408",
+          "criterion": "مع3",
+          "type": "OPEN",
+          "prompt": "اكتب رسالة إلى صديق تدعوه فيها لزيارة بلادك.",
+          "answerLines": 8,
+          "points": 5
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "التنظيم والمنهجية",
+          "mastery": {
+            "none": 0,
+            "below": 1,
+            "min": 2,
+            "max": 3
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "اللغة والقواعد",
+          "mastery": {
+            "none": 0,
+            "below": 1.5,
+            "min": 3,
+            "max": 4.5
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "الإنتاج والإبداع",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4,
+            "max": 6
+          }
+        }
+      ],
+      "source": "generated-bank-v1"
     }
   ]
 }
