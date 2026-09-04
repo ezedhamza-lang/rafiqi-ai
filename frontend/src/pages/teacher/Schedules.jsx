@@ -3,22 +3,18 @@ import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 
 const SUBJECTS = [
-  { name: 'اللغة العربية', color: '#ef4444' },
-  { name: 'الرياضيات', color: '#3b82f6' },
-  { name: 'اللغة الإنجليزية', color: '#06b6d4' },
-  { name: 'التربية الدينية', color: '#f97316' },
-  { name: 'العلوم', color: '#10b981' },
-  { name: 'الدراسات الاجتماعية', color: '#8b5cf6' },
-  { name: 'التربية الفنية', color: '#ec4899' },
-  { name: 'التربية البدنية', color: '#14b8a6' },
-  { name: 'تكنولوجيا المعلومات', color: '#6366f1' },
-  { name: 'التربية الموسيقية', color: '#a855f7' },
-  { name: 'المهارات المهنية', color: '#f59e0b' },
-  { name: 'القراءة', color: '#22c55e' },
-  { name: 'الإنتاج الكتابي', color: '#e11d48' },
-  { name: 'الخط والإملاء', color: '#7c3aed' },
-  { name: 'التربية المدنية', color: '#64748b' },
-  { name: 'التنشيط', color: '#0d9488' }
+  { name: 'اللغة العربية', color: '#ef4444', desc: 'القراءة، الإنتاج الكتابي، قواعد اللغة' },
+  { name: 'الرياضيات', color: '#3b82f6', desc: 'لجميع السنوات' },
+  { name: 'التربية الإسلامية', color: '#f97316', desc: 'منذ السنة الأولى' },
+  { name: 'الإيقاظ العلمي', color: '#10b981', desc: 'علوم وتكنولوجيا مبسطة' },
+  { name: 'التنشئة التشكيلية', color: '#ec4899', desc: 'أنشطة فنية' },
+  { name: 'التربية الموسيقية', color: '#a855f7', desc: 'أنشطة موسيقية' },
+  { name: 'التربية البدنية', color: '#14b8a6', desc: 'الرياضة المدرسية' },
+  { name: 'اللغة الفرنسية', color: '#06b6d4', desc: 'من السنة الثانية' },
+  { name: 'اللغة الإنجليزية', color: '#6366f1', desc: 'من السنة الرابعة' },
+  { name: 'الدراسات الاجتماعية', color: '#8b5cf6', desc: 'التاريخ، الجغرافيا، التربية المدنية - من السنة الخامسة' },
+  { name: 'تكنولوجيا المعلومات', color: '#f59e0b', desc: 'الحوسبة' },
+  { name: 'المهارات المهنية', color: '#78716c', desc: 'من الصفوف العليا' }
 ];
 
 const TIME_BLOCKS = [
@@ -249,25 +245,41 @@ export default function Schedules({ classes }) {
         </table>
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1rem', padding: '0.8rem', background: '#fce4ec', borderRadius: '12px', border: '2px solid #f48fb1' }}>
-        <span style={{ fontWeight: 800, fontSize: '0.88rem', color: '#c2185b', width: '100%', marginBottom: '0.3rem' }}>📦 المواد الدراسية (القرار الوزاري 151 - 2026):</span>
-        {SUBJECTS.map((s) => (
-          <span key={s.name} style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.3rem',
-            padding: '0.25rem 0.6rem',
-            borderRadius: '999px',
-            fontSize: '0.75rem',
-            fontWeight: 700,
-            background: s.color + '18',
-            color: s.color,
-            border: `1px solid ${s.color}35`
-          }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: s.color }} />
-            {s.name}
-          </span>
-        ))}
+      <div style={{ marginTop: '1rem', padding: '1rem', background: '#fce4ec', borderRadius: '12px', border: '2px solid #f48fb1' }}>
+        <div style={{ fontWeight: 800, fontSize: '0.9rem', color: '#c2185b', marginBottom: '0.6rem' }}>📦 المواد الدراسية</div>
+
+        <div style={{ marginBottom: '0.6rem' }}>
+          <div style={{ fontWeight: 700, fontSize: '0.82rem', color: '#c2185b', marginBottom: '0.3rem' }}>المواد الأساسية (لجميع المستويات - الأولى إلى السادسة):</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+            {SUBJECTS.slice(0, 7).map((s) => (
+              <span key={s.name} style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
+                padding: '0.25rem 0.6rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 700,
+                background: s.color + '18', color: s.color, border: `1px solid ${s.color}35`
+              }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: s.color }} />
+                {s.name}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <div style={{ fontWeight: 700, fontSize: '0.82rem', color: '#c2185b', marginBottom: '0.3rem' }}>المواد التدريجية (حسب المستوى):</div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+            {SUBJECTS.slice(7).map((s) => (
+              <span key={s.name} style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
+                padding: '0.25rem 0.6rem', borderRadius: '999px', fontSize: '0.75rem', fontWeight: 700,
+                background: s.color + '18', color: s.color, border: `1px solid ${s.color}35`
+              }}>
+                <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: s.color }} />
+                {s.name}
+                <span style={{ fontSize: '0.65rem', opacity: 0.7 }}>({s.desc})</span>
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
 
       <p className="muted note" style={{ marginTop: '0.8rem', fontSize: '0.82rem' }}>
