@@ -1,211 +1,183 @@
-import React, { useState, useCallback, useRef } from 'react';
+import React, { useState } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 
-const GRADE_DISTRIBUTION = {
+const COLORS = ['#ef4444','#06b6d4','#8b5cf6','#3b82f6','#f97316','#ec4899','#10b981','#14b8a6','#78716c','#a16207','#f59e0b','#64748b','#0ea5e9','#6366f1','#a855f7','#e11d48','#22c55e','#d946ef','#0891b2','#7c3aed'];
+
+const REQUIRED_HOURS = { 1: 20, 2: 22, 3: 25, 4: 25, 5: 28, 6: 28 };
+
+const GRADE_SUBJECTS = {
   1: [
-    { name: 'تواصل شفوي', color: '#ef4444', sessions: [{ day: 0, dur: 30 }, { day: 2, dur: 30 }, { day: 4, dur: 30 }] },
-    { name: 'حوار منظم', color: '#06b6d4', sessions: [{ day: 0, dur: 30 }] },
-    { name: 'محفوظات', color: '#8b5cf6', sessions: [{ day: 2, dur: 30 }] },
-    { name: 'قراءة', color: '#3b82f6', sessions: [{ day: 0, dur: 30 }, { day: 0, dur: 30 }, { day: 1, dur: 30 }, { day: 1, dur: 30 }, { day: 2, dur: 30 }, { day: 2, dur: 30 }, { day: 3, dur: 30 }, { day: 4, dur: 30 }] },
-    { name: 'كتابة', color: '#f97316', sessions: [{ day: 1, dur: 30 }, { day: 3, dur: 30 }] },
-    { name: 'إنتاج كتابي', color: '#ec4899', sessions: [{ day: 0, dur: 30 }, { day: 3, dur: 30 }, { day: 4, dur: 30 }] },
-    { name: 'رياضيات', color: '#10b981', sessions: [{ day: 0, dur: 30 }, { day: 0, dur: 30 }, { day: 1, dur: 30 }, { day: 1, dur: 30 }, { day: 2, dur: 30 }, { day: 2, dur: 30 }, { day: 3, dur: 30 }, { day: 3, dur: 30 }, { day: 4, dur: 30 }, { day: 4, dur: 30 }] },
-    { name: 'إيقاظ علمي', color: '#14b8a6', sessions: [{ day: 1, dur: 30 }, { day: 3, dur: 30 }] },
-    { name: 'تربية إسلامية', color: '#f59e0b', sessions: [{ day: 1, dur: 30 }, { day: 4, dur: 30 }] },
-    { name: 'تربية موسيقية', color: '#a855f7', sessions: [{ day: 5, dur: 30 }] },
-    { name: 'تربية تشكيلية', color: '#e11d48', sessions: [{ day: 5, dur: 30 }] },
-    { name: 'تربية تكنولوجية', color: '#6366f1', sessions: [{ day: 3, dur: 60 }] },
-    { name: 'تربية بدنية', color: '#22c55e', sessions: [{ day: 5, dur: 60 }] }
+    { name: 'اللغة العربية', color: '#ef4444', hours: 9, group: 'اللغة العربية' },
+    { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
+    { name: 'الرياضيات', color: '#10b981', hours: 5, group: 'الرياضيات' },
+    { name: 'إيقاظ علمي', color: '#14b8a6', hours: 1, group: 'العلوم والتكنولوجيا' },
+    { name: 'التربية التكنولوجية', color: '#6366f1', hours: 1, group: 'التربية والرياضة' },
+    { name: 'التربية الموسيقية', color: '#a855f7', hours: 1, group: 'التربية والرياضة' },
+    { name: 'التربية التشكيلية', color: '#e11d48', hours: 1, group: 'التربية والرياضة' },
+    { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   2: [
-    { name: 'تواصل شفوي', color: '#ef4444', sessions: [{ day: 0, dur: 30 }] },
-    { name: 'حوار منظم', color: '#06b6d4', sessions: [{ day: 4, dur: 30 }] },
-    { name: 'محفوظات', color: '#8b5cf6', sessions: [{ day: 2, dur: 30 }] },
-    { name: 'قراءة', color: '#3b82f6', sessions: [{ day: 0, dur: 30 }, { day: 2, dur: 30 }, { day: 4, dur: 30 }] },
-    { name: 'قواعد اللغة', color: '#f97316', sessions: [{ day: 0, dur: 30 }, { day: 1, dur: 30 }, { day: 2, dur: 30 }, { day: 3, dur: 30 }] },
-    { name: 'إنتاج كتابي', color: '#ec4899', sessions: [{ day: 1, dur: 30 }, { day: 4, dur: 30 }] },
-    { name: 'رياضيات', color: '#10b981', sessions: [{ day: 0, dur: 60 }, { day: 1, dur: 60 }, { day: 2, dur: 60 }, { day: 3, dur: 60 }, { day: 4, dur: 60 }] },
-    { name: 'إيقاظ علمي', color: '#14b8a6', sessions: [{ day: 0, dur: 30 }, { day: 2, dur: 30 }] },
-    { name: 'تربية إسلامية', color: '#f59e0b', sessions: [{ day: 0, dur: 30 }, { day: 4, dur: 30 }] },
-    { name: 'تربية موسيقية', color: '#a855f7', sessions: [{ day: 5, dur: 30 }] },
-    { name: 'تربية تشكيلية', color: '#e11d48', sessions: [{ day: 5, dur: 30 }] },
-    { name: 'تربية تكنولوجية', color: '#6366f1', sessions: [{ day: 1, dur: 60 }] },
-    { name: 'تربية بدنية', color: '#22c55e', sessions: [{ day: 4, dur: 60 }] }
+    { name: 'اللغة العربية', color: '#ef4444', hours: 9, group: 'اللغة العربية' },
+    { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 2, group: 'اللغات الأجنبية' },
+    { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
+    { name: 'الرياضيات', color: '#10b981', hours: 5, group: 'الرياضيات' },
+    { name: 'إيقاظ علمي', color: '#14b8a6', hours: 1, group: 'العلوم والتكنولوجيا' },
+    { name: 'التربية التكنولوجية', color: '#6366f1', hours: 1, group: 'التربية والرياضة' },
+    { name: 'التربية الموسيقية', color: '#a855f7', hours: 1, group: 'التربية والرياضة' },
+    { name: 'التربية التشكيلية', color: '#e11d48', hours: 1, group: 'التربية والرياضة' },
+    { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   3: [
-    { name: 'تواصل شفوي', color: '#ef4444', sessions: [{ day: 0, dur: 30 }] },
-    { name: 'محفوظات', color: '#8b5cf6', sessions: [{ day: 2, dur: 20 }] },
-    { name: 'قراءة', color: '#3b82f6', sessions: [{ day: 0, dur: 45 }, { day: 2, dur: 45 }] },
-    { name: 'قواعد اللغة', color: '#f97316', sessions: [{ day: 0, dur: 40 }, { day: 2, dur: 40 }, { day: 4, dur: 40 }] },
-    { name: 'إنتاج كتابي', color: '#ec4899', sessions: [{ day: 0, dur: 30 }, { day: 2, dur: 30 }, { day: 4, dur: 40 }] },
-    { name: 'رياضيات', color: '#10b981', sessions: [{ day: 0, dur: 60 }, { day: 1, dur: 60 }, { day: 2, dur: 60 }, { day: 3, dur: 60 }, { day: 4, dur: 60 }] },
-    { name: 'إيقاظ علمي', color: '#14b8a6', sessions: [{ day: 1, dur: 60 }] },
-    { name: 'تاريخ', color: '#78716c', sessions: [{ day: 1, dur: 40 }] },
-    { name: 'جغرافيا', color: '#a16207', sessions: [{ day: 3, dur: 40 }] },
-    { name: 'تربية مدنية', color: '#64748b', sessions: [{ day: 3, dur: 40 }] },
-    { name: 'تربية إسلامية', color: '#f59e0b', sessions: [{ day: 1, dur: 30 }, { day: 3, dur: 30 }] },
-    { name: 'تربية موسيقية', color: '#a855f7', sessions: [{ day: 5, dur: 30 }] },
-    { name: 'تربية تشكيلية', color: '#e11d48', sessions: [{ day: 5, dur: 30 }] },
-    { name: 'تربية تكنولوجية', color: '#6366f1', sessions: [{ day: 3, dur: 60 }] },
-    { name: 'تربية بدنية', color: '#22c55e', sessions: [{ day: 5, dur: 60 }] }
+    { name: 'اللغة العربية', color: '#ef4444', hours: 6, group: 'اللغة العربية' },
+    { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
+    { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
+    { name: 'التاريخ', color: '#78716c', hours: 0.67, group: 'التربية الاجتماعية' },
+    { name: 'الجغرافيا', color: '#a16207', hours: 0.67, group: 'التربية الاجتماعية' },
+    { name: 'التربية مدنية', color: '#64748b', hours: 0.67, group: 'التربية الاجتماعية' },
+    { name: 'الرياضيات', color: '#10b981', hours: 5, group: 'الرياضيات' },
+    { name: 'إيقاظ علمي', color: '#14b8a6', hours: 1, group: 'العلوم والتكنولوجيا' },
+    { name: 'التربية التكنولوجية', color: '#6366f1', hours: 1, group: 'التربية والرياضة' },
+    { name: 'التربية الموسيقية', color: '#a855f7', hours: 0.5, group: 'التربية والرياضة' },
+    { name: 'التربية التشكيلية', color: '#e11d48', hours: 0.5, group: 'التربية والرياضة' },
+    { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   4: [
-    { name: 'تواصل شفوي', color: '#ef4444', sessions: [{ day: 0, dur: 30 }] },
-    { name: 'محفوظات', color: '#8b5cf6', sessions: [{ day: 2, dur: 20 }] },
-    { name: 'قراءة', color: '#3b82f6', sessions: [{ day: 0, dur: 45 }, { day: 2, dur: 45 }] },
-    { name: 'قواعد اللغة', color: '#f97316', sessions: [{ day: 0, dur: 40 }, { day: 2, dur: 40 }, { day: 4, dur: 40 }] },
-    { name: 'إنتاج كتابي', color: '#ec4899', sessions: [{ day: 0, dur: 30 }, { day: 2, dur: 30 }, { day: 4, dur: 40 }] },
-    { name: 'رياضيات', color: '#10b981', sessions: [{ day: 0, dur: 60 }, { day: 1, dur: 60 }, { day: 2, dur: 60 }, { day: 3, dur: 60 }, { day: 4, dur: 60 }] },
-    { name: 'علوم', color: '#14b8a6', sessions: [{ day: 1, dur: 60 }] },
-    { name: 'تاريخ', color: '#78716c', sessions: [{ day: 1, dur: 40 }] },
-    { name: 'جغرافيا', color: '#a16207', sessions: [{ day: 3, dur: 40 }] },
-    { name: 'تربية مدنية', color: '#64748b', sessions: [{ day: 3, dur: 40 }] },
-    { name: 'تربية إسلامية', color: '#f59e0b', sessions: [{ day: 1, dur: 30 }, { day: 3, dur: 30 }] },
-    { name: 'لغة فرنسية', color: '#0ea5e9', sessions: [{ day: 4, dur: 60 }] },
-    { name: 'تربية موسيقية', color: '#a855f7', sessions: [{ day: 5, dur: 30 }] },
-    { name: 'تربية تشكيلية', color: '#e11d48', sessions: [{ day: 5, dur: 30 }] },
-    { name: 'تكنولوجيا المعلومات', color: '#8b5cf6', sessions: [{ day: 3, dur: 30 }] },
-    { name: 'تربية بدنية', color: '#22c55e', sessions: [{ day: 5, dur: 60 }] }
+    { name: 'اللغة العربية', color: '#ef4444', hours: 6, group: 'اللغة العربية' },
+    { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
+    { name: 'اللغة الإنجليزية', color: '#6366f1', hours: 1, group: 'اللغات الأجنبية' },
+    { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
+    { name: 'التاريخ', color: '#78716c', hours: 0.67, group: 'التربية الاجتماعية' },
+    { name: 'الجغرافيا', color: '#a16207', hours: 0.67, group: 'التربية الاجتماعية' },
+    { name: 'التربية مدنية', color: '#64748b', hours: 0.67, group: 'التربية الاجتماعية' },
+    { name: 'الرياضيات', color: '#10b981', hours: 5, group: 'الرياضيات' },
+    { name: 'إيقاظ علمي', color: '#14b8a6', hours: 1, group: 'العلوم والتكنولوجيا' },
+    { name: 'التربية التكنولوجية', color: '#6366f1', hours: 1, group: 'التربية والرياضة' },
+    { name: 'التربية الموسيقية', color: '#a855f7', hours: 0.5, group: 'التربية والرياضة' },
+    { name: 'التربية التشكيلية', color: '#e11d48', hours: 0.5, group: 'التربية والرياضة' },
+    { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   5: [
-    { name: 'تواصل شفوي', color: '#ef4444', sessions: [{ day: 0, dur: 30 }] },
-    { name: 'محفوظات', color: '#8b5cf6', sessions: [{ day: 2, dur: 20 }] },
-    { name: 'قراءة', color: '#3b82f6', sessions: [{ day: 0, dur: 45 }, { day: 2, dur: 45 }] },
-    { name: 'قواعد اللغة', color: '#f97316', sessions: [{ day: 0, dur: 40 }, { day: 2, dur: 40 }, { day: 4, dur: 40 }] },
-    { name: 'إنتاج كتابي', color: '#ec4899', sessions: [{ day: 0, dur: 30 }, { day: 2, dur: 30 }, { day: 4, dur: 40 }] },
-    { name: 'رياضيات', color: '#10b981', sessions: [{ day: 0, dur: 60 }, { day: 1, dur: 60 }, { day: 2, dur: 60 }, { day: 3, dur: 60 }, { day: 4, dur: 60 }] },
-    { name: 'علوم', color: '#14b8a6', sessions: [{ day: 1, dur: 60 }] },
-    { name: 'تاريخ', color: '#78716c', sessions: [{ day: 1, dur: 40 }] },
-    { name: 'جغرافيا', color: '#a16207', sessions: [{ day: 3, dur: 40 }] },
-    { name: 'تربية مدنية', color: '#64748b', sessions: [{ day: 3, dur: 40 }] },
-    { name: 'تربية إسلامية', color: '#f59e0b', sessions: [{ day: 1, dur: 30 }, { day: 3, dur: 30 }] },
-    { name: 'لغة فرنسية', color: '#0ea5e9', sessions: [{ day: 4, dur: 60 }] },
-    { name: 'لغة إنجليزية', color: '#6366f1', sessions: [{ day: 3, dur: 60 }] },
-    { name: 'تربية موسيقية', color: '#a855f7', sessions: [{ day: 5, dur: 30 }] },
-    { name: 'تربية تشكيلية', color: '#e11d48', sessions: [{ day: 5, dur: 30 }] },
-    { name: 'تكنولوجيا المعلومات', color: '#8b5cf6', sessions: [{ day: 3, dur: 30 }] },
-    { name: 'تربية بدنية', color: '#22c55e', sessions: [{ day: 5, dur: 60 }] }
+    { name: 'اللغة العربية', color: '#ef4444', hours: 6, group: 'اللغة العربية' },
+    { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
+    { name: 'اللغة الإنجليزية', color: '#6366f1', hours: 2, group: 'اللغات الأجنبية' },
+    { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
+    { name: 'التاريخ', color: '#78716c', hours: 0.67, group: 'التربية الاجتماعية' },
+    { name: 'الجغرافيا', color: '#a16207', hours: 0.67, group: 'التربية الاجتماعية' },
+    { name: 'التربية مدنية', color: '#64748b', hours: 0.67, group: 'التربية الاجتماعية' },
+    { name: 'الرياضيات', color: '#10b981', hours: 5, group: 'الرياضيات' },
+    { name: 'إيقاظ علمي', color: '#14b8a6', hours: 1, group: 'العلوم والتكنولوجيا' },
+    { name: 'التربية التكنولوجية', color: '#6366f1', hours: 1, group: 'التربية والرياضة' },
+    { name: 'التربية الموسيقية', color: '#a855f7', hours: 0.5, group: 'التربية والرياضة' },
+    { name: 'التربية التشكيلية', color: '#e11d48', hours: 0.5, group: 'التربية والرياضة' },
+    { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   6: [
-    { name: 'تواصل شفوي', color: '#ef4444', sessions: [{ day: 0, dur: 30 }] },
-    { name: 'محفوظات', color: '#8b5cf6', sessions: [{ day: 2, dur: 20 }] },
-    { name: 'قراءة', color: '#3b82f6', sessions: [{ day: 0, dur: 45 }, { day: 2, dur: 45 }] },
-    { name: 'قواعد اللغة', color: '#f97316', sessions: [{ day: 0, dur: 40 }, { day: 2, dur: 40 }, { day: 4, dur: 40 }] },
-    { name: 'إنتاج كتابي', color: '#ec4899', sessions: [{ day: 0, dur: 30 }, { day: 2, dur: 30 }, { day: 4, dur: 40 }] },
-    { name: 'رياضيات', color: '#10b981', sessions: [{ day: 0, dur: 60 }, { day: 1, dur: 60 }, { day: 2, dur: 60 }, { day: 3, dur: 60 }, { day: 4, dur: 60 }] },
-    { name: 'علوم', color: '#14b8a6', sessions: [{ day: 1, dur: 60 }] },
-    { name: 'تاريخ', color: '#78716c', sessions: [{ day: 1, dur: 40 }] },
-    { name: 'جغرافيا', color: '#a16207', sessions: [{ day: 3, dur: 40 }] },
-    { name: 'تربية مدنية', color: '#64748b', sessions: [{ day: 3, dur: 40 }] },
-    { name: 'تربية إسلامية', color: '#f59e0b', sessions: [{ day: 1, dur: 30 }, { day: 3, dur: 30 }] },
-    { name: 'لغة فرنسية', color: '#0ea5e9', sessions: [{ day: 4, dur: 60 }] },
-    { name: 'لغة إنجليزية', color: '#6366f1', sessions: [{ day: 3, dur: 60 }] },
-    { name: 'تربية موسيقية', color: '#a855f7', sessions: [{ day: 5, dur: 30 }] },
-    { name: 'تربية تشكيلية', color: '#e11d48', sessions: [{ day: 5, dur: 30 }] },
-    { name: 'تكنولوجيا المعلومات', color: '#8b5cf6', sessions: [{ day: 3, dur: 30 }] },
-    { name: 'تربية بدنية', color: '#22c55e', sessions: [{ day: 5, dur: 60 }] }
+    { name: 'اللغة العربية', color: '#ef4444', hours: 6, group: 'اللغة العربية' },
+    { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
+    { name: 'اللغة الإنجليزية', color: '#6366f1', hours: 2, group: 'اللغات الأجنبية' },
+    { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
+    { name: 'التاريخ', color: '#78716c', hours: 0.67, group: 'التربية الاجتماعية' },
+    { name: 'الجغرافيا', color: '#a16207', hours: 0.67, group: 'التربية الاجتماعية' },
+    { name: 'التربية مدنية', color: '#64748b', hours: 0.67, group: 'التربية الاجتماعية' },
+    { name: 'الرياضيات', color: '#10b981', hours: 5, group: 'الرياضيات' },
+    { name: 'إيقاظ علمي', color: '#14b8a6', hours: 1, group: 'العلوم والتكنولوجيا' },
+    { name: 'التربية التكنولوجية', color: '#6366f1', hours: 1, group: 'التربية والرياضة' },
+    { name: 'التربية الموسيقية', color: '#a855f7', hours: 0.5, group: 'التربية والرياضة' },
+    { name: 'التربية التشكيلية', color: '#e11d48', hours: 0.5, group: 'التربية والرياضة' },
+    { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ]
 };
 
-const SESSIONS = [
-  { name: 'الصباحية الأولى', time: '08:00 - 09:55', dur: 115 },
-  { name: 'الصباحية الثانية', time: '10:05 - 12:00', dur: 115 },
-  { name: 'الصباحية الثالثة', time: '12:05 - 13:00', dur: 55 }
-];
+const GRADE_NAMES = ['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة'];
 
-const DAYS = ['الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
-
-function buildGrid(grade) {
-  const dist = GRADE_DISTRIBUTION[grade] || GRADE_DISTRIBUTION[1];
-  const grid = Array.from({ length: 3 }, () => Array.from({ length: 6 }, () => []));
-  const sessionLimits = [115, 115, 55];
-  const sessionUsed = [0, 0, 0];
-
-  dist.forEach((sub) => {
-    sub.sessions.forEach((s) => {
-      let placed = false;
-      for (let si = 0; si < 3 && !placed; si++) {
-        if (sessionUsed[si] + s.dur <= sessionLimits[si]) {
-          grid[si][s.day].push({ subject: sub.name, duration: s.dur, color: sub.color });
-          sessionUsed[si] += s.dur;
-          placed = true;
-        }
-      }
-    });
-  });
-
-  return grid;
-}
-
-function getSubjectColor(name) {
-  for (const grade of Object.values(GRADE_DISTRIBUTION)) {
-    const found = grade.find((s) => s.name === name);
-    if (found) return found.color;
-  }
-  return '#94a3b8';
+function formatHours(h) {
+  if (h === 0.5) return '30 دقيقة';
+  if (h === 0.67) return '40 دقيقة';
+  return `${h} س`;
 }
 
 export default function Schedules({ classes }) {
   const { t } = useI18n();
-  const [classId, setClassId] = useState('');
   const [grade, setGrade] = useState(1);
-  const [grid, setGrid] = useState(() => buildGrid(1));
+  const [classId, setClassId] = useState('');
   const [saved, setSaved] = useState(null);
   const [error, setError] = useState('');
-  const scheduleRef = useRef(null);
+  const [subjects, setSubjects] = useState(() => JSON.parse(JSON.stringify(GRADE_SUBJECTS[1])));
+  const [editingCell, setEditingCell] = useState(null);
+  const [editValue, setEditValue] = useState('');
 
   const changeGrade = (g) => {
     setGrade(g);
-    setGrid(buildGrid(g));
+    setSubjects(JSON.parse(JSON.stringify(GRADE_SUBJECTS[g])));
     setSaved(null);
+    setEditingCell(null);
+  };
+
+  const totalHours = subjects.reduce((sum, s) => sum + s.hours, 0);
+  const required = REQUIRED_HOURS[grade];
+  const isValid = Math.abs(totalHours - required) < 0.1;
+
+  const startEdit = (idx, field) => {
+    const val = field === 'name' ? subjects[idx].name : subjects[idx].hours;
+    setEditValue(val);
+    setEditingCell({ idx, field });
+  };
+
+  const saveEdit = () => {
+    if (!editingCell) return;
+    const { idx, field } = editingCell;
+    setSubjects((prev) => {
+      const next = [...prev];
+      if (field === 'name') {
+        next[idx] = { ...next[idx], name: editValue };
+      } else if (field === 'hours') {
+        next[idx] = { ...next[idx], hours: Number(editValue) || 0 };
+      } else if (field === 'color') {
+        next[idx] = { ...next[idx], color: editValue };
+      }
+      return next;
+    });
+    setEditingCell(null);
+  };
+
+  const addSubject = () => {
+    const color = COLORS[subjects.length % COLORS.length];
+    setSubjects((prev) => [...prev, { name: 'مادة جديدة', color, hours: 1, group: 'أخرى' }]);
+    setTimeout(() => startEdit(subjects.length, 'name'), 100);
+  };
+
+  const removeSubject = (idx) => {
+    setSubjects((prev) => prev.filter((_, i) => i !== idx));
+  };
+
+  const moveSubject = (idx, dir) => {
+    setSubjects((prev) => {
+      const next = [...prev];
+      const newIdx = idx + dir;
+      if (newIdx < 0 || newIdx >= next.length) return prev;
+      [next[idx], next[newIdx]] = [next[newIdx], next[idx]];
+      return next;
+    });
   };
 
   const save = async () => {
     setError('');
+    if (!isValid) { setError(`يجب أن يكون المجموع ${required} ساعة حسب القرار الوزاري`); return; }
     try {
-      const flat = [];
-      grid.forEach((session, si) => {
-        session.forEach((dayItems, di) => {
-          dayItems.forEach((item) => {
-            flat.push({ session: si, day: di, subject: item.subject, duration: item.duration, grade });
-          });
-        });
-      });
-      const res = await api.put(`/teacher/schedules/${classId}`, { grid: flat, grade });
+      const res = await api.put(`/teacher/schedules/${classId}`, { grade, subjects });
       setSaved(res);
     } catch (err) {
       setError(err.message);
     }
   };
 
-  const printSchedule = () => {
-    const content = scheduleRef.current;
-    if (!content) return;
-    const w = window.open('', '_blank');
-    w.document.write(`
-      <html dir="rtl"><head><title>جدول توزيع المواد - السنة ${grade}</title>
-      <style>
-        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap');
-        body { font-family: 'Tajawal', Arial, sans-serif; padding: 15px; }
-        h2 { text-align: center; color: #1a237e; font-size: 18px; margin-bottom: 10px; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 2px solid #1a237e; padding: 8px 6px; text-align: center; font-size: 12px; vertical-align: top; }
-        th { background: #e8eaf6; color: #1a237e; font-weight: 800; }
-        .break td { background: #e8f5e9; color: #2e7d32; font-weight: 700; }
-        @media print { body { padding: 8mm; } }
-      </style></head><body>
-      <h2>جدول توزيع المواد - السنة ${grade}</h2>
-      ${content.innerHTML}
-      <script>window.onload=function(){window.print();}<\/script>
-      </body></html>
-    `);
-    w.document.close();
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') saveEdit();
+    if (e.key === 'Escape') setEditingCell(null);
   };
 
-  const getSessionTotal = (si) => grid[si].reduce((t, d) => t + d.reduce((s, i) => s + i.duration, 0), 0);
-
-  const gradeSubjects = GRADE_DISTRIBUTION[grade] || [];
+  const groups = [...new Set(subjects.map((s) => s.group))];
 
   return (
     <div className="panel">
@@ -214,110 +186,106 @@ export default function Schedules({ classes }) {
         <div className="btn-group">
           <select value={grade} onChange={(e) => changeGrade(Number(e.target.value))}>
             {[1,2,3,4,5,6].map((g) => (
-              <option key={g} value={g}>السنة {['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة'][g-1]}</option>
+              <option key={g} value={g}>السنة {GRADE_NAMES[g-1]}</option>
             ))}
           </select>
           <select value={classId} onChange={(e) => setClassId(e.target.value)}>
             <option value="">{t('teacherSpace.schedules.selectClass')}</option>
-            {classes.map((c) => (
-              <option key={c.id} value={c.id}>{c.name}</option>
-            ))}
+            {classes.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
           </select>
-          <button className="btn" onClick={printSchedule}>🖨️ طباعة</button>
           <button className="btn btn-primary" onClick={save} disabled={!classId}>{t('teacherSpace.schedules.saveSchedule')}</button>
         </div>
       </div>
 
-      {error && <div className="form-error">{error}</div>}
+      {error && <div style={{ padding: '0.8rem', background: '#ffebee', border: '2px solid #ef5350', borderRadius: '10px', color: '#c62828', fontWeight: 800, fontSize: '0.9rem', textAlign: 'center', marginBottom: '0.8rem' }}>⚠️ {error}</div>}
       {saved && <div className="form-success">{t('teacherSpace.schedules.savedMsg', { n: saved.count })}</div>}
 
-      <div ref={scheduleRef} style={{ overflowX: 'auto' }}>
-        <table style={{
-          width: '100%', borderCollapse: 'collapse', minWidth: '800px',
-          border: '3px solid #1a237e', borderRadius: '12px', overflow: 'hidden'
-        }}>
+      <div style={{ padding: '1rem', borderRadius: '12px', border: `3px solid ${isValid ? '#4caf50' : '#ef5350'}`, background: isValid ? '#e8f5e9' : '#ffebee', textAlign: 'center', marginBottom: '1rem' }}>
+        <div style={{ fontSize: '0.85rem', color: isValid ? '#2e7d32' : '#c62828', fontWeight: 700, marginBottom: '0.3rem' }}>
+          {isValid ? '✅ عدد الساعات صحيح' : '⚠️ عدد الساعات غير مطابق للقرار الوزاري'}
+        </div>
+        <div style={{ fontSize: '1.3rem', fontWeight: 900, color: isValid ? '#1b5e20' : '#b71c1c' }}>
+          {totalHours} / {required} ساعة
+        </div>
+        {!isValid && (
+          <div style={{ fontSize: '0.82rem', color: '#c62828', marginTop: '0.3rem', fontWeight: 700 }}>
+            اصلح الجدول! يجب أن يكون المجموع {required} ساعة
+          </div>
+        )}
+      </div>
+
+      <div style={{ overflowX: 'auto' }}>
+        <table style={{ width: '100%', borderCollapse: 'collapse', border: '3px solid #1a237e', borderRadius: '12px', overflow: 'hidden' }}>
           <thead>
             <tr>
-              <th style={{
-                background: '#1a237e', color: '#fff', padding: '12px 8px',
-                fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', width: '100px'
-              }}>الحصة / اليوم</th>
-              {DAYS.map((day, i) => (
-                <th key={i} style={{
-                  background: '#1a237e', color: '#fff', padding: '12px 6px',
-                  fontSize: '0.9rem', fontWeight: 800, border: '2px solid #1a237e', minWidth: '110px'
-                }}>{day}</th>
-              ))}
+              <th style={{ background: '#1a237e', color: '#fff', padding: '12px 6px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', width: '40px' }}>#</th>
+              <th style={{ background: '#1a237e', color: '#fff', padding: '12px 8px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', width: '40px' }}>اللون</th>
+              <th style={{ background: '#1a237e', color: '#fff', padding: '12px 8px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', textAlign: 'right' }}>المادة</th>
+              <th style={{ background: '#1a237e', color: '#fff', padding: '12px 8px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', width: '110px' }}>الساعات</th>
+              <th style={{ background: '#1a237e', color: '#fff', padding: '12px 8px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', width: '80px' }}>إجراءات</th>
             </tr>
           </thead>
           <tbody>
-            {SESSIONS.map((session, si) => (
-              <React.Fragment key={si}>
-                <tr>
-                  <td style={{
-                    background: '#e8eaf6', color: '#1a237e', fontWeight: 800,
-                    padding: '10px 6px', fontSize: '0.82rem', border: '2px solid #c5cae9', textAlign: 'center'
-                  }}>
-                    <div>{session.name}</div>
-                    <div style={{ fontSize: '0.7rem', opacity: 0.8 }}>{session.time}</div>
-                    <div style={{ fontSize: '0.7rem', color: '#666' }}>{getSessionTotal(si)} دقيقة</div>
-                  </td>
-                  {DAYS.map((_, di) => {
-                    const items = grid[si][di];
-                    return (
-                      <td key={di} style={{
-                        border: '2px solid #c5cae9', padding: '6px 4px', textAlign: 'center',
-                        background: items.length > 0 ? '#fff' : '#fafafa', verticalAlign: 'top', minHeight: '80px'
-                      }}>
-                        {items.map((item, idx) => (
-                          <div key={idx} style={{
-                            margin: '2px 0', padding: '3px 4px', borderRadius: '6px',
-                            background: item.color + '15', border: `1px solid ${item.color}30`
-                          }}>
-                            <span style={{ fontWeight: 800, fontSize: '0.78rem', color: item.color }}>{item.subject}</span>
-                            <span style={{ fontSize: '0.68rem', color: '#1a237e', fontWeight: 800 }}> {item.duration}د</span>
-                          </div>
-                        ))}
-                      </td>
-                    );
-                  })}
-                </tr>
-                {si < 2 && (
-                  <tr key={`break-${si}`}>
-                    <td colSpan={7} style={{
-                      background: '#e8f5e9', color: '#2e7d32', fontWeight: 700,
-                      fontSize: '0.8rem', padding: '4px', border: '2px solid #c5cae9', textAlign: 'center'
-                    }}>
-                      استراحة {si === 0 ? '10 دقائق' : '5 دقائق'}
-                    </td>
-                  </tr>
-                )}
-              </React.Fragment>
+            {subjects.map((sub, idx) => (
+              <tr key={idx} style={{ background: idx % 2 === 0 ? '#fff' : '#f8f9ff' }}>
+                <td style={{ padding: '8px 6px', border: '2px solid #c5cae9', textAlign: 'center', fontWeight: 800, color: '#1a237e', fontSize: '0.85rem' }}>{idx + 1}</td>
+                <td style={{ padding: '8px 6px', border: '2px solid #c5cae9', textAlign: 'center' }}>
+                  {editingCell?.idx === idx && editingCell?.field === 'color' ? (
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2px' }}>
+                      <input type="color" value={editValue} onChange={(e) => setEditValue(e.target.value)}
+                        style={{ width: '30px', height: '28px', border: 'none', cursor: 'pointer', padding: 0 }} />
+                      <button onClick={saveEdit} style={{ background: '#4caf50', color: '#fff', border: 'none', borderRadius: '4px', padding: '2px 6px', cursor: 'pointer', fontSize: '0.7rem' }}>✓</button>
+                    </div>
+                  ) : (
+                    <span onClick={() => startEdit(idx, 'color')} style={{ cursor: 'pointer', display: 'inline-block', width: '24px', height: '24px', borderRadius: '50%', background: sub.color, border: '2px solid #fff', boxShadow: '0 1px 3px rgba(0,0,0,0.2)' }} />
+                  )}
+                </td>
+                <td style={{ padding: '8px 10px', border: '2px solid #c5cae9', textAlign: 'right' }}>
+                  {editingCell?.idx === idx && editingCell?.field === 'name' ? (
+                    <input type="text" value={editValue} onChange={(e) => setEditValue(e.target.value)} onKeyDown={handleKeyDown} onBlur={saveEdit}
+                      autoFocus style={{ width: '100%', padding: '4px 8px', border: '2px solid #3b82f6', borderRadius: '6px', fontSize: '0.9rem', fontWeight: 700 }} />
+                  ) : (
+                    <span onClick={() => startEdit(idx, 'name')} style={{ cursor: 'pointer', fontWeight: 800, fontSize: '0.92rem', color: '#333', padding: '4px 8px', borderRadius: '4px', display: 'inline-block' }}>
+                      {sub.name}
+                    </span>
+                  )}
+                </td>
+                <td style={{ padding: '8px 6px', border: '2px solid #c5cae9', textAlign: 'center' }}>
+                  {editingCell?.idx === idx && editingCell?.field === 'hours' ? (
+                    <input type="number" value={editValue} onChange={(e) => setEditValue(e.target.value)} onKeyDown={handleKeyDown} onBlur={saveEdit} min={0} max={40} step={0.5}
+                      autoFocus style={{ width: '70px', padding: '4px', border: '2px solid #3b82f6', borderRadius: '6px', textAlign: 'center', fontSize: '0.9rem', fontWeight: 700 }} />
+                  ) : (
+                    <span onClick={() => startEdit(idx, 'hours')} style={{ cursor: 'pointer', padding: '4px 10px', borderRadius: '8px', background: sub.color + '15', border: `1px solid ${sub.color}30`, fontWeight: 900, fontSize: '0.9rem', color: sub.color, display: 'inline-block' }}>
+                      {formatHours(sub.hours)}
+                    </span>
+                  )}
+                </td>
+                <td style={{ padding: '6px 4px', border: '2px solid #c5cae9', textAlign: 'center' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2px' }}>
+                    <button onClick={() => moveSubject(idx, -1)} disabled={idx === 0} style={{ background: idx === 0 ? '#e0e0e0' : '#1a237e', color: '#fff', border: 'none', borderRadius: '4px', padding: '4px 6px', cursor: idx === 0 ? 'default' : 'pointer', fontSize: '0.7rem', opacity: idx === 0 ? 0.4 : 1 }}>▲</button>
+                    <button onClick={() => moveSubject(idx, 1)} disabled={idx === subjects.length - 1} style={{ background: idx === subjects.length - 1 ? '#e0e0e0' : '#1a237e', color: '#fff', border: 'none', borderRadius: '4px', padding: '4px 6px', cursor: idx === subjects.length - 1 ? 'default' : 'pointer', fontSize: '0.7rem', opacity: idx === subjects.length - 1 ? 0.4 : 1 }}>▼</button>
+                    <button onClick={() => removeSubject(idx)} style={{ background: '#ef5350', color: '#fff', border: 'none', borderRadius: '4px', padding: '4px 6px', cursor: 'pointer', fontSize: '0.7rem' }}>✕</button>
+                  </div>
+                </td>
+              </tr>
             ))}
+            <tr style={{ background: isValid ? '#e8eaf6' : '#ffebee' }}>
+              <td colSpan={3} style={{ padding: '12px', border: '2px solid #1a237e', textAlign: 'center', fontWeight: 900, fontSize: '1rem', color: '#1a237e' }}>المجموع</td>
+              <td style={{ padding: '12px', border: '2px solid #1a237e', textAlign: 'center', fontWeight: 900, fontSize: '1.1rem', color: isValid ? '#1a237e' : '#ef5350' }}>
+                {totalHours} / {required}
+              </td>
+              <td style={{ border: '2px solid #1a237e' }}></td>
+            </tr>
           </tbody>
         </table>
       </div>
 
-      <div style={{ marginTop: '1rem', padding: '1rem', background: '#e8eaf6', borderRadius: '12px', border: '2px solid #c5cae9' }}>
-        <div style={{ fontWeight: 800, fontSize: '0.88rem', color: '#1a237e', marginBottom: '0.5rem' }}>
-          📦 المواد - السنة {['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة'][grade-1]}
-        </div>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-          {gradeSubjects.map((s) => (
-            <span key={s.name} style={{
-              display: 'inline-flex', alignItems: 'center', gap: '0.3rem',
-              padding: '0.2rem 0.5rem', borderRadius: '999px', fontSize: '0.72rem', fontWeight: 700,
-              background: s.color + '18', color: s.color, border: `1px solid ${s.color}35`
-            }}>
-              <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: s.color }} />
-              {s.name}
-            </span>
-          ))}
-        </div>
-      </div>
+      <button onClick={addSubject} style={{ marginTop: '0.8rem', width: '100%', padding: '0.6rem', background: '#1a237e', color: '#fff', border: 'none', borderRadius: '10px', cursor: 'pointer', fontWeight: 800, fontSize: '0.9rem' }}>
+        + إضافة مادة جديدة
+      </button>
 
       <p className="muted note" style={{ marginTop: '0.8rem', fontSize: '0.82rem' }}>
-        💡 اختر السنة من القائمة لإظهار التوزيع الرسمي للمواد حسب القرار الوزاري.
+        💡 انقر على اسم المادة أو عدد الساعات أو اللون لتعديله. استخدم ▲▼ للترتيب و ✕ للحذف.
       </p>
     </div>
   );

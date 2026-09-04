@@ -194,31 +194,20 @@ router.get('/schedules', teacherMiddleware, asyncHandler(async (req, res) => {
  *       404:
  *         description: القسم غير موجود
  */
-router.put('/schedules/:classId', teacherMiddleware, validateParams(classIdParamSchema), validateBody(scheduleGridSchema), asyncHandler(async (req, res) => {
+router.put('/schedules/:classId', teacherMiddleware, validateParams(classIdParamSchema), asyncHandler(async (req, res) => {
   const classId = Number(req.params.classId);
   const cls = await prisma.class.findFirst({ where: { id: classId, teacherId: req.user.id } });
   if (!cls) throw new ApiError(404, 'القسم غير موجود');
 
-  const { grid } = req.body;
+  const { grade, subjects } = req.body;
 
-  await prisma.schedule.deleteMany({ where: { classId } });
-  const rows = [];
-  grid.forEach((day, dayIdx) => {
-    (day || []).forEach((cell, periodIdx) => {
-      const subject = String(cell?.subject || '').trim();
-      if (subject && cell?.filled) {
-        rows.push({
-          classId,
-          day: dayIdx,
-          period: periodIdx,
-          subject,
-          teacherId: cell.teacherId ? Number(cell.teacherId) : req.user.id
-        });
-      }
-    });
+  await prisma.subjectDistribution.upsert({
+    where: { classId },
+    update: { grade, subjects },
+    create: { classId, grade, subjects }
   });
-  if (rows.length) await prisma.schedule.createMany({ data: rows });
-  res.json({ ok: true, count: rows.length, days: DAYS, periods: 6 });
+
+  res.json({ ok: true, count: subjects?.length || 0 });
 }));
 
 /**
@@ -235,17 +224,10 @@ router.put('/schedules/:classId', teacherMiddleware, validateParams(classIdParam
  */
 router.get('/schedules/student/my', studentMiddleware, asyncHandler(async (req, res) => {
   const student = await prisma.student.findFirst({ where: { accountUserId: req.user.id } });
-  if (!student?.classId) return res.json({ class: null, grid: [] });
+  if (!student?.classId) return res.json({ class: null, distribution: null });
   const cls = await prisma.class.findUnique({ where: { id: student.classId } });
-  const schedules = await prisma.schedule.findMany({
-    where: { classId: student.classId },
-    orderBy: [{ day: 'asc' }, { period: 'asc' }]
-  });
-  const grid = Array.from({ length: 6 }, () => Array(6).fill(null));
-  schedules.forEach((s) => {
-    grid[s.day][s.period] = { subject: s.subject };
-  });
-  res.json({ class: cls, grid, days: DAYS, periods: 6 });
+  const distribution = await prisma.subjectDistribution.findUnique({ where: { classId: student.classId } });
+  res.json({ class: cls, distribution });
 }));
 
 /**

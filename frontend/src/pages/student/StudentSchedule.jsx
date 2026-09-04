@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api/client.js';
-import { useI18n } from '../../i18n/index.jsx';
 
-const DAY_KEYS = [0, 1, 2, 3, 4, 5];
-const PERIOD_KEYS = [1, 2, 3, 4, 5, 6];
+function formatHours(h) {
+  if (h === 0.5) return '30 دقيقة';
+  if (h === 0.67) return '40 دقيقة';
+  return `${h} س`;
+}
 
 export default function StudentSchedule() {
-  const { t } = useI18n();
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -18,37 +19,55 @@ export default function StudentSchedule() {
 
   if (!data) return <div className="loading-wrap"><span className="spinner" /></div>;
 
-  const days = t('time.days');
+  const distribution = data.distribution?.subjects || [];
+  const totalHours = distribution.reduce((sum, s) => sum + (s.hours || 0), 0);
 
   return (
     <div className="panel">
       <div className="panel-head">
-        <h3>{data.class ? t('studentSpace.schedule.titleWithClass', { className: data.class.name }) : t('studentSpace.schedule.title')}</h3>
+        <h3>{data.class ? `جدول المواد - ${data.class.name}` : 'جدول المواد'}</h3>
       </div>
       {!data.class ? (
-        <div className="empty">{t('studentSpace.schedule.noClass')}</div>
+        <div className="empty">لم يتم تعيينك لأي قسم بعد</div>
+      ) : distribution.length === 0 ? (
+        <div className="empty">لم يُحدد الأستاذ جدول المواد بعد</div>
       ) : (
-        <div className="schedule-grid">
-          <div className="schedule-row head">
-            <div className="schedule-cell">{t('studentSpace.schedule.dayHeader')}</div>
-            {PERIOD_KEYS.map((p, i) => (
-              <div key={i} className="schedule-cell">{t('time.period', { n: p })}</div>
-            ))}
+        <>
+          <div style={{ padding: '0.8rem', background: '#e8eaf6', borderRadius: '12px', border: '2px solid #c5cae9', textAlign: 'center', marginBottom: '1rem' }}>
+            <span style={{ fontWeight: 900, fontSize: '1rem', color: '#1a237e' }}>المجموع: {formatHours(totalHours)} أسبوعياً</span>
           </div>
-          {DAY_KEYS.map((di) => (
-            <div key={di} className="schedule-row">
-              <div className="schedule-cell day">{Array.isArray(days) ? days[di] : t(`time.days.${di}`)}</div>
-              {PERIOD_KEYS.map((_, pi) => {
-                const cell = data.grid[di][pi];
-                return (
-                  <div key={pi} className={`schedule-cell slot ${cell ? 'filled' : ''}`}>
-                    {cell ? cell.subject : ''}
-                  </div>
-                );
-              })}
-            </div>
-          ))}
-        </div>
+          <div style={{ overflowX: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', border: '3px solid #1a237e', borderRadius: '12px', overflow: 'hidden' }}>
+              <thead>
+                <tr>
+                  <th style={{ background: '#1a237e', color: '#fff', padding: '12px 6px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', width: '40px' }}>#</th>
+                  <th style={{ background: '#1a237e', color: '#fff', padding: '12px 8px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', textAlign: 'right' }}>المادة</th>
+                  <th style={{ background: '#1a237e', color: '#fff', padding: '12px 8px', fontSize: '0.85rem', fontWeight: 800, border: '2px solid #1a237e', width: '110px' }}>الساعات الأسبوعية</th>
+                </tr>
+              </thead>
+              <tbody>
+                {distribution.map((sub, idx) => (
+                  <tr key={idx} style={{ background: idx % 2 === 0 ? '#fff' : '#f8f9ff' }}>
+                    <td style={{ padding: '10px 8px', border: '2px solid #c5cae9', textAlign: 'center', fontWeight: 800, color: '#1a237e' }}>{idx + 1}</td>
+                    <td style={{ padding: '10px 12px', border: '2px solid #c5cae9', textAlign: 'right' }}>
+                      <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <span style={{ width: '12px', height: '12px', borderRadius: '50%', background: sub.color || '#94a3b8', flexShrink: 0 }} />
+                        <span style={{ fontWeight: 800, fontSize: '0.92rem', color: '#333' }}>{sub.name}</span>
+                      </span>
+                    </td>
+                    <td style={{ padding: '10px 8px', border: '2px solid #c5cae9', textAlign: 'center', fontWeight: 900, fontSize: '0.9rem', color: sub.color || '#1a237e' }}>
+                      {formatHours(sub.hours)}
+                    </td>
+                  </tr>
+                ))}
+                <tr style={{ background: '#e8eaf6' }}>
+                  <td colSpan={2} style={{ padding: '12px', border: '2px solid #1a237e', textAlign: 'center', fontWeight: 900, fontSize: '1rem', color: '#1a237e' }}>المجموع</td>
+                  <td style={{ padding: '12px', border: '2px solid #1a237e', textAlign: 'center', fontWeight: 900, fontSize: '1.1rem', color: '#1a237e' }}>{formatHours(totalHours)}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </>
       )}
     </div>
   );

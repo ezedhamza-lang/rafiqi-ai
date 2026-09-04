@@ -15,4 +15,4 @@ COPY frontend/dist /app/frontend/dist
 
 EXPOSE 3001
 
-CMD ["node", "src/index.js"]
+CMD ["sh", "-c", "npx prisma db push --skip-generate && node src/index.js"]
