@@ -62,8 +62,8 @@ export default function Footer() {
           <div className="footer-col">
             <h4>{t('footer.contactUs')}</h4>
             <ul className="footer-contact">
-              <li>
-                <span className="material-icons">phone</span> +216 96 035 997
+              <li style={{ direction: 'ltr', textAlign: 'left' }}>
+                <span className="material-icons" style={{ verticalAlign: 'middle' }}>phone</span> +216 96 035 997
               </li>
               <li>
                 <span className="material-icons">email</span> ensp75882@education.tn
