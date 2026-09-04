@@ -34,8 +34,7 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-col footer-brand-col">
-            <img src="/logo-rafiqi.png" alt="Rafiqi" className="footer-logo" />
-            <p className="footer-desc">{t('footer.rightsReserved')}</p>
+            <img src="/logo-1MB.png" alt="Rafiqi" className="footer-logo" style={{ maxWidth: '120px', height: 'auto' }} />
           </div>
           <div className="footer-col">
             <h4>{t('footer.quickServices')}</h4>
@@ -62,8 +61,8 @@ export default function Footer() {
           <div className="footer-col">
             <h4>{t('footer.contactUs')}</h4>
             <ul className="footer-contact">
-              <li style={{ direction: 'ltr', textAlign: 'left' }}>
-                <span className="material-icons" style={{ verticalAlign: 'middle' }}>phone</span> +216 96 035 997
+              <li>
+                <span className="material-icons">phone</span> +216 96 035 997
               </li>
               <li>
                 <span className="material-icons">email</span> ensp75882@education.tn
@@ -87,7 +86,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>{t('footer.rightsReserved')}</p>
+          <p>جميع الحقوق محفوظة &copy; 2026 الأستاذ حمزة بن عمر عزالدين</p>
         </div>
       </div>
     </footer>

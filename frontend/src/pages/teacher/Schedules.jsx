@@ -3,25 +3,31 @@ import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 
 const SUBJECTS = [
+  { name: 'اللغة العربية', color: '#ef4444' },
   { name: 'الرياضيات', color: '#3b82f6' },
-  { name: 'القراءة', color: '#10b981' },
-  { name: 'الإيقاظ العلمي', color: '#f59e0b' },
-  { name: 'الإنتاج الكتابي', color: '#ef4444' },
-  { name: 'الخط والإملاء', color: '#8b5cf6' },
-  { name: 'اللغة العربية', color: '#ec4899' },
-  { name: 'اللغة الفرنسية', color: '#06b6d4' },
-  { name: 'التربية الإسلامية', color: '#f97316' },
+  { name: 'اللغة الإنجليزية', color: '#06b6d4' },
+  { name: 'التربية الدينية', color: '#f97316' },
+  { name: 'العلوم', color: '#10b981' },
+  { name: 'الدراسات الاجتماعية', color: '#8b5cf6' },
+  { name: 'التربية الفنية', color: '#ec4899' },
+  { name: 'التربية البدنية', color: '#14b8a6' },
+  { name: 'تكنولوجيا المعلومات', color: '#6366f1' },
+  { name: 'التربية الموسيقية', color: '#a855f7' },
+  { name: 'المهارات المهنية', color: '#f59e0b' },
+  { name: 'القراءة', color: '#22c55e' },
+  { name: 'الإنتاج الكتابي', color: '#e11d48' },
+  { name: 'الخط والإملاء', color: '#7c3aed' },
   { name: 'التربية المدنية', color: '#64748b' },
-  { name: 'التنشيط', color: '#14b8a6' }
+  { name: 'التنشيط', color: '#0d9488' }
 ];
 
 const PERIOD_TIMES = [
-  { start: '08:00', end: '08:50' },
-  { start: '09:00', end: '09:50' },
-  { start: '10:00', end: '10:50' },
-  { start: '11:00', end: '11:50' },
-  { start: '14:00', end: '14:50' },
-  { start: '15:00', end: '15:50' }
+  { start: '08:00', end: '08:45' },
+  { start: '08:50', end: '09:35' },
+  { start: '09:40', end: '10:25' },
+  { start: '10:45', end: '11:30' },
+  { start: '11:35', end: '12:20' },
+  { start: '14:00', end: '14:45' }
 ];
 
 const DAYS = ['السبت', 'الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'];
@@ -107,8 +113,6 @@ export default function Schedules({ classes }) {
         th, td { border: 2px solid #1a237e; padding: 10px; text-align: center; font-size: 13px; }
         th { background: #1a237e; color: #fff; font-weight: 800; }
         .day-header { background: #e8eaf6; font-weight: 800; color: #1a237e; }
-        .period-time { font-size: 10px; color: #666; display: block; }
-        .subject-cell { font-weight: 700; font-size: 13px; }
         @media print { .no-print { display: none; } }
       </style></head><body>
       <h2>جدول الأوقات الأسبوعي</h2>
@@ -154,7 +158,7 @@ export default function Schedules({ classes }) {
               }}>اليوم / الفترات</th>
               {PERIOD_TIMES.map((pt, i) => (
                 <th key={i} style={{
-                  background: i < 4 ? '#1a237e' : '#4a148c',
+                  background: i < 3 ? '#1a237e' : i === 3 ? '#c62828' : '#4a148c',
                   color: '#fff',
                   padding: '10px 8px',
                   fontSize: '0.82rem',
@@ -189,7 +193,6 @@ export default function Schedules({ classes }) {
                 </td>
                 {[0, 1, 2, 3, 4, 5].map((pi) => {
                   const cell = grid[di][pi];
-                  const isBreak = pi === 4 && di !== -1;
                   return (
                     <td
                       key={pi}
@@ -248,7 +251,7 @@ export default function Schedules({ classes }) {
       </div>
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1rem', padding: '0.8rem', background: '#f8fafc', borderRadius: '10px', border: '1px solid #e2e8f0' }}>
-        <span style={{ fontWeight: 800, fontSize: '0.85rem', color: '#1a237e', width: '100%', marginBottom: '0.3rem' }}>المواد:</span>
+        <span style={{ fontWeight: 800, fontSize: '0.85rem', color: '#1a237e', width: '100%', marginBottom: '0.3rem' }}>المواد (وفق القرار الوزاري 151 لسنة 2026):</span>
         {SUBJECTS.map((s) => (
           <span key={s.name} style={{
             display: 'inline-flex',
@@ -266,6 +269,18 @@ export default function Schedules({ classes }) {
             {s.name}
           </span>
         ))}
+      </div>
+
+      <div style={{ marginTop: '0.8rem', padding: '0.8rem', background: '#fffbeb', borderRadius: '10px', border: '1px solid #fde68a', fontSize: '0.82rem', color: '#92400e' }}>
+        <strong>⏰ أوقات الحصص (النظام العادي):</strong>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.3rem', marginTop: '0.4rem' }}>
+          {PERIOD_TIMES.map((pt, i) => (
+            <span key={i}>الفترة {i + 1}: {pt.start} - {pt.end}</span>
+          ))}
+        </div>
+        <div style={{ marginTop: '0.3rem', fontSize: '0.75rem', color: '#b45309' }}>
+          ⚠️ الاستراحة الصباحية: 10:25 - 10:45 (بعد الفترة الثالثة)
+        </div>
       </div>
 
       <p className="muted note" style={{ marginTop: '0.8rem' }}>
