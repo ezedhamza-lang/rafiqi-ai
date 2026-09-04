@@ -133,6 +133,8 @@ model User {
   passwordHash  String
   role          Role          @default(PARENT)
   accountStatus AccountStatus @default(ACTIVE)
+  schoolId      Int?
+  emailVerified Boolean       @default(false)
   xp            Int           @default(0)
   coins         Int           @default(0)
   level         Int           @default(1)
@@ -239,6 +241,7 @@ model Class {
   name       String
   level      String
   schoolYear String   @default("2026-2027")
+  schoolId   Int?
   teacherId  Int?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -1226,4 +1229,18 @@ model LessonProgress {
   @@unique([userId, gradeId, subjectId, lessonId])
   @@index([userId, completedAt])
   @@index([userId, gradeId, subjectId])
+}
+
+model School {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+}
+
+model EmailVerificationToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  userId    Int
+  expiresAt DateTime
+  createdAt DateTime @default(now())
 }
