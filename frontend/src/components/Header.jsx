@@ -20,27 +20,40 @@ const MESSAGES_NAV = { to: '/messages', icon: 'mail', key: 'messages', unread: t
 const NOTIF_NAV = { to: '/message-center', icon: 'notifications_active', key: 'notifications', notif: true };
 
 const TEACHER_SPACE_CHILDREN = [
+  { group: 'analysis', groupLabel: 'التحليل والتقييم', groupIcon: 'analytics', groupColor: '#3b82f6' },
   { to: '/teacher', end: true, icon: 'analytics', key: 'unitAnalysis' },
   { to: '/teacher/quizzes', icon: 'quiz', key: 'quizzes' },
   { to: '/teacher/assignments', icon: 'assignment', key: 'assignments' },
   { to: '/teacher/analytics', icon: 'monitoring', key: 'analyticsExport' },
+
+  { group: 'exams', groupLabel: 'الامتحانات', groupIcon: 'fact_check', groupColor: '#ef4444' },
   { to: '/teacher/exams', icon: 'fact_check', key: 'officialExams' },
+
+  { group: 'subjects', groupLabel: 'المواد والمحتوى', groupIcon: 'category', groupColor: '#8b5cf6' },
   { to: '/teacher/class-subjects', icon: 'category', key: 'classSubjects' },
   { to: '/teacher/correction', icon: 'grading', key: 'correction' },
+
+  { group: 'results', groupLabel: 'النتائج والتقارير', groupIcon: 'scoreboard', groupColor: '#10b981' },
   { to: '/teacher/results', icon: 'scoreboard', key: 'results' },
   { to: '/teacher/averages', icon: 'percent', key: 'averages' },
   { to: '/teacher/gradebook', icon: 'menu_book', key: 'gradebook' },
+
+  { group: 'progress', groupLabel: 'التقدم والمتابعة', groupIcon: 'trending_up', groupColor: '#f59e0b' },
   { to: '/teacher/lesson-progress', icon: 'fact_check', key: 'lessonProgress' },
   { to: '/teacher/notes', icon: 'rate_review', key: 'teacherNotes' },
-  { to: '/teacher/memos', icon: 'description', key: 'memos' },
-  { to: '/teacher/resources', icon: 'folder_special', key: 'resources' },
-  { to: '/teacher/library', icon: 'local_library', key: 'library' },
+  { to: '/teacher/attendance', icon: 'fact_check', key: 'attendance' },
+
+  { group: 'planning', groupLabel: 'التخطيط والتنظيم', groupIcon: 'calendar_month', groupColor: '#06b6d4' },
   { to: '/teacher/lesson-plan', icon: 'calendar_month', key: 'lessonPlan' },
   { to: '/teacher/plans', icon: 'event_note', key: 'annualPlans' },
-  { to: '/teacher/attendance', icon: 'fact_check', key: 'attendance' },
+  { to: '/teacher/memos', icon: 'description', key: 'memos' },
+  { to: '/teacher/schedules', icon: 'calendar_view_week', key: 'schedules' },
+
+  { group: 'tools', groupLabel: 'الأدوات والموارد', groupIcon: 'build', groupColor: '#ec4899' },
+  { to: '/teacher/resources', icon: 'folder_special', key: 'resources' },
+  { to: '/teacher/library', icon: 'local_library', key: 'library' },
   { to: '/teacher/health', icon: 'favorite', key: 'health' },
   { to: '/teacher/ai', icon: 'smart_toy', key: 'teacherAI' },
-  { to: '/teacher/schedules', icon: 'calendar_view_week', key: 'schedules' },
   { to: '/teacher/live', icon: 'live_tv', key: 'live' },
   { to: '/teacher/suggestions', icon: 'lightbulb', key: 'suggestions' },
   { to: '/payment', icon: 'payments', key: 'payment' },
@@ -308,17 +321,24 @@ export default function Header() {
                   <span className="material-icons dropdown-caret" aria-hidden="true">expand_more</span>
                 </NavLink>
                 <ul className="dropdown-menu">
-                  {item.children.map((child) => (
-                    <li key={child.to} className={child.divider ? 'dropdown-divider' : ''}>
-                      <NavLink
-                        to={child.to}
-                        end={child.end}
-                        className={({ isActive }) => (isActive ? 'active' : '')}
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        <span className="material-icons" aria-hidden="true">{child.icon}</span>
-                        {t(`nav.${child.key}`)}
-                      </NavLink>
+                  {item.children.map((child, ci) => (
+                    <li key={child.to || child.group || ci} className={`${child.divider ? 'dropdown-divider' : ''} ${child.group ? 'dropdown-group-header' : ''}`}>
+                      {child.group ? (
+                        <span className="dropdown-group-label" style={{ '--group-color': child.groupColor }}>
+                          <span className="material-icons" style={{ color: child.groupColor }}>{child.groupIcon}</span>
+                          {child.groupLabel}
+                        </span>
+                      ) : (
+                        <NavLink
+                          to={child.to}
+                          end={child.end}
+                          className={({ isActive }) => (isActive ? 'active' : '')}
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          <span className="material-icons" aria-hidden="true">{child.icon}</span>
+                          {t(`nav.${child.key}`)}
+                        </NavLink>
+                      )}
                     </li>
                   ))}
                 </ul>

@@ -33,18 +33,11 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="container">
         <div className="footer-grid">
-          <div>
-            <h4>{t('footer.contactUs')}</h4>
-            <ul>
-              <li>
-                <span className="material-icons">phone</span> +216 96 035 997
-              </li>
-              <li>
-                <span className="material-icons">email</span> ensp75882@education.tn
-              </li>
-            </ul>
+          <div className="footer-col footer-brand-col">
+            <img src="/logo-rafiqi.png" alt="Rafiqi" className="footer-logo" />
+            <p className="footer-desc">{t('footer.rightsReserved')}</p>
           </div>
-          <div>
+          <div className="footer-col">
             <h4>{t('footer.quickServices')}</h4>
             <ul>
               {isParent && (
@@ -57,7 +50,7 @@ export default function Footer() {
               <li><a href="/dashboard">{t('footer.dashboard')}</a></li>
             </ul>
           </div>
-          <div>
+          <div className="footer-col">
             <h4>{t('footer.usefulInfo')}</h4>
             <ul>
               <li><a href="/">{t('footer.userGuide')}</a></li>
@@ -66,8 +59,17 @@ export default function Footer() {
               <li><a href="/#announcements">{t('footer.announcements')}</a></li>
             </ul>
           </div>
-          <div>
-            <h4>{t('footer.followUs')}</h4>
+          <div className="footer-col">
+            <h4>{t('footer.contactUs')}</h4>
+            <ul className="footer-contact">
+              <li>
+                <span className="material-icons">phone</span> +216 96 035 997
+              </li>
+              <li>
+                <span className="material-icons">email</span> ensp75882@education.tn
+              </li>
+            </ul>
+            <h4 style={{ marginTop: '1rem' }}>{t('footer.followUs')}</h4>
             <div className="footer-social-icons">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-icon social-facebook" aria-label="Facebook">
                 <FacebookIcon />
@@ -85,7 +87,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          {t('footer.rightsReserved')}
+          <p>{t('footer.rightsReserved')}</p>
         </div>
       </div>
     </footer>
