@@ -5,38 +5,57 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+/* ══════════════════════════════════════════════════════════════════
+   OFFICIAL TUNISIAN MINISTRY OF EDUCATION EXAM TEMPLATE
+   Matches real teacher papers (years 1-6, all subjects, all trimesters):
+   - Header table: school / title / subject-year-name
+   - Grey shaded Sanad (reading passage) blocks
+   - Numbered Taalima (instruction) blocks with marks
+   - Question types: MCQ ○, TRUE_FALSE, FILL_BLANK, MATCHING,
+     ORDERING, EXTRACT, OPEN (dotted answer lines)
+   - Grading table "جدول إسناد الأعداد" at the end
+   - RTL Arabic, Andalus headings + Traditional Arabic body
+   ══════════════════════════════════════════════════════════════════ */
+
 const SUBJECT_MAP = {
   arabic: 'اللغة العربية', french: 'اللغة الفرنسية', english: 'اللغة الإنجليزية',
   math: 'الرياضيات', science: 'العلوم الطبيعية', 'history-geography': 'التاريخ والجغرافيا',
-  islamic: 'التربية الإسلامية', civic: 'التربية المدنية', art: 'التربية التشكيلية',
-  music: 'التربية الموسيقية', pe: 'التربية البدنية', technology: 'التكنولوجيا'
+  history: 'التاريخ', geography: 'الجغرافيا', islamic: 'التربية الإسلامية',
+  civic: 'التربية المدنية', art: 'التربية التشكيلية',
+  music: 'التربية الموسيقية', pe: 'التربية البدنية', technology: 'التكنولوجيا',
+  reading: 'القراءة', grammar: 'قواعد اللغة', writing: 'الإنتاج الكتابي',
+  'قواعد اللغة': 'قواعد اللغة', 'الإنتاج الكتابي': 'الإنتاج الكتابي'
 };
 
 const LEVEL_NAMES = {
-  1: 'السنة الأولى أساسي', 2: 'السنة الثانية أساسي', 3: 'السنة الثالثة أساسي',
-  4: 'السنة الرابعة أساسي', 5: 'السنة الخامسة أساسي', 6: 'السنة السادسة أساسي'
+  1: 'السنة الأولى', 2: 'السنة الثانية', 3: 'السنة الثالثة',
+  4: 'السنة الرابعة', 5: 'السنة الخامسة', 6: 'السنة السادسة'
+};
+
+const TRIMESTER_NAMES = {
+  1: 'الثلاثي الأول', 2: 'الثلاثي الثاني', 3: 'الثلاثي الثالث'
 };
 
 const DEFAULT_CRITERIA = {
   arabic: [
-    { id: 'القراءة', label: 'القراءة', mastery: { none: 0, below: 1, min: 2, max: 3 } },
-    { id: 'الكتابة', label: 'الكتابة', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
-    { id: 'المعالجة اللغوية', label: 'المعالجة اللغوية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
+    { id: 'مع1', label: 'القراءة والفهم', mastery: { none: 0, below: 1, min: 2, max: 3 } },
+    { id: 'مع2', label: 'اللغة والقواعد', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
+    { id: 'مع3', label: 'الإنتاج الكتابي', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
   ],
   math: [
-    { id: 'المفاهيم الرياضية', label: 'المفاهيم الرياضية', mastery: { none: 0, below: 1, min: 2, max: 3 } },
-    { id: 'المهارات الحسابية', label: 'المهارات الحسابية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
-    { id: 'حل المسائل', label: 'حل المسائل', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
+    { id: 'مع1', label: 'المفاهيم الرياضية', mastery: { none: 0, below: 1, min: 2, max: 3 } },
+    { id: 'مع2', label: 'المهارات الحسابية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
+    { id: 'مع3', label: 'حل المسائل', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
   ],
   science: [
-    { id: 'المفاهيم العلمية', label: 'المفاهيم العلمية', mastery: { none: 0, below: 1, min: 2, max: 3 } },
-    { id: 'المهارات العلمية', label: 'المهارات العلمية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
-    { id: 'المعالجة العلمية', label: 'المعالجة العلمية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
+    { id: 'مع1', label: 'المفاهيم العلمية', mastery: { none: 0, below: 1, min: 2, max: 3 } },
+    { id: 'مع2', label: 'المهارات العلمية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
+    { id: 'مع3', label: 'المعالجة العلمية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
   ],
   french: [
-    { id: 'القراءة', label: 'القراءة', mastery: { none: 0, below: 1, min: 2, max: 3 } },
-    { id: 'الكتابة', label: 'الكتابة', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
-    { id: 'المعالجة اللغوية', label: 'المعالجة اللغوية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
+    { id: 'مع1', label: 'القراءة والفهم', mastery: { none: 0, below: 1, min: 2, max: 3 } },
+    { id: 'مع2', label: 'اللغة والقواعد', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
+    { id: 'مع3', label: 'الإنتاج الكتابي', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
   ]
 };
 
@@ -44,169 +63,200 @@ function esc(text) {
   return String(text ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
-function dottedLine(n = 30) { return '\u00B7'.repeat(n); }
+function dottedLine(n = 40) { return '.'.repeat(n); }
 
-const FONT = 'Simplified Arabic';
-const RTL = 'rtl';
+// Official fonts: Andalus for headings, Traditional Arabic for body
+const FONT_TITLE = 'Andalus';
+const FONT_BODY = 'Traditional Arabic';
+const GREY_FILL = 'D9D9D9';
+const HEADER_FILL = 'D9E2F3';
 
 function run(text, opts = {}) {
-  const r = [`<w:r><w:rPr><w:rFonts w:ascii="${FONT}" w:hAnsi="${FONT}" w:cs="${FONT}"/><w:sz w:val="${opts.sz || 22}"/><w:szCs w:val="${opts.sz || 22}"/>`];
-  if (opts.bold) r.push('<w:b/><w:bCs/>');
-  if (opts.italics) r.push('<w:i/><w:iCs/>');
-  if (opts.underline) r.push('<w:u w:val="single"/>');
-  if (opts.color) r.push(`<w:color w:val="${opts.color}"/>`);
-  r.push(`</w:rPr><w:t xml:space="preserve">${esc(text)}</w:t></w:r>`);
-  return r.join('');
+  const font = opts.font || FONT_BODY;
+  const sz = opts.sz || 28;
+  const parts = [`<w:r><w:rPr><w:rFonts w:ascii="${font}" w:hAnsi="${font}" w:cs="${font}"/><w:sz w:val="${sz}"/><w:szCs w:val="${sz}"/><w:rtl/><w:lang w:val="ar-TN" w:bidi="ar-SA"/>`];
+  if (opts.bold) parts.push('<w:b/><w:bCs/>');
+  if (opts.italics) parts.push('<w:i/><w:iCs/>');
+  if (opts.underline) parts.push('<w:u w:val="single"/>');
+  if (opts.color) parts.push(`<w:color w:val="${opts.color}"/>`);
+  parts.push(`</w:rPr><w:t xml:space="preserve">${esc(text)}</w:t></w:r>`);
+  return parts.join('');
 }
 
 function paragraph(children, opts = {}) {
+  const kids = Array.isArray(children) ? children : [children];
   const pPr = [`<w:pPr><w:pStyle w:val="Normal"/>`];
   pPr.push(`<w:jc w:val="${opts.align || 'right'}"/>`);
-  pPr.push(`<w:rPr><w:rFonts w:ascii="${FONT}" w:hAnsi="${FONT}" w:cs="${FONT}"/><w:sz w:val="${opts.sz || 22}"/><w:szCs w:val="${opts.sz || 22}"/>`);
+  const font = opts.font || FONT_BODY;
+  const sz = opts.sz || 28;
+  pPr.push(`<w:rPr><w:rFonts w:ascii="${font}" w:hAnsi="${font}" w:cs="${font}"/><w:sz w:val="${sz}"/><w:szCs w:val="${sz}"/><w:rtl/>`);
   if (opts.bold) pPr.push('<w:b/><w:bCs/>');
   pPr.push('</w:rPr>');
-  if (opts.spacing) pPr.push(`<w:spacing w:before="${opts.spacing.before || 0}" w:after="${opts.spacing.after || 80}" w:line="${opts.spacing.line || 276}" w:lineRule="auto"/>`);
-  if (opts.indent) pPr.push(`<w:ind w:right="${opts.indent}" w:left="${opts.indentLeft || 0}"/>`);
-  if (opts.pageBreakBefore) pPr.push('<w:pageBreakBefore/>');
+  if (opts.shading) pPr.push(`<w:shd w:val="clear" w:color="auto" w:fill="${opts.shading}"/>`);
+  if (opts.borders) {
+    pPr.push('<w:pBdr>');
+    ['top', 'bottom', 'start', 'end'].forEach(side => {
+      pPr.push(`<w:${side} w:val="single" w:sz="6" w:space="4" w:color="000000"/>`);
+    });
+    pPr.push('</w:pBdr>');
+  }
+  pPr.push(`<w:spacing w:before="${opts.before ?? 0}" w:after="${opts.after ?? 100}" w:line="${opts.line || 300}" w:lineRule="auto"/>`);
   pPr.push('</w:pPr>');
-  return `<w:p>${pPr.join('')}${children.join('')}</w:p>`;
+  return `<w:p>${pPr.join('')}${kids.join('')}</w:p>`;
 }
 
-function cell(text, opts = {}) {
-  const cellPr = ['<w:tcPr>'];
-  if (opts.width) cellPr.push(`<w:tcW w:w="${opts.width}" w:type="dxa"/>`);
-  cellPr.push(`<w:vAlign w:val="${opts.vAlign || 'center'}"/>`);
-  if (opts.shading) cellPr.push(`<w:shd w:val="clear" w:color="auto" w:fill="${opts.shading}"/>`);
-  if (opts.columnSpan) cellPr.push(`<w:gridSpan w:val="${opts.columnSpan}"/>`);
-  cellPr.push('<w:tcBorders>');
-  ['top', 'bottom', 'start', 'end'].forEach(side => {
-    cellPr.push(`<w:${side} w:val="single" w:sz="4" w:space="0" w:color="000000"/>`);
-  });
-  cellPr.push('</w:tcBorders>');
-  cellPr.push('<w:textDirection w:val="lr"/>');
-  cellPr.push('</w:tcPr>');
+function cellXml(innerXml, opts = {}) {
+  const tcPr = ['<w:tcPr>'];
+  if (opts.width) tcPr.push(`<w:tcW w:w="${opts.width}" w:type="dxa"/>`);
+  tcPr.push(`<w:vAlign w:val="${opts.vAlign || 'center'}"/>`);
+  if (opts.shading) tcPr.push(`<w:shd w:val="clear" w:color="auto" w:fill="${opts.shading}"/>`);
+  if (opts.columnSpan) tcPr.push(`<w:gridSpan w:val="${opts.columnSpan}"/>`);
+  if (opts.noBorders) {
+    tcPr.push('<w:tcBorders><w:top w:val="nil" w:sz="0" w:space="0" w:color="auto"/><w:bottom w:val="nil" w:sz="0" w:space="0" w:color="auto"/><w:start w:val="nil" w:sz="0" w:space="0" w:color="auto"/><w:end w:val="nil" w:sz="0" w:space="0" w:color="auto"/></w:tcBorders>');
+  } else {
+    tcPr.push('<w:tcBorders>');
+    ['top', 'bottom', 'start', 'end'].forEach(side => {
+      tcPr.push(`<w:${side} w:val="single" w:sz="6" w:space="0" w:color="000000"/>`);
+    });
+    tcPr.push('</w:tcBorders>');
+  }
+  tcPr.push('</w:tcPr>');
+  return `<w:tc>${tcPr.join('')}${innerXml}</w:tc>`;
+}
 
+function cellPara(text, opts = {}) {
+  const font = opts.font || (opts.bold ? FONT_TITLE : FONT_BODY);
+  const sz = opts.sz || (opts.bold ? 30 : 28);
   const align = opts.align || 'center';
-  const pContent = [run(text, { sz: opts.sz || 20, bold: opts.bold })];
-  const pPr = `<w:pPr><w:jc w:val="${align}"/><w:spacing w:before="40" w:after="40"/></w:pPr>`;
-
-  return `<w:tc>${cellPr.join('')}${pPr}${pContent.join('')}</w:tc>`;
+  return `<w:p><w:pPr><w:jc w:val="${align}"/><w:spacing w:before="30" w:after="30"/><w:rPr><w:rFonts w:ascii="${font}" w:hAnsi="${font}" w:cs="${font}"/><w:sz w:val="${sz}"/><w:szCs w:val="${sz}"/><w:rtl/>${opts.bold ? '<w:b/><w:bCs/>' : ''}</w:rPr></w:pPr><w:r><w:rPr><w:rFonts w:ascii="${font}" w:hAnsi="${font}" w:cs="${font}"/><w:sz w:val="${sz}"/><w:szCs w:val="${sz}"/><w:rtl/>${opts.bold ? '<w:b/><w:bCs/>' : ''}</w:rPr><w:t xml:space="preserve">${esc(text)}</w:t></w:r></w:p>`;
 }
 
-function table(rows, opts = {}) {
-  const tblPr = [`<w:tblPr><w:tblStyle w:val="TableGrid"/>`];
-  tblPr.push(`<w:tblW w:w="${opts.width || 9000}" w:type="dxa"/>`);
-  tblPr.push('<w:tblBorders>');
+function table(rowsXml, opts = {}) {
+  const parts = [`<w:tbl><w:tblPr><w:tblStyle w:val="TableGrid"/><w:bidiVisual/>`];
+  parts.push(`<w:tblW w:w="${opts.width || 9500}" w:type="dxa"/>`);
+  parts.push(`<w:jc w:val="${opts.jc || 'center'}"/>`);
+  parts.push('<w:tblBorders>');
   ['top', 'bottom', 'start', 'end', 'insideH', 'insideV'].forEach(side => {
-    tblPr.push(`<w:${side} w:val="single" w:sz="4" w:space="0" w:color="000000"/>`);
+    parts.push(`<w:${side} w:val="single" w:sz="6" w:space="0" w:color="000000"/>`);
   });
-  tblPr.push('</w:tblBorders>');
-  tblPr.push('<w:tblLayout w:type="fixed"/>');
-  tblPr.push('</w:tblPr>');
-
-  const tblGrid = rows[0] ? rows[0].map(() => '<w:gridCol w:w="1500"/>').join('') : '';
-  const tblRows = rows.map(r => `<w:tr>${r.join('')}</w:tr>`).join('');
-
-  return `<w:tbl>${tblPr.join('')}${tblGrid ? `<w:tblGrid>${tblGrid}</w:tblGrid>` : ''}${tblRows}</w:tbl>`;
+  parts.push('</w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr>');
+  const nCols = opts.cols || (rowsXml[0] ? (rowsXml[0].match(/<w:tc>/g) || []).length : 1);
+  const colW = Math.floor((opts.width || 9500) / Math.max(nCols, 1));
+  parts.push('<w:tblGrid>' + Array.from({ length: Math.max(nCols, 1) }, () => `<w:gridCol w:w="${colW}"/>`).join('') + '</w:tblGrid>');
+  parts.push(rowsXml.map(cells => `<w:tr>${cells}</w:tr>`).join(''));
+  parts.push('</w:tbl>');
+  return parts.join('');
 }
 
 function emptyPara() {
-  return `<w:p><w:pPr><w:spacing w:before="0" w:after="0"/></w:pPr></w:p>`;
+  return `<w:p><w:pPr><w:spacing w:before="0" w:after="60"/></w:pPr></w:p>`;
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   BUILD HEADER
+   OFFICIAL HEADER TABLE (matches Ministry papers)
    ══════════════════════════════════════════════════════════════════ */
 
 function buildHeader(context = {}) {
-  const school = context.school || 'المدرسة الإبتدائية';
+  const school = context.school || 'المدرسة الابتدائية';
   const subjectLabel = SUBJECT_MAP[context.subject] || context.subject || '';
   const levelLabel = LEVEL_NAMES[context.level] || context.level || '';
-  const trimester = context.trimester ? `الفصل ${context.trimester}` : '';
+  const trimesterLabel = TRIMESTER_NAMES[context.trimester] || (context.trimester ? `الثلاثي ${context.trimester}` : '');
+  const year = new Date().getFullYear();
+  const schoolYear = `${year - 1}/${year}`;
   const date = context.date || new Date().toLocaleDateString('ar-TN');
   const duration = context.durationMinutes || 60;
   const teacher = context.teacherName || '...........';
   const studentName = context.studentName || '................................';
-  const studentClass = context.studentClass || '................................';
+  const studentClass = context.studentClass || '...........';
+  const title = context.title || `تقييم مكتسبات التلاميذ في نهاية ${trimesterLabel}`;
 
-  const rows = [
-    [cell(school, { bold: true, width: 3000 }), cell(`تقويم مكتسبات التلاميذ\n${subjectLabel}${trimester ? ' — ' + trimester : ''}`, { bold: true, width: 4500 }), cell(date, { width: 2000 })],
-    [cell(`المستوى والقسم: ${levelLabel}`, { width: 3000 }), cell(`المعلم واللقب: ${teacher}`, { width: 4500 }), cell(`التوقيت: ${duration} د`, { width: 2000 })],
-    [cell(`الاسم واللقب: ${studentName}`, { width: 4500 }), cell(`القسم: ${studentClass}`, { width: 2500 }), cell(`المستوى: ${levelLabel}`, { width: 2000 })]
-  ];
+  const row1 =
+    cellXml(cellPara(`المدرسة الابتدائية: ${school}`, { bold: true, sz: 28, width: 0 }), { width: 3000 }) +
+    cellXml(cellPara(`${title}`, { bold: true, sz: 30, font: FONT_TITLE }) + cellPara(`${subjectLabel}`, { bold: true, sz: 30, font: FONT_TITLE }), { width: 3800 }) +
+    cellXml(cellPara(`السنة الدراسية: ${schoolYear}`, { bold: true, sz: 26 }), { width: 2700 });
 
-  return table(rows, { width: 9500 });
+  const row2 =
+    cellXml(cellPara(`الاسم واللقب: ${studentName}`, { sz: 26, align: 'right' }), { width: 3000 }) +
+    cellXml(cellPara(`القسم: ${studentClass}`, { sz: 26, align: 'right' }), { width: 3800 }) +
+    cellXml(cellPara(`${levelLabel}${trimesterLabel ? ' — ' + trimesterLabel : ''}`, { sz: 26 }), { width: 2700 });
+
+  const row3 =
+    cellXml(cellPara(`المعلم(ة): ${teacher}`, { sz: 24, align: 'right' }), { width: 3000 }) +
+    cellXml(cellPara(`التاريخ: ${date}`, { sz: 24 }), { width: 3800 }) +
+    cellXml(cellPara(`المدة: ${duration} دقيقة`, { sz: 24 }), { width: 2700 });
+
+  return table([row1, row2, row3], { width: 9500, cols: 3 });
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   BUILD QUESTIONS
+   SANAD (grey passage block) + TAALIMA (numbered instruction)
    ══════════════════════════════════════════════════════════════════ */
 
-function buildPassage(passage) {
-  if (!passage?.text) return '';
-  return paragraph([run(passage.text)], { spacing: { after: 120, line: 300 }, indent: 400 });
+function buildSanad(index, text) {
+  if (!text) return '';
+  return paragraph(
+    [run(`السند ${index}: `, { bold: true, sz: 30, font: FONT_TITLE }), run(text, { sz: 28 })],
+    { shading: GREY_FILL, borders: true, after: 120, before: 160 }
+  );
 }
 
-function buildSectionHeader(index, title) {
-  return paragraph([run(`السند ${index}: `, { bold: true, sz: 24 }), run(title || '', { sz: 22 })], { spacing: { before: 200, after: 100 } });
+function buildTaalimaHeader(label, instruction, points) {
+  const mark = points ? `  (${points}ن)` : '';
+  return paragraph(
+    [run(`${label}: `, { bold: true, sz: 30, font: FONT_TITLE }), run(`${instruction}${mark}`, { sz: 28 })],
+    { after: 80, before: 140 }
+  );
 }
 
-function buildSubQuestion(label, instruction, question, subIndex) {
-  const elements = [];
-
-  elements.push(paragraph([run(`${label}: `, { bold: true, sz: 22 }), run(instruction, { sz: 22 })], { spacing: { after: 60 } }));
-
-  if (question.type === 'MCQ') {
-    elements.push(...buildMCQ(question));
-  } else if (question.type === 'TRUE_FALSE') {
-    elements.push(...buildTrueFalse(question));
-  } else if (question.type === 'FILL_BLANK') {
-    elements.push(...buildFillBlank(question));
-  } else if (question.type === 'MATCHING') {
-    elements.push(...buildMatching(question));
-  } else if (question.type === 'ORDERING') {
-    elements.push(...buildOrdering(question));
-  } else {
-    elements.push(...buildOpen(question));
+function answerLines(n = 3, width = 60) {
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    out.push(paragraph([run(dottedLine(width), { sz: 24 })], { after: 60 }));
   }
-
-  return elements.join('');
+  return out.join('');
 }
+
+/* ══════════════════════════════════════════════════════════════════
+   QUESTION TYPES (official rendering)
+   ══════════════════════════════════════════════════════════════════ */
 
 function buildMCQ(q) {
   const prompt = q.prompt || q.text || '';
-  const options = q.options || ['أ', 'ب', 'ج'];
+  const options = q.options && q.options.length ? q.options : ['أ', 'ب', 'ج'];
   const lines = [];
-  if (prompt) lines.push(paragraph([run(prompt)], { spacing: { after: 60 }, indent: 400 }));
-  options.forEach((opt, i) => {
-    const text = typeof opt === 'string' ? opt : opt.text || '';
-    lines.push(paragraph([run(`  ▲  `, { bold: true }), run(text)], { spacing: { after: 40 }, indent: 600 }));
+  if (prompt) lines.push(paragraph([run(prompt, { sz: 28 })], { after: 80, indent: 0 }));
+  options.forEach((opt) => {
+    const text = typeof opt === 'string' ? opt : (opt.text || '');
+    lines.push(paragraph([run('○   ', { sz: 28 }), run(text, { sz: 28 })], { after: 50 }));
   });
   return lines.join('');
 }
 
 function buildTrueFalse(q) {
-  const stmts = q.statements || [{ text: q.prompt || q.text || '' }];
-  return stmts.map((s, i) => {
-    const text = typeof s === 'string' ? s : s.text || '';
-    return paragraph([run(`  ${i + 1})  `, { bold: true }), run(text), run('   (  ) صحيح     (  ) خطأ', { sz: 20, bold: true })], { spacing: { after: 60 }, indent: 400 });
+  const stmts = q.statements && q.statements.length ? q.statements : [{ text: q.prompt || q.text || '' }];
+  return stmts.map((s) => {
+    const text = typeof s === 'string' ? s : (s.text || '');
+    return paragraph(
+      [run(text, { sz: 28 }), run('    (  ) صحيح       (  ) خطأ', { sz: 26, bold: true })],
+      { after: 70 }
+    );
   }).join('');
 }
 
 function buildFillBlank(q) {
-  const items = q.items || [{ text: q.prompt || q.text || '' }];
+  const items = q.items && q.items.length ? q.items : [{ text: q.prompt || q.text || '' }];
   return items.map((item, i) => {
-    const text = typeof item === 'string' ? item : item.text || '';
-    const parts = text.split(/_{3,}/);
+    const text = typeof item === 'string' ? item : (item.text || '');
+    const parts = String(text).split(/_{3,}|\.{4,}|…+/);
     if (parts.length > 1) {
-      const children = [run(`  ${i + 1})  `, { bold: true })];
+      const children = [];
       parts.forEach((part, j) => {
-        children.push(run(part));
-        if (j < parts.length - 1) children.push(run(dottedLine(15), { underline: true }));
+        children.push(run(part, { sz: 28 }));
+        if (j < parts.length - 1) children.push(run(dottedLine(18), { sz: 26 }));
       });
-      return paragraph(children, { spacing: { after: 60 }, indent: 400 });
+      return paragraph(children, { after: 70 });
     }
-    return paragraph([run(`  ${i + 1})  `, { bold: true }), run(text), run(`   ${dottedLine(20)}`, { underline: true })], { spacing: { after: 60 }, indent: 400 });
+    return paragraph([run(text, { sz: 28 }), run('   ' + dottedLine(25), { sz: 26 })], { after: 70 });
   }).join('');
 }
 
@@ -214,87 +264,123 @@ function buildMatching(q) {
   const left = q.leftItems || [];
   const right = q.rightItems || [];
   const lines = [];
-  if (q.prompt) lines.push(paragraph([run(q.prompt)], { spacing: { after: 80 } }));
-  const maxLen = Math.max(left.length, right.length);
+  if (q.prompt || q.text) lines.push(paragraph([run(q.prompt || q.text, { sz: 28 })], { after: 80 }));
+  const maxLen = Math.max(left.length, right.length, 1);
   const rows = [];
   for (let i = 0; i < maxLen; i++) {
-    rows.push([
-      cell(left[i] ? `${i + 1}) ${left[i]}` : '', { width: 4000, align: 'right' }),
-      cell('', { width: 1000 }),
-      cell(right[i] ? `${String.fromCharCode(1571 + i)}) ${right[i]}` : '', { width: 4000, align: 'right' })
-    ]);
+    const l = left[i] ? `${i + 1}) ${typeof left[i] === 'string' ? left[i] : (left[i].text || '')}` : '';
+    const r = right[i] ? `${String.fromCharCode(1571 + i)}) ${typeof right[i] === 'string' ? right[i] : (right[i].text || '')}` : '';
+    rows.push(
+      cellXml(cellPara(l, { align: 'right', sz: 26 }), { width: 4200 }) +
+      cellXml(cellPara('', { sz: 26 }), { width: 1100 }) +
+      cellXml(cellPara(r, { align: 'right', sz: 26 }), { width: 4200 })
+    );
   }
-  lines.push(table(rows, { width: 9000 }));
+  lines.push(table(rows, { width: 9500, cols: 3 }));
   return lines.join('');
 }
 
 function buildOrdering(q) {
   const items = q.items || q.orderItems || [];
   const lines = [];
-  if (q.prompt) lines.push(paragraph([run(q.prompt)], { spacing: { after: 80 } }));
-  items.forEach((item, i) => {
-    const text = typeof item === 'string' ? item : item.text || '';
-    lines.push(paragraph([run(`  ${i + 1})  `, { bold: true }), run(text), run(`   ${dottedLine(10)}`, { underline: true })], { spacing: { after: 40 }, indent: 400 }));
+  if (q.prompt || q.text) lines.push(paragraph([run(q.prompt || q.text, { sz: 28 })], { after: 80 }));
+  items.forEach((item) => {
+    const text = typeof item === 'string' ? item : (item.text || '');
+    lines.push(paragraph(
+      [run('□   ', { sz: 28 }), run(text, { sz: 28 }), run('   ' + dottedLine(12), { sz: 24 })],
+      { after: 50 }
+    ));
   });
+  return lines.join('');
+}
+
+function buildExtract(q) {
+  const prompt = q.prompt || q.text || '';
+  const options = q.options && q.options.length ? q.options : [];
+  const lines = [];
+  if (prompt) lines.push(paragraph([run(prompt, { sz: 28 })], { after: 80 }));
+  options.forEach((opt) => {
+    const text = typeof opt === 'string' ? opt : (opt.text || '');
+    lines.push(paragraph([run('□   ', { sz: 28 }), run(text, { sz: 28 })], { after: 50 }));
+  });
+  if (!options.length) lines.push(answerLines(2, 55));
   return lines.join('');
 }
 
 function buildOpen(q) {
   const prompt = q.prompt || q.text || '';
-  const lineCount = q.answerLines || 3;
+  const lineCount = q.answerLines || 4;
   const lines = [];
-  if (prompt) lines.push(paragraph([run(prompt)], { spacing: { after: 80 } }));
-  for (let i = 0; i < lineCount; i++) {
-    lines.push(paragraph([run(dottedLine(60), { underline: true })], { spacing: { after: 40 }, indent: 200 }));
-  }
+  if (prompt) lines.push(paragraph([run(prompt, { sz: 28 })], { after: 80 }));
+  lines.push(answerLines(lineCount, 65));
   return lines.join('');
 }
 
+function buildQuestionBody(q) {
+  const type = (q.type || 'OPEN').toUpperCase();
+  if (type === 'MCQ') return buildMCQ(q);
+  if (type === 'TRUE_FALSE') return buildTrueFalse(q);
+  if (type === 'FILL_BLANK') return buildFillBlank(q);
+  if (type === 'MATCHING') return buildMatching(q);
+  if (type === 'ORDERING' || type === 'ORDER') return buildOrdering(q);
+  if (type === 'EXTRACT') return buildExtract(q);
+  return buildOpen(q);
+}
+
 /* ══════════════════════════════════════════════════════════════════
-   BUILD CRITERIA TABLE
+   OFFICIAL GRADING TABLE (جدول إسناد الأعداد)
    ══════════════════════════════════════════════════════════════════ */
 
 function buildCriteriaTable(criteria) {
   if (!criteria?.length) return '';
 
-  const titleRow = [cell('جدول إسناد الأعداد', { bold: true, width: 9000, columnSpan: 6, shading: 'D9E2F3' })];
+  const n = criteria.length;
+  const colW = Math.floor(7000 / n);
+  const titleRow = cellXml(cellPara('جدول إسناد الأعداد', { bold: true, sz: 30, font: FONT_TITLE }), { width: 9500, columnSpan: n + 2 });
 
-  const headerRow = [
-    cell('المعيار', { bold: true, width: 2500, shading: 'D9E2F3' }),
-    cell('انعدام التملك\n(---)', { bold: true, sz: 16, width: 1300, shading: 'D9E2F3' }),
-    cell('دون التملك\n(--+)', { bold: true, sz: 16, width: 1300, shading: 'D9E2F3' }),
-    cell('التملك الأدنى\n(-++)', { bold: true, sz: 16, width: 1300, shading: 'D9E2F3' }),
-    cell('التملك الأقصى\n(+++)', { bold: true, sz: 16, width: 1300, shading: 'D9E2F3' }),
-    cell('المجموع', { bold: true, width: 1300, shading: 'D9E2F3' })
-  ];
-
-  const dataRows = criteria.map(c => {
-    const m = c.mastery || {};
-    return [
-      cell(c.label || c.id || '', { width: 2500, align: 'right' }),
-      cell(String(m.none ?? 0), { width: 1300 }),
-      cell(String(m.below ?? 0), { width: 1300 }),
-      cell(String(m.min ?? 0), { width: 1300 }),
-      cell(String(m.max ?? 0), { width: 1300 }),
-      cell(String(m.max ?? 0), { bold: true, width: 1300 })
-    ];
+  let headerRow =
+    cellXml(cellPara('المعيار', { bold: true, sz: 26 }), { width: 2500, shading: HEADER_FILL });
+  criteria.forEach((c, i) => {
+    headerRow += cellXml(cellPara(c.id || `مع${i + 1}`, { bold: true, sz: 26 }), { width: colW, shading: HEADER_FILL });
   });
+  headerRow += cellXml(cellPara('العدد', { bold: true, sz: 26 }), { width: 1200, shading: HEADER_FILL });
 
-  const totalMax = criteria.reduce((s, c) => s + (c.mastery?.max || 0), 0);
-  const totalRow = [
-    cell('المجموع الكلي', { bold: true, width: 2500, shading: 'E2EFDA' }),
-    cell('', { width: 1300, shading: 'E2EFDA' }),
-    cell('', { width: 1300, shading: 'E2EFDA' }),
-    cell('', { width: 1300, shading: 'E2EFDA' }),
-    cell(String(totalMax), { bold: true, width: 1300, shading: 'E2EFDA' }),
-    cell(`${totalMax} / 20`, { bold: true, width: 1300, shading: 'E2EFDA' })
-  ];
+  const levelRow = (symbol, key) => {
+    let row = cellXml(cellPara(symbol, { bold: true, sz: 26 }), { width: 2500 });
+    criteria.forEach((c) => {
+      const m = c.mastery || {};
+      row += cellXml(cellPara(String(m[key] ?? 0), { sz: 26 }), { width: colW });
+    });
+    row += cellXml(cellPara('', { sz: 26 }), { width: 1200 });
+    return row;
+  };
 
-  return paragraph([run('')], { spacing: { before: 200 } }) + table([titleRow, headerRow, ...dataRows, totalRow], { width: 9000 });
+  const labelRow = cellXml(cellPara('معايير الحد الأدنى', { bold: true, sz: 24 }), { width: 9500, columnSpan: n + 2, shading: 'E2EFDA' });
+
+  const rows = [titleRow, headerRow];
+  criteria.forEach((c) => {
+    let r = cellXml(cellPara(c.label || c.id || '', { sz: 24, align: 'right' }), { width: 2500 });
+    for (let i = 0; i < n; i++) r += cellXml(cellPara('', { sz: 24 }), { width: colW });
+    r += cellXml(cellPara('', { sz: 24 }), { width: 1200 });
+    rows.push(r);
+  });
+  rows.push(labelRow);
+  rows.push(levelRow('---', 'none'));
+  rows.push(levelRow('--+', 'below'));
+  rows.push(levelRow('-++', 'min'));
+  rows.push(levelRow('+++', 'max'));
+
+  const totalMax = criteria.reduce((s, c) => s + (Number(c.mastery?.max) || 0), 0);
+  let totalRow = cellXml(cellPara('المجموع', { bold: true, sz: 26 }), { width: 2500, shading: 'E2EFDA' });
+  for (let i = 0; i < n; i++) totalRow += cellXml(cellPara('', { sz: 26 }), { width: colW, shading: 'E2EFDA' });
+  totalRow += cellXml(cellPara(`${totalMax} / 20`, { bold: true, sz: 26 }), { width: 1200, shading: 'E2EFDA' });
+  rows.push(totalRow);
+
+  return paragraph([run('')], { before: 240 }) + table(rows, { width: 9500, cols: n + 2 });
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   GENERATE DOCX
+   DOCUMENT ASSEMBLY
    ══════════════════════════════════════════════════════════════════ */
 
 function buildDocumentXml(bodyContent) {
@@ -316,12 +402,13 @@ function buildDocumentXml(bodyContent) {
             xmlns:wps="http://schemas.microsoft.com/office/word/2010/wordprocessingShape"
             mc:Ignorable="w14 wp14">
   <w:body>
+    ${bodyContent}
     <w:sectPr>
       <w:pgSz w:w="11906" w:h="16838"/>
       <w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="720" w:footer="720" w:gutter="0"/>
       <w:cols w:space="720"/>
+      <w:docGrid w:linePitch="360"/>
     </w:sectPr>
-    ${bodyContent}
   </w:body>
 </w:document>`;
 }
@@ -333,6 +420,7 @@ function buildContentTypes() {
   <Default Extension="xml" ContentType="application/xml"/>
   <Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
   <Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
+  <Override PartName="/word/fontTable.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.fontTable+xml"/>
 </Types>`;
 }
 
@@ -347,17 +435,44 @@ function buildDocRels() {
   return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
   <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>
+  <Relationship Id="rId2" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/fontTable" Target="fontTable.xml"/>
 </Relationships>`;
 }
 
 function buildStyles() {
   return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:docDefaults>
+    <w:rPrDefault><w:rPr><w:rFonts w:ascii="${FONT_BODY}" w:hAnsi="${FONT_BODY}" w:cs="${FONT_BODY}"/><w:sz w:val="28"/><w:szCs w:val="28"/><w:lang w:val="ar-TN" w:bidi="ar-SA"/></w:rPr></w:rPrDefault>
+    <w:pPrDefault><w:pPr><w:jc w:val="right"/></w:pPr></w:pPrDefault>
+  </w:docDefaults>
   <w:style w:type="paragraph" w:default="1" w:styleId="Normal">
     <w:name w:val="Normal"/>
-    <w:rPr><w:rFonts w:ascii="${FONT}" w:hAnsi="${FONT}" w:cs="${FONT}"/><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr>
+    <w:rPr><w:rFonts w:ascii="${FONT_BODY}" w:hAnsi="${FONT_BODY}" w:cs="${FONT_BODY}"/><w:sz w:val="28"/><w:szCs w:val="28"/><w:rtl/><w:lang w:val="ar-TN" w:bidi="ar-SA"/></w:rPr>
   </w:style>
 </w:styles>`;
+}
+
+function buildFontTable() {
+  return `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:fonts xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+  <w:font w:name="${FONT_TITLE}"><w:charset w:val="178"/><w:family w:val="auto"/><w:pitch w:val="variable"/></w:font>
+  <w:font w:name="${FONT_BODY}"><w:charset w:val="178"/><w:family w:val="auto"/><w:pitch w:val="variable"/></w:font>
+</w:fonts>`;
+}
+
+function groupIntoSections(questions) {
+  const groups = [];
+  const bySection = new Map();
+  questions.forEach((q) => {
+    const key = q.section ?? q.criterion ?? 1;
+    if (!bySection.has(key)) {
+      bySection.set(key, { id: key, title: q.sectionTitle || '', questions: [] });
+      groups.push(bySection.get(key));
+    }
+    bySection.get(key).questions.push(q);
+  });
+  return groups;
 }
 
 export async function buildOfficialDocx(examData, context = {}) {
@@ -373,33 +488,41 @@ export async function buildOfficialDocx(examData, context = {}) {
   const bodyParts = [];
 
   bodyParts.push(buildHeader({
-    ...context, subject, level, trimester, durationMinutes
+    ...context, subject, level, trimester, durationMinutes, title
   }));
   bodyParts.push(emptyPara());
 
-  passages.forEach(p => {
-    bodyParts.push(buildPassage(p));
+  passages.forEach((p, i) => {
+    const text = typeof p === 'string' ? p : (p.text || '');
+    const pTitle = typeof p === 'object' ? (p.title || '') : '';
+    if (pTitle) bodyParts.push(buildSanad(i + 1, pTitle));
+    bodyParts.push(paragraph([run(text, { sz: 28 })], { after: 100 }));
     bodyParts.push(emptyPara());
   });
 
-  let mainIdx = 0;
-  const subCounters = {};
-
-  questions.forEach((q, gi) => {
-    const mainId = q.section || q.mainIndex || Math.floor(gi / 3) + 1;
-    if (!subCounters[mainId]) { subCounters[mainId] = 0; mainIdx++; }
-    subCounters[mainId]++;
-
-    if (subCounters[mainId] === 1) {
-      bodyParts.push(buildSectionHeader(mainId, q.sectionTitle || q.title || ''));
+  const groups = groupIntoSections(questions);
+  groups.forEach((g, gi) => {
+    const mainNum = gi + 1;
+    if (g.title) {
+      bodyParts.push(buildSanad(mainNum, g.title));
     }
-
-    const label = q.label || `التعليمة ${mainId}-${subCounters[mainId]}`;
-    bodyParts.push(buildSubQuestion(label, q.instruction || '', q, subCounters[mainId]));
-    bodyParts.push(emptyPara());
+    g.questions.forEach((q, qi) => {
+      const label = q.label || `التعليمة ${mainNum}-${qi + 1}`;
+      const instruction = q.instruction || q.prompt || q.text || '';
+      const points = q.points || '';
+      const hasOwnPrompt = ['MCQ', 'TRUE_FALSE', 'FILL_BLANK', 'MATCHING', 'ORDERING', 'ORDER', 'EXTRACT'].includes((q.type || '').toUpperCase());
+      bodyParts.push(buildTaalimaHeader(label, hasOwnPrompt ? '' : instruction, points));
+      if (hasOwnPrompt && instruction && q.type && (q.type || '').toUpperCase() !== 'OPEN') {
+        // instruction shown above via header; body renders prompt/options
+      }
+      const bodyQ = { ...q };
+      if (!hasOwnPrompt) bodyQ.prompt = '';
+      else if (!bodyQ.prompt && !bodyQ.text && instruction) bodyQ.prompt = instruction;
+      bodyParts.push(buildQuestionBody(bodyQ));
+      bodyParts.push(emptyPara());
+    });
   });
 
-  bodyParts.push(paragraph([run('')], { pageBreakBefore: true }));
   bodyParts.push(buildCriteriaTable(criteria));
 
   const bodyXml = bodyParts.join('\n');
@@ -411,6 +534,7 @@ export async function buildOfficialDocx(examData, context = {}) {
   zip.file('word/_rels/document.xml.rels', buildDocRels());
   zip.file('word/document.xml', documentXml);
   zip.file('word/styles.xml', buildStyles());
+  zip.file('word/fontTable.xml', buildFontTable());
 
   return zip.generateAsync({ type: 'nodebuffer', compression: 'DEFLATE' });
 }
@@ -420,24 +544,24 @@ export function prepareExamForDocx(content, context = {}) {
 
   const questions = (content.questions || []).map((q, i) => ({
     id: q.id || `q${i + 1}`,
-    section: q.section || q.criterion || Math.floor(i / 3) + 1,
+    section: q.section ?? q.criterion ?? Math.floor(i / 3) + 1,
     sectionTitle: q.sectionTitle || '',
-    label: q.label || `التعليمة ${q.section || Math.floor(i / 3) + 1}-${((i % 3) + 1)}`,
-    instruction: q.instruction || q.prompt || q.text || '',
+    label: q.label || `التعليمة ${q.section ?? Math.floor(i / 3) + 1}-${((i % 3) + 1)}`,
+    instruction: q.instruction || '',
     prompt: q.prompt || q.text || '',
     type: q.type || 'OPEN',
     options: q.options, correct: q.correct, correctAnswer: q.correctAnswer,
     orderItems: q.orderItems, points: q.points || 1,
-    answerLines: q.answerLines || 3,
+    answerLines: q.answerLines || 4,
     items: q.items, leftItems: q.leftItems, rightItems: q.rightItems,
     statements: q.statements, visual: q.visual
   }));
 
   return {
-    title: content.title || 'اختبار رسمي',
+    title: content.title || context.title || 'اختبار رسمي',
     subject: content.subject || context.subject,
-    level: content.level || context.level,
-    trimester: content.trimester || context.trimester,
+    level: content.level ?? context.level,
+    trimester: content.trimester ?? context.trimester,
     questions, criteria: content.criteria,
     passages: content.passages || [],
     durationMinutes: content.durationMinutes || context.durationMinutes || 60,
@@ -445,4 +569,4 @@ export function prepareExamForDocx(content, context = {}) {
   };
 }
 
-export { SUBJECT_MAP, LEVEL_NAMES, DEFAULT_CRITERIA };
+export { SUBJECT_MAP, LEVEL_NAMES, DEFAULT_CRITERIA, TRIMESTER_NAMES };
