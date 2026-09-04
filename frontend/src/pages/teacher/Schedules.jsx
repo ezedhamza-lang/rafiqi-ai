@@ -6,19 +6,17 @@ const COLORS = ['#ef4444','#06b6d4','#8b5cf6','#3b82f6','#f97316','#ec4899','#10
 
 const REQUIRED_HOURS = { 1: 20, 2: 22, 3: 25, 4: 25, 5: 28, 6: 28 };
 
-const ARABIC_COMPONENTS = [
-  { name: 'تواصل شفوي', color: '#ef4444', group: 'اللغة العربية' },
-  { name: 'قراءة', color: '#dc2626', group: 'اللغة العربية' },
-  { name: 'إنتاج كتابي', color: '#b91c1c', group: 'اللغة العربية' },
-  { name: 'حوار منظّم', color: '#991b1b', group: 'اللغة العربية' },
-  { name: 'كتابة', color: '#7f1d1d', group: 'اللغة العربية' },
-  { name: 'حفظات', color: '#450a0a', group: 'اللغة العربية' },
-  { name: 'قواعد اللغة', color: '#f87171', group: 'اللغة العربية' }
-];
-
+// Γνωστικية العربية حسب دليل التنظيمات 2026-2027
+// السنة الأولى: 9 ساعات — الثانية: 6 ساعات — الثالثة+: 6 ساعات
 const GRADE_SUBJECTS = {
   1: [
-    ...ARABIC_COMPONENTS.map((c, i) => ({ ...c, hours: [2, 1.5, 1.5, 1, 1.5, 1, 0.5][i] })),
+    { name: 'تواصل شفوي', color: '#ef4444', hours: 1.5, group: 'اللغة العربية' },
+    { name: 'قراءة', color: '#dc2626', hours: 4, group: 'اللغة العربية' },
+    { name: 'حفظات', color: '#991b1b', hours: 0.5, group: 'اللغة العربية' },
+    { name: 'حوار منظّم', color: '#b91c1c', hours: 0.5, group: 'اللغة العربية' },
+    { name: 'كتابة', color: '#7f1d1d', hours: 1, group: 'اللغة العربية' },
+    { name: 'استيعاب قواعد اللغة', color: '#f87171', hours: 0, group: 'اللغة العربية' },
+    { name: 'إنتاج كتابي', color: '#450a0a', hours: 1.5, group: 'اللغة العربية' },
     { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
     { name: 'الرياضيات', color: '#10b981', hours: 5, group: 'الرياضيات' },
     { name: 'إيقاظ علمي', color: '#14b8a6', hours: 1, group: 'العلوم والتكنولوجيا' },
@@ -28,7 +26,13 @@ const GRADE_SUBJECTS = {
     { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   2: [
-    ...ARABIC_COMPONENTS.map((c, i) => ({ ...c, hours: [2, 1.5, 1.5, 1, 1.5, 1, 0.5][i] })),
+    { name: 'تواصل شفوي', color: '#ef4444', hours: 0.5, group: 'اللغة العربية' },
+    { name: 'قراءة', color: '#dc2626', hours: 1.5, group: 'اللغة العربية' },
+    { name: 'حفظات', color: '#991b1b', hours: 0.5, group: 'اللغة العربية' },
+    { name: 'حوار منظّم', color: '#b91c1c', hours: 0.5, group: 'اللغة العربية' },
+    { name: 'كتابة', color: '#7f1d1d', hours: 0, group: 'اللغة العربية' },
+    { name: 'استيعاب قواعد اللغة', color: '#f87171', hours: 2, group: 'اللغة العربية' },
+    { name: 'إنتاج كتابي', color: '#450a0a', hours: 1, group: 'اللغة العربية' },
     { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 2, group: 'اللغات الأجنبية' },
     { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
     { name: 'الرياضيات', color: '#10b981', hours: 5, group: 'الرياضيات' },
@@ -39,7 +43,13 @@ const GRADE_SUBJECTS = {
     { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   3: [
-    ...ARABIC_COMPONENTS.map((c, i) => ({ ...c, hours: [1, 1, 1, 0.5, 1, 1, 0.5][i] })),
+    { name: 'تواصل شفوي', color: '#ef4444', hours: 0.5, group: 'اللغة العربية' },
+    { name: 'قراءة', color: '#dc2626', hours: 1.5, group: 'اللغة العربية' },
+    { name: 'حفظات', color: '#991b1b', hours: 0.33, group: 'اللغة العربية' },
+    { name: 'حوار منظّم', color: '#b91c1c', hours: 0, group: 'اللغة العربية' },
+    { name: 'كتابة', color: '#7f1d1d', hours: 0, group: 'اللغة العربية' },
+    { name: 'استيعاب قواعد اللغة', color: '#f87171', hours: 2, group: 'اللغة العربية' },
+    { name: 'إنتاج كتابي', color: '#450a0a', hours: 1.67, group: 'اللغة العربية' },
     { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
     { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
     { name: 'التاريخ', color: '#78716c', hours: 0.67, group: 'التربية الاجتماعية' },
@@ -53,7 +63,13 @@ const GRADE_SUBJECTS = {
     { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   4: [
-    ...ARABIC_COMPONENTS.map((c, i) => ({ ...c, hours: [1, 1, 1, 0.5, 1, 1, 0.5][i] })),
+    { name: 'تواصل شفوي', color: '#ef4444', hours: 0.5, group: 'اللغة العربية' },
+    { name: 'قراءة', color: '#dc2626', hours: 1.5, group: 'اللغة العربية' },
+    { name: 'حفظات', color: '#991b1b', hours: 0.33, group: 'اللغة العربية' },
+    { name: 'حوار منظّم', color: '#b91c1c', hours: 0, group: 'اللغة العربية' },
+    { name: 'كتابة', color: '#7f1d1d', hours: 0, group: 'اللغة العربية' },
+    { name: 'استيعاب قواعد اللغة', color: '#f87171', hours: 2, group: 'اللغة العربية' },
+    { name: 'إنتاج كتابي', color: '#450a0a', hours: 1.67, group: 'اللغة العربية' },
     { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
     { name: 'اللغة الإنجليزية', color: '#6366f1', hours: 1, group: 'اللغات الأجنبية' },
     { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
@@ -68,7 +84,13 @@ const GRADE_SUBJECTS = {
     { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   5: [
-    ...ARABIC_COMPONENTS.map((c, i) => ({ ...c, hours: [1, 1, 1, 0.5, 1, 1, 0.5][i] })),
+    { name: 'تواصل شفوي', color: '#ef4444', hours: 0.5, group: 'اللغة العربية' },
+    { name: 'قراءة', color: '#dc2626', hours: 1.5, group: 'اللغة العربية' },
+    { name: 'حفظات', color: '#991b1b', hours: 0.33, group: 'اللغة العربية' },
+    { name: 'حوار منظّم', color: '#b91c1c', hours: 0, group: 'اللغة العربية' },
+    { name: 'كتابة', color: '#7f1d1d', hours: 0, group: 'اللغة العربية' },
+    { name: 'استيعاب قواعد اللغة', color: '#f87171', hours: 2, group: 'اللغة العربية' },
+    { name: 'إنتاج كتابي', color: '#450a0a', hours: 1.67, group: 'اللغة العربية' },
     { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
     { name: 'اللغة الإنجليزية', color: '#6366f1', hours: 2, group: 'اللغات الأجنبية' },
     { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
@@ -83,7 +105,13 @@ const GRADE_SUBJECTS = {
     { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   6: [
-    ...ARABIC_COMPONENTS.map((c, i) => ({ ...c, hours: [1, 1, 1, 0.5, 1, 1, 0.5][i] })),
+    { name: 'تواصل شفوي', color: '#ef4444', hours: 0.5, group: 'اللغة العربية' },
+    { name: 'قراءة', color: '#dc2626', hours: 1.5, group: 'اللغة العربية' },
+    { name: 'حفظات', color: '#991b1b', hours: 0.33, group: 'اللغة العربية' },
+    { name: 'حوار منظّم', color: '#b91c1c', hours: 0, group: 'اللغة العربية' },
+    { name: 'كتابة', color: '#7f1d1d', hours: 0, group: 'اللغة العربية' },
+    { name: 'استيعاب قواعد اللغة', color: '#f87171', hours: 2, group: 'اللغة العربية' },
+    { name: 'إنتاج كتابي', color: '#450a0a', hours: 1.67, group: 'اللغة العربية' },
     { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
     { name: 'اللغة الإنجليزية', color: '#6366f1', hours: 2, group: 'اللغات الأجنبية' },
     { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
@@ -104,9 +132,22 @@ const DAYS = ['الإثنين','الثلاثاء','الأربعاء','الخمي
 
 const DURATION_OPTIONS = [15, 20, 25, 30, 40, 55];
 
+function formatDuration(d) {
+  if (d === 15) return '15 دقيقة';
+  if (d === 20) return '20 دقيقة';
+  if (d === 25) return '25 دقيقة';
+  if (d === 30) return '30 دقيقة';
+  if (d === 40) return '40 دقيقة';
+  return `${d} دقيقة`;
+}
+
 function formatHours(h) {
+  if (h === 0) return '—';
+  if (h === 0.33) return '20 دقيقة';
   if (h === 0.5) return '30 دقيقة';
   if (h === 0.67) return '40 دقيقة';
+  if (h === 1.5) return '1 ساعة و 30 دق';
+  if (h === 1.67) return '1 ساعة و 40 دق';
   return `${h} س`;
 }
 
@@ -324,7 +365,7 @@ export default function Schedules({ classes }) {
                     </td>
                     <td style={{ padding: '8px 6px', border: '2px solid #c5cae9', textAlign: 'center' }}>
                       {editingCell?.idx === idx && editingCell?.field === 'hours' ? (
-                        <input type="number" value={editValue} onChange={(e) => setEditValue(e.target.value)} onKeyDown={handleKeyDown} onBlur={saveEdit} min={0} max={40} step={0.5}
+                        <input type="number" value={editValue} onChange={(e) => setEditValue(e.target.value)} onKeyDown={handleKeyDown} onBlur={saveEdit} min={0} max={40} step={0.33}
                           autoFocus style={{ width: '70px', padding: '4px', border: '2px solid #3b82f6', borderRadius: '6px', textAlign: 'center', fontSize: '0.9rem', fontWeight: 700 }} />
                       ) : (
                         <span onClick={() => startEdit(idx, 'hours')} style={{ cursor: 'pointer', padding: '4px 10px', borderRadius: '8px', background: sub.color + '15', border: `1px solid ${sub.color}30`, fontWeight: 900, fontSize: '0.9rem', color: sub.color, display: 'inline-block' }}>
