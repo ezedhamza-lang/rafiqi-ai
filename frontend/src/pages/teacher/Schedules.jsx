@@ -4,10 +4,15 @@ import { useI18n } from '../../i18n/index.jsx';
 
 const COLORS = ['#ef4444','#06b6d4','#8b5cf6','#3b82f6','#f97316','#ec4899','#10b981','#14b8a6','#78716c','#a16207','#f59e0b','#64748b','#0ea5e9','#6366f1','#a855f7','#e11d48','#22c55e','#d946ef','#0891b2','#7c3aed'];
 
+// الدرجة الأولى = سنة 1 + 2 — الدرجة الثانية = سنة 3 + 4 — الدرجة الثالثة = سنة 5 + 6
 const REQUIRED_HOURS = { 1: 20, 2: 22, 3: 25, 4: 25, 5: 28, 6: 28 };
 
-// Γνωστικية العربية حسب دليل التنظيمات 2026-2027
-// السنة الأولى: 9 ساعات — الثانية: 6 ساعات — الثالثة+: 6 ساعات
+const DEGREES = [
+  { name: 'الدرجة الأولى', years: [1, 2], yearLabels: ['السنة الأولى', 'السنة الثانية'] },
+  { name: 'الدرجة الثانية', years: [3, 4], yearLabels: ['السنة الثالثة', 'السنة الرابعة'] },
+  { name: 'الدرجة الثالثة', years: [5, 6], yearLabels: ['السنة الخامسة', 'السنة السادسة'] }
+];
+
 const GRADE_SUBJECTS = {
   1: [
     { name: 'تواصل شفوي', color: '#ef4444', hours: 1.5, group: 'اللغة العربية' },
@@ -46,7 +51,7 @@ const GRADE_SUBJECTS = {
     { name: 'تواصل شفوي', color: '#ef4444', hours: 0.5, group: 'اللغة العربية' },
     { name: 'قراءة', color: '#dc2626', hours: 1.5, group: 'اللغة العربية' },
     { name: 'حفظات', color: '#991b1b', hours: 0.33, group: 'اللغة العربية' },
-    { name: 'حوار منظّم', color: '#b91c1c', hours: 0, group: 'اللغة العربية' },
+    { name: 'حوار منظّم', color: '#b91c1c', hours: 0.5, group: 'اللغة العربية' },
     { name: 'كتابة', color: '#7f1d1d', hours: 0, group: 'اللغة العربية' },
     { name: 'استيعاب قواعد اللغة', color: '#f87171', hours: 2, group: 'اللغة العربية' },
     { name: 'إنتاج كتابي', color: '#450a0a', hours: 1.67, group: 'اللغة العربية' },
@@ -158,6 +163,8 @@ function makeDefaultGrid(numPeriods) {
 export default function Schedules({ classes }) {
   const { t } = useI18n();
   const [grade, setGrade] = useState(1);
+  const [degreeIdx, setDegreeIdx] = useState(0);
+  const [yearIdx, setYearIdx] = useState(0);
   const [classId, setClassId] = useState('');
   const [saved, setSaved] = useState(null);
   const [error, setError] = useState('');
@@ -170,6 +177,9 @@ export default function Schedules({ classes }) {
   const [editingTimetable, setEditingTimetable] = useState(null);
   const [activeTab, setActiveTab] = useState('distribution');
 
+  const currentDegree = DEGREES[degreeIdx];
+  const currentYear = currentDegree.years[yearIdx];
+
   useEffect(() => {
     if (!classId) return;
     api.get('/teacher/schedules').then((data) => {
@@ -177,6 +187,11 @@ export default function Schedules({ classes }) {
       if (match?.class) {
         const foundGrade = match.grade || 1;
         setGrade(foundGrade);
+        const degIdx = DEGREES.findIndex((d) => d.years.includes(foundGrade));
+        if (degIdx >= 0) {
+          setDegreeIdx(degIdx);
+          setYearIdx(DEGREES[degIdx].years.indexOf(foundGrade));
+        }
         setSubjects(match.subjects || JSON.parse(JSON.stringify(GRADE_SUBJECTS[foundGrade])));
       }
       if (match?.timetable) {
@@ -186,7 +201,19 @@ export default function Schedules({ classes }) {
     }).catch(() => {});
   }, [classId]);
 
-  const changeGrade = (g) => {
+  const changeDegree = (idx) => {
+    setDegreeIdx(idx);
+    setYearIdx(0);
+    const g = DEGREES[idx].years[0];
+    setGrade(g);
+    setSubjects(JSON.parse(JSON.stringify(GRADE_SUBJECTS[g])));
+    setSaved(null);
+    setEditingCell(null);
+  };
+
+  const changeYear = (idx) => {
+    setYearIdx(idx);
+    const g = currentDegree.years[idx];
     setGrade(g);
     setSubjects(JSON.parse(JSON.stringify(GRADE_SUBJECTS[g])));
     setSaved(null);
@@ -284,11 +311,16 @@ export default function Schedules({ classes }) {
   return (
     <div className="panel">
       <div className="panel-head">
-        <h3>📋 جدول توزيع المواد والأسبوعية</h3>
-        <div className="btn-group">
-          <select value={grade} onChange={(e) => changeGrade(Number(e.target.value))}>
-            {[1,2,3,4,5,6].map((g) => (
-              <option key={g} value={g}>السنة {GRADE_NAMES[g-1]}</option>
+        <h3>📋 توزيع المواد حسب الدرجة</h3>
+        <div className="btn-group" style={{ flexWrap: 'wrap', gap: '0.4rem' }}>
+          <select value={degreeIdx} onChange={(e) => changeDegree(Number(e.target.value))}>
+            {DEGREES.map((d, i) => (
+              <option key={i} value={i}>{d.name}</option>
+            ))}
+          </select>
+          <select value={yearIdx} onChange={(e) => changeYear(Number(e.target.value))}>
+            {currentDegree.yearLabels.map((label, i) => (
+              <option key={i} value={i}>{label}</option>
             ))}
           </select>
           <select value={classId} onChange={(e) => setClassId(e.target.value)}>
