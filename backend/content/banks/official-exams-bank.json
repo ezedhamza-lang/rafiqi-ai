@@ -49207,6 +49207,711 @@
         }
       ],
       "source": "generated-bank-v1"
+    },
+    {
+      "id": "year3-lesson-y3m01-math",
+      "level": "year3",
+      "subject": "math",
+      "trimester": 1,
+      "kind": "lesson-test",
+      "lessonId": "y3m01",
+      "lessonTitle": "أُكوّنُ الأعدادَ ذاتَ 4 أرقامٍ وأقرَؤُها وأكتُبُها",
+      "title": "اختبار الدرس: تكوين الأعداد ذات 4 أرقام — السنة الثالثة",
+      "durationMinutes": 30,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "السند 1",
+          "text": "زار تلاميذ السنة الثالثة مكتبة المدرسة، فرتّبت أمينة المكتبة 2435 قصة على الرفوف."
+        },
+        {
+          "id": "p2",
+          "title": "السند 2",
+          "text": "أحصى مدير المدرسة 3126 كراسا في المخزن، ثم أضاف إليها 500 كراس جديد."
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "تكوين الأعداد ذات 4 أرقام وقراءتها",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4.5,
+            "max": 7
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "تفكيك الأعداد وتركيبها",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4.5,
+            "max": 7
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "مقارنة الأعداد وترتيبها",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 3.5,
+            "max": 6
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "كم عدد الآلاف في العدد 2435؟",
+          "options": [
+            "2",
+            "4",
+            "3"
+          ],
+          "correct": "2"
+        },
+        {
+          "id": "q2",
+          "criterion": "مع1",
+          "type": "FILL_BLANK",
+          "prompt": "الرقم الموجود في مرتبة المئات في العدد 5074 هو ......",
+          "correctAnswer": "0|صفر"
+        },
+        {
+          "id": "q3",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "ما تفكيك العدد 2435؟",
+          "options": [
+            "2000+400+30+5",
+            "200+40+30+5",
+            "2000+400+3+5"
+          ],
+          "correct": "2000+400+30+5"
+        },
+        {
+          "id": "q4",
+          "criterion": "مع2",
+          "type": "TRUE_FALSE",
+          "prompt": "تركيب 3000+100+20+6 يعطي العدد 3126.",
+          "correctAnswer": "صواب"
+        },
+        {
+          "id": "q5",
+          "criterion": "مع3",
+          "type": "ORDER",
+          "prompt": "رتب الأعداد التالية من الأصغر إلى الأكبر:",
+          "orderItems": [
+            "3451",
+            "3541",
+            "4351",
+            "5431"
+          ]
+        },
+        {
+          "id": "q6",
+          "criterion": "مع3",
+          "type": "MCQ",
+          "prompt": "أي عدد هو الأكبر؟",
+          "options": [
+            "8602",
+            "8062",
+            "8260"
+          ],
+          "correct": "8602"
+        }
+      ],
+      "source": "curated-s3-lesson-pilot"
+    },
+    {
+      "id": "year3-lesson-y3m03-math",
+      "level": "year3",
+      "subject": "math",
+      "trimester": 1,
+      "kind": "lesson-test",
+      "lessonId": "y3m03",
+      "lessonTitle": "أتعرّفُ العلاقةَ بينَ المترْ والسّنتيمترْ",
+      "title": "اختبار الدرس: العلاقة بين المتر والسنتمتر — السنة الثالثة",
+      "durationMinutes": 30,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "السند 1",
+          "text": "اشترت الخياطة فاطمة شريطا طوله متران و35 سنتمترا لتخيط ميدعة لابنتها."
+        },
+        {
+          "id": "p2",
+          "title": "السند 2",
+          "text": "قاس المعلم سبورة القسم فوجد طولها 3 أمتار، وقاست سارة طول طاولتها فوجدته 120 سنتمترا."
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "معرفة العلاقة بين المتر والسنتمتر",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4.5,
+            "max": 7
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "التحويل بين المتر والسنتمتر",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4.5,
+            "max": 7
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "مقارنة الأطوال بعد التحويل",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 3.5,
+            "max": 6
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "كم سنتمترا في المتر الواحد؟",
+          "options": [
+            "100 سم",
+            "10 سم",
+            "1000 سم"
+          ],
+          "correct": "100 سم"
+        },
+        {
+          "id": "q2",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "المتر أطول من السنتمتر.",
+          "correctAnswer": "صواب"
+        },
+        {
+          "id": "q3",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "2 م = ...... سم",
+          "correctAnswer": "200"
+        },
+        {
+          "id": "q4",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "350 سم تساوي:",
+          "options": [
+            "3 م و50 سم",
+            "3 م و5 سم",
+            "35 م"
+          ],
+          "correct": "3 م و50 سم"
+        },
+        {
+          "id": "q5",
+          "criterion": "مع3",
+          "type": "MCQ",
+          "prompt": "أيهما أطول: 150 سم أم 2 م؟",
+          "options": [
+            "2 م",
+            "150 سم",
+            "متساويان"
+          ],
+          "correct": "2 م"
+        },
+        {
+          "id": "q6",
+          "criterion": "مع3",
+          "type": "EXTRACT",
+          "prompt": "استخرج من السند 2 طول سبورة القسم:",
+          "correctAnswer": "3 أمتار"
+        }
+      ],
+      "source": "curated-s3-lesson-pilot"
+    },
+    {
+      "id": "year3-lesson-y3m04-math",
+      "level": "year3",
+      "subject": "math",
+      "trimester": 1,
+      "kind": "lesson-test",
+      "lessonId": "y3m04",
+      "lessonTitle": "أطرَحُ بالزّيادَةِ (1)",
+      "title": "اختبار الدرس: الطرح بالزيادة — السنة الثالثة",
+      "durationMinutes": 30,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "السند 1",
+          "text": "كان مع يوسف 456 مليما، فاشترى علبة ألوان بـ 278 مليما من دكان الحي."
+        },
+        {
+          "id": "p2",
+          "title": "السند 2",
+          "text": "جمعت مريم 620 طابعا بريديا وأهدت صديقتها 245 طابعا."
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "فهم تقنية الطرح بالزيادة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4.5,
+            "max": 7
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "إنجاز الطرح بالزيادة",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4.5,
+            "max": 7
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "التحقق بالجمع وحل المسائل",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 3.5,
+            "max": 6
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "لتبسيط 456 - 278 بالزيادة نضيف للعددين:",
+          "options": [
+            "22",
+            "28",
+            "78"
+          ],
+          "correct": "22"
+        },
+        {
+          "id": "q2",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "عند إضافة نفس العدد للمطروح منه والمطروح يبقى الفرق كما هو.",
+          "correctAnswer": "صواب"
+        },
+        {
+          "id": "q3",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "ناتج 345 - 187 بالزيادة هو:",
+          "options": [
+            "158",
+            "168",
+            "148"
+          ],
+          "correct": "158"
+        },
+        {
+          "id": "q4",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "523 - 265 = ......",
+          "correctAnswer": "258"
+        },
+        {
+          "id": "q5",
+          "criterion": "مع3",
+          "type": "MCQ",
+          "prompt": "للتحقق من نتيجة طرح نستعمل:",
+          "options": [
+            "الجمع",
+            "الضرب",
+            "القسمة"
+          ],
+          "correct": "الجمع"
+        },
+        {
+          "id": "q6",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "620 - 245 = ......",
+          "correctAnswer": "375"
+        }
+      ],
+      "source": "curated-s3-lesson-pilot"
+    },
+    {
+      "id": "year3-lesson-y3m08-math",
+      "level": "year3",
+      "subject": "math",
+      "trimester": 1,
+      "kind": "lesson-test",
+      "lessonId": "y3m08",
+      "lessonTitle": "أتعرّفُ المسالكَ على الشّبكةِ وأرسمُها",
+      "title": "اختبار الدرس: المسالك على الشبكة — السنة الثالثة",
+      "durationMinutes": 30,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "السند 1",
+          "text": "يريد سامي الذهاب من المدرسة إلى دكان الحي عبر شوارع مرسومة على شبكة الحي."
+        },
+        {
+          "id": "p2",
+          "title": "السند 2",
+          "text": "تتنقل نحلة من الزهرة إلى الخلية فوق شبكة مرسومة في حديقة المدرسة."
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "قراءة الشبكة ومكوناتها",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4.5,
+            "max": 7
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "وصف مسلك بالحركات",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4.5,
+            "max": 7
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "رسم مسلك ومقارنة الأطوال",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 3.5,
+            "max": 6
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ما هي مكونات الشبكة؟",
+          "options": [
+            "عقد وخطوط ومربعات",
+            "دوائر فقط",
+            "ألوان فقط"
+          ],
+          "correct": "عقد وخطوط ومربعات"
+        },
+        {
+          "id": "q2",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "المسلك يرسم على خطوط الشبكة من عقدة الانطلاق إلى عقدة الوصول.",
+          "correctAnswer": "صواب"
+        },
+        {
+          "id": "q3",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "مسلك من 3 خطوات يمينا وخطوتين أعلى يتكون من كم خطوة؟",
+          "options": [
+            "5",
+            "6",
+            "4"
+          ],
+          "correct": "5"
+        },
+        {
+          "id": "q4",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "للوصول إلى نقطة على يميني أتحرك ......",
+          "correctAnswer": "يمينا|إلى اليمين"
+        },
+        {
+          "id": "q5",
+          "criterion": "مع3",
+          "type": "MCQ",
+          "prompt": "أقصر مسلك بين نقطتين هو الذي فيه:",
+          "options": [
+            "أقل عدد من الخطوات",
+            "أكبر عدد من الخطوات",
+            "أجمل رسم"
+          ],
+          "correct": "أقل عدد من الخطوات"
+        },
+        {
+          "id": "q6",
+          "criterion": "مع3",
+          "type": "ORDER",
+          "prompt": "رتب مراحل رسم مسلك صحيح:",
+          "orderItems": [
+            "أحدد عقدة الانطلاق",
+            "أتبع الحركات خطوة خطوة",
+            "أتحقق من الوصول"
+          ]
+        }
+      ],
+      "source": "curated-s3-lesson-pilot"
+    },
+    {
+      "id": "year3-lesson-y3m22-math",
+      "level": "year3",
+      "subject": "math",
+      "trimester": 2,
+      "kind": "lesson-test",
+      "lessonId": "y3m22",
+      "lessonTitle": "أتصرّفُ في القطعِ النّقديّةِ والورقةِ الماليّةِ من فئةِ 1 د",
+      "title": "اختبار الدرس: التصرف في نقود 1 دينار — السنة الثالثة",
+      "durationMinutes": 30,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "السند 1",
+          "text": "أعطت الأم لابنتها سلمى ورقة 1 دينار لتشتري قلما بـ 350 مليما وممحاة بـ 250 مليما."
+        },
+        {
+          "id": "p2",
+          "title": "السند 2",
+          "text": "اشترى كريم كراسا بـ 800 مليم ودفع ورقة 1 دينار للبائع."
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "معرفة فئات النقود",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4.5,
+            "max": 7
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "تركيب المبالغ وتفكيكها",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4.5,
+            "max": 7
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "حساب باقي عملية شراء",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 3.5,
+            "max": 6
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "كم مليما في الدينار الواحد؟",
+          "options": [
+            "1000",
+            "100",
+            "10"
+          ],
+          "correct": "1000"
+        },
+        {
+          "id": "q2",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "ورقة 1 دينار تساوي 1000 مليم.",
+          "correctAnswer": "صواب"
+        },
+        {
+          "id": "q3",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "أي تركيب يساوي 750 مليما؟",
+          "options": [
+            "500+200+50",
+            "500+100+50",
+            "200+200+200"
+          ],
+          "correct": "500+200+50"
+        },
+        {
+          "id": "q4",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "فكك: 1 دينار = 500 + ......",
+          "correctAnswer": "500"
+        },
+        {
+          "id": "q5",
+          "criterion": "مع3",
+          "type": "MCQ",
+          "prompt": "اشترى كريم بـ 800 مي ودفع 1 د، كم يعيد له البائع؟",
+          "options": [
+            "200 مي",
+            "800 مي",
+            "1 د"
+          ],
+          "correct": "200 مي"
+        },
+        {
+          "id": "q6",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "350 + 250 = ...... مليما",
+          "correctAnswer": "600"
+        }
+      ],
+      "source": "curated-s3-lesson-pilot"
+    },
+    {
+      "id": "year3-lesson-y3m27-math",
+      "level": "year3",
+      "subject": "math",
+      "trimester": 3,
+      "kind": "lesson-test",
+      "lessonId": "y3m27",
+      "lessonTitle": "أُنجزُ عمليّةَ الضّربِ",
+      "title": "اختبار الدرس: إنجاز عملية الضرب — السنة الثالثة",
+      "durationMinutes": 30,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "السند 1",
+          "text": "اشترت المدرسة 4 قصص لمعرض الكتاب، وثمن القصة الواحدة 23 دينارا."
+        },
+        {
+          "id": "p2",
+          "title": "السند 2",
+          "text": "يستهلك عصفور حديقة المدرسة 15 غراما من الحبوب كل يوم."
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "حفظ جدول الضرب وتوظيفه",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4.5,
+            "max": 7
+          }
+        },
+        {
+          "id": "مع2",
+          "label": "إنجاز الضرب عموديا بالاحتفاظ",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 4.5,
+            "max": 7
+          }
+        },
+        {
+          "id": "مع3",
+          "label": "توظيف الضرب في المسائل",
+          "mastery": {
+            "none": 0,
+            "below": 2,
+            "min": 3.5,
+            "max": 6
+          }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "ناتج 5 × 7 هو:",
+          "options": [
+            "35",
+            "30",
+            "40"
+          ],
+          "correct": "35"
+        },
+        {
+          "id": "q2",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "3 × 5 = 5 × 3 لأن الضرب إبدالي.",
+          "correctAnswer": "صواب"
+        },
+        {
+          "id": "q3",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "ناتج 23 × 4 عموديا هو:",
+          "options": [
+            "92",
+            "82",
+            "102"
+          ],
+          "correct": "92"
+        },
+        {
+          "id": "q4",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "32 × 3 = ......",
+          "correctAnswer": "96"
+        },
+        {
+          "id": "q5",
+          "criterion": "مع3",
+          "type": "MCQ",
+          "prompt": "ثمن 4 قصص بـ 23 د للقصة الواحدة هو:",
+          "options": [
+            "92 د",
+            "27 د",
+            "82 د"
+          ],
+          "correct": "92 د"
+        },
+        {
+          "id": "q6",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "15 × 6 = ......",
+          "correctAnswer": "90"
+        }
+      ],
+      "source": "curated-s3-lesson-pilot"
     }
   ]
 }
