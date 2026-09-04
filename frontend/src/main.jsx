@@ -56,3 +56,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </React.StrictMode>
 );
+
+// Remove the static loading splash as soon as React has mounted,
+// without waiting for window 'load' (external fonts may hang it).
+try {
+  const fallback = document.getElementById('loading-fallback');
+  if (fallback) fallback.remove();
+} catch (e) {}

@@ -116,19 +116,36 @@
     
     <!-- Batch 6: Remove loading fallback after React mounts -->
     <script>
+      function hideFallback() {
+        var fallback = document.getElementById('loading-fallback');
+        if (fallback) {
+          fallback.style.opacity = '0';
+          fallback.style.transition = 'opacity 0.3s ease';
+          setTimeout(function() {
+            var el = document.getElementById('loading-fallback');
+            if (el) el.remove();
+          }, 300);
+        }
+      }
       // Hide loading screen once React is ready
       window.addEventListener('load', function() {
-        setTimeout(function() {
+        setTimeout(hideFallback, 100);
+      });
+      // Absolute fallback: never trap the user on the splash.
+      // If React mounted, its own removal already ran; otherwise reveal the page anyway.
+      setTimeout(function() {
+        var root = document.getElementById('root');
+        if (!root || !root.hasChildNodes()) {
           var fallback = document.getElementById('loading-fallback');
           if (fallback) {
-            fallback.style.opacity = '0';
-            fallback.style.transition = 'opacity 0.3s ease';
-            setTimeout(function() {
-              fallback.remove();
-            }, 300);
+            fallback.innerHTML = '<div style="text-align:center;padding:2rem;font-family:Tajawal,sans-serif;color:#0369a1;">'
+              + '<p>تعذر تحميل التطبيق. يرجى تحديث الصفحة (Ctrl+F5).</p>'
+              + '<p>Impossible de charger. Veuillez actualiser (Ctrl+F5).</p></div>';
           }
-        }, 100);
-      });
+        } else {
+          hideFallback();
+        }
+      }, 15000);
     </script>
     
     <!-- Main app entry point -->
