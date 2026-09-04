@@ -10,12 +10,22 @@ export default function Correction() {
     CORRECTED: { label: t('teacherSpace.correction.status.CORRECTED'), cls: 'good' }
   };
 
+  const LESSON_SUB_STATUS = {
+    SUBMITTED: { label: t('teacherSpace.correction.lessonStatus.SUBMITTED'), cls: 'warn' },
+    IN_REVIEW: { label: t('teacherSpace.correction.lessonStatus.IN_REVIEW'), cls: 'warn' },
+    GRADED: { label: t('teacherSpace.correction.lessonStatus.GRADED'), cls: 'good' },
+    RETURNED: { label: t('teacherSpace.correction.lessonStatus.RETURNED'), cls: 'info' }
+  };
+
   const [submissions, setSubmissions] = useState([]);
   const [examSubs, setExamSubs] = useState([]);
+  const [lessonSubs, setLessonSubs] = useState([]);
   const [suggestion, setSuggestion] = useState('');
   const [paperExams, setPaperExams] = useState([]);
   const [paperFilter, setPaperFilter] = useState('ALL');
+  const [lessonFilter, setLessonFilter] = useState('ALL');
   const [grading, setGrading] = useState({});
+  const [lessonGrading, setLessonGrading] = useState({});
 
   const load = useCallback(() => {
     api
@@ -24,9 +34,12 @@ export default function Correction() {
       .catch(() => {});
   }, []);
 
-  useEffect(() => {
-    load();
-  }, [load]);
+  const loadLessonSubs = useCallback(() => {
+    api
+      .get('/teacher/lesson-submissions')
+      .then(setLessonSubs)
+      .catch(() => {});
+  }, []);
 
   const loadPaperExams = useCallback(() => {
     api
@@ -36,8 +49,10 @@ export default function Correction() {
   }, []);
 
   useEffect(() => {
+    load();
     loadPaperExams();
-  }, [loadPaperExams]);
+    loadLessonSubs();
+  }, [load, loadPaperExams, loadLessonSubs]);
 
   const loadExamSubs = async (examId) => {
     const data = await api.get(`/teacher/exams/${examId}/submissions`);
@@ -73,8 +88,31 @@ export default function Correction() {
     loadPaperExams();
   };
 
+  const startLessonReview = async (id) => {
+    await api.put(`/teacher/lesson-submissions/${id}`, { status: 'IN_REVIEW' });
+    loadLessonSubs();
+  };
+
+  const saveLessonGrade = async (id) => {
+    const g = lessonGrading[id] || {};
+    try {
+      await api.put(`/teacher/lesson-submissions/${id}`, {
+        score: g.score !== '' ? Number(g.score) : undefined,
+        feedback: g.feedback,
+        status: g.status || 'GRADED'
+      });
+      loadLessonSubs();
+      setLessonGrading((prev) => ({ ...prev, [id]: {} }));
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
   const filteredPapers =
     paperFilter === 'ALL' ? paperExams : paperExams.filter((p) => p.status === paperFilter);
+
+  const filteredLessons =
+    lessonFilter === 'ALL' ? lessonSubs : lessonSubs.filter((ls) => ls.status === lessonFilter);
 
   return (
     <div className="panel">
@@ -170,52 +208,55 @@ export default function Correction() {
         </div>
       )}
 
-      <h4 style={{ marginTop: 24 }}>{t('teacherSpace.correction.paperBoxTitle')}</h4>
+      <h4 style={{ marginTop: 24 }}>{t('teacherSpace.correction.lessonSubmissionsTitle')}</h4>
       <div className="form-row">
         <div className="form-group">
           <label>{t('teacherSpace.correction.filterByStatus')}</label>
-          <select value={paperFilter} onChange={(e) => setPaperFilter(e.target.value)}>
+          <select value={lessonFilter} onChange={(e) => setLessonFilter(e.target.value)}>
             <option value="ALL">{t('teacherSpace.correction.all')}</option>
-            <option value="SENT">{t('teacherSpace.correction.status.SENT')}</option>
-            <option value="IN_REVIEW">{t('teacherSpace.correction.status.IN_REVIEW')}</option>
-            <option value="CORRECTED">{t('teacherSpace.correction.status.CORRECTED')}</option>
+            <option value="SUBMITTED">{t('teacherSpace.correction.lessonStatus.SUBMITTED')}</option>
+            <option value="IN_REVIEW">{t('teacherSpace.correction.lessonStatus.IN_REVIEW')}</option>
+            <option value="GRADED">{t('teacherSpace.correction.lessonStatus.GRADED')}</option>
+            <option value="RETURNED">{t('teacherSpace.correction.lessonStatus.RETURNED')}</option>
           </select>
         </div>
       </div>
 
-      {filteredPapers.length === 0 ? (
-        <div className="empty">{t('teacherSpace.correction.noScans')}</div>
+      {filteredLessons.length === 0 ? (
+        <div className="empty">{t('teacherSpace.correction.noLessonSubmissions')}</div>
       ) : (
         <div className="table-wrap">
           <table className="data-table">
             <thead>
               <tr>
                 <th>{t('teacherSpace.correction.studentCol')}</th>
-                <th>{t('teacherSpace.correction.examCol')}</th>
-                <th>{t('teacherSpace.correction.subjectCol')}</th>
+                <th>{t('teacherSpace.correction.lessonCol')}</th>
                 <th>{t('teacherSpace.correction.statusCol')}</th>
                 <th>{t('teacherSpace.correction.fileCol')}</th>
                 <th>{t('teacherSpace.correction.gradingCol')}</th>
               </tr>
             </thead>
             <tbody>
-              {filteredPapers.map((p) => {
-                const st = STATUS_STYLES[p.status] || STATUS_STYLES.SENT;
-                const g = grading[p.id] || {};
+              {filteredLessons.map((ls) => {
+                const st = LESSON_SUB_STATUS[ls.status] || LESSON_SUB_STATUS.SUBMITTED;
+                const g = lessonGrading[ls.id] || {};
                 return (
-                  <tr key={p.id}>
-                    <td>{p.student.firstName} {p.student.lastName}</td>
-                    <td>{p.examTitle}</td>
-                    <td>{p.subjectLabel}</td>
+                  <tr key={ls.id}>
+                    <td>{ls.student.firstName} {ls.student.lastName}</td>
+                    <td>{ls.lessonTitle}</td>
                     <td><span className={`badge ${st.cls}`}>{st.label}</span></td>
                     <td>
-                      <a href={p.fileUrl} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline">{t('teacherSpace.correction.viewPdf')}</a>
+                      {ls.files && ls.files.length > 0 ? (
+                        <a href={ls.files[0].dataUrl || '#'} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline">{t('teacherSpace.correction.viewFile')}</a>
+                      ) : (
+                        <span className="muted">{t('teacherSpace.correction.noFile')}</span>
+                      )}
                     </td>
                     <td className="paper-grade-cell">
-                      {p.status === 'SENT' && (
-                        <button className="btn btn-sm" onClick={() => startReview(p.id)}>{t('teacherSpace.correction.startReview')}</button>
+                      {ls.status === 'SUBMITTED' && (
+                        <button className="btn btn-sm" onClick={() => startLessonReview(ls.id)}>{t('teacherSpace.correction.startReview')}</button>
                       )}
-                      {p.status !== 'CORRECTED' && (
+                      {ls.status !== 'GRADED' && (
                         <>
                           <input
                             type="number"
@@ -224,14 +265,14 @@ export default function Correction() {
                             step="0.5"
                             placeholder={t('teacherSpace.correction.scorePlaceholder')}
                             value={g.score ?? ''}
-                            onChange={(e) => setGrading({ ...grading, [p.id]: { ...g, score: e.target.value } })}
+                            onChange={(e) => setLessonGrading({ ...lessonGrading, [ls.id]: { ...g, score: e.target.value } })}
                             className="grade-input"
                           />
-                          <button className="btn btn-sm btn-primary" onClick={() => saveGrade(p.id)}>{t('teacherSpace.correction.save')}</button>
+                          <button className="btn btn-sm btn-primary" onClick={() => saveLessonGrade(ls.id)}>{t('teacherSpace.correction.save')}</button>
                         </>
                       )}
-                      {p.status === 'CORRECTED' && p.score !== null && (
-                        <strong>{p.score} / 20</strong>
+                      {ls.status === 'GRADED' && ls.grade !== null && (
+                        <strong>{ls.grade} / 20</strong>
                       )}
                     </td>
                   </tr>

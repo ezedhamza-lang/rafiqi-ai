@@ -342,4 +342,119 @@ router.put('/submitted-exams/:id', teacherMiddleware, validateParams(submittedEx
   });
 }));
 
+/**
+ * @swagger
+ * /api/teacher/lesson-submissions:
+ *   get:
+ *     summary: قائمة إرسالات الدروس التفاعلية للتصحيح
+ *     tags: [submitted-exams]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: status
+ *         schema: { type: string, enum: [SUBMITTED, IN_REVIEW, GRADED, RETURNED] }
+ *     responses:
+ *       200:
+ *         description: قائمة الإرسالات
+ */
+router.get('/lesson-submissions', teacherMiddleware, asyncHandler(async (req, res) => {
+  const { status } = req.query;
+  const where = {
+    OR: [{ teacherId: req.user.id }, { class: { teacherId: req.user.id } }]
+  };
+  if (status) where.status = status;
+
+  const items = await prisma.lessonSubmission.findMany({
+    where,
+    include: {
+      student: { select: { id: true, firstName: true, lastName: true } },
+      class: { select: { id: true, name: true, level: true } }
+    },
+    orderBy: [{ status: 'asc' }, { submittedAt: 'desc' }]
+  });
+  res.json(
+    items.map((i) => ({
+      ...i,
+      statusLabel: i.status
+    }))
+  );
+}));
+
+/**
+ * @swagger
+ * /api/teacher/lesson-submissions/{id}:
+ *   put:
+ *     summary: تصحيح إرسال درس تفاعلي
+ *     tags: [submitted-exams]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: integer }
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               score: { type: number }
+ *               feedback: { type: string }
+ *               status: { type: string, enum: [SUBMITTED, IN_REVIEW, GRADED, RETURNED] }
+ *     responses:
+ *       200:
+ *         description: تم التصحيح
+ *       400:
+ *         description: فشل التحقق من البيانات
+ *       404:
+ *         description: الإرسال غير موجود
+ */
+router.put('/lesson-submissions/:id', teacherMiddleware, asyncHandler(async (req, res) => {
+  const { score, feedback, status } = req.body;
+  const item = await prisma.lessonSubmission.findFirst({
+    where: {
+      id: Number(req.params.id),
+      OR: [{ teacherId: req.user.id }, { class: { teacherId: req.user.id } }]
+    },
+    include: { student: { select: { id: true, firstName: true, lastName: true } } }
+  });
+  if (!item) throw new ApiError(404, 'الإرسال غير موجود');
+
+  const data = {};
+  if (score !== undefined && score !== '') data.score = Number(score);
+  if (feedback !== undefined) data.feedback = String(feedback).trim() || null;
+  if (status && ['SUBMITTED', 'IN_REVIEW', 'GRADED', 'RETURNED'].includes(status)) data.status = status;
+
+  const updated = await prisma.lessonSubmission.update({ where: { id: item.id }, data });
+
+  if (data.status === 'GRADED') {
+    await notify([item.studentId], {
+      type: 'LESSON_GRADED',
+      title: 'تم تصحيح واجبك التفاعلي',
+      body: `${item.lessonTitle || 'الدرس'} — النتيجة ${data.score ?? '—'}/20`,
+      link: '/student-space/lessons'
+    });
+
+    const parentOfStudent = await prisma.student.findFirst({
+      where: { accountUserId: item.studentId },
+      select: { userId: true }
+    });
+    if (parentOfStudent?.userId && parentOfStudent.userId !== item.studentId) {
+      await notify([parentOfStudent.userId], {
+        type: 'LESSON_GRADED',
+        title: 'تم تصحيح واجب ابنك التفاعلي',
+        body: `${item.lessonTitle || 'الدرس'} — النتيجة ${data.score ?? '—'}/20`,
+        link: '/parent'
+      });
+    }
+  }
+
+  res.json({
+    ...updated
+  });
+}));
+
 export default router;
