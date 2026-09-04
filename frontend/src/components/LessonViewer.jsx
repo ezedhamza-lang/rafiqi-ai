@@ -29,7 +29,7 @@ const BLOCK_ICONS = {
   'file-upload': 'cloud_upload'
 };
 
-function Block({ block }) {
+function Block({ block, onAnswer, blockId }) {
   const [showAnswer, setShowAnswer] = useState(false);
   const [sel, setSel] = useState(null);
   const [checked, setChecked] = useState(false);
@@ -137,6 +137,7 @@ function Block({ block }) {
 
   if (kind === 'textarea') {
     const [value, setValue] = useState('');
+    useEffect(() => { onAnswer(blockId, value); }, [value]);
     return (
       <div className="lesson-block lesson-block-textarea">
         <div className="lesson-block-head">
@@ -157,9 +158,9 @@ function Block({ block }) {
     );
   }
 
-  if (kind === 'math-input') {
+if (kind === 'math-input') {
     const [value, setValue] = useState('');
-    const mathSymbols = ['×', '÷', '−', '+', '=', '²', '³', '½', '¼', '(', ')', '−'];
+    useEffect(() => { onAnswer(blockId, value); }, [value]);
     return (
       <div className="lesson-block lesson-block-math">
         <div className="lesson-block-head">
@@ -200,6 +201,11 @@ function Block({ block }) {
     const [tool, setTool] = useState('pen');
     const [color, setColor] = useState('#000000');
     const [lineWidth, setLineWidth] = useState(2);
+    const [dataUrl, setDataUrl] = useState(null);
+
+    useEffect(() => {
+      if (dataUrl) onAnswer(blockId, { type: 'drawing', dataUrl });
+    }, [dataUrl]);
 
     const draw = (e) => {
       const canvas = canvasRef.current;
@@ -241,6 +247,8 @@ function Block({ block }) {
       if (!canvas) return;
       canvas.removeEventListener('mousemove', draw);
       canvas.removeEventListener('touchmove', draw);
+      // Capture drawing as data URL
+      setDataUrl(canvas.toDataURL('image/png'));
     };
 
     useEffect(() => {
@@ -402,6 +410,8 @@ function Block({ block }) {
                 return;
               }
               setFile(f);
+              // Notify parent of file selection
+              onAnswer(blockId, { type: 'file', name: f.name, size: f.size, type: f.type });
               if (f.type.startsWith('image/')) {
                 const reader = new FileReader();
                 reader.onload = (e) => setPreview(e.target.result);
@@ -472,6 +482,60 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
     speak(parts.join('. '));
   };
 
+  const [answers, setAnswers] = useState({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitResult, setSubmitResult] = useState(null);
+
+  const handleAnswer = (blockId, answer) => {
+    setAnswers((prev) => ({ ...prev, [blockId]: answer }));
+  };
+
+  const handleSubmit = async () => {
+    const lessonId = lesson.id;
+    const interactiveBlocks = (lesson.blocks || []).filter((b) =>
+      ['textarea', 'math-input', 'drawing', 'file-upload'].includes(b.kind)
+    );
+
+    if (interactiveBlocks.length === 0) {
+      setSubmitResult({ success: false, message: 'لا توجد تمارين تفاعلية في هذا الدرس' });
+      return;
+    }
+
+    const submission = {
+      lessonId,
+      lessonTitle: lesson.title,
+      answers: Object.fromEntries(
+        Object.entries(answers).filter(([id, val]) => val !== '' && val !== null)
+      ),
+      submittedAt: new Date().toISOString()
+    };
+
+    // Check if there's at least one answer
+    if (Object.keys(submission.answers).length === 0) {
+      setSubmitResult({ success: false, message: 'الرجاء الإجابة على تمرين واحد على الأقل قبل الإرسال' });
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const res = await api.post('/student/lesson/submit', submission);
+      setSubmitResult({ success: true, message: 'تم إرسال إجاباتك للمعلم بنجاح!', data: res });
+      // Optionally mark lesson as completed
+      if (!completed) {
+        await api.post('/student/progress/lessons', {
+          gradeId: 'year3', // This should come from context
+          subjectId: 'math',
+          lessonId,
+          lessonTitle: lesson.title
+        });
+      }
+    } catch (e) {
+      setSubmitResult({ success: false, message: e.message || 'فشل الإرسال، حاول مرة أخرى' });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <div className="lesson-page">
       <div className="lesson-page-head">
@@ -521,7 +585,40 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
       )}
 
       <div className="lesson-blocks">
-        {(lesson.blocks || []).map((b, i) => <Block key={i} block={b} />)}
+        {(lesson.blocks || []).map((b, i) => <Block key={i} block={b} onAnswer={handleAnswer} blockId={`${lesson.id}-${i}`} />)}
+      </div>
+
+      {/* Submit to Teacher Section */}
+      <div className="lesson-submit-section">
+        <div className="submit-divider">
+          <span className="material-icons">assignment_turned_in</span>
+          <span>إرسال الواجب للمعلم</span>
+        </div>
+        <p className="submit-hint">سيتم إرسال جميع إجاباتك (النصوص، العمليات الحسابية، الرسومات، والملفات) للمعلم للتصحيح.</p>
+        <button
+          type="button"
+          className="btn btn-success btn-lg submit-btn"
+          onClick={handleSubmit}
+          disabled={submitting}
+        >
+          {submitting ? (
+            <>
+              <span className="spinner" style={{ fontSize: 18, marginLeft: 8 }}></span>
+              جاري الإرسال...
+            </>
+          ) : (
+            <>
+              <span className="material-icons" style={{ fontSize: 20, marginLeft: 8 }}>send</span>
+              أرسل للمعلم
+            </>
+          )}
+        </button>
+        {submitResult && (
+          <div className={`submit-result ${submitResult.success ? 'success' : 'error'}`}>
+            <span className="material-icons">{submitResult.success ? 'check_circle' : 'error'}</span>
+            {submitResult.message}
+          </div>
+        )}
       </div>
     </div>
   );
