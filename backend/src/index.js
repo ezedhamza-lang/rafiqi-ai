@@ -188,11 +188,44 @@ app.use('/api/admin/ai', adminAiKeyRoutes);
 app.use('/api/admin/insights', adminInsightsRoutes);
 app.use('/api/memos', memoRoutes);
 
-app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
-app.use('/assets', express.static(path.join(__dirname, '../uploads/assets')));
-app.use('/images', express.static(path.join(__dirname, '../uploads/images')));
-app.use('/media', express.static(path.join(__dirname, '../uploads/media')));
-app.use('/plans', express.static(path.join(__dirname, '../content/plans')));
+// الملفات الثابتة — مع تخزين مؤقت طويل للأصول المجزأة (hashed)
+const staticOpts = { maxAge: '7d', etag: true };
+const immutableOpts = {
+  maxAge: '1y',
+  immutable: true,
+  etag: true,
+  setHeaders(res, filePath) {
+    if (filePath.endsWith('index.html')) res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  }
+};
+app.use('/uploads', express.static(path.join(__dirname, '../uploads'), staticOpts));
+app.use('/assets', express.static(path.join(__dirname, '../uploads/assets'), immutableOpts));
+app.use('/images', express.static(path.join(__dirname, '../uploads/images'), staticOpts));
+app.use('/media', express.static(path.join(__dirname, '../uploads/media'), staticOpts));
+app.use('/svg', express.static(path.join(__dirname, '../uploads/svg'), staticOpts));
+app.use('/islamic', express.static(path.join(__dirname, '../uploads/islamic'), staticOpts));
+app.use('/tech', express.static(path.join(__dirname, '../uploads/tech'), staticOpts));
+app.use('/science', express.static(path.join(__dirname, '../uploads/science'), staticOpts));
+app.use('/intaj', express.static(path.join(__dirname, '../uploads/intaj'), staticOpts));
+app.use('/plans', express.static(path.join(__dirname, '../content/plans'), staticOpts));
+
+// ===== الإنتاج: تقديم الواجهة المبنية من نفس الخادم — رابط واحد للمنصة =====
+const DIST = path.join(__dirname, '../frontend/dist');
+if (config.nodeEnv === 'production' && fs.existsSync(DIST)) {
+  app.use(express.static(DIST, {
+    maxAge: '1y',
+    immutable: true,
+    etag: true,
+    setHeaders(res, filePath) {
+      if (filePath.endsWith('index.html')) res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    }
+  }));
+  app.get('*', (req, res, next) => {
+    if (req.path.startsWith('/api') || req.path.includes('.')) return next();
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.sendFile(path.join(DIST, 'index.html'));
+  });
+}
 
 app.use(notFoundHandler);
 app.use(errorHandler);

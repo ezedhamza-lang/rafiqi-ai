@@ -1,5 +1,6 @@
 node_modules
-frontend
+frontend/*
+!frontend/dist/
 docs
 rafiqi
 .git
