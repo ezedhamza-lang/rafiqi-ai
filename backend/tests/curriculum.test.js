@@ -134,7 +134,9 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
     expect(y5Text.includes('قِطَّة')).toBe(false);
     expect(y5Text.includes('نُورَ')).toBe(false);
 
-    // السنوات 2-6: بنك القوالب كله من مستوى س1 فلا يُرفق بها أي سؤال من المستوى الأدنى
+    // السنوات 2-6: بنك القوالب كله من مستوى س1 فلا يُرفق بها أي سؤال من المستوى الأدنى.
+    // استثناء موثّق: الدروس المؤلفة أصلياً (تحمل lessonTestId) قد تحوي أسئلة
+    // تفاعلية من تأليف المنصة — يُتحقق من سلامتها بدل منعها.
     const y3 = await request(app)
       .get('/api/public/curriculum/books/year3/math/lessons')
       .send();
@@ -143,6 +145,20 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
     const y3Text = JSON.stringify(compose.blocks);
     expect(y3Text.includes('12 أَمْ 8')).toBe(false);
     expect(y3Text.includes('15 أَصْغَرُ مِنْ 10')).toBe(false);
+    for (const page of y3.body) {
+      const qs = (page.blocks || []).filter((b) => b.kind === 'question');
+      if (qs.length) {
+        expect(page.lessonTestId, `درس ${page.id} فيه أسئلة دون lessonTestId`).toBeTruthy();
+        for (const q of qs) {
+          expect(q.text || q.title, `سؤال بلا نص في ${page.id}`).toBeTruthy();
+          expect(q.answer !== undefined, `سؤال بلا إجابة في ${page.id}`).toBe(true);
+          if (q.options) {
+            expect(Number(q.answer)).toBeGreaterThanOrEqual(0);
+            expect(Number(q.answer)).toBeLessThan(q.options.length);
+          }
+        }
+      }
+    }
   });
 
   it('المرحلة 6.2: لا محتوى أجنبي عند الاستدعاء بالمستوى وحده (دون gradeId)', async () => {
@@ -153,7 +169,11 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
     const text = JSON.stringify(compose.blocks || []);
     expect(text.includes('12 أَمْ 8')).toBe(false);
     expect(text.includes('15 أَصْغَرُ مِنْ 10')).toBe(false);
-    expect(compose.blocks.some((b) => b.kind === 'question')).toBe(false);
+    const authored = pages.filter((p) => p.lessonTestId);
+    expect(authored.length).toBeGreaterThan(0);
+    for (const page of pages.filter((p) => !p.lessonTestId)) {
+      expect(page.blocks.some((b) => b.kind === 'question')).toBe(false);
+    }
   });
 
   it('المرحلة 6.2: الإثراء المطابق يرفق سؤالاً من نفس موضوع الدرس (مثال: الموقع في الفضاء)', async () => {

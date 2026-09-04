@@ -157,6 +157,17 @@ function adaptMathUnits(lessons) {
   for (const [id, item] of Object.entries(lessons)) {
     if (!item || typeof item !== 'object' || !item.title || item.ready === false) continue;
     if (item.kind && String(item.kind).startsWith('count-extra')) continue;
+    const extra = item.lessonTestId ? { lessonTestId: item.lessonTestId } : {};
+    // دروس مؤلفة للتلميذ (studentBlocks): تعرض حصرياً للتلميذ بدل القالب
+    // الافتراضي (أساس بيداغوجي موجّه للمعلم) — أسئلة تفاعلية + خلاصة.
+    if (Array.isArray(item.studentBlocks) && item.studentBlocks.length) {
+      const blocks = item.studentBlocks
+        .filter((b) => b && typeof b === 'object' && (b.text || b.title || (b.points || []).length))
+        .map((b) => ({ kind: b.kind || 'concept', ...b }));
+      const firstText = (blocks.find((b) => b.text)?.text) || item.title;
+      pages.push({ id, title: item.title, content: firstText, domain: item.domain, blocks, ...extra });
+      continue;
+    }
     const blocks = [
       { kind: 'objective', title: 'الأهداف', text: item.pedagogicalBasis ? `أن يتعرّف المتعلّم على: ${item.title}.` : `أن يتقن المتعلّم: ${item.title}.` }
     ];
@@ -164,7 +175,7 @@ function adaptMathUnits(lessons) {
     if (item.domain) blocks.push({ kind: 'definition', title: 'المحور', text: item.domain });
     for (const act of item.activities || []) blocks.push({ kind: 'example', title: 'نشاط', text: act });
     if (item.officialRef?.pages) blocks.push({ kind: 'note', title: 'مرجع', text: `${item.officialRef.source || 'الكتاب'} — ص ${item.officialRef.pages}` });
-    pages.push({ id, title: item.title, content: item.pedagogicalBasis || item.title, domain: item.domain, blocks });
+    pages.push({ id, title: item.title, content: item.pedagogicalBasis || item.title, domain: item.domain, blocks, ...extra });
   }
   return pages;
 }
