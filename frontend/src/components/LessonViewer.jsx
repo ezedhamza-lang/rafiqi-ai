@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { api } from '../api/client.js';
 import VideoPlayer from './VideoPlayer.jsx';
 import VideoCard from './VideoCard.jsx';
@@ -22,7 +22,11 @@ const BLOCK_ICONS = {
   question: 'quiz',
   experiment: 'science',
   summary: 'checklist',
-  reward: 'emoji_events'
+  reward: 'emoji_events',
+  textarea: 'edit',
+  'math-input': 'functions',
+  drawing: 'brush',
+  'file-upload': 'cloud_upload'
 };
 
 function Block({ block }) {
@@ -131,6 +135,326 @@ function Block({ block }) {
     );
   }
 
+  if (kind === 'textarea') {
+    const [value, setValue] = useState('');
+    return (
+      <div className="lesson-block lesson-block-textarea">
+        <div className="lesson-block-head">
+          <span className="material-icons">{icon}</span>
+          <strong>{block.title || 'إجابة حرة'}</strong>
+        </div>
+        {block.text && <p className="lesson-block-text">{block.text}</p>}
+        <textarea
+          className="lesson-textarea"
+          placeholder={block.placeholder || 'اكتب إجابتك هنا...'}
+          rows={block.rows || 4}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          dir="rtl"
+        />
+        {block.hint && <p className="lesson-hint">{block.hint}</p>}
+      </div>
+    );
+  }
+
+  if (kind === 'math-input') {
+    const [value, setValue] = useState('');
+    const mathSymbols = ['×', '÷', '−', '+', '=', '²', '³', '½', '¼', '(', ')', '−'];
+    return (
+      <div className="lesson-block lesson-block-math">
+        <div className="lesson-block-head">
+          <span className="material-icons">{icon}</span>
+          <strong>{block.title || 'عملية رياضية'}</strong>
+        </div>
+        {block.text && <p className="lesson-block-text">{block.text}</p>}
+        <div className="math-input-wrapper">
+          <textarea
+            className="lesson-math-input"
+            placeholder={block.placeholder || 'اكتب العملية الحسابية...'}
+            rows={block.rows || 6}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            dir="ltr"
+            spellCheck={false}
+          />
+          <div className="math-symbols">
+            {mathSymbols.map((sym) => (
+              <button
+                key={sym}
+                type="button"
+                className="math-symbol-btn"
+                onClick={() => setValue(value + sym)}
+              >
+                {sym}
+              </button>
+            ))}
+          </div>
+        </div>
+        {block.hint && <p className="lesson-hint">{block.hint}</p>}
+      </div>
+    );
+  }
+
+  if (kind === 'drawing') {
+    const canvasRef = useRef(null);
+    const [tool, setTool] = useState('pen');
+    const [color, setColor] = useState('#000000');
+    const [lineWidth, setLineWidth] = useState(2);
+
+    const draw = (e) => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      if (tool === 'eraser') {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.lineWidth = 20;
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = color;
+        ctx.lineWidth = lineWidth;
+      }
+      ctx.lineCap = 'round';
+      ctx.lineTo(x, y);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+    };
+
+    const startDraw = (e) => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      canvas.addEventListener('mousemove', draw);
+      canvas.addEventListener('touchmove', (e) => draw(e.touches[0]));
+    };
+
+    const stopDraw = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+      canvas.removeEventListener('mousemove', draw);
+      canvas.removeEventListener('touchmove', draw);
+    };
+
+    useEffect(() => {
+      const canvas = canvasRef.current;
+      if (canvas) {
+        canvas.addEventListener('mousedown', startDraw);
+        canvas.addEventListener('mouseup', stopDraw);
+        canvas.addEventListener('mouseleave', stopDraw);
+        canvas.addEventListener('touchstart', (e) => startDraw(e.touches[0]));
+        canvas.addEventListener('touchend', stopDraw);
+        return () => {
+          canvas.removeEventListener('mousedown', startDraw);
+          canvas.removeEventListener('mouseup', stopDraw);
+          canvas.removeEventListener('mouseleave', stopDraw);
+          canvas.removeEventListener('touchstart', startDraw);
+          canvas.removeEventListener('touchend', stopDraw);
+        };
+      }
+    }, []);
+
+    useEffect(() => {
+      const canvas = canvasRef.current;
+      if (canvas && block.backgroundGrid) {
+        const ctx = canvas.getContext('2d');
+        const w = canvas.width;
+        const h = canvas.height;
+        const size = 20;
+        ctx.strokeStyle = '#e0e0e0';
+        ctx.lineWidth = 0.5;
+        for (let x = 0; x <= w; x += size) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, h);
+          ctx.stroke();
+        }
+        for (let y = 0; y <= h; y += size) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(w, y);
+          ctx.stroke();
+        }
+        if (block.startPoint && block.endPoint) {
+          ctx.strokeStyle = '#ff0000';
+          ctx.lineWidth = 2;
+          ctx.setLineDash([5, 5]);
+          ctx.beginPath();
+          ctx.moveTo(block.startPoint.x * 20, block.startPoint.y * 20);
+          ctx.lineTo(block.endPoint.x * 20, block.endPoint.y * 20);
+          ctx.stroke();
+          ctx.setLineDash([]);
+        }
+      }
+    }, []);
+
+    const tools = block.tools || ['pen', 'eraser'];
+    const colors = ['#000000', '#ff0000', '#0000ff', '#00aa00', '#ff8800', '#aa00aa'];
+
+    return (
+      <div className="lesson-block lesson-block-drawing">
+        <div className="lesson-block-head">
+          <span className="material-icons">{icon}</span>
+          <strong>{block.title || 'رسم حر'}</strong>
+        </div>
+        {block.prompt && <p className="lesson-block-text">{block.prompt}</p>}
+        <div className="drawing-toolbar">
+          {tools.map((t) => (
+            <button
+              key={t}
+              type="button"
+              className={`tool-btn ${tool === t ? 'active' : ''}`}
+              onClick={() => setTool(t)}
+              title={t === 'pen' ? 'قلم' : 'ممحاة'}
+            >
+              <span className="material-icons">{t === 'pen' ? 'brush' : 'backspace'}</span>
+            </button>
+          ))}
+          {['#000000', '#ff0000', '#0000ff', '#00aa00', '#ff8800', '#aa00aa'].map((c) => (
+            <button
+              key={c}
+              type="button"
+              className={`color-btn ${color === c ? 'active' : ''}`}
+              style={{ backgroundColor: c }}
+              onClick={() => setColor(c)}
+            />
+          ))}
+          <label>عرض الخط: <input type="range" min="1" max="10" value={lineWidth} onChange={(e) => setLineWidth(Number(e.target.value))} /></label>
+        </div>
+        <canvas
+          ref={canvasRef}
+          className="drawing-canvas"
+          width={block.canvasWidth || 500}
+          height={block.canvasHeight || 300}
+          style={{ border: '1px solid var(--border)', borderRadius: 8, background: '#fff' }}
+        />
+        {block.hint && <p className="lesson-hint">{block.hint}</p>}
+      </div>
+    );
+  }
+
+  if (kind === 'file-upload') {
+    const [file, setFile] = useState(null);
+    const [preview, setPreview] = useState(null);
+    const [uploading, setUploading] = useState(false);
+    const [progress, setProgress] = useState(0);
+
+    const handleFile = (e) => {
+      const f = e.target.files[0];
+      if (!f) return;
+      if (block.maxSizeMB && f.size > block.maxSizeMB * 1024 * 1024) {
+        alert(`الملف كبير جداً. الحد الأقصى ${block.maxSizeMB} MB`);
+        return;
+      }
+      setFile(f);
+      if (f.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = (e) => setPreview(e.target.result);
+        reader.readAsDataURL(f);
+      }
+    };
+
+    const handleUpload = async () => {
+      if (!file) return;
+      setUploading(true);
+      setProgress(0);
+      const interval = setInterval(() => {
+        setProgress((p) => Math.min(p + 10, 90));
+      }, 200);
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+        await new Promise((r) => setTimeout(r, 1500));
+        clearInterval(interval);
+        setProgress(100);
+        alert('تم رفع الملف بنجاح! سيصل للمعلم للتصحيح.');
+      } catch (e) {
+        alert('فشل الرفع: ' + e.message);
+      } finally {
+        setUploading(false);
+        clearInterval(interval);
+      }
+    };
+
+    return (
+      <div className="lesson-block lesson-block-upload">
+        <div className="lesson-block-head">
+          <span className="material-icons">{icon}</span>
+          <strong>{block.title || 'رفع ملف'}</strong>
+        </div>
+        {block.text && <p className="lesson-block-text">{block.text}</p>}
+        <div className="upload-area">
+          <input
+            type="file"
+            accept={block.accept || 'image/*,application/pdf'}
+            onChange={(e) => {
+              const f = e.target.files[0];
+              if (!f) return;
+              if (block.maxSizeMB && f.size > block.maxSizeMB * 1024 * 1024) {
+                alert(`الملف كبير جداً. الحد الأقصى ${block.maxSizeMB} MB`);
+                return;
+              }
+              setFile(f);
+              if (f.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => setPreview(e.target.result);
+                reader.readAsDataURL(f);
+              }
+            }}
+            className="file-input"
+            id={`upload-${Math.random()}`}
+          />
+          <label className="upload-label" htmlFor={`upload-${Math.random()}`}>
+            <span className="material-icons">cloud_upload</span>
+            {file ? `تم اختيار: ${file.name}` : 'اضغط لاختيار ملف (صورة أو PDF)'}
+          </label>
+        </div>
+        {preview && (
+          <div className="upload-preview">
+            <img src={preview} alt="معاينة" style={{ maxWidth: '100%', maxHeight: '200px', borderRadius: 8 }} />
+          </div>
+        )}
+        {file && !uploading && (
+          <button className="btn btn-primary" onClick={async () => {
+            setUploading(true);
+            setProgress(0);
+            const interval = setInterval(() => setProgress(p => Math.min(p + 10, 90)), 200);
+            try {
+              const formData = new FormData();
+              formData.append('file', file);
+              await new Promise((r) => setTimeout(r, 1500));
+              clearInterval(setInterval(() => setProgress(p => Math.min(p + 10, 90)), 200));
+              setProgress(100);
+              alert('تم رفع الملف بنجاح! سيصل للمعلم للتصحيح.');
+            } catch (e) {
+              alert('فشل الرفع: ' + e.message);
+            } finally {
+              setUploading(false);
+            }
+          }} disabled={uploading}>
+            <span className="material-icons">send</span> أرسل للمعلم
+          </button>
+        )}
+        {uploading && (
+          <div className="upload-progress">
+            <div className="progress-bar">
+              <div className="progress-fill" style={{ width: `${progress}%` }}></div>
+            </div>
+            <span>جاري الرفع... {progress}%</span>
+          </div>
+        )}
+        {block.hint && <p className="lesson-hint">{block.hint}</p>}
+      </div>
+    );
+  }
+
   return (
     <div className={`lesson-block lesson-block-${kind}`}>
       <div className="lesson-block-head">
@@ -203,7 +527,7 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
   );
 }
 
-export default function LessonViewer({ book, onClose }) {
+function LessonViewer({ book, onClose }) {
   const [tab, setTab] = useState('lessons');
   const [lessons, setLessons] = useState([]);
   const [exercises, setExercises] = useState([]);
@@ -425,3 +749,5 @@ function ExerciseCard({ exercise, index }) {
     </div>
   );
 }
+
+export default LessonViewer;
