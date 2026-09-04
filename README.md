@@ -93,7 +93,7 @@ npm run dev
 | مدير مدرسة | `director@test.tn` | `director123` |
 | أستاذ | `teacher@test.tn` | `teacher123` |
 | ولي | `parent@test.tn` | `parent123` |
-| تلميذ | `student@test.tn` | `student123` |
+| تلميذ (استكشاف: بلا قسم، يرى محتوى كل المستويات س1-س6) | `student@test.tn` | `student123` |
 
 ## فضاء الأستاذ (20 تبويب)
 

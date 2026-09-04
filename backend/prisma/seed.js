@@ -210,18 +210,22 @@ async function main() {
   const existingStudent = await prisma.student.findUnique({
     where: { accountUserId: studentAccount.id }
   });
+  // حساب الاستكشاف التجريبي: تلميذ بلا قسم (classId فارغ ومستوى فارغ) ليرى
+  // محتوى كل المستويات (س1-س6) في فضاء التلميذ — القفل بالمستوى يُرفع فقط
+  // عند غياب المستوى (انظر studentLevelService + ‏StudentBooks). التكليفات
+  // والاختبارات المرتبطة بالقسم تعيد له قائمة فارغة بأمان.
   const student = existingStudent
     ? await prisma.student.update({
         where: { id: existingStudent.id },
         data: {
           userId: parent.id,
-          classId: createdClasses['قسم السنة الأولى أ'].id,
+          classId: null,
           firstName: 'أحمد',
           lastName: 'التلميذ',
           birthDate: new Date('2019-03-15'),
           cin: '00000000',
           gender: 'ذكر',
-          level: 'السنة الأولى أساسي',
+          level: '',
           schoolYear: '2026-2027',
           schoolName: 'المدرسة الابتدائية النموذجية'
         }
@@ -230,13 +234,13 @@ async function main() {
         data: {
           userId: parent.id,
           accountUserId: studentAccount.id,
-          classId: createdClasses['قسم السنة الأولى أ'].id,
+          classId: null,
           firstName: 'أحمد',
           lastName: 'التلميذ',
           birthDate: new Date('2019-03-15'),
           cin: '00000000',
           gender: 'ذكر',
-          level: 'السنة الأولى أساسي',
+          level: '',
           schoolYear: '2026-2027',
           schoolName: 'المدرسة الابتدائية النموذجية'
         }
