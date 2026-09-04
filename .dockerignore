@@ -1,6 +1,5 @@
 node_modules
-frontend/*
-!frontend/dist/
+frontend/node_modules
 docs
 rafiqi
 .git
@@ -17,5 +16,3 @@ backend/*.tmp
 backend/scripts
 docker-compose.yml
 start.sh
-GLOBALIZATION_ROADMAP.md
-PENDING_FIXES.md

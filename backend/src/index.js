@@ -210,7 +210,7 @@ app.use('/intaj', express.static(path.join(__dirname, '../uploads/intaj'), stati
 app.use('/plans', express.static(path.join(__dirname, '../content/plans'), staticOpts));
 
 // ===== الإنتاج: تقديم الواجهة المبنية من نفس الخادم — رابط واحد للمنصة =====
-const DIST = path.join(__dirname, '../frontend/dist');
+const DIST = path.join(__dirname, '../../frontend/dist');
 if (config.nodeEnv === 'production' && fs.existsSync(DIST)) {
   app.use(express.static(DIST, {
     maxAge: '1y',

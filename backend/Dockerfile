@@ -2,17 +2,23 @@ FROM node:20-alpine3.19
 
 WORKDIR /app
 
-COPY backend/package*.json ./
-RUN npm ci
+# Backend deps
+COPY backend/package*.json ./backend/
+RUN cd backend && npm ci
 
-COPY backend/prisma ./prisma
-RUN npx prisma generate
+COPY backend/prisma ./backend/prisma
+RUN cd backend && npx prisma generate
 
-COPY backend/ .
+# Frontend build
+COPY frontend/package*.json frontend/
+RUN cd frontend && npm ci
 
-# الواجهة المبنية جاهزة
-COPY frontend/dist /app/frontend/dist
+COPY frontend/ frontend/
+RUN cd frontend && npm run build
+
+# Backend source
+COPY backend/ backend/
 
 EXPOSE 3001
 
-CMD ["node", "src/index.js"]
+CMD ["node", "backend/src/index.js"]
