@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 
@@ -247,6 +247,60 @@ export default function OfficialExams({ classes }) {
     const passages = [...(draft.content.passages || [])];
     passages.splice(idx, 1);
     setDraft({ ...draft, content: { ...draft.content, passages } });
+  };
+
+  const promptRefs = useRef({});
+  const SYMBOLS = ['○', '□', '△', '▲', '●', '■', '★', '✓', '✗', '→', '◄', '►', '…', '......'];
+
+  const insertSymbol = (idx, sym) => {
+    const el = promptRefs.current[idx];
+    const cur = (draft.content.questions || [])[idx] || {};
+    const base = cur.prompt || cur.text || '';
+    if (el && typeof el.selectionStart === 'number') {
+      const a = el.selectionStart;
+      const b = el.selectionEnd == null ? a : el.selectionEnd;
+      updateQuestion(idx, { prompt: base.slice(0, a) + sym + base.slice(b) });
+      setTimeout(() => {
+        try {
+          const n = document.querySelector('[data-qprompt="' + idx + '"]');
+          if (n) { n.focus(); n.selectionStart = n.selectionEnd = a + sym.length; }
+        } catch (e) {}
+      }, 0);
+    } else {
+      updateQuestion(idx, { prompt: base + sym });
+    }
+  };
+
+  const updateCriterion = (idx, patch) => {
+    const criteria = [...(draft.content.criteria || [])];
+    criteria[idx] = { ...criteria[idx], ...patch };
+    setDraft({ ...draft, content: { ...draft.content, criteria } });
+  };
+
+  const updateCriterionMastery = (idx, key, val) => {
+    const criteria = [...(draft.content.criteria || [])];
+    const c = { ...(criteria[idx] || {}), mastery: { ...((criteria[idx] || {}).mastery || {}) } };
+    c.mastery[key] = Number(val);
+    criteria[idx] = c;
+    setDraft({ ...draft, content: { ...draft.content, criteria } });
+  };
+
+  const addCriterion = () => {
+    const criteria = [...(draft.content.criteria || [])];
+    criteria.push({ id: 'مع' + (criteria.length + 1), label: '', mastery: { none: 0, below: 1, min: 2, max: 3 } });
+    setDraft({ ...draft, content: { ...draft.content, criteria } });
+  };
+
+  const removeCriterion = (idx) => {
+    const criteria = [...(draft.content.criteria || [])];
+    criteria.splice(idx, 1);
+    setDraft({ ...draft, content: { ...draft.content, criteria } });
+  };
+
+  const criterionOptions = () => {
+    const list = draft.content.criteria || [];
+    if (list.length === 0) return [{ id: 'مع1' }, { id: 'مع2' }, { id: 'مع3' }];
+    return list;
   };
 
   const generateAi = async (e) => {
@@ -680,13 +734,31 @@ export default function OfficialExams({ classes }) {
                     <img src={q.visual || q.image} alt="" style={{ maxWidth: '160px', maxHeight: '120px', marginTop: '4px' }} />
                   )}
                 </div>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>{t('teacherSpace.officialExams.qCriterionLabel')}</label>
+                    <select value={q.criterion || 'مع1'} onChange={(e) => updateQuestion(i, { criterion: e.target.value, section: e.target.value })}>
+                      {criterionOptions().map((c) => (
+                        <option key={c.id} value={c.id}>{c.label ? c.id + ' - ' + c.label : c.id}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="form-group grow">
+                    <label>{t('teacherSpace.officialExams.qSymbolLabel')}</label>
+                    <div>
+                      {SYMBOLS.map((sym) => (
+                        <button key={sym} type="button" className="btn btn-sm" style={{ margin: '2px' }} onClick={() => insertSymbol(i, sym)}>{sym}</button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
                 <div className="form-group">
                   <label>{t('teacherSpace.officialExams.qInstructionLabel')}</label>
                   <input value={q.instruction || ''} onChange={(e) => updateQuestion(i, { instruction: e.target.value })} />
                 </div>
                 <div className="form-group">
                   <label>{t('teacherSpace.officialExams.qPromptLabel')}</label>
-                  <textarea value={q.prompt || q.text || ''} rows="2" onChange={(e) => updateQuestion(i, { prompt: e.target.value })} />
+                  <textarea data-qprompt={i} ref={(el) => { promptRefs.current[i] = el; }} value={q.prompt || q.text || ''} rows="2" onChange={(e) => updateQuestion(i, { prompt: e.target.value })} />
                 </div>
                 {(q.type === 'MCQ' || q.type === 'EXTRACT') && (
                   <div className="form-group">
@@ -708,6 +780,33 @@ export default function OfficialExams({ classes }) {
               </div>
             ))}
             <button type="button" className="btn btn-sm" onClick={addQuestion}>+ {t('teacherSpace.officialExams.addQuestion')}</button>
+          </div>
+          <div className="form-group">
+            <label>{t('teacherSpace.officialExams.critSectionLabel')}</label>
+            {(draft.content.criteria || []).map((c, i) => (
+              <div key={c.id || i} className="card-item">
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>ID</label>
+                    <input value={c.id || ''} onChange={(e) => updateCriterion(i, { id: e.target.value })} />
+                  </div>
+                  <div className="form-group grow">
+                    <label>{t('teacherSpace.officialExams.criteriaCol')}</label>
+                    <input value={c.label || ''} onChange={(e) => updateCriterion(i, { label: e.target.value })} placeholder={t('teacherSpace.officialExams.critLabelPh')} />
+                  </div>
+                  <button type="button" className="btn btn-danger btn-sm" onClick={() => removeCriterion(i)}>×</button>
+                </div>
+                <div className="form-row">
+                  {[['none', 'critNoneLabel'], ['below', 'critBelowLabel'], ['min', 'critMinLabel'], ['max', 'critMaxLabel']].map(([k, lk]) => (
+                    <div key={k} className="form-group">
+                      <label>{t('teacherSpace.officialExams.' + lk)}</label>
+                      <input type="number" min="0" step="0.5" value={c.mastery?.[k] ?? 0} onChange={(e) => updateCriterionMastery(i, k, e.target.value)} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+            <button type="button" className="btn btn-sm" onClick={addCriterion}>+ {t('teacherSpace.officialExams.addCriterion')}</button>
           </div>
           <button className="btn btn-primary" type="submit">
             {t('teacherSpace.officialExams.saveExam')}
