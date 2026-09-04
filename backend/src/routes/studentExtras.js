@@ -5,6 +5,22 @@ import { asyncHandler } from '../middleware/errorHandler.js';
 import { getLessonPages, findGradeByLevel } from '../services/curriculumService.js';
 import { buildRecommendedSession } from '../services/adaptivePlanService.js';
 import { getStudentLevel } from '../services/studentLevelService.js';
+import { validateBody } from '../middleware/validate.js';
+import { z } from 'zod';
+
+const router = Router();
+
+const submitLessonSchema = z.object({
+  lessonId: z.string().min(1),
+  lessonTitle: z.string().optional(),
+  answers: z.record(z.any()),
+  files: z.array(z.object({
+    name: z.string(),
+    size: z.number(),
+    type: z.string(),
+    dataUrl: z.string().optional()
+  })).optional()
+});
 
 const router = Router();
 
@@ -169,6 +185,86 @@ router.get('/daily-routine', studentMiddleware, asyncHandler(async (req, res) =>
         }
       : null
   });
+}));
+
+export default router;
+
+/**
+ * @openapi
+ * /api/student/lesson/submit:
+ *   post:
+ *     summary: إرسال إجابات الدرس التفاعلي للمعلم
+ *     tags: [student]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [lessonId, answers]
+ *             properties:
+ *               lessonId:
+ *                 type: string
+ *               lessonTitle:
+ *                 type: string
+ *               answers:
+ *                 type: object
+ *               files:
+ *                 type: array
+ *                 items:
+ *                   type: object
+ *                   properties:
+ *                     name:
+ *                       type: string
+ *                     size:
+ *                       type: integer
+ *                     type:
+ *                       type: string
+ *                     dataUrl:
+ *                       type: string
+ *     responses:
+ *       201:
+ *         description: تم الإرسال بنجاح
+ *       400:
+ *         description: بيانات ناقصة
+ *       401:
+ *         description: غير مصرح
+ */
+router.post('/lesson/submit', studentMiddleware, validateBody(submitLessonSchema), asyncHandler(async (req, res) => {
+  const { lessonId, lessonTitle, answers, files } = req.body;
+
+  const submission = await prisma.lessonSubmission.create({
+    data: {
+      userId: req.user.id,
+      lessonId,
+      lessonTitle,
+      answers,
+      files: files || null,
+      status: 'SUBMITTED',
+      submittedAt: new Date()
+    }
+  });
+
+  // Notify teacher if lesson is linked to a class
+  const student = await prisma.student.findFirst({ where: { accountUserId: req.user.id }, select: { classId: true } });
+  if (student?.classId) {
+    const classTeacher = await prisma.class.findUnique({ where: { id: student.classId }, select: { teacherId: true } });
+    if (classTeacher?.teacherId) {
+      await prisma.notification.create({
+        data: {
+          userId: classTeacher.teacherId,
+          type: 'LESSON_SUBMITTED',
+          title: 'إرسال واجب جديد',
+          message: `أرسل تلميذ إجابات درس: ${req.body.lessonTitle || 'بدون عنوان'}`,
+          data: { submissionId: submission.id, lessonId: req.body.lessonId }
+        }
+      });
+    }
+  }
+
+  res.status(201).json({ ok: true, submissionId: submission.id, message: 'تم إرسال إجاباتك للمعلم بنجاح' });
 }));
 
 export default router;

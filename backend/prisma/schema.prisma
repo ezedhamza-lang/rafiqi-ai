@@ -196,6 +196,7 @@ model User {
   parentNotesSent      ParentNote[]        @relation("ParentNoteParent")
   parentNotesAbout     ParentNote[]        @relation("ParentNoteStudent")
   parentNotesReceived  ParentNote[]        @relation("ParentNoteTeacher")
+  lessonSubmissions    LessonSubmission[]  @relation("UserLessonSubmissions")
 
   @@index([role])
 }
@@ -1227,4 +1228,25 @@ model LessonProgress {
   @@unique([userId, gradeId, subjectId, lessonId])
   @@index([userId, completedAt])
   @@index([userId, gradeId, subjectId])
+}
+
+model LessonSubmission {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  lessonId    String
+  lessonTitle String?
+  answers     Json     // { blockId: answer }
+  files       Json?    // [{ name, size, type, dataUrl }]
+  status      String   @default("SUBMITTED") // SUBMITTED, GRADED, RETURNED
+  grade       Int?     // /20
+  feedback    String?
+  submittedAt DateTime @default(now())
+  gradedAt    DateTime?
+  gradedBy    Int?
+
+  user User @relation("UserLessonSubmissions", fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, lessonId])
+  @@index([userId, status])
+  @@index([status])
 }
