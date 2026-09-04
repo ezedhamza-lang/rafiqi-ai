@@ -448,6 +448,58 @@ button {
   padding: 3.5rem 0;
 }
 
+/* ---------- Custom Scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 10px;
+  border: 2px solid #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #94a3b8 #f1f5f9;
+}
+
+/* ---------- Improved Cursor UX ---------- */
+input, textarea, select, a, button, [role="button"] {
+  cursor: pointer;
+}
+
+textarea, input[type="text"], input[type="email"], input[type="password"], input[type="number"], input[type="search"] {
+  cursor: text;
+}
+
+textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.2);
+  border-color: var(--primary) !important;
+}
+
+/* Improve select dropdown visibility */
+select {
+  appearance: auto;
+  background-image: none;
+}
+
 .section-title {
   font-size: 1.7rem;
   font-weight: 800;
@@ -1068,6 +1120,49 @@ tr:hover td {
   color: rgba(255, 255, 255, 0.6);
 }
 
+.footer-social-icons {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 0.3rem;
+}
+
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.85);
+  transition: all 0.25s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.social-facebook:hover {
+  background: #1877f2;
+  color: #fff;
+}
+
+.social-youtube:hover {
+  background: #ff0000;
+  color: #fff;
+}
+
+.social-linkedin:hover {
+  background: #0a66c2;
+  color: #fff;
+}
+
+.social-instagram:hover {
+  background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: #fff;
+}
+
 /* ---------- Home stats ---------- */
 .stats-row {
   display: grid;
@@ -1426,6 +1521,100 @@ tr:hover td {
 
 .tab-content {
   min-height: 50vh;
+}
+
+/* ---------- Student Tabs Navigation ---------- */
+.student-tabs-nav {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding: 0.8rem 0;
+  margin-bottom: 1.5rem;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.student-tabs-nav::-webkit-scrollbar {
+  height: 6px;
+}
+
+.student-tabs-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.student-tabs-nav::-webkit-scrollbar-thumb {
+  background: rgba(14, 165, 233, 0.3);
+  border-radius: 10px;
+}
+
+.student-tab-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.7rem 1rem;
+  border-radius: 14px;
+  background: #fff;
+  border: 2px solid var(--border);
+  color: #555;
+  font-weight: 700;
+  font-size: 0.78rem;
+  white-space: nowrap;
+  min-width: 72px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  user-select: none;
+}
+
+.student-tab-item .material-icons {
+  font-size: 1.5rem;
+  color: var(--tab-color, var(--primary));
+  transition: transform 0.25s ease;
+}
+
+.student-tab-item .student-tab-label {
+  line-height: 1.2;
+}
+
+.student-tab-item:hover {
+  border-color: var(--tab-color, var(--primary));
+  background: color-mix(in srgb, var(--tab-color, var(--primary)) 8%, white);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.student-tab-item:hover .material-icons {
+  transform: scale(1.15);
+}
+
+.student-tab-item.active {
+  background: var(--tab-color, var(--primary));
+  color: #fff;
+  border-color: var(--tab-color, var(--primary));
+  box-shadow: 0 6px 20px color-mix(in srgb, var(--tab-color, var(--primary)) 35%, transparent);
+  transform: translateY(-2px);
+}
+
+.student-tab-item.active .material-icons {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .student-tabs-nav {
+    gap: 0.4rem;
+    padding: 0.5rem 0;
+  }
+
+  .student-tab-item {
+    min-width: 64px;
+    padding: 0.6rem 0.7rem;
+    font-size: 0.72rem;
+  }
+
+  .student-tab-item .material-icons {
+    font-size: 1.3rem;
+  }
 }
 
 /* اللوحات */
