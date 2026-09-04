@@ -6,9 +6,19 @@ const COLORS = ['#ef4444','#06b6d4','#8b5cf6','#3b82f6','#f97316','#ec4899','#10
 
 const REQUIRED_HOURS = { 1: 20, 2: 22, 3: 25, 4: 25, 5: 28, 6: 28 };
 
+const ARABIC_COMPONENTS = [
+  { name: 'تواصل شفوي', color: '#ef4444', group: 'اللغة العربية' },
+  { name: 'قراءة', color: '#dc2626', group: 'اللغة العربية' },
+  { name: 'إنتاج كتابي', color: '#b91c1c', group: 'اللغة العربية' },
+  { name: 'حوار منظّم', color: '#991b1b', group: 'اللغة العربية' },
+  { name: 'كتابة', color: '#7f1d1d', group: 'اللغة العربية' },
+  { name: 'حفظات', color: '#450a0a', group: 'اللغة العربية' },
+  { name: 'قواعد اللغة', color: '#f87171', group: 'اللغة العربية' }
+];
+
 const GRADE_SUBJECTS = {
   1: [
-    { name: 'اللغة العربية', color: '#ef4444', hours: 9, group: 'اللغة العربية' },
+    ...ARABIC_COMPONENTS.map((c, i) => ({ ...c, hours: [2, 1.5, 1.5, 1, 1.5, 1, 0.5][i] })),
     { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
     { name: 'الرياضيات', color: '#10b981', hours: 5, group: 'الرياضيات' },
     { name: 'إيقاظ علمي', color: '#14b8a6', hours: 1, group: 'العلوم والتكنولوجيا' },
@@ -18,7 +28,7 @@ const GRADE_SUBJECTS = {
     { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   2: [
-    { name: 'اللغة العربية', color: '#ef4444', hours: 9, group: 'اللغة العربية' },
+    ...ARABIC_COMPONENTS.map((c, i) => ({ ...c, hours: [2, 1.5, 1.5, 1, 1.5, 1, 0.5][i] })),
     { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 2, group: 'اللغات الأجنبية' },
     { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
     { name: 'الرياضيات', color: '#10b981', hours: 5, group: 'الرياضيات' },
@@ -29,7 +39,7 @@ const GRADE_SUBJECTS = {
     { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   3: [
-    { name: 'اللغة العربية', color: '#ef4444', hours: 6, group: 'اللغة العربية' },
+    ...ARABIC_COMPONENTS.map((c, i) => ({ ...c, hours: [1, 1, 1, 0.5, 1, 1, 0.5][i] })),
     { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
     { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
     { name: 'التاريخ', color: '#78716c', hours: 0.67, group: 'التربية الاجتماعية' },
@@ -43,7 +53,7 @@ const GRADE_SUBJECTS = {
     { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   4: [
-    { name: 'اللغة العربية', color: '#ef4444', hours: 6, group: 'اللغة العربية' },
+    ...ARABIC_COMPONENTS.map((c, i) => ({ ...c, hours: [1, 1, 1, 0.5, 1, 1, 0.5][i] })),
     { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
     { name: 'اللغة الإنجليزية', color: '#6366f1', hours: 1, group: 'اللغات الأجنبية' },
     { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
@@ -58,7 +68,7 @@ const GRADE_SUBJECTS = {
     { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   5: [
-    { name: 'اللغة العربية', color: '#ef4444', hours: 6, group: 'اللغة العربية' },
+    ...ARABIC_COMPONENTS.map((c, i) => ({ ...c, hours: [1, 1, 1, 0.5, 1, 1, 0.5][i] })),
     { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
     { name: 'اللغة الإنجليزية', color: '#6366f1', hours: 2, group: 'اللغات الأجنبية' },
     { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
@@ -73,7 +83,7 @@ const GRADE_SUBJECTS = {
     { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   6: [
-    { name: 'اللغة العربية', color: '#ef4444', hours: 6, group: 'اللغة العربية' },
+    ...ARABIC_COMPONENTS.map((c, i) => ({ ...c, hours: [1, 1, 1, 0.5, 1, 1, 0.5][i] })),
     { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
     { name: 'اللغة الإنجليزية', color: '#6366f1', hours: 2, group: 'اللغات الأجنبية' },
     { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
@@ -92,7 +102,7 @@ const GRADE_SUBJECTS = {
 const GRADE_NAMES = ['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة'];
 const DAYS = ['الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
 
-const DURATION_OPTIONS = [25, 30, 40, 55];
+const DURATION_OPTIONS = [15, 20, 25, 30, 40, 55];
 
 function formatHours(h) {
   if (h === 0.5) return '30 دقيقة';
