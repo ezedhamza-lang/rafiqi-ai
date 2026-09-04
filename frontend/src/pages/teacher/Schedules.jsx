@@ -5,15 +5,16 @@ import { useI18n } from '../../i18n/index.jsx';
 const COLORS = ['#ef4444','#06b6d4','#8b5cf6','#3b82f6','#f97316','#ec4899','#10b981','#14b8a6','#78716c','#a16207','#f59e0b','#64748b','#0ea5e9','#6366f1','#a855f7','#e11d48','#22c55e','#d946ef','#0891b2','#7c3aed'];
 
 // الدرجة الأولى = سنة 1 + 2 — الدرجة الثانية = سنة 3 + 4 — الدرجة الثالثة = سنة 5 + 6
-const REQUIRED_HOURS = { 1: 20, 2: 22, 3: 25, 4: 25, 5: 28, 6: 28 };
+// كل درجة لها توزيع مواد واحد (السنتان متماثلتان)
 
 const DEGREES = [
-  { name: 'الدرجة الأولى', years: [1, 2], yearLabels: ['السنة الأولى', 'السنة الثانية'] },
-  { name: 'الدرجة الثانية', years: [3, 4], yearLabels: ['السنة الثالثة', 'السنة الرابعة'] },
-  { name: 'الدرجة الثالثة', years: [5, 6], yearLabels: ['السنة الخامسة', 'السنة السادسة'] }
+  { name: 'الدرجة الأولى', years: [1, 2], yearLabels: ['السنة الأولى', 'السنة الثانية'], required: 9 },
+  { name: 'الدرجة الثانية', years: [3, 4], yearLabels: ['السنة الثالثة', 'السنة الرابعة'], required: 6 },
+  { name: 'الدرجة الثالثة', years: [5, 6], yearLabels: ['السنة الخامسة', 'السنة السادسة'], required: 6 }
 ];
 
-const GRADE_SUBJECTS = {
+// توزيع المواد لكل درجة
+const DEGREE_SUBJECTS = {
   1: [
     { name: 'تواصل شفوي', color: '#ef4444', hours: 1.5, group: 'اللغة العربية' },
     { name: 'قراءة', color: '#dc2626', hours: 4, group: 'اللغة العربية' },
@@ -38,13 +39,16 @@ const GRADE_SUBJECTS = {
     { name: 'كتابة', color: '#7f1d1d', hours: 0, group: 'اللغة العربية' },
     { name: 'استيعاب قواعد اللغة', color: '#f87171', hours: 2, group: 'اللغة العربية' },
     { name: 'إنتاج كتابي', color: '#450a0a', hours: 1, group: 'اللغة العربية' },
-    { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 2, group: 'اللغات الأجنبية' },
+    { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
     { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
+    { name: 'التاريخ', color: '#78716c', hours: 0.67, group: 'التربية الاجتماعية' },
+    { name: 'الجغرافيا', color: '#a16207', hours: 0.67, group: 'التربية الاجتماعية' },
+    { name: 'التربية مدنية', color: '#64748b', hours: 0.67, group: 'التربية الاجتماعية' },
     { name: 'الرياضيات', color: '#10b981', hours: 5, group: 'الرياضيات' },
     { name: 'إيقاظ علمي', color: '#14b8a6', hours: 1, group: 'العلوم والتكنولوجيا' },
     { name: 'التربية التكنولوجية', color: '#6366f1', hours: 1, group: 'التربية والرياضة' },
-    { name: 'التربية الموسيقية', color: '#a855f7', hours: 1, group: 'التربية والرياضة' },
-    { name: 'التربية التشكيلية', color: '#e11d48', hours: 1, group: 'التربية والرياضة' },
+    { name: 'التربية الموسيقية', color: '#a855f7', hours: 0.5, group: 'التربية والرياضة' },
+    { name: 'التربية التشكيلية', color: '#e11d48', hours: 0.5, group: 'التربية والرياضة' },
     { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
   ],
   3: [
@@ -52,68 +56,6 @@ const GRADE_SUBJECTS = {
     { name: 'قراءة', color: '#dc2626', hours: 1.5, group: 'اللغة العربية' },
     { name: 'حفظات', color: '#991b1b', hours: 0.33, group: 'اللغة العربية' },
     { name: 'حوار منظّم', color: '#b91c1c', hours: 0.5, group: 'اللغة العربية' },
-    { name: 'كتابة', color: '#7f1d1d', hours: 0, group: 'اللغة العربية' },
-    { name: 'استيعاب قواعد اللغة', color: '#f87171', hours: 2, group: 'اللغة العربية' },
-    { name: 'إنتاج كتابي', color: '#450a0a', hours: 1.67, group: 'اللغة العربية' },
-    { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
-    { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
-    { name: 'التاريخ', color: '#78716c', hours: 0.67, group: 'التربية الاجتماعية' },
-    { name: 'الجغرافيا', color: '#a16207', hours: 0.67, group: 'التربية الاجتماعية' },
-    { name: 'التربية مدنية', color: '#64748b', hours: 0.67, group: 'التربية الاجتماعية' },
-    { name: 'الرياضيات', color: '#10b981', hours: 5, group: 'الرياضيات' },
-    { name: 'إيقاظ علمي', color: '#14b8a6', hours: 1, group: 'العلوم والتكنولوجيا' },
-    { name: 'التربية التكنولوجية', color: '#6366f1', hours: 1, group: 'التربية والرياضة' },
-    { name: 'التربية الموسيقية', color: '#a855f7', hours: 0.5, group: 'التربية والرياضة' },
-    { name: 'التربية التشكيلية', color: '#e11d48', hours: 0.5, group: 'التربية والرياضة' },
-    { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
-  ],
-  4: [
-    { name: 'تواصل شفوي', color: '#ef4444', hours: 0.5, group: 'اللغة العربية' },
-    { name: 'قراءة', color: '#dc2626', hours: 1.5, group: 'اللغة العربية' },
-    { name: 'حفظات', color: '#991b1b', hours: 0.33, group: 'اللغة العربية' },
-    { name: 'حوار منظّم', color: '#b91c1c', hours: 0, group: 'اللغة العربية' },
-    { name: 'كتابة', color: '#7f1d1d', hours: 0, group: 'اللغة العربية' },
-    { name: 'استيعاب قواعد اللغة', color: '#f87171', hours: 2, group: 'اللغة العربية' },
-    { name: 'إنتاج كتابي', color: '#450a0a', hours: 1.67, group: 'اللغة العربية' },
-    { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
-    { name: 'اللغة الإنجليزية', color: '#6366f1', hours: 1, group: 'اللغات الأجنبية' },
-    { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
-    { name: 'التاريخ', color: '#78716c', hours: 0.67, group: 'التربية الاجتماعية' },
-    { name: 'الجغرافيا', color: '#a16207', hours: 0.67, group: 'التربية الاجتماعية' },
-    { name: 'التربية مدنية', color: '#64748b', hours: 0.67, group: 'التربية الاجتماعية' },
-    { name: 'الرياضيات', color: '#10b981', hours: 5, group: 'الرياضيات' },
-    { name: 'إيقاظ علمي', color: '#14b8a6', hours: 1, group: 'العلوم والتكنولوجيا' },
-    { name: 'التربية التكنولوجية', color: '#6366f1', hours: 1, group: 'التربية والرياضة' },
-    { name: 'التربية الموسيقية', color: '#a855f7', hours: 0.5, group: 'التربية والرياضة' },
-    { name: 'التربية التشكيلية', color: '#e11d48', hours: 0.5, group: 'التربية والرياضة' },
-    { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
-  ],
-  5: [
-    { name: 'تواصل شفوي', color: '#ef4444', hours: 0.5, group: 'اللغة العربية' },
-    { name: 'قراءة', color: '#dc2626', hours: 1.5, group: 'اللغة العربية' },
-    { name: 'حفظات', color: '#991b1b', hours: 0.33, group: 'اللغة العربية' },
-    { name: 'حوار منظّم', color: '#b91c1c', hours: 0, group: 'اللغة العربية' },
-    { name: 'كتابة', color: '#7f1d1d', hours: 0, group: 'اللغة العربية' },
-    { name: 'استيعاب قواعد اللغة', color: '#f87171', hours: 2, group: 'اللغة العربية' },
-    { name: 'إنتاج كتابي', color: '#450a0a', hours: 1.67, group: 'اللغة العربية' },
-    { name: 'اللغة الفرنسية', color: '#0ea5e9', hours: 8, group: 'اللغات الأجنبية' },
-    { name: 'اللغة الإنجليزية', color: '#6366f1', hours: 2, group: 'اللغات الأجنبية' },
-    { name: 'التربية الإسلامية', color: '#f59e0b', hours: 1, group: 'التربية الإسلامية' },
-    { name: 'التاريخ', color: '#78716c', hours: 0.67, group: 'التربية الاجتماعية' },
-    { name: 'الجغرافيا', color: '#a16207', hours: 0.67, group: 'التربية الاجتماعية' },
-    { name: 'التربية مدنية', color: '#64748b', hours: 0.67, group: 'التربية الاجتماعية' },
-    { name: 'الرياضيات', color: '#10b981', hours: 5, group: 'الرياضيات' },
-    { name: 'إيقاظ علمي', color: '#14b8a6', hours: 1, group: 'العلوم والتكنولوجيا' },
-    { name: 'التربية التكنولوجية', color: '#6366f1', hours: 1, group: 'التربية والرياضة' },
-    { name: 'التربية الموسيقية', color: '#a855f7', hours: 0.5, group: 'التربية والرياضة' },
-    { name: 'التربية التشكيلية', color: '#e11d48', hours: 0.5, group: 'التربية والرياضة' },
-    { name: 'التربية البدنية', color: '#22c55e', hours: 1, group: 'التربية والرياضة' }
-  ],
-  6: [
-    { name: 'تواصل شفوي', color: '#ef4444', hours: 0.5, group: 'اللغة العربية' },
-    { name: 'قراءة', color: '#dc2626', hours: 1.5, group: 'اللغة العربية' },
-    { name: 'حفظات', color: '#991b1b', hours: 0.33, group: 'اللغة العربية' },
-    { name: 'حوار منظّم', color: '#b91c1c', hours: 0, group: 'اللغة العربية' },
     { name: 'كتابة', color: '#7f1d1d', hours: 0, group: 'اللغة العربية' },
     { name: 'استيعاب قواعد اللغة', color: '#f87171', hours: 2, group: 'اللغة العربية' },
     { name: 'إنتاج كتابي', color: '#450a0a', hours: 1.67, group: 'اللغة العربية' },
@@ -132,7 +74,6 @@ const GRADE_SUBJECTS = {
   ]
 };
 
-const GRADE_NAMES = ['الأولى','الثانية','الثالثة','الرابعة','الخامسة','السادسة'];
 const DAYS = ['الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
 
 const DURATION_OPTIONS = [15, 20, 25, 30, 40, 55];
@@ -168,7 +109,7 @@ export default function Schedules({ classes }) {
   const [classId, setClassId] = useState('');
   const [saved, setSaved] = useState(null);
   const [error, setError] = useState('');
-  const [subjects, setSubjects] = useState(() => JSON.parse(JSON.stringify(GRADE_SUBJECTS[1])));
+  const [subjects, setSubjects] = useState(() => JSON.parse(JSON.stringify(DEGREE_SUBJECTS[1])));
   const [editingCell, setEditingCell] = useState(null);
   const [editValue, setEditValue] = useState('');
 
@@ -191,8 +132,8 @@ export default function Schedules({ classes }) {
         if (degIdx >= 0) {
           setDegreeIdx(degIdx);
           setYearIdx(DEGREES[degIdx].years.indexOf(foundGrade));
+          setSubjects(match.subjects || JSON.parse(JSON.stringify(DEGREE_SUBJECTS[degIdx + 1])));
         }
-        setSubjects(match.subjects || JSON.parse(JSON.stringify(GRADE_SUBJECTS[foundGrade])));
       }
       if (match?.timetable) {
         setTimetable(match.timetable.grid || makeDefaultGrid(match.timetable.periods || 6));
@@ -206,7 +147,7 @@ export default function Schedules({ classes }) {
     setYearIdx(0);
     const g = DEGREES[idx].years[0];
     setGrade(g);
-    setSubjects(JSON.parse(JSON.stringify(GRADE_SUBJECTS[g])));
+    setSubjects(JSON.parse(JSON.stringify(DEGREE_SUBJECTS[idx + 1])));
     setSaved(null);
     setEditingCell(null);
   };
@@ -215,13 +156,13 @@ export default function Schedules({ classes }) {
     setYearIdx(idx);
     const g = currentDegree.years[idx];
     setGrade(g);
-    setSubjects(JSON.parse(JSON.stringify(GRADE_SUBJECTS[g])));
+    setSubjects(JSON.parse(JSON.stringify(DEGREE_SUBJECTS[degreeIdx + 1])));
     setSaved(null);
     setEditingCell(null);
   };
 
   const totalHours = subjects.reduce((sum, s) => sum + s.hours, 0);
-  const required = REQUIRED_HOURS[grade];
+  const required = currentDegree.required;
   const isValid = Math.abs(totalHours - required) < 0.1;
 
   const startEdit = (idx, field) => {
