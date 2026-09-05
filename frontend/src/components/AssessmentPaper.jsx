@@ -18,7 +18,7 @@ function rich(text) {
 }
 
 const PERIOD_NAMES = {
-  1: 'الأولى', 2: 'الثانية', 3: 'الثالثة', 4: 'الرابعة', 5: 'الخامسة', 6: 'السادسة'
+  1: 'الأُولَى', 2: 'الثَّانِيَة', 3: 'الثَّالِثَة', 4: 'الرَّابِعَة', 5: 'الخَامِسَة', 6: 'السَّادِسَة'
 };
 
 export default function AssessmentPaper({ lesson, answers, onAnswer, submitting, submitResult, onSubmit }) {
@@ -90,7 +90,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
           gap: 8px;
-          font-size: 18px;
+          font-size: 22px;
           margin-bottom: 6px;
         }
         .paper-header-grid .field {
@@ -108,7 +108,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           border-bottom: 1px solid #999;
           background: transparent;
           font-family: inherit;
-          font-size: 18px;
+          font-size: 22px;
           padding: 4px 6px;
           outline: none;
           direction: rtl;
@@ -121,7 +121,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           border-top: 2px solid #333;
           padding: 12px 18px;
           background: #e8f5e9;
-          font-size: 30px;
+          font-size: 34px;
           font-weight: bold;
         }
         .paper-title-bar .period-badge {
@@ -129,7 +129,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           color: #fff;
           padding: 4px 14px;
           border-radius: 6px;
-          font-size: 22px;
+          font-size: 24px;
         }
         .paper-body {
           border: 2px solid #333;
@@ -146,14 +146,14 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
         }
         .paper-passage h3 {
           margin: 0 0 8px 0;
-          font-size: 22px;
+          font-size: 26px;
           color: #555;
           font-family: 'Amiri', serif;
         }
         .paper-passage p {
           margin: 0;
           line-height: 2;
-          font-size: 22px;
+          font-size: 26px;
         }
         .paper-exercise {
           display: flex;
@@ -166,8 +166,8 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           page-break-inside: avoid;
         }
         .paper-exercise .ex-num {
-          min-width: 40px;
-          height: 40px;
+          min-width: 46px;
+          height: 46px;
           background: #1976d2;
           color: #fff;
           border-radius: 50%;
@@ -175,7 +175,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           align-items: center;
           justify-content: center;
           font-weight: bold;
-          font-size: 18px;
+          font-size: 22px;
           flex-shrink: 0;
           margin-top: 2px;
         }
@@ -183,12 +183,12 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           flex: 1;
         }
         .paper-exercise .ex-content .ex-text {
-          font-size: 20px;
+          font-size: 24px;
           line-height: 1.8;
           margin-bottom: 8px;
         }
         .paper-exercise .ex-points {
-          font-size: 16px;
+          font-size: 20px;
           color: #888;
           white-space: nowrap;
           margin-top: 4px;
@@ -202,11 +202,11 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           display: flex;
           align-items: center;
           gap: 4px;
-          padding: 8px 18px;
+          padding: 10px 22px;
           border: 1px solid #ccc;
           border-radius: 20px;
           cursor: pointer;
-          font-size: 18px;
+          font-size: 24px;
           transition: all 0.15s;
           background: #fff;
         }
@@ -228,7 +228,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           border-bottom: 2px solid #999;
           background: transparent;
           font-family: inherit;
-          font-size: 22px;
+          font-size: 26px;
           padding: 4px 8px;
           outline: none;
           direction: rtl;
@@ -243,7 +243,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           border: 1px solid #ccc;
           border-radius: 4px;
           font-family: inherit;
-          font-size: 18px;
+          font-size: 22px;
           padding: 8px;
           resize: vertical;
           min-height: 80px;
@@ -263,13 +263,13 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           margin: 0;
           padding: 8px 12px;
           background: #f5f5f5;
-          font-size: 16px;
+          font-size: 20px;
           border-bottom: 1px solid #ccc;
         }
         .paper-scoring table {
           width: 100%;
           border-collapse: collapse;
-          font-size: 16px;
+          font-size: 20px;
           text-align: center;
         }
         .paper-scoring th, .paper-scoring td {
@@ -289,7 +289,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           border-top: 1px dashed #ccc;
         }
         .paper-footer .signature {
-          font-size: 18px;
+          font-size: 22px;
           color: #666;
         }
         .paper-submit-section {
@@ -303,12 +303,12 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
         .paper-submit-section h3 {
           margin: 0 0 8px;
           color: #2e7d32;
-          font-size: 20px;
+          font-size: 26px;
         }
         .paper-submit-section p {
           margin: 0 0 12px;
           color: #555;
-          font-size: 18px;
+          font-size: 22px;
         }
         .paper-submit-btn {
           background: #4caf50;
@@ -316,7 +316,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           border: none;
           padding: 12px 32px;
           border-radius: 6px;
-          font-size: 20px;
+          font-size: 26px;
           font-family: inherit;
           cursor: pointer;
           display: inline-flex;
@@ -330,7 +330,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           margin-top: 12px;
           padding: 10px;
           border-radius: 6px;
-          font-size: 18px;
+          font-size: 22px;
         }
         .paper-submit-result.success { background: #e8f5e9; color: #2e7d32; }
         .paper-submit-result.error { background: #ffebee; color: #c62828; }
@@ -354,18 +354,18 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
       <div className="paper-header">
         <div className="paper-header-grid">
           <div className="field">
-            <label>المادة: {lesson.subject || 'الرياضيات'}</label>
+            <label>المَادَّة: {lesson.subject || 'الرياضيات'}</label>
           </div>
           <div className="field">
-            <label>المستوى: الأول الأساسي</label>
+            <label>المُسْتَوَى: الأَوَّلُ الأَسَاسِيُّ</label>
           </div>
           <div className="field">
-            <label>الفترة: {PERIOD_NAMES[lesson.period] || lesson.period}</label>
+            <label>الفَتْرَة: {PERIOD_NAMES[lesson.period] || lesson.period}</label>
           </div>
         </div>
         <div className="paper-header-grid">
           <div className="field">
-            <label>الاسم واللقب:</label>
+            <label>الاِسْمُ وَاللَّقَبُ:</label>
             <input
               type="text"
               value={studentName}
@@ -374,7 +374,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
             />
           </div>
           <div className="field">
-            <label>القسم:</label>
+            <label>القِسْمُ:</label>
             <input
               type="text"
               value={studentClass}
@@ -383,7 +383,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
             />
           </div>
           <div className="field">
-            <label>التاريخ:</label>
+            <label>التَّارِيخُ:</label>
             <span style={{ borderBottom: '1px solid #999', minWidth: 100, display: 'inline-block', textAlign: 'center' }}>
               {new Date().toLocaleDateString('ar-TN')}
             </span>
@@ -394,7 +394,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
       {/* Title Bar */}
       <div className="paper-title-bar">
         <span>{lesson.title}</span>
-        <span className="period-badge">الفترة {PERIOD_NAMES[lesson.period] || ''}</span>
+        <span className="period-badge">الفَتْرَة {PERIOD_NAMES[lesson.period] || ''}</span>
       </div>
 
       {/* Paper Body */}
@@ -466,7 +466,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
                     {/* Textarea */}
                     {ex.kind === 'textarea' && (
                       <textarea
-                        placeholder={ex.placeholder || 'اكتب إجابتك هنا...'}
+                        placeholder={ex.placeholder || 'اُكْتُبْ إِجَابَتَكَ هُنَا...'}
                         value={savedVal || ''}
                         onChange={(e) => handleText(blockId, e.target.value)}
                         rows={3}
@@ -476,7 +476,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
                     {/* Drawing */}
                     {ex.kind === 'drawing' && (
                       <div className="paper-art-container">
-                        <span style={{ fontSize: 13, color: '#888' }}>(يمكنك الرسم هنا)</span>
+                        <span style={{ fontSize: 13, color: '#888' }}>(يُمْكِنُكَ الرَّسْمُ هُنَا)</span>
                       </div>
                     )}
 
@@ -513,21 +513,21 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
 
         {/* Scoring Grid */}
         <div className="paper-scoring">
-          <h4>جدول التنقيط</h4>
+          <h4>جَدْوَلُ التَّنْقِيطِ</h4>
           <table>
             <thead>
               <tr>
-                <th>المعيار</th>
+                <th>المِعْيَارُ</th>
                 <th>م.1</th>
                 <th>م.2</th>
                 <th>م.3</th>
                 <th>م.4</th>
-                <th>المجموع</th>
+                <th>المَجْمُوعُ</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td style={{ textAlign: 'right', fontWeight: 'bold' }}>إجمالي النقط</td>
+                <td style={{ textAlign: 'right', fontWeight: 'bold' }}>إِجْمَالِيُّ النُّقَاطِ</td>
                 <td>/{Math.ceil(totalPoints * 0.25)}</td>
                 <td>/{Math.ceil(totalPoints * 0.25)}</td>
                 <td>/{Math.ceil(totalPoints * 0.25)}</td>
@@ -535,7 +535,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
                 <td style={{ fontWeight: 'bold' }}>/{totalPoints}</td>
               </tr>
               <tr>
-                <td style={{ textAlign: 'right', fontWeight: 'bold' }}>المحصلة النهائية</td>
+                <td style={{ textAlign: 'right', fontWeight: 'bold' }}>المُحَصِّلَةُ النِّهَائِيَّةُ</td>
                 <td colSpan={5}></td>
                 <td>/20</td>
               </tr>
@@ -545,17 +545,17 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
 
         {/* Footer */}
         <div className="paper-footer">
-          <span className="signature">توقيع التلميذ: ...................</span>
-          <span className="signature">توقيع المعلّم: ...................</span>
+          <span className="signature">تَوْقِيعُ التِّلْمِيذِ: ...................</span>
+          <span className="signature">تَوْقِيعُ المُعَلِّمِ: ...................</span>
         </div>
       </div>
 
       {/* Submit Section */}
       <div className="paper-submit-section">
-        <h3>إرسال الاختبار للمعلّم</h3>
-        <p>بعد إكمال جميع التمارين، اضغط على الزر أدناه لإرسال إجاباتك للمعلّم للتصحيح.</p>
+        <h3>إِرْسَالُ الاخْتِبَارِ لِلْمُعَلِّمِ</h3>
+        <p>بَعْدَ إِكْمَالِ جَمِيعِ التَّمَارِينِ، اَضْغَطْ عَلَى الزِّرِّ أَدْنَاهُ لِإِرْسَالِ إِجَابَاتِكَ لِلْمُعَلِّمِ لِلتَّصْحِيحِ.</p>
         {studentName.trim() && (
-          <p style={{ fontWeight: 'bold', color: '#2e7d32' }}>التلميذ: {studentName}</p>
+          <p style={{ fontWeight: 'bold', color: '#2e7d32' }}>التِّلْمِيذُ: {studentName}</p>
         )}
         <button
           className="paper-submit-btn"
@@ -563,7 +563,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           disabled={submitting}
         >
           <span className="material-icons" style={{ fontSize: 20 }}>send</span>
-          {submitting ? 'جاري الإرسال...' : 'أرسل للمعلّم'}
+          {submitting ? 'جَارِي الإِرْسَالُ...' : 'أَرْسِلْ لِلْمُعَلِّمِ'}
         </button>
         {submitResult && (
           <div className={`paper-submit-result ${submitResult.success ? 'success' : 'error'}`}>
