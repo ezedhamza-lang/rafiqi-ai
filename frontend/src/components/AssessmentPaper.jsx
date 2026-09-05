@@ -90,7 +90,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
           gap: 8px;
-          font-size: 14px;
+          font-size: 18px;
           margin-bottom: 6px;
         }
         .paper-header-grid .field {
@@ -108,8 +108,8 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           border-bottom: 1px solid #999;
           background: transparent;
           font-family: inherit;
-          font-size: 14px;
-          padding: 2px 4px;
+          font-size: 18px;
+          padding: 4px 6px;
           outline: none;
           direction: rtl;
         }
@@ -121,7 +121,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           border-top: 2px solid #333;
           padding: 8px 16px;
           background: #e8f5e9;
-          font-size: 15px;
+          font-size: 20px;
           font-weight: bold;
         }
         .paper-title-bar .period-badge {
@@ -129,7 +129,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           color: #fff;
           padding: 2px 10px;
           border-radius: 4px;
-          font-size: 13px;
+          font-size: 16px;
         }
         .paper-body {
           border: 2px solid #333;
@@ -146,14 +146,14 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
         }
         .paper-passage h3 {
           margin: 0 0 8px 0;
-          font-size: 16px;
+          font-size: 22px;
           color: #555;
           font-family: 'Amiri', serif;
         }
         .paper-passage p {
           margin: 0;
           line-height: 2;
-          font-size: 16px;
+          font-size: 22px;
         }
         .paper-exercise {
           display: flex;
@@ -166,8 +166,8 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           page-break-inside: avoid;
         }
         .paper-exercise .ex-num {
-          min-width: 32px;
-          height: 32px;
+          min-width: 40px;
+          height: 40px;
           background: #1976d2;
           color: #fff;
           border-radius: 50%;
@@ -175,7 +175,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           align-items: center;
           justify-content: center;
           font-weight: bold;
-          font-size: 14px;
+          font-size: 18px;
           flex-shrink: 0;
           margin-top: 2px;
         }
@@ -183,12 +183,12 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           flex: 1;
         }
         .paper-exercise .ex-content .ex-text {
-          font-size: 15px;
+          font-size: 20px;
           line-height: 1.8;
           margin-bottom: 8px;
         }
         .paper-exercise .ex-points {
-          font-size: 12px;
+          font-size: 16px;
           color: #888;
           white-space: nowrap;
           margin-top: 4px;
@@ -202,11 +202,11 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           display: flex;
           align-items: center;
           gap: 4px;
-          padding: 6px 14px;
+          padding: 8px 18px;
           border: 1px solid #ccc;
           border-radius: 20px;
           cursor: pointer;
-          font-size: 14px;
+          font-size: 18px;
           transition: all 0.15s;
           background: #fff;
         }
@@ -228,12 +228,12 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           border-bottom: 2px solid #999;
           background: transparent;
           font-family: inherit;
-          font-size: 16px;
+          font-size: 22px;
           padding: 4px 8px;
           outline: none;
           direction: rtl;
           text-align: center;
-          max-width: 200px;
+          max-width: 240px;
         }
         .paper-exercise .text-input:focus {
           border-bottom-color: #1976d2;
@@ -243,10 +243,10 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           border: 1px solid #ccc;
           border-radius: 4px;
           font-family: inherit;
-          font-size: 14px;
+          font-size: 18px;
           padding: 8px;
           resize: vertical;
-          min-height: 60px;
+          min-height: 80px;
           direction: rtl;
           outline: none;
         }
@@ -263,13 +263,13 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           margin: 0;
           padding: 8px 12px;
           background: #f5f5f5;
-          font-size: 14px;
+          font-size: 16px;
           border-bottom: 1px solid #ccc;
         }
         .paper-scoring table {
           width: 100%;
           border-collapse: collapse;
-          font-size: 13px;
+          font-size: 16px;
           text-align: center;
         }
         .paper-scoring th, .paper-scoring td {
@@ -289,7 +289,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           border-top: 1px dashed #ccc;
         }
         .paper-footer .signature {
-          font-size: 14px;
+          font-size: 18px;
           color: #666;
         }
         .paper-submit-section {
@@ -303,11 +303,12 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
         .paper-submit-section h3 {
           margin: 0 0 8px;
           color: #2e7d32;
+          font-size: 20px;
         }
         .paper-submit-section p {
           margin: 0 0 12px;
           color: #555;
-          font-size: 14px;
+          font-size: 18px;
         }
         .paper-submit-btn {
           background: #4caf50;
@@ -315,7 +316,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           border: none;
           padding: 12px 32px;
           border-radius: 6px;
-          font-size: 16px;
+          font-size: 20px;
           font-family: inherit;
           cursor: pointer;
           display: inline-flex;
@@ -329,7 +330,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           margin-top: 12px;
           padding: 10px;
           border-radius: 6px;
-          font-size: 14px;
+          font-size: 18px;
         }
         .paper-submit-result.success { background: #e8f5e9; color: #2e7d32; }
         .paper-submit-result.error { background: #ffebee; color: #c62828; }
@@ -345,7 +346,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
         @media (max-width: 600px) {
           .paper-header-grid { grid-template-columns: 1fr; }
           .paper-exercise { flex-direction: column; gap: 8px; }
-          .paper-body { padding: 12px; }
+          .paper-body { padding: 16px; }
         }
       `}</style>
 
