@@ -31,13 +31,14 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
   let current = null;
   let exNum = 0;
 
-  for (const b of blocks) {
+  for (let bi = 0; bi < blocks.length; bi++) {
+    const b = blocks[bi];
     if (b.kind === 'concept' && b.title && b.title.includes('السند')) {
       if (current) passages.push(current);
       current = { passage: b, exercises: [] };
     } else if (['question', 'math-input', 'textarea', 'drawing', 'match-pairs', 'picture-choice'].includes(b.kind)) {
       exNum++;
-      const ex = { ...b, _num: exNum };
+      const ex = { ...b, _num: exNum, _blockIdx: bi };
       if (current) {
         current.exercises.push(ex);
       } else {
@@ -50,14 +51,19 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
 
   if (passages.length === 0) {
     const allEx = [];
-    for (const b of blocks) {
+    for (let bi = 0; bi < blocks.length; bi++) {
+      const b = blocks[bi];
       if (['question', 'math-input', 'textarea', 'drawing', 'match-pairs', 'picture-choice'].includes(b.kind)) {
         exNum++;
-        allEx.push({ ...b, _num: exNum });
+        allEx.push({ ...b, _num: exNum, _blockIdx: bi });
       }
     }
     if (allEx.length) passages.push({ passage: null, exercises: allEx });
   }
+
+  const totalPoints = passages.reduce((sum, pg) =>
+    sum + pg.exercises.reduce((s, ex) => s + (ex.points || 3), 0), 0
+  );
 
   const handleOption = (blockId, idx) => onAnswer(blockId, idx);
   const handleText = (blockId, val) => onAnswer(blockId, val);
@@ -407,7 +413,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
             )}
 
             {pg.exercises.map((ex) => {
-              const blockId = `${lesson.id}-${blocks.indexOf(ex)}`;
+              const blockId = `${lesson.id}-${ex._blockIdx}`;
               const savedVal = answers[blockId];
 
               return (
@@ -516,11 +522,11 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
             <tbody>
               <tr>
                 <td style={{ textAlign: 'right', fontWeight: 'bold' }}>إجمالي النقط</td>
-                <td>/{Math.ceil(exNum * 3 * 0.25)}</td>
-                <td>/{Math.ceil(exNum * 3 * 0.25)}</td>
-                <td>/{Math.ceil(exNum * 3 * 0.25)}</td>
-                <td>/{Math.ceil(exNum * 3 * 0.5)}</td>
-                <td style={{ fontWeight: 'bold' }}>/{exNum * 3}</td>
+                <td>/{Math.ceil(totalPoints * 0.25)}</td>
+                <td>/{Math.ceil(totalPoints * 0.25)}</td>
+                <td>/{Math.ceil(totalPoints * 0.25)}</td>
+                <td>/{Math.ceil(totalPoints * 0.5)}</td>
+                <td style={{ fontWeight: 'bold' }}>/{totalPoints}</td>
               </tr>
               <tr>
                 <td style={{ textAlign: 'right', fontWeight: 'bold' }}>المحصلة النهائية</td>
