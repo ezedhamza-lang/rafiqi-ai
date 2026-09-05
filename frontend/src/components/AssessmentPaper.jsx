@@ -354,7 +354,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
       <div className="paper-header">
         <div className="paper-header-grid">
           <div className="field">
-            <label>المادة: الرياضيات</label>
+            <label>المادة: {lesson.subject || 'الرياضيات'}</label>
           </div>
           <div className="field">
             <label>المستوى: الأول الأساسي</label>

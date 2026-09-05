@@ -730,7 +730,7 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
 
   const handleSubmit = async () => {
     const lessonId = lesson.id;
-    const isAssessment = /^y\d+a\d+$/.test(lessonId);
+    const isAssessment = lesson.isAssessment || /^y\d+a\d+$/.test(lessonId);
 
     const keptAnswers = Object.fromEntries(
       Object.entries(answers).filter(([id, val]) => val !== '' && val !== null && val !== undefined)
@@ -832,7 +832,7 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
       )}
 
       {/* Assessment Paper View vs Normal Lesson View */}
-      {(/^y\d+a\d+$/.test(lesson.id)) ? (
+      {((lesson.isAssessment) || /^y\d+a\d+$/.test(lesson.id)) ? (
         <AssessmentPaper
           lesson={lesson}
           answers={answers}
