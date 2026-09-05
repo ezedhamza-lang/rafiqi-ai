@@ -29,191 +29,236 @@ const BLOCK_ICONS = {
   'file-upload': 'cloud_upload'
 };
 
-function Block({ block, onAnswer, blockId }) {
+const MATH_SYMBOLS = ['×', '÷', '−', '+', '=', '²', '³', '½', '¼', '(', ')'];
+
+// Max attached file payload per block (base64) — keeps the submit JSON
+// well below the server body limit.
+const MAX_ATTACH_BYTES = 2500000;
+
+function QuestionBlock({ block }) {
   const [showAnswer, setShowAnswer] = useState(false);
   const [sel, setSel] = useState(null);
   const [checked, setChecked] = useState(false);
-  const kind = block.kind || 'concept';
-  const icon = BLOCK_ICONS[kind] || 'article';
-
-  if (kind === 'question') {
-    const isMCQ = block.options && block.options.length > 0;
-    const hasAnswer = block.answer !== undefined && block.answer !== null;
-    const answerIndex = hasAnswer && typeof block.answer === 'number'
-      ? Number(block.answer)
-      : block.options.findIndex((o) => String(o) === String(block.answer));
-    const correct = sel != null && hasAnswer && sel === answerIndex;
-    return (
-      <div className="lesson-block lesson-block-question">
-        <div className="lesson-block-head">
-          <span className="material-icons">{icon}</span>
-          <strong>{block.title || 'سؤال'}</strong>
-          {block.text && <p>{block.text}</p>}
-        </div>
-        {isMCQ ? (
-          <>
-            <div className="lesson-mcq">
-              {block.options.map((opt, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  className={`exercise-option ${sel === i ? 'selected' : ''} ${checked && hasAnswer && (i === sel ? (correct ? 'ok' : 'no') : i === answerIndex ? 'ok' : '')}`}
-                  onClick={() => { setSel(i); setChecked(false); }}
-                >
-                  {opt}
-                </button>
-              ))}
-            </div>
-            <div className="exercise-check-row">
-              {hasAnswer && (
-                <button type="button" className="btn btn-sm" onClick={() => setChecked(true)}>تحقّق</button>
-              )}
-              {checked && hasAnswer && (
-                <span className={`exercise-feedback ${correct ? 'ok' : 'no'}`}>
-                  {correct ? '✓ صحيح' : '✗ خاطئ'}
-                </span>
-              )}
-              {checked && hasAnswer && <span className="exercise-answer">الإجابة: {block.options[answerIndex]}</span>}
-            </div>
-          </>
-        ) : (
-          <div className="lesson-answer-toggle">
-            <button type="button" className="btn btn-sm" onClick={() => setShowAnswer((v) => !v)}>
-              {showAnswer ? 'إخفاء الإجابة' : 'إظهار الإجابة'}
-            </button>
-            {showAnswer && <span className="exercise-answer">الإجابة: {block.answer || block.text}</span>}
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  if (kind === 'experiment') {
-    return (
-      <div className="lesson-block lesson-block-experiment">
-        <div className="lesson-block-head">
-          <span className="material-icons">{icon}</span>
-          <strong>{block.title || 'جرّب بنفسك'}</strong>
-        </div>
-        {block.text && <p className="lesson-block-text">{block.text}</p>}
-        {block.materials?.length > 0 && (
-          <div className="lesson-experiment-materials">
-            <strong>الأدوات:</strong>
-            <ul>{block.materials.map((m, i) => <li key={i}>{m}</li>)}</ul>
-          </div>
-        )}
-        {block.steps?.length > 0 && (
-          <div className="lesson-experiment-steps">
-            <strong>الخطوات:</strong>
-            <ol>{block.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  if (kind === 'summary') {
-    return (
-      <div className="lesson-block lesson-block-summary">
-        <div className="lesson-block-head">
-          <span className="material-icons">{icon}</span>
-          <strong>{block.title || 'خلاصة الوحدة'}</strong>
-        </div>
-        <ul className="lesson-summary-list">
-          {(block.points || []).map((pt, i) => <li key={i}>{pt}</li>)}
-        </ul>
-      </div>
-    );
-  }
-
-  if (kind === 'reward') {
-    return (
-      <div className="lesson-block lesson-block-reward">
+  const icon = BLOCK_ICONS.question;
+  const isMCQ = block.options && block.options.length > 0;
+  const hasAnswer = block.answer !== undefined && block.answer !== null;
+  const answerIndex = hasAnswer && typeof block.answer === 'number'
+    ? Number(block.answer)
+    : (block.options || []).findIndex((o) => String(o) === String(block.answer));
+  const correct = sel != null && hasAnswer && sel === answerIndex;
+  return (
+    <div className="lesson-block lesson-block-question">
+      <div className="lesson-block-head">
         <span className="material-icons">{icon}</span>
-        <p className="lesson-block-text">{block.text || 'أحسنت!'}</p>
+        <strong>{block.title || 'سؤال'}</strong>
+        {block.text && <p>{block.text}</p>}
       </div>
-    );
-  }
-
-  if (kind === 'textarea') {
-    const [value, setValue] = useState('');
-    useEffect(() => { onAnswer(blockId, value); }, [value]);
-    return (
-      <div className="lesson-block lesson-block-textarea">
-        <div className="lesson-block-head">
-          <span className="material-icons">{icon}</span>
-          <strong>{block.title || 'إجابة حرة'}</strong>
-        </div>
-        {block.text && <p className="lesson-block-text">{block.text}</p>}
-        <textarea
-          className="lesson-textarea"
-          placeholder={block.placeholder || 'اكتب إجابتك هنا...'}
-          rows={block.rows || 4}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          dir="rtl"
-        />
-        {block.hint && <p className="lesson-hint">{block.hint}</p>}
-      </div>
-    );
-  }
-
-if (kind === 'math-input') {
-    const [value, setValue] = useState('');
-    useEffect(() => { onAnswer(blockId, value); }, [value]);
-    return (
-      <div className="lesson-block lesson-block-math">
-        <div className="lesson-block-head">
-          <span className="material-icons">{icon}</span>
-          <strong>{block.title || 'عملية رياضية'}</strong>
-        </div>
-        {block.text && <p className="lesson-block-text">{block.text}</p>}
-        <div className="math-input-wrapper">
-          <textarea
-            className="lesson-math-input"
-            placeholder={block.placeholder || 'اكتب العملية الحسابية...'}
-            rows={block.rows || 6}
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            dir="ltr"
-            spellCheck={false}
-          />
-          <div className="math-symbols">
-            {mathSymbols.map((sym) => (
+      {isMCQ ? (
+        <>
+          <div className="lesson-mcq">
+            {block.options.map((opt, i) => (
               <button
-                key={sym}
+                key={i}
                 type="button"
-                className="math-symbol-btn"
-                onClick={() => setValue(value + sym)}
+                className={`exercise-option ${sel === i ? 'selected' : ''} ${checked && hasAnswer && (i === sel ? (correct ? 'ok' : 'no') : i === answerIndex ? 'ok' : '')}`}
+                onClick={() => { setSel(i); setChecked(false); }}
               >
-                {sym}
+                {opt}
               </button>
             ))}
           </div>
+          <div className="exercise-check-row">
+            {hasAnswer && (
+              <button type="button" className="btn btn-sm" onClick={() => setChecked(true)}>تحقّق</button>
+            )}
+            {checked && hasAnswer && (
+              <span className={`exercise-feedback ${correct ? 'ok' : 'no'}`}>
+                {correct ? '✓ صحيح' : '✗ خاطئ'}
+              </span>
+            )}
+            {checked && hasAnswer && answerIndex >= 0 && <span className="exercise-answer">الإجابة: {block.options[answerIndex]}</span>}
+          </div>
+        </>
+      ) : (
+        <div className="lesson-answer-toggle">
+          <button type="button" className="btn btn-sm" onClick={() => setShowAnswer((v) => !v)}>
+            {showAnswer ? 'إخفاء الإجابة' : 'إظهار الإجابة'}
+          </button>
+          {showAnswer && <span className="exercise-answer">الإجابة: {block.answer || block.text}</span>}
         </div>
-        {block.hint && <p className="lesson-hint">{block.hint}</p>}
+      )}
+    </div>
+  );
+}
+
+function ExperimentBlock({ block }) {
+  const icon = BLOCK_ICONS.experiment;
+  return (
+    <div className="lesson-block lesson-block-experiment">
+      <div className="lesson-block-head">
+        <span className="material-icons">{icon}</span>
+        <strong>{block.title || 'جرّب بنفسك'}</strong>
       </div>
-    );
-  }
+      {block.text && <p className="lesson-block-text">{block.text}</p>}
+      {block.materials?.length > 0 && (
+        <div className="lesson-experiment-materials">
+          <strong>الأدوات:</strong>
+          <ul>{block.materials.map((m, i) => <li key={i}>{m}</li>)}</ul>
+        </div>
+      )}
+      {block.steps?.length > 0 && (
+        <div className="lesson-experiment-steps">
+          <strong>الخطوات:</strong>
+          <ol>{block.steps.map((s, i) => <li key={i}>{s}</li>)}</ol>
+        </div>
+      )}
+    </div>
+  );
+}
 
-  if (kind === 'drawing') {
-    const canvasRef = useRef(null);
-    const [tool, setTool] = useState('pen');
-    const [color, setColor] = useState('#000000');
-    const [lineWidth, setLineWidth] = useState(2);
-    const [dataUrl, setDataUrl] = useState(null);
+function SummaryBlock({ block }) {
+  const icon = BLOCK_ICONS.summary;
+  return (
+    <div className="lesson-block lesson-block-summary">
+      <div className="lesson-block-head">
+        <span className="material-icons">{icon}</span>
+        <strong>{block.title || 'خلاصة الوحدة'}</strong>
+      </div>
+      <ul className="lesson-summary-list">
+        {(block.points || []).map((pt, i) => <li key={i}>{pt}</li>)}
+      </ul>
+    </div>
+  );
+}
 
-    useEffect(() => {
-      if (dataUrl) onAnswer(blockId, { type: 'drawing', dataUrl });
-    }, [dataUrl]);
+function RewardBlock({ block }) {
+  const icon = BLOCK_ICONS.reward;
+  return (
+    <div className="lesson-block lesson-block-reward">
+      <span className="material-icons">{icon}</span>
+      <p className="lesson-block-text">{block.text || 'أحسنت!'}</p>
+    </div>
+  );
+}
 
-    const draw = (e) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
+function DefaultBlock({ block, kind, icon }) {
+  return (
+    <div className={`lesson-block lesson-block-${kind}`}>
+      <div className="lesson-block-head">
+        <span className="material-icons">{icon}</span>
+        <strong>{block.title || (kind === 'objective' ? 'الأهداف' : '')}</strong>
+      </div>
+      <p className="lesson-block-text">{block.text}</p>
+    </div>
+  );
+}
+
+function TextareaBlock({ block, onAnswer, blockId }) {
+  const [value, setValue] = useState('');
+  useEffect(() => { onAnswer(blockId, value); }, [value]);
+  const icon = BLOCK_ICONS.textarea;
+  return (
+    <div className="lesson-block lesson-block-textarea">
+      <div className="lesson-block-head">
+        <span className="material-icons">{icon}</span>
+        <strong>{block.title || 'إجابة حرة'}</strong>
+      </div>
+      {block.text && <p className="lesson-block-text">{block.text}</p>}
+      <textarea
+        className="lesson-textarea"
+        placeholder={block.placeholder || 'اكتب إجابتك هنا...'}
+        rows={block.rows || 4}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        dir="rtl"
+      />
+      {block.hint && <p className="lesson-hint">{block.hint}</p>}
+    </div>
+  );
+}
+
+function MathInputBlock({ block, onAnswer, blockId }) {
+  const [value, setValue] = useState('');
+  const inputRef = useRef(null);
+  useEffect(() => { onAnswer(blockId, value); }, [value]);
+  const icon = BLOCK_ICONS['math-input'];
+  const insertSymbol = (sym) => {
+    const el = inputRef.current;
+    if (el && typeof el.selectionStart === 'number') {
+      const start = el.selectionStart;
+      const end = el.selectionEnd;
+      const next = value.slice(0, start) + sym + value.slice(end);
+      setValue(next);
+      requestAnimationFrame(() => {
+        try { el.focus(); el.setSelectionRange(start + sym.length, start + sym.length); } catch { /* ignore */ }
+      });
+    } else {
+      setValue(value + sym);
+    }
+  };
+  return (
+    <div className="lesson-block lesson-block-math">
+      <div className="lesson-block-head">
+        <span className="material-icons">{icon}</span>
+        <strong>{block.title || 'عملية رياضية'}</strong>
+      </div>
+      {block.text && <p className="lesson-block-text">{block.text}</p>}
+      <div className="math-input-wrapper">
+        <textarea
+          ref={inputRef}
+          className="lesson-math-input"
+          placeholder={block.placeholder || 'اكتب العملية الحسابية...'}
+          rows={block.rows || 6}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          dir="ltr"
+          spellCheck={false}
+        />
+        <div className="math-symbols">
+          {MATH_SYMBOLS.map((sym) => (
+            <button
+              key={sym}
+              type="button"
+              className="math-symbol-btn"
+              onClick={() => insertSymbol(sym)}
+            >
+              {sym}
+            </button>
+          ))}
+        </div>
+      </div>
+      {block.hint && <p className="lesson-hint">{block.hint}</p>}
+    </div>
+  );
+}
+
+function DrawingBlock({ block, onAnswer, blockId }) {
+  const canvasRef = useRef(null);
+  const [tool, setTool] = useState('pen');
+  const [color, setColor] = useState('#000000');
+  const [lineWidth, setLineWidth] = useState(2);
+  const [saved, setSaved] = useState(false);
+  const icon = BLOCK_ICONS.drawing;
+
+  const capture = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    try {
+      onAnswer(blockId, { type: 'drawing', dataUrl: canvas.toDataURL('image/png') });
+      setSaved(true);
+    } catch { /* canvas export unavailable */ }
+  };
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return undefined;
+    let drawing = false;
+    const pos = (e) => {
       const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+    };
+    const strokeTo = (x, y) => {
+      const ctx = canvas.getContext('2d');
       if (tool === 'eraser') {
         ctx.globalCompositeOperation = 'destination-out';
         ctx.lineWidth = 20;
@@ -228,255 +273,240 @@ if (kind === 'math-input') {
       ctx.beginPath();
       ctx.moveTo(x, y);
     };
-
-    const startDraw = (e) => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
+    const onDown = (e) => {
+      drawing = true;
+      setSaved(false);
+      const { x, y } = pos(e);
       const ctx = canvas.getContext('2d');
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
       ctx.beginPath();
       ctx.moveTo(x, y);
-      canvas.addEventListener('mousemove', draw);
-      canvas.addEventListener('touchmove', (e) => draw(e.touches[0]));
     };
-
-    const stopDraw = () => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
-      canvas.removeEventListener('mousemove', draw);
-      canvas.removeEventListener('touchmove', draw);
-      // Capture drawing as data URL
-      setDataUrl(canvas.toDataURL('image/png'));
+    const onMove = (e) => { if (drawing) { const { x, y } = pos(e); strokeTo(x, y); } };
+    const onUp = () => { drawing = false; };
+    const onTouchStart = (e) => { if (e.touches[0]) onDown(e.touches[0]); };
+    const onTouchMove = (e) => { if (e.touches[0]) { e.preventDefault(); onMove(e.touches[0]); } };
+    canvas.addEventListener('mousedown', onDown);
+    canvas.addEventListener('mousemove', onMove);
+    canvas.addEventListener('mouseup', onUp);
+    canvas.addEventListener('mouseleave', onUp);
+    canvas.addEventListener('touchstart', onTouchStart, { passive: true });
+    canvas.addEventListener('touchmove', onTouchMove, { passive: false });
+    canvas.addEventListener('touchend', onUp);
+    return () => {
+      canvas.removeEventListener('mousedown', onDown);
+      canvas.removeEventListener('mousemove', onMove);
+      canvas.removeEventListener('mouseup', onUp);
+      canvas.removeEventListener('mouseleave', onUp);
+      canvas.removeEventListener('touchstart', onTouchStart);
+      canvas.removeEventListener('touchmove', onTouchMove);
+      canvas.removeEventListener('touchend', onUp);
     };
+  }, [tool, color, lineWidth]);
 
-    useEffect(() => {
-      const canvas = canvasRef.current;
-      if (canvas) {
-        canvas.addEventListener('mousedown', startDraw);
-        canvas.addEventListener('mouseup', stopDraw);
-        canvas.addEventListener('mouseleave', stopDraw);
-        canvas.addEventListener('touchstart', (e) => startDraw(e.touches[0]));
-        canvas.addEventListener('touchend', stopDraw);
-        return () => {
-          canvas.removeEventListener('mousedown', startDraw);
-          canvas.removeEventListener('mouseup', stopDraw);
-          canvas.removeEventListener('mouseleave', stopDraw);
-          canvas.removeEventListener('touchstart', startDraw);
-          canvas.removeEventListener('touchend', stopDraw);
-        };
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (canvas && block.backgroundGrid) {
+      const ctx = canvas.getContext('2d');
+      const w = canvas.width;
+      const h = canvas.height;
+      const size = 20;
+      ctx.strokeStyle = '#e0e0e0';
+      ctx.lineWidth = 0.5;
+      for (let x = 0; x <= w; x += size) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h);
+        ctx.stroke();
       }
-    }, []);
-
-    useEffect(() => {
-      const canvas = canvasRef.current;
-      if (canvas && block.backgroundGrid) {
-        const ctx = canvas.getContext('2d');
-        const w = canvas.width;
-        const h = canvas.height;
-        const size = 20;
-        ctx.strokeStyle = '#e0e0e0';
-        ctx.lineWidth = 0.5;
-        for (let x = 0; x <= w; x += size) {
-          ctx.beginPath();
-          ctx.moveTo(x, 0);
-          ctx.lineTo(x, h);
-          ctx.stroke();
-        }
-        for (let y = 0; y <= h; y += size) {
-          ctx.beginPath();
-          ctx.moveTo(0, y);
-          ctx.lineTo(w, y);
-          ctx.stroke();
-        }
-        if (block.startPoint && block.endPoint) {
-          ctx.strokeStyle = '#ff0000';
-          ctx.lineWidth = 2;
-          ctx.setLineDash([5, 5]);
-          ctx.beginPath();
-          ctx.moveTo(block.startPoint.x * 20, block.startPoint.y * 20);
-          ctx.lineTo(block.endPoint.x * 20, block.endPoint.y * 20);
-          ctx.stroke();
-          ctx.setLineDash([]);
-        }
+      for (let y = 0; y <= h; y += size) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
       }
-    }, []);
-
-    const tools = block.tools || ['pen', 'eraser'];
-    const colors = ['#000000', '#ff0000', '#0000ff', '#00aa00', '#ff8800', '#aa00aa'];
-
-    return (
-      <div className="lesson-block lesson-block-drawing">
-        <div className="lesson-block-head">
-          <span className="material-icons">{icon}</span>
-          <strong>{block.title || 'رسم حر'}</strong>
-        </div>
-        {block.prompt && <p className="lesson-block-text">{block.prompt}</p>}
-        <div className="drawing-toolbar">
-          {tools.map((t) => (
-            <button
-              key={t}
-              type="button"
-              className={`tool-btn ${tool === t ? 'active' : ''}`}
-              onClick={() => setTool(t)}
-              title={t === 'pen' ? 'قلم' : 'ممحاة'}
-            >
-              <span className="material-icons">{t === 'pen' ? 'brush' : 'backspace'}</span>
-            </button>
-          ))}
-          {['#000000', '#ff0000', '#0000ff', '#00aa00', '#ff8800', '#aa00aa'].map((c) => (
-            <button
-              key={c}
-              type="button"
-              className={`color-btn ${color === c ? 'active' : ''}`}
-              style={{ backgroundColor: c }}
-              onClick={() => setColor(c)}
-            />
-          ))}
-          <label>عرض الخط: <input type="range" min="1" max="10" value={lineWidth} onChange={(e) => setLineWidth(Number(e.target.value))} /></label>
-        </div>
-        <canvas
-          ref={canvasRef}
-          className="drawing-canvas"
-          width={block.canvasWidth || 500}
-          height={block.canvasHeight || 300}
-          style={{ border: '1px solid var(--border)', borderRadius: 8, background: '#fff' }}
-        />
-        {block.hint && <p className="lesson-hint">{block.hint}</p>}
-      </div>
-    );
-  }
-
-  if (kind === 'file-upload') {
-    const [file, setFile] = useState(null);
-    const [preview, setPreview] = useState(null);
-    const [uploading, setUploading] = useState(false);
-    const [progress, setProgress] = useState(0);
-
-    const handleFile = (e) => {
-      const f = e.target.files[0];
-      if (!f) return;
-      if (block.maxSizeMB && f.size > block.maxSizeMB * 1024 * 1024) {
-        alert(`الملف كبير جداً. الحد الأقصى ${block.maxSizeMB} MB`);
-        return;
+      if (block.startPoint && block.endPoint) {
+        ctx.strokeStyle = '#ff0000';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([5, 5]);
+        ctx.beginPath();
+        ctx.moveTo(block.startPoint.x * 20, block.startPoint.y * 20);
+        ctx.lineTo(block.endPoint.x * 20, block.endPoint.y * 20);
+        ctx.stroke();
+        ctx.setLineDash([]);
       }
-      setFile(f);
-      if (f.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = (e) => setPreview(e.target.result);
-        reader.readAsDataURL(f);
-      }
-    };
+    }
+  }, []);
 
-    const handleUpload = async () => {
-      if (!file) return;
-      setUploading(true);
-      setProgress(0);
-      const interval = setInterval(() => {
-        setProgress((p) => Math.min(p + 10, 90));
-      }, 200);
-      try {
-        const formData = new FormData();
-        formData.append('file', file);
-        await new Promise((r) => setTimeout(r, 1500));
-        clearInterval(interval);
-        setProgress(100);
-        alert('تم رفع الملف بنجاح! سيصل للمعلم للتصحيح.');
-      } catch (e) {
-        alert('فشل الرفع: ' + e.message);
-      } finally {
-        setUploading(false);
-        clearInterval(interval);
-      }
-    };
-
-    return (
-      <div className="lesson-block lesson-block-upload">
-        <div className="lesson-block-head">
-          <span className="material-icons">{icon}</span>
-          <strong>{block.title || 'رفع ملف'}</strong>
-        </div>
-        {block.text && <p className="lesson-block-text">{block.text}</p>}
-        <div className="upload-area">
-          <input
-            type="file"
-            accept={block.accept || 'image/*,application/pdf'}
-            onChange={(e) => {
-              const f = e.target.files[0];
-              if (!f) return;
-              if (block.maxSizeMB && f.size > block.maxSizeMB * 1024 * 1024) {
-                alert(`الملف كبير جداً. الحد الأقصى ${block.maxSizeMB} MB`);
-                return;
-              }
-              setFile(f);
-              // Notify parent of file selection
-              onAnswer(blockId, { kind: 'file', name: f.name, size: f.size, mimeType: f.type });
-              if (f.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = (e) => setPreview(e.target.result);
-                reader.readAsDataURL(f);
-              }
-            }}
-            className="file-input"
-            id={`upload-${Math.random()}`}
-          />
-          <label className="upload-label" htmlFor={`upload-${Math.random()}`}>
-            <span className="material-icons">cloud_upload</span>
-            {file ? `تم اختيار: ${file.name}` : 'اضغط لاختيار ملف (صورة أو PDF)'}
-          </label>
-        </div>
-        {preview && (
-          <div className="upload-preview">
-            <img src={preview} alt="معاينة" style={{ maxWidth: '100%', maxHeight: '200px', borderRadius: 8 }} />
-          </div>
-        )}
-        {file && !uploading && (
-          <button className="btn btn-primary" onClick={async () => {
-            setUploading(true);
-            setProgress(0);
-            const interval = setInterval(() => setProgress(p => Math.min(p + 10, 90)), 200);
-            try {
-              const formData = new FormData();
-              formData.append('file', file);
-              await new Promise((r) => setTimeout(r, 1500));
-              clearInterval(setInterval(() => setProgress(p => Math.min(p + 10, 90)), 200));
-              setProgress(100);
-              alert('تم رفع الملف بنجاح! سيصل للمعلم للتصحيح.');
-            } catch (e) {
-              alert('فشل الرفع: ' + e.message);
-            } finally {
-              setUploading(false);
-            }
-          }} disabled={uploading}>
-            <span className="material-icons">send</span> أرسل للمعلم
-          </button>
-        )}
-        {uploading && (
-          <div className="upload-progress">
-            <div className="progress-bar">
-              <div className="progress-fill" style={{ width: `${progress}%` }}></div>
-            </div>
-            <span>جاري الرفع... {progress}%</span>
-          </div>
-        )}
-        {block.hint && <p className="lesson-hint">{block.hint}</p>}
-      </div>
-    );
-  }
+  const tools = block.tools || ['pen', 'eraser'];
 
   return (
-    <div className={`lesson-block lesson-block-${kind}`}>
+    <div className="lesson-block lesson-block-drawing">
       <div className="lesson-block-head">
         <span className="material-icons">{icon}</span>
-        <strong>{block.title || (kind === 'objective' ? 'الأهداف' : '')}</strong>
+        <strong>{block.title || 'رسم حر'}</strong>
       </div>
-      <p className="lesson-block-text">{block.text}</p>
+      {block.prompt && <p className="lesson-block-text">{block.prompt}</p>}
+      <div className="drawing-toolbar">
+        {tools.map((t) => (
+          <button
+            key={t}
+            type="button"
+            className={`tool-btn ${tool === t ? 'active' : ''}`}
+            onClick={() => setTool(t)}
+            title={t === 'pen' ? 'قلم' : 'ممحاة'}
+          >
+            <span className="material-icons">{t === 'pen' ? 'brush' : 'backspace'}</span>
+          </button>
+        ))}
+        {['#000000', '#ff0000', '#0000ff', '#00aa00', '#ff8800', '#aa00aa'].map((c) => (
+          <button
+            key={c}
+            type="button"
+            className={`color-btn ${color === c ? 'active' : ''}`}
+            style={{ backgroundColor: c }}
+            onClick={() => setColor(c)}
+          />
+        ))}
+        <label>عرض الخط: <input type="range" min="1" max="10" value={lineWidth} onChange={(e) => setLineWidth(Number(e.target.value))} /></label>
+      </div>
+      <canvas
+        ref={canvasRef}
+        className="drawing-canvas"
+        width={block.canvasWidth || 500}
+        height={block.canvasHeight || 300}
+        style={{ border: '1px solid var(--border)', borderRadius: 8, background: '#fff', touchAction: 'none' }}
+      />
+      <div className="exercise-check-row">
+        <button type="button" className="btn btn-sm" onClick={capture}>
+          {saved ? '✓ تم حفظ الرسم' : 'حفظ الرسم في إجابتي'}
+        </button>
+      </div>
+      {block.hint && <p className="lesson-hint">{block.hint}</p>}
     </div>
   );
 }
 
-function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onComplete }) {
+function FileUploadBlock({ block, onAnswer, blockId }) {
+  const [file, setFile] = useState(null);
+  const [preview, setPreview] = useState(null);
+  const [tooBig, setTooBig] = useState(false);
+  const icon = BLOCK_ICONS['file-upload'];
+  const inputId = `upload-${blockId}`.replace(/[^a-zA-Z0-9-_]/g, '-');
+
+  const handleFile = (f) => {
+    if (!f) return;
+    if (block.maxSizeMB && f.size > block.maxSizeMB * 1024 * 1024) {
+      alert(`الملف كبير جداً. الحد الأقصى ${block.maxSizeMB} MB`);
+      return;
+    }
+    setFile(f);
+    setTooBig(false);
+    if (f.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const dataUrl = e.target.result;
+        setPreview(dataUrl);
+        if (typeof dataUrl === 'string' && dataUrl.length <= MAX_ATTACH_BYTES) {
+          onAnswer(blockId, { kind: 'file', name: f.name, size: f.size, mimeType: f.type, dataUrl });
+        } else {
+          setTooBig(true);
+          onAnswer(blockId, { kind: 'file', name: f.name, size: f.size, mimeType: f.type });
+        }
+      };
+      reader.readAsDataURL(f);
+    } else {
+      onAnswer(blockId, { kind: 'file', name: f.name, size: f.size, mimeType: f.type });
+    }
+  };
+
+  return (
+    <div className="lesson-block lesson-block-upload">
+      <div className="lesson-block-head">
+        <span className="material-icons">{icon}</span>
+        <strong>{block.title || 'رفع ملف'}</strong>
+      </div>
+      {block.text && <p className="lesson-block-text">{block.text}</p>}
+      <div className="upload-area">
+        <input
+          type="file"
+          accept={block.accept || 'image/*,application/pdf'}
+          onChange={(e) => handleFile(e.target.files[0])}
+          className="file-input"
+          id={inputId}
+        />
+        <label className="upload-label" htmlFor={inputId}>
+          <span className="material-icons">cloud_upload</span>
+          {file ? `تم اختيار: ${file.name}` : 'اضغط لاختيار ملف (صورة أو PDF)'}
+        </label>
+      </div>
+      {preview && (
+        <div className="upload-preview">
+          <img src={preview} alt="معاينة" style={{ maxWidth: '100%', maxHeight: '200px', borderRadius: 8 }} />
+        </div>
+      )}
+      {file && (
+        <p className="lesson-hint">
+          {tooBig
+            ? 'الصورة كبيرة — سيُرفق اسمها فقط. التقط صورة أصغر لإرفاق محتواها.'
+            : 'سيُرفق هذا الملف مع زر «أرسل للمعلم» أسفل الدرس.'}
+        </p>
+      )}
+      {block.hint && <p className="lesson-hint">{block.hint}</p>}
+    </div>
+  );
+}
+
+// Dispatcher without hooks — safe to reuse across lessons with different
+// block kinds at the same list positions (React hooks rules).
+function Block({ block, onAnswer = () => {}, blockId = '' }) {
+  const kind = block?.kind || 'concept';
+  const icon = BLOCK_ICONS[kind] || 'article';
+  switch (kind) {
+    case 'question':
+      return <QuestionBlock block={block} />;
+    case 'experiment':
+      return <ExperimentBlock block={block} />;
+    case 'summary':
+      return <SummaryBlock block={block} />;
+    case 'reward':
+      return <RewardBlock block={block} />;
+    case 'textarea':
+      return <TextareaBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
+    case 'math-input':
+      return <MathInputBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
+    case 'drawing':
+      return <DrawingBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
+    case 'file-upload':
+      return <FileUploadBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
+    default:
+      return <DefaultBlock block={block} kind={kind} icon={icon} />;
+  }
+}
+
+export { Block };
+
+function fileAnswerToAttachment(blockId, value) {
+  if (!value || typeof value !== 'object') return null;
+  if (value.kind === 'file') {
+    return {
+      name: value.name || `file-${blockId}`,
+      size: value.size || 0,
+      type: value.mimeType || 'application/octet-stream',
+      ...(value.dataUrl ? { dataUrl: value.dataUrl } : {})
+    };
+  }
+  if (value.type === 'drawing' && value.dataUrl) {
+    return {
+      name: `drawing-${String(blockId).replace(/[^a-zA-Z0-9-_]/g, '-')}.png`,
+      size: value.dataUrl.length,
+      type: 'image/png',
+      dataUrl: value.dataUrl
+    };
+  }
+  return null;
+}
+
+function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onComplete, book }) {
   const readAloud = () => {
     const parts = [lesson.title, ...(lesson.blocks || []).map((b) => b.text || '').filter(Boolean)];
     speak(parts.join('. '));
@@ -501,17 +531,22 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
       return;
     }
 
+    const keptAnswers = Object.fromEntries(
+      Object.entries(answers).filter(([id, val]) => val !== '' && val !== null && val !== undefined)
+    );
+    const files = Object.entries(keptAnswers)
+      .map(([id, val]) => fileAnswerToAttachment(id, val))
+      .filter(Boolean);
+
     const submission = {
       lessonId,
       lessonTitle: lesson.title,
-      answers: Object.fromEntries(
-        Object.entries(answers).filter(([id, val]) => val !== '' && val !== null)
-      ),
+      answers: keptAnswers,
+      ...(files.length ? { files } : {}),
       submittedAt: new Date().toISOString()
     };
 
-    // Check if there's at least one answer
-    if (Object.keys(submission.answers).length === 0) {
+    if (Object.keys(keptAnswers).length === 0) {
       setSubmitResult({ success: false, message: 'الرجاء الإجابة على تمرين واحد على الأقل قبل الإرسال' });
       return;
     }
@@ -520,11 +555,10 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
     try {
       const res = await api.post('/student/lesson/submit', submission);
       setSubmitResult({ success: true, message: 'تم إرسال إجاباتك للمعلم بنجاح!', data: res });
-      // Optionally mark lesson as completed
       if (!completed) {
         await api.post('/student/progress/lessons', {
-          gradeId: 'year3', // This should come from context
-          subjectId: 'math',
+          gradeId: book?.gradeId,
+          subjectId: book?.subjectId,
           lessonId,
           lessonTitle: lesson.title
         });
@@ -763,7 +797,7 @@ function LessonViewer({ book, onClose }) {
               </ul>
             </aside>
             <section className="lesson-stage">
-              <LessonPage lesson={currentLesson} index={active} total={lessons.length} onNav={go} lessonVideos={lessonVideos} completed={doneIds.has(currentLesson?.id)} onComplete={completeCurrent} />
+              <LessonPage lesson={currentLesson} index={active} total={lessons.length} onNav={go} lessonVideos={lessonVideos} completed={doneIds.has(currentLesson?.id)} onComplete={completeCurrent} book={book} />
             </section>
           </div>
         ) : tab === 'exercises' && exercises.length === 0 ? (
