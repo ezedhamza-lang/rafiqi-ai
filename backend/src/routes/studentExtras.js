@@ -5,6 +5,7 @@ import { asyncHandler } from '../middleware/errorHandler.js';
 import { getLessonPages, findGradeByLevel } from '../services/curriculumService.js';
 import { buildRecommendedSession } from '../services/adaptivePlanService.js';
 import { getStudentLevel } from '../services/studentLevelService.js';
+import { notify } from '../services/notify.js';
 import { validateBody } from '../middleware/validate.js';
 import { z } from 'zod';
 
@@ -248,14 +249,12 @@ router.post('/lesson/submit', studentMiddleware, validateBody(submitLessonSchema
   if (student?.classId) {
     const classTeacher = await prisma.class.findUnique({ where: { id: student.classId }, select: { teacherId: true } });
     if (classTeacher?.teacherId) {
-      await prisma.notification.create({
-        data: {
-          userId: classTeacher.teacherId,
-          type: 'LESSON_SUBMITTED',
-          title: 'إرسال واجب جديد',
-          message: `أرسل تلميذ إجابات درس: ${req.body.lessonTitle || 'بدون عنوان'}`,
-          data: { submissionId: submission.id, lessonId: req.body.lessonId }
-        }
+      await notify([classTeacher.teacherId], {
+        type: 'LESSON_SUBMITTED',
+        title: 'إرسال واجب جديد',
+        body: `أرسل تلميذ إجابات درس: ${req.body.lessonTitle || 'بدون عنوان'}`,
+        link: '/teacher/correction',
+        metadata: { submissionId: submission.id, lessonId: req.body.lessonId }
       });
     }
   }

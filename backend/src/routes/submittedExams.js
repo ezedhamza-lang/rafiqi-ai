@@ -360,22 +360,29 @@ router.put('/submitted-exams/:id', teacherMiddleware, validateParams(submittedEx
  */
 router.get('/lesson-submissions', teacherMiddleware, asyncHandler(async (req, res) => {
   const { status } = req.query;
-  const where = {
-    OR: [{ teacherId: req.user.id }, { class: { teacherId: req.user.id } }]
-  };
+  // Teacher sees submissions from students enrolled in their own classes.
+  const myClasses = await prisma.class.findMany({
+    where: { teacherId: req.user.id },
+    select: { id: true }
+  });
+  const myStudents = await prisma.student.findMany({
+    where: { classId: { in: myClasses.map((c) => c.id) }, NOT: { accountUserId: null } },
+    select: { accountUserId: true, firstName: true, lastName: true, classId: true }
+  });
+  const byAccount = new Map(myStudents.map((s) => [s.accountUserId, s]));
+  const where = { userId: { in: [...byAccount.keys()] } };
   if (status) where.status = status;
 
   const items = await prisma.lessonSubmission.findMany({
     where,
-    include: {
-      student: { select: { id: true, firstName: true, lastName: true } },
-      class: { select: { id: true, name: true, level: true } }
-    },
+    include: { user: { select: { id: true, firstName: true, lastName: true } } },
     orderBy: [{ status: 'asc' }, { submittedAt: 'desc' }]
   });
   res.json(
     items.map((i) => ({
       ...i,
+      student: i.user,
+      classId: byAccount.get(i.userId)?.classId ?? null,
       statusLabel: i.status
     }))
   );
@@ -415,38 +422,40 @@ router.get('/lesson-submissions', teacherMiddleware, asyncHandler(async (req, re
 router.put('/lesson-submissions/:id', teacherMiddleware, asyncHandler(async (req, res) => {
   const { score, feedback, status } = req.body;
   const item = await prisma.lessonSubmission.findFirst({
-    where: {
-      id: Number(req.params.id),
-      OR: [{ teacherId: req.user.id }, { class: { teacherId: req.user.id } }]
-    },
-    include: { student: { select: { id: true, firstName: true, lastName: true } } }
+    where: { id: Number(req.params.id) }
   });
   if (!item) throw new ApiError(404, 'الإرسال غير موجود');
+  // Ownership: the submitting user must be a student in one of my classes.
+  const ownerStudent = await prisma.student.findFirst({
+    where: { accountUserId: item.userId, class: { teacherId: req.user.id } },
+    select: { id: true }
+  });
+  if (!ownerStudent) throw new ApiError(404, 'الإرسال غير موجود');
 
   const data = {};
-  if (score !== undefined && score !== '') data.score = Number(score);
+  if (score !== undefined && score !== '') data.grade = Number(score);
   if (feedback !== undefined) data.feedback = String(feedback).trim() || null;
   if (status && ['SUBMITTED', 'IN_REVIEW', 'GRADED', 'RETURNED'].includes(status)) data.status = status;
 
   const updated = await prisma.lessonSubmission.update({ where: { id: item.id }, data });
 
   if (data.status === 'GRADED') {
-    await notify([item.studentId], {
+    await notify([item.userId], {
       type: 'LESSON_GRADED',
       title: 'تم تصحيح واجبك التفاعلي',
-      body: `${item.lessonTitle || 'الدرس'} — النتيجة ${data.score ?? '—'}/20`,
+      body: `${item.lessonTitle || 'الدرس'} — النتيجة ${data.grade ?? '—'}/20`,
       link: '/student-space/lessons'
     });
 
     const parentOfStudent = await prisma.student.findFirst({
-      where: { accountUserId: item.studentId },
+      where: { accountUserId: item.userId },
       select: { userId: true }
     });
-    if (parentOfStudent?.userId && parentOfStudent.userId !== item.studentId) {
+    if (parentOfStudent?.userId && parentOfStudent.userId !== item.userId) {
       await notify([parentOfStudent.userId], {
         type: 'LESSON_GRADED',
         title: 'تم تصحيح واجب ابنك التفاعلي',
-        body: `${item.lessonTitle || 'الدرس'} — النتيجة ${data.score ?? '—'}/20`,
+        body: `${item.lessonTitle || 'الدرس'} — النتيجة ${data.grade ?? '—'}/20`,
         link: '/parent'
       });
     }
