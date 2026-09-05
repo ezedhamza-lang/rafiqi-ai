@@ -243,7 +243,7 @@ function MathInputBlock({ block, onAnswer, blockId }) {
             rows={block.rows || 6}
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            dir="ltr"
+            dir="rtl"
             spellCheck={false}
             aria-label={block.title || 'مكان العملية'}
           />

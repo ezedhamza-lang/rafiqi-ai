@@ -36,7 +36,22 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
     expect(Array.isArray(l.blocks)).toBe(true);
     expect(l.blocks.length).toBeGreaterThan(0);
     const kinds = new Set(l.blocks.map((b) => b.kind));
-    expect(kinds.has('objective')).toBe(true);
+    expect(kinds.has('concept')).toBe(true);
+  });
+
+  it('كتب التلميذ بلا كتل مذكرة (لا أهداف/أساس/محور/مرجع) — رياضيات كل السنوات', async () => {
+    const forbidden = ['الأهداف', 'الأساس البيداغوجي', 'المحور', 'مرجع'];
+    for (const gradeId of ['year1', 'year2', 'year3', 'year4', 'year5', 'year6']) {
+      const res = await request(app)
+        .get(`/api/public/curriculum/books/${gradeId}/math/lessons`)
+        .send();
+      expect(res.status).toBe(200);
+      for (const page of res.body) {
+        for (const block of page.blocks || []) {
+          expect(forbidden.includes(block.title), `${gradeId}/${page.id}: كتلة مذكرة ممنوعة «${block.title}»`).toBe(false);
+        }
+      }
+    }
   });
 
   it('يدرج دروس القراءة (أنيسي) س1 التفاعلية', async () => {

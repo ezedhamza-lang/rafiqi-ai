@@ -168,14 +168,13 @@ function adaptMathUnits(lessons) {
       pages.push({ id, title: item.title, content: firstText, domain: item.domain, blocks, ...extra });
       continue;
     }
+    // دروس بلا محتوى مؤلف: صفحة تلميذ نظيفة بالعنوان فقط + تنبيه لطيف.
+    // (لا نعرض كتل المذكرة: الأهداف/الأساس البيداغوجي/المحور/مرجع —
+    //  مكانها مذكرة المعلم وخرائط المهارات، لا كتاب التلميذ.)
     const blocks = [
-      { kind: 'objective', title: 'الأهداف', text: item.pedagogicalBasis ? `أن يتعرّف المتعلّم على: ${item.title}.` : `أن يتقن المتعلّم: ${item.title}.` }
+      { kind: 'concept', title: item.title, text: `درس «${item.title}» — نسخته التفاعلية قيد التحضير وستظهر هنا قريبًا. راجع دروسك المكتملة وواصل التقدم.` }
     ];
-    if (item.pedagogicalBasis) blocks.push({ kind: 'concept', title: 'الأساس البيداغوجي', text: item.pedagogicalBasis });
-    if (item.domain) blocks.push({ kind: 'definition', title: 'المحور', text: item.domain });
-    for (const act of item.activities || []) blocks.push({ kind: 'example', title: 'نشاط', text: act });
-    if (item.officialRef?.pages) blocks.push({ kind: 'note', title: 'مرجع', text: `${item.officialRef.source || 'الكتاب'} — ص ${item.officialRef.pages}` });
-    pages.push({ id, title: item.title, content: item.pedagogicalBasis || item.title, domain: item.domain, blocks, ...extra });
+    pages.push({ id, title: item.title, content: item.title, domain: item.domain, blocks, ...extra });
   }
   return pages;
 }
@@ -347,7 +346,7 @@ export function getLessonPages(subjectCode, level, gradeId, country) {
           title: item.title,
           content: item.title,
           blocks: [
-            { kind: 'objective', title: 'الأهداف', text: `أن يتعلّم المتعلّم: ${item.title}.` },
+            { kind: 'concept', title: item.title, text: item.title },
             ...(item.content ? [{ kind: 'concept', title: 'المحتوى', text: item.content }] : [])
           ]
         });

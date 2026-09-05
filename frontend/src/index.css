@@ -4616,6 +4616,8 @@ tr:hover td {
   resize: vertical;
   color: #1a2a6c;
   font-weight: 600;
+  text-align: right;
+  unicode-bidi: plaintext;
 }
 .lesson-math-input.kid-write { font-size: 1.45rem; letter-spacing: 1px; }
 .lesson-textarea.kid-write::placeholder,
