@@ -1025,7 +1025,7 @@ function LessonViewer({ book, onClose }) {
               <h4>دروس الكتاب</h4>
               <ul>
                 {lessons.map((l, i) => (
-                  <li key={l.id || i} className={i === active ? 'active' : ''}>
+                  <li key={l.id || i} className={`${i === active ? 'active' : ''} ${l.period ? 'period-' + l.period : ''}`}>
                     <button type="button" onClick={() => go(i)}>
                       <span className="toc-num">{i + 1}</span>
                       <span className="toc-title">{l.title}</span>

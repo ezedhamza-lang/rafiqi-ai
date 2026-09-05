@@ -957,7 +957,7 @@
         "kind": "concept",
         "title": "🔍 أستكشف",
         "text": "هذه قطعة 1 مليم، وهذه 2 مليم، وهذه 5 مليم. لاحظ الفرق بينها.",
-        "art": "coins-add"
+        "art": "coins-1-2-5"
       },
       {
         "kind": "picture-choice",
@@ -965,11 +965,11 @@
         "text": "أي قطعة قيمتها 5 مليم؟",
         "options": [
           {
-            "art": "coin-10",
-            "label": "10 مليم"
+            "art": "coin-2",
+            "label": "2 مليم"
           },
           {
-            "art": "coin-50",
+            "art": "coin-5",
             "label": "5 مليم"
           }
         ],

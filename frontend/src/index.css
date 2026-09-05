@@ -4220,6 +4220,20 @@ tr:hover td {
 }
 .lesson-toc li.active .toc-num { background: rgba(255, 255, 255, 0.25); }
 
+/* Period-based color coding for sidebar */
+.lesson-toc li.period-1 .toc-num { background: #4caf50; }
+.lesson-toc li.period-2 .toc-num { background: #2196f3; }
+.lesson-toc li.period-3 .toc-num { background: #ff9800; }
+.lesson-toc li.period-4 .toc-num { background: #9c27b0; }
+.lesson-toc li.period-5 .toc-num { background: #f44336; }
+.lesson-toc li.period-6 .toc-num { background: #009688; }
+.lesson-toc li.active.period-1 button { background: #4caf50; }
+.lesson-toc li.active.period-2 button { background: #2196f3; }
+.lesson-toc li.active.period-3 button { background: #ff9800; }
+.lesson-toc li.active.period-4 button { background: #9c27b0; }
+.lesson-toc li.active.period-5 button { background: #f44336; }
+.lesson-toc li.active.period-6 button { background: #009688; }
+
 .lesson-stage {
   flex: 1 1 auto;
   overflow-y: auto;

@@ -487,6 +487,7 @@ export default function SvgArt({ id, size }) {
   else if (id === 'cat') art = <Cat />;
   else if (id === 'rabbit') art = <Rabbit />;
   else if (id === 'fish') art = <Fish />;
+  else if (id === 'coins-1-2-5') art = (<g><g transform="translate(-30,-14) scale(.8)"><Coin v="1" /></g><g transform="translate(30,-14) scale(.8)"><Coin v="2" /></g><g transform="translate(0,26) scale(.8)"><Coin v="5" /></g></g>);
   else if (id === 'coins-10-20-50' || id === 'coins-add') art = (<g><g transform="translate(-30,-14) scale(.8)"><Coin v="10" /></g><g transform="translate(30,-14) scale(.8)"><Coin v="20" /></g><g transform="translate(0,26) scale(.8)"><Coin v="50" /></g></g>);
   return (
     <svg className="art-svg" width={s} height={s} viewBox="0 0 120 120" role="img" aria-hidden="true">
