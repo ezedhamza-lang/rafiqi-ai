@@ -404,9 +404,14 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
             {pg.passage && (
               <div className="paper-passage">
                 <h3>{pg.passage.title}</h3>
-                {pg.passage.art && (
+                {pg.passage.image && (
                   <div className="paper-art-container">
-                    <SvgArt name={pg.passage.art} width={220} height={120} />
+                    <img src={pg.passage.image} alt={pg.passage.title} style={{ maxWidth: '100%', borderRadius: 8, border: '2px solid #e0d8a0' }} />
+                  </div>
+                )}
+                {pg.passage.art && !pg.passage.image && (
+                  <div className="paper-art-container">
+                    <SvgArt id={pg.passage.art} size={220} />
                   </div>
                 )}
                 <p>{rich(pg.passage.text)}</p>
