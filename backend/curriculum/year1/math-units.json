@@ -2497,7 +2497,7 @@
         "kind": "concept",
         "title": "📖 السند 1",
         "text": "في قسمنا طاولة عليها قلم وممحاة، وتحت الطاولة سلة المهملات.",
-        "art": "assess-desk"
+        "image": "/assessments/y1a1-s1.png"
       },
       {
         "kind": "question",
@@ -2601,7 +2601,7 @@
         "kind": "concept",
         "title": "📖 السند 1",
         "text": "في حديقة المدرسة 3 عصافير على الشجرة وعشّان فارغان.",
-        "art": "assess-birds"
+        "image": "/assessments/y1a2-s1.png"
       },
       {
         "kind": "question",
@@ -2701,7 +2701,7 @@
         "kind": "concept",
         "title": "📖 السند 1",
         "text": "في علبة أمين 4 كرات حمراء وكرة خضراء واحدة.",
-        "art": "assess-box"
+        "image": "/assessments/y1a3-s1.png"
       },
       {
         "kind": "question",
@@ -2802,7 +2802,7 @@
         "kind": "concept",
         "title": "📖 السند 1",
         "text": "جمع سامي 10 أزرار زرقاء في حزمة واحدة و3 أزرار حمراء منفردة.",
-        "art": "assess-buttons"
+        "image": "/assessments/y1a4-s1.png"
       },
       {
         "kind": "question",
@@ -2903,7 +2903,7 @@
         "kind": "concept",
         "title": "📖 السند 1: جدول النقط",
         "text": "حمدي سجل 43 نقطة في الشوط الأول و54 نقطة في الشوط الثاني. عزيز سجل 50 نقطة في الشوط الأول و38 نقطة في الشوط الثاني.",
-        "art": "assess-scores"
+        "image": "/assessments/y1a5-s1.png"
       },
       {
         "kind": "question",
@@ -3007,7 +3007,7 @@
         "kind": "concept",
         "title": "📖 السند 1: الحيوانات في المرعي",
         "text": "في الصباح خرج إلى المرعي 14 بقرة و12 عجلًا و3 ثيران.",
-        "art": "assess-farm"
+        "image": "/assessments/y1a6-s1.png"
       },
       {
         "kind": "question",
