@@ -4341,6 +4341,10 @@ tr:hover td {
 .lesson-block-question { background: #fbf3ff; border-color: #e7d3f5; }
 .lesson-block-question .material-icons { color: #7b1fa2; }
 
+.lesson-block-activity { background: linear-gradient(135deg, #fff8ee, #fffdf7); border: 2px dashed #d9a441; }
+.lesson-block-activity .material-icons { color: #b06b00; }
+.lesson-block-activity .lesson-block-text { font-size: 1.5rem; font-weight: 600; color: #6b4a12; }
+
 .lesson-block-experiment { background: #f0fafd; border-color: #c9eaf2; }
 .lesson-block-experiment .material-icons { color: #0e6b8a; }
 .lesson-block-summary { background: #f2f7ed; border-color: #d4e5c5; }

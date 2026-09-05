@@ -558,7 +558,11 @@ export function getLessonPages(subjectCode, level, gradeId, country) {
   } else if (code === 'production' || code === 'writing') {
     const book = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile || 'production-units.json'));
     if (!book) return [];
-    pages = adaptProductionBook(book);
+    if (Array.isArray(book.units)) {
+      pages = adaptProductionBook(book);
+    } else {
+      pages = adaptMathUnits(book);
+    }
   } else {
     return [];
   }

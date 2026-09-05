@@ -23,6 +23,7 @@ const BLOCK_ICONS = {
   keyword: 'translate',
   question: 'quiz',
   experiment: 'science',
+  activity: 'edit_note',
   summary: 'checklist',
   reward: 'emoji_events',
   textarea: 'edit',
