@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import ExamPaper from '../../components/ExamPaper.jsx';
 
 function ResultCriteriaTable({ result, t }) {
   if (!result?.criteria) return null;
@@ -114,69 +115,13 @@ export default function StudentOfficialExams({ onChanged }) {
         </div>
         {error && <div className="form-error">{error}</div>}
 
-        {content.passages?.length > 0 && (
-          <div className="form-group">
-            <label>{t('studentSpace.officialExams.passages')}</label>
-            {content.passages.map((p) => (
-              <div key={p.id} className="card-item">
-                <h5>{p.title}</h5>
-                <p>{p.text}</p>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {(content.questions || []).map((q, qi) => (
-          <div key={q.id} className="stage-item quiz-question">
-            <p><strong>{qi + 1}. {q.prompt}</strong></p>
-            {q.type === 'MCQ' && (
-              <div className="quiz-options">
-                {q.options.map((opt, oi) => (
-                  <label key={oi} className="quiz-option">
-                    <input
-                      type="radio"
-                      name={q.id}
-                      value={opt}
-                      onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value })}
-                    />
-                    {opt}
-                  </label>
-                ))}
-              </div>
-            )}
-            {q.type === 'TRUE_FALSE' && (
-              <div className="quiz-options">
-                <label className="quiz-option">
-                  <input type="radio" name={q.id} value="صواب" onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value })} />
-                  {t('time.trueLabel')}
-                </label>
-                <label className="quiz-option">
-                  <input type="radio" name={q.id} value="خطأ" onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value })} />
-                  {t('time.falseLabel')}
-                </label>
-              </div>
-            )}
-            {q.type === 'ORDER' && (
-              <div className="form-group">
-                <input
-                  value={answers[q.id] || ''}
-                  onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value.split(',') })}
-                  placeholder={t('studentSpace.officialExams.orderPlaceholder')}
-                />
-              </div>
-            )}
-            {(q.type === 'EXTRACT' || q.type === 'FILL_BLANK') && (
-              <div className="form-group">
-                <input value={answers[q.id] || ''} onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value })} placeholder={t('studentSpace.officialExams.answerPlaceholder')} />
-              </div>
-            )}
-            {q.type === 'OPEN' && (
-              <div className="form-group">
-                <textarea value={answers[q.id] || ''} onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value })} placeholder={t('studentSpace.officialExams.openPlaceholder')} />
-              </div>
-            )}
-          </div>
-        ))}
+        <ExamPaper
+          content={content}
+          meta={{ title: active.title, subject: active.subject, trimester: active.trimester }}
+          mode="solve"
+          answers={answers}
+          onAnswer={(id, v) => setAnswers({ ...answers, [id]: v })}
+        />
 
         <button className="btn btn-primary" type="submit" disabled={submitting}>
           {submitting ? t('studentSpace.officialExams.submitting') : t('studentSpace.officialExams.submit')}

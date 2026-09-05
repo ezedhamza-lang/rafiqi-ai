@@ -50,6 +50,15 @@ function ListenBtn({ text }) {
   );
 }
 
+// Minimal rich text: **bold** → <strong>. Lesson content uses ** for
+// emphasis but blocks render plain text, so parse it here.
+function rich(text) {
+  if (!text || typeof text !== 'string') return text;
+  const parts = text.split('**');
+  if (parts.length < 3) return text;
+  return parts.map((p, i) => (i % 2 === 1 ? <strong key={i}>{p}</strong> : p));
+}
+
 function QuestionBlock({ block }) {
   const [showAnswer, setShowAnswer] = useState(false);
   const [sel, setSel] = useState(null);
@@ -65,8 +74,8 @@ function QuestionBlock({ block }) {
     <div className="lesson-block lesson-block-question">
       <div className="lesson-block-head">
         <span className="material-icons">{icon}</span>
-        <strong>{block.title || 'سؤال'}</strong>
-        {block.text && <p>{block.text}</p>}
+        <strong>{rich(block.title) || 'سؤال'}</strong>
+        {block.text && <p>{rich(block.text)}</p>}
       </div>
       {isMCQ ? (
         <>
@@ -114,7 +123,7 @@ function ExperimentBlock({ block }) {
         <span className="material-icons">{icon}</span>
         <strong>{block.title || 'جرّب بنفسك'}</strong>
       </div>
-      {block.text && <p className="lesson-block-text">{block.text}</p>}
+      {block.text && <p className="lesson-block-text">{rich(block.text)}</p>}
       {block.materials?.length > 0 && (
         <div className="lesson-experiment-materials">
           <strong>الأدوات:</strong>
@@ -140,7 +149,7 @@ function SummaryBlock({ block }) {
         <strong>{block.title || 'خلاصة الوحدة'}</strong>
       </div>
       <ul className="lesson-summary-list">
-        {(block.points || []).map((pt, i) => <li key={i}>{pt}</li>)}
+        {(block.points || []).map((pt, i) => <li key={i}>{rich(pt)}</li>)}
       </ul>
     </div>
   );
@@ -151,7 +160,7 @@ function RewardBlock({ block }) {
   return (
     <div className="lesson-block lesson-block-reward">
       <span className="material-icons">{icon}</span>
-      <p className="lesson-block-text">{block.text || 'أحسنت!'}</p>
+      <p className="lesson-block-text">{rich(block.text) || 'أحسنت!'}</p>
     </div>
   );
 }
@@ -161,9 +170,9 @@ function DefaultBlock({ block, kind, icon }) {
     <div className={`lesson-block lesson-block-${kind}`}>
       <div className="lesson-block-head">
         <span className="material-icons">{icon}</span>
-        <strong>{block.title || (kind === 'objective' ? 'الأهداف' : '')}</strong>
+        <strong>{rich(block.title) || (kind === 'objective' ? 'الأهداف' : '')}</strong>
       </div>
-      <p className="lesson-block-text">{block.text}</p>
+      <p className="lesson-block-text">{rich(block.text)}</p>
     </div>
   );
 }
@@ -179,7 +188,7 @@ function TextareaBlock({ block, onAnswer, blockId }) {
         <strong>{block.title || 'إجابة حرة'}</strong>
         <ListenBtn text={`${block.title || ''}. ${block.text || ''}`} />
       </div>
-      {block.text && <p className="lesson-block-text">{block.text}</p>}
+      {block.text && <p className="lesson-block-text">{rich(block.text)}</p>}
       <span className="write-here"><span className="material-icons" style={{ fontSize: 20 }}>edit</span> اكتب إجابتك هنا</span>
       <div className="cahier-paper">
         <textarea
@@ -223,7 +232,7 @@ function MathInputBlock({ block, onAnswer, blockId }) {
         <strong>{block.title || 'عملية رياضية'}</strong>
         <ListenBtn text={`${block.title || ''}. ${block.text || ''}`} />
       </div>
-      {block.text && <p className="lesson-block-text">{block.text}</p>}
+      {block.text && <p className="lesson-block-text">{rich(block.text)}</p>}
       <span className="write-here"><span className="material-icons" style={{ fontSize: 20 }}>functions</span> اكتب العملية هنا</span>
       <div className="math-input-wrapper">
         <div className="cahier-paper">
@@ -371,7 +380,7 @@ function DrawingBlock({ block, onAnswer, blockId }) {
         <strong>{block.title || 'رسم حر'}</strong>
         <ListenBtn text={`${block.title || ''}. ${block.prompt || ''}`} />
       </div>
-      {block.prompt && <p className="lesson-block-text">{block.prompt}</p>}
+      {block.prompt && <p className="lesson-block-text">{rich(block.prompt)}</p>}
       <span className="write-here"><span className="material-icons" style={{ fontSize: 20 }}>brush</span> ارسم هنا بإصبعك</span>
       <div className="drawing-toolbar">
         {tools.map((t) => (
@@ -452,7 +461,7 @@ function FileUploadBlock({ block, onAnswer, blockId }) {
         <span className="material-icons">{icon}</span>
         <strong>{block.title || 'رفع ملف'}</strong>
       </div>
-      {block.text && <p className="lesson-block-text">{block.text}</p>}
+      {block.text && <p className="lesson-block-text">{rich(block.text)}</p>}
       <div className="upload-area">
         <input
           type="file"

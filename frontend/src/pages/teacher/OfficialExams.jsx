@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import ExamPaper from '../../components/ExamPaper.jsx';
 
 const LEVELS = [
   { code: 'year1', label: 'السنة الأولى' },
@@ -21,35 +22,6 @@ const SUBJECTS = [
   { code: 'french', label: 'اللغة الفرنسية' },
   { code: 'islamic', label: 'التربية الإسلامية' }
 ];
-
-function CriteriaTable({ criteria, t }) {
-  if (!criteria || criteria.length === 0) return null;
-  const MASTERY_KEYS = ['none', 'below', 'min', 'max'];
-  return (
-    <div className="table-wrap">
-      <table className="data-table">
-        <thead>
-          <tr>
-            <th>{t('teacherSpace.officialExams.criteriaCol')}</th>
-            {MASTERY_KEYS.map((k) => (
-              <th key={k}>{t(`teacherSpace.officialExams.mastery.${k}`)}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {criteria.map((c) => (
-            <tr key={c.id}>
-              <td>{c.label || c.id}</td>
-              {MASTERY_KEYS.map((k) => (
-                <td key={k}>{c.mastery?.[k] ?? t('teacherSpace.officialExams.noValue')}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
 
 export default function OfficialExams({ classes }) {
   const { t } = useI18n();
@@ -478,45 +450,9 @@ export default function OfficialExams({ classes }) {
       )}
 
       {view === 'bank-preview' && active && (
-        <div className="exam-preview">
-          <div className="exam-header">
-            <h4>{active.title}</h4>
-            <p>{t('teacherSpace.officialExams.totalPointsLine', { duration: active.durationMinutes, points: active.totalPoints })}</p>
-          </div>
-
-          <div className="form-group">
-            <label>{t('teacherSpace.officialExams.passagesLabel')}</label>
-            {active.passages?.map((p) => (
-              <div key={p.id} className="card-item">
-                <h5>{p.title}</h5>
-                <p>{p.text}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="form-group">
-            <label>{t('teacherSpace.officialExams.criteriaTableLabel')}</label>
-            <CriteriaTable criteria={active.criteria} t={t} />
-          </div>
-
-          <div className="form-group">
-            <label>{t('teacherSpace.officialExams.questionsLabel', { n: active.questions?.length || 0 })}</label>
-            {active.questions?.map((q, i) => (
-              <div key={q.id} className="card-item">
-                <p><strong>{i + 1}. {q.prompt}</strong></p>
-                <p className="sub">{t('teacherSpace.officialExams.criterionLabel', { criterion: q.criterion, type: q.type })}</p>
-                {q.options?.length > 0 && (
-                  <ul>
-                    {q.options.map((o, j) => (
-                      <li key={j}>{o}</li>
-                    ))}
-                  </ul>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className="btn-group">
+        <div>
+          <ExamPaper content={active} meta={active} mode="print" />
+          <div className="btn-group no-print" style={{ marginTop: '1rem' }}>
             <button className="btn btn-primary" onClick={() => importBank(active)}>
               {t('teacherSpace.officialExams.importToMine')}
             </button>
@@ -800,55 +736,9 @@ export default function OfficialExams({ classes }) {
       )}
 
       {view === 'preview' && active && (
-        <div className="exam-preview">
-          <div className="exam-header">
-            <h4>{active.title}</h4>
-            <p>{active.content?.header}</p>
-            <p>{active.content?.school} — {active.content?.date}</p>
-          </div>
-
-          {active.content?.criteria?.length > 0 && (
-            <div className="form-group">
-              <label>{t('teacherSpace.officialExams.criteriaTableLabel')}</label>
-              <CriteriaTable criteria={active.content.criteria} t={t} />
-            </div>
-          )}
-
-          {active.content?.passages?.length > 0 && (
-            <div className="form-group">
-              <label>{t('teacherSpace.officialExams.passagesLabel')}</label>
-              {active.content.passages.map((p) => (
-                <div key={p.id} className="card-item">
-                  <h5>{p.title}</h5>
-                  <p>{p.text}</p>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {active.content?.questions?.length > 0 && (
-            <div className="form-group">
-              <label>{t('teacherSpace.officialExams.questionsLabel', { n: active.content.questions.length })}</label>
-              {active.content.questions.map((q, i) => (
-                <div key={q.id} className="card-item">
-                  <p><strong>{i + 1}. {q.prompt}</strong></p>
-                  {q.options?.length > 0 && (
-                    <ul>
-                      {q.options.map((o, j) => (
-                        <li key={j}>{o}</li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              ))}
-            </div>
-          )}
-
-          <div className="form-group">
-            <label>{t('teacherSpace.officialExams.instructionsLabel')}</label>
-            <p>{active.content?.instructions}</p>
-          </div>
-          <div className="btn-group">
+        <div>
+          <ExamPaper content={active.content} meta={active} mode="print" />
+          <div className="btn-group no-print" style={{ marginTop: '1rem' }}>
             <button className="btn btn-primary" onClick={() => downloadDocx(active, false)}>
               {t('teacherSpace.officialExams.downloadWord')}
             </button>
