@@ -411,7 +411,7 @@ if (kind === 'math-input') {
               }
               setFile(f);
               // Notify parent of file selection
-              onAnswer(blockId, { type: 'file', name: f.name, size: f.size, type: f.type });
+              onAnswer(blockId, { kind: 'file', name: f.name, size: f.size, mimeType: f.type });
               if (f.type.startsWith('image/')) {
                 const reader = new FileReader();
                 reader.onload = (e) => setPreview(e.target.result);

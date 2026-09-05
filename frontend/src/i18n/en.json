@@ -1727,7 +1727,18 @@
       "viewPdf": "View PDF",
       "startReview": "Start Review",
       "scorePlaceholder": "Score /20",
-      "save": "Save"
+      "save": "Save",
+      "lessonSubmissionsTitle": "Interactive Lesson Submissions",
+      "lessonStatus": {
+        "SUBMITTED": "Submitted",
+        "IN_REVIEW": "Under review",
+        "GRADED": "Graded",
+        "RETURNED": "Returned"
+      },
+      "noLessonSubmissions": "No lesson submissions yet.",
+      "lessonCol": "Lesson",
+      "viewFile": "View file",
+      "noFile": "No file"
     },
     "results": {
       "title": "Student Results",

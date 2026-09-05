@@ -256,8 +256,28 @@ async function start() {
       "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
       "updatedAt" TIMESTAMP(3) NOT NULL,
       FOREIGN KEY ("classId") REFERENCES "Class"("id") ON DELETE CASCADE
-    )`).then(() => prisma.$executeRaw`ALTER TABLE "SubjectDistribution" ADD COLUMN IF NOT EXISTS "timetable" JSONB`).catch((err) => {
+    )`)    .then(() => prisma.$executeRaw`ALTER TABLE "SubjectDistribution" ADD COLUMN IF NOT EXISTS "timetable" JSONB`).catch((err) => {
       console.error('SubjectDistribution table check failed:', err.message);
+    })
+    // LessonSubmission table (interactive lesson answers) — same pattern:
+    // idempotent ensure, never crashes startup. Needed on hosts that run
+    // the image without `prisma migrate deploy` (e.g. Render Dockerfile).
+    .then(() => prisma.$executeRaw`CREATE TABLE IF NOT EXISTS "LessonSubmission" (
+      "id" SERIAL PRIMARY KEY,
+      "userId" INTEGER NOT NULL,
+      "lessonId" TEXT NOT NULL,
+      "lessonTitle" TEXT,
+      "answers" JSONB NOT NULL,
+      "files" JSONB,
+      "status" TEXT NOT NULL DEFAULT 'SUBMITTED',
+      "grade" INTEGER,
+      "feedback" TEXT,
+      "submittedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      "gradedAt" TIMESTAMP(3),
+      "gradedBy" INTEGER,
+      FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE
+    )`).then(() => prisma.$executeRaw`CREATE INDEX IF NOT EXISTS "LessonSubmission_userId_lessonId_idx" ON "LessonSubmission"("userId", "lessonId")`).then(() => prisma.$executeRaw`CREATE INDEX IF NOT EXISTS "LessonSubmission_userId_status_idx" ON "LessonSubmission"("userId", "status")`).then(() => prisma.$executeRaw`CREATE INDEX IF NOT EXISTS "LessonSubmission_status_idx" ON "LessonSubmission"("status")`).catch((err) => {
+      console.error('LessonSubmission table check failed:', err.message);
     })
     .then(() => runRenewalSweep().catch((err) => {
       console.error('initial renewal sweep failed:', err.message);

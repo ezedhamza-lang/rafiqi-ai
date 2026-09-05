@@ -185,8 +185,6 @@ router.get('/daily-routine', studentMiddleware, asyncHandler(async (req, res) =>
   });
 }));
 
-export default router;
-
 /**
  * @openapi
  * /api/student/lesson/submit:

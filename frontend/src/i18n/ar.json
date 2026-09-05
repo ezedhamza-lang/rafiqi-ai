@@ -1728,7 +1728,18 @@
       "viewPdf": "عرض PDF",
       "startReview": "بدء التصحيح",
       "scorePlaceholder": "النقطة /20",
-      "save": "حفظ"
+      "save": "حفظ",
+      "lessonSubmissionsTitle": "إرسالات الدروس التفاعلية",
+      "lessonStatus": {
+        "SUBMITTED": "مرسل",
+        "IN_REVIEW": "قيد التصحيح",
+        "GRADED": "مصحح",
+        "RETURNED": "مُعاد"
+      },
+      "noLessonSubmissions": "لا توجد إرسالات دروس بعد.",
+      "lessonCol": "الدرس",
+      "viewFile": "عرض الملف",
+      "noFile": "بلا ملف"
     },
     "results": {
       "title": "نتائج التلاميذ",

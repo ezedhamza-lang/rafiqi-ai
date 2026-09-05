@@ -282,6 +282,78 @@ export default function Correction() {
           </table>
         </div>
       )}
+
+      <h4 style={{ marginTop: 24 }}>{t('teacherSpace.correction.paperBoxTitle')}</h4>
+      <div className="form-row">
+        <div className="form-group">
+          <label>{t('teacherSpace.correction.filterByStatus')}</label>
+          <select value={paperFilter} onChange={(e) => setPaperFilter(e.target.value)}>
+            <option value="ALL">{t('teacherSpace.correction.all')}</option>
+            <option value="SENT">{t('teacherSpace.correction.status.SENT')}</option>
+            <option value="IN_REVIEW">{t('teacherSpace.correction.status.IN_REVIEW')}</option>
+            <option value="CORRECTED">{t('teacherSpace.correction.status.CORRECTED')}</option>
+          </select>
+        </div>
+      </div>
+
+      {filteredPapers.length === 0 ? (
+        <div className="empty">{t('teacherSpace.correction.noScans')}</div>
+      ) : (
+        <div className="table-wrap">
+          <table className="data-table">
+            <thead>
+              <tr>
+                <th>{t('teacherSpace.correction.studentCol')}</th>
+                <th>{t('teacherSpace.correction.examCol')}</th>
+                <th>{t('teacherSpace.correction.subjectCol')}</th>
+                <th>{t('teacherSpace.correction.statusCol')}</th>
+                <th>{t('teacherSpace.correction.fileCol')}</th>
+                <th>{t('teacherSpace.correction.gradingCol')}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredPapers.map((p) => {
+                const st = STATUS_STYLES[p.status] || STATUS_STYLES.SENT;
+                const g = grading[p.id] || {};
+                return (
+                  <tr key={p.id}>
+                    <td>{p.student.firstName} {p.student.lastName}</td>
+                    <td>{p.examTitle}</td>
+                    <td>{p.subjectLabel}</td>
+                    <td><span className={`badge ${st.cls}`}>{st.label}</span></td>
+                    <td>
+                      <a href={p.fileUrl} target="_blank" rel="noreferrer" className="btn btn-sm btn-outline">{t('teacherSpace.correction.viewPdf')}</a>
+                    </td>
+                    <td className="paper-grade-cell">
+                      {p.status === 'SENT' && (
+                        <button className="btn btn-sm" onClick={() => startReview(p.id)}>{t('teacherSpace.correction.startReview')}</button>
+                      )}
+                      {p.status !== 'GRADED' && p.status !== 'CORRECTED' && (
+                        <>
+                          <input
+                            type="number"
+                            min="0"
+                            max="20"
+                            step="0.5"
+                            placeholder={t('teacherSpace.correction.scorePlaceholder')}
+                            value={g.score ?? ''}
+                            onChange={(e) => setGrading({ ...grading, [p.id]: { ...g, score: e.target.value } })}
+                            className="grade-input"
+                          />
+                          <button className="btn btn-sm btn-primary" onClick={() => saveGrade(p.id)}>{t('teacherSpace.correction.save')}</button>
+                        </>
+                      )}
+                      {(p.status === 'CORRECTED' || p.status === 'GRADED') && p.score !== null && p.score !== undefined && (
+                        <strong>{p.score} / 20</strong>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 }
