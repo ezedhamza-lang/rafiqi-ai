@@ -68,32 +68,6 @@ function Flower() {
   );
 }
 
-function Butterfly() {
-  return (
-    <g>
-      <ellipse cx="42" cy="52" rx="20" ry="30" fill="#8ab6ff" stroke={INK} strokeWidth="3" />
-      <ellipse cx="78" cy="52" rx="20" ry="30" fill="#8ab6ff" stroke={INK} strokeWidth="3" />
-      <circle cx="42" cy="46" r="5" fill="#1e50b4" />
-      <circle cx="78" cy="58" r="5" fill="#1e50b4" />
-      <rect x="56" y="26" width="8" height="56" rx="4" fill="#5c430a" />
-      <circle cx="60" cy="22" r="7" fill="#5c430a" />
-    </g>
-  );
-}
-
-function Bird() {
-  return (
-    <g>
-      <ellipse cx="58" cy="66" rx="26" ry="18" fill="#fff" stroke={INK} strokeWidth="3" />
-      <circle cx="80" cy="50" r="12" fill="#fff" stroke={INK} strokeWidth="3" />
-      <polygon points="92,50 102,54 92,58" fill="#f4a63b" />
-      <circle cx="82" cy="47" r="2.5" fill={INK} />
-      <line x1="50" y1="84" x2="50" y2="96" stroke={INK} strokeWidth="3" />
-      <line x1="64" y1="84" x2="64" y2="96" stroke={INK} strokeWidth="3" />
-    </g>
-  );
-}
-
 function Ball() {
   return (
     <g>
@@ -132,6 +106,40 @@ function Tree() {
 
 function Triangle({ color = '#2e9e5b' }) {
   return <polygon points="60,22 100,96 20,96" fill={color} stroke={INK} strokeWidth="3" strokeLinejoin="round" />;
+}
+
+function TriangleDown({ color = '#4a90e2' }) {
+  return <polygon points="60,98 100,24 20,24" fill={color} stroke={INK} strokeWidth="3" strokeLinejoin="round" />;
+}
+
+function Dots({ n }) {
+  const count = Math.max(1, Math.min(Number(n) || 1, 16));
+  const cols = 4;
+  const cells = [];
+  for (let i = 0; i < count; i += 1) {
+    const cx = 24 + (i % cols) * 24;
+    const cy = 30 + Math.floor(i / cols) * 24;
+    cells.push(<circle key={i} cx={cx} cy={cy} r="9" fill="#e5484d" stroke={INK} strokeWidth="2.5" />);
+  }
+  return <g>{cells}</g>;
+}
+
+function BallAbove() {
+  return (
+    <g>
+      <line x1="14" y1="66" x2="106" y2="66" stroke={INK} strokeWidth="4" strokeLinecap="round" />
+      <circle cx="60" cy="38" r="16" fill="#e5484d" stroke={INK} strokeWidth="3" />
+    </g>
+  );
+}
+
+function BallBelow() {
+  return (
+    <g>
+      <line x1="14" y1="54" x2="106" y2="54" stroke={INK} strokeWidth="4" strokeLinecap="round" />
+      <circle cx="60" cy="82" r="16" fill="#e5484d" stroke={INK} strokeWidth="3" />
+    </g>
+  );
 }
 
 function Square({ color = '#4a90e2' }) {
@@ -305,6 +313,7 @@ export default function SvgArt({ id, size }) {
   else if (fingerMatch) art = <Fingers n={Number(fingerMatch[1])} />;
   else if (coinMatch) art = <Coin v={coinMatch[1]} />;
   else if (digitMatch) art = <Digit n={digitMatch[1]} />;
+  else if (/^dots-\d+$/.test(id || '')) art = <Dots n={Number(id.split('-')[1])} />;
   else if (id === 'flower') art = <Flower />;
   else if (id === 'butterfly') art = <Butterfly />;
   else if (id === 'bird' || id === 'bird-up' || id === 'bird-down') art = <Bird />;
@@ -313,6 +322,7 @@ export default function SvgArt({ id, size }) {
   else if (id === 'star') art = <Star />;
   else if (id === 'tree') art = <Tree />;
   else if (id === 'triangle') art = <Triangle />;
+  else if (id === 'triangle-down') art = <TriangleDown />;
   else if (id === 'square') art = <Square />;
   else if (id === 'circle') art = <CircleShape />;
   else if (id === 'ruler') art = <Ruler />;
@@ -325,10 +335,15 @@ export default function SvgArt({ id, size }) {
   else if (id === 'birds-nests') art = (<g><Bird /><g transform="translate(36,34) scale(.7)"><Bird /></g></g>);
   else if (id === 'lines' || id === 'lines-sets') art = (<g><circle cx="34" cy="60" r="24" fill="none" stroke="#1e50b4" strokeWidth="4" /><path d="M78 84 Q100 60 78 36" fill="none" stroke="#e5484d" strokeWidth="4" strokeLinecap="round" /></g>);
   else if (id === 'box-ball') art = <BoxBall inside />;
+  else if (id === 'ball-in') art = <BoxBall inside />;
+  else if (id === 'ball-out') art = <BoxBall inside={false} />;
+  else if (id === 'ball-above') art = <BallAbove />;
+  else if (id === 'ball-below') art = <BallBelow />;
   else if (id === 'table-pens' || id === 'table-34' || id === 'table-47' || id === 'table-plus1' || id === 'table-plus2') art = <GridBoard />;
   else if (id === 'bundle-10' || id === 'bundle-13') art = (<g><rect x="30" y="40" width="60" height="40" rx="6" fill="#ffe9a8" stroke={INK} strokeWidth="3" /><text x="60" y="66" textAnchor="middle" fontSize="20" fontWeight="800" fill={INK}>10</text></g>);
   else if (id === 'apples-join' || id === 'apples-compare' || id === 'balls-5' || id === 'marbles-15' || id === 'flowers-2') art = (<g><Apple /><g transform="translate(34,20) scale(.8)"><Apple /></g><g transform="translate(-32,18) scale(.8)"><Apple /></g></g>);
-  else if (id === 'swap' || id === 'group' || id === 'tens') art = (<g><polygon points="30,44 52,44 52,34 70,48 52,62 52,52 30,52" fill="#4a90e2" stroke={INK} strokeWidth="3" /><polygon points="90,72 68,72 68,62 50,76 68,90 68,80 90,80" fill="#e5484d" stroke={INK} strokeWidth="3" /></g>);
+  else if (id === 'swap' || id === 'group') art = (<g><polygon points="30,44 52,44 52,34 70,48 52,62 52,52 30,52" fill="#4a90e2" stroke={INK} strokeWidth="3" /><polygon points="90,72 68,72 68,62 50,76 68,90 68,80 90,80" fill="#e5484d" stroke={INK} strokeWidth="3" /></g>);
+  else if (id === 'tens') art = (<g><rect x="30" y="40" width="60" height="40" rx="6" fill="#ffe9a8" stroke={INK} strokeWidth="3" /><text x="60" y="66" textAnchor="middle" fontSize="20" fontWeight="800" fill={INK}>10</text></g>);
   else if (id === 'digits' || id === 'order-digits') art = (<g><Digit n="7" /><g transform="translate(44,0)"><Digit n="2" /></g></g>);
   else if (id === 'column-add' || id === 'compare-14-17' || id === 'compare-45-54' || id === 'pen-on-table' || id === 'race' || id === 'scene-class' || id === 'scene-tree') art = <Scene kind={id === 'scene-tree' ? 'tree' : id === 'race' ? 'race' : 'class'} />;
   else if (id === 'cat') art = <Cat />;

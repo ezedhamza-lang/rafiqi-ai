@@ -553,7 +553,12 @@ function enrichPagesWithBankExercises(pages, code, country, gradeId, level) {
   if (!pages.length) return pages;
   const templates = getBankTemplatesForSubject(code, country);
   if (!templates.length) return pages;
+  const AUTHORED_KINDS = new Set(['textarea', 'math-input', 'drawing', 'file-upload', 'picture-choice', 'match-pairs']);
   return pages.map((page) => {
+    // الدروس المؤلفة ودروس التقييم لها محتواها المضبوط — لا نلوثها
+    // بأسئلة دخيلة من البنك (كانت تظهر لتلميذ 6 سنوات بلا صور ولا سياق).
+    const authored = page.lessonTestId || (page.blocks || []).some((b) => AUTHORED_KINDS.has(b.kind));
+    if (authored) return page;
     const matches = templates.filter((t) => templateMatchesLesson(t, page));
     if (!matches.length) return page;
     // اختيار حتمي (حسب معرّف الدرس) بين القوالب المطابقة — يمنع تكرار نفس
