@@ -4648,11 +4648,10 @@ tr:hover td {
 
 /* Sticky big send bar — always visible while writing */
 .lesson-submit-section {
-  position: sticky;
-  bottom: 0;
   background: linear-gradient(to top, #fff 78%, rgba(255, 255, 255, 0));
   padding: 1.2rem 0.2rem 0.6rem;
-  z-index: 5;
+  border-top: 3px solid var(--accent);
+  margin-top: 1.4rem;
 }
 .submit-btn { width: 100%; font-size: 1.25rem; padding: 1rem; border-radius: 14px; }
 .submit-hint { font-size: 1rem; }

@@ -626,6 +626,16 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
               أنهيت الدرس
             </button>
           )}
+          <button
+            type="button"
+            className="btn btn-primary btn-sm"
+            onClick={handleSubmit}
+            disabled={submitting}
+            title="أرسل إجاباتك للمعلم"
+          >
+            <span className="material-icons" style={{ fontSize: 18 }}>send</span>
+            {submitting ? 'جاري الإرسال...' : 'أرسل للمعلم'}
+          </button>
           <button type="button" className="btn btn-ghost btn-sm" onClick={() => onNav(index - 1)} disabled={index <= 0}>
             <span className="material-icons" style={{ fontSize: 18 }}>chevron_right</span>
             السابق
