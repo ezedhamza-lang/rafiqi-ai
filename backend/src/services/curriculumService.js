@@ -158,6 +158,9 @@ function adaptMathUnits(lessons) {
     if (!item || typeof item !== 'object' || !item.title || item.ready === false) continue;
     if (item.kind && String(item.kind).startsWith('count-extra')) continue;
     const extra = item.lessonTestId ? { lessonTestId: item.lessonTestId } : {};
+    // مرّر axisId و period لتمكين الـ frontend من رسم страниц التقييم كأوراق اختبار
+    if (item.axisId) extra.axisId = item.axisId;
+    if (item.period) extra.period = item.period;
     // دروس مؤلفة للتلميذ (studentBlocks): تعرض حصرياً للتلميذ بدل القالب
     // الافتراضي (أساس بيداغوجي موجّه للمعلم) — أسئلة تفاعلية + خلاصة.
     if (Array.isArray(item.studentBlocks) && item.studentBlocks.length) {
