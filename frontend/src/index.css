@@ -4236,6 +4236,7 @@ tr:hover td {
 
 .lesson-stage {
   flex: 1 1 auto;
+  min-width: 0;
   overflow-y: auto;
   padding: 1.4rem 1.6rem 2rem;
 }
@@ -4315,6 +4316,9 @@ tr:hover td {
   padding: 1rem 1.1rem;
   background: #fff;
   border: 1px solid var(--line, #e3e8ef);
+  min-width: 0;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .lesson-block-head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem; }
@@ -4372,6 +4376,7 @@ tr:hover td {
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 0.4rem;
+  min-width: 0;
 }
 
 .exercise-option {
@@ -4382,6 +4387,8 @@ tr:hover td {
   cursor: pointer;
   font-size: 1.35rem;
   transition: all 0.15s ease;
+  max-width: 100%;
+  overflow-wrap: break-word;
 }
 .exercise-option.selected { border-color: var(--accent); background: #fff7e8; }
 .exercise-option.ok { border-color: #2e9e5b; background: #e7f6ec; color: #1c6f3f; }
