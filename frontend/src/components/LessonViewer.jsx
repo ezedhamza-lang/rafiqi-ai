@@ -174,7 +174,11 @@ function DefaultBlock({ block, kind, icon }) {
         <span className="material-icons">{icon}</span>
         <strong>{rich(block.title) || (kind === 'objective' ? 'الأهداف' : '')}</strong>
       </div>
-      {block.art && <SvgArt id={block.art} />}
+      {block.image ? (
+        <div style={{ textAlign: 'center', margin: '0.5rem 0' }}>
+          <img src={block.image} alt={block.title || ''} style={{ maxWidth: '100%', maxHeight: 320, borderRadius: 14, border: '2px solid #dbead2' }} />
+        </div>
+      ) : block.art && <SvgArt id={block.art} />}
       <p className="lesson-block-text">{rich(block.text)}</p>
     </div>
   );
