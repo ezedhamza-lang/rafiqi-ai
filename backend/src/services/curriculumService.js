@@ -191,8 +191,6 @@ function adaptAnisiLessons(book) {
       ];
       const story = (lesson.story_text || []).join(' ');
       if (story) blocks.push({ kind: 'concept', title: 'نص الانطلاق', text: story });
-      if (lesson.key_sentence) blocks.push({ kind: 'definition', title: 'الجملة المفتاحية', text: lesson.key_sentence });
-      for (const v of lesson.vocabulary || []) blocks.push({ kind: 'keyword', title: 'كلمة', text: v });
       for (const ex of lesson.workbook_exercises || []) {
         const q = { kind: 'question', title: ex.instr, text: ex.instr };
         if (Array.isArray(ex.options) && ex.options.length) {
