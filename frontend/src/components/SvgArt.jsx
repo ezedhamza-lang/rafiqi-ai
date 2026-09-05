@@ -317,7 +317,7 @@ export default function SvgArt({ id, size }) {
   else if (id === 'flower') art = <Flower />;
   else if (id === 'butterfly') art = <Butterfly />;
   else if (id === 'bird' || id === 'bird-up' || id === 'bird-down') art = <Bird />;
-  else if (id === 'ball' || id === 'ball-in' || id === 'ball-out') art = <Ball />;
+  else if (id === 'ball') art = <Ball />;
   else if (id === 'apple') art = <Apple />;
   else if (id === 'star') art = <Star />;
   else if (id === 'tree') art = <Tree />;
