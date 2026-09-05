@@ -478,7 +478,8 @@
         "title": "🔢 أتدرب",
         "text": "كم عنصرًا في المجموعة؟ اكتب العدد.",
         "placeholder": "عدد العناصر = ....",
-        "rows": 2
+        "rows": 2,
+        "answer": "3"
       },
       {
         "kind": "summary",
@@ -579,6 +580,16 @@
         "rows": 2
       },
       {
+        "kind": "question",
+        "title": "✅ سؤال سريع",
+        "text": "لكل مجموعة رمز خاص بها.",
+        "options": [
+          "نعم",
+          "لا"
+        ],
+        "answer": 0
+      },
+      {
         "kind": "summary",
         "title": "📌 القاعدة",
         "points": [
@@ -619,6 +630,16 @@
         "text": "5 = .... + ....",
         "placeholder": "5 = .... + ....",
         "rows": 2
+      },
+      {
+        "kind": "question",
+        "title": "✅ سؤال سريع",
+        "text": "5 = 2 + 3 تفكيك صحيح للعدد 5.",
+        "options": [
+          "نعم",
+          "لا"
+        ],
+        "answer": 0
       },
       {
         "kind": "summary",
@@ -941,9 +962,10 @@
       {
         "kind": "math-input",
         "title": "🔢 أتدرب",
-        "text": "اكتب القياسات: 1 صم، 2 صم، 5 صم.",
-        "placeholder": "1 صم = ....\n2 صم = ....\n5 صم = ....",
-        "rows": 3
+        "placeholder": "قست المعلمة قلما فوجدت 2 صم. اكتب العدد.\n\nالعدد = .... صم",
+        "rows": 2,
+        "answer": "2",
+        "text": "القلم طوله 2 صم."
       },
       {
         "kind": "summary",
@@ -1038,6 +1060,16 @@
         "text": "اكتب 7 و9 ثم رتّب من الأصغر: 7 .... 9",
         "placeholder": "7 ....\n9 ....\nالترتيب: ....",
         "rows": 3
+      },
+      {
+        "kind": "question",
+        "title": "✅ سؤال سريع",
+        "text": "9 أكبر من 7.",
+        "options": [
+          "نعم",
+          "لا"
+        ],
+        "answer": 0
       },
       {
         "kind": "summary",
@@ -1189,10 +1221,24 @@
       },
       {
         "kind": "math-input",
-        "title": "🔢 أتدرب",
-        "text": "ضع العلامة المناسبة (> أو < أو =).",
-        "placeholder": "5 .... 3\n2 .... 7\n4 .... 4",
-        "rows": 3
+        "title": "🔢 أتدرب (1)",
+        "placeholder": "5 .... 3",
+        "rows": 2,
+        "answer": ">"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 أتدرب (2)",
+        "placeholder": "2 .... 7",
+        "rows": 2,
+        "answer": "<"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 أتدرب (3)",
+        "placeholder": "4 .... 4",
+        "rows": 2,
+        "answer": "="
       },
       {
         "kind": "summary",
@@ -1227,15 +1273,29 @@
       {
         "kind": "concept",
         "title": "🔍 أستكشف",
-        "text": "صنّف أقلام القسم في جدول: حمراء وزرقاء. كم في كل خانة؟",
+        "text": "في العلبة 5 أقلام حمراء و3 أقلام زرقاء. لاحظ ثم أجب.",
         "art": "table-pens"
       },
       {
         "kind": "math-input",
-        "title": "🔢 أتدرب",
-        "text": "أكمل: الأقلام الحمراء .... والأقلام الزرقاء ....",
-        "placeholder": "حمراء: ....\nزرقاء: ....\nالمجموع: ....",
-        "rows": 3
+        "title": "🔢 الأقلام الحمراء",
+        "placeholder": "عدد الحمراء = ....",
+        "rows": 2,
+        "answer": "5"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 الأقلام الزرقاء",
+        "placeholder": "عدد الزرقاء = ....",
+        "rows": 2,
+        "answer": "3"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 المجموع",
+        "placeholder": "5 + 3 = ....",
+        "rows": 2,
+        "answer": "8"
       },
       {
         "kind": "summary",
@@ -1340,10 +1400,17 @@
       },
       {
         "kind": "math-input",
-        "title": "🔢 أتدرب",
-        "text": "كم عشرة في 20؟ وفي 30؟",
-        "placeholder": "20 = .... عشرات\n30 = .... عشرات",
-        "rows": 2
+        "title": "🔢 أتدرب (1)",
+        "placeholder": "20 = .... عشرات",
+        "rows": 2,
+        "answer": "2"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 أتدرب (2)",
+        "placeholder": "30 = .... عشرات",
+        "rows": 2,
+        "answer": "3"
       },
       {
         "kind": "summary",
@@ -1385,7 +1452,8 @@
         "title": "🔢 أتدرب",
         "text": "اكتب الجمع المناسب.",
         "placeholder": "3 + 2 = ....",
-        "rows": 2
+        "rows": 2,
+        "answer": "5"
       },
       {
         "kind": "summary",
@@ -1425,10 +1493,24 @@
       },
       {
         "kind": "math-input",
-        "title": "🔢 أتدرب",
-        "text": "احسب: 2+5، 3+3، 1+8.",
-        "placeholder": "2 + 5 = ....\n3 + 3 = ....\n1 + 8 = ....",
-        "rows": 3
+        "title": "🔢 أتدرب (1)",
+        "placeholder": "2 + 5 = ....",
+        "rows": 2,
+        "answer": "7"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 أتدرب (2)",
+        "placeholder": "3 + 3 = ....",
+        "rows": 2,
+        "answer": "6"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 أتدرب (3)",
+        "placeholder": "1 + 8 = ....",
+        "rows": 2,
+        "answer": "9"
       },
       {
         "kind": "summary",
@@ -1533,10 +1615,31 @@
       },
       {
         "kind": "math-input",
-        "title": "🔢 أتدرب",
-        "text": "فكك: 34 و58.",
-        "placeholder": "34 = .... عشرات + .... آحاد\n58 = .... عشرات + .... آحاد",
-        "rows": 2
+        "title": "🔢 عشرات 34",
+        "placeholder": "عدد عشرات 34 هو ....",
+        "rows": 2,
+        "answer": "3"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 آحاد 34",
+        "placeholder": "عدد آحاد 34 هو ....",
+        "rows": 2,
+        "answer": "4"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 عشرات 58",
+        "placeholder": "عدد عشرات 58 هو ....",
+        "rows": 2,
+        "answer": "5"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 آحاد 58",
+        "placeholder": "عدد آحاد 58 هو ....",
+        "rows": 2,
+        "answer": "8"
       },
       {
         "kind": "summary",
@@ -1575,10 +1678,24 @@
       },
       {
         "kind": "math-input",
-        "title": "🔢 أتدرب",
-        "text": "أكمل: 3+1، 5+1، 7+1.",
-        "placeholder": "3 + 1 = ....\n5 + 1 = ....\n7 + 1 = ....",
-        "rows": 3
+        "title": "🔢 أتدرب (1)",
+        "placeholder": "3 + 1 = ....",
+        "rows": 2,
+        "answer": "4"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 أتدرب (2)",
+        "placeholder": "5 + 1 = ....",
+        "rows": 2,
+        "answer": "6"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 أتدرب (3)",
+        "placeholder": "7 + 1 = ....",
+        "rows": 2,
+        "answer": "8"
       },
       {
         "kind": "summary",
@@ -1617,10 +1734,24 @@
       },
       {
         "kind": "math-input",
-        "title": "🔢 أتدرب",
-        "text": "احسب: 4+2، 6+2، 3+2.",
-        "placeholder": "4 + 2 = ....\n6 + 2 = ....\n3 + 2 = ....",
-        "rows": 3
+        "title": "🔢 أتدرب (1)",
+        "placeholder": "4 + 2 = ....",
+        "rows": 2,
+        "answer": "6"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 أتدرب (2)",
+        "placeholder": "6 + 2 = ....",
+        "rows": 2,
+        "answer": "8"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 أتدرب (3)",
+        "placeholder": "3 + 2 = ....",
+        "rows": 2,
+        "answer": "5"
       },
       {
         "kind": "summary",
@@ -1662,7 +1793,8 @@
         "title": "🔢 أتدرب",
         "text": "5 + 3 = ؟",
         "placeholder": "5 + 3 = ....",
-        "rows": 1
+        "rows": 1,
+        "answer": "8"
       },
       {
         "kind": "summary",
@@ -1746,10 +1878,17 @@
       },
       {
         "kind": "math-input",
-        "title": "🔢 أتدرب",
-        "text": "احسب بالطريقتين: (2+3)+4.",
-        "placeholder": "(2 + 3) + 4 = ....\n2 + (3 + 4) = ....",
-        "rows": 2
+        "title": "🔢 أتدرب (1)",
+        "placeholder": "(2 + 3) + 4 = ....",
+        "rows": 2,
+        "answer": "9"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 أتدرب (2)",
+        "placeholder": "2 + (3 + 4) = ....",
+        "rows": 2,
+        "answer": "9"
       },
       {
         "kind": "summary",
@@ -1854,10 +1993,24 @@
       },
       {
         "kind": "math-input",
-        "title": "🔢 أتدرب",
-        "text": "ضع > أو < أو =.",
-        "placeholder": "12 .... 15\n19 .... 9\n11 .... 11",
-        "rows": 3
+        "title": "🔢 أتدرب (1)",
+        "placeholder": "12 .... 15",
+        "rows": 2,
+        "answer": "<"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 أتدرب (2)",
+        "placeholder": "19 .... 9",
+        "rows": 2,
+        "answer": ">"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 أتدرب (3)",
+        "placeholder": "11 .... 11",
+        "rows": 2,
+        "answer": "="
       },
       {
         "kind": "summary",
@@ -1896,10 +2049,17 @@
       },
       {
         "kind": "math-input",
-        "title": "🔢 أتدرب",
-        "text": "فكك وركّب.",
-        "placeholder": "13 = 10 + ....\n10 + 8 = ....",
-        "rows": 2
+        "title": "🔢 أتدرب (1)",
+        "placeholder": "13 = 10 + ....",
+        "rows": 2,
+        "answer": "3"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 أتدرب (2)",
+        "placeholder": "10 + 8 = ....",
+        "rows": 2,
+        "answer": "18"
       },
       {
         "kind": "summary",
@@ -1938,10 +2098,24 @@
       },
       {
         "kind": "math-input",
-        "title": "🔢 أتدرب",
-        "text": "اكتب المفرد المسموع: خمسة، صفر، تسعة.",
-        "placeholder": "خمسة = ....\nصفر = ....\nتسعة = ....",
-        "rows": 3
+        "title": "🔢 أتدرب (1)",
+        "placeholder": "خمسة = ....",
+        "rows": 2,
+        "answer": "5"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 أتدرب (2)",
+        "placeholder": "صفر = ....",
+        "rows": 2,
+        "answer": "0"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 أتدرب (3)",
+        "placeholder": "تسعة = ....",
+        "rows": 2,
+        "answer": "9"
       },
       {
         "kind": "summary",
@@ -1984,6 +2158,16 @@
         "text": "فكك 6 بطريقتين.",
         "placeholder": "6 = .... + ....\n6 = .... + ....",
         "rows": 2
+      },
+      {
+        "kind": "question",
+        "title": "✅ سؤال سريع",
+        "text": "6 = 5 + 1 تفكيك صحيح للعدد 6.",
+        "options": [
+          "نعم",
+          "لا"
+        ],
+        "answer": 0
       },
       {
         "kind": "summary",
@@ -2089,9 +2273,9 @@
       {
         "kind": "math-input",
         "title": "🔢 أتدرب",
-        "text": "قارن ورتّب.",
-        "placeholder": "6 .... 8\nالترتيب: ....",
-        "rows": 2
+        "placeholder": "6 .... 8",
+        "rows": 2,
+        "answer": "<"
       },
       {
         "kind": "summary",
@@ -2130,10 +2314,31 @@
       },
       {
         "kind": "math-input",
-        "title": "🔢 أتدرب",
-        "text": "اكتب وفكك: 63 و85.",
-        "placeholder": "63: .... عشرات + .... آحاد\n85: .... عشرات + .... آحاد",
-        "rows": 2
+        "title": "🔢 عشرات 63",
+        "placeholder": "عدد عشرات 63 هو ....",
+        "rows": 2,
+        "answer": "6"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 آحاد 63",
+        "placeholder": "عدد آحاد 63 هو ....",
+        "rows": 2,
+        "answer": "3"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 عشرات 85",
+        "placeholder": "عدد عشرات 85 هو ....",
+        "rows": 2,
+        "answer": "8"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 آحاد 85",
+        "placeholder": "عدد آحاد 85 هو ....",
+        "rows": 2,
+        "answer": "5"
       },
       {
         "kind": "summary",
@@ -2175,7 +2380,8 @@
         "title": "🔢 أتدرب",
         "text": "أنجز عموديًا: 23+14.",
         "placeholder": "  23\n+ 14\n――――\n  ....",
-        "rows": 4
+        "rows": 4,
+        "answer": "37"
       },
       {
         "kind": "summary",
@@ -2214,10 +2420,24 @@
       },
       {
         "kind": "math-input",
-        "title": "🔢 أتدرب",
-        "text": "قارن 45 و54 ثم فكك الأكبر.",
-        "placeholder": "45 .... 54\n54 = .... + ....",
-        "rows": 2
+        "title": "🔢 أتدرب (1)",
+        "placeholder": "45 .... 54",
+        "rows": 2,
+        "answer": "<"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 عشرات 54",
+        "placeholder": "عدد عشرات 54 هو ....",
+        "rows": 2,
+        "answer": "5"
+      },
+      {
+        "kind": "math-input",
+        "title": "🔢 آحاد 54",
+        "placeholder": "عدد آحاد 54 هو ....",
+        "rows": 2,
+        "answer": "4"
       },
       {
         "kind": "summary",

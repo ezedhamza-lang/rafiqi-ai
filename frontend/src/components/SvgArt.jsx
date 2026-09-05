@@ -178,11 +178,27 @@ function Hand({ side }) {
 }
 
 function Kid({ pose }) {
+  const back = pose === 'back';
   return (
     <g>
+      {/* head */}
       <circle cx="60" cy="30" r="14" fill="#ffd9a0" stroke={INK} strokeWidth="3" />
-      <path d="M46 28 Q60 12 74 28" fill="#5c3a1e" strokeWidth="4" />
-      <rect x="48" y="46" width="24" height="34" rx="8" fill={pose === 'back' ? '#9db8e8' : '#4a90e2'} stroke={INK} strokeWidth="3" />
+      {back ? (
+        /* back of head: full hair, NO face */
+        <g>
+          <path d="M46 30 Q46 10 60 10 Q74 10 74 30 L74 38 Q67 30 60 30 Q53 30 46 38 Z" fill="#5c3a1e" />
+          <path d="M46 30 Q60 44 74 30" fill="none" stroke={INK} strokeWidth="2.5" />
+        </g>
+      ) : (
+        /* front: face with eyes + smile, hair on top only */
+        <g>
+          <path d="M46 28 Q60 12 74 28" fill="#5c3a1e" strokeWidth="4" />
+          <circle cx="54" cy="30" r="2.5" fill={INK} />
+          <circle cx="66" cy="30" r="2.5" fill={INK} />
+          <path d="M54 38 Q60 43 66 38" fill="none" stroke={INK} strokeWidth="2.5" strokeLinecap="round" />
+        </g>
+      )}
+      <rect x="48" y="46" width="24" height="34" rx="8" fill={back ? '#9db8e8' : '#e5484d'} stroke={INK} strokeWidth="3" />
       <line x1="52" y1="80" x2="52" y2="102" stroke={INK} strokeWidth="4" strokeLinecap="round" />
       <line x1="68" y1="80" x2="68" y2="102" stroke={INK} strokeWidth="4" strokeLinecap="round" />
     </g>

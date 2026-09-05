@@ -304,10 +304,24 @@ function useMemoShuffled(n, seed) {
   return order;
 }
 
+// Normalization mirrors backend gradingService (Arabic letters, tashkeel,
+// Arabic-Indic digits, whitespace) so instant checking matches server rules.
+function normAns(s) {
+  return String(s ?? '').trim()
+    .replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي')
+    .replace(/[ً-ٟ]/g, '')
+    .replace(/[٠-٩]/g, (dd) => '٠١٢٣٤٥٦٧٨٩'.indexOf(dd))
+    .replace(/\s+/g, ' ');
+}
+
 function TextareaBlock({ block, onAnswer, blockId }) {
   const [value, setValue] = useState('');
+  const [checked, setChecked] = useState(false);
+  const [ok, setOk] = useState(null);
   useEffect(() => { onAnswer(blockId, value); }, [value]);
   const icon = BLOCK_ICONS.textarea;
+  const verifiable = block.answer !== undefined && block.answer !== null;
+  const check = () => { setChecked(true); setOk(normAns(value) === normAns(block.answer)); };
   return (
     <div className="lesson-block lesson-block-textarea">
       <div className="lesson-block-head">
@@ -323,11 +337,21 @@ function TextareaBlock({ block, onAnswer, blockId }) {
           placeholder={block.placeholder || 'اكتب إجابتك هنا...'}
           rows={block.rows || 5}
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => { setValue(e.target.value); setChecked(false); }}
           dir="rtl"
           aria-label={block.title || 'مكان الإجابة'}
         />
       </div>
+      {verifiable && (
+        <div className="exercise-check-row">
+          <button type="button" className="btn btn-sm" onClick={check}>تحقّق</button>
+          {checked && (
+            <span className={`exercise-feedback ${ok ? 'ok' : 'no'}`}>
+              {ok ? '✓ صحيح' : '✗ حاول مجددًا'}
+            </span>
+          )}
+        </div>
+      )}
       {block.hint && <p className="lesson-hint">{block.hint}</p>}
     </div>
   );
@@ -335,9 +359,13 @@ function TextareaBlock({ block, onAnswer, blockId }) {
 
 function MathInputBlock({ block, onAnswer, blockId }) {
   const [value, setValue] = useState('');
+  const [checked, setChecked] = useState(false);
+  const [ok, setOk] = useState(null);
   const inputRef = useRef(null);
   useEffect(() => { onAnswer(blockId, value); }, [value]);
   const icon = BLOCK_ICONS['math-input'];
+  const verifiable = block.answer !== undefined && block.answer !== null;
+  const check = () => { setChecked(true); setOk(normAns(value) === normAns(block.answer)); };
   const insertSymbol = (sym) => {
     const el = inputRef.current;
     if (el && typeof el.selectionStart === 'number') {
@@ -369,7 +397,7 @@ function MathInputBlock({ block, onAnswer, blockId }) {
             placeholder={block.placeholder || 'اكتب العملية الحسابية...'}
             rows={block.rows || 6}
             value={value}
-            onChange={(e) => setValue(e.target.value)}
+            onChange={(e) => { setValue(e.target.value); setChecked(false); }}
             dir="rtl"
             spellCheck={false}
             aria-label={block.title || 'مكان العملية'}
@@ -386,11 +414,21 @@ function MathInputBlock({ block, onAnswer, blockId }) {
               {sym}
             </button>
           ))}
+          </div>
         </div>
+        {verifiable && (
+          <div className="exercise-check-row">
+            <button type="button" className="btn btn-sm" onClick={check}>تحقّق</button>
+            {checked && (
+              <span className={`exercise-feedback ${ok ? 'ok' : 'no'}`}>
+                {ok ? '✓ صحيح' : '✗ حاول مجددًا'}
+              </span>
+            )}
+          </div>
+        )}
+        {block.hint && <p className="lesson-hint">{block.hint}</p>}
       </div>
-      {block.hint && <p className="lesson-hint">{block.hint}</p>}
-    </div>
-  );
+    );
 }
 
 function DrawingBlock({ block, onAnswer, blockId }) {
