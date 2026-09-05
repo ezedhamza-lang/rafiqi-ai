@@ -35,6 +35,21 @@ const MATH_SYMBOLS = ['×', '÷', '−', '+', '=', '²', '³', '½', '¼', '(', 
 // well below the server body limit.
 const MAX_ATTACH_BYTES = 2500000;
 
+function ListenBtn({ text }) {
+  if (!text) return null;
+  return (
+    <button
+      type="button"
+      className="block-listen"
+      title="استمع للتعليمة"
+      onClick={() => speak(text)}
+    >
+      <span className="material-icons" style={{ fontSize: 18 }}>volume_up</span>
+      استمع
+    </button>
+  );
+}
+
 function QuestionBlock({ block }) {
   const [showAnswer, setShowAnswer] = useState(false);
   const [sel, setSel] = useState(null);
@@ -162,16 +177,21 @@ function TextareaBlock({ block, onAnswer, blockId }) {
       <div className="lesson-block-head">
         <span className="material-icons">{icon}</span>
         <strong>{block.title || 'إجابة حرة'}</strong>
+        <ListenBtn text={`${block.title || ''}. ${block.text || ''}`} />
       </div>
       {block.text && <p className="lesson-block-text">{block.text}</p>}
-      <textarea
-        className="lesson-textarea"
-        placeholder={block.placeholder || 'اكتب إجابتك هنا...'}
-        rows={block.rows || 4}
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        dir="rtl"
-      />
+      <span className="write-here"><span className="material-icons" style={{ fontSize: 20 }}>edit</span> اكتب إجابتك هنا</span>
+      <div className="cahier-paper">
+        <textarea
+          className="lesson-textarea kid-write"
+          placeholder={block.placeholder || 'اكتب إجابتك هنا...'}
+          rows={block.rows || 5}
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          dir="rtl"
+          aria-label={block.title || 'مكان الإجابة'}
+        />
+      </div>
       {block.hint && <p className="lesson-hint">{block.hint}</p>}
     </div>
   );
@@ -201,19 +221,24 @@ function MathInputBlock({ block, onAnswer, blockId }) {
       <div className="lesson-block-head">
         <span className="material-icons">{icon}</span>
         <strong>{block.title || 'عملية رياضية'}</strong>
+        <ListenBtn text={`${block.title || ''}. ${block.text || ''}`} />
       </div>
       {block.text && <p className="lesson-block-text">{block.text}</p>}
+      <span className="write-here"><span className="material-icons" style={{ fontSize: 20 }}>functions</span> اكتب العملية هنا</span>
       <div className="math-input-wrapper">
-        <textarea
-          ref={inputRef}
-          className="lesson-math-input"
-          placeholder={block.placeholder || 'اكتب العملية الحسابية...'}
-          rows={block.rows || 6}
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          dir="ltr"
-          spellCheck={false}
-        />
+        <div className="cahier-paper">
+          <textarea
+            ref={inputRef}
+            className="lesson-math-input kid-write"
+            placeholder={block.placeholder || 'اكتب العملية الحسابية...'}
+            rows={block.rows || 6}
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            dir="ltr"
+            spellCheck={false}
+            aria-label={block.title || 'مكان العملية'}
+          />
+        </div>
         <div className="math-symbols">
           {MATH_SYMBOLS.map((sym) => (
             <button
@@ -236,7 +261,7 @@ function DrawingBlock({ block, onAnswer, blockId }) {
   const canvasRef = useRef(null);
   const [tool, setTool] = useState('pen');
   const [color, setColor] = useState('#000000');
-  const [lineWidth, setLineWidth] = useState(2);
+  const [lineWidth, setLineWidth] = useState(5);
   const [saved, setSaved] = useState(false);
   const icon = BLOCK_ICONS.drawing;
 
@@ -344,8 +369,10 @@ function DrawingBlock({ block, onAnswer, blockId }) {
       <div className="lesson-block-head">
         <span className="material-icons">{icon}</span>
         <strong>{block.title || 'رسم حر'}</strong>
+        <ListenBtn text={`${block.title || ''}. ${block.prompt || ''}`} />
       </div>
       {block.prompt && <p className="lesson-block-text">{block.prompt}</p>}
+      <span className="write-here"><span className="material-icons" style={{ fontSize: 20 }}>brush</span> ارسم هنا بإصبعك</span>
       <div className="drawing-toolbar">
         {tools.map((t) => (
           <button
@@ -660,6 +687,7 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
 
 function LessonViewer({ book, onClose }) {
   const [tab, setTab] = useState('lessons');
+  const [full, setFull] = useState(true);
   const [lessons, setLessons] = useState([]);
   const [exercises, setExercises] = useState([]);
   const [videos, setVideos] = useState([]);
@@ -745,14 +773,24 @@ function LessonViewer({ book, onClose }) {
   );
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal lesson-viewer-modal" onClick={(e) => e.stopPropagation()}>
+    <div className={`modal-overlay${full ? ' cahier-overlay' : ''}`} onClick={onClose}>
+      <div className={`modal lesson-viewer-modal${full ? ' cahier-full' : ''}`} onClick={(e) => e.stopPropagation()}>
         <div className="modal-head">
           <div>
             <h3>الدروس التفاعلية — {book.title}</h3>
             <p className="viewer-sub">{book.grade} — {book.subject}</p>
           </div>
-          <button className="btn btn-ghost btn-sm" onClick={onClose}>إغلاق</button>
+          <div style={{ display: 'flex', gap: '0.4rem' }}>
+            <button
+              className="btn btn-ghost btn-sm"
+              onClick={() => setFull((v) => !v)}
+              title={full ? 'تصغير' : 'ملء الشاشة'}
+            >
+              <span className="material-icons" style={{ fontSize: 18 }}>{full ? 'fullscreen_exit' : 'fullscreen'}</span>
+              {full ? 'تصغير' : 'ملء الشاشة'}
+            </button>
+            <button className="btn btn-ghost btn-sm" onClick={onClose}>إغلاق</button>
+          </div>
         </div>
 
         <div className="lesson-viewer-tabs">

@@ -4414,6 +4414,109 @@ tr:hover td {
   }
 }
 
+/* ---------- Cahier interactif (plein écran + lignage Seyès, 6-10 ans) ---------- */
+.modal-overlay.cahier-overlay { padding: 0; }
+.lesson-viewer-modal.cahier-full {
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  border-radius: 0;
+}
+.cahier-full .lesson-stage { padding: 1.2rem clamp(1rem, 4vw, 3rem) 8rem; }
+.cahier-full .lesson-page-title { font-size: clamp(1.4rem, 3vw, 2rem); }
+
+/* Seyès ruling: blue lines + red margin on the right (RTL) */
+.cahier-paper {
+  --cahier-line: 34px;
+  background-color: #fff;
+  background-image:
+    linear-gradient(to left, transparent 44px, rgba(230, 30, 30, 0.6) 44px, rgba(230, 30, 30, 0.6) 46px, transparent 46px),
+    repeating-linear-gradient(to bottom, transparent 0, transparent calc(var(--cahier-line) - 2px), rgba(30, 80, 180, 0.5) calc(var(--cahier-line) - 2px), rgba(30, 80, 180, 0.5) var(--cahier-line));
+  border: 2px solid #1e50b4;
+  border-radius: 12px;
+  padding: 0.4rem 3.6rem 0.4rem 0.8rem;
+  margin-top: 0.6rem;
+}
+.lesson-textarea.kid-write,
+.lesson-math-input.kid-write {
+  background: transparent;
+  border: 0;
+  width: 100%;
+  font-size: 1.3rem;
+  line-height: 34px;
+  min-height: 170px;
+  resize: vertical;
+  color: #1a2a6c;
+  font-weight: 600;
+}
+.lesson-math-input.kid-write { font-size: 1.45rem; letter-spacing: 1px; }
+.lesson-textarea.kid-write::placeholder,
+.lesson-math-input.kid-write::placeholder { color: #8aa0c8; font-weight: 400; }
+.lesson-textarea.kid-write:focus,
+.lesson-math-input.kid-write:focus {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+  background: rgba(255, 247, 232, 0.55);
+  border-radius: 8px;
+}
+
+/* Big touch targets for small fingers */
+.math-symbols { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
+.math-symbol-btn {
+  min-width: 54px;
+  min-height: 54px;
+  font-size: 1.5rem;
+  border-radius: 12px;
+  border: 2px solid var(--line, #d9dee9);
+  background: #fff;
+  cursor: pointer;
+}
+.math-symbol-btn:active { background: #fff3d6; border-color: var(--accent); }
+.tool-btn, .color-btn { min-width: 52px; min-height: 52px; }
+.drawing-toolbar { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin: 0.6rem 0; }
+.drawing-canvas { width: 100%; height: auto; touch-action: none; cursor: crosshair; }
+.color-btn { width: 52px; height: 52px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 0 0 2px #c9d2e0; cursor: pointer; }
+.color-btn.active { box-shadow: 0 0 0 3px var(--accent); }
+
+/* Sticky big send bar — always visible while writing */
+.lesson-submit-section {
+  position: sticky;
+  bottom: 0;
+  background: linear-gradient(to top, #fff 78%, rgba(255, 255, 255, 0));
+  padding: 1.2rem 0.2rem 0.6rem;
+  z-index: 5;
+}
+.submit-btn { width: 100%; font-size: 1.25rem; padding: 1rem; border-radius: 14px; }
+.submit-hint { font-size: 1rem; }
+.block-listen {
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: 1px solid var(--line, #d9dee9);
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: var(--primary);
+}
+.lesson-block-head { flex-wrap: wrap; }
+.write-here {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #fff7e0;
+  border: 2px dashed var(--accent);
+  color: #7a4d00;
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 0.35rem 0.9rem;
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+}
+
 /* ---------- Short lesson videos (Stage 6.4) ---------- */
 .lesson-video-bank {
   flex: 1 1 auto;
