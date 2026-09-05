@@ -184,23 +184,31 @@ function Kid({ pose }) {
       {/* head */}
       <circle cx="60" cy="30" r="14" fill="#ffd9a0" stroke={INK} strokeWidth="3" />
       {back ? (
-        /* back of head: full hair, NO face */
+        /* back of head: full hair covering, NO face, backpack visible */
         <g>
-          <path d="M46 30 Q46 10 60 10 Q74 10 74 30 L74 38 Q67 30 60 30 Q53 30 46 38 Z" fill="#5c3a1e" />
-          <path d="M46 30 Q60 44 74 30" fill="none" stroke={INK} strokeWidth="2.5" />
+          <path d="M46 26 Q46 8 60 8 Q74 8 74 26 L74 36 Q67 28 60 28 Q53 28 46 36 Z" fill="#5c3a1e" stroke={INK} strokeWidth="2" />
+          <path d="M46 30 Q60 46 74 30" fill="none" stroke={INK} strokeWidth="2.5" />
+          {/* backpack straps */}
+          <rect x="50" y="44" width="4" height="20" rx="2" fill="#e5484d" />
+          <rect x="66" y="44" width="4" height="20" rx="2" fill="#e5484d" />
         </g>
       ) : (
         /* front: face with eyes + smile, hair on top only */
         <g>
-          <path d="M46 28 Q60 12 74 28" fill="#5c3a1e" strokeWidth="4" />
-          <circle cx="54" cy="30" r="2.5" fill={INK} />
-          <circle cx="66" cy="30" r="2.5" fill={INK} />
-          <path d="M54 38 Q60 43 66 38" fill="none" stroke={INK} strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M46 28 Q60 10 74 28" fill="#5c3a1e" stroke={INK} strokeWidth="2" />
+          <circle cx="54" cy="30" r="3" fill={INK} />
+          <circle cx="66" cy="30" r="3" fill={INK} />
+          <circle cx="54" cy="29" r="1" fill="#fff" />
+          <circle cx="66" cy="29" r="1" fill="#fff" />
+          <path d="M53 38 Q60 44 67 38" fill="none" stroke="#e5484d" strokeWidth="2.5" strokeLinecap="round" />
         </g>
       )}
-      <rect x="48" y="46" width="24" height="34" rx="8" fill={back ? '#9db8e8' : '#e5484d'} stroke={INK} strokeWidth="3" />
-      <line x1="52" y1="80" x2="52" y2="102" stroke={INK} strokeWidth="4" strokeLinecap="round" />
-      <line x1="68" y1="80" x2="68" y2="102" stroke={INK} strokeWidth="4" strokeLinecap="round" />
+      <rect x="46" y="46" width="28" height="34" rx="8" fill={back ? '#9db8e8' : '#e5484d'} stroke={INK} strokeWidth="3" />
+      <line x1="50" y1="80" x2="50" y2="104" stroke={INK} strokeWidth="5" strokeLinecap="round" />
+      <line x1="70" y1="80" x2="70" y2="104" stroke={INK} strokeWidth="5" strokeLinecap="round" />
+      {/* shoes */}
+      <ellipse cx="50" cy="107" rx="6" ry="4" fill={back ? '#333' : '#5c3a1e'} />
+      <ellipse cx="70" cy="107" rx="6" ry="4" fill={back ? '#333' : '#5c3a1e'} />
     </g>
   );
 }
@@ -278,18 +286,120 @@ function BoxBall({ inside }) {
   );
 }
 
+function PenOnTable() {
+  return (
+    <g>
+      <rect x="10" y="60" width="100" height="40" rx="4" fill="#ffe9a8" stroke={INK} strokeWidth="3" />
+      <rect x="30" y="50" width="60" height="12" rx="3" fill="#fff" stroke={INK} strokeWidth="2" />
+      {/* pen */}
+      <rect x="40" y="48" width="40" height="6" rx="3" fill="#1e50b4" stroke={INK} strokeWidth="2" transform="rotate(-10 60 51)" />
+      <polygon points="80,48 88,51 80,54" fill="#f4c542" transform="rotate(-10 84 51)" />
+    </g>
+  );
+}
+
+function AppleJoin({ left, right }) {
+  return (
+    <g>
+      {Array.from({ length: left }).map((_, i) => (
+        <g key={`l${i}`} transform={`translate(${-30 + i * 22}, 18) scale(.85)`}>
+          <circle cx="60" cy="68" r="28" fill="#e5484d" stroke="#8f1d22" strokeWidth="3" />
+          <line x1="60" y1="40" x2="64" y2="26" stroke="#5c430a" strokeWidth="5" strokeLinecap="round" />
+          <ellipse cx="74" cy="34" rx="12" ry="7" fill="#3fa34d" transform="rotate(-20 74 34)" />
+        </g>
+      ))}
+      {/* plus sign */}
+      <text x="60" y="60" textAnchor="middle" fontSize="22" fontWeight="800" fill={INK}>+</text>
+      {Array.from({ length: right }).map((_, i) => (
+        <g key={`r${i}`} transform={`translate(${10 + i * 22}, 18) scale(.85)`}>
+          <circle cx="60" cy="68" r="28" fill="#e5484d" stroke="#8f1d22" strokeWidth="3" />
+          <line x1="60" y1="40" x2="64" y2="26" stroke="#5c430a" strokeWidth="5" strokeLinecap="round" />
+          <ellipse cx="74" cy="34" rx="12" ry="7" fill="#3fa34d" transform="rotate(-20 74 34)" />
+        </g>
+      ))}
+    </g>
+  );
+}
+
+function AppleCompare({ left, right }) {
+  return (
+    <g>
+      {Array.from({ length: left }).map((_, i) => (
+        <g key={`l${i}`} transform={`translate(${-14 + (i % 3) * 18}, ${14 + Math.floor(i / 3) * 18}) scale(.55)`}>
+          <circle cx="60" cy="68" r="28" fill="#e5484d" stroke="#8f1d22" strokeWidth="3" />
+          <line x1="60" y1="40" x2="64" y2="26" stroke="#5c430a" strokeWidth="5" strokeLinecap="round" />
+          <ellipse cx="74" cy="34" rx="12" ry="7" fill="#3fa34d" transform="rotate(-20 74 34)" />
+        </g>
+      ))}
+      <text x="60" y="68" textAnchor="middle" fontSize="16" fontWeight="800" fill={INK}>?</text>
+      {Array.from({ length: right }).map((_, i) => (
+        <g key={`r${i}`} transform={`translate(${18 + (i % 3) * 18}, ${14 + Math.floor(i / 3) * 18}) scale(.55)`}>
+          <circle cx="60" cy="68" r="28" fill="#e5484d" stroke="#8f1d22" strokeWidth="3" />
+          <line x1="60" y1="40" x2="64" y2="26" stroke="#5c430a" strokeWidth="5" strokeLinecap="round" />
+          <ellipse cx="74" cy="34" rx="12" ry="7" fill="#3fa34d" transform="rotate(-20 74 34)" />
+        </g>
+      ))}
+    </g>
+  );
+}
+
+function SplitDots({ n, groups }) {
+  const cols = 5;
+  const cells = [];
+  for (let i = 0; i < n; i += 1) {
+    const cx = 18 + (i % cols) * 20;
+    const cy = 28 + Math.floor(i / cols) * 20;
+    cells.push(<circle key={i} cx={cx} cy={cy} r="8" fill={i < groups[0] ? '#e5484d' : '#4a90e2'} stroke={INK} strokeWidth="2" />);
+  }
+  return (
+    <g>
+      {cells}
+      <line x1="18" y1={28 + Math.ceil(n / cols) * 20 + 4} x2="98" y2={28 + Math.ceil(n / cols) * 20 + 4} stroke={INK} strokeWidth="2" strokeDasharray="4 3" />
+    </g>
+  );
+}
+
+function ColumnAdd({ top, bottom, sum }) {
+  return (
+    <g>
+      <rect x="18" y="10" width="84" height="100" rx="6" fill="#fff" stroke={INK} strokeWidth="3" />
+      <text x="70" y="40" textAnchor="end" fontSize="24" fontWeight="800" fill="#1a2a6c">{top}</text>
+      <text x="70" y="68" textAnchor="end" fontSize="24" fontWeight="800" fill="#1a2a6c">+{bottom}</text>
+      <line x1="24" y1="78" x2="96" y2="78" stroke={INK} strokeWidth="3" />
+      <text x="70" y="102" textAnchor="end" fontSize="24" fontWeight="800" fill="#e5484d">{sum}</text>
+      <text x="30" y="40" fontSize="16" fill={INK}>+</text>
+    </g>
+  );
+}
+
+function Computer() {
+  return (
+    <g>
+      <rect x="36" y="20" width="48" height="32" rx="4" fill="#333" stroke={INK} strokeWidth="2.5" />
+      <rect x="40" y="24" width="40" height="24" rx="2" fill="#7ec8e3" />
+      <rect x="50" y="52" width="20" height="6" rx="2" fill="#666" />
+      <rect x="42" y="58" width="36" height="4" rx="2" fill="#999" />
+    </g>
+  );
+}
+
 function Scene({ kind }) {
   if (kind === 'class') {
     return (
       <g>
-        <rect x="10" y="14" width="100" height="92" rx="10" fill="#eef3ff" stroke="#9db8e8" strokeWidth="3" />
-        <rect x="30" y="60" width="60" height="10" rx="3" fill="#8a5a2b" />
-        <rect x="34" y="70" width="8" height="22" fill="#8a5a2b" />
-        <rect x="78" y="70" width="8" height="22" fill="#8a5a2b" />
-        <circle cx="50" cy="42" r="9" fill="#ffd9a0" stroke={INK} strokeWidth="2.5" />
-        <rect x="43" y="51" width="14" height="12" rx="4" fill="#4a90e2" />
-        <circle cx="78" cy="36" r="9" fill="#ffd9a0" stroke={INK} strokeWidth="2.5" />
-        <rect x="71" y="45" width="14" height="20" rx="4" fill="#e5484d" />
+        <rect x="10" y="10" width="100" height="98" rx="10" fill="#eef3ff" stroke="#9db8e8" strokeWidth="3" />
+        {/* desk */}
+        <rect x="24" y="58" width="72" height="10" rx="3" fill="#8a5a2b" />
+        <rect x="28" y="68" width="8" height="24" fill="#8a5a2b" />
+        <rect x="84" y="68" width="8" height="24" fill="#8a5a2b" />
+        {/* computer on desk */}
+        <rect x="44" y="36" width="32" height="22" rx="3" fill="#333" stroke={INK} strokeWidth="2" />
+        <rect x="47" y="39" width="26" height="16" rx="1" fill="#7ec8e3" />
+        <rect x="54" y="58" width="12" height="4" rx="1" fill="#666" />
+        {/* student (sitting at desk, facing computer) */}
+        <circle cx="60" cy="72" r="8" fill="#ffd9a0" stroke={INK} strokeWidth="2" />
+        <path d="M52 72 Q60 64 68 72" fill="#5c3a1e" />
+        <rect x="53" y="80" width="14" height="14" rx="4" fill="#4a90e2" />
       </g>
     );
   }
@@ -325,14 +435,13 @@ export default function SvgArt({ id, size }) {
   const fingerMatch = /^fingers-([0-5])$/.exec(id || '');
   const coinMatch = /^coin-(\d+)$/.exec(id || '');
   const digitMatch = /^digit-(\d)$/.exec(id || '');
+  const dotsMatch = /^dots-(\d+)$/.exec(id || '');
   if (diceMatch) art = <Dice n={Number(diceMatch[1])} />;
   else if (fingerMatch) art = <Fingers n={Number(fingerMatch[1])} />;
   else if (coinMatch) art = <Coin v={coinMatch[1]} />;
   else if (digitMatch) art = <Digit n={digitMatch[1]} />;
-  else if (/^dots-\d+$/.test(id || '')) art = <Dots n={Number(id.split('-')[1])} />;
+  else if (dotsMatch) art = <Dots n={Number(dotsMatch[1])} />;
   else if (id === 'flower') art = <Flower />;
-  else if (id === 'butterfly') art = <Butterfly />;
-  else if (id === 'bird' || id === 'bird-up' || id === 'bird-down') art = <Bird />;
   else if (id === 'ball') art = <Ball />;
   else if (id === 'apple') art = <Apple />;
   else if (id === 'star') art = <Star />;
@@ -346,9 +455,12 @@ export default function SvgArt({ id, size }) {
   else if (id === 'hand-left') art = <Hand side="left" />;
   else if (id === 'hands') art = (<g><g transform="translate(-24,0)"><Hand side="right" /></g><g transform="translate(24,0)"><Hand side="left" /></g></g>);
   else if (id === 'kid-front' || id === 'kid-back' || id === 'kid-center') art = <Kid pose={id === 'kid-back' ? 'back' : 'front'} />;
-  else if (id === 'venn-3' || id === 'set-red' || id === 'set-fruits' || id === 'set-tag' || id === 'sets-compare' || id === 'buttons-set' || id === 'pens-erasers' || id === 'split-5' || id === 'split-5b' || id === 'split-16') art = <Venn n={3} />;
+  else if (id === 'scene-class') art = <Scene kind="class" />;
+  else if (id === 'scene-tree') art = <Scene kind="tree" />;
+  else if (id === 'race') art = <Scene kind="race" />;
+  else if (id === 'pen-on-table') art = <PenOnTable />;
+  else if (id === 'venn-3') art = <Venn n={3} />;
   else if (id === 'empty-set' || id === 'empty-box') art = <Venn n={0} />;
-  else if (id === 'birds-nests') art = (<g><Bird /><g transform="translate(36,34) scale(.7)"><Bird /></g></g>);
   else if (id === 'lines' || id === 'lines-sets') art = (<g><circle cx="34" cy="60" r="24" fill="none" stroke="#1e50b4" strokeWidth="4" /><path d="M78 84 Q100 60 78 36" fill="none" stroke="#e5484d" strokeWidth="4" strokeLinecap="round" /></g>);
   else if (id === 'box-ball') art = <BoxBall inside />;
   else if (id === 'ball-in') art = <BoxBall inside />;
@@ -356,12 +468,22 @@ export default function SvgArt({ id, size }) {
   else if (id === 'ball-above') art = <BallAbove />;
   else if (id === 'ball-below') art = <BallBelow />;
   else if (id === 'table-pens' || id === 'table-34' || id === 'table-47' || id === 'table-plus1' || id === 'table-plus2') art = <GridBoard />;
-  else if (id === 'bundle-10' || id === 'bundle-13') art = (<g><rect x="30" y="40" width="60" height="40" rx="6" fill="#ffe9a8" stroke={INK} strokeWidth="3" /><text x="60" y="66" textAnchor="middle" fontSize="20" fontWeight="800" fill={INK}>10</text></g>);
-  else if (id === 'apples-join' || id === 'apples-compare' || id === 'balls-5' || id === 'marbles-15' || id === 'flowers-2') art = (<g><Apple /><g transform="translate(34,20) scale(.8)"><Apple /></g><g transform="translate(-32,18) scale(.8)"><Apple /></g></g>);
+  else if (id === 'bundle-10' || id === 'bundle-13' || id === 'tens') art = (<g><rect x="30" y="40" width="60" height="40" rx="6" fill="#ffe9a8" stroke={INK} strokeWidth="3" /><text x="60" y="66" textAnchor="middle" fontSize="20" fontWeight="800" fill={INK}>10</text></g>);
+  else if (id === 'apples-join') art = <AppleJoin left={3} right={2} />;
+  else if (id === 'apples-compare') art = <AppleCompare left={5} right={3} />;
   else if (id === 'swap' || id === 'group') art = (<g><polygon points="30,44 52,44 52,34 70,48 52,62 52,52 30,52" fill="#4a90e2" stroke={INK} strokeWidth="3" /><polygon points="90,72 68,72 68,62 50,76 68,90 68,80 90,80" fill="#e5484d" stroke={INK} strokeWidth="3" /></g>);
-  else if (id === 'tens') art = (<g><rect x="30" y="40" width="60" height="40" rx="6" fill="#ffe9a8" stroke={INK} strokeWidth="3" /><text x="60" y="66" textAnchor="middle" fontSize="20" fontWeight="800" fill={INK}>10</text></g>);
   else if (id === 'digits' || id === 'order-digits') art = (<g><Digit n="7" /><g transform="translate(44,0)"><Digit n="2" /></g></g>);
-  else if (id === 'column-add' || id === 'compare-14-17' || id === 'compare-45-54' || id === 'pen-on-table' || id === 'race' || id === 'scene-class' || id === 'scene-tree') art = <Scene kind={id === 'scene-tree' ? 'tree' : id === 'race' ? 'race' : 'class'} />;
+  else if (id === 'column-add') art = <ColumnAdd top={23} bottom={14} sum={37} />;
+  else if (id === 'compare-14-17') art = (<g><Digit n="1" /><g transform="translate(28,0)"><Digit n="4" /></g><text x="62" y="64" textAnchor="middle" fontSize="18" fontWeight="800" fill={INK}>vs</text><g transform="translate(56,0)"><Digit n="1" /></g><g transform="translate(84,0)"><Digit n="7" /></g></g>);
+  else if (id === 'compare-45-54') art = (<g><Digit n="4" /><g transform="translate(28,0)"><Digit n="5" /></g><text x="62" y="64" textAnchor="middle" fontSize="18" fontWeight="800" fill={INK}>vs</text><g transform="translate(56,0)"><Digit n="5" /></g><g transform="translate(84,0)"><Digit n="4" /></g></g>);
+  else if (id === 'split-5') art = <SplitDots n={5} groups={[3, 2]} />;
+  else if (id === 'split-5b') art = <SplitDots n={5} groups={[2, 3]} />;
+  else if (id === 'split-16') art = <SplitDots n={10} groups={[6, 4]} />;
+  else if (id === 'set-red') art = <Venn n={4} />;
+  else if (id === 'set-fruits') art = (<g><g transform="translate(-12,10) scale(.8)"><Apple /></g><g transform="translate(12,10) scale(.8)"><Apple /></g></g>);
+  else if (id === 'set-tag') art = (<g><g transform="translate(-10,10) scale(.8)"><Flower /></g><g transform="translate(14,10) scale(.8)"><Flower /></g></g>);
+  else if (id === 'sets-compare' || id === 'buttons-set') art = <Venn n={3} />;
+  else if (id === 'pens-erasers') art = (<g><g transform="translate(-18,16) scale(.65)"><PenOnTable /></g><g transform="translate(18,16) scale(.65)"><Square color="#f4a63b" /></g></g>);
   else if (id === 'cat') art = <Cat />;
   else if (id === 'rabbit') art = <Rabbit />;
   else if (id === 'fish') art = <Fish />;
