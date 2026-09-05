@@ -97,6 +97,8 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           display: flex;
           align-items: center;
           gap: 6px;
+          min-width: 0;
+          flex-wrap: wrap;
         }
         .paper-header-grid .field label {
           font-weight: bold;
@@ -384,8 +386,8 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           </div>
           <div className="field">
             <label>التَّارِيخُ:</label>
-            <span style={{ borderBottom: '1px solid #999', minWidth: 100, display: 'inline-block', textAlign: 'center' }}>
-              {new Date().toLocaleDateString('ar-TN')}
+            <span dir="ltr" style={{ borderBottom: '1px solid #999', flex: 1, minWidth: 70, display: 'inline-block', textAlign: 'center', fontVariantNumeric: 'tabular-nums' }}>
+              {new Date().toLocaleDateString('fr-FR')}
             </span>
           </div>
         </div>
