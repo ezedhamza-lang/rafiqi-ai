@@ -119,17 +119,17 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
           align-items: center;
           border: 2px solid #333;
           border-top: 2px solid #333;
-          padding: 8px 16px;
+          padding: 12px 18px;
           background: #e8f5e9;
-          font-size: 20px;
+          font-size: 30px;
           font-weight: bold;
         }
         .paper-title-bar .period-badge {
           background: #388e3c;
           color: #fff;
-          padding: 2px 10px;
-          border-radius: 4px;
-          font-size: 16px;
+          padding: 4px 14px;
+          border-radius: 6px;
+          font-size: 22px;
         }
         .paper-body {
           border: 2px solid #333;
