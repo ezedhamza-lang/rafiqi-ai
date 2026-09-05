@@ -49912,6 +49912,547 @@
         }
       ],
       "source": "curated-s3-lesson-pilot"
+    },
+    {
+      "id": "year1-period-1-assess",
+      "level": "year1",
+      "subject": "math",
+      "trimester": 1,
+      "period": 1,
+      "kind": "period-test",
+      "title": "تقييم مكتسبات الفترة الأولى — رياضيات س1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "السند 1",
+          "text": "في قسمنا طاولة عليها قلم وممحاة، وتحت الطاولة سلة المهملات."
+        },
+        {
+          "id": "p2",
+          "title": "السند 2",
+          "text": "جمعت المعلمة كل الأقلام الزرقاء في علبة واحدة."
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "تحديد المواقع في الفضاء",
+          "mastery": { "none": 0, "below": 2, "min": 4.5, "max": 7 }
+        },
+        {
+          "id": "مع2",
+          "label": "تكوين المجموعات",
+          "mastery": { "none": 0, "below": 2, "min": 4.5, "max": 7 }
+        },
+        {
+          "id": "مع3",
+          "label": "تمييز الخطوط",
+          "mastery": { "none": 0, "below": 2, "min": 3.5, "max": 6 }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أين القلم؟",
+          "art": "pen-on-table",
+          "options": ["فوق الطاولة", "تحت الطاولة", "وراء الطاولة"],
+          "correct": "فوق الطاولة"
+        },
+        {
+          "id": "q2",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "السلة تحت الطاولة.",
+          "correctAnswer": "صواب"
+        },
+        {
+          "id": "q3",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "أي مجموعة مكوَّنة تكوينًا صحيحًا؟",
+          "art": "sets-compare",
+          "options": ["4 أزهار حمراء", "3 حمراء وزهرة زرقاء", "زهرتان وكرتان"],
+          "correct": "4 أزهار حمراء"
+        },
+        {
+          "id": "q4",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "في العلبة ...... قلمًا أزرق.",
+          "correctAnswer": "4|أربعة"
+        },
+        {
+          "id": "q5",
+          "criterion": "مع3",
+          "type": "MCQ",
+          "prompt": "أي خط مغلق؟",
+          "art": "lines-sets",
+          "options": ["الدائرة", "الموجة", "القطعة المستقيمة"],
+          "correct": "الدائرة"
+        },
+        {
+          "id": "q6",
+          "criterion": "مع3",
+          "type": "TRUE_FALSE",
+          "prompt": "الخط المستقيم لا ينحني.",
+          "correctAnswer": "صواب"
+        }
+      ],
+      "source": "curated-y1-period"
+    },
+    {
+      "id": "year1-period-2-assess",
+      "level": "year1",
+      "subject": "math",
+      "trimester": 1,
+      "period": 2,
+      "kind": "period-test",
+      "title": "تقييم مكتسبات الفترة الثانية — رياضيات س1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "السند 1",
+          "text": "في حديقة المدرسة 3 عصافير على الشجرة وعشّان فارغان."
+        },
+        {
+          "id": "p2",
+          "title": "السند 2",
+          "text": "عند مريم 4 أزرار حمراء وزرّ أزرق في علبتها."
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "الانتماء ورمز المجموعة",
+          "mastery": { "none": 0, "below": 2, "min": 4.5, "max": 7 }
+        },
+        {
+          "id": "مع2",
+          "label": "التجزئة والمجموعة الفارغة",
+          "mastery": { "none": 0, "below": 2, "min": 4.5, "max": 7 }
+        },
+        {
+          "id": "مع3",
+          "label": "المقارنة والتقابل",
+          "mastery": { "none": 0, "below": 2, "min": 3.5, "max": 6 }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "الزرّ الأزرق بالنسبة لمجموعة الأزرار الحمراء:",
+          "art": "buttons-set",
+          "options": ["لا ينتمي إليها", "ينتمي إليها", "هو رمزها"],
+          "correct": "لا ينتمي إليها"
+        },
+        {
+          "id": "q2",
+          "criterion": "مع1",
+          "type": "FILL_BLANK",
+          "prompt": "رمز مجموعة الأزهار هو حرف ......",
+          "correctAnswer": "و"
+        },
+        {
+          "id": "q3",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "قسّمنا 5 كرات إلى 2 حمراء والباقي زرقاء. كم زرقاء؟",
+          "art": "split-5",
+          "options": ["3", "2", "5"],
+          "correct": "3"
+        },
+        {
+          "id": "q4",
+          "criterion": "مع2",
+          "type": "TRUE_FALSE",
+          "prompt": "مجموعة بلا عناصر تسمى مجموعة فارغة.",
+          "correctAnswer": "صواب"
+        },
+        {
+          "id": "q5",
+          "criterion": "مع3",
+          "type": "MCQ",
+          "prompt": "3 عصافير وعشّان: العصافير ...... من الأعشاش.",
+          "art": "birds-nests",
+          "options": ["أكثر", "أقل", "على قدر"],
+          "correct": "أكثر"
+        },
+        {
+          "id": "q6",
+          "criterion": "مع3",
+          "type": "ORDER",
+          "prompt": "رتب خطوات المقارنة الصحيحة:",
+          "orderItems": ["أربط كل عنصر بمقابله", "ألاحظ الباقي بلا مقابل", "أحكم: أكثر أو أقل أو على قدر"]
+        }
+      ],
+      "source": "curated-y1-period"
+    },
+    {
+      "id": "year1-period-3-assess",
+      "level": "year1",
+      "subject": "math",
+      "trimester": 2,
+      "period": 3,
+      "kind": "period-test",
+      "title": "تقييم مكتسبات الفترة الثالثة — رياضيات س1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "السند 1",
+          "text": "في علبة أمين 4 كرات حمراء وكرة خضراء واحدة."
+        },
+        {
+          "id": "p2",
+          "title": "السند 2",
+          "text": "قاس المعلم قلم سارة بالمسطرة فوجد طوله 5 سنتمترات."
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "قراءة الأعداد إلى 9 وكتابتها",
+          "mastery": { "none": 0, "below": 2, "min": 4.5, "max": 7 }
+        },
+        {
+          "id": "مع2",
+          "label": "القياس بالسنتمتر والعدد الرتبي",
+          "mastery": { "none": 0, "below": 2, "min": 4.5, "max": 7 }
+        },
+        {
+          "id": "مع3",
+          "label": "المقارنة بالعلامات",
+          "mastery": { "none": 0, "below": 2, "min": 3.5, "max": 6 }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "كم كرة في العلبة جملة؟",
+          "art": "balls-5",
+          "options": ["5", "4", "1"],
+          "correct": "5"
+        },
+        {
+          "id": "q2",
+          "criterion": "مع1",
+          "type": "FILL_BLANK",
+          "prompt": "العدد الذي يأتي بعد 7 مباشرة هو ......",
+          "correctAnswer": "8|ثمانية"
+        },
+        {
+          "id": "q3",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "طول القلم 5 سنتمترات. بم قيس؟",
+          "art": "ruler",
+          "options": ["بالمسطرة", "بالميزان", "بالساعة"],
+          "correct": "بالمسطرة"
+        },
+        {
+          "id": "q4",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "في سباق المدرسة، التلميذ الفائز مرتبته:",
+          "options": ["الأول", "الثاني", "الأخير"],
+          "correct": "الأول"
+        },
+        {
+          "id": "q5",
+          "criterion": "مع3",
+          "type": "MCQ",
+          "prompt": "أي مقارنة صحيحة؟",
+          "options": ["6 أكبر من 4", "2 أكبر من 8", "5 يساوي 7"],
+          "correct": "6 أكبر من 4"
+        },
+        {
+          "id": "q6",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "0 ...... 3 (ضع العلامة المناسبة: أكبر من / أصغر من / يساوي)",
+          "correctAnswer": "أصغر من|<"
+        }
+      ],
+      "source": "curated-y1-period"
+    },
+    {
+      "id": "year1-period-4-assess",
+      "level": "year1",
+      "subject": "math",
+      "trimester": 2,
+      "period": 4,
+      "kind": "period-test",
+      "title": "تقييم مكتسبات الفترة الرابعة — رياضيات س1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "السند 1",
+          "text": "جمع سامي 10 أزرار زرقاء في حزمة واحدة و3 أزرار حمراء منفردة."
+        },
+        {
+          "id": "p2",
+          "title": "السند 2",
+          "text": "في سلة الفواكه 4 تفاحات، وأضافت الأم تفاحتين."
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "التجميع والعشرات",
+          "mastery": { "none": 0, "below": 2, "min": 4.5, "max": 7 }
+        },
+        {
+          "id": "مع2",
+          "label": "الجمع بضم المجموعات",
+          "mastery": { "none": 0, "below": 2, "min": 4.5, "max": 7 }
+        },
+        {
+          "id": "مع3",
+          "label": "قراءة الأعداد إلى 99",
+          "mastery": { "none": 0, "below": 2, "min": 3.5, "max": 6 }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "حزمة من 10 أزرار فيها كم زرًا؟",
+          "art": "bundle-10",
+          "options": ["10", "3", "13"],
+          "correct": "10"
+        },
+        {
+          "id": "q2",
+          "criterion": "مع1",
+          "type": "FILL_BLANK",
+          "prompt": "عشرتان = ......",
+          "correctAnswer": "20|عشرون"
+        },
+        {
+          "id": "q3",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "4 تفاحات + تفاحتان = ؟",
+          "art": "apples-join",
+          "options": ["6", "5", "42"],
+          "correct": "6"
+        },
+        {
+          "id": "q4",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "2 + 5 = ......",
+          "correctAnswer": "7|سبعة"
+        },
+        {
+          "id": "q5",
+          "criterion": "مع3",
+          "type": "MCQ",
+          "prompt": "أي عدد فيه 3 عشرات و4 آحاد؟",
+          "options": ["34", "43", "304"],
+          "correct": "34"
+        },
+        {
+          "id": "q6",
+          "criterion": "مع3",
+          "type": "TRUE_FALSE",
+          "prompt": "العدد 58 فيه 8 عشرات.",
+          "correctAnswer": "خطأ"
+        }
+      ],
+      "source": "curated-y1-period"
+    },
+    {
+      "id": "year1-period-5-assess",
+      "level": "year1",
+      "subject": "math",
+      "trimester": 3,
+      "period": 5,
+      "kind": "period-test",
+      "title": "تقييم مكتسبات الفترة الخامسة — رياضيات س1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "السند 1",
+          "text": "كتبت المعلمة على السبورة: 2 + 5 = 7 و5 + 2 = 7."
+        },
+        {
+          "id": "p2",
+          "title": "السند 2",
+          "text": "عند كريم 15 كرة زجاجية: 10 حمراء في علبة و5 خضراء خارجها."
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "جداول الجمع وخاصياته",
+          "mastery": { "none": 0, "below": 2, "min": 4.5, "max": 7 }
+        },
+        {
+          "id": "مع2",
+          "label": "قراءة أعداد 10-19 وتمثيلها",
+          "mastery": { "none": 0, "below": 2, "min": 4.5, "max": 7 }
+        },
+        {
+          "id": "مع3",
+          "label": "المقارنة والتفكيك إلى 19",
+          "mastery": { "none": 0, "below": 2, "min": 3.5, "max": 6 }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "3 + 1 = ؟",
+          "options": ["4", "31", "2"],
+          "correct": "4"
+        },
+        {
+          "id": "q2",
+          "criterion": "مع1",
+          "type": "TRUE_FALSE",
+          "prompt": "2 + 5 يساوي 5 + 2.",
+          "correctAnswer": "صواب"
+        },
+        {
+          "id": "q3",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "عند كريم 10 كرات في علبة و5 خارجها. كم المجموع؟",
+          "art": "marbles-15",
+          "options": ["15", "105", "51"],
+          "correct": "15"
+        },
+        {
+          "id": "q4",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "العدد 13 = 10 + ......",
+          "correctAnswer": "3|ثلاثة"
+        },
+        {
+          "id": "q5",
+          "criterion": "مع3",
+          "type": "MCQ",
+          "prompt": "أي عدد هو الأكبر؟",
+          "options": ["17", "12", "9"],
+          "correct": "17"
+        },
+        {
+          "id": "q6",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "16 = ...... + 6",
+          "correctAnswer": "10|عشرة"
+        }
+      ],
+      "source": "curated-y1-period"
+    },
+    {
+      "id": "year1-period-6-assess",
+      "level": "year1",
+      "subject": "math",
+      "trimester": 3,
+      "period": 6,
+      "kind": "period-test",
+      "title": "تقييم مكتسبات الفترة السادسة — رياضيات س1",
+      "durationMinutes": 45,
+      "totalPoints": 20,
+      "passages": [
+        {
+          "id": "p1",
+          "title": "السند 1",
+          "text": "اشترى أب 3 دفاتر ثمن الواحد 23 مليمًا، ودفع بورقة نقدية."
+        },
+        {
+          "id": "p2",
+          "title": "السند 2",
+          "text": "في حانوت الحي قطع نقدية من فئات 10 و20 و50 مليمًا."
+        }
+      ],
+      "criteria": [
+        {
+          "id": "مع1",
+          "label": "المفرد والقطع النقدية",
+          "mastery": { "none": 0, "below": 2, "min": 4.5, "max": 7 }
+        },
+        {
+          "id": "مع2",
+          "label": "الجمع العمودي دون احتفاظ",
+          "mastery": { "none": 0, "below": 2, "min": 4.5, "max": 7 }
+        },
+        {
+          "id": "مع3",
+          "label": "الإدماج: مقارنة وتفكيك إلى 99",
+          "mastery": { "none": 0, "below": 2, "min": 3.5, "max": 6 }
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "criterion": "مع1",
+          "type": "MCQ",
+          "prompt": "أي قطعة هي الأكبر قيمة؟",
+          "art": "coins-10-20-50",
+          "options": ["50 مليمًا", "20 مليمًا", "10 مليمات"],
+          "correct": "50 مليمًا"
+        },
+        {
+          "id": "q2",
+          "criterion": "مع1",
+          "type": "FILL_BLANK",
+          "prompt": "7 ...... 9 (ضع: أكبر من / أصغر من / يساوي)",
+          "correctAnswer": "أصغر من|<"
+        },
+        {
+          "id": "q3",
+          "criterion": "مع2",
+          "type": "MCQ",
+          "prompt": "23 + 14 = ؟ (رتّب عموديًا ثم احسب)",
+          "options": ["37", "73", "3714"],
+          "correct": "37"
+        },
+        {
+          "id": "q4",
+          "criterion": "مع2",
+          "type": "FILL_BLANK",
+          "prompt": "41 + 25 = ......",
+          "correctAnswer": "66|ستة وستون"
+        },
+        {
+          "id": "q5",
+          "criterion": "مع3",
+          "type": "MCQ",
+          "prompt": "أي عدد أكبر: 45 أم 54؟",
+          "options": ["54", "45", "متساويان"],
+          "correct": "54"
+        },
+        {
+          "id": "q6",
+          "criterion": "مع3",
+          "type": "FILL_BLANK",
+          "prompt": "فكك العدد 54 إلى عشرات وآحاد: ......",
+          "correctAnswer": "5 عشرات + 4 آحاد|54 = 5 عشرات + 4 آحاد"
+        }
+      ],
+      "source": "curated-y1-period"
     }
   ]
 }

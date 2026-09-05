@@ -4685,6 +4685,57 @@ tr:hover td {
   font-size: 1rem;
 }
 
+/* ---------- Original illustrations + picture/match exercises ---------- */
+.art-svg { max-width: 210px; height: auto; display: block; margin: 0.5rem auto; }
+.match-item .art-svg { max-width: 72px; margin: 0.1rem auto; }
+.pic-card .art-svg { max-width: 110px; }
+.pic-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.7rem;
+  margin-top: 0.6rem;
+}
+.pic-card {
+  border: 3px solid var(--line, #d9dee9);
+  border-radius: 14px;
+  background: #fff;
+  padding: 0.6rem;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  min-height: 130px;
+  justify-content: center;
+}
+.pic-card.selected { border-color: var(--accent); background: #fff7e8; }
+.pic-card.ok { border-color: #2e9e5b; background: #e7f6ec; color: #1c6f3f; }
+.pic-card.no { border-color: #d64545; background: #fdecec; }
+.match-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 0.6rem; }
+.match-col { display: flex; flex-direction: column; gap: 0.5rem; }
+.match-item {
+  border: 2px solid var(--line, #d9dee9);
+  border-radius: 12px;
+  background: #fff;
+  padding: 0.7rem 0.5rem;
+  font-size: 1.05rem;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-height: 64px;
+  justify-content: center;
+}
+.match-item.selected { border-color: var(--accent); background: #fff7e8; }
+.match-item.done { border-color: #2e9e5b; background: #e7f6ec; color: #1c6f3f; font-weight: 800; }
+.match-item.wrong { border-color: #d64545; background: #fdecec; }
+.match-item:disabled { cursor: default; }
+.match-done-msg { color: #1e9e6a; font-weight: 800; margin-top: 0.5rem; font-size: 1.05rem; }
+
 /* ---------- Short lesson videos (Stage 6.4) ---------- */
 .lesson-video-bank {
   flex: 1 1 auto;

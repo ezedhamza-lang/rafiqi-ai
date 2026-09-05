@@ -67,7 +67,7 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(res.body.cached).toBe(true);
     expect(res.body.memo.id).toBeTruthy();
     const count = await prisma.lessonMemo.count({
-      where: { bookId: 'year1/math', lessonId: 'mathPos1' }
+      where: { bookId: 'year1/math', lessonId: 'y1m01' }
     });
     expect(count).toBe(1);
   });

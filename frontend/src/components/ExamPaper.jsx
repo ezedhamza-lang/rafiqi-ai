@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SvgArt from './SvgArt.jsx';
 
 // Shared exam-paper renderer (Tunisian official-paper visual language):
 // header shafts (name/subject/score), colored sanad boxes, numbered
@@ -219,6 +220,7 @@ export default function ExamPaper({ content, meta, mode, answers, onAnswer }) {
                 <p className="paper-q-prompt">{q.prompt}</p>
                 <QuestionPoints q={q} criteria={criteria} />
               </div>
+              {q.art && <SvgArt id={q.art} size={150} />}
               {solve
                 ? <SolveInput q={q} answers={answers || {}} onAnswer={onAnswer || (() => {})} />
                 : <PrintAnswerSpace q={q} />}

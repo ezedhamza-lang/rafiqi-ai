@@ -124,7 +124,8 @@ export function buildExamContent(bankExam, context = {}) {
       ...(q.options ? { options: q.options } : {}),
       ...(q.correct !== undefined ? { correct: q.correct } : {}),
       ...(q.correctAnswer !== undefined ? { correctAnswer: q.correctAnswer } : {}),
-      ...(q.orderItems ? { orderItems: q.orderItems } : {})
+      ...(q.orderItems ? { orderItems: q.orderItems } : {}),
+      ...(q.art ? { art: q.art } : {})
     }))
   };
 }

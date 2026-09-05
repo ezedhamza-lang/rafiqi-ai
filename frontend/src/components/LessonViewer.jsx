@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { api } from '../api/client.js';
 import VideoPlayer from './VideoPlayer.jsx';
 import VideoCard from './VideoCard.jsx';
+import SvgArt from './SvgArt.jsx';
 
 function speak(text) {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
@@ -172,9 +173,135 @@ function DefaultBlock({ block, kind, icon }) {
         <span className="material-icons">{icon}</span>
         <strong>{rich(block.title) || (kind === 'objective' ? 'الأهداف' : '')}</strong>
       </div>
+      {block.art && <SvgArt id={block.art} />}
       <p className="lesson-block-text">{rich(block.text)}</p>
     </div>
   );
+}
+
+function PictureChoiceBlock({ block, onAnswer, blockId }) {
+  const [sel, setSel] = useState(null);
+  const [checked, setChecked] = useState(false);
+  const icon = BLOCK_ICONS.question;
+  const correct = sel !== null && sel === block.answer;
+  const verify = () => {
+    setChecked(true);
+    onAnswer(blockId, { type: 'picture', picked: sel, correct: sel === block.answer });
+  };
+  return (
+    <div className="lesson-block lesson-block-question">
+      <div className="lesson-block-head">
+        <span className="material-icons">{icon}</span>
+        <strong>{block.title || 'اختر الصورة'}</strong>
+        <ListenBtn text={`${block.title || ''}. ${block.text || ''}`} />
+      </div>
+      {block.text && <p className="lesson-block-text">{rich(block.text)}</p>}
+      <div className="pic-grid">
+        {(block.options || []).map((opt, i) => (
+          <button
+            key={i}
+            type="button"
+            className={`pic-card ${sel === i ? 'selected' : ''} ${checked && (i === sel ? (correct ? 'ok' : 'no') : i === block.answer ? 'ok' : '')}`}
+            onClick={() => { setSel(i); setChecked(false); }}
+          >
+            {opt.art && <SvgArt id={opt.art} size={96} />}
+            <span>{opt.label || ''}</span>
+          </button>
+        ))}
+      </div>
+      <div className="exercise-check-row">
+        <button type="button" className="btn btn-sm" onClick={verify} disabled={sel === null}>تحقّق</button>
+        {checked && (
+          <span className={`exercise-feedback ${correct ? 'ok' : 'no'}`}>
+            {correct ? '✓ أحسنت' : '✗ حاول مجددًا'}
+          </span>
+        )}
+      </div>
+      {block.hint && <p className="lesson-hint">{block.hint}</p>}
+    </div>
+  );
+}
+
+function seededOrder(n, seedStr) {
+  const a = Array.from({ length: n }, (_, i) => i);
+  let h = 0;
+  for (const c of String(seedStr)) h = ((h * 31) + c.charCodeAt(0)) >>> 0;
+  for (let i = n - 1; i > 0; i -= 1) {
+    h = ((h * 1103515245) + 12345) >>> 0;
+    const j = h % (i + 1);
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function MatchPairsBlock({ block, onAnswer, blockId }) {
+  const pairs = block.pairs || [];
+  const [left, setLeft] = useState(null);
+  const [done, setDone] = useState([]);
+  const [wrong, setWrong] = useState(null);
+  const order = useMemoShuffled(pairs.length, blockId);
+  const icon = BLOCK_ICONS.question;
+  const pickRight = (pairIdx) => {
+    if (left === null || done.includes(pairIdx)) return;
+    if (left === pairIdx) {
+      const nd = [...done, pairIdx];
+      setDone(nd);
+      setLeft(null);
+      if (nd.length === pairs.length) onAnswer(blockId, { type: 'match', done: true });
+    } else {
+      setWrong(pairIdx);
+      setTimeout(() => setWrong(null), 600);
+    }
+  };
+  return (
+    <div className="lesson-block lesson-block-question">
+      <div className="lesson-block-head">
+        <span className="material-icons">{icon}</span>
+        <strong>{block.title || 'اربط'}</strong>
+        <ListenBtn text={`${block.title || ''}. ${block.text || ''}`} />
+      </div>
+      {block.text && <p className="lesson-block-text">{rich(block.text)}</p>}
+      <div className="match-cols">
+        <div className="match-col">
+          {pairs.map((p, i) => (
+            <button
+              key={`l${i}`}
+              type="button"
+              className={`match-item ${left === i ? 'selected' : ''} ${done.includes(i) ? 'done' : ''}`}
+              onClick={() => { if (!done.includes(i)) setLeft(i); }}
+              disabled={done.includes(i)}
+            >
+              {p.left?.art && <SvgArt id={p.left.art} size={64} />}
+              <span>{p.left?.text || ''}</span>
+            </button>
+          ))}
+        </div>
+        <div className="match-col">
+          {order.map((pi) => (
+            <button
+              key={`r${pi}`}
+              type="button"
+              className={`match-item ${wrong === pi ? 'wrong' : ''} ${done.includes(pi) ? 'done' : ''}`}
+              onClick={() => pickRight(pi)}
+              disabled={done.includes(pi)}
+            >
+              {pairs[pi].right?.art && <SvgArt id={pairs[pi].right.art} size={64} />}
+              <span>{pairs[pi].right?.text || ''}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      {done.length === pairs.length && pairs.length > 0 && (
+        <p className="match-done-msg">✓ أحسنت! أكملت كل المطابقة.</p>
+      )}
+      {block.hint && <p className="lesson-hint">{block.hint}</p>}
+    </div>
+  );
+}
+
+function useMemoShuffled(n, seed) {
+  const [order] = useState(() => seededOrder(n, seed));
+  return order;
 }
 
 function TextareaBlock({ block, onAnswer, blockId }) {
@@ -459,8 +586,10 @@ function FileUploadBlock({ block, onAnswer, blockId }) {
     <div className="lesson-block lesson-block-upload">
       <div className="lesson-block-head">
         <span className="material-icons">{icon}</span>
-        <strong>{block.title || 'رفع ملف'}</strong>
+        <strong>{rich(block.title) || 'سؤال'}</strong>
+        {block.text && <p>{rich(block.text)}</p>}
       </div>
+      {block.art && <SvgArt id={block.art} />}
       {block.text && <p className="lesson-block-text">{rich(block.text)}</p>}
       <div className="upload-area">
         <input
@@ -512,6 +641,10 @@ function Block({ block, onAnswer = () => {}, blockId = '' }) {
       return <MathInputBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
     case 'drawing':
       return <DrawingBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
+    case 'picture-choice':
+      return <PictureChoiceBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
+    case 'match-pairs':
+      return <MatchPairsBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
     case 'file-upload':
       return <FileUploadBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
     default:
