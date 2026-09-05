@@ -109,7 +109,7 @@
             "science"
           ],
           "bookFile": "science-book.json",
-          "lessonsFile": null,
+          "lessonsFile": "science-units.json",
           "skillsMapFile": "skills-map-science.json",
           "adapter": "science"
         },

@@ -161,6 +161,9 @@ function adaptMathUnits(lessons) {
     // مرّر axisId و period لتمكين الـ frontend من رسم страниц التقييم كأوراق اختبار
     if (item.axisId) extra.axisId = item.axisId;
     if (item.period) extra.period = item.period;
+    if (item.isAssessment) extra.isAssessment = true;
+    if (item.subject) extra.subject = item.subject;
+    if (item.noEnrich) extra.noEnrich = true;
     // دروس مؤلفة للتلميذ (studentBlocks): تعرض حصرياً للتلميذ بدل القالب
     // الافتراضي (أساس بيداغوجي موجّه للمعلم) — أسئلة تفاعلية + خلاصة.
     if (Array.isArray(item.studentBlocks) && item.studentBlocks.length) {
@@ -544,9 +547,14 @@ export function getLessonPages(subjectCode, level, gradeId, country) {
     const isLetterBook = Array.isArray(book.units) && book.units.some((u) => Array.isArray(u.lessons) && u.lessons.some((l) => l.letter));
     pages = isLetterBook ? adaptAnisiLessons(book) : adaptReadingBook(book);
   } else if (code === 'science') {
-    const book = readJson(path.join(curriculumDir, grade.dir, subject.bookFile || 'science-book.json'));
-    if (!book) return [];
-    pages = adaptScienceBook(book);
+    if (subject.lessonsFile) {
+      const lessons = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile));
+      if (lessons) pages = adaptMathUnits(lessons);
+    }
+    if (!pages || !pages.length) {
+      const book = readJson(path.join(curriculumDir, grade.dir, subject.bookFile || 'science-book.json'));
+      pages = book ? adaptScienceBook(book) : [];
+    }
   } else if (code === 'production' || code === 'writing') {
     const book = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile || 'production-units.json'));
     if (!book) return [];
