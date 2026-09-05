@@ -730,18 +730,17 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
 
   const handleSubmit = async () => {
     const lessonId = lesson.id;
-    const interactiveBlocks = (lesson.blocks || []).filter((b) =>
-      ['textarea', 'math-input', 'drawing', 'file-upload'].includes(b.kind)
-    );
-
-    if (interactiveBlocks.length === 0) {
-      setSubmitResult({ success: false, message: 'لا توجد تمارين تفاعلية في هذا الدرس' });
-      return;
-    }
+    const isAssessment = /^y\d+a\d+$/.test(lessonId);
 
     const keptAnswers = Object.fromEntries(
       Object.entries(answers).filter(([id, val]) => val !== '' && val !== null && val !== undefined)
     );
+
+    if (Object.keys(keptAnswers).length === 0) {
+      setSubmitResult({ success: false, message: 'الرجاء الإجابة على تمرين واحد على الأقل قبل الإرسال' });
+      return;
+    }
+
     const files = Object.entries(keptAnswers)
       .map(([id, val]) => fileAnswerToAttachment(id, val))
       .filter(Boolean);
@@ -750,14 +749,10 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
       lessonId,
       lessonTitle: lesson.title,
       answers: keptAnswers,
+      ...(isAssessment ? { isAssessment: true } : {}),
       ...(files.length ? { files } : {}),
       submittedAt: new Date().toISOString()
     };
-
-    if (Object.keys(keptAnswers).length === 0) {
-      setSubmitResult({ success: false, message: 'الرجاء الإجابة على تمرين واحد على الأقل قبل الإرسال' });
-      return;
-    }
 
     setSubmitting(true);
     try {
@@ -837,7 +832,7 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
       )}
 
       {/* Assessment Paper View vs Normal Lesson View */}
-      {lesson.axisId === 'axAssess' || (lesson.period && lesson.id && /^y1a\d$/.test(lesson.id)) ? (
+      {(/^y\d+a\d+$/.test(lesson.id)) ? (
         <AssessmentPaper
           lesson={lesson}
           answers={answers}
