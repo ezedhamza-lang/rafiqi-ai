@@ -3,6 +3,7 @@ import { api } from '../api/client.js';
 import VideoPlayer from './VideoPlayer.jsx';
 import VideoCard from './VideoCard.jsx';
 import SvgArt from './SvgArt.jsx';
+import AssessmentPaper from './AssessmentPaper.jsx';
 
 function speak(text) {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
@@ -835,42 +836,56 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
         </div>
       )}
 
-      <div className="lesson-blocks">
-        {(lesson.blocks || []).map((b, i) => <Block key={i} block={b} onAnswer={handleAnswer} blockId={`${lesson.id}-${i}`} />)}
-      </div>
-
-      {/* Submit to Teacher Section */}
-      <div className="lesson-submit-section">
-        <div className="submit-divider">
-          <span className="material-icons">assignment_turned_in</span>
-          <span>إرسال الواجب للمعلم</span>
-        </div>
-        <p className="submit-hint">سيتم إرسال جميع إجاباتك (النصوص، العمليات الحسابية، الرسومات، والملفات) للمعلم للتصحيح.</p>
-        <button
-          type="button"
-          className="btn btn-success btn-lg submit-btn"
-          onClick={handleSubmit}
-          disabled={submitting}
-        >
-          {submitting ? (
-            <>
-              <span className="spinner" style={{ fontSize: 18, marginLeft: 8 }}></span>
-              جاري الإرسال...
-            </>
-          ) : (
-            <>
-              <span className="material-icons" style={{ fontSize: 20, marginLeft: 8 }}>send</span>
-              أرسل للمعلم
-            </>
-          )}
-        </button>
-        {submitResult && (
-          <div className={`submit-result ${submitResult.success ? 'success' : 'error'}`}>
-            <span className="material-icons">{submitResult.success ? 'check_circle' : 'error'}</span>
-            {submitResult.message}
+      {/* Assessment Paper View vs Normal Lesson View */}
+      {lesson.axisId === 'axAssess' || (lesson.period && lesson.id && /^y1a\d$/.test(lesson.id)) ? (
+        <AssessmentPaper
+          lesson={lesson}
+          answers={answers}
+          onAnswer={handleAnswer}
+          submitting={submitting}
+          submitResult={submitResult}
+          onSubmit={handleSubmit}
+        />
+      ) : (
+        <>
+          <div className="lesson-blocks">
+            {(lesson.blocks || []).map((b, i) => <Block key={i} block={b} onAnswer={handleAnswer} blockId={`${lesson.id}-${i}`} />)}
           </div>
-        )}
-      </div>
+
+          {/* Submit to Teacher Section */}
+          <div className="lesson-submit-section">
+            <div className="submit-divider">
+              <span className="material-icons">assignment_turned_in</span>
+              <span>إرسال الواجب للمعلم</span>
+            </div>
+            <p className="submit-hint">سيتم إرسال جميع إجاباتك (النصوص، العمليات الحسابية، الرسومات، والملفات) للمعلم للتصحيح.</p>
+            <button
+              type="button"
+              className="btn btn-success btn-lg submit-btn"
+              onClick={handleSubmit}
+              disabled={submitting}
+            >
+              {submitting ? (
+                <>
+                  <span className="spinner" style={{ fontSize: 18, marginLeft: 8 }}></span>
+                  جاري الإرسال...
+                </>
+              ) : (
+                <>
+                  <span className="material-icons" style={{ fontSize: 20, marginLeft: 8 }}>send</span>
+                  أرسل للمعلم
+                </>
+              )}
+            </button>
+            {submitResult && (
+              <div className={`submit-result ${submitResult.success ? 'success' : 'error'}`}>
+                <span className="material-icons">{submitResult.success ? 'check_circle' : 'error'}</span>
+                {submitResult.message}
+              </div>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }
