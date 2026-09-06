@@ -10,6 +10,11 @@ backend/coverage/
 .env
 .env.*
 !.env.example
+كلمات-السر.md
+*كلمات*سر*.md
+*password*.md
+*.pem
+*.key
 
 # الملفات المرفوعة (صور/امتحانات/تسجيلات) — محتوى مستخدمين وليست كوداً
 backend/uploads/
