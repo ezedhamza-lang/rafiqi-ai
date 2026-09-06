@@ -4467,6 +4467,23 @@ tr:hover td {
 .lesson-block-activity .material-icons { color: #b06b00; }
 .lesson-block-activity .lesson-block-text { font-size: 1.5rem; font-weight: 600; color: #6b4a12; }
 
+.lesson-block-vocabulary { background: #f3f7ff; border-color: #d5e3fb; }
+.lesson-block-vocabulary .material-icons { color: #1557c2; }
+.vocab-chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.3rem; }
+.vocab-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  background: #fff;
+  border: 1.5px solid #cfe0fb;
+  border-radius: 999px;
+  padding: 0.35rem 0.9rem;
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+.vocab-chip b { color: var(--primary); font-weight: 800; }
+.vocab-chip em { color: var(--muted); font-style: normal; font-size: 1rem; }
+
 .lesson-block-experiment { background: #f0fafd; border-color: #c9eaf2; }
 .lesson-block-experiment .material-icons { color: #0e6b8a; }
 .lesson-block-summary { background: #f2f7ed; border-color: #d4e5c5; }

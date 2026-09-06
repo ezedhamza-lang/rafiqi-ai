@@ -27,6 +27,15 @@ function readJson(abs) {
   }
 }
 
+let _vocabGlossary = null;
+function getVocabGlossary() {
+  if (_vocabGlossary) return _vocabGlossary;
+  const raw = readJson(path.join(CURRICULUM_DIR, 'shared', 'vocab-glossary.json')) || {};
+  _vocabGlossary = {};
+  for (const [k, v] of Object.entries(raw)) _vocabGlossary[normalizeArabic(k)] = v;
+  return _vocabGlossary;
+}
+
 // ===== Batch 3: فصل محرّك المنهج عن المحتوى التونسي (تحميل حسب country) =====
 //
 // registry.json (الجذر) يبقى دائماً "الفهرس": يحوي حقل "countries" يسرد كل
@@ -468,7 +477,12 @@ function adaptReadingBook(book) {
       const story = (lesson.story_text || []).join(' ');
       if (story) blocks.push({ kind: 'concept', title: 'نص الانطلاق', text: story });
       if (lesson.key_sentence) blocks.push({ kind: 'definition', title: 'الجملة المفتاحية', text: lesson.key_sentence });
-      for (const v of lesson.vocabulary || []) blocks.push({ kind: 'keyword', title: 'كلمة', text: v });
+      const vocab = (lesson.vocabulary || []).map((v) => {
+        const word = typeof v === 'string' ? v : (v.word || '');
+        const meaning = (typeof v === 'object' && v.meaning) ? v.meaning : (getVocabGlossary()[normalizeArabic(word)] || '');
+        return { word, meaning };
+      }).filter((x) => x.word);
+      if (vocab.length) blocks.push({ kind: 'vocabulary', title: '💡 مَفْرُدَاتُ النَّصِّ', words: vocab });
       for (const q of lesson.comprehension || []) {
         const qb = { kind: 'question', title: 'فهم النص', text: q.prompt };
         if (Array.isArray(q.options) && q.options.length) {

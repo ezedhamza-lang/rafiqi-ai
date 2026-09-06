@@ -21,6 +21,7 @@ const BLOCK_ICONS = {
   example: 'fact_check',
   note: 'info',
   keyword: 'translate',
+  vocabulary: 'lightbulb',
   question: 'quiz',
   experiment: 'science',
   activity: 'edit_note',
@@ -181,6 +182,26 @@ function DefaultBlock({ block, kind, icon }) {
         </div>
       ) : block.art && <SvgArt id={block.art} />}
       <p className="lesson-block-text">{rich(block.text)}</p>
+    </div>
+  );
+}
+
+function VocabularyBlock({ block }) {
+  const words = block.words || [];
+  return (
+    <div className="lesson-block lesson-block-vocabulary">
+      <div className="lesson-block-head">
+        <span className="material-icons">{BLOCK_ICONS.vocabulary}</span>
+        <strong>{block.title || 'مفردات النص'}</strong>
+      </div>
+      <div className="vocab-chips">
+        {words.map((w, i) => (
+          <span key={i} className="vocab-chip" title={w.meaning || ''}>
+            <b>{w.word}</b>
+            {w.meaning && <em> — {w.meaning}</em>}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -681,6 +702,8 @@ function Block({ block, onAnswer = () => {}, blockId = '' }) {
       return <ExperimentBlock block={block} />;
     case 'summary':
       return <SummaryBlock block={block} />;
+    case 'vocabulary':
+      return <VocabularyBlock block={block} />;
     case 'reward':
       return <RewardBlock block={block} />;
     case 'textarea':
