@@ -61,11 +61,13 @@ export default function Footer() {
           <div className="footer-col">
             <h4>{t('footer.contactUs')}</h4>
             <ul className="footer-contact">
-              <li dir="ltr" style={{ textAlign: 'left' }}>
-                <span className="material-icons" style={{ verticalAlign: 'middle' }}>phone</span> +216 96 035 997
+              <li>
+                <span className="material-icons" style={{ verticalAlign: 'middle' }}>phone</span>{' '}
+                <span dir="ltr">+216 96 035 997</span>
               </li>
               <li>
-                <span className="material-icons">email</span> ensp75882@education.tn
+                <span className="material-icons" style={{ verticalAlign: 'middle' }}>email</span>{' '}
+                <span dir="ltr">ensp75882@education.tn</span>
               </li>
             </ul>
             <h4 style={{ marginTop: '1rem' }}>{t('footer.followUs')}</h4>
