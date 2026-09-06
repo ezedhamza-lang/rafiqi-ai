@@ -444,6 +444,20 @@ function adaptReadingBook(book) {
   const pages = [];
   for (const unit of book.units || []) {
     for (const lesson of unit.lessons || []) {
+      // دروس بتخطيط ورقة الاختبار (studentBlocks + isAssessment) — تُمرَّر كما هي
+      if (Array.isArray(lesson.studentBlocks) && lesson.studentBlocks.length) {
+        const extra = {};
+        if (lesson.isAssessment) extra.isAssessment = true;
+        if (lesson.subject) extra.subject = lesson.subject;
+        if (lesson.period) extra.period = lesson.period;
+        if (lesson.lessonTestId) extra.lessonTestId = lesson.lessonTestId;
+        const blocks = lesson.studentBlocks
+          .filter((b) => b && typeof b === 'object' && (b.text || b.title || (b.points || []).length))
+          .map((b) => ({ kind: b.kind || 'concept', ...b }));
+        const firstText = (blocks.find((b) => b.text)?.text) || lesson.title;
+        pages.push({ id: lesson.id, title: lesson.title, content: firstText, chapter: unit.title, blocks, ...extra });
+        continue;
+      }
       const blocks = [
         {
           kind: 'objective',
