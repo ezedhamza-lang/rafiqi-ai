@@ -6,6 +6,14 @@ import { useStudentLevel } from '../../hooks/useStudentLevel.js';
 
 const GRADES = ['year1', 'year2', 'year3', 'year4', 'year5', 'year6'];
 
+function matchGrade(storyGrade, g) {
+  if (!storyGrade || !g) return false;
+  if (storyGrade === g) return true;
+  // تلاميذ السنة الثانية يرون قصص السنة الأولى أيضاً (مستوى تمهيدي مناسب)
+  if (g === 'year2' && storyGrade === 'year1') return true;
+  return false;
+}
+
 function storyText(story) {
   if (Array.isArray(story.text) && story.text.length) return story.text.join(' ');
   if (Array.isArray(story.textArray) && story.textArray.length) return story.textArray.join(' ');
@@ -54,9 +62,10 @@ export default function StudentStories() {
   const seriesForGrade = (s) => {
     if (!ownLevel && grade === 'all') return s;
     const g = ownLevel || grade;
+    if (!storyMap) return s;
     const mapSeries = storyMap?.series?.find((x) => x.id === s.id);
-    if (mapSeries && mapSeries.grade === g) return s;
-    const count = storyMap?.stories?.filter((st) => st.series === s.id && st.grade === g).length || 0;
+    if (mapSeries && matchGrade(mapSeries.grade, g)) return s;
+    const count = storyMap?.stories?.filter((st) => st.series === s.id && matchGrade(st.grade, g)).length || 0;
     if (count > 0) return { ...s, count };
     return null;
   };
@@ -66,7 +75,8 @@ export default function StudentStories() {
   const storiesForGrade = (stories) => {
     if (!ownLevel && grade === 'all') return stories;
     const g = ownLevel || grade;
-    const ids = new Set(storyMap?.stories?.filter((st) => st.series === activeSeries.id && st.grade === g).map((st) => st.id) || []);
+    if (!storyMap) return stories;
+    const ids = new Set(storyMap?.stories?.filter((st) => st.series === activeSeries.id && matchGrade(st.grade, g)).map((st) => st.id) || []);
     return stories.filter((st) => ids.has(st.id ?? st.storyId));
   };
 

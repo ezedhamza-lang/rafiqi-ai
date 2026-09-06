@@ -144,12 +144,11 @@ router.get('/lessons', asyncHandler(async (_req, res) => {
  *       200:
  *         description: خريطة القصص
  */
-router.get('/story-map', asyncHandler(async (_req, res) => {
-  const path = await import('path');
-  const fs = await import('fs');
-  const file = path.default.join(process.cwd(), 'content', 'stories', 'story-map.json');
-  if (!fs.default.existsSync(file)) return res.status(404).json({ error: 'خريطة القصص غير متوفرة' });
-  res.json(JSON.parse(fs.default.readFileSync(file, 'utf8')));
+router.get('/story-map', asyncHandler(async (req, res) => {
+  const { getStoryMap } = await import('../services/curriculumService.js');
+  const map = getStoryMap(req.query.country);
+  if (!map) return res.status(404).json({ error: 'خريطة القصص غير متوفرة' });
+  res.json(map);
 }));
 
 /**

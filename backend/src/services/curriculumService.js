@@ -617,6 +617,11 @@ export function getStorySeries(id, country) {
   return { ...series, stories: readJson(path.join(contentDir, 'stories', series.file)) || [] };
 }
 
+export function getStoryMap(country) {
+  const { contentDir } = baseDirs(country);
+  return readJson(path.join(contentDir, 'stories', 'story-map.json'));
+}
+
 // ===== Question banks =====
 
 export function getTemplates(country) {
