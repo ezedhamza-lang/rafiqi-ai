@@ -1313,8 +1313,9 @@ tr:hover td {
 }
 
 .footer-logo {
-  width: 64px;
-  height: 64px;
+  height: 200px;
+  width: auto;
+  max-width: 100%;
   object-fit: contain;
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.2));
 }
