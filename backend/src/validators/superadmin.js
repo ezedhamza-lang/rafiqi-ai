@@ -26,3 +26,7 @@ export const superAdminUsersQuerySchema = z.object({
 });
 
 export { idParamSchema as superAdminIdParamSchema };
+
+export const superAdminPasswordResetSchema = z.object({
+  password: z.string().trim().min(6, { error: 'كلمة السر قصيرة جدا (6 أحرف على الأقل)' }).max(100, { error: 'كلمة السر طويلة جدا' }).optional().nullable()
+});

@@ -1212,7 +1212,14 @@
     "classColumn": "القسم",
     "subscriptionColumn": "الاشتراك",
     "changeRoleColumn": "تغيير الدور",
-    "none": "بدون"
+    "none": "بدون",
+    "passwordColumn": "كلمة السر",
+    "resetPassword": "إعادة تعيين",
+    "resetPrompt": "كلمة سر جديدة لـ {name} (اتركه فارغًا لتوليد واحدة تلقائيًا):",
+    "newPassword": "كلمة السر الجديدة",
+    "copy": "نسخ",
+    "copied": "تم النسخ ✓",
+    "copyManually": "انسخ كلمة السر يدويًا:"
   },
   "studentSpace": {
     "tabs": {

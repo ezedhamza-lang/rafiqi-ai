@@ -17,6 +17,8 @@ export default function UsersAdmin() {
   const [users, setUsers] = useState([]);
   const [query, setQuery] = useState('');
   const [role, setRole] = useState('');
+  const [resetInfo, setResetInfo] = useState(null);
+  const [copied, setCopied] = useState(false);
 
   const load = useCallback((q, r) => {
     const params = new URLSearchParams();
@@ -36,6 +38,31 @@ export default function UsersAdmin() {
   const changeRole = async (id, newRole) => {
     await api.put(`/superadmin/users/${id}/role`, { role: newRole });
     load(query, role);
+  };
+
+  const resetPassword = async (u) => {
+    const custom = window.prompt(
+      t('usersAdmin.resetPrompt', { name: `${u.firstName} ${u.lastName}` }),
+      ''
+    );
+    if (custom === null) return;
+    try {
+      const res = await api.put(`/superadmin/users/${u.id}/password`, custom.trim() ? { password: custom.trim() } : {});
+      setResetInfo({ id: u.id, email: res.email, password: res.password });
+      setCopied(false);
+    } catch (e) {
+      window.alert(e.message);
+    }
+  };
+
+  const copyPassword = async () => {
+    if (!resetInfo) return;
+    try {
+      await navigator.clipboard.writeText(resetInfo.password);
+      setCopied(true);
+    } catch {
+      window.prompt(t('usersAdmin.copyManually'), resetInfo.password);
+    }
   };
 
   const roleLabel = (r) => (ROLE_LABEL_KEYS[r] ? t(ROLE_LABEL_KEYS[r]) : r);
@@ -70,6 +97,7 @@ export default function UsersAdmin() {
               <th>{t('usersAdmin.classColumn')}</th>
               <th>{t('usersAdmin.subscriptionColumn')}</th>
               <th>{t('usersAdmin.changeRoleColumn')}</th>
+              <th>{t('usersAdmin.passwordColumn')}</th>
             </tr>
           </thead>
           <tbody>
@@ -96,6 +124,19 @@ export default function UsersAdmin() {
                       <option key={r.value} value={r.value}>{t(r.labelKey)}</option>
                     ))}
                   </select>
+                </td>
+                <td>
+                  <button type="button" className="btn btn-sm" onClick={() => resetPassword(u)}>
+                    {t('usersAdmin.resetPassword')}
+                  </button>
+                  {resetInfo && resetInfo.id === u.id && (
+                    <div className="reset-result" style={{ marginTop: '0.4rem', fontSize: '0.85rem' }}>
+                      <div><strong>{t('usersAdmin.newPassword')}:</strong> <code dir="ltr">{resetInfo.password}</code></div>
+                      <button type="button" className="btn btn-sm" onClick={copyPassword} style={{ marginTop: '0.25rem' }}>
+                        {copied ? t('usersAdmin.copied') : t('usersAdmin.copy')}
+                      </button>
+                    </div>
+                  )}
                 </td>
               </tr>
             ))}

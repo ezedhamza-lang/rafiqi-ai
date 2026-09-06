@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import crypto from 'crypto';
+import bcrypt from 'bcryptjs';
 import prisma from '../db.js';
 import { authMiddleware, superAdminMiddleware } from '../auth.js';
 import { currentSchoolYear, schoolYearBounds, priceForType } from '../services/schoolYear.js';
@@ -10,7 +11,8 @@ import {
   superAdminSubscriptionCreateSchema,
   superAdminRoleUpdateSchema,
   superAdminUsersQuerySchema,
-  superAdminIdParamSchema
+  superAdminIdParamSchema,
+  superAdminPasswordResetSchema
 } from '../validators/superadmin.js';
 
 const router = Router();
@@ -328,6 +330,40 @@ router.put('/users/:id/role', validateParams(superAdminIdParamSchema), validateB
   const { role } = req.body;
   await prisma.user.update({ where: { id: Number(req.params.id) }, data: { role } });
   res.json({ ok: true });
+}));
+
+/**
+ * @swagger
+ * /api/superadmin/users/{id}/password:
+ *   put:
+ *     summary: إعادة تعيين كلمة سر مستخدم (تُرجع الجديدة مرة واحدة)
+ *     tags: [superadmin]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: integer }
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               password: { type: string }
+ *     responses:
+ *       200:
+ *         description: تم التعيين مع إرجاع كلمة السر الجديدة
+ *       404:
+ *         description: المستخدم غير موجود
+ */
+router.put('/users/:id/password', validateParams(superAdminIdParamSchema), validateBody(superAdminPasswordResetSchema), asyncHandler(async (req, res) => {
+  const user = await prisma.user.findUnique({ where: { id: Number(req.params.id) } });
+  if (!user) throw new ApiError(404, 'المستخدم غير موجود');
+  const plain = (req.body.password || '').trim() || `Rafeeqi-${crypto.randomBytes(3).toString('hex')}`;
+  await prisma.user.update({ where: { id: user.id }, data: { passwordHash: await bcrypt.hash(plain, 10) } });
+  res.json({ ok: true, email: user.email, password: plain });
 }));
 
 /**

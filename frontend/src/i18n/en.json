@@ -1211,7 +1211,14 @@
     "classColumn": "Class",
     "subscriptionColumn": "Subscription",
     "changeRoleColumn": "Change role",
-    "none": "None"
+    "none": "None",
+    "passwordColumn": "Password",
+    "resetPassword": "Reset",
+    "resetPrompt": "New password for {name} (leave empty to auto-generate):",
+    "newPassword": "New password",
+    "copy": "Copy",
+    "copied": "Copied ✓",
+    "copyManually": "Copy the password manually:"
   },
   "studentSpace": {
     "tabs": {
