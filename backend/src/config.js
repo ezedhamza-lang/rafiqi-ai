@@ -24,6 +24,11 @@ export const config = {
     .map((o) => o.trim())
     .filter(Boolean),
   bodyLimit: process.env.BODY_LIMIT || '5mb',
+  // حسابات تجريبية ترى محتوى كل السنوات (لا تُتتبّع بها المنصة).
+  exploreAllGradesEmails: (process.env.EXPLORE_ALL_GRADES_EMAILS || 'student@test.tn')
+    .split(',')
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean),
   payment: {
     defaultProvider: process.env.PAYMENT_PROVIDER || 'DEMO',
     stripeSecretKey: process.env.STRIPE_SECRET_KEY || '',

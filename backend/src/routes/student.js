@@ -4,6 +4,7 @@ import { authMiddleware, studentMiddleware } from '../auth.js';
 import { asyncHandler } from '../middleware/errorHandler.js';
 import { countLessonsCompleted } from '../services/progressService.js';
 import { findGradeByLevel } from '../services/curriculumService.js';
+import { config } from '../config.js';
 
 const router = Router();
 
@@ -48,6 +49,8 @@ router.get('/profile', studentMiddleware, asyncHandler(async (req, res) => {
     : 0;
   const lessonsCompleted = await countLessonsCompleted(req.user.id);
 
+  const exploreAll = config.exploreAllGradesEmails.includes(String(user.email || '').toLowerCase());
+
   res.json({
     user: {
       firstName: user.firstName,
@@ -58,6 +61,7 @@ router.get('/profile', studentMiddleware, asyncHandler(async (req, res) => {
       streakDays: user.streakDays
     },
     class: student?.class || null,
+    canSeeAllGrades: exploreAll,
     gradeId: student?.class?.level ? findGradeByLevel(student.class.level)?.id || null : null,
     studentLevel: student?.level || null,
     badges: badges.map((b) => b.badge),

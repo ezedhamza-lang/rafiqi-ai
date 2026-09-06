@@ -16,7 +16,7 @@ export function useStudentLevel() {
       inflight = api
         .get('/student/profile')
         .then((p) => {
-          cached = p?.gradeId || p?.studentLevel || null;
+          cached = p?.canSeeAllGrades ? null : (p?.gradeId || p?.studentLevel || null);
           return cached;
         })
         .catch(() => {
