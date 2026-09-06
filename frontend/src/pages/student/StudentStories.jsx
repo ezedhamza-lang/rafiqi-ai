@@ -29,6 +29,7 @@ export default function StudentStories() {
   const [openStory, setOpenStory] = useState(null);
   const [grade, setGrade] = useState('all');
   const [storyMap, setStoryMap] = useState(null);
+  const [storyFull, setStoryFull] = useState(false);
   const [loading, setLoading] = useState(true);
   const [speaking, setSpeaking] = useState(false);
   const speechRef = useRef(null);
@@ -177,8 +178,8 @@ export default function StudentStories() {
       )}
 
       {openStory && (
-        <div className="modal-overlay" onClick={() => { setOpenStory(null); window.speechSynthesis?.cancel(); setSpeaking(false); }}>
-          <div className="modal story-modal" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-overlay" onClick={() => { setOpenStory(null); setStoryFull(false); window.speechSynthesis?.cancel(); setSpeaking(false); }}>
+          <div className={`modal story-modal${storyFull ? ' full' : ''}`} onClick={(e) => e.stopPropagation()}>
             <div className="modal-head">
               <h3>{openStory.title || openStory.storyTitle}</h3>
               <div className="row">
@@ -188,7 +189,15 @@ export default function StudentStories() {
                     {speaking ? t('studentSpace.stories.stopListen') : t('studentSpace.stories.listen')}
                   </button>
                 )}
-                <button className="btn btn-ghost btn-sm" onClick={() => { setOpenStory(null); window.speechSynthesis?.cancel(); setSpeaking(false); }}>{t('common.close')}</button>
+                <button
+                  type="button"
+                  className="btn btn-ghost btn-sm"
+                  onClick={() => setStoryFull((v) => !v)}
+                  title={storyFull ? 'تصغير' : 'ملء الشاشة'}
+                >
+                  <span className="material-icons" style={{ fontSize: 18 }}>{storyFull ? 'fullscreen_exit' : 'fullscreen'}</span>
+                </button>
+                <button className="btn btn-ghost btn-sm" onClick={() => { setOpenStory(null); setStoryFull(false); window.speechSynthesis?.cancel(); setSpeaking(false); }}>{t('common.close')}</button>
               </div>
             </div>
             <div className="story-content">
