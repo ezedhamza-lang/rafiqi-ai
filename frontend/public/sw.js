@@ -1,7 +1,7 @@
 /* Service Worker — بوابة رفيقي للحياة المدرسية
    Strategy: network-first for API and navigation, cache-first for static assets. */
 
-const CACHE_NAME = 'rafiqi-cache-v2';
+const CACHE_NAME = 'rafiqi-cache-v3';
 const APP_SHELL = [
   '/',
   '/index.html',
