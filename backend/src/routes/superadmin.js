@@ -12,7 +12,8 @@ import {
   superAdminRoleUpdateSchema,
   superAdminUsersQuerySchema,
   superAdminIdParamSchema,
-  superAdminPasswordResetSchema
+  superAdminPasswordResetSchema,
+  superAdminUserCreateSchema
 } from '../validators/superadmin.js';
 
 const router = Router();
@@ -326,6 +327,39 @@ router.get('/users', validateQuery(superAdminUsersQuerySchema), asyncHandler(asy
  *       400:
  *         description: دور غير صالح
  */
+/**
+ * @swagger
+ * /api/superadmin/users:
+ *   post:
+ *     summary: إنشاء مستخدم جديد بدور محدد (افتراضي: أستاذ) مع كلمة سر
+ *     tags: [superadmin]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       201:
+ *         description: تم الإنشاء مع إرجاع كلمة السر مرة واحدة
+ *       409:
+ *         description: البريد مسجل مسبقا
+ */
+router.post('/users', validateBody(superAdminUserCreateSchema), asyncHandler(async (req, res) => {
+  const { firstName, lastName, email, phone, role, password } = req.body;
+  const emailNorm = String(email).toLowerCase();
+  const existing = await prisma.user.findUnique({ where: { email: emailNorm } });
+  if (existing) throw new ApiError(409, 'البريد مسجل مسبقا');
+  const plain = (password || '').trim() || `Rafeeqi-${crypto.randomBytes(3).toString('hex')}`;
+  const user = await prisma.user.create({
+    data: {
+      firstName: String(firstName).trim(),
+      lastName: String(lastName).trim(),
+      email: emailNorm,
+      phone: phone ? String(phone).trim() : null,
+      passwordHash: await bcrypt.hash(plain, 10),
+      role: role || 'TEACHER'
+    }
+  });
+  res.status(201).json({ ok: true, id: user.id, email: user.email, role: user.role, password: plain });
+}));
+
 router.put('/users/:id/role', validateParams(superAdminIdParamSchema), validateBody(superAdminRoleUpdateSchema), asyncHandler(async (req, res) => {
   const { role } = req.body;
   await prisma.user.update({ where: { id: Number(req.params.id) }, data: { role } });

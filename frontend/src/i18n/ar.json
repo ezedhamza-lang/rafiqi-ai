@@ -1219,7 +1219,16 @@
     "newPassword": "كلمة السر الجديدة",
     "copy": "نسخ",
     "copied": "تم النسخ ✓",
-    "copyManually": "انسخ كلمة السر يدويًا:"
+    "copyManually": "انسخ كلمة السر يدويًا:",
+    "addTeacher": "إضافة أستاذ",
+    "addTeacherTitle": "حساب أستاذ جديد",
+    "firstName": "الاسم",
+    "lastName": "اللقب",
+    "phone": "الهاتف",
+    "passwordOptional": "كلمة السر (اختيارية — تُولّد تلقائياً)",
+    "create": "إنشاء",
+    "fillRequired": "يرجى ملء الاسم واللقب والبريد",
+    "accountCreated": "تم إنشاء الحساب:"
   },
   "studentSpace": {
     "tabs": {

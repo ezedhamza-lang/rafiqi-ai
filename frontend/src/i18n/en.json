@@ -1218,7 +1218,16 @@
     "newPassword": "New password",
     "copy": "Copy",
     "copied": "Copied ✓",
-    "copyManually": "Copy the password manually:"
+    "copyManually": "Copy the password manually:",
+    "addTeacher": "Add teacher",
+    "addTeacherTitle": "New teacher account",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "phone": "Phone",
+    "passwordOptional": "Password (optional — auto-generated)",
+    "create": "Create",
+    "fillRequired": "Please fill first name, last name and email",
+    "accountCreated": "Account created:"
   },
   "studentSpace": {
     "tabs": {

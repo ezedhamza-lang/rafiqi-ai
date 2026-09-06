@@ -19,6 +19,10 @@ export default function UsersAdmin() {
   const [role, setRole] = useState('');
   const [resetInfo, setResetInfo] = useState(null);
   const [copied, setCopied] = useState(false);
+  const [showAdd, setShowAdd] = useState(false);
+  const [addForm, setAddForm] = useState({ firstName: '', lastName: '', email: '', phone: '', password: '' });
+  const [addErr, setAddErr] = useState('');
+  const [adding, setAdding] = useState(false);
 
   const load = useCallback((q, r) => {
     const params = new URLSearchParams();
@@ -65,6 +69,35 @@ export default function UsersAdmin() {
     }
   };
 
+  const createTeacher = async (e) => {
+    e.preventDefault();
+    setAddErr('');
+    if (!addForm.firstName.trim() || !addForm.lastName.trim() || !addForm.email.trim()) {
+      setAddErr(t('usersAdmin.fillRequired'));
+      return;
+    }
+    setAdding(true);
+    try {
+      const res = await api.post('/superadmin/users', {
+        firstName: addForm.firstName.trim(),
+        lastName: addForm.lastName.trim(),
+        email: addForm.email.trim(),
+        phone: addForm.phone.trim() || undefined,
+        role: 'TEACHER',
+        password: addForm.password.trim() || undefined
+      });
+      setResetInfo({ id: res.id, email: res.email, password: res.password, isNew: true });
+      setCopied(false);
+      setAddForm({ firstName: '', lastName: '', email: '', phone: '', password: '' });
+      setShowAdd(false);
+      load(query, role);
+    } catch (ex) {
+      setAddErr(ex.message);
+    } finally {
+      setAdding(false);
+    }
+  };
+
   const roleLabel = (r) => (ROLE_LABEL_KEYS[r] ? t(ROLE_LABEL_KEYS[r]) : r);
 
   return (
@@ -84,8 +117,55 @@ export default function UsersAdmin() {
               <option key={r.value} value={r.value}>{t(r.labelKey)}</option>
             ))}
           </select>
+          <button type="button" className="btn btn-primary btn-sm" onClick={() => { setShowAdd((v) => !v); setAddErr(''); }}>
+            {t('usersAdmin.addTeacher')}
+          </button>
         </div>
       </div>
+
+      {showAdd && (
+        <form onSubmit={createTeacher} style={{ background: 'var(--primary-soft, #eef2ff)', padding: '1rem', borderRadius: '12px', display: 'grid', gap: '0.6rem', marginBottom: '1rem' }}>
+          <h4 style={{ margin: 0 }}>{t('usersAdmin.addTeacherTitle')}</h4>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.6rem' }}>
+            <div className="form-group">
+              <label>{t('usersAdmin.firstName')} *</label>
+              <input type="text" value={addForm.firstName} onChange={(e) => setAddForm({ ...addForm, firstName: e.target.value })} />
+            </div>
+            <div className="form-group">
+              <label>{t('usersAdmin.lastName')} *</label>
+              <input type="text" value={addForm.lastName} onChange={(e) => setAddForm({ ...addForm, lastName: e.target.value })} />
+            </div>
+            <div className="form-group">
+              <label>{t('usersAdmin.emailColumn')} *</label>
+              <input type="email" dir="ltr" value={addForm.email} onChange={(e) => setAddForm({ ...addForm, email: e.target.value })} />
+            </div>
+            <div className="form-group">
+              <label>{t('usersAdmin.phone')}</label>
+              <input type="text" dir="ltr" value={addForm.phone} onChange={(e) => setAddForm({ ...addForm, phone: e.target.value })} />
+            </div>
+            <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+              <label>{t('usersAdmin.passwordOptional')}</label>
+              <input type="text" dir="ltr" value={addForm.password} onChange={(e) => setAddForm({ ...addForm, password: e.target.value })} placeholder="••••••" />
+            </div>
+          </div>
+          {addErr && <p className="form-error">{addErr}</p>}
+          <div>
+            <button type="submit" className="btn btn-primary btn-sm" disabled={adding}>
+              {adding ? '...' : t('usersAdmin.create')}
+            </button>
+          </div>
+        </form>
+      )}
+
+      {resetInfo && resetInfo.isNew && (
+        <div className="reset-result" style={{ background: '#e7f6ec', border: '1px solid #bfe7d2', borderRadius: '10px', padding: '0.8rem', marginBottom: '1rem' }}>
+          <div><strong>{t('usersAdmin.accountCreated')}</strong> {resetInfo.email}</div>
+          <div><strong>{t('usersAdmin.newPassword')}:</strong> <code dir="ltr">{resetInfo.password}</code></div>
+          <button type="button" className="btn btn-sm" onClick={copyPassword} style={{ marginTop: '0.4rem' }}>
+            {copied ? t('usersAdmin.copied') : t('usersAdmin.copy')}
+          </button>
+        </div>
+      )}
 
       <div className="table-wrap">
         <table className="data-table">

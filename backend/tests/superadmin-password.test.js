@@ -65,3 +65,25 @@ describe('إعادة تعيين كلمات السر من المشرف العام
     expect(loginRes.body.token).toBeTruthy();
   });
 });
+
+describe('إنشاء مستخدم من المشرف العام (أستاذ)', () => {
+  it('يرفض البريد المكرر (409)', async () => {
+    const dup = await request(app)
+      .post('/api/superadmin/users')
+      .set('Authorization', `Bearer ${superToken}`)
+      .send({ firstName: 'مكرر', lastName: 'مكرر', email: 'student@test.tn' });
+    expect(dup.status).toBe(409);
+  });
+
+  it('ينشئ أستاذا بدور TEACHER ويدخل فعلا', async () => {
+    const res = await request(app)
+      .post('/api/superadmin/users')
+      .set('Authorization', 'Bearer ' + superToken)
+      .send({ firstName: 'سامي', lastName: 'المعلم', email: 'sami.teacher@test.tn' });
+    expect(res.status).toBe(201);
+    expect(res.body.role).toBe('TEACHER');
+    expect(res.body.password).toBeTruthy();
+    const back = await login('sami.teacher@test.tn', res.body.password);
+    expect(back.body.token).toBeTruthy();
+  });
+});

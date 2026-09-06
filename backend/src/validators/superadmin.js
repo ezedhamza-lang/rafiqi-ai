@@ -30,3 +30,12 @@ export { idParamSchema as superAdminIdParamSchema };
 export const superAdminPasswordResetSchema = z.object({
   password: z.string().trim().min(6, { error: 'كلمة السر قصيرة جدا (6 أحرف على الأقل)' }).max(100, { error: 'كلمة السر طويلة جدا' }).optional().nullable()
 });
+
+export const superAdminUserCreateSchema = z.object({
+  firstName: z.string({ error: 'الاسم مطلوب' }).trim().min(2, { error: 'الاسم قصير جدا' }).max(100, { error: 'الاسم طويل جدا' }),
+  lastName: z.string({ error: 'اللقب مطلوب' }).trim().min(2, { error: 'اللقب قصير جدا' }).max(100, { error: 'اللقب طويل جدا' }),
+  email: z.string({ error: 'البريد مطلوب' }).trim().email({ error: 'البريد غير صحيح' }).max(150, { error: 'البريد طويل جدا' }),
+  phone: z.string().trim().max(30, { error: 'الهاتف طويل جدا' }).optional().nullable(),
+  role: z.enum(['STUDENT', 'PARENT', 'TEACHER', 'SCHOOL_DIRECTOR', 'ADMIN', 'SUPER_ADMIN'], { error: 'دور غير صالح' }).optional().nullable(),
+  password: z.string().trim().min(6, { error: 'كلمة السر قصيرة جدا (6 أحرف على الأقل)' }).max(100, { error: 'كلمة السر طويلة جدا' }).optional().nullable()
+});
