@@ -82,35 +82,54 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
       .send();
     const all = res.body.flatMap((p) => p.blocks || []);
     const kinds = new Set(all.map((b) => b.kind));
-    for (const k of ['objective', 'concept', 'definition', 'keyword', 'question']) {
+    // العقد الحالي لأنيسي س1: أهداف + نص انطلاق + أسئلة قابلة للإجابة (حُذفت المفردات والجمل المفتاحية عمدًا)
+    for (const k of ['objective', 'concept', 'question']) {
       expect(kinds.has(k), `نوع الكتلة ${k} يجب أن يكون مدعوماً`).toBe(true);
+    }
+    // كل سؤال يجب أن يكون قابلًا للإجابة: خيارات مع إجابة، أو فراغ مع إجابة
+    for (const q of all.filter((b) => b.kind === 'question')) {
+      const hasMCQ = Array.isArray(q.options) && q.options.length > 0 && typeof q.answer === 'number';
+      const hasFill = !q.options && q.answer !== undefined && q.answer !== null;
+      expect(hasMCQ || hasFill, `السؤال "${(q.text || '').slice(0, 40)}" يجب أن يكون قابلًا للإجابة`).toBe(true);
     }
   });
 
-  it('إيقاظ علمي س1: لا يضيع محتوى — تجارب وخلاصات ومكافآت تصل للتلميذ', async () => {
+  it('إيقاظ علمي س1: دروس تفاعلية + تقييمات فترات /20 — كل سؤال قابل للإجابة', async () => {
     const res = await request(app)
       .get('/api/public/curriculum/books/year1/science/lessons')
       .send();
     expect(res.status).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
-    expect(res.body.length).toBeGreaterThan(200);
+    // 21 درسًا + 6 تقييمات فترات
+    expect(res.body.length).toBeGreaterThanOrEqual(25);
 
     const blocks = res.body.flatMap((p) => p.blocks || []);
     const kinds = new Set(blocks.map((b) => b.kind));
-    for (const k of ['experiment', 'summary', 'reward', 'question', 'concept']) {
+    for (const k of ['objective', 'concept', 'question', 'summary']) {
       expect(kinds.has(k), `نوع الكتلة ${k} يجب أن يصل للتلميذ من كتاب الإيقاظ`).toBe(true);
     }
-
-    const experiment = blocks.find((b) => b.kind === 'experiment');
-    expect(experiment.materials.length).toBeGreaterThan(0);
-    expect(experiment.steps.length).toBeGreaterThan(0);
-
-    const summary = blocks.find((b) => b.kind === 'summary');
-    expect(summary.points.length).toBeGreaterThan(0);
 
     for (const page of res.body) {
       expect(page.blocks.length).toBeGreaterThan(0);
     }
+
+    // كل سؤال قابل للإجابة
+    for (const q of blocks.filter((b) => b.kind === 'question')) {
+      const hasMCQ = Array.isArray(q.options) && q.options.length > 0 && typeof q.answer === 'number';
+      const hasFill = !q.options && q.answer !== undefined && q.answer !== null;
+      expect(hasMCQ || hasFill, `سؤال بلا إجابة في ${q.title || ''}`).toBe(true);
+    }
+
+    // تقييمات الفترات الست بمجموع 20 نقطة
+    const assess = res.body.filter((p) => p.isAssessment);
+    expect(assess.length).toBe(6);
+    for (const a of assess) {
+      const pts = (a.blocks || []).filter((b) => b.points).reduce((s, b) => s + b.points, 0);
+      expect(pts, `تقييم ${a.id} مجموعه ${pts} بدل 20`).toBe(20);
+    }
+
+    const summary = blocks.find((b) => b.kind === 'summary');
+    expect(summary.points.length).toBeGreaterThan(0);
   });
 
   it('إيقاظ علمي س1: أسئلة الاختيار تحمل خيارات وإجابة قابلة للتحقق', async () => {

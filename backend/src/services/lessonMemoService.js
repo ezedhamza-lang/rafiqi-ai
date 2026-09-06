@@ -226,7 +226,8 @@ export function buildMemoContent(methodology, lesson, ctx) {
   const table = buildTable(profile, phases);
   const sourceBlocks = uniqueStrings([
     ...(lesson.blocks || []).map((b) => b.text),
-    lesson.content || ''
+    lesson.content || '',
+    lesson.pedagogicalBasis || ''
   ]);
 
   return {

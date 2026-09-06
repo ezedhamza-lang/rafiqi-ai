@@ -91,7 +91,7 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     const res = await request(app)
       .post('/api/memos/generate')
       .set('Authorization', `Bearer ${token}`)
-      .send({ subject: 'إيقاظ علمي', level: 'السنة الأولى أساسي', lessonTitle: 'جسم الإنسان' });
+      .send({ subject: 'إيقاظ علمي', level: 'السنة الأولى أساسي', lessonTitle: 'الحواس الخمس ووظائفها' });
     expect(res.status).toBe(200);
     const memo = res.body.memo;
     expect(memo.methodologyId).toBe('year1-science-awakening');
@@ -166,7 +166,7 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     const res = await request(app)
       .post('/api/memos/generate')
       .set('Authorization', `Bearer ${token}`)
-      .send({ subject: 'الإيقاظ العلمي', level: 'السنة الأولى أساسي', lessonTitle: 'جسم الإنسان' });
+      .send({ subject: 'الإيقاظ العلمي', level: 'السنة الأولى أساسي', lessonTitle: 'الحواس الخمس ووظائفها' });
     expect(res.status).toBe(200);
     expect(res.body.memo.methodologyId).toBe('year1-science-awakening');
   });
