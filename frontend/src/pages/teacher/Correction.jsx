@@ -61,7 +61,7 @@ export default function Correction() {
 
   const askSuggestion = async (question, studentAnswer) => {
     try {
-      const res = await api.post('/teacher/ai/grade-suggestion', { question, studentAnswer });
+      const res = await api.post('/ai/grade-suggestion', { question, studentAnswer });
       setSuggestion(res.suggestion);
     } catch {
       setSuggestion(t('teacherSpace.correction.aiFallback'));
