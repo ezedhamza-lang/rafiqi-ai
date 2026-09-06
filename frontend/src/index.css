@@ -403,6 +403,26 @@ button {
   padding-top: 0.4rem;
 }
 
+/* Wide 2-column variant for long menus (e.g. student space) */
+@media (min-width: 993px) {
+  .has-dropdown:hover .dropdown-menu--wide,
+  .has-dropdown:focus-within .dropdown-menu--wide {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.15rem 0.5rem;
+    min-width: 500px;
+    max-width: calc(100vw - 2rem);
+    max-height: calc(100vh - 120px);
+  }
+  .dropdown-menu--wide > li {
+    min-width: 0;
+  }
+  .dropdown-menu--wide .dropdown-divider,
+  .dropdown-menu--wide .dropdown-group-header {
+    grid-column: 1 / -1;
+  }
+}
+
 /* ---------- Dropdown Group Headers ---------- */
 .dropdown-group-header {
   padding: 0;
@@ -1732,10 +1752,15 @@ tr:hover td {
   display: flex;
   gap: 0.5rem;
   overflow-x: auto;
-  padding: 0.8rem 0;
+  padding: 0.8rem 0.25rem 1rem;
   margin-bottom: 1.5rem;
   scrollbar-width: thin;
+  scrollbar-color: rgba(79, 70, 229, 0.35) transparent;
   -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: 0.25rem;
+  mask-image: linear-gradient(to left, transparent, #000 20px, #000 calc(100% - 20px), transparent);
+  -webkit-mask-image: linear-gradient(to left, transparent, #000 20px, #000 calc(100% - 20px), transparent);
 }
 
 .student-tabs-nav::-webkit-scrollbar {
@@ -1747,7 +1772,7 @@ tr:hover td {
 }
 
 .student-tabs-nav::-webkit-scrollbar-thumb {
-  background: rgba(14, 165, 233, 0.3);
+  background: rgba(79, 70, 229, 0.35);
   border-radius: 10px;
 }
 
@@ -1762,12 +1787,19 @@ tr:hover td {
   border: 2px solid var(--border);
   color: #555;
   font-weight: 700;
-  font-size: 0.78rem;
+  font-size: 0.85rem;
   white-space: nowrap;
-  min-width: 72px;
+  min-width: 76px;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
   user-select: none;
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+}
+
+.student-tab-item:focus-visible {
+  outline: 3px solid rgba(99, 102, 241, 0.45);
+  outline-offset: 2px;
 }
 
 .student-tab-item .material-icons {

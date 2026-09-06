@@ -321,7 +321,7 @@ export default function Header() {
                   {renderBadge(item)}
                   <span className="material-icons dropdown-caret" aria-hidden="true">expand_more</span>
                 </NavLink>
-                <ul className="dropdown-menu">
+                <ul className={`dropdown-menu${item.key === 'studentSpace' ? ' dropdown-menu--wide' : ''}`}>
                   {item.children.map((child, ci) => (
                     <li key={child.to || child.group || ci} className={`${child.divider ? 'dropdown-divider' : ''} ${child.group ? 'dropdown-group-header' : ''}`}>
                       {child.group ? (
