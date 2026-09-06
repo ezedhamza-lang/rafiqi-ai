@@ -627,6 +627,7 @@ const STORY_SERIES = [
   { id: 'anisi-stories-ai', file: 'anisi-stories-ai-data.json', title: 'أنيسي — الذكاء الاصطناعي' },
   { id: 'salem', file: 'salem-stories-data.json', title: 'سالم والنظافة' },
   { id: 'haras-watani', file: 'haras-watani-stories-data.json', title: 'قصصي في وطني' },
+  { id: 'y6-word-lessons', file: 'y6-word-lessons-data.json', title: 'قصصُ السنة السادسة — دُروسُ الكلمات' },
   { id: 'iqra', file: 'iqra-series.json', title: 'اقرأ بذكاء' }
 ];
 

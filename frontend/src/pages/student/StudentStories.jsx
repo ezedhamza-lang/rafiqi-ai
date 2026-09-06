@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { api } from '../../api/client.js';
 import StoryExercises from './StoryExercises.jsx';
+import AssessmentPaper from '../../components/AssessmentPaper.jsx';
 import { useI18n } from '../../i18n/index.jsx';
 import { useStudentLevel } from '../../hooks/useStudentLevel.js';
 
@@ -30,6 +31,32 @@ export default function StudentStories() {
   const [grade, setGrade] = useState('all');
   const [storyMap, setStoryMap] = useState(null);
   const [storyFull, setStoryFull] = useState(false);
+  const [assessAnswers, setAssessAnswers] = useState({});
+  const [assessSubmitting, setAssessSubmitting] = useState(false);
+  const [assessResult, setAssessResult] = useState(null);
+
+  const handleAssessAnswer = (blockId, answer) => setAssessAnswers((prev) => ({ ...prev, [blockId]: answer }));
+  const handleAssessSubmit = async () => {
+    if (!openStory) return;
+    const kept = Object.fromEntries(Object.entries(assessAnswers).filter(([, v]) => v !== '' && v != null));
+    if (!Object.keys(kept).length) { setAssessResult({ success: false, message: 'أجب عن سؤال واحد على الأقل قبل الإرسال' }); return; }
+    setAssessSubmitting(true);
+    setAssessResult(null);
+    try {
+      await api.post('/student/lesson/submit', {
+        lessonId: openStory.id,
+        lessonTitle: openStory.title,
+        answers: kept,
+        isAssessment: true,
+        submittedAt: new Date().toISOString()
+      });
+      setAssessResult({ success: true, message: 'تم إرسال إجاباتك للمعلّم بنجاح!' });
+    } catch (e) {
+      setAssessResult({ success: false, message: e.message || 'فشل الإرسال' });
+    } finally {
+      setAssessSubmitting(false);
+    }
+  };
   const [loading, setLoading] = useState(true);
   const [speaking, setSpeaking] = useState(false);
   const speechRef = useRef(null);
@@ -101,6 +128,11 @@ export default function StudentStories() {
     setSpeaking(true);
     window.speechSynthesis.speak(utter);
   };
+
+  useEffect(() => {
+    setAssessAnswers({});
+    setAssessResult(null);
+  }, [openStory?.id]);
 
   const current = activeSeries || (seriesList.length ? null : null);
 
@@ -201,6 +233,17 @@ export default function StudentStories() {
               </div>
             </div>
             <div className="story-content">
+              {openStory.assessment ? (
+                <AssessmentPaper
+                  lesson={{ id: openStory.id, title: openStory.title, subject: openStory.subject || 'القراءة', period: openStory.period || 1, isAssessment: true, blocks: openStory.studentBlocks || [] }}
+                  answers={assessAnswers}
+                  onAnswer={handleAssessAnswer}
+                  submitting={assessSubmitting}
+                  submitResult={assessResult}
+                  onSubmit={handleAssessSubmit}
+                />
+              ) : (
+              <>
               {(openStory.image || openStory.imageUrl) && (
                 <img
                   src={openStory.image || openStory.imageUrl}
@@ -238,6 +281,8 @@ export default function StudentStories() {
                 matchPairs={openStory.matchPairs}
               />
               {openStory.moral && <p className="story-key">{t('studentSpace.stories.moral', { text: openStory.moral })}</p>}
+              </>
+              )}
             </div>
           </div>
         </div>
