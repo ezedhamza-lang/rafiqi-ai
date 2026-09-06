@@ -41,5 +41,16 @@ export default defineConfig({
       }
     },
     allowedHosts: ['.monkeycode-ai.live']
+  },
+  build: {
+    // livekit-client is a large third-party SDK, already lazy-loaded on demand.
+    chunkSizeWarningLimit: 600,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom']
+        }
+      }
+    }
   }
 });
