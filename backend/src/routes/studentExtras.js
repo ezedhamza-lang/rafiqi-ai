@@ -112,7 +112,7 @@ router.get('/flashcards', studentMiddleware, asyncHandler(async (req, res) => {
  * @openapi
  * /api/student/challenge/today:
  *   get:
- *     summary: تحدي اليوم (أهداف محسوبة من سجلات حقيقية: درس + أسئلة + لعبة)
+ *     summary: "تحدي اليوم (أهداف محسوبة من سجلات حقيقية: درس + أسئلة + لعبة)"
  *     tags: [student]
  *     security:
  *       - bearerAuth: []

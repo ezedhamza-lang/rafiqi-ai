@@ -331,7 +331,7 @@ router.get('/users', validateQuery(superAdminUsersQuerySchema), asyncHandler(asy
  * @swagger
  * /api/superadmin/users:
  *   post:
- *     summary: إنشاء مستخدم جديد بدور محدد (افتراضي: أستاذ) مع كلمة سر
+ *     summary: "إنشاء مستخدم جديد بدور محدد (افتراضي: أستاذ) مع كلمة سر"
  *     tags: [superadmin]
  *     security:
  *       - bearerAuth: []
