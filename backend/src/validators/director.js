@@ -23,3 +23,19 @@ export const directorStatusQuerySchema = z
   });
 
 export { idParamSchema as directorRequestIdParamSchema };
+
+export const directorClassCreateSchema = z.object({
+  name: z.string({ error: 'اسم القسم مطلوب' }).trim().min(2, { error: 'اسم القسم قصير جدا' }).max(120, { error: 'اسم القسم طويل جدا' }),
+  level: z.string({ error: 'المستوى مطلوب' }).trim().min(2, { error: 'المستوى مطلوب' }).max(120, { error: 'المستوى طويل جدا' }),
+  teacherId: z.coerce.number({ error: 'معرف الأستاذ غير صحيح' }).int().positive({ error: 'معرف الأستاذ غير صحيح' }).optional().nullable(),
+  schoolYear: z.string().trim().max(20, { error: 'السنة الدراسية طويلة جدا' }).optional().nullable()
+});
+
+export const directorClassUpdateSchema = z.object({
+  name: z.string().trim().min(2, { error: 'اسم القسم قصير جدا' }).max(120, { error: 'اسم القسم طويل جدا' }).optional().nullable(),
+  level: z.string().trim().min(2, { error: 'المستوى مطلوب' }).max(120, { error: 'المستوى طويل جدا' }).optional().nullable(),
+  teacherId: z.coerce.number({ error: 'معرف الأستاذ غير صحيح' }).int().positive({ error: 'معرف الأستاذ غير صحيح' }).optional().nullable(),
+  schoolYear: z.string().trim().max(20, { error: 'السنة الدراسية طويلة جدا' }).optional().nullable()
+});
+
+export { idParamSchema as directorClassIdParamSchema };

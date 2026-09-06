@@ -12,7 +12,10 @@ import {
   directorRequestRejectSchema,
   directorBroadcastSchema,
   directorStatusQuerySchema,
-  directorRequestIdParamSchema
+  directorRequestIdParamSchema,
+  directorClassCreateSchema,
+  directorClassUpdateSchema,
+  directorClassIdParamSchema
 } from '../validators/director.js';
 
 const router = Router();
@@ -164,6 +167,112 @@ router.get('/classes', asyncHandler(async (req, res) => {
     orderBy: { name: 'asc' }
   });
   res.json(classes);
+}));
+
+/**
+ * @swagger
+ * /api/director/teachers:
+ *   get:
+ *     summary: قائمة الأساتذة لإسناد الأقسام
+ *     tags: [director]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: قائمة الأساتذة
+ */
+router.get('/teachers', requireRole('SCHOOL_DIRECTOR'), asyncHandler(async (req, res) => {
+  const teachers = await prisma.user.findMany({
+    where: { role: 'TEACHER' },
+    select: { id: true, firstName: true, lastName: true, email: true },
+    orderBy: [{ firstName: 'asc' }, { lastName: 'asc' }]
+  });
+  res.json(teachers);
+}));
+
+/**
+ * @swagger
+ * /api/director/classes:
+ *   post:
+ *     summary: إنشاء قسم جديد وإسناده لأستاذ
+ *     tags: [director]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [name, level]
+ *             properties:
+ *               name: { type: string }
+ *               level: { type: string }
+ *               teacherId: { type: integer }
+ *               schoolYear: { type: string }
+ *     responses:
+ *       201:
+ *         description: تم إنشاء القسم
+ *       404:
+ *         description: الأستاذ غير موجود
+ */
+router.post('/classes', requireRole('SCHOOL_DIRECTOR'), validateBody(directorClassCreateSchema), asyncHandler(async (req, res) => {
+  const { name, level, teacherId, schoolYear } = req.body;
+  let teacher = null;
+  if (teacherId !== undefined && teacherId !== null && teacherId !== '') {
+    teacher = await prisma.user.findFirst({ where: { id: Number(teacherId), role: 'TEACHER' } });
+    if (!teacher) throw new ApiError(404, 'الأستاذ غير موجود');
+  }
+  const klass = await prisma.class.create({
+    data: {
+      name: String(name).trim(),
+      level: String(level).trim(),
+      ...(schoolYear ? { schoolYear: String(schoolYear).trim() } : {}),
+      ...(teacher ? { teacherId: teacher.id } : {})
+    },
+    include: { teacher: { select: { id: true, firstName: true, lastName: true } } }
+  });
+  res.status(201).json(klass);
+}));
+
+/**
+ * @swagger
+ * /api/director/classes/{id}:
+ *   put:
+ *     summary: تعديل قسم أو إسناده لأستاذ
+ *     tags: [director]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: integer }
+ *     responses:
+ *       200:
+ *         description: تم التحديث
+ *       404:
+ *         description: القسم أو الأستاذ غير موجود
+ */
+router.put('/classes/:id', requireRole('SCHOOL_DIRECTOR'), validateParams(directorClassIdParamSchema), validateBody(directorClassUpdateSchema), asyncHandler(async (req, res) => {
+  const klass = await prisma.class.findUnique({ where: { id: Number(req.params.id) } });
+  if (!klass) throw new ApiError(404, 'القسم غير موجود');
+  const { name, level, teacherId, schoolYear } = req.body;
+  const data = {};
+  if (name !== undefined && name !== null && name !== '') data.name = String(name).trim();
+  if (level !== undefined && level !== null && level !== '') data.level = String(level).trim();
+  if (schoolYear !== undefined && schoolYear !== null && schoolYear !== '') data.schoolYear = String(schoolYear).trim();
+  if (teacherId !== undefined && teacherId !== null && teacherId !== '') {
+    const teacher = await prisma.user.findFirst({ where: { id: Number(teacherId), role: 'TEACHER' } });
+    if (!teacher) throw new ApiError(404, 'الأستاذ غير موجود');
+    data.teacherId = teacher.id;
+  }
+  const updated = await prisma.class.update({
+    where: { id: klass.id },
+    data,
+    include: { teacher: { select: { id: true, firstName: true, lastName: true } } }
+  });
+  res.json(updated);
 }));
 
 /**
