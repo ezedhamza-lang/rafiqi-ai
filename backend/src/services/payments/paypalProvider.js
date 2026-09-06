@@ -5,7 +5,6 @@
  * Uses PayPal REST API v2 for checkout creation and webhook verification.
  */
 
-import crypto from 'crypto';
 import { config } from '../../config.js';
 import { ApiError } from '../../middleware/errorHandler.js';
 

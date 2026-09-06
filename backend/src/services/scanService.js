@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { PDFDocument, degrees } from 'pdf-lib';
+import { PDFDocument } from 'pdf-lib';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const EXAMS_UPLOAD_DIR = path.join(__dirname, '../../uploads/exams');

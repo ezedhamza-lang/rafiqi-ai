@@ -630,7 +630,7 @@ router.post('/exams/generate-ai', teacherMiddleware, asyncHandler(async (req, re
       lessonTitle: lessonTitle || title || '',
       count: Math.min(Math.max(Number(count) || 6, 1), 15)
     });
-  } catch (e) {
+  } catch {
     aiQuestions = null;
   }
   if (!aiQuestions || !Array.isArray(aiQuestions) || aiQuestions.length === 0) {

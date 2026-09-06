@@ -3,7 +3,7 @@ import prisma from '../db.js';
 import { authMiddleware, teacherMiddleware, studentMiddleware } from '../auth.js';
 import { gradeQuiz } from '../services/gradingService.js';
 import { awardXp, checkBadges, registerDailyActivity, XP_QUIZ } from '../services/gamificationService.js';
-import { gradeOfficialExam, buildExamContent } from '../services/officialExamService.js';
+import { gradeOfficialExam } from '../services/officialExamService.js';
 import { validateBody, validateParams } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 import { quizCreateSchema, quizUpdateSchema, quizSubmitSchema, quizIdParamSchema } from '../validators/teacher.js';

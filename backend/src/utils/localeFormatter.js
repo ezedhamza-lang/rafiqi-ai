@@ -419,7 +419,6 @@ export function formatNumber(num, lang = 'ar', options = {}) {
     return lang === 'ar' ? '—' : '—';
   }
   
-  const locale = LOCALES[lang] || LOCALES.ar;
   const decimals = options.decimals !== undefined ? options.decimals : 2;
   const useGrouping = options.useGrouping !== false;
   

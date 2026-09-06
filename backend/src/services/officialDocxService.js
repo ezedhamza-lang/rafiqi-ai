@@ -339,7 +339,7 @@ function buildTrueFalse(q) {
 
 function buildFillBlank(q) {
   const items = q.items && q.items.length ? q.items : [{ text: q.prompt || q.text || '' }];
-  return items.map((item, i) => {
+  return items.map((item) => {
     const text = typeof item === 'string' ? item : (item.text || '');
     const parts = String(text).split(/_{3,}|\.{4,}|…+/);
     if (parts.length > 1) {
@@ -596,7 +596,7 @@ export async function buildOfficialDocx(examData, context = {}) {
   const {
     title, subject, level, trimester,
     questions = [], criteria: rawCriteria,
-    passages = [], durationMinutes = 60, totalPoints = 20
+    passages = [], durationMinutes = 60
   } = examData;
 
   const subjectKey = typeof subject === 'string' ? subject.toLowerCase().replace(/[^a-z-]/g, '') : '';

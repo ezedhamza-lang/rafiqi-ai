@@ -171,7 +171,7 @@ function gradeClosedQuestion(question, answer) {
   return correct;
 }
 
-function masteryFromRatio(ratio, mastery) {
+function masteryFromRatio(ratio) {
   if (ratio <= 0) return MASTERY_KEYS.none;
   if (ratio >= 1) return MASTERY_KEYS.max;
   if (ratio >= 0.5) return MASTERY_KEYS.min;
@@ -205,7 +205,7 @@ export function gradeOfficialExam(content, answers = {}) {
         if (gradeClosedQuestion(q, answers[q.id])) correctCount += 1;
       }
       const ratio = correctCount / closed.length;
-      masteryKey = masteryFromRatio(ratio, criterion.mastery);
+      masteryKey = masteryFromRatio(ratio);
       earned = criterion.mastery[masteryKey] ?? 0;
     }
 

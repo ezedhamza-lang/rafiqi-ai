@@ -58,7 +58,7 @@ export function localeMiddleware(req, res, next) {
     res.setHeader('X-Locale-Dir', getDirection(lang));
 
     next();
-  } catch (error) {
+  } catch {
     // Don't block the request on locale errors, just default to Arabic
     req.locale = {
       lang: 'ar',

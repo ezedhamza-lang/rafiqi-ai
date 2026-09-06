@@ -16,7 +16,6 @@ export const SUBJECTS = [
 ];
 
 const SUBJECT_LABELS = Object.fromEntries(SUBJECTS.map((s) => [s.code, s.label]));
-const VALID_SUBJECTS = SUBJECTS.map((s) => s.code);
 
 function canManage(req, klass) {
   if (['ADMIN', 'SCHOOL_DIRECTOR', 'SUPER_ADMIN'].includes(req.user.role)) return true;

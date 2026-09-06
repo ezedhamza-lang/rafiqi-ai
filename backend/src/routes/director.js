@@ -40,8 +40,6 @@ router.get('/dashboard', asyncHandler(async (req, res) => {
     submissions,
     memos,
     messages,
-    schedules,
-    weakClasses,
     pendingRequests
   ] = await Promise.all([
     prisma.class.count(),
@@ -52,8 +50,6 @@ router.get('/dashboard', asyncHandler(async (req, res) => {
     prisma.submission.count(),
     prisma.memo.count(),
     prisma.message.count({ where: { recipientId: req.user.id, readAt: null } }),
-    prisma.schedule.findMany({ take: 10, include: { class: true }, orderBy: { createdAt: 'desc' } }),
-    prisma.class.findMany({ include: { _count: { select: { students: true } } } }),
     prisma.subscriptionRequest.count({ where: { status: 'PENDING_APPROVAL' } })
   ]);
 

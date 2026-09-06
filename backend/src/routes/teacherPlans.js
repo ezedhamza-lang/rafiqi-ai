@@ -6,7 +6,6 @@ import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 import {
   annualPlanCreateSchema,
   annualPlanContentSchema,
-  scheduleGridSchema,
   classIdParamSchema,
   annualPlanIdParamSchema
 } from '../validators/teacherPlans.js';
@@ -135,8 +134,6 @@ router.delete('/plans/:id', teacherMiddleware, validateParams(annualPlanIdParamS
   await prisma.annualPlan.deleteMany({ where: { id: Number(req.params.id), teacherId: req.user.id } });
   res.json({ ok: true });
 }));
-
-const DAYS = ['الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
 
 /**
  * @swagger
