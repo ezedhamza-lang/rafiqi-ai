@@ -72,7 +72,7 @@ export default function Footer() {
             </ul>
             <h4 style={{ marginTop: '1rem' }}>{t('footer.followUs')}</h4>
             <div className="footer-social-icons">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-icon social-facebook" aria-label="Facebook">
+              <a href="https://www.facebook.com/profile.php?id=61591553832110" target="_blank" rel="noopener noreferrer" className="social-icon social-facebook" aria-label="Facebook">
                 <FacebookIcon />
               </a>
               <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-icon social-youtube" aria-label="YouTube">
