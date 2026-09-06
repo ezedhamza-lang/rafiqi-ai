@@ -26,7 +26,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
 
   for (let bi = 0; bi < blocks.length; bi++) {
     const b = blocks[bi];
-    if (b.kind === 'concept' && b.title && b.title.includes('السند')) {
+    if (b.kind === 'concept' && b.title && b.title.replace(/[\u064B-\u0652\u0670]/g, '').includes('السند')) {
       if (current) passages.push(current);
       current = { passage: b, exercises: [] };
     } else if (['question', 'math-input', 'textarea', 'drawing', 'match-pairs', 'picture-choice'].includes(b.kind)) {
