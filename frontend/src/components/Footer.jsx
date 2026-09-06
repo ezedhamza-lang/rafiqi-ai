@@ -34,7 +34,7 @@ export default function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-col footer-brand-col">
-            <img src="/logo-rafiqi.png" alt="Rafiqi" className="footer-logo" style={{ maxWidth: '120px', height: 'auto' }} />
+            <img src="/logo-rafiqi-square.png" alt="Rafiqi" className="footer-logo" style={{ maxWidth: '120px', height: 'auto' }} />
           </div>
           <div className="footer-col">
             <h4>{t('footer.quickServices')}</h4>
