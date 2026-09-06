@@ -1,0 +1,307 @@
+{
+  "_meta": {
+    "note": "خريطة مهارات مادة الإنتاج الكتابي س1، مفتاحها id الدرس في production-units.json."
+  },
+  "lessons": {
+    "y1p01": {
+      "learningObjectives": [
+        "يقدم نفسه بجملتين"
+      ],
+      "competencies": [
+        "التعبير عن الذات"
+      ],
+      "skills": [
+        "written-production",
+        "sentence-building"
+      ],
+      "indicators": [
+        "يكتب جملا سليمة تبدأ بحرف كبير وتنتهي بنقطة"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "ينتج نصا قصيرا مرتبطا ومنطقيا"
+      ],
+      "source": "curated"
+    },
+    "y1p02": {
+      "learningObjectives": [
+        "يصف أفراد عائلته"
+      ],
+      "competencies": [
+        "الوصف"
+      ],
+      "skills": [
+        "written-production",
+        "sentence-building"
+      ],
+      "indicators": [
+        "يكتب جملا سليمة تبدأ بحرف كبير وتنتهي بنقطة"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "ينتج نصا قصيرا مرتبطا ومنطقيا"
+      ],
+      "source": "curated"
+    },
+    "y1p03": {
+      "learningObjectives": [
+        "يرتب جملا حسب تسلسل الصور"
+      ],
+      "competencies": [
+        "التسلسل الزمني"
+      ],
+      "skills": [
+        "written-production",
+        "sentence-building"
+      ],
+      "indicators": [
+        "يكتب جملا سليمة تبدأ بحرف كبير وتنتهي بنقطة"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "ينتج نصا قصيرا مرتبطا ومنطقيا"
+      ],
+      "source": "curated"
+    },
+    "y1p04": {
+      "learningObjectives": [
+        "يصف أفعال الأطفال في الحديقة"
+      ],
+      "competencies": [
+        "وصف الأفعال"
+      ],
+      "skills": [
+        "written-production",
+        "sentence-building"
+      ],
+      "indicators": [
+        "يكتب جملا سليمة تبدأ بحرف كبير وتنتهي بنقطة"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "ينتج نصا قصيرا مرتبطا ومنطقيا"
+      ],
+      "source": "curated"
+    },
+    "y1p05": {
+      "learningObjectives": [
+        "يكمل الجملة الثالثة في سرد مصور"
+      ],
+      "competencies": [
+        "إتمام السرد"
+      ],
+      "skills": [
+        "written-production",
+        "sentence-building"
+      ],
+      "indicators": [
+        "يكتب جملا سليمة تبدأ بحرف كبير وتنتهي بنقطة"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "ينتج نصا قصيرا مرتبطا ومنطقيا"
+      ],
+      "source": "curated"
+    },
+    "y1p06": {
+      "learningObjectives": [
+        "يربط جملتين بأداة الربط فـ"
+      ],
+      "competencies": [
+        "الربط"
+      ],
+      "skills": [
+        "written-production",
+        "sentence-building"
+      ],
+      "indicators": [
+        "يكتب جملا سليمة تبدأ بحرف كبير وتنتهي بنقطة"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "ينتج نصا قصيرا مرتبطا ومنطقيا"
+      ],
+      "source": "curated"
+    },
+    "y1p07": {
+      "learningObjectives": [
+        "يرتب نصا مجزأ ليكون قصة"
+      ],
+      "competencies": [
+        "ترتيب النص"
+      ],
+      "skills": [
+        "written-production",
+        "sentence-building"
+      ],
+      "indicators": [
+        "يكتب جملا سليمة تبدأ بحرف كبير وتنتهي بنقطة"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "ينتج نصا قصيرا مرتبطا ومنطقيا"
+      ],
+      "source": "curated"
+    },
+    "y1p08": {
+      "learningObjectives": [
+        "يكتب عن نظافة جسمه بتسلسل"
+      ],
+      "competencies": [
+        "تسلسل الأفعال"
+      ],
+      "skills": [
+        "written-production",
+        "sentence-building"
+      ],
+      "indicators": [
+        "يكتب جملا سليمة تبدأ بحرف كبير وتنتهي بنقطة"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "ينتج نصا قصيرا مرتبطا ومنطقيا"
+      ],
+      "source": "curated"
+    },
+    "y1p09": {
+      "learningObjectives": [
+        "يسرد قصة مصورة في ثلاث جمل"
+      ],
+      "competencies": [
+        "السرد المصور"
+      ],
+      "skills": [
+        "written-production",
+        "sentence-building"
+      ],
+      "indicators": [
+        "يكتب جملا سليمة تبدأ بحرف كبير وتنتهي بنقطة"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "ينتج نصا قصيرا مرتبطا ومنطقيا"
+      ],
+      "source": "curated"
+    },
+    "y1p10": {
+      "learningObjectives": [
+        "يتمم مشهدا بجملة ثالثة"
+      ],
+      "competencies": [
+        "إتمام المشهد"
+      ],
+      "skills": [
+        "written-production",
+        "sentence-building"
+      ],
+      "indicators": [
+        "يكتب جملا سليمة تبدأ بحرف كبير وتنتهي بنقطة"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "ينتج نصا قصيرا مرتبطا ومنطقيا"
+      ],
+      "source": "curated"
+    },
+    "y1p11": {
+      "learningObjectives": [
+        "يكتب أربع جمل حرة عن يومه"
+      ],
+      "competencies": [
+        "الإنتاج الحر"
+      ],
+      "skills": [
+        "written-production",
+        "sentence-building"
+      ],
+      "indicators": [
+        "يكتب جملا سليمة تبدأ بحرف كبير وتنتهي بنقطة"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "ينتج نصا قصيرا مرتبطا ومنطقيا"
+      ],
+      "source": "curated"
+    },
+    "y1p12": {
+      "learningObjectives": [
+        "يراجع نصا ويصحح أخطاءه"
+      ],
+      "competencies": [
+        "التقويم الذاتي"
+      ],
+      "skills": [
+        "written-production",
+        "sentence-building"
+      ],
+      "indicators": [
+        "يكتب جملا سليمة تبدأ بحرف كبير وتنتهي بنقطة"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "ينتج نصا قصيرا مرتبطا ومنطقيا"
+      ],
+      "source": "curated"
+    },
+    "y1pa1": {
+      "learningObjectives": [
+        "يكتب نصا قصيرا"
+      ],
+      "competencies": [
+        "الإنتاج الكتابي"
+      ],
+      "skills": [
+        "written-production",
+        "sentence-building"
+      ],
+      "indicators": [
+        "يكتب جملا سليمة تبدأ بحرف كبير وتنتهي بنقطة"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "ينتج نصا قصيرا مرتبطا ومنطقيا"
+      ],
+      "source": "curated"
+    },
+    "y1pa2": {
+      "learningObjectives": [
+        "يكتب نصا قصيرا"
+      ],
+      "competencies": [
+        "الإنتاج الكتابي"
+      ],
+      "skills": [
+        "written-production",
+        "sentence-building"
+      ],
+      "indicators": [
+        "يكتب جملا سليمة تبدأ بحرف كبير وتنتهي بنقطة"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "ينتج نصا قصيرا مرتبطا ومنطقيا"
+      ],
+      "source": "curated"
+    },
+    "y1pa3": {
+      "learningObjectives": [
+        "يكتب نصا قصيرا"
+      ],
+      "competencies": [
+        "الإنتاج الكتابي"
+      ],
+      "skills": [
+        "written-production",
+        "sentence-building"
+      ],
+      "indicators": [
+        "يكتب جملا سليمة تبدأ بحرف كبير وتنتهي بنقطة"
+      ],
+      "prerequisites": [],
+      "expectedOutcomes": [
+        "ينتج نصا قصيرا مرتبطا ومنطقيا"
+      ],
+      "source": "curated"
+    }
+  }
+}
