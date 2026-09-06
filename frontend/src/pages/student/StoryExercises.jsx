@@ -246,8 +246,15 @@ function MatchExercise({ ex, num }) {
   const half = ex.content ? Math.floor(ex.content.length / 2) : 0;
   const hasBothHalves = ex.content && ex.content.length % 2 === 0 && ex.content.length === answerPairs.length * 2;
   const leftOnly = ex.content && ex.content.length > 0 && !hasBothHalves;
+  const showPlain = !hasStructured && !hasBothHalves && !leftOnly;
 
-  if (!hasStructured && !hasBothHalves && !leftOnly) {
+  const [selL, setSelL] = useState(null);
+  const [selR, setSelR] = useState(null);
+  const [matched, setMatched] = useState([]);
+  const [checked, setChecked] = useState(false);
+  const [fills, setFills] = useState(() => (ex.content || []).map(() => ''));
+
+  if (showPlain) {
     return (
       <ExerciseWrapper num={num}>
         <p className="exercise-q">{ex.q}</p>
@@ -257,14 +264,8 @@ function MatchExercise({ ex, num }) {
     );
   }
 
-  const [selL, setSelL] = useState(null);
-  const [selR, setSelR] = useState(null);
-  const [matched, setMatched] = useState([]);
-  const [checked, setChecked] = useState(false);
-
   if (leftOnly) {
     const colL = ex.content;
-    const [fills, setFills] = useState(colL.map(() => ''));
     const expectedFor = (c) => {
       const cn = normAr(c);
       const pair = answerPairs.find(([ea, eb]) => matchAr(cn, ea) || matchAr(cn, eb));
@@ -273,7 +274,7 @@ function MatchExercise({ ex, num }) {
     };
     const correct = checked && colL.every((c, i) => {
       const exp = expectedFor(c);
-      return exp != null && matchAr(normAr(fills[i]), exp);
+      return exp != null && matchAr(normAr(fills[i] ?? ''), exp);
     });
     return (
       <ExerciseWrapper num={num}>
@@ -283,7 +284,7 @@ function MatchExercise({ ex, num }) {
           <div key={i} className="match-fill-row">
             <span className="classify-item">{c}</span>
             <input
-              value={fills[i]}
+              value={fills[i] ?? ''}
               onChange={(e) => {
                 const next = [...fills];
                 next[i] = e.target.value;

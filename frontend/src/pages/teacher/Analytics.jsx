@@ -9,7 +9,7 @@ function shortLabel(title) {
   return words.slice(0, 2).join(' ');
 }
 
-export default function Analytics({ classes, onChanged }) {
+export default function Analytics({ classes }) {
   const { t } = useI18n();
   const [classId, setClassId] = useState('');
   const [classReport, setClassReport] = useState(null);

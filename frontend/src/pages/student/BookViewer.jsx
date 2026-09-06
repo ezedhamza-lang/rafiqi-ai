@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useI18n } from '../../i18n/index.jsx';
 
-function pageUrl(imageBase, imageExt, page, total) {
+function pageUrl(imageBase, imageExt, page) {
   const num = String(page).padStart(3, '0');
   return `${imageBase}page-${num}${imageExt || '.jpg'}`;
 }
@@ -12,7 +12,7 @@ export default function BookViewer({ book, onClose }) {
   const [imgError, setImgError] = useState(false);
   const total = book.totalPages || 0;
 
-  const src = pageUrl(book.imageBase, book.imageExt, page, total);
+  const src = pageUrl(book.imageBase, book.imageExt, page);
   const go = (p) => {
     setImgError(false);
     setPage(Math.min(Math.max(1, p), total));

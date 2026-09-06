@@ -1,13 +1,6 @@
 import { useState, useRef } from 'react';
 import SvgArt from './SvgArt';
 
-function normAns(s) {
-  if (s == null) return '';
-  return String(s).trim().replace(/\s+/g, ' ')
-    .replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
-    .replace(/،/g, ',').replace(/؛/g, ';').replace(/؟/g, '?').replace(/أ/g, 'ا').replace(/إ/g, 'ا').replace(/آ/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').toLowerCase();
-}
-
 function rich(text) {
   if (!text) return null;
   const parts = text.split(/(\*\*[^*]+\*\*)/g);

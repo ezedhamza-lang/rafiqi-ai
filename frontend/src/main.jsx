@@ -62,4 +62,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 try {
   const fallback = document.getElementById('loading-fallback');
   if (fallback) fallback.remove();
-} catch (e) {}
+} catch {}

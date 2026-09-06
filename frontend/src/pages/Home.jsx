@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../api/client.js';
 import { useI18n } from '../i18n/index.jsx';
-import { Button, Card, Badge } from '../components/ui/index.js';
+import { Card, Badge } from '../components/ui/index.js';
 
 const SERVICES = [
   { icon: 'school', key: 'studentSection', to: '/student' },
@@ -89,16 +89,12 @@ function FaqSection({ faqs }) {
 
 export default function Home() {
   const { t } = useI18n();
-  const [announcements, setAnnouncements] = useState([]);
-  const [articles, setArticles] = useState([]);
   const [faqs, setFaqs] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    Promise.all([api.get('/public/announcements'), api.get('/public/articles'), api.get('/public/faqs')])
-      .then(([a, ar, f]) => {
-        setAnnouncements(a);
-        setArticles(ar);
+    api.get('/public/faqs')
+      .then((f) => {
         setFaqs(f);
       })
       .catch(console.error)

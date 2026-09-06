@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 
@@ -74,18 +74,7 @@ const DEGREE_SUBJECTS = {
   ]
 };
 
-const DAYS = ['الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
-
 const DURATION_OPTIONS = [15, 20, 25, 30, 40, 55];
-
-function formatDuration(d) {
-  if (d === 15) return '15 دقيقة';
-  if (d === 20) return '20 دقيقة';
-  if (d === 25) return '25 دقيقة';
-  if (d === 30) return '30 دقيقة';
-  if (d === 40) return '40 دقيقة';
-  return `${d} دقيقة`;
-}
 
 function formatHours(h) {
   if (h === 0) return '—';
@@ -119,7 +108,6 @@ export default function Schedules({ classes }) {
   const [activeTab, setActiveTab] = useState('distribution');
 
   const currentDegree = DEGREES[degreeIdx];
-  const currentYear = currentDegree.years[yearIdx];
 
   useEffect(() => {
     if (!classId) return;

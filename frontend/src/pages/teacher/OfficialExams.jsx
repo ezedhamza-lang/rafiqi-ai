@@ -236,7 +236,7 @@ export default function OfficialExams({ classes }) {
         try {
           const n = document.querySelector('[data-qprompt="' + idx + '"]');
           if (n) { n.focus(); n.selectionStart = n.selectionEnd = a + sym.length; }
-        } catch (e) {}
+        } catch {}
       }, 0);
     } else {
       updateQuestion(idx, { prompt: base + sym });
@@ -731,6 +731,9 @@ export default function OfficialExams({ classes }) {
           </div>
           <button className="btn btn-primary" type="submit">
             {t('teacherSpace.officialExams.saveExam')}
+          </button>
+          <button type="button" className="btn btn-ghost" onClick={cancelEdit} style={{ marginInlineStart: '0.5rem' }}>
+            {t('teacherSpace.officialExams.cancelEdit')}
           </button>
         </form>
       )}

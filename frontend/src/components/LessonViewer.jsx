@@ -324,7 +324,9 @@ function TextareaBlock({ block, onAnswer, blockId }) {
   const [value, setValue] = useState('');
   const [checked, setChecked] = useState(false);
   const [ok, setOk] = useState(null);
-  useEffect(() => { onAnswer(blockId, value); }, [value]);
+  const onAnswerRef = useRef(onAnswer);
+  onAnswerRef.current = onAnswer;
+  useEffect(() => { onAnswerRef.current(blockId, value); }, [value, blockId]);
   const icon = BLOCK_ICONS.textarea;
   const verifiable = block.answer !== undefined && block.answer !== null;
   const check = () => { setChecked(true); setOk(normAns(value) === normAns(block.answer)); };
@@ -368,7 +370,9 @@ function MathInputBlock({ block, onAnswer, blockId }) {
   const [checked, setChecked] = useState(false);
   const [ok, setOk] = useState(null);
   const inputRef = useRef(null);
-  useEffect(() => { onAnswer(blockId, value); }, [value]);
+  const onAnswerRef = useRef(onAnswer);
+  onAnswerRef.current = onAnswer;
+  useEffect(() => { onAnswerRef.current(blockId, value); }, [value, blockId]);
   const icon = BLOCK_ICONS['math-input'];
   const verifiable = block.answer !== undefined && block.answer !== null;
   const check = () => { setChecked(true); setOk(normAns(value) === normAns(block.answer)); };
@@ -540,7 +544,7 @@ function DrawingBlock({ block, onAnswer, blockId }) {
         ctx.setLineDash([]);
       }
     }
-  }, []);
+  }, [block.backgroundGrid, block.endPoint, block.startPoint]);
 
   const tools = block.tools || ['pen', 'eraser'];
 
@@ -738,7 +742,7 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
     const isAssessment = lesson.isAssessment || /^y\d+a\d+$/.test(lessonId);
 
     const keptAnswers = Object.fromEntries(
-      Object.entries(answers).filter(([id, val]) => val !== '' && val !== null && val !== undefined)
+      Object.entries(answers).filter(([, val]) => val !== '' && val !== null && val !== undefined)
     );
 
     if (Object.keys(keptAnswers).length === 0) {

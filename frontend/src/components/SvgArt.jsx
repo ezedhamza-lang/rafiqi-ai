@@ -638,17 +638,6 @@ function AssessFarm() {
 
 // ── end assessment scenes ──
 
-function Computer() {
-  return (
-    <g>
-      <rect x="36" y="20" width="48" height="32" rx="4" fill="#333" stroke={INK} strokeWidth="2.5" />
-      <rect x="40" y="24" width="40" height="24" rx="2" fill="#7ec8e3" />
-      <rect x="50" y="52" width="20" height="6" rx="2" fill="#666" />
-      <rect x="42" y="58" width="36" height="4" rx="2" fill="#999" />
-    </g>
-  );
-}
-
 function Scene({ kind }) {
   if (kind === 'class') {
     return (

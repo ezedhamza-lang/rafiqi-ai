@@ -156,7 +156,7 @@ const ROLE_NAV = {
 export default function Header() {
   const { user, logout } = useAuth();
   const { theme, toggle } = useTheme();
-  const { lang, setLang, t } = useI18n();
+  const { lang, t } = useI18n();
   const { unread: msgUnread, connected } = useChat();
   const { unreadCount, recent, markAllRead } = useNotifications();
   const navigate = useNavigate();

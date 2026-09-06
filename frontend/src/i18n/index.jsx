@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import ar from './ar.json';
 import en from './en.json';
 
@@ -26,7 +26,7 @@ function getInitialLang() {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored && dictionaries[stored]) return stored;
-  } catch (e) {}
+  } catch {}
   return FALLBACK_LANG;
 }
 
@@ -36,7 +36,7 @@ export function I18nProvider({ children }) {
   useEffect(() => {
     try {
       localStorage.setItem(STORAGE_KEY, lang);
-    } catch (e) {}
+    } catch {}
     document.documentElement.setAttribute('lang', lang);
     document.documentElement.setAttribute('dir', RTL_LANGS.includes(lang) ? 'rtl' : 'ltr');
     const titles = {

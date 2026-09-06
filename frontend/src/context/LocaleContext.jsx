@@ -11,7 +11,7 @@
  * - Auto-syncs when language changes
  */
 
-import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
+import { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react';
 import { useI18n } from '../i18n/index.jsx';
 
 const LocaleContext = createContext(null);
@@ -87,7 +87,7 @@ function saveCachedLocale(config) {
       timestamp: Date.now()
     };
     localStorage.setItem(LOCALE_CACHE_KEY, JSON.stringify(cacheData));
-  } catch (e) {
+  } catch {
     // Silently fail if localStorage is not available
   }
 }
@@ -160,7 +160,6 @@ export function LocaleProvider({ children, apiBaseUrl = '' }) {
       const dateObj = new Date(date);
       if (isNaN(dateObj.getTime())) return '';
       
-      const formatPattern = localeConfig?.dateFormat?.[format] || localeConfig?.dateFormat?.medium;
       const localeStr = lang === 'ar' ? 'ar-TN' : 'en-US';
       
       // Use Intl.DateTimeFormat for proper localization
@@ -190,7 +189,7 @@ export function LocaleProvider({ children, apiBaseUrl = '' }) {
       console.error('Date formatting error:', e);
       return String(date);
     }
-  }, [localeConfig, lang]);
+  }, [lang]);
   
   /**
    * Format currency amount
@@ -233,7 +232,7 @@ export function LocaleProvider({ children, apiBaseUrl = '' }) {
         minimumFractionDigits: options.decimals ?? 2,
         maximumFractionDigits: options.decimals ?? 2
       });
-    } catch (e) {
+    } catch {
       return String(num);
     }
   }, [lang]);
@@ -268,7 +267,7 @@ export function LocaleProvider({ children, apiBaseUrl = '' }) {
       if (diffHours < 24) return t[5].replace('{{n}}', diffHours);
       if (diffDays < 2) return t[6];
       return t[7].replace('{{n}}', diffDays);
-    } catch (e) {
+    } catch {
       return String(date);
     }
   }, [lang]);
@@ -291,7 +290,7 @@ export function LocaleProvider({ children, apiBaseUrl = '' }) {
     firstDayOfWeek: localeConfig?.firstDayOfWeek ?? 1,
     weekend: localeConfig?.weekend ?? [5, 6],
     timeZone: localeConfig?.timeZone ?? 'Africa/Tunis'
-  }), [localeConfig, isLoading, error, lang, formatDate, formatCurrency, formatNumber, formatRelativeTime]);
+  }), [localeConfig, isLoading, error, lang, formatDate, formatCurrency, formatNumber, formatRelativeTime, fetchLocaleConfig]);
   
   return (
     <LocaleContext.Provider value={value}>

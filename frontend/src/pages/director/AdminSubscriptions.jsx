@@ -15,7 +15,7 @@ export default function AdminSubscriptions() {
   const [err, setErr] = useState('');
   const [payForm, setPayForm] = useState(null);
   const [amount, setAmount] = useState('');
-  const [method, setMethod] = useState('OFFLINE');
+  const [method] = useState('OFFLINE');
 
   const [dcForm, setDcForm] = useState(null);
   const [dc, setDc] = useState({ code: '', type: 'PERCENTAGE', value: '', usageLimit: '', expiresAt: '', description: '' });

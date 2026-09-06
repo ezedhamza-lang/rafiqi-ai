@@ -27,7 +27,7 @@ const emptyForm = () => ({
 });
 
 export default function Assignments({ classes, onChanged }) {
-  const { t, lang } = useI18n();
+  const { t } = useI18n();
   const [assignments, setAssignments] = useState([]);
   const [view, setView] = useState('list');
   const [form, setForm] = useState(emptyForm());
@@ -63,7 +63,7 @@ export default function Assignments({ classes, onChanged }) {
       description: a.description || '',
       dueDate: a.dueDate ? a.dueDate.slice(0, 16) : '',
       status: a.status,
-      questions: a.questions.map((q, i) => ({
+      questions: a.questions.map((q) => ({
         ...q,
         options: q.options || ['', '', '', ''],
         orderItems: q.orderItems || []

@@ -1,4 +1,3 @@
-import babelParser from '@babel/eslint-parser';
 import reactHooks from 'eslint-plugin-react-hooks';
 
 export default [
@@ -10,12 +9,8 @@ export default [
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module',
-      parser: babelParser,
       parserOptions: {
-        requireConfigFile: false,
-        babelOptions: {
-          presets: ['@babel/preset-react']
-        }
+        ecmaFeatures: { jsx: true }
       },
       globals: {
         window: 'readonly',

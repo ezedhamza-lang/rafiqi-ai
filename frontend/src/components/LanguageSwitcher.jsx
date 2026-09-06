@@ -79,7 +79,7 @@ export default function LanguageSwitcher({
       setIsChanging(false);
       document.body.classList.remove('direction-changing');
     }
-  }, [lang, setLang, isChanging, onLanguageChange, nextLang]);
+  }, [setLang, isChanging, onLanguageChange, nextLang]);
   
   /**
    * Keyboard handler for accessibility
@@ -198,7 +198,7 @@ export function MiniLanguageSwitcher({ className = '', onLanguageChange }) {
  * Shows all available languages in a dropdown menu
  */
 export function LanguageDropdown({ className = '', onLanguageChange }) {
-  const { lang, setLang, t } = useI18n();
+  const { lang, setLang } = useI18n();
   const [isOpen, setIsOpen] = useState(false);
   const ref = React.useRef(null);
   

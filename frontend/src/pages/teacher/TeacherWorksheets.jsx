@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react';
-import { useI18n } from '../../i18n/index.jsx';
 
 const EMPTY_WORKSHEET = {
   schoolName: '',
@@ -221,7 +220,6 @@ function PrintWorksheet({ data }) {
 }
 
 export default function TeacherWorksheets() {
-  const { t } = useI18n();
   const [data, setData] = useState({ ...EMPTY_WORKSHEET });
   const [showPreview, setShowPreview] = useState(false);
   const previewRef = useRef(null);
