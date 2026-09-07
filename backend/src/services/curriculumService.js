@@ -175,6 +175,7 @@ function adaptMathUnits(lessons) {
     if (item.subject) extra.subject = item.subject;
     if (item.noEnrich) extra.noEnrich = true;
     if (item.pedagogicalBasis) extra.pedagogicalBasis = item.pedagogicalBasis;
+    if (item.image) extra.image = item.image;
     // دروس مؤلفة للتلميذ (studentBlocks): تعرض حصرياً للتلميذ بدل القالب
     // الافتراضي (أساس بيداغوجي موجّه للمعلم) — أسئلة تفاعلية + خلاصة.
     if (Array.isArray(item.studentBlocks) && item.studentBlocks.length) {
