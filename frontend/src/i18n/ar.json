@@ -2209,6 +2209,7 @@
       "lessonTitleLabel": "عنوان الدرس",
       "lessonTitlePlaceholder": "مثال: الجمع",
       "generateBtn": "توليد {{kind}}",
+      "generating": "جاري التوليد بالذكاء الاصطناعي...",
       "empty": "لا توجد موارد من هذا النوع بعد.",
       "titleCol": "العنوان",
       "lessonCol": "الدرس",
@@ -2223,6 +2224,7 @@
       "rebuild": "إعادة بناء",
       "back": "عودة",
       "instructionsLabel": "التعليمات:",
+      "durationLabel": "المدة",
       "durationDaysLabel": "المدة:",
       "daysSuffix": "أيام",
       "slideLabel": "شريحة {{n}}: {{title}}"

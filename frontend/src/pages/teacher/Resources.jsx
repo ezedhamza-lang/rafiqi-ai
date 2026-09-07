@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 
-const RESOURCE_KIND_CODES = ['WORKSHEET', 'HOMEWORK', 'FLASHCARDS', 'PRESENTATION'];
+const RESOURCE_KIND_CODES = ['WORKSHEET', 'HOMEWORK', 'FLASHCARDS', 'PRESENTATION', 'LESSON_PLAN'];
 
 export default function Resources() {
   const { t } = useI18n();
@@ -11,6 +11,7 @@ export default function Resources() {
   const [form, setForm] = useState({ lessonTitle: '' });
   const [view, setView] = useState(null);
   const [error, setError] = useState('');
+  const [generating, setGenerating] = useState(false);
 
   const load = useCallback((k) => {
     api
@@ -26,6 +27,7 @@ export default function Resources() {
   const create = async (e) => {
     e.preventDefault();
     setError('');
+    setGenerating(true);
     try {
       const res = await api.post('/teacher/resources', {
         kind,
@@ -38,6 +40,8 @@ export default function Resources() {
       load(kind);
     } catch (err) {
       setError(err.message);
+    } finally {
+      setGenerating(false);
     }
   };
 
@@ -90,8 +94,8 @@ export default function Resources() {
                 <label>{t('teacherSpace.resources.lessonTitleLabel')}</label>
                 <input required value={form.lessonTitle} onChange={(e) => setForm({ ...form, lessonTitle: e.target.value })} placeholder={t('teacherSpace.resources.lessonTitlePlaceholder')} />
               </div>
-              <button className="btn btn-primary" type="submit">
-                {t('teacherSpace.resources.generateBtn', { kind: kindLabel })}
+              <button className="btn btn-primary" type="submit" disabled={generating}>
+                {generating ? t('teacherSpace.resources.generating') : t('teacherSpace.resources.generateBtn', { kind: kindLabel })}
               </button>
             </div>
           </form>
@@ -182,6 +186,19 @@ export default function Resources() {
                 <div key={i} className="stage-item slide-card">
                   <h5>{t('teacherSpace.resources.slideLabel', { n: i + 1, title: s.title })}</h5>
                   <p>{s.body}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {kind === 'LESSON_PLAN' && (
+            <div>
+              {content.duration && <p><strong>{t('teacherSpace.resources.durationLabel')}:</strong> {content.duration} دقيقة</p>}
+              {content.stages?.map((s, i) => (
+                <div key={i} className="stage-item">
+                  <p><strong>{s.time} — {s.name}</strong></p>
+                  <p className="muted">{s.goal}</p>
+                  <p>{s.activity}</p>
                 </div>
               ))}
             </div>

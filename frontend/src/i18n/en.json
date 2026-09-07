@@ -2208,6 +2208,7 @@
       "lessonTitleLabel": "Lesson Title",
       "lessonTitlePlaceholder": "e.g. Addition",
       "generateBtn": "Generate {{kind}}",
+      "generating": "AI generating...",
       "empty": "No resources of this type yet.",
       "titleCol": "Title",
       "lessonCol": "Lesson",
@@ -2222,6 +2223,7 @@
       "rebuild": "Rebuild",
       "back": "Back",
       "instructionsLabel": "Instructions:",
+      "durationLabel": "Duration",
       "durationDaysLabel": "Duration:",
       "daysSuffix": "days",
       "slideLabel": "Slide {{n}}: {{title}}"
