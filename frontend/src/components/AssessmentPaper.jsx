@@ -27,9 +27,17 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
 
   for (let bi = 0; bi < blocks.length; bi++) {
     const b = blocks[bi];
-    if (b.kind === 'concept' && b.title && b.title.replace(/[\u064B-\u0652\u0670]/g, '').includes('السند')) {
-      if (current) passages.push(current);
-      current = { passage: b, exercises: [] };
+    if (b.kind === 'concept') {
+      // دمج الكتل المفهومية المتتالية (مثل القاعدة + الأمثلة) في سند واحد
+      // ما دامت لم تليها تمارين، ثم إرفاق التمارين بالسند السابق.
+      if (current && current.passage && current.exercises.length === 0) {
+        const extra = [b.title ? `**${b.title}**` : '', b.text].filter(Boolean).join('\n');
+        const mergedText = [current.passage.text, extra].filter(Boolean).join('\n\n');
+        current.passage = { ...current.passage, text: mergedText };
+      } else {
+        if (current) passages.push(current);
+        current = { passage: b, exercises: [] };
+      }
     } else if (['question', 'math-input', 'textarea', 'drawing', 'match-pairs', 'picture-choice'].includes(b.kind)) {
       exNum++;
       const ex = { ...b, _num: exNum, _blockIdx: bi };
