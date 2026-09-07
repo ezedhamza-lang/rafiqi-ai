@@ -4,6 +4,7 @@
   "grammar": "الْأَعْدَادُ ذَاتُ خَمْسَةِ أَرْقَامٍ (قِرَاءَةٌ وَكِتَابَةٌ)",
   "period": 1,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -36,6 +37,7 @@
   "grammar": "تَفْكِيكُ الْأَعْدَادِ ذَاتِ خَمْسَةِ أَرْقَامٍ",
   "period": 1,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -68,6 +70,7 @@
   "grammar": "مَنَازِلُ الْأَعْدَادِ (الْقِيمَةُ الْمَنْزِلِيَّةُ)",
   "period": 1,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -100,6 +103,7 @@
   "grammar": "مُقَارَنَةُ الْأَعْدَادِ الطَّبِيعِيَّةِ",
   "period": 1,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -132,6 +136,7 @@
   "grammar": "تَرْتِيبُ الْأَعْدَادِ الطَّبِيعِيَّةِ",
   "period": 1,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -164,6 +169,7 @@
   "grammar": "تَقْرِيبُ الْأَعْدَادِ إِلَى أَقْرَبِ 10 وَ 100",
   "period": 1,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -196,6 +202,7 @@
   "grammar": "خَطُّ الْأَعْدَادِ",
   "period": 1,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -228,6 +235,7 @@
   "grammar": "الْأَعْدَادُ عَلَى خَطِّ الْأَعْدَادِ (مُقَارَنَةٌ)",
   "period": 1,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -260,6 +268,7 @@
   "grammar": "مُضَاعَفَاتُ عَدَدٍ",
   "period": 1,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -292,6 +301,7 @@
   "grammar": "الْأَنْمَاطُ الْعَدَدِيَّةُ",
   "period": 1,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -324,6 +334,7 @@
   "grammar": "الْجَمْعُ بِدُونِ تَحْوِيلٍ",
   "period": 1,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -356,6 +367,7 @@
   "grammar": "الْجَمْعُ بِتَحْوِيلٍ",
   "period": 1,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -388,6 +400,7 @@
   "grammar": "الطَّرْحُ بِدُونِ تَحْوِيلٍ",
   "period": 1,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -420,6 +433,7 @@
   "grammar": "الطَّرْحُ بِتَحْوِيلٍ",
   "period": 1,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -452,6 +466,7 @@
   "grammar": "تَقْدِيرُ حَاصِلِ الْجَمْعِ",
   "period": 2,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -484,6 +499,7 @@
   "grammar": "تَقْدِيرُ حَاصِلِ الطَّرْحِ",
   "period": 2,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -516,6 +532,7 @@
   "grammar": "إِنْشَاءُ جُمْلَةٍ رِيَاضِيَّةٍ",
   "period": 2,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -548,6 +565,7 @@
   "grammar": "حَلُّ مَشْكِلَاتٍ (جَمْعٌ وَطَرْحٌ)",
   "period": 2,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -580,6 +598,7 @@
   "grammar": "جَدَاوِلُ الضَّرْبِ (مُرَاجَعَةٌ)",
   "period": 2,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -612,6 +631,7 @@
   "grammar": "الضَّرْبُ فِي عَدَدٍ مِنْ خَانَةٍ وَاحِدَةٍ",
   "period": 2,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -644,6 +664,7 @@
   "grammar": "الضَّرْبُ فِي 10 وَ 100 وَ 1 000",
   "period": 2,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -676,6 +697,7 @@
   "grammar": "الضَّرْبُ فِي عَدَدٍ مِنْ خَانَتَيْنِ",
   "period": 2,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -708,6 +730,7 @@
   "grammar": "تَقْدِيرُ حَاصِلِ الضَّرْبِ",
   "period": 2,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -740,6 +763,7 @@
   "grammar": "خَصَائِصُ الضَّرْبِ",
   "period": 2,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -772,6 +796,7 @@
   "grammar": "حَلُّ مَشْكِلَاتٍ (ضَرْبٌ)",
   "period": 2,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -804,6 +829,7 @@
   "grammar": "الْقِسْمَةُ الْإِقْلِيدِيَّةُ (تَعْرِيفٌ)",
   "period": 2,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -836,6 +862,7 @@
   "grammar": "الْقِسْمَةُ عَلَى عَدَدٍ مِنْ خَانَةٍ وَاحِدَةٍ",
   "period": 2,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -868,6 +895,7 @@
   "grammar": "الْقَاسِمُ وَالْحَاصِلُ وَالْبَاقِي",
   "period": 2,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -900,6 +928,7 @@
   "grammar": "الْقِسْمَةُ وَمُضَاعَفَاتُ الْعَدَدِ",
   "period": 3,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -932,6 +961,7 @@
   "grammar": "تَقْدِيرُ حَاصِلِ الْقِسْمَةِ",
   "period": 3,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -964,6 +994,7 @@
   "grammar": "الْقِسْمَةُ عَلَى 10 وَ 100",
   "period": 3,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -996,6 +1027,7 @@
   "grammar": "حَلُّ مَشْكِلَاتٍ (قِسْمَةٌ)",
   "period": 3,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1028,6 +1060,7 @@
   "grammar": "الْكَسْرُ (تَعْرِيفٌ وَقِرَاءَةٌ)",
   "period": 3,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1060,6 +1093,7 @@
   "grammar": "الْكُسُورُ الْمُتَكَافِئَةُ",
   "period": 3,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1092,6 +1126,7 @@
   "grammar": "مُقَارَنَةُ الْكُسُورِ (نَفْسُ الْمَقَامِ)",
   "period": 3,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1124,6 +1159,7 @@
   "grammar": "الْكَسْرُ كَنِسْبَةٍ",
   "period": 3,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1156,6 +1192,7 @@
   "grammar": "الْكَسْرُ عَلَى الْمُسْتَقِيمِ الْعَدَدِيِّ",
   "period": 3,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1188,6 +1225,7 @@
   "grammar": "كُسُورُ الْوَحْدَةِ (1/2، 1/3، 1/4)",
   "period": 3,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1220,6 +1258,7 @@
   "grammar": "وَحَدَاتُ الطُّولِ (km, m, dm, cm, mm)",
   "period": 3,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1252,6 +1291,7 @@
   "grammar": "وَحَدَاتُ الْكَتْلَةِ (kg, hg, dag, g)",
   "period": 3,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1284,6 +1324,7 @@
   "grammar": "وَحَدَاتُ السُّعَةِ (L, dL, cL, mL)",
   "period": 3,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1316,6 +1357,7 @@
   "grammar": "قِيَاسُ الزَّمَنِ (السَّاعَةُ، الدَّقِيقَةُ)",
   "period": 3,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1348,6 +1390,7 @@
   "grammar": "حِسَابُ الْمُدَّةِ الزَّمَنِيَّةِ",
   "period": 4,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1380,6 +1423,7 @@
   "grammar": "تَحْوِيلُ الْوَحَدَاتِ الْبَسِيطَةِ",
   "period": 4,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1412,6 +1456,7 @@
   "grammar": "الْمُسْتَقِيمَاتُ وَأَنْصَافُ الْمُسْتَقِيمَاتِ وَالْقِطَعُ الْمُسْتَقِيمَةُ",
   "period": 4,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1444,6 +1489,7 @@
   "grammar": "الزَّوَايَا (تَعْرِيفٌ وَأَنْوَاعٌ)",
   "period": 4,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1476,6 +1522,7 @@
   "grammar": "الْمُضَلَّعَاتُ (الْمُثَلَّثُ، الْمُرَبَّعُ، الْمُسْتَطِيلُ)",
   "period": 4,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1508,6 +1555,7 @@
   "grammar": "الدَّائِرَةُ وَعَنَاصِرُهَا",
   "period": 4,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1540,6 +1588,7 @@
   "grammar": "مَحِيطُ الْمُضَلَّعَاتِ (الْمُرَبَّعُ، الْمُسْتَطِيلُ، الْمُثَلَّثُ)",
   "period": 4,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1572,6 +1621,7 @@
   "grammar": "مِسَاحَةُ الْمُرَبَّعِ وَالْمُسْتَطِيلِ وَالْجَدَاوِلُ الْبِيَانِيَّةُ",
   "period": 4,
   "subject": "الرياضيات",
+  "isAssessment": true,
   "studentBlocks": [
    {
     "kind": "concept",

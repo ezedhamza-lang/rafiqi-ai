@@ -136,6 +136,7 @@ function listBooks(country) {
         subject: subject.title,
         title: book.title,
         subtitle: book.subtitle,
+        paperOnly: !!book.paperOnly,
         imageBase: book.imageBase,
         imageExt: book.imageExt || '.jpg',
         totalPages: book.totalPages,

@@ -1029,18 +1029,22 @@ function LessonViewer({ book, onClose }) {
         <div className="lesson-viewer-tabs">
           <button type="button" className={tab === 'lessons' ? 'active' : ''} onClick={() => setTab('lessons')}>
             <span className="material-icons" style={{ fontSize: 16 }}>menu_book</span>
-            الدروس
+            {book.paperOnly ? 'المواقف' : 'الدروس'}
           </button>
-          <button type="button" className={tab === 'exercises' ? 'active' : ''} onClick={() => setTab('exercises')}>
-            <span className="material-icons" style={{ fontSize: 16 }}>edit_note</span>
-            تمارين تفاعلية
-            {!loading && tab !== 'lessons' && <span className="subject-count">{exercises.length} تمرين</span>}
-          </button>
-          <button type="button" className={tab === 'videos' ? 'active' : ''} onClick={() => setTab('videos')}>
-            <span className="material-icons" style={{ fontSize: 16 }}>smart_display</span>
-            فيديوهات
-            {!loading && tab !== 'lessons' && <span className="subject-count">{videos.length} فيديو</span>}
-          </button>
+          {!book.paperOnly && (
+            <button type="button" className={tab === 'exercises' ? 'active' : ''} onClick={() => setTab('exercises')}>
+              <span className="material-icons" style={{ fontSize: 16 }}>edit_note</span>
+              تمارين تفاعلية
+              {!loading && tab !== 'lessons' && <span className="subject-count">{exercises.length} تمرين</span>}
+            </button>
+          )}
+          {!book.paperOnly && (
+            <button type="button" className={tab === 'videos' ? 'active' : ''} onClick={() => setTab('videos')}>
+              <span className="material-icons" style={{ fontSize: 16 }}>smart_display</span>
+              فيديوهات
+              {!loading && tab !== 'lessons' && <span className="subject-count">{videos.length} فيديو</span>}
+            </button>
+          )}
         </div>
 
         {error && <div className="form-error" style={{ margin: '1rem' }}>{error}</div>}
