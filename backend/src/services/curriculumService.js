@@ -632,6 +632,7 @@ const STORY_SERIES = [
   { id: 'y6-word-lessons', file: 'y6-word-lessons-data.json', title: 'قصصُ السنة السادسة — دُروسُ الكلمات' },
   { id: 'y5-reading-stories', file: 'y5-reading-stories-data.json', title: 'قصصُ السنة الخامسة — قراءتي' },
   { id: 'y4-reading-stories', file: 'y4-reading-stories-data.json', title: 'سلسلة النصوص — السنة الرابعة' },
+  { id: 'y3-reading-stories', file: 'y3-reading-stories-data.json', title: 'سلسلة النصوص — السنة الثالثة' },
   { id: 'iqra', file: 'iqra-series.json', title: 'اقرأ بذكاء' }
 ];
 
