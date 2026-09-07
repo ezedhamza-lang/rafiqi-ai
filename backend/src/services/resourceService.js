@@ -3,6 +3,26 @@ import { generateText } from './aiService.js';
 
 function extractJson(text) {
   if (!text) return null;
+  // Try markdown code blocks first
+  const codeBlock = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (codeBlock) {
+    try { return JSON.parse(codeBlock[1].trim()); } catch {}
+  }
+  // Try to find first valid JSON object by scanning
+  const start = text.indexOf('{');
+  if (start !== -1) {
+    let depth = 0;
+    for (let i = start; i < text.length; i++) {
+      if (text[i] === '{') depth++;
+      else if (text[i] === '}') {
+        depth--;
+        if (depth === 0) {
+          try { return JSON.parse(text.slice(start, i + 1)); } catch { break; }
+        }
+      }
+    }
+  }
+  // Fallback: greedy match
   const objMatch = text.match(/\{[\s\S]*\}/);
   if (objMatch) { try { return JSON.parse(objMatch[0]); } catch {} }
   const arrMatch = text.match(/\[[\s\S]*\]/);
