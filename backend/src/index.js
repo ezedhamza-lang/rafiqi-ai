@@ -68,6 +68,11 @@ for (const dir of ['uploads', 'uploads/documents', 'uploads/exams', 'uploads/ima
 const app = express();
 const PORT = config.port;
 
+// Render يعمل خلف وكيل (proxy) يضیف رأس X-Forwarded-For. بدون ھذا الإعداد
+// يفشل express-rate-limit برمي ValidationError غير ملتقط على أول طلب،
+// فتسقط العملية قبل أن ينجح فحص الصحة (فشل النشر + رجوع تلقائي).
+app.set('trust proxy', 1);
+
 app.use(helmet({
   // معطَّل: هذا التطبيق يخدم صوراً/فيديوهات/تسجيلات عبر نطاقات متعددة
   // (uploads, assets) وسيُصعّب COEP/CORP التحميل المتقاطع بلا فائدة أمنية
