@@ -49,6 +49,13 @@
    "grade": "year6",
    "subject": "anisi",
    "count": 31
+  },
+  {
+   "id": "y5-reading-stories",
+   "file": "y5-reading-stories-data.json",
+   "grade": "year5",
+   "subject": "anisi",
+   "count": 32
   }
  ],
  "stories": [
@@ -1648,12 +1655,44 @@
    "subject": "anisi",
    "series": "y6-word-lessons"
   },
-  {
-   "id": "y6w-31",
-   "title": "الْمَشْرُوعُ الْمُجَهَّزُ",
-   "grade": "year6",
-   "subject": "anisi",
-   "series": "y6-word-lessons"
-  }
+   {
+    "id": "y6w-31",
+    "title": "الْمَشْرُوعُ الْمُجَهَّزُ",
+    "grade": "year6",
+    "subject": "anisi",
+    "series": "y6-word-lessons"
+   },
+   {"id":"y5r-01","title":"صَبَاحٌ جَمِيلٌ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-02","title":"وَطَنِي تُونُسُ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-03","title":"الصَّانِعُ الْمَاهِرُ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-04","title":"رِحْلَةٌ إِلَى الْبَادِيَةِ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-05","title":"الْفَلَّاحُ الْمُجْتَهِدُ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-06","title":"فِي الْمَدِينَةِ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-07","title":"فِي الْحَدِيقَةِ الْعَامَّةِ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-08","title":"الْمُخْتَرِعُ الصَّغِيرُ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-09","title":"أُسْرَتِي","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-10","title":"التَّاجِرُ الْأَمِينُ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-11","title":"الرِّيَاضِيُّ الْبَطَلُ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-12","title":"يَوْمٌ مَلِيءٌ بِالْأَحْدَاثِ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-13","title":"الطِّفْلُ السَّعِيدُ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-14","title":"فِي السُّوقِ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-15","title":"الْفَرِيقُ الْمُتَعَاوِنُ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-16","title":"لَيْلَةُ الْقَمَرِ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-17","title":"الْأَمَلُ الْمُشْرِقُ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-18","title":"فِي رِحَابِ الطَّبِيعَةِ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-19","title":"الْأَصْدِقَاءُ الْمُخْلِصُونَ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-20","title":"بَيْتِي الْأَنِيسُ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-21","title":"يَا أُمِّي الْحَنُونَ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-22","title":"أَسْئِلَةٌ فِي الْفَضَاءِ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-23","title":"ثَمَرَةُ الِاجْتِهَادِ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-24","title":"الْعِلْمُ أَفْضَلُ مَالٍ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-25","title":"فِي الْغَابَةِ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-26","title":"فِي الْمَدِينَةِ الْكَبِيرَةِ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-27","title":"فَصْلُ الرَّبِيعِ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-28","title":"الطَّائِرُ الْأَسِيرُ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-29","title":"فِي بَحْرِ الْأَمَاجِ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-30","title":"عِنْدَ مَسَاءِ الْخَمِيسِ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-31","title":"صَوْتُ الْمُؤَذِّنِ","grade":"year5","subject":"anisi","series":"y5-reading-stories"},
+   {"id":"y5r-32","title":"نَخْلَةٌ مُبَارَكَةٌ","grade":"year5","subject":"anisi","series":"y5-reading-stories"}
  ]
 }
