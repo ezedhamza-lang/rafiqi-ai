@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import prisma from '../db.js';
 import { authMiddleware, teacherMiddleware, studentMiddleware } from '../auth.js';
+import { notify } from '../services/notify.js';
 import {
   saveAiKey,
   deleteAiKey,
@@ -15,7 +16,8 @@ import {
   resolveLessonContext,
   generateLessonPlan,
   generateSummary,
-  generatePresentation
+  generatePresentation,
+  batchGradeSubmissions
 } from '../services/aiService.js';
 import { getLessonPages, getSubjectsForLevel, listBooks, normalizeArabic } from '../services/curriculumService.js';
 import { validateBody } from '../middleware/validate.js';
@@ -44,7 +46,7 @@ function levelToCurriculumTitle(level) {
 }
 
 function aiError(e) {
-  if (e.message === 'NO_AI_KEY') return new ApiError(400, 'لم يتم ضبط مفتاح Gemini بعد');
+  if (e.message === 'NO_AI_KEY') return new ApiError(400, 'لم يتم ضبط مفتاح الذكاء الاصطناعي بعد. أضف مفتاحك من إعدادات AI');
   return new ApiError(502, 'تعذر الاتصال بخدمة الذكاء الاصطناعي');
 }
 
@@ -561,6 +563,109 @@ router.post('/generate-presentation', teacherMiddleware, validateBody(aiPresenta
   } catch (e) {
     throw aiError(e);
   }
+}));
+
+// ===== التصحيح الذكي الجماعي =====
+router.post('/batch-grade', teacherMiddleware, asyncHandler(async (req, res) => {
+  const { lessonId } = req.body;
+  if (!lessonId) throw new ApiError(400, 'lessonId مطلوب');
+
+  // جلب إرسالات التلاميذ المعلّميonly
+  const myClasses = await prisma.class.findMany({
+    where: { teacherId: req.user.id },
+    select: { id: true }
+  });
+  const myStudents = await prisma.student.findMany({
+    where: { classId: { in: myClasses.map(c => c.id) }, NOT: { accountUserId: null } },
+    select: { accountUserId: true, firstName: true, lastName: true }
+  });
+  const studentIds = myStudents.map(s => s.accountUserId);
+  const nameMap = new Map(myStudents.map(s => [s.accountUserId, `${s.firstName} ${s.lastName}`]));
+
+  const submissions = await prisma.lessonSubmission.findMany({
+    where: { userId: { in: studentIds }, lessonId, status: 'SUBMITTED' }
+  });
+
+  if (!submissions.length) {
+    return res.json({ ok: true, message: 'لا توجد إرسالات معلّقة للتصحيح', results: [] });
+  }
+
+  // جلب سياق الدرس
+  const lessonContext = resolveLessonContext({ lessonId });
+
+  const results = await batchGradeSubmissions(req.user.id, {
+    lessonId,
+    submissions: submissions.map(s => ({
+      id: s.id,
+      studentName: nameMap.get(s.userId) || 'تلميذ',
+      answers: s.answers
+    })),
+    lessonContext
+  });
+
+  // حفظ الاقتراحات (بدون نشرها)
+  for (const r of results) {
+    if (r.score !== null) {
+      await prisma.lessonSubmission.update({
+        where: { id: r.submissionId },
+        data: {
+          grade: r.score,
+          feedback: r.feedback || null,
+          status: 'IN_REVIEW'
+        }
+      });
+    }
+  }
+
+  res.json({
+    ok: true,
+    message: `تم تصحيح ${results.length} إرسال بالذكاء الاصطناعي — في انتظار مراجعتك`,
+    results
+  });
+}));
+
+// ===== مراجعة ونشر الدرجات =====
+router.post('/publish-grades', teacherMiddleware, asyncHandler(async (req, res) => {
+  const { lessonId, approvedIds, rejectedIds } = req.body;
+  if (!lessonId) throw new ApiError(400, 'lessonId مطلوب');
+
+  const myClasses = await prisma.class.findMany({
+    where: { teacherId: req.user.id },
+    select: { id: true }
+  });
+  const myStudents = await prisma.student.findMany({
+    where: { classId: { in: myClasses.map(c => c.id) }, NOT: { accountUserId: null } },
+    select: { accountUserId: true }
+  });
+  const studentIds = myStudents.map(s => s.accountUserId);
+
+  // نشر المقبولين
+  const toPublish = approvedIds?.length
+    ? await prisma.lessonSubmission.findMany({ where: { id: { in: approvedIds }, userId: { in: studentIds } } })
+    : await prisma.lessonSubmission.findMany({ where: { userId: { in: studentIds }, lessonId, status: 'IN_REVIEW' } });
+
+  for (const sub of toPublish) {
+    await prisma.lessonSubmission.update({
+      where: { id: sub.id },
+      data: { status: 'GRADED' }
+    });
+    await notify([sub.userId], {
+      type: 'LESSON_GRADED',
+      title: 'تم تصحيح واجبك التفاعلي',
+      body: `${sub.lessonTitle || 'الدرس'} — النتيجة ${sub.grade ?? '—'}/20`,
+      link: '/student/stories'
+    });
+  }
+
+  // إرجاع المرفوضين
+  if (rejectedIds?.length) {
+    await prisma.lessonSubmission.updateMany({
+      where: { id: { in: rejectedIds }, userId: { in: studentIds } },
+      data: { status: 'SUBMITTED', grade: null, feedback: null }
+    });
+  }
+
+  res.json({ ok: true, published: toPublish.length, rejected: rejectedIds?.length || 0 });
 }));
 
 export default router;

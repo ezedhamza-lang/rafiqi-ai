@@ -1755,7 +1755,13 @@
       "noLessonSubmissions": "No lesson submissions yet.",
       "lessonCol": "Lesson",
       "viewFile": "View file",
-      "noFile": "No file"
+      "noFile": "No file",
+      "batchGradeBtn": "AI Batch Grade All",
+      "batchGrading": "AI Grading in progress...",
+      "batchGraded": "AI graded {{count}} submissions",
+      "batchError": "Batch grading failed",
+      "noPendingSubs": "No pending submissions to grade",
+      "publishGradesBtn": "Publish Grades"
     },
     "results": {
       "title": "Student Results",

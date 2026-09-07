@@ -26,6 +26,7 @@ export default function Correction() {
   const [lessonFilter, setLessonFilter] = useState('ALL');
   const [grading, setGrading] = useState({});
   const [lessonGrading, setLessonGrading] = useState({});
+  const [batchGrading, setBatchGrading] = useState(false);
 
   const load = useCallback(() => {
     api
@@ -103,6 +104,38 @@ export default function Correction() {
       });
       loadLessonSubs();
       setLessonGrading((prev) => ({ ...prev, [id]: {} }));
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
+  const batchGrade = async () => {
+    const pendingSubs = lessonSubs.filter(s => s.status === 'SUBMITTED');
+    const lessonIds = [...new Set(pendingSubs.map(s => s.lessonId))];
+    if (lessonIds.length === 0) {
+      alert(t('teacherSpace.correction.noPendingSubs'));
+      return;
+    }
+    setBatchGrading(true);
+    try {
+      let totalGraded = 0;
+      for (const lid of lessonIds) {
+        const res = await api.post('/ai/batch-grade', { lessonId: lid });
+        totalGraded += res.results?.length || 0;
+      }
+      loadLessonSubs();
+      alert(t('teacherSpace.correction.batchGraded', { count: totalGraded }));
+    } catch (err) {
+      alert(err.message || t('teacherSpace.correction.batchError'));
+    } finally {
+      setBatchGrading(false);
+    }
+  };
+
+  const publishGrades = async (lessonId) => {
+    try {
+      await api.post('/ai/publish-grades', { lessonId });
+      loadLessonSubs();
     } catch (err) {
       alert(err.message);
     }
@@ -209,7 +242,7 @@ export default function Correction() {
       )}
 
       <h4 style={{ marginTop: 24 }}>{t('teacherSpace.correction.lessonSubmissionsTitle')}</h4>
-      <div className="form-row">
+      <div className="form-row" style={{ display: 'flex', gap: 12, alignItems: 'flex-end', flexWrap: 'wrap' }}>
         <div className="form-group">
           <label>{t('teacherSpace.correction.filterByStatus')}</label>
           <select value={lessonFilter} onChange={(e) => setLessonFilter(e.target.value)}>
@@ -220,6 +253,14 @@ export default function Correction() {
             <option value="RETURNED">{t('teacherSpace.correction.lessonStatus.RETURNED')}</option>
           </select>
         </div>
+        <button
+          className="btn btn-primary"
+          onClick={batchGrade}
+          disabled={batchGrading || lessonSubs.filter(s => s.status === 'SUBMITTED').length === 0}
+          style={{ marginBottom: 2 }}
+        >
+          {batchGrading ? t('teacherSpace.correction.batchGrading') : t('teacherSpace.correction.batchGradeBtn')}
+        </button>
       </div>
 
       {filteredLessons.length === 0 ? (
@@ -273,6 +314,9 @@ export default function Correction() {
                       )}
                       {ls.status === 'GRADED' && ls.grade !== null && (
                         <strong>{ls.grade} / 20</strong>
+                      )}
+                      {ls.status === 'IN_REVIEW' && (
+                        <button className="btn btn-sm btn-outline" style={{ marginLeft: 4 }} onClick={() => publishGrades(ls.lessonId)}>{t('teacherSpace.correction.publishGradesBtn')}</button>
                       )}
                     </td>
                   </tr>

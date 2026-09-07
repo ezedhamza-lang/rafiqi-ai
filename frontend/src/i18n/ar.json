@@ -1756,7 +1756,13 @@
       "noLessonSubmissions": "لا توجد إرسالات دروس بعد.",
       "lessonCol": "الدرس",
       "viewFile": "عرض الملف",
-      "noFile": "بلا ملف"
+      "noFile": "بلا ملف",
+      "batchGradeBtn": "تصحيح الكل بالذكاء الاصطناعي",
+      "batchGrading": "جاري التصحيح بالذكاء الاصطناعي...",
+      "batchGraded": "تم تصحيح {{count}} إرسال بالذكاء الاصطناعي",
+      "batchError": "فشل التصحيح الجماعي",
+      "noPendingSubs": "لا توجد إرسالات معلّقة للتصحيح",
+      "publishGradesBtn": "نشر الدرجات"
     },
     "results": {
       "title": "نتائج التلاميذ",

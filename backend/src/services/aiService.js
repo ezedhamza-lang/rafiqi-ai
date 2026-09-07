@@ -23,10 +23,11 @@ function decrypt(payload) {
 
 export async function saveAiKey(teacherId, apiKey) {
   const keyEncrypted = encrypt(apiKey);
+  const provider = detectProvider(apiKey);
   return prisma.aiKey.upsert({
     where: { teacherId },
-    update: { keyEncrypted, provider: 'gemini', updatedAt: new Date() },
-    create: { teacherId, keyEncrypted, provider: 'gemini' }
+    update: { keyEncrypted, provider, updatedAt: new Date() },
+    create: { teacherId, keyEncrypted, provider }
   });
 }
 
@@ -70,16 +71,26 @@ async function resolveApiKey(teacherId) {
     const row = await prisma.aiKey.findUnique({ where: { teacherId } });
     if (row) {
       try {
-        return decrypt(row.keyEncrypted);
+        return { key: decrypt(row.keyEncrypted), provider: row.provider || 'gemini' };
       } catch {
         /* المفتاح التالف يتجاوز للمستوى التالي */
       }
     }
   }
   const platform = await getPlatformAiKey();
-  if (platform) return platform;
-  if (process.env.GEMINI_API_KEY) return process.env.GEMINI_API_KEY;
+  if (platform) return { key: platform, provider: 'gemini' };
+  if (process.env.GEMINI_API_KEY) return { key: process.env.GEMINI_API_KEY, provider: 'gemini' };
   return null;
+}
+
+// كشف المزوّد من صيغة المفتاح
+function detectProvider(apiKey) {
+  if (!apiKey) return 'gemini';
+  if (apiKey.startsWith('sk-ant-')) return 'claude';
+  if (apiKey.startsWith('sk-')) return 'openai';
+  if (apiKey.startsWith('AIza')) return 'gemini';
+  if (apiKey.startsWith('gsk_')) return 'groq';
+  return 'openai'; // افتراضي: OpenAI-compatible
 }
 
 async function callGemini(prompt, apiKey) {
@@ -100,6 +111,72 @@ async function callGemini(prompt, apiKey) {
   return data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
 }
 
+async function callOpenAI(prompt, apiKey) {
+  const res = await fetch('https://api.openai.com/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+    body: JSON.stringify({
+      model: 'gpt-4o-mini',
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.7,
+      max_tokens: 800
+    })
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`OpenAI error: ${res.status} ${err.slice(0, 200)}`);
+  }
+  const data = await res.json();
+  return data?.choices?.[0]?.message?.content || '';
+}
+
+async function callClaude(prompt, apiKey) {
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01' },
+    body: JSON.stringify({
+      model: 'claude-3-5-haiku-20241022',
+      max_tokens: 800,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Claude error: ${res.status} ${err.slice(0, 200)}`);
+  }
+  const data = await res.json();
+  return data?.content?.[0]?.text || '';
+}
+
+async function callGroq(prompt, apiKey) {
+  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+    body: JSON.stringify({
+      model: 'llama-3.1-8b-instant',
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.7,
+      max_tokens: 800
+    })
+  });
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`Groq error: ${res.status} ${err.slice(0, 200)}`);
+  }
+  const data = await res.json();
+  return data?.choices?.[0]?.message?.content || '';
+}
+
+async function callProviderByType(prompt, apiKey, provider) {
+  switch (provider) {
+    case 'claude': return callClaude(prompt, apiKey);
+    case 'gemini': return callGemini(prompt, apiKey);
+    case 'groq': return callGroq(prompt, apiKey);
+    case 'openai':
+    default: return callOpenAI(prompt, apiKey);
+  }
+}
+
 // Injectable provider (used by tests to avoid real network calls).
 let callProvider = callGemini;
 export function __setCallProvider(fn) {
@@ -114,11 +191,12 @@ function buildPrompt(system, user) {
 }
 
 export async function generateText(teacherId, system, user) {
-  const apiKey = await resolveApiKey(teacherId);
-  if (!apiKey) {
+  const resolved = await resolveApiKey(teacherId);
+  if (!resolved) {
     throw new Error('NO_AI_KEY');
   }
-  return callProvider(buildPrompt(system, user), apiKey);
+  const { key, provider } = resolved;
+  return callProviderByType(buildPrompt(system, user), key, provider);
 }
 
 export async function generateQuizQuestions(teacherId, { subject, level, lessonTitle, count = 5 }) {
@@ -265,4 +343,71 @@ export async function generateParentActivities(teacherId, contextData) {
   const text = await generateText(teacherId, system, user);
   const parsed = extractJson(text);
   return Array.isArray(parsed) ? parsed : null;
+}
+
+// ===== التصحيح الذكي الجماعي =====
+
+export async function batchGradeSubmissions(teacherId, { submissions, lessonContext }) {
+  const apiKey = await resolveApiKey(teacherId);
+  if (!apiKey) throw new Error('NO_AI_KEY');
+
+  const system = `أنت مصحّح تونسي خبير. قيّم إجابات التلاميذ على هذا الدرس.
+السياق: ${lessonContext || 'درس ابتدائي تونسي'}
+
+قواعد التصحيح:
+1. لكل سؤال، قيّم الإجابة و أعطِ درجة من 0到الحد الأقصى
+2. الإجابة الصحيحة = كامل الدرجة، الجزئية = نصف أو ثلث، الخاطئة = 0
+3. للنصوص المفتوحة: قيّم الفهم وال HomePage والتركيب اللغوي
+4. أعد JSON فقط بدون شرح
+
+الشكل المطلوب:
+{
+  "results": [
+    {
+      "submissionId": 123,
+      "score": 15,
+      "maxScore": 20,
+      "feedback": "تعليق موجز",
+      "details": [
+        { "blockId": "b1", "earned": 2, "max": 2, "comment": "" },
+        { "blockId": "b2", "earned": 1, "max": 2, "comment": "ينقص التفصيل" }
+      ]
+    }
+  ]
+}`;
+
+  const results = [];
+  const BATCH_SIZE = 5;
+
+  for (let i = 0; i < submissions.length; i += BATCH_SIZE) {
+    const batch = submissions.slice(i, i + BATCH_SIZE);
+    const batchData = batch.map(s => ({
+      submissionId: s.id,
+      studentName: s.studentName,
+      answers: s.answers
+    }));
+
+    const user = `إرسالات التلاميذ (${batch.length}):\n${JSON.stringify(batchData, null, 2)}\n\nقيّم كل إرسال وأعد JSON.`;
+
+    try {
+      const text = await callProviderByType(`${system}\n\nالمستخدم:\n${user}\n\nيرجى الرد مباشرة بدون مقدمات.`, apiKey.key, apiKey.provider);
+      const parsed = extractJson(text);
+      if (parsed?.results) {
+        results.push(...parsed.results);
+      }
+    } catch (err) {
+      console.error('Batch grading error for batch starting at', i, err.message);
+      for (const s of batch) {
+        results.push({
+          submissionId: s.id,
+          score: null,
+          maxScore: 20,
+          feedback: 'تعذر التصحيح التلقائي — يحتاج مراجعة يدوية',
+          details: []
+        });
+      }
+    }
+  }
+
+  return results;
 }
