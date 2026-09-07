@@ -1,0 +1,32 @@
+{
+ "title": "سلسلة المواقف الرياضية",
+ "subtitle": "السنة الثانية — مواقف رياضية مشكّلة بأسئلتها التفاعلية",
+ "paperOnly": true,
+ "totalPages": 40,
+ "units": [
+  {
+   "id": "u1",
+   "title": "الفترة 1",
+   "startPage": 1,
+   "endPage": 40
+  },
+  {
+   "id": "u2",
+   "title": "الفترة 2",
+   "startPage": 1,
+   "endPage": 40
+  },
+  {
+   "id": "u3",
+   "title": "الفترة 3",
+   "startPage": 1,
+   "endPage": 40
+  },
+  {
+   "id": "u4",
+   "title": "الفترة 4",
+   "startPage": 1,
+   "endPage": 40
+  }
+ ]
+}
