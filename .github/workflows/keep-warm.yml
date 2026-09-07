@@ -1,20 +1,57 @@
-name: Keep Render awake
+name: Keep Render awake + uptime alert
+
+# Render's free tier spins the service down after ~15 min of inactivity, causing
+# slow cold-starts / transient 502s. This free GitHub Action pings the health
+# endpoint every 5 minutes to keep the instance warm, AND doubles as an uptime
+# monitor: if the site does not return HTTP 200 it opens a GitHub issue to alert;
+# when the site recovers it closes that issue automatically.
 
 on:
   schedule:
     - cron: '*/5 * * * *'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  issues: write
+
 jobs:
   ping:
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    timeout-minutes: 3
     steps:
       - name: Ping health endpoint (wakes Render + Neon)
+        id: check
         run: |
+          code=""
           for i in 1 2 3; do
-            code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://rafiqi-platform.onrender.com/api/health || echo 000)
+            code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://rafiqi-platform.onrender.com/api/health || echo "000")
             echo "attempt $i -> HTTP $code"
             [ "$code" = "200" ] && break
             sleep 20
+          done
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+
+      - name: Open alert issue if down
+        if: steps.check.outputs.code != '200'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create "site-down" --color "d73a4a" --description "Site health check failed" 2>/dev/null || true
+          open=$(gh issue list --state open --label "site-down" --json number -q 'length' 2>/dev/null || echo 0)
+          if [ "$open" = "0" ]; then
+            gh issue create \
+              --title "Site is DOWN (HTTP ${{ steps.check.outputs.code }})" \
+              --label "site-down" \
+              --body "Health check returned HTTP ${{ steps.check.outputs.code }} at $(date -u). Check Render → Deployments → Logs."
+          fi
+
+      - name: Close alert issue if recovered
+        if: steps.check.outputs.code == '200'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          nums=$(gh issue list --state open --label "site-down" --json number -q '.[].number' 2>/dev/null || true)
+          for n in $nums; do
+            gh issue close "$n" --comment "Site is back UP (HTTP 200) at $(date -u)." 2>/dev/null || true
           done
