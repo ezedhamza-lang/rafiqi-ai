@@ -1,12 +1,13 @@
 import { useState, useRef } from 'react';
 import SvgArt from './SvgArt';
+import { bidiNodes } from '../utils/bidi';
 
 function rich(text) {
   if (!text) return null;
   const parts = text.split(/(\*\*[^*]+\*\*)/g);
   return parts.map((p, i) => {
-    if (p.startsWith('**') && p.endsWith('**')) return <strong key={i}>{p.slice(2, -2)}</strong>;
-    return p;
+    if (p.startsWith('**') && p.endsWith('**')) return <strong key={i}>{bidiNodes(p.slice(2, -2))}</strong>;
+    return <span key={i}>{bidiNodes(p)}</span>;
   });
 }
 
@@ -439,10 +440,10 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
                               type="radio"
                               name={`ex-${blockId}`}
                               checked={savedVal === oi}
-                              onChange={() => handleOption(blockId, oi)}
-                            />
-                            {opt}
-                          </label>
+                                onChange={() => handleOption(blockId, oi)}
+                              />
+                              {bidiNodes(opt)}
+                            </label>
                         ))}
                       </div>
                     )}

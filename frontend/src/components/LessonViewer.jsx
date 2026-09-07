@@ -4,6 +4,7 @@ import VideoPlayer from './VideoPlayer.jsx';
 import VideoCard from './VideoCard.jsx';
 import SvgArt from './SvgArt.jsx';
 import AssessmentPaper from './AssessmentPaper.jsx';
+import { bidiNodes } from '../utils/bidi';
 
 function speak(text) {
   if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
@@ -59,8 +60,8 @@ function ListenBtn({ text }) {
 function rich(text) {
   if (!text || typeof text !== 'string') return text;
   const parts = text.split('**');
-  if (parts.length < 3) return text;
-  return parts.map((p, i) => (i % 2 === 1 ? <strong key={i}>{p}</strong> : p));
+  if (parts.length < 3) return bidiNodes(text);
+  return parts.map((p, i) => (i % 2 === 1 ? <strong key={i}>{bidiNodes(p)}</strong> : <span key={i}>{bidiNodes(p)}</span>));
 }
 
 function QuestionBlock({ block }) {

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { api } from '../../api/client.js';
 import StoryExercises from './StoryExercises.jsx';
 import AssessmentPaper from '../../components/AssessmentPaper.jsx';
+import { bidiNodes } from '../../utils/bidi';
 import { useI18n } from '../../i18n/index.jsx';
 import { useStudentLevel } from '../../hooks/useStudentLevel.js';
 
@@ -255,20 +256,20 @@ export default function StudentStories() {
               {(openStory.text || []).length > 0 && (
                 <div className="story-paragraphs">
                   {(openStory.text || []).map((line, i) => (
-                    <p key={i} className="story-line">{line}</p>
+                    <p key={i} className="story-line">{bidiNodes(line)}</p>
                   ))}
                 </div>
               )}
               {openStory.textArray && (
                 <div className="story-paragraphs">
                   {(Array.isArray(openStory.textArray) ? openStory.textArray : []).map((line, i) => (
-                    <p key={i} className="story-line">{line}</p>
+                    <p key={i} className="story-line">{bidiNodes(line)}</p>
                   ))}
                 </div>
               )}
               {!Array.isArray(openStory.text) && openStory.text && (
                 <div className="story-paragraphs">
-                  <p className="story-line">{openStory.text}</p>
+                  <p className="story-line">{bidiNodes(openStory.text)}</p>
                 </div>
               )}
               {openStory.key_sentence && <p className="story-key">{t('studentSpace.stories.keySentence', { text: openStory.key_sentence })}</p>}
