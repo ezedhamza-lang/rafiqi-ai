@@ -104,14 +104,21 @@ app.use('/api/payments', paymentRoutes);
 
 app.use(express.json({ limit: config.bodyLimit }));
 
-// فحص الصحة — تستعمله منصات النشر (Render healthCheckPath) — مع فحص DB خفيف
+// فحص الصحة — تستعمله منصات النشر (Render healthCheckPath). يرجع 200 ما دام
+// الخادم يعمل (liveness) حتى لا يفشل النشر عند برودة Neon، مع ذكر حالة قاعدة
+// البيانات داخل الجسم. فحص DB محدود بوقت قصير حتى لا يتعطّل الرد أثناء الإقلاع.
 app.get(['/api/health', '/health'], async (_req, res) => {
+  let db = 'down';
   try {
-    await prisma.$queryRaw`SELECT 1`;
-    res.json({ status: 'ok', db: 'up', uptime: Math.round(process.uptime()), at: new Date().toISOString() });
+    await Promise.race([
+      prisma.$queryRaw`SELECT 1`,
+      new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 3000))
+    ]);
+    db = 'up';
   } catch {
-    res.status(503).json({ status: 'degraded', db: 'down', uptime: Math.round(process.uptime()), at: new Date().toISOString() });
+    db = 'down';
   }
+  res.json({ status: 'ok', db, uptime: Math.round(process.uptime()), at: new Date().toISOString() });
 });
 
 // Batch 4: Global locale middleware - extracts ?lang= from all requests
