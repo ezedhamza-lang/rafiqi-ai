@@ -352,10 +352,14 @@ button {
 .dropdown-caret {
   font-size: 18px !important;
   margin-inline-start: -0.15rem;
+  transition: transform 0.25s ease;
+}
+
+.has-dropdown:hover > a .dropdown-caret {
+  transform: rotate(180deg);
 }
 
 .dropdown-menu {
-  display: none;
   position: absolute;
   top: 100%;
   right: 0;
@@ -370,11 +374,19 @@ button {
   box-shadow: var(--shadow-lg);
   padding: 0.5rem;
   margin-top: 0.5rem;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  pointer-events: none;
 }
 
-.has-dropdown:hover .dropdown-menu,
-.has-dropdown:focus-within .dropdown-menu {
-  display: block;
+.has-dropdown:hover > .dropdown-menu,
+.has-dropdown:focus-within > .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .dropdown-menu li a {
@@ -386,11 +398,15 @@ button {
   font-weight: 700;
   font-size: 0.85rem;
   color: #333;
+  transition: all 0.2s ease;
+  transform: translateX(0);
 }
 
 .dropdown-menu li a:hover {
   background: var(--primary-soft);
   color: var(--primary);
+  transform: translateX(-4px);
+  box-shadow: inset 3px 0 0 var(--primary);
 }
 
 .dropdown-menu li a.active {
@@ -400,6 +416,12 @@ button {
 
 .dropdown-menu li a .material-icons {
   font-size: 18px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-menu li a:hover .material-icons {
+  color: var(--primary);
+  transform: scale(1.15);
 }
 
 .dropdown-menu .dropdown-divider {
