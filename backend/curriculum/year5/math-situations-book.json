@@ -1,0 +1,55 @@
+{
+ "title": "سلسلة المواقف الرياضية",
+ "subtitle": "السنة الخامسة — مواقف رياضية مشكّلة بأسئلتها التفاعلية",
+ "totalPages": 62,
+ "units": [
+  {
+   "id": "u1",
+   "title": "الفترة 1",
+   "startPage": 1,
+   "endPage": 62
+  },
+  {
+   "id": "u2",
+   "title": "الفترة 2",
+   "startPage": 1,
+   "endPage": 62
+  },
+  {
+   "id": "u3",
+   "title": "الفترة 3",
+   "startPage": 1,
+   "endPage": 62
+  },
+  {
+   "id": "u4",
+   "title": "الفترة 4",
+   "startPage": 1,
+   "endPage": 62
+  },
+  {
+   "id": "u5",
+   "title": "الفترة 5",
+   "startPage": 1,
+   "endPage": 62
+  },
+  {
+   "id": "u6",
+   "title": "الفترة 6",
+   "startPage": 1,
+   "endPage": 62
+  },
+  {
+   "id": "u7",
+   "title": "الفترة 7",
+   "startPage": 1,
+   "endPage": 62
+  },
+  {
+   "id": "u8",
+   "title": "الفترة 8",
+   "startPage": 1,
+   "endPage": 62
+  }
+ ]
+}

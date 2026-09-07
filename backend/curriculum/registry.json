@@ -280,7 +280,8 @@
             "math",
             "maths"
           ],
-          "lessonsFile": "math-units.json",
+          "bookFile": "math-situations-book.json",
+          "lessonsFile": "math-situations.json",
           "skillsMapFile": "skills-map-math.json",
           "adapter": "math"
         },
@@ -346,8 +347,8 @@
             "math",
             "maths"
           ],
-          "bookFile": "mathbook-book.json",
-          "lessonsFile": "math-units.json",
+          "bookFile": "math-situations-book.json",
+          "lessonsFile": "math-situations.json",
           "skillsMapFile": "skills-map-math.json",
           "adapter": "math"
         },

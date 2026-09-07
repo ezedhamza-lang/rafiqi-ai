@@ -1,13 +1,9 @@
-[
- {
-  "id": "y4m-01",
-  "num": 1,
+{
+ "y4m-01": {
   "title": "عَدَدُ كُتُبِ الْمَكْتَبَةِ",
   "grammar": "الْأَعْدَادُ ذَاتُ خَمْسَةِ أَرْقَامٍ (قِرَاءَةٌ وَكِتَابَةٌ)",
-  "image": "/story-covers/y4-math-01.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 1,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -35,15 +31,11 @@
    }
   ]
  },
- {
-  "id": "y4m-02",
-  "num": 2,
+ "y4m-02": {
   "title": "ثَرْوَةُ الْحَدِيقَةِ",
   "grammar": "تَفْكِيكُ الْأَعْدَادِ ذَاتِ خَمْسَةِ أَرْقَامٍ",
-  "image": "/story-covers/y4-math-02.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 1,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -71,15 +63,11 @@
    }
   ]
  },
- {
-  "id": "y4m-03",
-  "num": 3,
+ "y4m-03": {
   "title": "مَسَافَةُ السَّفَرِ",
   "grammar": "مَنَازِلُ الْأَعْدَادِ (الْقِيمَةُ الْمَنْزِلِيَّةُ)",
-  "image": "/story-covers/y4-math-03.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 1,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -107,15 +95,11 @@
    }
   ]
  },
- {
-  "id": "y4m-04",
-  "num": 4,
+ "y4m-04": {
   "title": "عَدَدُ سُكَّانِ قَرْيَتَيْنِ",
   "grammar": "مُقَارَنَةُ الْأَعْدَادِ الطَّبِيعِيَّةِ",
-  "image": "/story-covers/y4-math-04.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 1,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -143,15 +127,11 @@
    }
   ]
  },
- {
-  "id": "y4m-05",
-  "num": 5,
+ "y4m-05": {
   "title": "نَتَائِجُ الِاخْتِبَارِ",
   "grammar": "تَرْتِيبُ الْأَعْدَادِ الطَّبِيعِيَّةِ",
-  "image": "/story-covers/y4-math-05.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 1,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -179,15 +159,11 @@
    }
   ]
  },
- {
-  "id": "y4m-06",
-  "num": 6,
+ "y4m-06": {
   "title": "عَدَدُ الْمُشَاهِدِينَ",
   "grammar": "تَقْرِيبُ الْأَعْدَادِ إِلَى أَقْرَبِ 10 وَ 100",
-  "image": "/story-covers/y4-math-06.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 1,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -215,15 +191,11 @@
    }
   ]
  },
- {
-  "id": "y4m-07",
-  "num": 7,
+ "y4m-07": {
   "title": "قَفَزَاتُ الضَّفْدَعِ",
   "grammar": "خَطُّ الْأَعْدَادِ",
-  "image": "/story-covers/y4-math-07.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 1,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -251,15 +223,11 @@
    }
   ]
  },
- {
-  "id": "y4m-08",
-  "num": 8,
+ "y4m-08": {
   "title": "مَنَازِلُ السَّكَنِ",
   "grammar": "الْأَعْدَادُ عَلَى خَطِّ الْأَعْدَادِ (مُقَارَنَةٌ)",
-  "image": "/story-covers/y4-math-08.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 1,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -287,15 +255,11 @@
    }
   ]
  },
- {
-  "id": "y4m-09",
-  "num": 9,
+ "y4m-09": {
   "title": "عُلَبُ الْحَلِيبِ",
   "grammar": "مُضَاعَفَاتُ عَدَدٍ",
-  "image": "/story-covers/y4-math-09.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 1,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -323,15 +287,11 @@
    }
   ]
  },
- {
-  "id": "y4m-10",
-  "num": 10,
+ "y4m-10": {
   "title": "زِيَادَةُ النَّبَاتِ",
   "grammar": "الْأَنْمَاطُ الْعَدَدِيَّةُ",
-  "image": "/story-covers/y4-math-10.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 1,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -359,15 +319,11 @@
    }
   ]
  },
- {
-  "id": "y4m-11",
-  "num": 11,
+ "y4m-11": {
   "title": "حِصَّادُ الْقَمْحِ",
   "grammar": "الْجَمْعُ بِدُونِ تَحْوِيلٍ",
-  "image": "/story-covers/y4-math-11.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 1,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -395,15 +351,11 @@
    }
   ]
  },
- {
-  "id": "y4m-12",
-  "num": 12,
+ "y4m-12": {
   "title": "زِيَادَةُ السُّكَّانِ",
   "grammar": "الْجَمْعُ بِتَحْوِيلٍ",
-  "image": "/story-covers/y4-math-12.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 1,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -431,15 +383,11 @@
    }
   ]
  },
- {
-  "id": "y4m-13",
-  "num": 13,
+ "y4m-13": {
   "title": "بَقِيَّةُ النُّقُودِ",
   "grammar": "الطَّرْحُ بِدُونِ تَحْوِيلٍ",
-  "image": "/story-covers/y4-math-13.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 1,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -467,15 +415,11 @@
    }
   ]
  },
- {
-  "id": "y4m-14",
-  "num": 14,
+ "y4m-14": {
   "title": "مَسَافَةُ السَّفَرِ الْمُتَبَقِّيَةُ",
   "grammar": "الطَّرْحُ بِتَحْوِيلٍ",
-  "image": "/story-covers/y4-math-14.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 1,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -503,15 +447,11 @@
    }
   ]
  },
- {
-  "id": "y4m-15",
-  "num": 15,
+ "y4m-15": {
   "title": "ثَمَنُ الْمَشْتَرَيَاتِ",
   "grammar": "تَقْدِيرُ حَاصِلِ الْجَمْعِ",
-  "image": "/story-covers/y4-math-15.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 2,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -539,15 +479,11 @@
    }
   ]
  },
- {
-  "id": "y4m-16",
-  "num": 16,
+ "y4m-16": {
   "title": "بَقِيَّةُ الْمِيزَانِيَّةِ",
   "grammar": "تَقْدِيرُ حَاصِلِ الطَّرْحِ",
-  "image": "/story-covers/y4-math-16.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 2,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -575,15 +511,11 @@
    }
   ]
  },
- {
-  "id": "y4m-17",
-  "num": 17,
+ "y4m-17": {
   "title": "فِي حَدِيقَةِ اللُّعَبِ",
   "grammar": "إِنْشَاءُ جُمْلَةٍ رِيَاضِيَّةٍ",
-  "image": "/story-covers/y4-math-17.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 2,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -611,15 +543,11 @@
    }
   ]
  },
- {
-  "id": "y4m-18",
-  "num": 18,
+ "y4m-18": {
   "title": "رِحْلَةُ الْمَدْرَسَةِ",
   "grammar": "حَلُّ مَشْكِلَاتٍ (جَمْعٌ وَطَرْحٌ)",
-  "image": "/story-covers/y4-math-18.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 2,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -647,15 +575,11 @@
    }
   ]
  },
- {
-  "id": "y4m-19",
-  "num": 19,
+ "y4m-19": {
   "title": "أَصْنَافُ الْحَلْوَى",
   "grammar": "جَدَاوِلُ الضَّرْبِ (مُرَاجَعَةٌ)",
-  "image": "/story-covers/y4-math-19.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 2,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -683,15 +607,11 @@
    }
   ]
  },
- {
-  "id": "y4m-20",
-  "num": 20,
+ "y4m-20": {
   "title": "أَسْطُوَانَاتُ الْحَلِيبِ",
   "grammar": "الضَّرْبُ فِي عَدَدٍ مِنْ خَانَةٍ وَاحِدَةٍ",
-  "image": "/story-covers/y4-math-20.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 2,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -719,15 +639,11 @@
    }
   ]
  },
- {
-  "id": "y4m-21",
-  "num": 21,
+ "y4m-21": {
   "title": "أَقْلَامُ الْمَدْرَسَةِ",
   "grammar": "الضَّرْبُ فِي 10 وَ 100 وَ 1 000",
-  "image": "/story-covers/y4-math-21.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 2,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -755,15 +671,11 @@
    }
   ]
  },
- {
-  "id": "y4m-22",
-  "num": 22,
+ "y4m-22": {
   "title": "كُتُبُ الْمَكْتَبَةِ",
   "grammar": "الضَّرْبُ فِي عَدَدٍ مِنْ خَانَتَيْنِ",
-  "image": "/story-covers/y4-math-22.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 2,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -791,15 +703,11 @@
    }
   ]
  },
- {
-  "id": "y4m-23",
-  "num": 23,
+ "y4m-23": {
   "title": "حُقُوبُ التُّفَّاحِ",
   "grammar": "تَقْدِيرُ حَاصِلِ الضَّرْبِ",
-  "image": "/story-covers/y4-math-23.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 2,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -827,15 +735,11 @@
    }
   ]
  },
- {
-  "id": "y4m-24",
-  "num": 24,
+ "y4m-24": {
   "title": "تَوْزِيعُ الْحَلْوَى",
   "grammar": "خَصَائِصُ الضَّرْبِ",
-  "image": "/story-covers/y4-math-24.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 2,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -863,15 +767,11 @@
    }
   ]
  },
- {
-  "id": "y4m-25",
-  "num": 25,
+ "y4m-25": {
   "title": "شِرَاءُ الْمَدْرَسَةِ",
   "grammar": "حَلُّ مَشْكِلَاتٍ (ضَرْبٌ)",
-  "image": "/story-covers/y4-math-25.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 2,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -899,15 +799,11 @@
    }
   ]
  },
- {
-  "id": "y4m-26",
-  "num": 26,
+ "y4m-26": {
   "title": "تَقْسِيمُ الْكَعْكَةِ",
   "grammar": "الْقِسْمَةُ الْإِقْلِيدِيَّةُ (تَعْرِيفٌ)",
-  "image": "/story-covers/y4-math-26.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 2,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -935,15 +831,11 @@
    }
   ]
  },
- {
-  "id": "y4m-27",
-  "num": 27,
+ "y4m-27": {
   "title": "تَوْزِيعُ الْكُرَاسَاتِ",
   "grammar": "الْقِسْمَةُ عَلَى عَدَدٍ مِنْ خَانَةٍ وَاحِدَةٍ",
-  "image": "/story-covers/y4-math-27.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 2,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -971,15 +863,11 @@
    }
   ]
  },
- {
-  "id": "y4m-28",
-  "num": 28,
+ "y4m-28": {
   "title": "تَنْظِيمُ الْبَضَائِعِ",
   "grammar": "الْقَاسِمُ وَالْحَاصِلُ وَالْبَاقِي",
-  "image": "/story-covers/y4-math-28.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 2,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1007,15 +895,11 @@
    }
   ]
  },
- {
-  "id": "y4m-29",
-  "num": 29,
+ "y4m-29": {
   "title": "تَنْظِيمُ الطُّلَّابِ",
   "grammar": "الْقِسْمَةُ وَمُضَاعَفَاتُ الْعَدَدِ",
-  "image": "/story-covers/y4-math-29.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 3,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1043,15 +927,11 @@
    }
   ]
  },
- {
-  "id": "y4m-30",
-  "num": 30,
+ "y4m-30": {
   "title": "تَقْدِيرُ عَدَدِ الْأَسَابِيعِ",
   "grammar": "تَقْدِيرُ حَاصِلِ الْقِسْمَةِ",
-  "image": "/story-covers/y4-math-30.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 3,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1079,15 +959,11 @@
    }
   ]
  },
- {
-  "id": "y4m-31",
-  "num": 31,
+ "y4m-31": {
   "title": "تَوْزِيعُ الْمَلَالِيمِ",
   "grammar": "الْقِسْمَةُ عَلَى 10 وَ 100",
-  "image": "/story-covers/y4-math-31.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 3,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1115,15 +991,11 @@
    }
   ]
  },
- {
-  "id": "y4m-32",
-  "num": 32,
+ "y4m-32": {
   "title": "حَفْلَةُ الْمَدْرَسَةِ",
   "grammar": "حَلُّ مَشْكِلَاتٍ (قِسْمَةٌ)",
-  "image": "/story-covers/y4-math-32.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 3,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1151,15 +1023,11 @@
    }
   ]
  },
- {
-  "id": "y4m-33",
-  "num": 33,
+ "y4m-33": {
   "title": "قَطْعُ الْكَعْكَةِ",
   "grammar": "الْكَسْرُ (تَعْرِيفٌ وَقِرَاءَةٌ)",
-  "image": "/story-covers/y4-math-33.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 3,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1187,15 +1055,11 @@
    }
   ]
  },
- {
-  "id": "y4m-34",
-  "num": 34,
+ "y4m-34": {
   "title": "قِسْمَةُ الشُّوكُولَاتَةِ",
   "grammar": "الْكُسُورُ الْمُتَكَافِئَةُ",
-  "image": "/story-covers/y4-math-34.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 3,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1223,15 +1087,11 @@
    }
   ]
  },
- {
-  "id": "y4m-35",
-  "num": 35,
+ "y4m-35": {
   "title": "مَنْ يَأْكُلُ أَكْثَرَ؟",
   "grammar": "مُقَارَنَةُ الْكُسُورِ (نَفْسُ الْمَقَامِ)",
-  "image": "/story-covers/y4-math-35.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 3,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1259,15 +1119,11 @@
    }
   ]
  },
- {
-  "id": "y4m-36",
-  "num": 36,
+ "y4m-36": {
   "title": "نَتَائِجُ الِاخْتِبَارِ",
   "grammar": "الْكَسْرُ كَنِسْبَةٍ",
-  "image": "/story-covers/y4-math-36.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 3,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1295,15 +1151,11 @@
    }
   ]
  },
- {
-  "id": "y4m-37",
-  "num": 37,
+ "y4m-37": {
   "title": "قَفَزَاتُ الْأَرْنَبِ",
   "grammar": "الْكَسْرُ عَلَى الْمُسْتَقِيمِ الْعَدَدِيِّ",
-  "image": "/story-covers/y4-math-37.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 3,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1331,15 +1183,11 @@
    }
   ]
  },
- {
-  "id": "y4m-38",
-  "num": 38,
+ "y4m-38": {
   "title": "قِسْمَةُ الْبِيتْزَا",
   "grammar": "كُسُورُ الْوَحْدَةِ (1/2، 1/3، 1/4)",
-  "image": "/story-covers/y4-math-38.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 3,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1367,15 +1215,11 @@
    }
   ]
  },
- {
-  "id": "y4m-39",
-  "num": 39,
+ "y4m-39": {
   "title": "مَسَافَةُ الْمَدْرَسَةِ",
   "grammar": "وَحَدَاتُ الطُّولِ (km, m, dm, cm, mm)",
-  "image": "/story-covers/y4-math-39.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 3,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1403,15 +1247,11 @@
    }
   ]
  },
- {
-  "id": "y4m-40",
-  "num": 40,
+ "y4m-40": {
   "title": "فِي السُّوقِ",
   "grammar": "وَحَدَاتُ الْكَتْلَةِ (kg, hg, dag, g)",
-  "image": "/story-covers/y4-math-40.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 3,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1439,15 +1279,11 @@
    }
   ]
  },
- {
-  "id": "y4m-41",
-  "num": 41,
+ "y4m-41": {
   "title": "قَارُورَاتُ الْعَصِيرِ",
   "grammar": "وَحَدَاتُ السُّعَةِ (L, dL, cL, mL)",
-  "image": "/story-covers/y4-math-41.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 3,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1475,15 +1311,11 @@
    }
   ]
  },
- {
-  "id": "y4m-42",
-  "num": 42,
+ "y4m-42": {
   "title": "يَوْمُ سَامِي",
   "grammar": "قِيَاسُ الزَّمَنِ (السَّاعَةُ، الدَّقِيقَةُ)",
-  "image": "/story-covers/y4-math-42.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 3,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1511,15 +1343,11 @@
    }
   ]
  },
- {
-  "id": "y4m-43",
-  "num": 43,
+ "y4m-43": {
   "title": "رِحْلَةٌ إِلَى الْبَحْرِ",
   "grammar": "حِسَابُ الْمُدَّةِ الزَّمَنِيَّةِ",
-  "image": "/story-covers/y4-math-43.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 4,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1547,15 +1375,11 @@
    }
   ]
  },
- {
-  "id": "y4m-44",
-  "num": 44,
+ "y4m-44": {
   "title": "تَنْظِيمُ الْمُخْزَنِ",
   "grammar": "تَحْوِيلُ الْوَحَدَاتِ الْبَسِيطَةِ",
-  "image": "/story-covers/y4-math-44.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 4,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1583,15 +1407,11 @@
    }
   ]
  },
- {
-  "id": "y4m-45",
-  "num": 45,
+ "y4m-45": {
   "title": "خُطُوطُ الطَّرِيقِ",
   "grammar": "الْمُسْتَقِيمَاتُ وَأَنْصَافُ الْمُسْتَقِيمَاتِ وَالْقِطَعُ الْمُسْتَقِيمَةُ",
-  "image": "/story-covers/y4-math-45.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 4,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1619,15 +1439,11 @@
    }
   ]
  },
- {
-  "id": "y4m-46",
-  "num": 46,
+ "y4m-46": {
   "title": "زَوَايَا الْغُرْفَةِ",
   "grammar": "الزَّوَايَا (تَعْرِيفٌ وَأَنْوَاعٌ)",
-  "image": "/story-covers/y4-math-46.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 4,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1655,15 +1471,11 @@
    }
   ]
  },
- {
-  "id": "y4m-47",
-  "num": 47,
+ "y4m-47": {
   "title": "أَشْكَالٌ حَوْلَنَا",
   "grammar": "الْمُضَلَّعَاتُ (الْمُثَلَّثُ، الْمُرَبَّعُ، الْمُسْتَطِيلُ)",
-  "image": "/story-covers/y4-math-47.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 4,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1691,15 +1503,11 @@
    }
   ]
  },
- {
-  "id": "y4m-48",
-  "num": 48,
+ "y4m-48": {
   "title": "الْعَجَلَةُ الْكَبِيرَةُ",
   "grammar": "الدَّائِرَةُ وَعَنَاصِرُهَا",
-  "image": "/story-covers/y4-math-48.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 4,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1727,15 +1535,11 @@
    }
   ]
  },
- {
-  "id": "y4m-49",
-  "num": 49,
+ "y4m-49": {
   "title": "تَسْوِيرُ الْحَدِيقَةِ",
   "grammar": "مَحِيطُ الْمُضَلَّعَاتِ (الْمُرَبَّعُ، الْمُسْتَطِيلُ، الْمُثَلَّثُ)",
-  "image": "/story-covers/y4-math-49.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 4,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1763,15 +1567,11 @@
    }
   ]
  },
- {
-  "id": "y4m-50",
-  "num": 50,
+ "y4m-50": {
   "title": "بَلَاطُ الْغُرْفَةِ وَالْأَمْطَارُ",
   "grammar": "مِسَاحَةُ الْمُرَبَّعِ وَالْمُسْتَطِيلِ وَالْجَدَاوِلُ الْبِيَانِيَّةُ",
-  "image": "/story-covers/y4-math-50.png",
-  "assessment": true,
-  "subject": "الرياضيات",
   "period": 4,
+  "subject": "الرياضيات",
   "studentBlocks": [
    {
     "kind": "concept",
@@ -1799,4 +1599,4 @@
    }
   ]
  }
-]
+}
