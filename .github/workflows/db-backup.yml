@@ -1,0 +1,37 @@
+name: Nightly database backup
+
+on:
+  schedule:
+    - cron: '30 1 * * *'
+  workflow_dispatch:
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install PostgreSQL client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+
+      - name: Dump database
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "DATABASE_URL secret is not set — skipping backup."
+            exit 1
+          fi
+          # pg_dump (libpq) rejects Prisma/Neon-only URI params (pgbouncer,
+          # connection_limit, pool_timeout). Strip them; keep sslmode,
+          # channel_binding and connect_timeout which are valid libpq params.
+          CLEAN_URL=$(printf '%s' "$DATABASE_URL" | sed -E 's/([?&])(pgbouncer|connection_limit|pool_timeout)=[^&]*//g' | sed -E 's/\?&/?/g; s/[?&]$//')
+          STAMP=$(date -u +%Y%m%d-%H%M%S)
+          pg_dump "$CLEAN_URL" --format=custom --file="rafiqi-backup-$STAMP.dump"
+          gzip "rafiqi-backup-$STAMP.dump"
+          ls -lh rafiqi-backup-*.dump.gz
+
+      - name: Upload backup artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: rafiqi-db-backup
+          path: rafiqi-backup-*.dump.gz
+          retention-days: 90
