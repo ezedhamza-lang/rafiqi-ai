@@ -1063,7 +1063,15 @@ function LessonViewer({ book, onClose }) {
               <ul>
                 {lessons.map((l, i) => (
                   <li key={l.id || i} className={`${i === active ? 'active' : ''} ${l.period ? 'period-' + l.period : ''}`}>
-                    <button type="button" onClick={() => go(i)}>
+                    <button type="button" onClick={() => go(i)} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      {l.image && (
+                        <img
+                          src={l.image}
+                          alt=""
+                          style={{ width: 40, height: 40, objectFit: 'cover', borderRadius: 6, flexShrink: 0, border: '1px solid rgba(0,0,0,.08)' }}
+                          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                        />
+                      )}
                       <span className="toc-num">{i + 1}</span>
                       <span className="toc-title">{l.title}</span>
                     </button>
