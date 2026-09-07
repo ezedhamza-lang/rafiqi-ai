@@ -46,7 +46,10 @@ export default function Register() {
   return (
     <div className="auth-wrapper">
       <div className="auth-card">
-        <h1>{t('register.title')}</h1>
+        <div style={{ textAlign: 'center', marginBottom: '1.2rem' }}>
+          <img src="/logo-rafiqi-square.png" alt="رفيقي" style={{ width: 80, height: 80, borderRadius: '50%', border: '3px solid #4f46e5', padding: 4, background: '#fff', boxShadow: '0 4px 20px rgba(79,70,229,0.15)' }} />
+        </div>
+        <h1 style={{ color: '#4f46e5' }}>{t('register.title')}</h1>
         <p className="sub">{t('register.subtitle')}</p>
         {error && <div className="form-error" role="alert">{error}</div>}
         <form onSubmit={submit}>

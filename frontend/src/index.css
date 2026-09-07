@@ -915,17 +915,52 @@ select {
   align-items: center;
   justify-content: center;
   min-height: 88vh;
-  padding: 3rem 1.5rem;
-  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 45%, #8b5cf6 100%);
+  padding: 2rem 1.5rem;
+  background: linear-gradient(135deg, #e8eaf6 0%, #f5f5f5 50%, #e3f2fd 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-wrapper::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: rgba(79, 70, 229, 0.06);
+  z-index: 0;
+}
+
+.auth-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  left: -80px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(245, 158, 11, 0.06);
+  z-index: 0;
 }
 
 .auth-card {
   background: var(--white);
   border-radius: 20px;
-  padding: 2.2rem;
+  padding: 2.5rem 2.2rem;
   width: 100%;
-  max-width: 460px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+  max-width: 480px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  position: relative;
+  z-index: 1;
+  animation: authFadeIn 0.5s ease;
+}
+
+@keyframes authFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .auth-card h1 {
