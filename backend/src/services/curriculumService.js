@@ -629,6 +629,7 @@ const STORY_SERIES = [
   { id: 'haras-watani', file: 'haras-watani-stories-data.json', title: 'قصصي في وطني' },
   { id: 'y6-word-lessons', file: 'y6-word-lessons-data.json', title: 'قصصُ السنة السادسة — دُروسُ الكلمات' },
   { id: 'y5-reading-stories', file: 'y5-reading-stories-data.json', title: 'قصصُ السنة الخامسة — قراءتي' },
+  { id: 'y5-math-stories', file: 'y5-math-stories-data.json', title: 'سلسلة مواقف رياضية — السنة الخامسة' },
   { id: 'iqra', file: 'iqra-series.json', title: 'اقرأ بذكاء' }
 ];
 
