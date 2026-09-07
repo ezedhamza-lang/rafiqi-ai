@@ -55,6 +55,7 @@ import { setupWs } from './ws.js';
 import { startRenewalScheduler, runRenewalSweep } from './services/subscriptionRenewalService.js';
 import { startParentInsightScheduler, runParentInsightSweep } from './services/parentInsightNotifyService.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
+import { initSentry } from './sentry.js';
 import { localeMiddleware } from './middleware/locale.js';
 import { swaggerSpec } from './swagger.js';
 import fs from 'fs';
@@ -239,6 +240,9 @@ const server = http.createServer(app);
 setupWs(server);
 
 async function start() {
+  // Error monitoring is opt-in (no-op unless SENTRY_DSN is set) and can never
+  // block or crash startup.
+  await initSentry();
   // STEP 1 — open the port FIRST so the hosting platform detects
   // the service immediately, even if the database is slow to wake up.
   await new Promise((resolve, reject) => {

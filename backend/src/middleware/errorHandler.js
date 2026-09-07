@@ -1,5 +1,6 @@
 import { AR } from './messages.js';
 import { ValidationError } from './validate.js';
+import { captureError } from '../sentry.js';
 
 export class ApiError extends Error {
   constructor(status, message, details) {
@@ -38,6 +39,7 @@ export function errorHandler(err, _req, res, _next) {
   }
 
   console.error('[UnhandledError]', err);
+  captureError(err);
   return res.status(500).json({ error: AR.INTERNAL });
 }
 
