@@ -1,7 +1,7 @@
 /* Service Worker — بوابة رفيقي للحياة المدرسية
    Strategy: network-first for API and navigation, cache-first for static assets. */
 
-const CACHE_NAME = 'rafiqi-cache-v4';
+const CACHE_NAME = 'rafiqi-cache-v5';
 const APP_SHELL = [
   '/',
   '/index.html',
@@ -44,12 +44,23 @@ self.addEventListener('fetch', (event) => {
   // Do not intercept non-GET or cross-origin requests
   if (request.method !== 'GET' || url.origin !== self.location.origin) return;
 
-  // API requests: network-first with no caching
+  // API requests: network-first. Public content endpoints are cached so that
+  // lessons/stories already opened remain readable offline. Personal/role
+  // endpoints (auth, student, teacher, parent, admin) are never cached.
   if (url.pathname.startsWith('/api/')) {
+    const cacheable = url.pathname.startsWith('/api/public/');
     event.respondWith(
-      fetch(request).catch(() =>
-        caches.match(request).then((r) => r || Response.error())
-      )
+      fetch(request)
+        .then((response) => {
+          if (cacheable && response && response.status === 200 && response.type === 'basic') {
+            const clone = response.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+          }
+          return response;
+        })
+        .catch(() =>
+          caches.match(request).then((r) => r || Response.error())
+        )
     );
     return;
   }
