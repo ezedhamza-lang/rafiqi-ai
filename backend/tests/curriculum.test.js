@@ -149,13 +149,13 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
   });
 
   it('المرحلة 6.2: إثراء البنك موضوعي لا عشوائي — لا محتوى أجنبي داخل الدروس', async () => {
-    // تقرير المستخدم: درس س2 «مكمّل عدد إلى آخر» كان يحمل أسئلة قياس الطول
+    // درس الأعداد في س2 («منازل الأعداد») يجب ألا يحمل محتوى قياس الطول (س1).
     const y2 = await request(app)
       .get('/api/public/curriculum/books/year2/math/lessons')
       .send();
-    const mokammil = y2.body.find((l) => l.title.includes('مكمّل عدد'));
-    expect(mokammil).toBeTruthy();
-    const y2Text = JSON.stringify(mokammil.blocks);
+    const numbersLesson = y2.body.find((l) => l.id === 'y2m-08');
+    expect(numbersLesson).toBeTruthy();
+    const y2Text = JSON.stringify(numbersLesson.blocks);
     expect(y2Text.includes('أَطْوَل') || y2Text.includes('الطَّاوِلَةِ')).toBe(false);
 
     // تقرير المستخدم: درس قراءة س5 «أعلامنا ورموزنا» كان يحمل نصّ «قطة نور» س1

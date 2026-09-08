@@ -25,7 +25,7 @@ services:
     restart: unless-stopped
     environment:
       DATABASE_URL: postgresql://school_user:school_pass@postgres:5432/school_platform?schema=public
-      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
+      JWT_SECRET: ${JWT_SECRET:?مطلوب تعيين JWT_SECRET — صدّره قبل التشغيل: JWT_SECRET=$(openssl rand -hex 32) docker compose up}
       PORT: 3001
       NODE_ENV: production
       # إصلاح أمني: عدّل هذا في الإنتاج الفعلي لدومين الواجهة الحقيقي.
@@ -45,10 +45,8 @@ services:
       dockerfile: Dockerfile
     container_name: rafiqi-web
     restart: unless-stopped
-    environment:
-      VITE_PROXY_TARGET: http://api:3001
     ports:
-      - "5173:5173"
+      - "5173:80"
     depends_on:
       - api
 

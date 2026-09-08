@@ -179,7 +179,8 @@ export default function LiveRoom({ session, joinData, canPublish, onExit }) {
     const run = async () => {
       const token = getToken();
       const proto = window.location.protocol === 'https:' ? 'wss' : 'ws';
-      const ws = new WebSocket(`${proto}://${window.location.host}/ws?token=${encodeURIComponent(token || '')}`);
+      const url = `${proto}://${window.location.host}/ws`;
+      const ws = token ? new WebSocket(url, [`bearer-${token}`]) : new WebSocket(url);
       wsRef.current = ws;
       ws.onopen = () => {
         ws.send(JSON.stringify({ type: 'live:presence', room: session.roomName, action: 'join' }));

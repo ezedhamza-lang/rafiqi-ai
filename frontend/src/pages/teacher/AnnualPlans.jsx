@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import DOMPurify from 'dompurify';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 
@@ -143,7 +144,7 @@ export default function AnnualPlans() {
               <h3>{officialView.title}</h3>
               <button className="btn btn-ghost btn-sm" onClick={() => setOfficialView(null)}>{t('teacherSpace.annualPlans.close')}</button>
             </div>
-            <div className="plan-html" dangerouslySetInnerHTML={{ __html: officialView.html }} />
+            <div className="plan-html" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(officialView.html || '') }} />
           </div>
         </div>
       )}

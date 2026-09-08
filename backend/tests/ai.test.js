@@ -195,6 +195,6 @@ describe('المرحلة 7.2 — مساعد الأستاذ (خطة/ملخص/شر
       .set('Authorization', `Bearer ${teacherToken}`)
       .send({ subject: 'الرياضيات', level: 'السنة الأولى', lessonTitle: 'الجمع' });
     expect(res.status).toBe(400);
-    expect(res.body.error).toContain('Gemini');
+    expect(res.body.error).toContain('مفتاح');
   });
 });

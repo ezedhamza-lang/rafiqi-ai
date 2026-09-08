@@ -177,17 +177,23 @@ async function callProviderByType(prompt, apiKey, provider) {
   }
 }
 
-// Injectable provider (used by tests to avoid real network calls).
-let callProvider = callGemini;
+// خطاف قابل للحقن تُستعمله الاختبارات لتفادي نداءات الشبكة الحقيقية.
+// عند تعيينه يُستبدل نداء المزوّد بالكامل؛ وإلا يُستخدم المزوّد الحقيقي حسب النوع.
+let callProvider = null;
 export function __setCallProvider(fn) {
   callProvider = fn;
 }
 export function __resetCallProvider() {
-  callProvider = callGemini;
+  callProvider = null;
 }
 
 function buildPrompt(system, user) {
   return `${system}\n\nالمستخدم:\n${user}\n\nيرجى الرد مباشرة بدون مقدمات.`;
+}
+
+function invokeProvider(prompt, apiKey, provider) {
+  if (callProvider) return callProvider(prompt, apiKey, provider);
+  return callProviderByType(prompt, apiKey, provider);
 }
 
 export async function generateText(teacherId, system, user) {
@@ -196,7 +202,7 @@ export async function generateText(teacherId, system, user) {
     throw new Error('NO_AI_KEY');
   }
   const { key, provider } = resolved;
-  return callProviderByType(buildPrompt(system, user), key, provider);
+  return invokeProvider(buildPrompt(system, user), key, provider);
 }
 
 export async function generateQuizQuestions(teacherId, { subject, level, lessonTitle, count = 5 }) {
@@ -390,7 +396,7 @@ export async function batchGradeSubmissions(teacherId, { submissions, lessonCont
     const user = `إرسالات التلاميذ (${batch.length}):\n${JSON.stringify(batchData, null, 2)}\n\nقيّم كل إرسال وأعد JSON.`;
 
     try {
-      const text = await callProviderByType(`${system}\n\nالمستخدم:\n${user}\n\nيرجى الرد مباشرة بدون مقدمات.`, apiKey.key, apiKey.provider);
+      const text = await invokeProvider(`${system}\n\nالمستخدم:\n${user}\n\nيرجى الرد مباشرة بدون مقدمات.`, apiKey.key, apiKey.provider);
       const parsed = extractJson(text);
       if (parsed?.results) {
         results.push(...parsed.results);

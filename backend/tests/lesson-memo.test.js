@@ -104,7 +104,7 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     const res = await request(app)
       .post('/api/memos/generate')
       .set('Authorization', `Bearer ${token}`)
-      .send({ subject: 'رياضيات', level: 'السنة الثانية أساسي', lessonTitle: 'المجموعات ومكوّناتها' });
+      .send({ subject: 'رياضيات', level: 'السنة الثانية أساسي', lessonTitle: 'أصابع اليد' });
     expect(res.status).toBe(400);
     expect(res.body.error).toContain('لا توجد منهجية');
   });

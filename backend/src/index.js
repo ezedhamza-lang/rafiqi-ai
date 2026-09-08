@@ -7,6 +7,7 @@ import http from 'http';
 import { fileURLToPath } from 'url';
 import swaggerUi from 'swagger-ui-express';
 import prisma from './db.js';
+import { Prisma } from '@prisma/client';
 import { config } from './config.js';
 import authRoutes from './routes/auth.js';
 import studentRoutes from './routes/students.js';
@@ -58,6 +59,7 @@ import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 import { localeMiddleware } from './middleware/locale.js';
 import { swaggerSpec } from './swagger.js';
 import fs from 'fs';
+import crypto from 'crypto';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -92,10 +94,73 @@ app.use(cors({
     if (!origin || config.allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
-    return callback(new Error(`المصدر غير مسموح به عبر CORS: ${origin}`));
+    // مصدر غير مسموح: لا نضع ترويسات CORS (المتصفح يحجب الرد)، ثم يرفضه
+    // الوسيط أدناه برمز 403 نظيف بدل رمي استثناء يتحوّل خطأ 500.
+    return callback(null, false);
   },
   credentials: true
 }));
+
+// رفض صريح لمصادر CORS غير المرخّصة (طلبات المتصفح الحاملة لرأس Origin).
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (origin && !config.allowedOrigins.includes(origin)) {
+    return res.status(403).json({ error: `المصدر غير مسموح به عبر CORS: ${origin}` });
+  }
+  next();
+});
+
+// ===== روابط محمية موقّعة للملفات الحساسة (أوراق الامتحانات + وثائق الأولياء) =====
+// هذه الملفات تُفتح من الواجهة عبر <a href> مباشرة (بلا ترويسة مصادقة)، لذا
+// نوقّعها وقت الاستجابة برمز قصير العمر. الملكية مضمونة لأن الـAPI الذي يُرجع
+// الرابط محمي بالصلاحيات أصلاً — فلا يحصل المستخدم على رابط إلا لما يُسمح له برؤيته.
+const PROTECTED_UPLOAD_PREFIXES = ['/uploads/exams/', '/uploads/documents/'];
+const SIGNED_URL_TTL_MS = 15 * 60 * 1000;
+
+function isProtectedUploadPath(p) {
+  return PROTECTED_UPLOAD_PREFIXES.some((pref) => typeof p === 'string' && p.startsWith(pref));
+}
+function signUploadUrl(urlPath) {
+  const exp = Date.now() + SIGNED_URL_TTL_MS;
+  const sig = crypto.createHmac('sha256', config.jwtSecret).update(`${urlPath}.${exp}`).digest('hex');
+  const sep = urlPath.includes('?') ? '&' : '?';
+  return `${urlPath}${sep}st=${exp}.${sig}`;
+}
+function verifyUploadSignature(urlPath, token) {
+  if (!token || typeof token !== 'string' || !token.includes('.')) return false;
+  const idx = token.lastIndexOf('.');
+  const exp = Number(token.slice(0, idx));
+  const sig = token.slice(idx + 1);
+  if (!Number.isFinite(exp) || exp < Date.now()) return false;
+  const expected = crypto.createHmac('sha256', config.jwtSecret).update(`${urlPath}.${exp}`).digest('hex');
+  const a = Buffer.from(expected, 'hex');
+  const b = Buffer.from(sig, 'hex');
+  if (a.length !== b.length) return false;
+  return crypto.timingSafeEqual(a, b);
+}
+
+// Prisma Decimal → Number + توقيع روابط الرفع المحمية، قبل التصيير JSON.
+// يُسجَّل مبكراً قبل كل المسارات (ومسار /api/payments يُركَّب قبل محلل JSON عمداً للـ webhooks).
+function transformResponse(value, seen = new WeakSet()) {
+  if (typeof value === 'string') {
+    if (isProtectedUploadPath(value) && !value.includes('st=')) return signUploadUrl(value);
+    return value;
+  }
+  if (value === null || typeof value !== 'object') return value;
+  if (Prisma.Decimal.isDecimal(value)) return value.toNumber();
+  if (value instanceof Date) return value;
+  if (seen.has(value)) return value;
+  seen.add(value);
+  if (Array.isArray(value)) return value.map((v) => transformResponse(v, seen));
+  const out = {};
+  for (const [k, v] of Object.entries(value)) out[k] = transformResponse(v, seen);
+  return out;
+}
+app.use((req, res, next) => {
+  const originalJson = res.json.bind(res);
+  res.json = (data) => originalJson(transformResponse(data));
+  next();
+});
 
 // مسارات الدفع تُركَّب قبل محلل JSON العام حتى تحصل الـ Webhooks على البنية الخام (Raw Body)
 // لتوقيعها والتحقق منه (Stripe Signature ...).
@@ -145,7 +210,11 @@ const authLimiter = rateLimit({
 });
 app.use('/api/auth', authLimiter);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// وثائق Swagger: متاحة في التطوير/الاختبار فقط. في الإنتاج تُحجب حتى لا
+// تُكشف خريطة كاملة للمسارات والحقول لأي مهاجم.
+if (config.nodeEnv !== 'production') {
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+}
 
 app.use('/api/auth', authRoutes);
 app.use('/api/students', studentRoutes);
@@ -210,6 +279,19 @@ const immutableOpts = {
     if (filePath.endsWith('index.html')) res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   }
 };
+// حارس: أوراق الامتحانات ووثائق الأولياء تتطلب توقيعاً صالحاً قصير العمر.
+// الملكية مضمونة لأن الـAPI الذي يُرجع الرابط الموقّع محمي بالصلاحيات أصلاً.
+app.use('/uploads/exams', (req, res, next) => {
+  const urlPath = `/uploads/exams${req.path.split('?')[0]}`;
+  if (verifyUploadSignature(urlPath, req.query.st)) return next();
+  return res.status(403).json({ error: 'رابط غير صالح أو منتهي الصلاحية' });
+});
+app.use('/uploads/documents', (req, res, next) => {
+  const urlPath = `/uploads/documents${req.path.split('?')[0]}`;
+  if (verifyUploadSignature(urlPath, req.query.st)) return next();
+  return res.status(403).json({ error: 'رابط غير صالح أو منتهي الصلاحية' });
+});
+
 app.use('/uploads', express.static(path.join(__dirname, '../uploads'), staticOpts));
 app.use('/assets', express.static(path.join(__dirname, '../uploads/assets'), immutableOpts));
 app.use('/images', express.static(path.join(__dirname, '../uploads/images'), staticOpts));
@@ -243,7 +325,7 @@ app.use(notFoundHandler);
 app.use(errorHandler);
 
 const server = http.createServer(app);
-setupWs(server);
+const wss = setupWs(server);
 
 async function start() {
   // STEP 1 — open the port FIRST so the hosting platform detects
@@ -305,6 +387,33 @@ async function start() {
       console.error('background startup tasks failed:', err.message);
     });
 }
+
+let shuttingDown = false;
+function shutdown(signal) {
+  if (shuttingDown) return;
+  shuttingDown = true;
+  console.log(`${signal} — بدء الإيقاف الرشيق...`);
+  // مهلة قصوى حتى لا يعلّق الإيقاف عند اتصالات مفتوحة.
+  const force = setTimeout(() => {
+    console.error('الإيقاف تجاوز المهلة — خروج قسري');
+    process.exit(1);
+  }, 10000);
+  force.unref();
+  try {
+    for (const client of wss?.clients || []) {
+      try { client.close(1001, 'server shutdown'); } catch { /* ignore */ }
+    }
+    wss?.close?.();
+  } catch { /* ignore */ }
+  server.close(async () => {
+    try { await prisma.$disconnect(); } catch { /* ignore */ }
+    console.log('تم الإيقاف الرشيق.');
+    clearTimeout(force);
+    process.exit(0);
+  });
+}
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT', () => shutdown('SIGINT'));
 
 if (config.nodeEnv !== 'test') {
   start().catch((err) => {

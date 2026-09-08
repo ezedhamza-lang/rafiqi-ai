@@ -55,12 +55,12 @@ router.get(
       prisma.payment.aggregate({ _sum: { amount: true }, where: { paidAt: { gte: monthStart } } })
     ]);
 
-    const totalRevenue = payments.reduce((acc, p) => acc + p.amount, 0);
+    const totalRevenue = payments.reduce((acc, p) => acc + Number(p.amount), 0);
 
     const monthMap = new Map();
     for (const p of revenueByMonth) {
       const key = p.paidAt.toISOString().slice(0, 7);
-      monthMap.set(key, (monthMap.get(key) || 0) + p.amount);
+      monthMap.set(key, (monthMap.get(key) || 0) + Number(p.amount));
     }
     const revenueByMonthList = Array.from(monthMap.entries())
       .map(([month, amount]) => ({ month, amount }))
@@ -76,7 +76,7 @@ router.get(
         suspendedCount,
         expiredCount,
         totalRevenue,
-        monthRevenue: monthRevenue._sum.amount || 0,
+        monthRevenue: Number(monthRevenue._sum.amount || 0),
         expiringSoonCount: expiringSoon.length
       },
       expiringSoon,

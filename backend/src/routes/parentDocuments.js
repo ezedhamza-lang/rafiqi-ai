@@ -8,6 +8,7 @@ import { notify } from '../services/notify.js';
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 import { parentDocCreateSchema, docReviewSchema, parentDocStatusQuerySchema, parentDocIdParamSchema } from '../validators/parentDocument.js';
+import { validateUploadedFiles } from '../utils/fileSecurity.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -110,6 +111,8 @@ router.get('/documents/types', requireRole('PARENT'), asyncHandler(async (_req, 
 router.post('/documents', requireRole('PARENT'), upload.single('file'), validateBody(parentDocCreateSchema), asyncHandler(async (req, res) => {
   const { studentId, docType, title, note } = req.body;
   if (!req.file) throw new ApiError(400, 'يرجى إرفاق ملف الوثيقة (PDF أو صورة)');
+  const badFiles = validateUploadedFiles([req.file], ['pdf', 'jpeg', 'png', 'zip']);
+  if (badFiles.length) throw new ApiError(400, 'نوع الملف غير مدعوم — يُقبل PDF أو صورة أو مستند Word فقط');
 
   if (studentId) {
     const student = await prisma.student.findFirst({

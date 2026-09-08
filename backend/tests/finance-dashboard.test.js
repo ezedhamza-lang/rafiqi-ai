@@ -243,12 +243,12 @@ describe('لوحة المدير المالية — الإرجاعات (Refunds)'
 
     const refund = await prisma.refund.findFirst({ where: { invoiceId: invoice.id } });
     expect(refund).toBeTruthy();
-    expect(refund.amount).toBe(invoice.total);
+    expect(Number(refund.amount)).toBe(Number(invoice.total));
     expect(refund.reason).toBe('خطأ في معالجة الدفع');
 
     const log = await prisma.auditLog.findFirst({ where: { action: 'INVOICE_REFUNDED' } });
     expect(log).toBeTruthy();
-    expect(log.metadata.amount).toBe(invoice.total);
+    expect(log.metadata.amount).toBe(Number(invoice.total));
 
     const again = await request(app)
       .post(`/api/admin/finance/invoices/${invoice.id}/refund`)
@@ -328,7 +328,7 @@ describe('لوحة المدير المالية — كشف الشذوذ', () => {
 
     await createDiscount(adminToken, { code: 'FULL', type: 'PERCENTAGE', value: 100 });
     const { invoice } = await makePaidInvoice(prisma, parentToken, { discountCode: 'FULL' });
-    expect(invoice.total).toBe(0);
+    expect(Number(invoice.total)).toBe(0);
 
     const detect = await request(app)
       .post('/api/admin/finance/anomalies/detect')

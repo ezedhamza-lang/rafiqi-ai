@@ -7,6 +7,7 @@ import prisma from '../db.js';
 import { authMiddleware, teacherMiddleware, studentMiddleware } from '../auth.js';
 import { notify } from '../services/notify.js';
 import { mergeImagesToPdf, ensureUploadDir, MAX_SCAN_PAGES } from '../services/scanService.js';
+import { validateUploadedFiles } from '../utils/fileSecurity.js';
 import { SUBJECTS } from './classSubjects.js';
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
@@ -105,6 +106,8 @@ router.post('/student/submitted-exams', studentMiddleware, upload.array('images'
   if (req.files.length > MAX_SCAN_PAGES) {
     throw new ApiError(400, `الحد الأقصى هو ${MAX_SCAN_PAGES} صفحات`);
   }
+  const badFiles = validateUploadedFiles(req.files, ['jpeg', 'png']);
+  if (badFiles.length) throw new ApiError(400, 'بعض الملفات ليست صور JPEG/PNG صالحة');
 
   const studentRecord = await prisma.student.findFirst({
     where: { accountUserId: req.user.id },

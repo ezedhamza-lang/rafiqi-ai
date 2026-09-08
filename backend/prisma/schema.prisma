@@ -635,7 +635,7 @@ model Subscription {
   startDate      DateTime
   endDate        DateTime
   status         AccountStatus    @default(PENDING_PAYMENT)
-  amount         Float?
+  amount         Decimal?         @db.Decimal(12, 3)
   studentId      Int?
   renewalEnabled Boolean          @default(true)
   cancelledAt    DateTime?
@@ -655,7 +655,7 @@ model Subscription {
 model Payment {
   id             Int      @id @default(autoincrement())
   subscriptionId Int
-  amount         Float
+  amount         Decimal  @db.Decimal(12, 3)
   method         String   @default("OFFLINE")
   reference      String?
   paidByUserId   Int
@@ -966,7 +966,7 @@ model PaymentIntent {
   userId            Int
   provider          PaymentProvider      @default(DEMO)
   status            PaymentIntentStatus  @default(PENDING)
-  amount            Float
+  amount            Decimal              @db.Decimal(12, 3)
   currency          String               @default("TND")
   providerReference String?              @unique
   checkoutUrl       String?
@@ -1013,10 +1013,10 @@ model Invoice {
   paymentId      Int
   status         InvoiceStatus @default(PAID)
   issuedAt       DateTime      @default(now())
-  amount         Float
-  discountAmount Float         @default(0)
-  taxAmount      Float         @default(0)
-  total          Float
+  amount         Decimal       @db.Decimal(12, 3)
+  discountAmount Decimal       @default(0) @db.Decimal(12, 3)
+  taxAmount      Decimal       @default(0) @db.Decimal(12, 3)
+  total          Decimal       @db.Decimal(12, 3)
   discountCode   String?
   currency       String        @default("TND")
   pdfUrl         String?
@@ -1056,7 +1056,7 @@ model Refund {
   invoiceId      Int
   paymentId      Int?
   subscriptionId Int
-  amount         Float
+  amount         Decimal  @db.Decimal(12, 3)
   reason         String?
   status         String   @default("COMPLETED")
   refundedBy     Int

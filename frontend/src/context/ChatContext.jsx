@@ -36,7 +36,9 @@ export function ChatProvider({ children }) {
     const connect = () => {
       const token = getToken();
       const proto = window.location.protocol === 'https:' ? 'wss' : 'ws';
-      ws = new WebSocket(`${proto}://${window.location.host}/ws?token=${encodeURIComponent(token || '')}`);
+      const url = `${proto}://${window.location.host}/ws`;
+      // التوكن عبر بروتوكول فرعي بدل الرابط (لا يُسجَّل في سجلات الوسيط).
+      ws = token ? new WebSocket(url, [`bearer-${token}`]) : new WebSocket(url);
       wsRef.current = ws;
 
       ws.onopen = () => {

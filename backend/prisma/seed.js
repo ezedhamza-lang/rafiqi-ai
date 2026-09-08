@@ -134,16 +134,16 @@ async function main() {
   }
 
   const demoUsers = [
-    { firstName: 'مدير', lastName: 'المنصة', email: 'admin@education.tn', phone: '70017032', password: 'admin123', role: 'ADMIN' },
-    { firstName: 'أحمد', lastName: 'التلميذ', email: 'student@test.tn', phone: '20000001', password: 'student123', role: 'STUDENT' },
-    { firstName: 'محمد', lastName: 'الولي', email: 'parent@test.tn', phone: '20000002', password: 'parent123', role: 'PARENT' },
-    { firstName: 'فاطمة', lastName: 'المعلمة', email: 'teacher@test.tn', phone: '20000003', password: 'teacher123', role: 'TEACHER' },
-    { firstName: 'خالد', lastName: 'مدير المدرسة', email: 'director@test.tn', phone: '20000004', password: 'director123', role: 'SCHOOL_DIRECTOR' },
-    { firstName: 'نظامي', lastName: 'المنصة', email: 'super@education.tn', phone: '70017033', password: 'super123', role: 'SUPER_ADMIN' },
+    { firstName: 'مدير', lastName: 'المنصة', email: 'admin@education.tn', phone: '70017032', password: 'qarn-zeft-7alib-2026!', role: 'ADMIN' },
+    { firstName: 'أحمد', lastName: 'التلميذ', email: 'student@test.tn', phone: '20000001', password: 'qarn-zeft-7alib-2026!', role: 'STUDENT' },
+    { firstName: 'محمد', lastName: 'الولي', email: 'parent@test.tn', phone: '20000002', password: 'qarn-zeft-7alib-2026!', role: 'PARENT' },
+    { firstName: 'فاطمة', lastName: 'المعلمة', email: 'teacher@test.tn', phone: '20000003', password: 'qarn-zeft-7alib-2026!', role: 'TEACHER' },
+    { firstName: 'خالد', lastName: 'مدير المدرسة', email: 'director@test.tn', phone: '20000004', password: 'qarn-zeft-7alib-2026!', role: 'SCHOOL_DIRECTOR' },
+    { firstName: 'نظامي', lastName: 'المنصة', email: 'super@education.tn', phone: '70017033', password: 'Super-Owner-2026!', role: 'SUPER_ADMIN' },
     // حساب الاستكشاف: دور تلميذ عمداً بلا سجل في جدول Student (لا قسم ولا مستوى)،
     // فيرى محتوى كل المستويات س1-س6 (القفل يُرفع عند غياب المستوى فقط).
     // التكليفات/الاختبارات المرتبطة بالقسم تعيد له قائمة فارغة بأمان.
-    { firstName: 'مستكشف', lastName: 'المنصة', email: 'explorer@test.tn', phone: '20000005', password: 'explorer123', role: 'STUDENT' }
+    { firstName: 'مستكشف', lastName: 'المنصة', email: 'explorer@test.tn', phone: '20000005', password: 'qarn-zeft-7alib-2026!', role: 'STUDENT' }
   ];
 
   const users = {};

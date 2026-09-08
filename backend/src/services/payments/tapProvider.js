@@ -57,7 +57,7 @@ export const tapProvider = {
     try {
       // Create charge/invoice
       const chargeData = {
-        amount: intent.amount,
+        amount: Number(intent.amount),
         currency: currency,
         customer: {
           first_name: intent.userFirstName || 'User',

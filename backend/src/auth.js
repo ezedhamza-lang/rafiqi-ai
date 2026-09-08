@@ -76,8 +76,6 @@ export async function purgeExpiredRefreshTokens() {
   await prisma.refreshToken.deleteMany({ where: { expiresAt: { lt: new Date() } } });
 }
 
-const SUBSCRIPTION_ROLES = ['STUDENT', 'TEACHER'];
-
 export function accountStatusMessage(status) {
   switch (status) {
     case 'PENDING_APPROVAL':
@@ -100,20 +98,20 @@ export async function authMiddleware(req, res, next) {
   }
   try {
     const payload = jwt.verify(token, JWT_SECRET);
-    if (SUBSCRIPTION_ROLES.includes(payload.role)) {
-      try {
-        const user = await prisma.user.findUnique({
-          where: { id: payload.id },
-          select: { accountStatus: true }
-        });
-        const accountStatus = user?.accountStatus || null;
-        if (accountStatus !== 'ACTIVE') {
-          return res.status(403).json({ error: accountStatusMessage(accountStatus) });
-        }
-        payload.accountStatus = accountStatus;
-      } catch {
-        return res.status(401).json({ error: AR.SESSION_EXPIRED });
+    // فحص حالة الحساب لكل الأدوار (وليس المشتركين فقط)، حتى لا يبقى حساب
+    // موقوف/منتهي لصلاحية إدارية فعّالاً حتى انتهاء الرمز القصير.
+    try {
+      const user = await prisma.user.findUnique({
+        where: { id: payload.id },
+        select: { accountStatus: true }
+      });
+      const accountStatus = user?.accountStatus || null;
+      if (accountStatus !== 'ACTIVE') {
+        return res.status(403).json({ error: accountStatusMessage(accountStatus) });
       }
+      payload.accountStatus = accountStatus;
+    } catch {
+      return res.status(401).json({ error: AR.SESSION_EXPIRED });
     }
     req.user = payload;
     next();

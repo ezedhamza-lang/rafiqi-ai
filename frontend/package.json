@@ -7,9 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint src --max-warnings=225"
+    "lint": "eslint src --max-warnings=0",
+    "test": "vitest run"
   },
   "dependencies": {
+    "dompurify": "^3.4.15",
     "livekit-client": "^2.21.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -22,7 +24,8 @@
     "@vitejs/plugin-react": "^4.3.4",
     "eslint": "^10.8.1",
     "eslint-plugin-react-hooks": "^7.1.1",
-    "vite": "^5.4.11"
+    "vite": "^5.4.11",
+    "vitest": "^4.1.10"
   },
   "allowScripts": {
     "esbuild@0.21.5": true

@@ -182,7 +182,7 @@ describe('Webhook / محاكاة المزود التجريبي', () => {
 
     const payment = await prisma.payment.findFirst({ where: { subscriptionId: sub.id } });
     expect(payment).toBeTruthy();
-    expect(payment.amount).toBe(147);
+    expect(Number(payment.amount)).toBe(147);
     expect(payment.method).toBe('DEMO');
     expect(payment.reference).toBe(providerReference);
 

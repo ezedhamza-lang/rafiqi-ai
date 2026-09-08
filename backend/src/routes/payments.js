@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import express from 'express';
 import prisma from '../db.js';
+import { config } from '../config.js';
 import { authMiddleware, requireRole } from '../auth.js';
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
@@ -117,6 +118,9 @@ router.post(
   express.raw({ type: '*/*' }),
   authMiddleware,
   asyncHandler(async (req, res) => {
+    if (config.nodeEnv === 'production' && !config.payment.allowDemoPayments) {
+      throw new ApiError(503, 'المزود التجريبي DEMO معطّل في الإنتاج');
+    }
     const intent = await prisma.paymentIntent.findUnique({ where: { id: Number(req.params.intentId) } });
     if (!intent || intent.provider !== 'DEMO') throw new ApiError(404, 'العملية غير موجودة');
     const isAdmin = ['ADMIN', 'SUPER_ADMIN'].includes(req.user.role);

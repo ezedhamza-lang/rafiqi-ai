@@ -46,6 +46,9 @@ export async function createCheckoutIntent({ subscriptionId, provider, userId, r
   if (!captcha.ok) throw new ApiError(400, captcha.error);
 
   const providerName = normalizeProviderName(provider) || config.payment.defaultProvider;
+  if (providerName === 'DEMO' && config.nodeEnv === 'production' && !config.payment.allowDemoPayments) {
+    throw new ApiError(503, 'المزود التجريبي DEMO معطّل في الإنتاج — استعمل مزوداً حقيقياً أو اضبط ALLOW_DEMO_PAYMENTS=true صراحةً');
+  }
   const providerInstance = getProvider(providerName);
   const baseAmount = subscription.amount != null ? Number(subscription.amount) : priceForType(subscription.type);
 

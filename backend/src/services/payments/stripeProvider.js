@@ -6,6 +6,19 @@ function isConfigured() {
   return Boolean(config.payment.stripeSecretKey && config.payment.stripeWebhookSecret);
 }
 
+// عدد الخانات العشرية لكل عملة (Stripe يتوقع أصغر وحدة).
+// عملات بلا كسور (JPY...) وعملات بثلاث خانات (TND/KWD/BHD/OMR/JOD/IQD/LYD...).
+const ZERO_DECIMAL_CURRENCIES = new Set(['JPY', 'KRW', 'VND', 'CLP', 'ISK', 'HUF', 'TWD', 'XOF', 'XAF', 'DJF', 'GNF', 'KMF', 'PYG', 'RWF', 'UGX', 'VUV', 'XAF', 'XOF']);
+const THREE_DECIMAL_CURRENCIES = new Set(['TND', 'KWD', 'BHD', 'OMR', 'JOD', 'IQD', 'LYD']);
+
+function toStripeUnits(amount, currency) {
+  const c = String(currency || 'TND').toUpperCase();
+  const value = Number(amount) || 0;
+  if (ZERO_DECIMAL_CURRENCIES.has(c)) return String(Math.round(value));
+  if (THREE_DECIMAL_CURRENCIES.has(c)) return String(Math.round(value * 1000));
+  return String(Math.round(value * 100));
+}
+
 export const stripeProvider = {
   name: 'STRIPE',
   label: 'Stripe (وضع اختبار Sandbox)',
@@ -30,7 +43,7 @@ export const stripeProvider = {
     params.set('mode', 'payment');
     params.set('line_items[0][price_data][currency]', (intent.currency || 'TND').toLowerCase());
     params.set('line_items[0][price_data][product_data][name]', `اشتراك ${subscription.plan || 'المنصة'}`);
-    params.set('line_items[0][price_data][unit_amount]', String(Math.round(intent.amount * 100)));
+    params.set('line_items[0][price_data][unit_amount]', toStripeUnits(intent.amount, intent.currency || config.payment.currency));
     params.set('line_items[0][quantity]', '1');
     params.set('success_url', `${baseUrl}/api/payments/confirm/success?intent=${intent.id}`);
     params.set('cancel_url', `${baseUrl}/api/payments/confirm/cancel?intent=${intent.id}`);
@@ -73,6 +86,9 @@ export const stripeProvider = {
       const ts = parts.find(([k]) => k === 't')?.[1];
       const sig = parts.find(([k]) => k === 'v1')?.[1];
       if (!ts || !sig) return false;
+      // رفض التوقيعات القديمة (حماية من إعادة الإرسال Replay) — نافذة 5 دقائق كما توصي Stripe.
+      const tsSeconds = Number(ts);
+      if (!Number.isFinite(tsSeconds) || Math.abs(Date.now() / 1000 - tsSeconds) > 300) return false;
       const payload = typeof req.body === 'string' ? req.body : req.body.toString('utf8');
       const signed = `${ts}.${payload}`;
       const expected = crypto.createHmac('sha256', config.payment.stripeWebhookSecret).update(signed).digest('hex');

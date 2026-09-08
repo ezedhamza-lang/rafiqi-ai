@@ -36,6 +36,9 @@ export const config = {
     stbMerchantId: process.env.STB_MERCHANT_ID || '',
     stbSecret: process.env.STB_SECRET || '',
     demoWebhookSecret: process.env.DEMO_WEBHOOK_SECRET || '',
+    // المزود التجريبي DEMO مسموح في التطوير/الاختبار فقط. في الإنتاج يجب
+    // إما ضبط مزود حقيقي أو تعيين ALLOW_DEMO_PAYMENTS=true صراحةً (للعروض).
+    allowDemoPayments: process.env.ALLOW_DEMO_PAYMENTS === 'true',
     currency: process.env.PAYMENT_CURRENCY || 'TND',
     publicBaseUrl: process.env.PUBLIC_BASE_URL || '',
     captchaTtlMs: Number(process.env.CAPTCHA_TTL_MS || 10 * 60 * 1000),

@@ -37,7 +37,7 @@ async function detectRepeatedRefunds(now) {
       orderBy: { refundedAt: 'desc' },
       take: 10
     });
-    const total = refunds.reduce((acc, r) => acc + r.amount, 0);
+    const total = refunds.reduce((acc, r) => acc + Number(r.amount), 0);
     const a = await upsertAnomaly({
       key: `REPEATED_REFUND-${row.subscriptionId}`,
       type: ANOMALY_TYPES.REPEATED_REFUND,
@@ -173,7 +173,7 @@ async function detectSucceededWithoutInvoice() {
         description: `عملية دفع ناجحة (${intent.amount} د.ت) دون فاتورة مقابلة — نقص محتمل في التسوية.`,
         subjectType: 'PaymentIntent',
         subjectId: intent.id,
-        metadata: { amount: intent.amount, subscriptionId: intent.subscriptionId }
+        metadata: { amount: Number(intent.amount), subscriptionId: intent.subscriptionId }
       });
       if (a) created.push(a);
     }
@@ -197,7 +197,7 @@ async function detectInvoiceMismatches() {
         description: `الفاتورة ${inv.invoiceNumber || `#${inv.id}`}: المجموع ${inv.total} د.ت بينما الدفعة ${inv.payment.amount} د.ت.`,
         subjectType: 'Invoice',
         subjectId: inv.id,
-        metadata: { invoiceNumber: inv.invoiceNumber, invoiceTotal: inv.total, paymentAmount: inv.payment.amount }
+        metadata: { invoiceNumber: inv.invoiceNumber, invoiceTotal: Number(inv.total), paymentAmount: Number(inv.payment.amount) }
       });
       if (a) created.push(a);
     }

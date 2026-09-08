@@ -186,7 +186,7 @@ async function planBreakdown(rows) {
     const plan = sub ? `${sub.plan} (${sub.schoolYear})` : `اشتراك #${row.subscriptionId}`;
     const entry = byPlan.get(plan) || { plan, count: 0, amount: 0 };
     entry.count += row._count;
-    entry.amount = round2(entry.amount + (row._sum.amount || 0));
+    entry.amount = round2(entry.amount + Number(row._sum.amount || 0));
     byPlan.set(plan, entry);
   }
   return Array.from(byPlan.values()).sort((a, b) => b.amount - a.amount);
@@ -197,7 +197,7 @@ async function revenueByMonthList() {
   const map = new Map();
   for (const p of payments) {
     const key = p.paidAt.toISOString().slice(0, 7);
-    map.set(key, round2((map.get(key) || 0) + p.amount));
+    map.set(key, round2((map.get(key) || 0) + Number(p.amount)));
   }
   return Array.from(map.entries())
     .map(([month, amount]) => ({ month, amount }))
@@ -244,10 +244,10 @@ export async function buildFinancialReport({ from, to, schoolYear } = {}) {
     })
   ]);
 
-  const totalRevenue = round2(payments.reduce((acc, p) => acc + p.amount, 0));
-  const totalDiscounts = round2(invoices.reduce((acc, i) => acc + i.discountAmount, 0));
-  const totalTax = round2(invoices.reduce((acc, i) => acc + i.taxAmount, 0));
-  const totalRefunds = round2(refunds.reduce((acc, r) => acc + r.amount, 0));
+  const totalRevenue = round2(payments.reduce((acc, p) => acc + Number(p.amount), 0));
+  const totalDiscounts = round2(invoices.reduce((acc, i) => acc + Number(i.discountAmount), 0));
+  const totalTax = round2(invoices.reduce((acc, i) => acc + Number(i.taxAmount), 0));
+  const totalRefunds = round2(refunds.reduce((acc, r) => acc + Number(r.amount), 0));
   const netRevenue = round2(totalRevenue - totalRefunds);
   const discountCodesUsed = discountCodes.reduce((acc, d) => acc + d.usedCount, 0);
 
@@ -334,11 +334,11 @@ export async function buildReconciliation() {
   });
   const activeWithoutPayment = activeSubsWithIssues.filter((s) => s.payments.length === 0);
 
-  const sumPaid = round2(payments.reduce((acc, p) => acc + p.amount, 0));
-  const sumInvoiced = round2(invoices.reduce((acc, i) => acc + i.total, 0));
-  const sumRefunded = round2(refunds.reduce((acc, r) => acc + r.amount, 0));
+  const sumPaid = round2(payments.reduce((acc, p) => acc + Number(p.amount), 0));
+  const sumInvoiced = round2(invoices.reduce((acc, i) => acc + Number(i.total), 0));
+  const sumRefunded = round2(refunds.reduce((acc, r) => acc + Number(r.amount), 0));
   const sumIntentsSucceeded = round2(
-    intents.filter((t) => t.status === 'SUCCEEDED').reduce((acc, t) => acc + t.amount, 0)
+    intents.filter((t) => t.status === 'SUCCEEDED').reduce((acc, t) => acc + Number(t.amount), 0)
   );
 
   const reconciled = sumPaid - sumRefunded;

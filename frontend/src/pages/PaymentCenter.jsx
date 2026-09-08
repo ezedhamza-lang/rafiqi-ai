@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import DOMPurify from 'dompurify';
 import { api } from '../api/client.js';
 import { useI18n } from '../i18n/index.jsx';
 
@@ -457,7 +458,7 @@ export default function PaymentCenter() {
             <div className="form-group">
               <label>{t('paymentCenter.captchaLabel')}</label>
               <div className="form-row" style={{ alignItems: 'center' }}>
-                <div className="grow" dangerouslySetInnerHTML={{ __html: captcha.svg }} style={{ border: '1px solid var(--border)', borderRadius: '10px', overflow: 'hidden', width: '100%' }} />
+                <div className="grow" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(captcha.svg || '', { USE_PROFILES: { svg: true, svgFilters: true } }) }} style={{ border: '1px solid var(--border)', borderRadius: '10px', overflow: 'hidden', width: '100%' }} />
                 <button type="button" className="btn btn-sm" onClick={refreshCaptcha} aria-label={t('paymentCenter.refreshAria')}>
                   <span className="material-icons">refresh</span>
                 </button>

@@ -363,13 +363,29 @@ export async function stopScreenShare(room, userId, sessionId) {
 }
 
 export function setupWs(server) {
-  const wss = new WebSocketServer({ server, path: '/ws' });
+  const wss = new WebSocketServer({
+    server,
+    path: '/ws',
+    // نقبل التوكن عبر بروتوكول فرعي `bearer-<jwt>` بدل وضعه في الرابط
+    // (الرابط قد يُسجَّل في سجلات الوسيط). نختار البروتوكول المُرسَل.
+    handleProtocols: (protocols) => {
+      for (const p of protocols) {
+        if (typeof p === 'string' && p.startsWith('bearer-')) return p;
+      }
+      return true;
+    }
+  });
 
   wss.on('connection', (ws, req) => {
     let userId = null;
     try {
       const url = new URL(req.url, 'http://localhost');
-      const token = url.searchParams.get('token');
+      let token = url.searchParams.get('token');
+      if (!token) {
+        const proto = String(req.headers['sec-websocket-protocol'] || '');
+        const bearer = proto.split(',').map((s) => s.trim()).find((p) => p.startsWith('bearer-'));
+        if (bearer) token = bearer.slice('bearer-'.length);
+      }
       if (token) {
         const payload = jwt.verify(token, JWT_SECRET);
         userId = payload.id;

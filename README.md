@@ -13,6 +13,12 @@ chmod +x start.sh
 ```bash
 JWT_SECRET=$(openssl rand -hex 32) docker compose up --build -d
 ```
+> `JWT_SECRET` **إلزامي** الآن — بدونه يرفض `docker compose` الإقلاع (لا قيمة افتراضية ضعيفة).
+> في الإنتاج عرّف أيضاً `ALLOWED_ORIGINS` بدومين الواجهة، واختر مزود دفع حقيقياً
+> (`PAYMENT_PROVIDER`) — المزود `DEMO` معطّل تلقائياً في `NODE_ENV=production`
+> إلا إذا ضبطت `ALLOW_DEMO_PAYMENTS=true` صراحةً (للعروض التجريبية فقط).
+> وثائق Swagger معطّلة في الإنتاج (متاحة في التطوير فقط على `/api-docs`).
+
 ثم افتح **http://localhost:5173** (API على 3001، قاعدة بيانات على 5432).
 يُنشئ الحاويات الثلاث (postgres + api + web)، يُطبّق الهجرات ويبذر البيانات تلقائياً
 (البذر قابل لإعادة التشغيل بأمان). لإيقافه: `docker compose down`.
@@ -86,15 +92,17 @@ npm run dev
 
 ## حسابات تجريبية
 
+> **الأمان:** كلمات السر هذه للتجربة المحلية فقط. في الإنتاج نفّذ `node backend/scripts/reset-passwords.mjs` (من Render Shell) لتعيينها، أو غيّرها من فضاء المشرف. لا تُدخل حسابات تجريبية لبيانات حقيقية.
+
 | الدور | البريد | كلمة السر |
 |-------|--------|-----------|
-| نظامي (Super Admin) | `super@education.tn` | `super123` |
-| مدير عام | `admin@education.tn` | `admin123` |
-| مدير مدرسة | `director@test.tn` | `director123` |
-| أستاذ | `teacher@test.tn` | `teacher123` |
-| ولي | `parent@test.tn` | `parent123` |
-| تلميذ | `student@test.tn` | `student123` |
-| تلميذ استكشاف (بلا قسم: يرى محتوى كل المستويات س1-س6) | `explorer@test.tn` | `explorer123` |
+| نظامي (Super Admin) | `super@education.tn` | `Super-Owner-2026!` |
+| مدير عام | `admin@education.tn` | `qarn-zeft-7alib-2026!` |
+| مدير مدرسة | `director@test.tn` | `qarn-zeft-7alib-2026!` |
+| أستاذ | `teacher@test.tn` | `qarn-zeft-7alib-2026!` |
+| ولي | `parent@test.tn` | `qarn-zeft-7alib-2026!` |
+| تلميذ | `student@test.tn` | `qarn-zeft-7alib-2026!` |
+| تلميذ استكشاف (بلا قسم: يرى محتوى كل المستويات س1-س6) | `explorer@test.tn` | `qarn-zeft-7alib-2026!` |
 
 ## فضاء الأستاذ (20 تبويب)
 

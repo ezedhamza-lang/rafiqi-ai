@@ -28,7 +28,7 @@ export const stbProvider = {
     const baseUrl = config.payment.publicBaseUrl || '';
     const payload = {
       merchantId: config.payment.stbMerchantId,
-      amount: intent.amount,
+      amount: Number(intent.amount),
       currency: intent.currency || 'TND',
       reference: `INT-${intent.id}`,
       description: `اشتراك ${subscription.plan || 'المنصة'}`,

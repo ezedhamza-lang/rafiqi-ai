@@ -28,10 +28,13 @@ export async function mergeImagesToPdf(imagePaths) {
     const buffer = fs.readFileSync(filePath);
     let image;
     const type = detectImageType(buffer);
+    // نجرّب النوع المكتشف أولاً، ثم النوع الآخر احتياطاً، وبعدها يفشل بصراحة.
+    const primary = type === 'png' ? () => pdfDoc.embedPng(buffer) : () => pdfDoc.embedJpg(buffer);
+    const secondary = type === 'png' ? () => pdfDoc.embedJpg(buffer) : () => pdfDoc.embedPng(buffer);
     try {
-      image = type === 'png' ? await pdfDoc.embedPng(buffer) : await pdfDoc.embedJpg(buffer);
+      image = await primary();
     } catch {
-      image = await pdfDoc.embedJpg(buffer);
+      image = await secondary();
     }
 
     const page = pdfDoc.addPage([595.28, 841.89]);

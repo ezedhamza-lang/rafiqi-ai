@@ -198,9 +198,9 @@ describe('الفاتورة الرقمية PDF', () => {
     const invoice = await prisma.invoice.findFirst({ where: { subscriptionId: sub.id } });
     expect(invoice).toBeTruthy();
     expect(invoice.invoiceNumber).toMatch(/^INV-\d{4}-\d{6}$/);
-    expect(invoice.amount).toBe(147);
-    expect(invoice.discountAmount).toBe(14.7);
-    expect(invoice.total).toBe(132.3);
+    expect(Number(invoice.amount)).toBe(147);
+    expect(Number(invoice.discountAmount)).toBe(14.7);
+    expect(Number(invoice.total)).toBe(132.3);
     expect(invoice.discountCode).toBe('DISCOUNT10');
 
     const dc = await prisma.discountCode.findUnique({ where: { code: 'DISCOUNT10' } });
@@ -304,11 +304,11 @@ describe('ربط الاشتراكات بعمليات الدفع + التجديد
     const payments = await prisma.payment.findMany({ where: { subscriptionId: sub.id } });
     const renewalPayment = payments.find((p) => p.method === 'DEMO');
     expect(renewalPayment).toBeTruthy();
-    expect(renewalPayment.amount).toBe(147);
+    expect(Number(renewalPayment.amount)).toBe(147);
 
     const invoice = await prisma.invoice.findFirst({ where: { paymentId: renewalPayment.id } });
     expect(invoice).toBeTruthy();
-    expect(invoice.total).toBe(147);
+    expect(Number(invoice.total)).toBe(147);
   });
 
   it('إلغاء التجديد التلقائي يمنع تجديدا جديدا، وإعادة التفعيل تسمح به', async () => {
@@ -410,6 +410,6 @@ describe('ربط الاشتراكات بعمليات الدفع + التجديد
     expect(res.body.invoice.invoiceNumber).toMatch(/^INV-/);
 
     const invoice = await prisma.invoice.findFirst({ where: { subscriptionId: sub.id } });
-    expect(invoice.total).toBe(147);
+    expect(Number(invoice.total)).toBe(147);
   });
 });
