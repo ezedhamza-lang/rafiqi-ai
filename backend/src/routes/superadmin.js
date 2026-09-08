@@ -13,11 +13,68 @@ import {
   superAdminUsersQuerySchema,
   superAdminIdParamSchema,
   superAdminPasswordResetSchema,
-  superAdminUserCreateSchema
+  superAdminUserCreateSchema,
+  schoolCreateSchema,
+  schoolUpdateSchema,
+  assignSchoolSchema
 } from '../validators/superadmin.js';
 
 const router = Router();
 router.use(authMiddleware, superAdminMiddleware);
+
+// ==================== المدارس (Multi-tenancy) ====================
+
+router.get('/schools', asyncHandler(async (_req, res) => {
+  const schools = await prisma.school.findMany({
+    orderBy: { createdAt: 'desc' },
+    include: { _count: { select: { users: true, classes: true } } }
+  });
+  res.json(schools);
+}));
+
+router.post('/schools', validateBody(schoolCreateSchema), asyncHandler(async (req, res) => {
+  const { code, name, address, phone, email } = req.body;
+  const exists = await prisma.school.findUnique({ where: { code } });
+  if (exists) throw new ApiError(409, 'رمز المدرسة مستعمل مسبقا');
+  const school = await prisma.school.create({ data: { code, name, address: address || null, phone: phone || null, email: email || null } });
+  res.status(201).json(school);
+}));
+
+router.patch('/schools/:id', validateParams(superAdminIdParamSchema), validateBody(schoolUpdateSchema), asyncHandler(async (req, res) => {
+  const id = Number(req.params.id);
+  const school = await prisma.school.findUnique({ where: { id } });
+  if (!school) throw new ApiError(404, 'المدرسة غير موجودة');
+  const { code, ...rest } = req.body;
+  const data = { ...rest };
+  if (code && code !== school.code) {
+    const clash = await prisma.school.findUnique({ where: { code } });
+    if (clash) throw new ApiError(409, 'رمز المدرسة مستعمل مسبقا');
+    data.code = code;
+  }
+  const updated = await prisma.school.update({ where: { id }, data });
+  res.json(updated);
+}));
+
+router.delete('/schools/:id', validateParams(superAdminIdParamSchema), asyncHandler(async (req, res) => {
+  const id = Number(req.params.id);
+  if (id === 1) throw new ApiError(400, 'لا يمكن حذف المدرسة الافتراضية');
+  const counts = await prisma.user.count({ where: { schoolId: id } });
+  if (counts > 0) throw new ApiError(400, 'لا يمكن حذف مدرسة لديها مستخدمون — انقلهم لمدرسة أخرى أولا');
+  await prisma.school.delete({ where: { id } });
+  res.json({ ok: true });
+}));
+
+// تعيين مستخدم لمدرسة (أو نقله). المشرف العام فقط.
+router.post('/schools/:id/users/:userId', validateParams(superAdminIdParamSchema), validateBody(assignSchoolSchema), asyncHandler(async (req, res) => {
+  const schoolId = Number(req.params.id);
+  const userId = Number(req.params.userId);
+  const school = await prisma.school.findUnique({ where: { id: schoolId } });
+  if (!school) throw new ApiError(404, 'المدرسة غير موجودة');
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (!user) throw new ApiError(404, 'المستخدم غير موجود');
+  const updated = await prisma.user.update({ where: { id: userId }, data: { schoolId } });
+  res.json({ id: updated.id, schoolId: updated.schoolId });
+}));
 
 /**
  * @swagger

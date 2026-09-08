@@ -29,6 +29,11 @@ enum SubscriptionType {
   TEACHER
 }
 
+enum SchoolStatus {
+  ACTIVE
+  SUSPENDED
+}
+
 enum SubscriptionRequestStatus {
   PENDING_APPROVAL
   REJECTED
@@ -133,6 +138,7 @@ model User {
   passwordHash  String
   role          Role          @default(PARENT)
   accountStatus AccountStatus @default(ACTIVE)
+  schoolId      Int?
   xp            Int           @default(0)
   coins         Int           @default(0)
   level         Int           @default(1)
@@ -144,6 +150,7 @@ model User {
   updatedAt     DateTime      @updatedAt
 
   students             Student[]             @relation("ParentStudents")
+  school               School?               @relation("SchoolUsers", fields: [schoolId], references: [id], onDelete: SetNull)
   studentAccount       Student?              @relation("StudentAccount")
   registrations        Registration[]
   helpRequests         HelpRequest[]
@@ -199,6 +206,7 @@ model User {
   lessonSubmissions    LessonSubmission[]  @relation("UserLessonSubmissions")
 
   @@index([role])
+  @@index([schoolId])
 }
 
 model RefreshToken {
@@ -241,10 +249,12 @@ model Class {
   level      String
   schoolYear String   @default("2026-2027")
   teacherId  Int?
+  schoolId   Int?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 
   teacher              User?                 @relation("ClassTeacher", fields: [teacherId], references: [id], onDelete: SetNull)
+  school               School?               @relation(fields: [schoolId], references: [id], onDelete: SetNull)
   students             Student[]
   quizzes              Quiz[]
   exams                OfficialExam[]
@@ -257,6 +267,8 @@ model Class {
   attendanceRecords    AttendanceRecord[]
   assignments          Assignment[]
   liveSessions         LiveSession[]
+
+  @@index([schoolId])
 }
 
 model Student {
@@ -612,6 +624,23 @@ model NotificationOutbox {
   @@index([userId])
   @@index([status])
   @@index([channel])
+}
+
+model School {
+  id        Int          @id @default(autoincrement())
+  code      String       @unique
+  name      String
+  address   String?
+  phone     String?
+  email     String?
+  status    SchoolStatus @default(ACTIVE)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+
+  users   User[]  @relation("SchoolUsers")
+  classes Class[]
+
+  @@index([status])
 }
 
 model License {

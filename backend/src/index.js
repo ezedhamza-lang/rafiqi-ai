@@ -54,6 +54,7 @@ import adminInsightsRoutes from './routes/adminInsights.js';
 import memoRoutes from './routes/memos.js';
 import { setupWs } from './ws.js';
 import { startRenewalScheduler, runRenewalSweep } from './services/subscriptionRenewalService.js';
+import { runSqlFile } from './services/migrationRunner.js';
 import { startParentInsightScheduler, runParentInsightSweep } from './services/parentInsightNotifyService.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 import { localeMiddleware } from './middleware/locale.js';
@@ -344,16 +345,13 @@ async function start() {
     // تطبيq تحويل الأعمدة المالية إلى Decimal من نفس ملف الهجرة (مصدر واحد).
     // idempotent + داخل .catch فلا يُعطّل الإقلاع. يعالج حالة الاستضافة التي
     // تُشغّل الصورة بلا `prisma migrate deploy` (مثل Render على الخطة المجانية).
-    .then(() => {
-      const sqlFile = path.join(__dirname, '../prisma/migrations/20260908000000_money_decimal/migration.sql');
-      if (!fs.existsSync(sqlFile)) return null;
-      const sql = fs.readFileSync(sqlFile, 'utf8');
-      // نستخرج كتلة DO الوحيدة (جملة واحدة) لأن $executeRawUnsafe لا يقبل جملات متعددة.
-      const m = sql.match(/DO\s+\$\$[\s\S]*?\$\$/);
-      if (!m) return null;
-      return prisma.$executeRawUnsafe(m[0]);
+    .then(async () => {
+      // تطبيق الهجرات idempotent عند الإقلاع (الاستضافة بلا Shell/migrate deploy).
+      const migDir = path.join(__dirname, '../prisma/migrations');
+      await runSqlFile(prisma, path.join(migDir, '20260908000000_money_decimal/migration.sql'));
+      await runSqlFile(prisma, path.join(migDir, '20260908120000_multi_tenancy/migration.sql'));
     }).catch((err) => {
-      console.error('money decimal conversion skipped:', err.message);
+      console.error('startup migrations skipped:', err.message);
     })
     .then(() => prisma.$executeRaw`CREATE TABLE IF NOT EXISTS "SubjectDistribution" (
       "id" SERIAL PRIMARY KEY,

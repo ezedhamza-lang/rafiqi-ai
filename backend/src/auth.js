@@ -13,7 +13,7 @@ export const REFRESH_TOKEN_TTL_DAYS = 7;
 
 export function signToken(user) {
   return jwt.sign(
-    { id: user.id, email: user.email, role: user.role, accountStatus: user.accountStatus },
+    { id: user.id, email: user.email, role: user.role, accountStatus: user.accountStatus, schoolId: user.schoolId ?? null },
     JWT_SECRET,
     { expiresIn: ACCESS_TOKEN_TTL }
   );

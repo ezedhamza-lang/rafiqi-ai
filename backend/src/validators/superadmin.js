@@ -39,3 +39,24 @@ export const superAdminUserCreateSchema = z.object({
   role: z.enum(['STUDENT', 'PARENT', 'TEACHER', 'SCHOOL_DIRECTOR', 'ADMIN', 'SUPER_ADMIN'], { error: 'دور غير صالح' }).optional().nullable(),
   password: z.string().trim().min(6, { error: 'كلمة السر قصيرة جدا (6 أحرف على الأقل)' }).max(100, { error: 'كلمة السر طويلة جدا' }).optional().nullable()
 });
+
+export const schoolCreateSchema = z.object({
+  code: z.string({ error: 'رمز المدرسة مطلوب' }).trim().min(1, { error: 'رمز المدرسة مطلوب' }).max(40, { error: 'الرمز طويل جدا' }),
+  name: z.string({ error: 'اسم المدرسة مطلوب' }).trim().min(2, { error: 'الاسم قصير جدا' }).max(200, { error: 'الاسم طويل جدا' }),
+  address: z.string().trim().max(250, { error: 'العنوان طويل جدا' }).optional().nullable(),
+  phone: z.string().trim().max(30, { error: 'الهاتف طويل جدا' }).optional().nullable(),
+  email: z.string().trim().email({ error: 'البريد غير صحيح' }).max(150, { error: 'البريد طويل جدا' }).optional().nullable()
+});
+
+export const schoolUpdateSchema = z.object({
+  code: z.string().trim().min(1).max(40).optional().nullable(),
+  name: z.string().trim().min(2).max(200).optional().nullable(),
+  address: z.string().trim().max(250).optional().nullable(),
+  phone: z.string().trim().max(30).optional().nullable(),
+  email: z.string().trim().email({ error: 'البريد غير صحيح' }).max(150).optional().nullable(),
+  status: z.enum(['ACTIVE', 'SUSPENDED'], { error: 'حالة غير صالحة' }).optional().nullable()
+});
+
+export const assignSchoolSchema = z.object({
+  schoolId: z.coerce.number({ error: 'معرف المدرسة غير صحيح' }).int().positive({ error: 'معرف المدرسة غير صحيح' })
+});
