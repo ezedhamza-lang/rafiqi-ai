@@ -4271,6 +4271,33 @@ tr:hover td {
   margin-inline: auto;
   padding: 0.25rem 0.25rem 1rem;
 }
+/* المصدر/السند: نصّ متّصل بلا بطاقات (مثل فقرات القصة) */
+.lesson-source {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 820px;
+  margin-inline: auto;
+}
+.lesson-source .lesson-block {
+  border: none;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+.lesson-source .lesson-block-head { margin-bottom: 0.25rem; }
+.lesson-source .lesson-block-text { font-size: 1.08rem; line-height: 1.9; color: #1f2937; }
+.lesson-source img { max-width: 100%; border-radius: 14px; margin: 0.5rem 0; }
+/* علبة القاعدة/التقويم */
+.lesson-rule {
+  max-width: 820px;
+  margin-inline: auto;
+  border: 1px solid color-mix(in srgb, var(--primary, #4f46e5) 30%, transparent);
+  background: var(--primary-soft, #f5f7ff);
+  border-radius: 14px;
+  padding: 0.75rem 1rem;
+}
+.lesson-rule .lesson-block { border: none; background: transparent; padding: 0; box-shadow: none; }
 .lesson-sheet-item {
   display: grid;
   grid-template-columns: 2.4rem 1fr;

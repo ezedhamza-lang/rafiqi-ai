@@ -852,14 +852,37 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
       ) : (
         <>
           <div className="lesson-blocks lesson-sheet">
-            {(lesson.blocks || []).map((b, i) => (
-              <div key={i} className="lesson-sheet-item">
-                <span className="lesson-sheet-num">{i + 1}</span>
-                <div className="lesson-sheet-body">
-                  <Block block={b} onAnswer={handleAnswer} blockId={`${lesson.id}-${i}`} />
-                </div>
-              </div>
-            ))}
+            {(() => {
+              const blocks = lesson.blocks || [];
+              const SOURCE = ['objective','concept','vocabulary','experiment'];
+              const RULE = ['summary'];
+              const isSrc = (b) => SOURCE.includes(b.kind);
+              const isRule = (b) => RULE.includes(b.kind);
+              const isEx = (b) => !isSrc(b) && !isRule(b);
+              const src = blocks.filter(isSrc);
+              const ex = blocks.filter(isEx);
+              const rule = blocks.filter(isRule);
+              return (<>
+                {src.length > 0 && (
+                  <div className="lesson-source">
+                    {src.map((b, i) => <Block key={'s' + i} block={b} onAnswer={handleAnswer} blockId={`${lesson.id}-s${i}`} />)}
+                  </div>
+                )}
+                {ex.map((b, i) => (
+                  <div key={i} className="lesson-sheet-item">
+                    <span className="lesson-sheet-num">{i + 1}</span>
+                    <div className="lesson-sheet-body">
+                      <Block block={b} onAnswer={handleAnswer} blockId={`${lesson.id}-${i}`} />
+                    </div>
+                  </div>
+                ))}
+                {rule.length > 0 && (
+                  <div className="lesson-rule">
+                    {rule.map((b, i) => <Block key={'r' + i} block={b} onAnswer={handleAnswer} blockId={`${lesson.id}-r${i}`} />)}
+                  </div>
+                )}
+              </>);
+            })()}
           </div>
 
           {/* Submit to Teacher Section */}
