@@ -1158,7 +1158,8 @@
     "tabs": {
       "licenses": "Licenses",
       "subscriptions": "Subscriptions",
-      "users": "Users"
+      "users": "Users",
+      "schools": "Schools"
     }
   },
   "licenses": {

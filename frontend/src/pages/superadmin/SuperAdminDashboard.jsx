@@ -4,11 +4,13 @@ import { useI18n } from '../../i18n/index.jsx';
 import Licenses from './Licenses.jsx';
 import Subscriptions from './Subscriptions.jsx';
 import UsersAdmin from './UsersAdmin.jsx';
+import Schools from './Schools.jsx';
 
 const TABS = [
   { to: '', end: true, icon: 'vpn_key', key: 'licenses' },
   { to: 'subscriptions', icon: 'subscriptions', key: 'subscriptions' },
-  { to: 'users', icon: 'manage_accounts', key: 'users' }
+  { to: 'users', icon: 'manage_accounts', key: 'users' },
+  { to: 'schools', icon: 'school', key: 'schools' }
 ];
 
 export default function SuperAdminDashboard() {
@@ -43,6 +45,7 @@ export default function SuperAdminDashboard() {
             <Route index element={<Licenses />} />
             <Route path="subscriptions" element={<Subscriptions />} />
             <Route path="users" element={<UsersAdmin />} />
+            <Route path="schools" element={<Schools />} />
           </Routes>
         </div>
       </div>
