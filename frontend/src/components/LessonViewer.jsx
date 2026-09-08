@@ -171,15 +171,17 @@ function RewardBlock({ block }) {
 }
 
 function DefaultBlock({ block, kind, icon }) {
+  const [imgErr, setImgErr] = useState(false);
+  const showImg = block.image && !imgErr;
   return (
     <div className={`lesson-block lesson-block-${kind}`}>
       <div className="lesson-block-head">
         <span className="material-icons">{icon}</span>
         <strong>{rich(block.title) || (kind === 'objective' ? 'الأهداف' : '')}</strong>
       </div>
-      {block.image ? (
+      {showImg ? (
         <div style={{ textAlign: 'center', margin: '0.5rem 0' }}>
-          <img src={block.image} alt={block.title || ''} style={{ maxWidth: '100%', maxHeight: 320, borderRadius: 14, border: '2px solid #dbead2' }} />
+          <img src={block.image} alt={block.title || ''} onError={() => setImgErr(true)} style={{ maxWidth: '100%', maxHeight: 320, borderRadius: 14, border: '2px solid #dbead2' }} />
         </div>
       ) : block.art && <SvgArt id={block.art} />}
       <p className="lesson-block-text">{rich(block.text)}</p>
@@ -232,7 +234,9 @@ function PictureChoiceBlock({ block, onAnswer, blockId }) {
             className={`pic-card ${sel === i ? 'selected' : ''} ${checked && (i === sel ? (correct ? 'ok' : 'no') : i === block.answer ? 'ok' : '')}`}
             onClick={() => { setSel(i); setChecked(false); }}
           >
-            {opt.art && <SvgArt id={opt.art} size={96} />}
+            {opt.image ? (
+              <img src={opt.image} alt={opt.label || ''} onError={(e) => { e.currentTarget.style.display = 'none'; }} style={{ maxWidth: 150, maxHeight: 110, borderRadius: 10, objectFit: 'contain' }} />
+            ) : opt.art && <SvgArt id={opt.art} size={96} />}
             <span>{opt.label || ''}</span>
           </button>
         ))}

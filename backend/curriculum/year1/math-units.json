@@ -2383,29 +2383,77 @@
     },
     "pedagogicalBasis": "يُقدَّم الجمع العمودي دون احتفاظ كتنظيم مكاني للعملية: آحاد تحت آحاد وعشرات تحت عشرات، ثم جمع كل مرتبة على حدة.",
     "activities": [
-      "ترتيب عددين عموديًا (مرتبة تحت مرتبة)",
-      "جمع الآحاد ثم العشرات دون احتفاظ"
+      "يحكّ التلميذ عمودَي العشرات والآحاد على جدول المراتب ويحسب كل عمود على حدة",
+      "يُرتّب عددين عموديًا (آحاد تحت آحاد، عشرات تحت عشرات) ثم يجمع الآحاد ثم العشرات دون احتفاظ",
+      "يمثّل عملية الجمع بمكعبات (حزَم عشرات ومفردات) ويربطها بالترتيب العمودي",
+      "يوظّف الجمع العمودي في وضعية من الحياة التونسية (سوق/هدايا)"
     ],
     "studentBlocks": [
       {
         "kind": "concept",
-        "title": "🔍 أستكشف",
-        "text": "23 + 14: رتّب عموديًا ثم اجمع. الآحاد مع الآحاد!",
-        "art": "column-add"
+        "title": "🔍 أستكشف — الجمع بالعمود",
+        "text": "لجمع 23 + 14 نرتّب الأعداد عموديًا: الآحاد تحت الآحاد (3 فوق 4) والعشرات تحت العشرات (2 فوق 1). ثم نجمع الآحاد أولًا: 3 + 4 = 7، ثم العشرات: 2 + 1 = 3. الناتج 37.",
+        "art": "column-add",
+        "image": "/uploads/curriculum/y1/math/y1m43-intro.png",
+        "imagePrompt": "Flat vector children-book illustration: column addition of 23 + 14 shown in two place-value columns (tens and ones) using base-10 blocks (bundles of ten sticks and single cubes), Arabic RTL friendly, soft pastel palette, thick clean outlines, white background, no text, no letters, no watermark, 4:3"
+      },
+      {
+        "kind": "picture-choice",
+        "title": "🖼️ أيّ ترتيبٍ صحيح؟",
+        "text": "اختر الترتيب العمودي الصحيح للجمع 23 + 14 (المرتبة تحت مرتبتها).",
+        "options": [
+          { "art": "align-correct", "label": "آحاد تحت آحاد وعشرات تحت عشرات", "image": "/uploads/curriculum/y1/math/y1m43-align-ok.png", "imagePrompt": "Flat vector kids illustration: vertical addition correctly aligned, ones over ones and tens over tens on a grid, one green check mark drawn as a shape (not text), soft pastel, thick outlines, white background, no text, 4:3" },
+          { "art": "align-wrong", "label": "غير محاذٍ بين المرتبتين", "image": "/uploads/curriculum/y1/math/y1m43-align-no.png", "imagePrompt": "Flat vector kids illustration: vertical addition badly aligned, ones shifted under tens, one red cross drawn as a shape (not text), soft pastel, thick outlines, white background, no text, 4:3" }
+        ],
+        "answer": 0
+      },
+      {
+        "kind": "question",
+        "title": "🤔 من أين نبدأ؟",
+        "text": "في الجمع العمودي، من أيّ مرتبة نبدأ الجمع؟",
+        "options": ["من الآحاد (يمينًا)", "من العشرات", "نبدأ دائمًا من اليسار"],
+        "answer": 0,
+        "explain": "نبدأ دائمًا بجمع الآحاد ثم ننتقل إلى العشرات."
       },
       {
         "kind": "math-input",
-        "title": "🔢 أتدرب",
-        "text": "أنجز عموديًا: 23+14.",
-        "placeholder": "  23\n+ 14\n――――\n  ....",
+        "title": "✏️ أُنجز بالعمود (1)",
+        "text": "احسب عموديًا: 32 + 15",
+        "placeholder": "  32\n+ 15\n――――\n  ؟",
         "rows": 4,
-        "answer": "37"
+        "answer": "47"
+      },
+      {
+        "kind": "math-input",
+        "title": "✏️ أُنجز بالعمود (2)",
+        "text": "احسب عموديًا: 41 + 26",
+        "placeholder": "  41\n+ 26\n――――\n  ؟",
+        "rows": 4,
+        "answer": "67"
+      },
+      {
+        "kind": "question",
+        "title": "🧩 وضعية من حياتي",
+        "text": "عند سلمى 24 تفّاحة، أعطاها جارها 13 تفّاحة. كم تفّاحة أصبحت عندها؟",
+        "options": ["37", "36", "38"],
+        "answer": 0,
+        "explain": "نجمع 24 + 13 بالعمود: الآحاد 4+3=7، العشرات 2+1=3 ← 37."
+      },
+      {
+        "kind": "math-input",
+        "title": "🌟 للبراعة",
+        "text": "احسب عموديًا: 50 + 19",
+        "placeholder": "  50\n+ 19\n――――\n  ؟",
+        "rows": 4,
+        "answer": "69"
       },
       {
         "kind": "summary",
         "title": "📌 القاعدة",
         "points": [
-          "مرتبة تحت مرتبة، ثم أجمع."
+          "نكتب العددَين عموديًا: الآحاد تحت الآحاد، والعشرات تحت العشرات.",
+          "نجمع الآحاد أوّلًا، ثم نجمع العشرات.",
+          "في هذا الدرس لا احتفاظ: مجموع كل مرتبة يبقى رقمًا واحدًا."
         ]
       }
     ]
