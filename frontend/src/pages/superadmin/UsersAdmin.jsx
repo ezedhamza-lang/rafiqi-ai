@@ -15,12 +15,13 @@ const ROLE_OPTIONS = [
 export default function UsersAdmin() {
   const { t } = useI18n();
   const [users, setUsers] = useState([]);
+  const [schools, setSchools] = useState([]);
   const [query, setQuery] = useState('');
   const [role, setRole] = useState('');
   const [resetInfo, setResetInfo] = useState(null);
   const [copied, setCopied] = useState(false);
   const [showAdd, setShowAdd] = useState(false);
-  const [addForm, setAddForm] = useState({ firstName: '', lastName: '', email: '', phone: '', password: '' });
+  const [addForm, setAddForm] = useState({ firstName: '', lastName: '', email: '', phone: '', password: '', schoolId: '' });
   const [addErr, setAddErr] = useState('');
   const [adding, setAdding] = useState(false);
 
@@ -35,6 +36,10 @@ export default function UsersAdmin() {
   }, []);
 
   useEffect(() => {
+    api.get('/superadmin/schools').then(setSchools).catch(() => {});
+  }, []);
+
+  useEffect(() => {
     const timer = setTimeout(() => load(query, role), 300);
     return () => clearTimeout(timer);
   }, [query, role, load]);
@@ -42,6 +47,15 @@ export default function UsersAdmin() {
   const changeRole = async (id, newRole) => {
     await api.put(`/superadmin/users/${id}/role`, { role: newRole });
     load(query, role);
+  };
+
+  const changeSchool = async (id, schoolId) => {
+    try {
+      await api.put(`/superadmin/users/${id}/school`, { schoolId: schoolId ? Number(schoolId) : null });
+      load(query, role);
+    } catch (e) {
+      window.alert(e.message);
+    }
   };
 
   const resetPassword = async (u) => {
@@ -84,11 +98,12 @@ export default function UsersAdmin() {
         email: addForm.email.trim(),
         phone: addForm.phone.trim() || undefined,
         role: 'TEACHER',
-        password: addForm.password.trim() || undefined
+        password: addForm.password.trim() || undefined,
+        schoolId: addForm.schoolId ? Number(addForm.schoolId) : undefined
       });
       setResetInfo({ id: res.id, email: res.email, password: res.password, isNew: true });
       setCopied(false);
-      setAddForm({ firstName: '', lastName: '', email: '', phone: '', password: '' });
+      setAddForm({ firstName: '', lastName: '', email: '', phone: '', password: '', schoolId: '' });
       setShowAdd(false);
       load(query, role);
     } catch (ex) {
@@ -147,6 +162,13 @@ export default function UsersAdmin() {
               <label>{t('usersAdmin.passwordOptional')}</label>
               <input type="text" dir="ltr" value={addForm.password} onChange={(e) => setAddForm({ ...addForm, password: e.target.value })} placeholder="••••••" />
             </div>
+            <div className="form-group" style={{ gridColumn: '1 / -1' }}>
+              <label>{t('usersAdmin.schoolColumn')}</label>
+              <select value={addForm.schoolId} onChange={(e) => setAddForm({ ...addForm, schoolId: e.target.value })}>
+                <option value="">—</option>
+                {schools.map((s) => (<option key={s.id} value={s.id}>{s.name}</option>))}
+              </select>
+            </div>
           </div>
           {addErr && <p className="form-error">{addErr}</p>}
           <div>
@@ -174,6 +196,7 @@ export default function UsersAdmin() {
               <th>{t('usersAdmin.nameColumn')}</th>
               <th>{t('usersAdmin.emailColumn')}</th>
               <th>{t('usersAdmin.roleColumn')}</th>
+              <th>{t('usersAdmin.schoolColumn')}</th>
               <th>{t('usersAdmin.classColumn')}</th>
               <th>{t('usersAdmin.subscriptionColumn')}</th>
               <th>{t('usersAdmin.changeRoleColumn')}</th>
@@ -187,6 +210,12 @@ export default function UsersAdmin() {
                 <td>{u.email}</td>
                 <td>
                   <span className="badge">{roleLabel(u.role)}</span>
+                </td>
+                <td>
+                  <select value={u.schoolId ?? ''} onChange={(e) => changeSchool(u.id, e.target.value)} disabled={u.role === 'SUPER_ADMIN'}>
+                    <option value="">{u.role === 'SUPER_ADMIN' ? '—' : t('usersAdmin.noSchool')}</option>
+                    {schools.map((s) => (<option key={s.id} value={s.id}>{s.name}</option>))}
+                  </select>
                 </td>
                 <td>{u.studentAccount?.class?.name || '—'}</td>
                 <td>

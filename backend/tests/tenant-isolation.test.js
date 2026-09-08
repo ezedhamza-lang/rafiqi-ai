@@ -66,6 +66,19 @@ describe('عزل المدارس (Multi-tenancy)', () => {
     expect(r.status).toBe(404);
   });
 
+  it('نقل مستخدم بين المدرستين يعمل للمشرف العام فقط', async () => {
+    const ts = await tok('supertest@test.tn');
+    const ta = await prisma.user.findUnique({ where: { email: 'ta@test.tn' } });
+    const schoolB = await prisma.school.findUnique({ where: { code: 'SCH-B' } });
+    const r = await request(app).put(`/api/superadmin/users/${ta.id}/school`).set('Authorization', `Bearer ${ts}`).send({ schoolId: schoolB.id });
+    expect(r.status).toBe(200);
+    expect(r.body.schoolId).toBe(schoolB.id);
+    // مدير مدرسة عادي لا يستطيع النقل
+    const tA = await tok('dira@test.tn');
+    const forbidden = await request(app).put(`/api/superadmin/users/${ta.id}/school`).set('Authorization', `Bearer ${tA}`).send({ schoolId: schoolB.id });
+    expect(forbidden.status).toBe(403);
+  });
+
   it('المشرف العام (بلا مدرسة) يرى كل الأقسام', async () => {
     const ts = await tok('supertest@test.tn');
     const r = await request(app).get('/api/director/classes').set('Authorization', `Bearer ${ts}`);

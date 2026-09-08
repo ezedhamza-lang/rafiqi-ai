@@ -1209,6 +1209,8 @@
     "nameColumn": "Name",
     "emailColumn": "Email",
     "roleColumn": "Role",
+    "schoolColumn": "School",
+    "noSchool": "No school",
     "classColumn": "Class",
     "subscriptionColumn": "Subscription",
     "changeRoleColumn": "Change role",

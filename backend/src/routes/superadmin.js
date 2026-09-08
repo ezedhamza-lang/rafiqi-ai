@@ -16,7 +16,8 @@ import {
   superAdminUserCreateSchema,
   schoolCreateSchema,
   schoolUpdateSchema,
-  assignSchoolSchema
+  assignSchoolSchema,
+  userSchoolAssignSchema
 } from '../validators/superadmin.js';
 
 const router = Router();
@@ -346,7 +347,8 @@ router.get('/users', validateQuery(superAdminUsersQuerySchema), asyncHandler(asy
   const users = await prisma.user.findMany({
     where,
     select: {
-      id: true, firstName: true, lastName: true, email: true, phone: true, role: true, createdAt: true,
+      id: true, firstName: true, lastName: true, email: true, phone: true, role: true, createdAt: true, schoolId: true,
+      school: { select: { id: true, name: true } },
       studentAccount: { select: { id: true, class: { select: { name: true } } } },
       subscriptions: { select: { id: true, plan: true, endDate: true, status: true } }
     },
@@ -399,10 +401,15 @@ router.get('/users', validateQuery(superAdminUsersQuerySchema), asyncHandler(asy
  *         description: البريد مسجل مسبقا
  */
 router.post('/users', validateBody(superAdminUserCreateSchema), asyncHandler(async (req, res) => {
-  const { firstName, lastName, email, phone, role, password } = req.body;
+  const { firstName, lastName, email, phone, role, password, schoolId } = req.body;
   const emailNorm = String(email).toLowerCase();
   const existing = await prisma.user.findUnique({ where: { email: emailNorm } });
   if (existing) throw new ApiError(409, 'البريد مسجل مسبقا');
+  const finalSchoolId = schoolId != null ? Number(schoolId) : null;
+  if (finalSchoolId != null) {
+    const school = await prisma.school.findUnique({ where: { id: finalSchoolId } });
+    if (!school) throw new ApiError(404, 'المدرسة غير موجودة');
+  }
   const plain = (password || '').trim() || `Rafeeqi-${crypto.randomBytes(3).toString('hex')}`;
   const user = await prisma.user.create({
     data: {
@@ -411,11 +418,28 @@ router.post('/users', validateBody(superAdminUserCreateSchema), asyncHandler(asy
       email: emailNorm,
       phone: phone ? String(phone).trim() : null,
       passwordHash: await bcrypt.hash(plain, 10),
-      role: role || 'TEACHER'
+      role: role || 'TEACHER',
+      schoolId: finalSchoolId
     }
   });
   res.status(201).json({ ok: true, id: user.id, email: user.email, role: user.role, password: plain });
 }));
+
+// نقل مستخدم إلى مدرسة (null = إزالة الانتماء/للمشرف العام).
+router.put('/users/:id/school', validateParams(superAdminIdParamSchema), validateBody(userSchoolAssignSchema), asyncHandler(async (req, res) => {
+  const userId = Number(req.params.id);
+  const { schoolId } = req.body;
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (!user) throw new ApiError(404, 'المستخدم غير موجود');
+  let finalId = schoolId == null ? null : Number(schoolId);
+  if (finalId != null) {
+    const school = await prisma.school.findUnique({ where: { id: finalId } });
+    if (!school) throw new ApiError(404, 'المدرسة غير موجودة');
+  }
+  const updated = await prisma.user.update({ where: { id: userId }, data: { schoolId: finalId } });
+  res.json({ id: updated.id, schoolId: updated.schoolId });
+}));
+
 
 router.put('/users/:id/role', validateParams(superAdminIdParamSchema), validateBody(superAdminRoleUpdateSchema), asyncHandler(async (req, res) => {
   const { role } = req.body;

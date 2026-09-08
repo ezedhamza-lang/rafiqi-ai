@@ -37,7 +37,8 @@ export const superAdminUserCreateSchema = z.object({
   email: z.string({ error: 'البريد مطلوب' }).trim().email({ error: 'البريد غير صحيح' }).max(150, { error: 'البريد طويل جدا' }),
   phone: z.string().trim().max(30, { error: 'الهاتف طويل جدا' }).optional().nullable(),
   role: z.enum(['STUDENT', 'PARENT', 'TEACHER', 'SCHOOL_DIRECTOR', 'ADMIN', 'SUPER_ADMIN'], { error: 'دور غير صالح' }).optional().nullable(),
-  password: z.string().trim().min(6, { error: 'كلمة السر قصيرة جدا (6 أحرف على الأقل)' }).max(100, { error: 'كلمة السر طويلة جدا' }).optional().nullable()
+  password: z.string().trim().min(6, { error: 'كلمة السر قصيرة جدا (6 أحرف على الأقل)' }).max(100, { error: 'كلمة السر طويلة جدا' }).optional().nullable(),
+  schoolId: z.coerce.number().int().positive({ error: 'معرف المدرسة غير صحيح' }).optional().nullable()
 });
 
 export const schoolCreateSchema = z.object({
@@ -59,4 +60,8 @@ export const schoolUpdateSchema = z.object({
 
 export const assignSchoolSchema = z.object({
   schoolId: z.coerce.number({ error: 'معرف المدرسة غير صحيح' }).int().positive({ error: 'معرف المدرسة غير صحيح' })
+});
+
+export const userSchoolAssignSchema = z.object({
+  schoolId: z.preprocess((v) => (v === '' || v === null || v === undefined ? null : v), z.coerce.number().int().positive({ error: 'معرف المدرسة غير صحيح' }).nullable())
 });

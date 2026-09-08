@@ -1210,6 +1210,8 @@
     "nameColumn": "الاسم",
     "emailColumn": "البريد",
     "roleColumn": "الدور",
+    "schoolColumn": "المدرسة",
+    "noSchool": "بلا مدرسة",
     "classColumn": "القسم",
     "subscriptionColumn": "الاشتراك",
     "changeRoleColumn": "تغيير الدور",
