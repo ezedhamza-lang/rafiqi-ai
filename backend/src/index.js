@@ -341,6 +341,20 @@ async function start() {
   // STEP 2 — database work runs AFTER the port is open.
   // Any failure here is only logged and can never crash or block startup.
   prisma.$connect()
+    // تطبيq تحويل الأعمدة المالية إلى Decimal من نفس ملف الهجرة (مصدر واحد).
+    // idempotent + داخل .catch فلا يُعطّل الإقلاع. يعالج حالة الاستضافة التي
+    // تُشغّل الصورة بلا `prisma migrate deploy` (مثل Render على الخطة المجانية).
+    .then(() => {
+      const sqlFile = path.join(__dirname, '../prisma/migrations/20260908000000_money_decimal/migration.sql');
+      if (!fs.existsSync(sqlFile)) return null;
+      const sql = fs.readFileSync(sqlFile, 'utf8');
+      // نستخرج كتلة DO الوحيدة (جملة واحدة) لأن $executeRawUnsafe لا يقبل جملات متعددة.
+      const m = sql.match(/DO\s+\$\$[\s\S]*?\$\$/);
+      if (!m) return null;
+      return prisma.$executeRawUnsafe(m[0]);
+    }).catch((err) => {
+      console.error('money decimal conversion skipped:', err.message);
+    })
     .then(() => prisma.$executeRaw`CREATE TABLE IF NOT EXISTS "SubjectDistribution" (
       "id" SERIAL PRIMARY KEY,
       "classId" INTEGER NOT NULL UNIQUE,
