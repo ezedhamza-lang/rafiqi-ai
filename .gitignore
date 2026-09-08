@@ -25,3 +25,9 @@ backend/uploads/
 Thumbs.db
 .idea/
 .vscode/
+
+# Local downloads / DB dumps - never commit (contain student data / logs)
+rafiqi-db-backup*.zip
+logs_*.zip
+*.dump.gz
+*.dump
