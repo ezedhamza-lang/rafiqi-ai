@@ -6,15 +6,6 @@ import SvgArt from './SvgArt.jsx';
 import AssessmentPaper from './AssessmentPaper.jsx';
 import { bidiNodes } from '../utils/bidi';
 
-function speak(text) {
-  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = 'ar';
-  u.rate = 0.85;
-  window.speechSynthesis.speak(u);
-}
-
 const BLOCK_ICONS = {
   objective: 'track_changes',
   concept: 'lightbulb',
@@ -40,19 +31,8 @@ const MATH_SYMBOLS = ['×', '÷', '−', '+', '=', '²', '³', '½', '¼', '(', 
 // well below the server body limit.
 const MAX_ATTACH_BYTES = 2500000;
 
-function ListenBtn({ text }) {
-  if (!text) return null;
-  return (
-    <button
-      type="button"
-      className="block-listen"
-      title="استمع للتعليمة"
-      onClick={() => speak(text)}
-    >
-      <span className="material-icons" style={{ fontSize: 18 }}>volume_up</span>
-      استمع
-    </button>
-  );
+function ListenBtn() {
+  return null; // معطّل حسب معيار المحتوى: لا صوت في الدروس
 }
 
 // Minimal rich text: **bold** → <strong>. Lesson content uses ** for
@@ -752,11 +732,6 @@ function fileAnswerToAttachment(blockId, value) {
 }
 
 function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onComplete, book }) {
-  const readAloud = () => {
-    const parts = [lesson.title, ...(lesson.blocks || []).map((b) => b.text || '').filter(Boolean)];
-    speak(parts.join('. '));
-  };
-
   const [answers, setAnswers] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState(null);
@@ -820,10 +795,6 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
           {completed && <span className="badge ok">مُنجز ✓</span>}
         </div>
         <div className="lesson-page-actions">
-          <button type="button" className="btn btn-ghost btn-sm" onClick={readAloud} title="قراءة صوتية">
-            <span className="material-icons" style={{ fontSize: 18 }}>volume_up</span>
-            استمع
-          </button>
           {!completed && (
             <button type="button" className="btn btn-success btn-sm" onClick={onComplete}>
               <span className="material-icons" style={{ fontSize: 18 }}>check_circle</span>
