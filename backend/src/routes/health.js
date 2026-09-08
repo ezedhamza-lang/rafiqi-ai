@@ -4,6 +4,7 @@ import { authMiddleware, requireRole } from '../auth.js';
 import { validateBody, validateParams } from '../middleware/validate.js';
 import { healthRecordSchema, healthStudentIdParamSchema } from '../validators/health.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
+import { actorSchoolId } from '../tenant.js';
 
 const router = Router();
 
@@ -215,7 +216,9 @@ router.get(
   '/health/all',
   requireRole('SCHOOL_DIRECTOR', 'ADMIN', 'SUPER_ADMIN'),
   asyncHandler(async (req, res) => {
+    const sid = actorSchoolId(req);
     const records = await prisma.healthRecord.findMany({
+      where: sid != null ? { student: { account: { schoolId: sid } } } : {},
       select: { ...SELECT, student: { select: { firstName: true, lastName: true } } },
       orderBy: { updatedAt: 'desc' }
     });

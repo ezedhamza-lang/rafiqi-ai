@@ -4,6 +4,7 @@ import { authMiddleware, teacherMiddleware, studentMiddleware } from '../auth.js
 import { validateBody, validateParams } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 import { classSubjectCreateSchema, classSubjectUpdateSchema, classSubjectIdParamSchema } from '../validators/classSubject.js';
+import { actorSchoolId } from '../tenant.js';
 
 const router = Router();
 router.use(authMiddleware);
@@ -18,13 +19,21 @@ export const SUBJECTS = [
 const SUBJECT_LABELS = Object.fromEntries(SUBJECTS.map((s) => [s.code, s.label]));
 
 function canManage(req, klass) {
-  if (['ADMIN', 'SCHOOL_DIRECTOR', 'SUPER_ADMIN'].includes(req.user.role)) return true;
-  return klass?.teacherId === req.user.id;
+  const sid = actorSchoolId(req);
+  if (['ADMIN', 'SCHOOL_DIRECTOR', 'SUPER_ADMIN'].includes(req.user.role)) {
+    if (sid == null) return true; // المشرف العام يدير كل المدارس
+    return klass?.schoolId === sid;
+  }
+  // الأستاذ: أقسامه التي يدرّسها ضمن مدرسته فقط.
+  return klass?.teacherId === req.user.id && (sid == null || klass?.schoolId === sid);
 }
 
 function withClassWhere(req) {
-  if (['ADMIN', 'SCHOOL_DIRECTOR', 'SUPER_ADMIN'].includes(req.user.role)) return {};
-  return { teacherId: req.user.id };
+  const sid = actorSchoolId(req);
+  if (['ADMIN', 'SCHOOL_DIRECTOR', 'SUPER_ADMIN'].includes(req.user.role)) {
+    return sid != null ? { schoolId: sid } : {};
+  }
+  return sid != null ? { teacherId: req.user.id, schoolId: sid } : { teacherId: req.user.id };
 }
 
 /**
@@ -93,7 +102,8 @@ router.post('/class-subjects', teacherMiddleware, validateBody(classSubjectCreat
   const existing = await prisma.classSubject.findFirst({ where: { classId: klass.id, subject } });
   if (existing) throw new ApiError(400, 'هذه المادة مضمنة مسبقا لهذا القسم');
 
-  const teacher = teacherId ? await prisma.user.findFirst({ where: { id: Number(teacherId), role: 'TEACHER' } }) : null;
+  const sid = actorSchoolId(req);
+  const teacher = teacherId ? await prisma.user.findFirst({ where: { id: Number(teacherId), role: 'TEACHER', ...(sid != null ? { schoolId: sid } : {}) } }) : null;
   const created = await prisma.classSubject.create({
     data: {
       classId: klass.id,

@@ -4,6 +4,7 @@ import { authMiddleware, requireRole } from '../auth.js';
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
 import { attendanceSaveSchema, classIdParamSchema, attendanceQuerySchema } from '../validators/attendance.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
+import { actorSchoolId } from '../tenant.js';
 
 const router = Router();
 router.use(authMiddleware);
@@ -42,7 +43,8 @@ router.get(
     const klass = await prisma.class.findFirst({
       where: {
         id: classId,
-        ...(req.user.role === 'TEACHER' ? { teacherId: req.user.id } : {})
+        ...(req.user.role === 'TEACHER' ? { teacherId: req.user.id } : {}),
+      ...(actorSchoolId(req) != null ? { schoolId: actorSchoolId(req) } : {})
       },
       include: {
         students: {
@@ -117,7 +119,8 @@ router.post(
     const klass = await prisma.class.findFirst({
       where: {
         id: classId,
-        ...(req.user.role === 'TEACHER' ? { teacherId: req.user.id } : {})
+        ...(req.user.role === 'TEACHER' ? { teacherId: req.user.id } : {}),
+      ...(actorSchoolId(req) != null ? { schoolId: actorSchoolId(req) } : {})
       }
     });
     if (!klass) throw new ApiError(404, 'القسم غير موجود');
