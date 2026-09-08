@@ -13,21 +13,35 @@ async function mkUser(email, role, schoolId) {
   });
 }
 
+let classBId, teacherAId, schoolAId, schoolBId;
+
 beforeAll(async () => {
   ({ app } = await import('../src/index.js'));
   await resetDatabase();
 
   const schoolA = await prisma.school.create({ data: { code: 'SCH-A', name: 'مدرسة أ' } });
   const schoolB = await prisma.school.create({ data: { code: 'SCH-B', name: 'مدرسة ب' } });
+  schoolAId = schoolA.id; schoolBId = schoolB.id;
 
   await mkUser('dira@test.tn', 'SCHOOL_DIRECTOR', schoolA.id);
   await mkUser('dirb@test.tn', 'SCHOOL_DIRECTOR', schoolB.id);
   const tA = await mkUser('ta@test.tn', 'TEACHER', schoolA.id);
   const tB = await mkUser('tb@test.tn', 'TEACHER', schoolB.id);
   await mkUser('supertest@test.tn', 'SUPER_ADMIN', null);
+  teacherAId = tA.id;
 
-  await prisma.class.create({ data: { name: 'قسم أ-1', level: 'السنة الأولى أساسي', teacherId: tA.id, schoolId: schoolA.id } });
-  await prisma.class.create({ data: { name: 'قسم ب-1', level: 'السنة الأولى أساسي', teacherId: tB.id, schoolId: schoolB.id } });
+  const classA = await prisma.class.create({ data: { name: 'قسم أ-1', level: 'السنة الأولى أساسي', teacherId: tA.id, schoolId: schoolA.id } });
+  const classB = await prisma.class.create({ data: { name: 'قسم ب-1', level: 'السنة الأولى أساسي', teacherId: tB.id, schoolId: schoolB.id } });
+  classBId = classB.id;
+
+  // طالب واحد في كل مدرسة (مع حساب ولي وحساب تلميذ)
+  for (const [cls, sid, tag] of [[classA.id, schoolA.id, 'a'], [classB.id, schoolB.id, 'b']]) {
+    const parent = await mkUser(`parent${tag}@test.tn`, 'PARENT', sid);
+    const acct = await mkUser(`stud${tag}@test.tn`, 'STUDENT', sid);
+    await prisma.student.create({
+      data: { userId: parent.id, accountUserId: acct.id, classId: cls, firstName: `تلميذ ${tag}`, lastName: 'اختبار', birthDate: new Date('2019-01-01'), gender: 'ذكر', level: 'السنة الأولى أساسي', schoolYear: '2026-2027' }
+    });
+  }
 });
 
 async function tok(email) {
@@ -54,28 +68,52 @@ describe('عزل المدارس (Multi-tenancy)', () => {
     const tA = await tok('dira@test.tn');
     const r = await request(app).post('/api/director/classes').set('Authorization', `Bearer ${tA}`).send({ name: 'قسم أ-2', level: 'السنة الثانية أساسي' });
     expect(r.status).toBe(201);
-    const schoolA = await prisma.school.findUnique({ where: { code: 'SCH-A' } });
-    expect(r.body.schoolId).toBe(schoolA.id);
+    expect(r.body.schoolId).toBe(schoolAId);
   });
 
   it('مدير لا يستطيع تعديل قسم مدرسة أخرى (404)', async () => {
     const tA = await tok('dira@test.tn');
-    const schoolB = await prisma.school.findUnique({ where: { code: 'SCH-B' } });
-    const clsB = await prisma.class.findFirst({ where: { schoolId: schoolB.id } });
-    const r = await request(app).put(`/api/director/classes/${clsB.id}`).set('Authorization', `Bearer ${tA}`).send({ name: 'اختراق' });
+    const r = await request(app).put(`/api/director/classes/${classBId}`).set('Authorization', `Bearer ${tA}`).send({ name: 'اختراق' });
     expect(r.status).toBe(404);
+  });
+
+  it('إحصاءات اللوحة معزولة (تلميذ واحد لكل مدرسة)', async () => {
+    const [tA, tB] = await Promise.all([tok('dira@test.tn'), tok('dirb@test.tn')]);
+    const sA = await request(app).get('/api/director/dashboard').set('Authorization', `Bearer ${tA}`);
+    const sB = await request(app).get('/api/director/dashboard').set('Authorization', `Bearer ${tB}`);
+    expect(sA.body.totals.students).toBe(1);
+    expect(sB.body.totals.students).toBe(1);
+    expect(sA.body.totals.teachers).toBe(1);
+  });
+
+  it('قائمة التلاميذ (/students) معزولة بالمدرسة للمدير', async () => {
+    const tA = await tok('dira@test.tn');
+    const r = await request(app).get('/api/students').set('Authorization', `Bearer ${tA}`);
+    const names = r.body.map((s) => s.firstName);
+    expect(names).toContain('تلميذ a');
+    expect(names).not.toContain('تلميذ b');
+  });
+
+  it('الحضور: مدير لا يصل لقسم مدرسة أخرى (404)', async () => {
+    const tA = await tok('dira@test.tn');
+    const r = await request(app).get(`/api/attendance/classes/${classBId}?date=2026-09-15`).set('Authorization', `Bearer ${tA}`);
+    expect(r.status).toBe(404);
+  });
+
+  it('مواد الأقسام: أستاذ مدرسة أ لا يضيف مادة لقسم مدرسة ب (403)', async () => {
+    const tAt = await tok('ta@test.tn');
+    const r = await request(app).post('/api/teacher/class-subjects').set('Authorization', `Bearer ${tAt}`).send({ classId: classBId, subject: 'MATH' });
+    expect(r.status).toBe(403);
   });
 
   it('نقل مستخدم بين المدرستين يعمل للمشرف العام فقط', async () => {
     const ts = await tok('supertest@test.tn');
-    const ta = await prisma.user.findUnique({ where: { email: 'ta@test.tn' } });
-    const schoolB = await prisma.school.findUnique({ where: { code: 'SCH-B' } });
-    const r = await request(app).put(`/api/superadmin/users/${ta.id}/school`).set('Authorization', `Bearer ${ts}`).send({ schoolId: schoolB.id });
+    const ta = await prisma.user.findUnique({ where: { id: teacherAId } });
+    const r = await request(app).put(`/api/superadmin/users/${ta.id}/school`).set('Authorization', `Bearer ${ts}`).send({ schoolId: schoolBId });
     expect(r.status).toBe(200);
-    expect(r.body.schoolId).toBe(schoolB.id);
-    // مدير مدرسة عادي لا يستطيع النقل
+    expect(r.body.schoolId).toBe(schoolBId);
     const tA = await tok('dira@test.tn');
-    const forbidden = await request(app).put(`/api/superadmin/users/${ta.id}/school`).set('Authorization', `Bearer ${tA}`).send({ schoolId: schoolB.id });
+    const forbidden = await request(app).put(`/api/superadmin/users/${ta.id}/school`).set('Authorization', `Bearer ${tA}`).send({ schoolId: schoolBId });
     expect(forbidden.status).toBe(403);
   });
 
