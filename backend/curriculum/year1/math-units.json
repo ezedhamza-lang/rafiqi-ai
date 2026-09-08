@@ -46,21 +46,24 @@
     },
     "pedagogicalBasis": "يؤكد الدليل أنّ إدراك الطفل للمفاهيم المكانية (التصنيف والتموضع) ينطلق من ممارسة حسّية فعلية على أشياء ملموسة قبل أي تجريد رمزي، وأنّ دور المعلّم هو تنظيم هذا الإدراك وهيكلته انطلاقًا من الواقع الذي يعيشه المتعلّم.",
     "activities": [
-      "وضعيات حسّية: تموضع فعلي للتلميذ أو لأشياء أمام/وراء عنصر مرجعي",
-      "وصف شفوي للموقع باستعمال 'أمام' و'وراء'",
-      "تمثيل الموقع بالرسم أو بترتيب أشياء مادية"
+      "وضعيات حسّية: يقف تلميذان، أحدهما أمام الآخر، أمام السبورة، ثم يصفان موقعيهما",
+      "وصف شفوي: «الكتاب أمام المحافظ» ثم بالعكس",
+      "رسم مشهد في الكراس فيه أمام/وراء",
+      "تمييز في صور: من في الأمام؟ ومن في الخلف؟"
     ],
     "studentBlocks": [
       {
         "kind": "concept",
         "title": "🔍 أستكشف",
-        "text": "انظر إلى الصورة: التلميذ جالس أمام الحاسوب. أين الحاسوب؟ أمام التلميذ أم وراءه؟",
-        "art": "scene-class"
+        "text": "في هذا القسم: التلميذ أحمد جالسٌ أمام الحاسوب، والتلميذة فاطمة واقفة خلف طاولتها. ماذا نسمّي موقع كلٍّ منهما؟",
+        "art": "scene-class",
+        "image": "/curriculum/y1/math/y1m01-hero.png",
+        "imagePrompt": "flat vector children-book illustration, soft pastel palette, rounded shapes, thick clean outlines, warm light, white background, no text, no letters, no watermark, 4:3. Tunisian primary-classroom cartoon: a boy sits in front of a computer on a desk, a girl stands behind another desk, teacher at the board; clear front/back composition."
       },
       {
         "kind": "picture-choice",
-        "title": "🖍️ أي صورة تمثل التلميذ أمام الحاسوب؟",
-        "text": "أي صورة تري التلميذ من الأمام؟ اضغط عليها.",
+        "title": "🖍️ أيّ صورة فيها التلميذ أمام الحاسوب؟",
+        "text": "اضغط على الصورة التي تري التلميذ من الأمام.",
         "options": [
           {
             "art": "kid-front",
@@ -71,34 +74,52 @@
             "label": "وراء"
           }
         ],
-        "answer": 0
+        "answer": 0,
+        "imageAlt": "صور كرتونية"
       },
       {
         "kind": "question",
-        "title": "✅ أتدرب 1",
-        "text": "رامي أمام الحاسوب.",
+        "title": "🤔 أفكّر",
+        "text": "إذا كان الحاسوب أمام رامي، فإنّ رامي يكون … الحاسوب.",
         "options": [
-          "نعم",
-          "لا"
+          "وراء",
+          "أمام",
+          "فوق"
         ],
-        "answer": 0
+        "answer": 0,
+        "explain": "العلاقة عكسية: إن كان (أ) أمام (ب) فإن (ب) وراء (أ)."
       },
       {
         "kind": "question",
-        "title": "✅ أتدرب 2",
-        "text": "الأب وراء النافذة.",
+        "title": "✏️ أتدرّب 1",
+        "text": "القط خلف الصندوق. ماذا نسمّي موقع الصندوق بالنسبة إلى القط؟",
         "options": [
-          "نعم",
-          "لا"
+          "أمام القط",
+          "وراء القط",
+          "داخل القط"
         ],
-        "answer": 0
+        "answer": 0,
+        "explain": "القط خلف، إذن الصندوق أمامه."
+      },
+      {
+        "kind": "question",
+        "title": "✏️ أتدرّب 2",
+        "text": "اختَر الجملة الصحيحة عن الصورة.",
+        "options": [
+          "الباب أمام التلميذ",
+          "الحقيبة خلف التلميذ",
+          "الاثنان صحيحان"
+        ],
+        "answer": 2,
+        "explain": "نقرأ الصورة من وجه التلميذ: الباب في جهة نظرته، والحقيبة في ظهره."
       },
       {
         "kind": "summary",
         "title": "📌 القاعدة",
         "points": [
-          "أمام تعني في الجهة التي ننظر إليها.",
-          "وراء تعني في الجهة الخلفية."
+          "أمام = في الجهة التي نَنْظر إليها.",
+          "وراء = في الجهة الخلفية المقابلة.",
+          "العلاقة عكسية: إن كان (أ) أمام (ب)، فـ (ب) وراء (أ)."
         ]
       }
     ]
@@ -119,50 +140,78 @@
     },
     "pedagogicalBasis": "يُبنى مفهوم فوق/تحت بالتجربة الحسّية المباشرة: يضع الطفل شيئًا فوق آخر وتحته فعليًا، ثم يعبّر عن ذلك شفويًا قبل تمثيله بالرسم.",
     "activities": [
-      "وضع أشياء فوق/تحت بعضها فعليًا في القسم",
-      "وصف شفوي للموقع",
-      "تمييز فوق/تحت في صورة أو مشهد مصوّر"
+      "وضع كتاب فوق الطاولة ومحفظة تحتها",
+      "وصف شفوي للموقع: «الطير فوق الشجرة»",
+      "لوّن الدائرة التي فوق الخط ولا تلوّن التي تحته"
     ],
     "studentBlocks": [
       {
         "kind": "concept",
         "title": "🔍 أستكشف",
-        "text": "ضع كرة فوق الطاولة ثم تحتها. أين الكرة الآن؟",
-        "art": "ball-above"
+        "text": "ضع كُرةً فوق الطاولة وأخرى تحتها. في كلٍّ منهما نختار الكلمة الصحيحة: «فوق» للأعلى، «تحت» للأسفل.",
+        "art": "ball-above",
+        "image": "/curriculum/y1/math/y1m02-hero.png",
+        "imagePrompt": "flat vector children-book illustration, soft pastel palette, rounded shapes, thick clean outlines, warm light, white background, no text, no letters, no watermark, 4:3. Tunisian classroom cartoon: a wooden table with a red ball on its top surface and a blue ball on the floor underneath, side view."
       },
       {
         "kind": "picture-choice",
-        "title": "🖍️ لوّن",
-        "text": "لوّن الكرة الموجودة فوق الخط.",
+        "title": "🖍️ لوّن الكرة الموجودة فوق الطاولة",
+        "text": "اضغط على الصورة الصحيحة.",
         "options": [
           {
             "art": "ball-above",
-            "label": "فوق"
+            "label": "كرة فوق الطاولة"
           },
           {
             "art": "ball-below",
-            "label": "تحت"
+            "label": "كرة تحت الطاولة"
           }
         ],
         "answer": 0
       },
       {
         "kind": "question",
-        "title": "✅ أتدرب",
-        "text": "الكرة فوق الخط.",
+        "title": "✏️ أتدرّب 1",
+        "text": "العصفور … الشجرة.",
         "options": [
-          "نعم",
-          "لا"
+          "فوق",
+          "تحت",
+          "خلف"
         ],
         "answer": 0,
-        "art": "ball-above"
+        "explain": "العصفور يقف على الغصن الأعلى، إذن فوق."
+      },
+      {
+        "kind": "question",
+        "title": "✏️ أتدرّب 2",
+        "text": "الحذاء … الطاولة إذا كان على الأرض.",
+        "options": [
+          "تحت",
+          "فوق",
+          "أمام"
+        ],
+        "answer": 0,
+        "explain": "ما كان على الأرض قرب الطاولة يكون تحتها."
+      },
+      {
+        "kind": "question",
+        "title": "🤔 أفكّر",
+        "text": "إذا كان (أ) فوق (ب)، فإنّ (ب) … (أ).",
+        "options": [
+          "تحت",
+          "فوق",
+          "أمام"
+        ],
+        "answer": 0,
+        "explain": "العلاقة عكسية بين فوق وتحت."
       },
       {
         "kind": "summary",
         "title": "📌 القاعدة",
         "points": [
-          "فوق تعني في الأعلى.",
-          "تحت تعني في الأسفل."
+          "فوق = في الجهة الأعلى.",
+          "تحت = في الجهة الأسفل.",
+          "العلاقة عكسية: إن كان (أ) فوق (ب) فـ (ب) تحت (أ)."
         ]
       }
     ]
@@ -183,21 +232,23 @@
     },
     "pedagogicalBasis": "يشير الدليل إلى أنّ التمييز بين اليمين واليسار أصعب إدراكيًا من أمام/وراء وفوق/تحت لأنه نسبي إلى جسم المتعلّم نفسه، لذا يُنصح بالانطلاق من جسد الطفل ذاته قبل تعميمه على أشياء أخرى.",
     "activities": [
-      "تمييز اليد اليمنى واليسرى على الجسد",
-      "تطبيق التمييز على أشياء موضوعة يمين/يسار عنصر مرجعي",
-      "ألعاب حركية (ارفع يدك اليمنى، تحرّك يمينًا)"
+      "ارفع اليد التي تكتب بها، ثم الجهة الأخرى",
+      "امشِ إلى يمين الطاولة ثم إلى يسارها",
+      "لعبة الإشارة: «ارفع يدك اليمنى / أمسك أذنك اليسرى»"
     ],
     "studentBlocks": [
       {
         "kind": "concept",
         "title": "🔍 أستكشف",
-        "text": "ارفع يدك اليمنى. ارفع يدك اليسرى. أي يد تكتب بها؟",
-        "art": "hands"
+        "text": "ارفع اليد التي تكتب بها — هذه هي اليد اليُمنى. اليد الأخرى هي اليُسرى. نُميَّز جهتَي الجسم قبل تمييز جهات الأشياء.",
+        "art": "hands",
+        "image": "/curriculum/y1/math/y1m03-hero.png",
+        "imagePrompt": "flat vector children-book illustration, soft pastel palette, rounded shapes, thick clean outlines, warm light, white background, no text, no letters, no watermark, 4:3. Tunisian child cartoon raising the right hand (viewer sees the left side of the child), simple classroom, right hand clearly lifted."
       },
       {
         "kind": "picture-choice",
-        "title": "🖍️ لوّن اليد اليمنى",
-        "text": "اضغط على اليد اليمنى.",
+        "title": "🖍️ اضغط على اليد اليمنى",
+        "text": "اليد اليمنى هي التي نكتب بها غالباً.",
         "options": [
           {
             "art": "hand-right",
@@ -212,20 +263,47 @@
       },
       {
         "kind": "question",
-        "title": "✅ أتدرب",
-        "text": "القلب في الجهة اليسرى من الجسم.",
+        "title": "✏️ أتدرّب 1",
+        "text": "أمسك القلم بيدي اليُمنى والدفتر بيدي اليُسرى. ماذا أكتب؟",
         "options": [
-          "نعم",
-          "لا"
+          "القلم في اليمين، الدفتر في اليسار",
+          "العكس",
+          "كلتاهما في اليمين"
         ],
-        "answer": 0
+        "answer": 0,
+        "explain": "نموضع الأشياء: القلم في اليد اليمنى، الدفتر في اليسرى."
+      },
+      {
+        "kind": "question",
+        "title": "🤔 أفكّر",
+        "text": "إذا رفعتَ يدك اليُمنى، فالجهة اليُمنى من جسمك هي:",
+        "options": [
+          "جهة اليد المرفوعة",
+          "جهة اليد الأخرى",
+          "جهة الأنف"
+        ],
+        "answer": 0,
+        "explain": "اليمين/اليسار مرتبطان بجسمك أنت."
+      },
+      {
+        "kind": "question",
+        "title": "✏️ أتدرّب 2",
+        "text": "عندما نكون أنا وأنت متقابلان، فإنّ يدي اليُمنى تكون مقابل:",
+        "options": [
+          "يدك اليُسرى",
+          "يدك اليُمنى",
+          "أنفك"
+        ],
+        "answer": 0,
+        "explain": "عند التقابل، تتعاكس الجهات."
       },
       {
         "kind": "summary",
         "title": "📌 القاعدة",
         "points": [
-          "اليمين جهة اليد التي نكتب بها غالبًا.",
-          "اليسار هو الجهة المقابلة."
+          "اليُمنى هي جهة اليد التي نكتب بها غالباً.",
+          "اليُسرى هي الجهة المقابلة.",
+          "إذا تقابلنا تعاكست الجهات."
         ]
       }
     ]
@@ -246,38 +324,60 @@
     },
     "pedagogicalBasis": "تركيب للمفاهيم السابقة (يمين/يسار) وتوسيعها لتحديد موقع شيء بالنسبة إلى ذات المتعلّم في وضعيات أكثر تعقيدًا.",
     "activities": [
-      "وضعيات جماعية: تموضع تلاميذ بجانب بعضهم",
-      "وصف موقع زميل بـ'على يميني' أو 'على يساري'"
+      "تلاميذ يقفون صفّاً، ثم يصفون مواقعهم",
+      "ارسم خريطة القسم الصغير: أين الباب؟ النافذة؟ مكتب المعلم؟",
+      "استعمل «على يميني» و«على يساري» في ثلاث جمل"
     ],
     "studentBlocks": [
       {
         "kind": "concept",
         "title": "🔍 أستكشف",
-        "text": "قف في وسط القسم. ما الشيء الموجود على يمينك؟ وما الموجود على يسارك؟",
-        "art": "kid-center"
+        "text": "قِف في وسط القسم. انظر حولك: ما الشيء الذي على يمينك؟ وما الذي على يسارك؟ استخدمتَ الآن جهة جسمك لوصف العالم.",
+        "art": "kid-center",
+        "image": "/curriculum/y1/math/y1m04-hero.png",
+        "imagePrompt": "flat vector children-book illustration, soft pastel palette, rounded shapes, thick clean outlines, warm light, white background, no text, no letters, no watermark, 4:3. Tunisian classroom cartoon: a child stands in the middle of the room, a door on their right and a window on their left, simple and clear perspective from the child."
       },
       {
         "kind": "question",
-        "title": "✅ أتدرب 1",
-        "text": "الباب على يميني.",
+        "title": "✏️ أتدرّب 1",
+        "text": "الباب على يميني. إذن، إذا استدرتُ نحو الباب، فإنّ النافذة تكون:",
         "options": [
-          "نعم",
-          "لا"
+          "على يساري",
+          "على يميني",
+          "خلفي"
+        ],
+        "answer": 0,
+        "explain": "بعد الاستدارة، تعكس الجهة الأخرى."
+      },
+      {
+        "kind": "picture-choice",
+        "title": "🖼️ اختر الموقع الصحيح",
+        "text": "الطفل واقف أمام الطاولة. الطاولة في أي جهة بالنسبة إلى الطفل؟",
+        "options": [
+          {
+            "art": "kid-front",
+            "label": "أمام الطفل"
+          },
+          {
+            "art": "kid-back",
+            "label": "وراء الطفل"
+          }
         ],
         "answer": 0
       },
       {
         "kind": "textarea",
-        "title": "✍️ أتدرب 2",
-        "text": "اكتب شيئًا يوجد على يسارك في القسم.",
-        "placeholder": "على يساري يوجد ......",
+        "title": "✍️ أعبّر",
+        "text": "اكتب جملة تصف فيها موقع زميل في القسم باستعمال «على يميني» أو «على يساري».",
+        "placeholder": "على يميني يوجد …",
         "rows": 2
       },
       {
         "kind": "summary",
         "title": "📌 القاعدة",
         "points": [
-          "أصف موقع الشيء بالنسبة إليّ: على يميني أو على يساري."
+          "أصف موقع الشيء بالنسبة إلى ذاتي: على يميني / على يساري.",
+          "الجهة مرتبطة بوجهتي؛ فإذا استدرت تغيّرت الوصوف."
         ]
       }
     ]
@@ -298,20 +398,23 @@
     },
     "pedagogicalBasis": "يمهّد مفهوم داخل/خارج مباشرة لفكرة الانتماء إلى مجموعة التي يُبنى عليها محور المجموعات لاحقًا.",
     "activities": [
-      "وضع أشياء داخل/خارج وعاء أو دائرة مرسومة على الأرض",
-      "وصف شفوي للموقع"
+      "ضع قلمك داخل المقلمة ثم خارجها",
+      "ارسم دائرة على الأرض، واقفٌ داخلها ثم خارجها",
+      "صنّف صوراً إلى داخل/خارج الصندوق"
     ],
     "studentBlocks": [
       {
         "kind": "concept",
         "title": "🔍 أستكشف",
-        "text": "ضع قلمك داخل المقلمة، ثم خارجها. أين القلم الآن؟",
-        "art": "box-ball"
+        "text": "ضع قلماً داخل المقلمة وآخر خارجها. «داخل» تعني محاطاً بحَدّ مغلق، و«خارج» تعني خارجه. هذا المفهوم يُمهّد لاحقاً لفكرة «ينتمي / لا ينتمي».",
+        "art": "box-ball",
+        "image": "/curriculum/y1/math/y1m05-hero.png",
+        "imagePrompt": "flat vector children-book illustration, soft pastel palette, rounded shapes, thick clean outlines, warm light, white background, no text, no letters, no watermark, 4:3. Tunisian cartoon of an open pencil box on a desk: one pencil inside the box and one pencil outside on the desk, clear boundary."
       },
       {
         "kind": "picture-choice",
-        "title": "🖍️ لوّن",
-        "text": "لوّن الكرة الموجودة داخل الصندوق.",
+        "title": "🖍️ الكرة داخل الصندوق",
+        "text": "اضغط على الصورة التي فيها الكرة داخل الصندوق.",
         "options": [
           {
             "art": "ball-in",
@@ -326,20 +429,35 @@
       },
       {
         "kind": "question",
-        "title": "✅ أتدرب",
-        "text": "العصفور خارج القفص.",
+        "title": "✏️ أتدرّب 1",
+        "text": "العصفور داخل القفص. ماذا نقول عن المفتاح لو كان على الطاولة خارج القفص؟",
         "options": [
-          "نعم",
-          "لا"
+          "خارج القفص",
+          "داخل القفص",
+          "فوق القفص"
         ],
-        "answer": 0
+        "answer": 0,
+        "explain": "الحَدّ هنا هو جدران القفص: ما خارجها هو خارج."
+      },
+      {
+        "kind": "question",
+        "title": "🤔 أفكّر",
+        "text": "إذا كان (أ) داخل (ب)، فـ (ب) بالنسبة إلى (أ) هي:",
+        "options": [
+          "تحتويه",
+          "تحتويها",
+          "تساويها"
+        ],
+        "answer": 0,
+        "explain": "(ب) هي الحاضنة، إذن تحتوي (أ)."
       },
       {
         "kind": "summary",
         "title": "📌 القاعدة",
         "points": [
-          "داخل تعني في الوسط المحاط.",
-          "خارج تعني بعيدًا عن الوسط."
+          "داخل = في جهة محاطة بحَدّ.",
+          "خارج = بعيداً عن الحَدّ.",
+          "الحَدّ (صندوق/دائرة/قفص) هو ما يحدد داخل/خارج."
         ]
       }
     ]
@@ -360,20 +478,23 @@
     },
     "pedagogicalBasis": "يُبنى مفهوم الخط المغلق كتمهيد مباشر لتمثيل المجموعة بيانيًا (خط مغلق يحوي عناصرها)، وهو ما يظهر لاحقًا في كل مخططات المجموعات.",
     "activities": [
-      "رسم خطوط مفتوحة ومغلقة بحرية",
-      "تمييز مستقيم/منحنٍ بصريًا وباللمس (خيط مشدود مقابل خيط مرتخٍ)"
+      "ارسم بخطٍّ واحد: دائرة (مغلقة) وموجة (مفتوحة)",
+      "اعقد خيطاً، ثم شدّ طرفيه: مستقيم. أرخِه: منحنٍ",
+      "صنّف 4 خطوط إلى مفتوح/مغلق ومستقيم/منحني"
     ],
     "studentBlocks": [
       {
         "kind": "concept",
         "title": "🔍 أستكشف",
-        "text": "ارسم دائرة (خط مغلق) وموجة (خط مفتوح). ما الفرق بينهما؟",
-        "art": "lines"
+        "text": "ارسم دائرة ثم ارسم موجة. الدائرة تبدأ وتنتهي في نفس النقطة: خط مغلق. الموجة تبدأ من نقطة وتنتهي في أخرى: خط مفتوح.",
+        "art": "lines",
+        "image": "/curriculum/y1/math/y1m06-hero.png",
+        "imagePrompt": "flat vector children-book illustration, soft pastel palette, rounded shapes, thick clean outlines, warm light, white background, no text, no letters, no watermark, 4:3. Tunisian kids cartoon: a child draws with a crayon a closed circle and an open wavy line side by side on a white sheet, friendly classroom."
       },
       {
         "kind": "drawing",
-        "title": "🎨 ارسم بنفسك",
-        "prompt": "ارسم خطًا مغلقًا وخطًا مفتوحًا.",
+        "title": "🎨 أرسم بنفسك",
+        "prompt": "ارسم خطاً مغلقاً وخطاً مفتوحاً. ثم ارسم خطاً مستقيماً وخطاً منحنياً.",
         "canvasWidth": 400,
         "canvasHeight": 220,
         "tools": [
@@ -383,21 +504,51 @@
         "backgroundGrid": false
       },
       {
+        "kind": "picture-choice",
+        "title": "🖍️ أيّهما خط مغلق؟",
+        "text": "اضغط على الخط الذي يعود إلى نقطة بدايته.",
+        "options": [
+          {
+            "art": "line-closed",
+            "label": "مغلق (دائرة)"
+          },
+          {
+            "art": "line-open",
+            "label": "مفتوح (قوس)"
+          }
+        ],
+        "answer": 0
+      },
+      {
         "kind": "question",
-        "title": "✅ أتدرب",
-        "text": "الدائرة خط مغلق.",
+        "title": "✏️ أتدرّب 1",
+        "text": "هل المربع خطٌّ مغلق؟",
         "options": [
           "نعم",
           "لا"
         ],
-        "answer": 0
+        "answer": 0,
+        "explain": "المربع يُغلق دورته عند نقطة البداية، إذن هو مغلق."
+      },
+      {
+        "kind": "question",
+        "title": "✏️ أتدرّب 2",
+        "text": "اختر الخط المستقيم:",
+        "options": [
+          "حبل مشدود بين نقطتين",
+          "درب متعرّج",
+          "قوس قزح"
+        ],
+        "answer": 0,
+        "explain": "المستقيم لا ينحني بين نقطتَيه."
       },
       {
         "kind": "summary",
         "title": "📌 القاعدة",
         "points": [
-          "الخط المغلق يعود إلى نقطة بدايته.",
-          "المستقيم لا ينحني، والمنحني يتعرج."
+          "الخط المغلق: ينتهي حيث بدأ.",
+          "الخط المفتوح: نقطتا طرفاه مختلفتان.",
+          "المستقيم لا ينحني، والمنحني يتعرّج."
         ]
       }
     ]
@@ -418,31 +569,78 @@
     },
     "pedagogicalBasis": "التصنيف نشاط ذهني أساسي ووسيلة لتنظيم إدراك الواقع: ينطلق المعلّم من تجميع أشياء ملموسة قبل تجريد الخاصية المشتركة.",
     "activities": [
-      "تجميع أشياء حسّية حرة حسب معيار يختاره المتعلّم",
-      "تعبير شفوي عن معيار التجميع"
+      "اجمع الأقلام الحمراء كلها في علبة، واشرح لماذا اخترتها",
+      "كوّن مجموعة من «الحلويات» ومن «الألعاب» من أغراض القسم",
+      "قارن مجموعتين: «أكبر من»، «أصغر من»، «يساوي» بعدد العناصر"
     ],
     "studentBlocks": [
       {
         "kind": "concept",
         "title": "🔍 أستكشف",
-        "text": "اجمع كل الأقلام الحمراء في علبة واحدة. ما الخاصية المشتركة بينها؟",
-        "art": "set-red"
+        "text": "اجمع كل الكرات الحمراء في حلقة. ما الخاصية المشتركة؟ هي «لون أحمر». من هنا وُلدت كلمة «مجموعة»: عناصر تشترك في خاصية واحدة.",
+        "art": "set-red",
+        "image": "/curriculum/y1/math/y1m07-hero.png",
+        "imagePrompt": "flat vector children-book illustration, soft pastel palette, rounded shapes, thick clean outlines, warm light, white background, no text, no letters, no watermark, 4:3. Tunisian cartoon: four red marbles grouped inside a closed curve, one blue marble outside the curve on a light background, child pointing."
+      },
+      {
+        "kind": "picture-choice",
+        "title": "🖼️ من ينتمي إلى المجموعة الحمراء؟",
+        "text": "اضغط على العنصر الذي ينتمي إلى مجموعة الكرات الحمراء.",
+        "options": [
+          {
+            "art": "red-ball",
+            "label": "كرة حمراء"
+          },
+          {
+            "art": "blue-ball",
+            "label": "كرة زرقاء"
+          }
+        ],
+        "answer": 0
       },
       {
         "kind": "question",
-        "title": "✅ أتدرب",
-        "text": "كوّنت مجموعة من 4 كرات حمراء وكرة زرقاء. هل تكويني صحيح؟",
+        "title": "✏️ أتدرّب 1",
+        "text": "جمعتُ 4 كرات حمراء وواحدة زرقاء. هل هي مجموعة «الحمراء»؟",
         "options": [
-          "لا",
-          "نعم"
+          "لا، لأنها تشترط خاصية واحدة فقط",
+          "نعم",
+          "لا يمكن الحكم"
         ],
-        "answer": 0
+        "answer": 0,
+        "explain": "الخاصية مشتركة واحدة، فالكرة الزرقاء لا تنتمي."
+      },
+      {
+        "kind": "question",
+        "title": "🤔 أفكّر",
+        "text": "ما المعيار الذي يجمع هذه الأغراض: قلم رصاص، دفتر، ممحاة؟",
+        "options": [
+          "أدوات مدرسية",
+          "لون واحد",
+          "حجم واحد"
+        ],
+        "answer": 0,
+        "explain": "الاشتراك في الوظيفة: أدوات مدرسية."
+      },
+      {
+        "kind": "question",
+        "title": "✏️ أتدرّب 2",
+        "text": "هذه مجموعة 3 أقلام و3 ممحيات. نقول عن مجموعتي الأقلام والممحيات:",
+        "options": [
+          "متساويتان في العدد",
+          "الأقلام أكبر",
+          "التمحيات أكبر"
+        ],
+        "answer": 0,
+        "explain": "كل مجموعة فيها 3 عناصر، إذن متساويتان."
       },
       {
         "kind": "summary",
         "title": "📌 القاعدة",
         "points": [
-          "المجموعة عناصر تشترك في خاصية واحدة."
+          "المجموعة = عناصر تشترك في خاصية واحدة.",
+          "نُسمّي الخاصية: لون، شكل، وظيفة، …",
+          "نُقارن مجموعتين بعدد عناصرهما: أكبر، أصغر، يساوي."
         ]
       }
     ]
@@ -2402,8 +2600,18 @@
         "title": "🖼️ أيّ ترتيبٍ صحيح؟",
         "text": "اختر الترتيب العمودي الصحيح للجمع 23 + 14 (المرتبة تحت مرتبتها).",
         "options": [
-          { "art": "align-correct", "label": "آحاد تحت آحاد وعشرات تحت عشرات", "image": "/curriculum/y1/math/y1m43-align-ok.png", "imagePrompt": "Flat vector kids illustration: vertical addition correctly aligned, ones over ones and tens over tens on a grid, one green check mark drawn as a shape (not text), soft pastel, thick outlines, white background, no text, 4:3" },
-          { "art": "align-wrong", "label": "غير محاذٍ بين المرتبتين", "image": "/curriculum/y1/math/y1m43-align-no.png", "imagePrompt": "Flat vector kids illustration: vertical addition badly aligned, ones shifted under tens, one red cross drawn as a shape (not text), soft pastel, thick outlines, white background, no text, 4:3" }
+          {
+            "art": "align-correct",
+            "label": "آحاد تحت آحاد وعشرات تحت عشرات",
+            "image": "/curriculum/y1/math/y1m43-align-ok.png",
+            "imagePrompt": "Flat vector kids illustration: vertical addition correctly aligned, ones over ones and tens over tens on a grid, one green check mark drawn as a shape (not text), soft pastel, thick outlines, white background, no text, 4:3"
+          },
+          {
+            "art": "align-wrong",
+            "label": "غير محاذٍ بين المرتبتين",
+            "image": "/curriculum/y1/math/y1m43-align-no.png",
+            "imagePrompt": "Flat vector kids illustration: vertical addition badly aligned, ones shifted under tens, one red cross drawn as a shape (not text), soft pastel, thick outlines, white background, no text, 4:3"
+          }
         ],
         "answer": 0
       },
@@ -2411,7 +2619,11 @@
         "kind": "question",
         "title": "🤔 من أين نبدأ؟",
         "text": "في الجمع العمودي، من أيّ مرتبة نبدأ الجمع؟",
-        "options": ["من الآحاد (يمينًا)", "من العشرات", "نبدأ دائمًا من اليسار"],
+        "options": [
+          "من الآحاد (يمينًا)",
+          "من العشرات",
+          "نبدأ دائمًا من اليسار"
+        ],
         "answer": 0,
         "explain": "نبدأ دائمًا بجمع الآحاد ثم ننتقل إلى العشرات."
       },
@@ -2435,7 +2647,11 @@
         "kind": "question",
         "title": "🧩 وضعية من حياتي",
         "text": "عند سلمى 24 تفّاحة، أعطاها جارها 13 تفّاحة. كم تفّاحة أصبحت عندها؟",
-        "options": ["37", "36", "38"],
+        "options": [
+          "37",
+          "36",
+          "38"
+        ],
         "answer": 0,
         "explain": "نجمع 24 + 13 بالعمود: الآحاد 4+3=7، العشرات 2+1=3 ← 37."
       },
