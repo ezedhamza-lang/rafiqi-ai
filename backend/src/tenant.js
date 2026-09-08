@@ -5,6 +5,11 @@ export function hasSchoolScope(user) {
   return user && user.schoolId != null;
 }
 
+// معرّف مدرسة الممثل الحالي (null للمشرف العام).
+export function actorSchoolId(req) {
+  return req.user?.schoolId ?? null;
+}
+
 // مقيد Prisma يفرض schoolId على استعلامات الجداول التي تحمل schoolId مباشرة (User/Class).
 // يرجّع {} للمشرف العام (بدون تقييد).
 export function schoolScope(req) {

@@ -3,6 +3,7 @@ import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import prisma from '../db.js';
 import { authMiddleware, adminMiddleware, requireRole } from '../auth.js';
+import { actorSchoolId } from '../tenant.js';
 import { notify, notifyRole } from '../services/notify.js';
 import { schoolYearBounds, priceForType } from '../services/schoolYear.js';
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
@@ -34,6 +35,9 @@ router.use(authMiddleware, adminMiddleware);
  *         description: إحصائيات اللوحة
  */
 router.get('/dashboard', asyncHandler(async (req, res) => {
+  const sid = actorSchoolId(req);
+  const inSchool = (relation) => (sid != null ? { [relation]: { schoolId: sid } } : {});
+  const direct = sid != null ? { schoolId: sid } : {};
   const [
     classes,
     students,
@@ -45,15 +49,15 @@ router.get('/dashboard', asyncHandler(async (req, res) => {
     messages,
     pendingRequests
   ] = await Promise.all([
-    prisma.class.count(),
-    prisma.student.count(),
-    prisma.user.count({ where: { role: 'TEACHER' } }),
-    prisma.user.count({ where: { role: 'PARENT' } }),
-    prisma.quiz.count(),
-    prisma.submission.count(),
-    prisma.memo.count(),
+    prisma.class.count({ where: direct }),
+    prisma.student.count({ where: sid != null ? { account: { schoolId: sid } } : {} }),
+    prisma.user.count({ where: { role: 'TEACHER', ...(sid != null ? { schoolId: sid } : {}) } }),
+    prisma.user.count({ where: { role: 'PARENT', ...(sid != null ? { schoolId: sid } : {}) } }),
+    prisma.quiz.count({ where: inSchool('teacher') }),
+    prisma.submission.count({ where: inSchool('student') }),
+    prisma.memo.count({ where: inSchool('teacher') }),
     prisma.message.count({ where: { recipientId: req.user.id, readAt: null } }),
-    prisma.subscriptionRequest.count({ where: { status: 'PENDING_APPROVAL' } })
+    prisma.subscriptionRequest.count({ where: { status: 'PENDING_APPROVAL', ...(sid != null ? { parent: { schoolId: sid } } : {}) } })
   ]);
 
   res.json({ totals: { classes, students, teachers, parents, quizzes, submissions, memos, unreadMessages: messages, pendingRequests } });
@@ -72,7 +76,9 @@ router.get('/dashboard', asyncHandler(async (req, res) => {
  *         description: الإحصائيات
  */
 router.get('/stats', asyncHandler(async (req, res) => {
+  const sid = actorSchoolId(req);
   const classes = await prisma.class.findMany({
+    where: sid != null ? { schoolId: sid } : {},
     include: {
       _count: { select: { students: true } },
       quizzes: { include: { submissions: true } }
@@ -92,7 +98,7 @@ router.get('/stats', asyncHandler(async (req, res) => {
   const now = new Date();
   const sevenDaysAgo = new Date(now.getTime() - 7 * 86400000);
   const recentSubmissions = await prisma.submission.findMany({
-    where: { createdAt: { gte: sevenDaysAgo } },
+    where: { createdAt: { gte: sevenDaysAgo }, ...(sid != null ? { student: { schoolId: sid } } : {}) },
     select: { createdAt: true }
   });
   const trend = Array.from({ length: 7 }, (_, i) => {
@@ -118,10 +124,12 @@ router.get('/stats', asyncHandler(async (req, res) => {
  *         description: التنبيهات
  */
 router.get('/alerts', asyncHandler(async (req, res) => {
-  const studentsNoClass = await prisma.student.count({ where: { classId: null } });
-  const studentsNoParent = await prisma.student.count({ where: { accountUserId: null } });
-  const noActivity = await prisma.class.findMany({ where: { quizzes: { none: {} } } });
-  const weakClasses = await prisma.class.findMany({ where: { quizzes: { some: {} } } });
+  const sid = actorSchoolId(req);
+  const schoolFilter = sid != null ? { schoolId: sid } : {};
+  const studentsNoClass = await prisma.student.count({ where: { classId: null, ...(sid != null ? { account: { schoolId: sid } } : {}) } });
+  const studentsNoParent = await prisma.student.count({ where: { accountUserId: null, ...(sid != null ? { user: { schoolId: sid } } : {}) } });
+  const noActivity = await prisma.class.findMany({ where: { quizzes: { none: {} }, ...schoolFilter } });
+  const weakClasses = await prisma.class.findMany({ where: { quizzes: { some: {} }, ...schoolFilter } });
   res.json({ studentsNoClass, studentsNoParent, noActivity: noActivity.map((c) => c.name), weakClasses: weakClasses.map((c) => c.name) });
 }));
 
@@ -138,10 +146,12 @@ router.get('/alerts', asyncHandler(async (req, res) => {
  *         description: الأنشطة الأخيرة
  */
 router.get('/activity', asyncHandler(async (req, res) => {
+  const sid = actorSchoolId(req);
+  const sc = sid != null ? { schoolId: sid } : null;
   const [submissions, memos, activities] = await Promise.all([
-    prisma.submission.findMany({ take: 10, orderBy: { createdAt: 'desc' }, include: { student: { select: { firstName: true, lastName: true } }, quiz: { select: { title: true } } } }),
-    prisma.memo.findMany({ take: 10, orderBy: { createdAt: 'desc' }, include: { teacher: { select: { firstName: true, lastName: true } } } }),
-    prisma.activityLog.findMany({ take: 10, orderBy: { createdAt: 'desc' }, include: { student: { select: { firstName: true, lastName: true } } } })
+    prisma.submission.findMany({ where: sc ? { student: sc } : {}, take: 10, orderBy: { createdAt: 'desc' }, include: { student: { select: { firstName: true, lastName: true } }, quiz: { select: { title: true } } } }),
+    prisma.memo.findMany({ where: sc ? { teacher: sc } : {}, take: 10, orderBy: { createdAt: 'desc' }, include: { teacher: { select: { firstName: true, lastName: true } } } }),
+    prisma.activityLog.findMany({ where: sc ? { student: sc } : {}, take: 10, orderBy: { createdAt: 'desc' }, include: { student: { select: { firstName: true, lastName: true } } } })
   ]);
   res.json({ submissions, memos, activities });
 }));
@@ -159,7 +169,9 @@ router.get('/activity', asyncHandler(async (req, res) => {
  *         description: قائمة الأقسام
  */
 router.get('/classes', asyncHandler(async (req, res) => {
+  const sid = actorSchoolId(req);
   const classes = await prisma.class.findMany({
+    where: sid != null ? { schoolId: sid } : {},
     include: {
       teacher: { select: { id: true, firstName: true, lastName: true } },
       _count: { select: { students: true } }
@@ -182,8 +194,9 @@ router.get('/classes', asyncHandler(async (req, res) => {
  *         description: قائمة الأساتذة
  */
 router.get('/teachers', requireRole('SCHOOL_DIRECTOR'), asyncHandler(async (req, res) => {
+  const sid = actorSchoolId(req);
   const teachers = await prisma.user.findMany({
-    where: { role: 'TEACHER' },
+    where: { role: 'TEACHER', ...(sid != null ? { schoolId: sid } : {}) },
     select: { id: true, firstName: true, lastName: true, email: true },
     orderBy: [{ firstName: 'asc' }, { lastName: 'asc' }]
   });
@@ -217,10 +230,11 @@ router.get('/teachers', requireRole('SCHOOL_DIRECTOR'), asyncHandler(async (req,
  *         description: الأستاذ غير موجود
  */
 router.post('/classes', requireRole('SCHOOL_DIRECTOR'), validateBody(directorClassCreateSchema), asyncHandler(async (req, res) => {
+  const sid = actorSchoolId(req);
   const { name, level, teacherId, schoolYear } = req.body;
   let teacher = null;
   if (teacherId !== undefined && teacherId !== null && teacherId !== '') {
-    teacher = await prisma.user.findFirst({ where: { id: Number(teacherId), role: 'TEACHER' } });
+    teacher = await prisma.user.findFirst({ where: { id: Number(teacherId), role: 'TEACHER', ...(sid != null ? { schoolId: sid } : {}) } });
     if (!teacher) throw new ApiError(404, 'الأستاذ غير موجود');
   }
   const klass = await prisma.class.create({
@@ -228,7 +242,8 @@ router.post('/classes', requireRole('SCHOOL_DIRECTOR'), validateBody(directorCla
       name: String(name).trim(),
       level: String(level).trim(),
       ...(schoolYear ? { schoolYear: String(schoolYear).trim() } : {}),
-      ...(teacher ? { teacherId: teacher.id } : {})
+      ...(teacher ? { teacherId: teacher.id } : {}),
+      ...(sid != null ? { schoolId: sid } : {})
     },
     include: { teacher: { select: { id: true, firstName: true, lastName: true } } }
   });
@@ -255,7 +270,8 @@ router.post('/classes', requireRole('SCHOOL_DIRECTOR'), validateBody(directorCla
  *         description: القسم أو الأستاذ غير موجود
  */
 router.put('/classes/:id', requireRole('SCHOOL_DIRECTOR'), validateParams(directorClassIdParamSchema), validateBody(directorClassUpdateSchema), asyncHandler(async (req, res) => {
-  const klass = await prisma.class.findUnique({ where: { id: Number(req.params.id) } });
+  const sid = actorSchoolId(req);
+  const klass = await prisma.class.findFirst({ where: { id: Number(req.params.id), ...(sid != null ? { schoolId: sid } : {}) } });
   if (!klass) throw new ApiError(404, 'القسم غير موجود');
   const { name, level, teacherId, schoolYear } = req.body;
   const data = {};
@@ -263,7 +279,7 @@ router.put('/classes/:id', requireRole('SCHOOL_DIRECTOR'), validateParams(direct
   if (level !== undefined && level !== null && level !== '') data.level = String(level).trim();
   if (schoolYear !== undefined && schoolYear !== null && schoolYear !== '') data.schoolYear = String(schoolYear).trim();
   if (teacherId !== undefined && teacherId !== null && teacherId !== '') {
-    const teacher = await prisma.user.findFirst({ where: { id: Number(teacherId), role: 'TEACHER' } });
+    const teacher = await prisma.user.findFirst({ where: { id: Number(teacherId), role: 'TEACHER', ...(sid != null ? { schoolId: sid } : {}) } });
     if (!teacher) throw new ApiError(404, 'الأستاذ غير موجود');
     data.teacherId = teacher.id;
   }
@@ -330,9 +346,11 @@ router.post('/notifications/read', asyncHandler(async (req, res) => {
  *         description: قائمة الطلبات
  */
 router.get('/requests', validateQuery(directorStatusQuerySchema), asyncHandler(async (req, res) => {
+  const sid = actorSchoolId(req);
   const { status } = req.query;
   const where = {};
   if (status) where.status = status;
+  if (sid != null) where.parent = { schoolId: sid };
   const requests = await prisma.subscriptionRequest.findMany({
     where,
     include: {
@@ -375,17 +393,19 @@ router.get('/requests', validateQuery(directorStatusQuerySchema), asyncHandler(a
  *         description: الطلب أو القسم غير موجود
  */
 router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validateParams(directorRequestIdParamSchema), validateBody(directorRequestApproveSchema), asyncHandler(async (req, res) => {
+  const sid = actorSchoolId(req);
   const { classId } = req.body;
-  const request = await prisma.subscriptionRequest.findUnique({ where: { id: Number(req.params.id) } });
+  const request = await prisma.subscriptionRequest.findFirst({ where: { id: Number(req.params.id), ...(sid != null ? { parent: { schoolId: sid } } : {}) } });
   if (!request) throw new ApiError(404, 'الطلب غير موجود');
   if (request.status !== 'PENDING_APPROVAL') {
     throw new ApiError(400, 'هذا الطلب تمت معالجته مسبقا');
   }
-  const klass = await prisma.class.findUnique({ where: { id: Number(classId) } });
+  const klass = await prisma.class.findFirst({ where: { id: Number(classId), ...(sid != null ? { schoolId: sid } : {}) } });
   if (!klass) throw new ApiError(404, 'القسم غير موجود');
 
   const temporaryPassword = `Refeeqi-${crypto.randomBytes(3).toString('hex')}`;
   const { start, end } = schoolYearBounds(request.schoolYear);
+  const schoolId = klass.schoolId ?? sid ?? null;
 
   try {
     const studentAccount = await prisma.user.create({
@@ -395,7 +415,8 @@ router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validatePara
         email: `s${request.parentId}-${Date.now()}@refeeqi.tn`,
         passwordHash: await bcrypt.hash(temporaryPassword, 10),
         role: 'STUDENT',
-        accountStatus: 'PENDING_PAYMENT'
+        accountStatus: 'PENDING_PAYMENT',
+        schoolId
       }
     });
 
@@ -487,8 +508,9 @@ router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validatePara
  *         description: الطلب غير موجود
  */
 router.put('/requests/:id/reject', requireRole('SCHOOL_DIRECTOR'), validateParams(directorRequestIdParamSchema), validateBody(directorRequestRejectSchema), asyncHandler(async (req, res) => {
+  const sid = actorSchoolId(req);
   const { reason } = req.body;
-  const request = await prisma.subscriptionRequest.findUnique({ where: { id: Number(req.params.id) } });
+  const request = await prisma.subscriptionRequest.findFirst({ where: { id: Number(req.params.id), ...(sid != null ? { parent: { schoolId: sid } } : {}) } });
   if (!request) throw new ApiError(404, 'الطلب غير موجود');
   if (request.status !== 'PENDING_APPROVAL') {
     throw new ApiError(400, 'هذا الطلب تمت معالجته مسبقا');
@@ -533,8 +555,9 @@ router.put('/requests/:id/reject', requireRole('SCHOOL_DIRECTOR'), validateParam
 router.post('/broadcast', requireRole('SCHOOL_DIRECTOR', 'ADMIN', 'SUPER_ADMIN'), validateBody(directorBroadcastSchema), asyncHandler(async (req, res) => {
   const { title, message } = req.body;
 
+  const sid = actorSchoolId(req);
   const parents = await prisma.user.findMany({
-    where: { role: 'PARENT' },
+    where: { role: 'PARENT', ...(sid != null ? { schoolId: sid } : {}) },
     select: { id: true }
   });
 

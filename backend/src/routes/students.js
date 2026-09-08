@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import prisma from '../db.js';
 import { authMiddleware, requireRole } from '../auth.js';
+import { actorSchoolId } from '../tenant.js';
 import { validateBody, validateParams } from '../middleware/validate.js';
 import { studentUpdateSchema } from '../validators/student.js';
 import { idParamSchema } from '../validators/common.js';
@@ -57,7 +58,8 @@ router.get(
     } else if (role === 'STUDENT') {
       where = { accountUserId: req.user.id };
     } else {
-      where = {};
+      const sid = actorSchoolId(req);
+      where = sid != null ? { account: { schoolId: sid } } : {};
     }
     const students = await prisma.student.findMany({
       where,

@@ -5,6 +5,7 @@ import { validateBody, validateParams } from '../middleware/validate.js';
 import { registrationStatusSchema, helpRequestStatusSchema } from '../validators/admin.js';
 import { idParamSchema } from '../validators/common.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
+import { actorSchoolId } from '../tenant.js';
 
 const router = Router();
 
@@ -24,13 +25,15 @@ router.use(authMiddleware, adminMiddleware);
  */
 router.get(
   '/stats',
-  asyncHandler(async (_req, res) => {
+  asyncHandler(async (req, res) => {
+    const sid = actorSchoolId(req);
+    const sc = sid != null ? { schoolId: sid } : null;
     const [users, students, registrations, pendingRegs, helpRequests, contactMessages] = await Promise.all([
-      prisma.user.count({ where: { role: 'PARENT' } }),
-      prisma.student.count(),
-      prisma.registration.count(),
-      prisma.registration.count({ where: { status: 'PENDING' } }),
-      prisma.helpRequest.count(),
+      prisma.user.count({ where: { role: 'PARENT', ...(sc || {}) } }),
+      prisma.student.count({ where: sc ? { account: sc } : {} }),
+      prisma.registration.count({ where: sc ? { user: sc } : {} }),
+      prisma.registration.count({ where: { status: 'PENDING', ...(sc ? { user: sc } : {}) } }),
+      prisma.helpRequest.count({ where: sc ? { user: sc } : {} }),
       prisma.contactMessage.count()
     ]);
     res.json({
@@ -58,8 +61,10 @@ router.get(
  */
 router.get(
   '/registrations',
-  asyncHandler(async (_req, res) => {
+  asyncHandler(async (req, res) => {
+    const sid = actorSchoolId(req);
     const items = await prisma.registration.findMany({
+      where: sid != null ? { user: { schoolId: sid } } : {},
       include: { student: true, user: true },
       orderBy: { createdAt: 'desc' },
       take: 100
@@ -99,8 +104,11 @@ router.put(
   validateParams(idParamSchema),
   validateBody(registrationStatusSchema),
   asyncHandler(async (req, res) => {
+    const sid = actorSchoolId(req);
     const { status, notes } = req.body;
-    const existing = await prisma.registration.findUnique({ where: { id: req.params.id } });
+    const existing = await prisma.registration.findFirst({
+      where: { id: Number(req.params.id), ...(sid != null ? { user: { schoolId: sid } } : {}) }
+    });
     if (!existing) throw new ApiError(404, 'طلب التسجيل غير موجود');
     const updated = await prisma.registration.update({
       where: { id: req.params.id },
@@ -125,8 +133,9 @@ router.put(
  */
 router.get(
   '/help-requests',
-  asyncHandler(async (_req, res) => {
-    const items = await prisma.helpRequest.findMany({ orderBy: { createdAt: 'desc' }, take: 100 });
+  asyncHandler(async (req, res) => {
+    const sid = actorSchoolId(req);
+    const items = await prisma.helpRequest.findMany({ where: sid != null ? { user: { schoolId: sid } } : {}, orderBy: { createdAt: 'desc' }, take: 100 });
     res.json(items);
   })
 );
@@ -161,8 +170,11 @@ router.put(
   validateParams(idParamSchema),
   validateBody(helpRequestStatusSchema),
   asyncHandler(async (req, res) => {
+    const sid = actorSchoolId(req);
     const { status } = req.body;
-    const existing = await prisma.helpRequest.findUnique({ where: { id: req.params.id } });
+    const existing = await prisma.helpRequest.findFirst({
+      where: { id: Number(req.params.id), ...(sid != null ? { user: { schoolId: sid } } : {}) }
+    });
     if (!existing) throw new ApiError(404, 'طلب المساعدة غير موجود');
     const updated = await prisma.helpRequest.update({
       where: { id: req.params.id },
