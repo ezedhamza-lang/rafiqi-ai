@@ -851,8 +851,15 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
         />
       ) : (
         <>
-          <div className="lesson-blocks">
-            {(lesson.blocks || []).map((b, i) => <Block key={i} block={b} onAnswer={handleAnswer} blockId={`${lesson.id}-${i}`} />)}
+          <div className="lesson-blocks lesson-sheet">
+            {(lesson.blocks || []).map((b, i) => (
+              <div key={i} className="lesson-sheet-item">
+                <span className="lesson-sheet-num">{i + 1}</span>
+                <div className="lesson-sheet-body">
+                  <Block block={b} onAnswer={handleAnswer} blockId={`${lesson.id}-${i}`} />
+                </div>
+              </div>
+            ))}
           </div>
 
           {/* Submit to Teacher Section */}

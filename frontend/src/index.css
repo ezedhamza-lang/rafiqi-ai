@@ -4261,6 +4261,48 @@ tr:hover td {
 }
 
 /* ---------- LessonViewer (unified interactive lessons) ---------- */
+
+/* الورقة الموحّدة لكل الدروس (على غرار «سلسلة النصوص»): غلاف + سند + أنشطة مرقّمة */
+.lesson-sheet {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  max-width: 820px;
+  margin-inline: auto;
+  padding: 0.25rem 0.25rem 1rem;
+}
+.lesson-sheet-item {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr;
+  gap: 0.75rem;
+  align-items: start;
+}
+.lesson-sheet-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--primary-soft, #eef2ff);
+  color: var(--primary, #4f46e5);
+  font-weight: 800;
+  font-size: 0.95rem;
+  margin-top: 0.35rem;
+  border: 1px solid var(--line, #e3e8ef);
+}
+.lesson-sheet-body { min-width: 0; }
+.lesson-sheet-body .lesson-block {
+  box-shadow: none;
+  border: 1px solid var(--line, #e9edf3);
+  background: #fff;
+  border-radius: 14px;
+}
+.lesson-sheet-item:last-child .lesson-block {
+  border-color: color-mix(in srgb, var(--primary, #4f46e5) 30%, transparent);
+  background: var(--primary-soft, #f5f7ff);
+}
+
 .lesson-viewer-modal {
   width: min(1100px, 96vw);
   height: min(92vh, 820px);
