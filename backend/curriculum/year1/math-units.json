@@ -2394,7 +2394,7 @@
         "title": "🔍 أستكشف — الجمع بالعمود",
         "text": "لجمع 23 + 14 نرتّب الأعداد عموديًا: الآحاد تحت الآحاد (3 فوق 4) والعشرات تحت العشرات (2 فوق 1). ثم نجمع الآحاد أولًا: 3 + 4 = 7، ثم العشرات: 2 + 1 = 3. الناتج 37.",
         "art": "column-add",
-        "image": "/uploads/curriculum/y1/math/y1m43-intro.png",
+        "image": "/curriculum/y1/math/y1m43-intro.png",
         "imagePrompt": "Flat vector children-book illustration: column addition of 23 + 14 shown in two place-value columns (tens and ones) using base-10 blocks (bundles of ten sticks and single cubes), Arabic RTL friendly, soft pastel palette, thick clean outlines, white background, no text, no letters, no watermark, 4:3"
       },
       {
@@ -2402,8 +2402,8 @@
         "title": "🖼️ أيّ ترتيبٍ صحيح؟",
         "text": "اختر الترتيب العمودي الصحيح للجمع 23 + 14 (المرتبة تحت مرتبتها).",
         "options": [
-          { "art": "align-correct", "label": "آحاد تحت آحاد وعشرات تحت عشرات", "image": "/uploads/curriculum/y1/math/y1m43-align-ok.png", "imagePrompt": "Flat vector kids illustration: vertical addition correctly aligned, ones over ones and tens over tens on a grid, one green check mark drawn as a shape (not text), soft pastel, thick outlines, white background, no text, 4:3" },
-          { "art": "align-wrong", "label": "غير محاذٍ بين المرتبتين", "image": "/uploads/curriculum/y1/math/y1m43-align-no.png", "imagePrompt": "Flat vector kids illustration: vertical addition badly aligned, ones shifted under tens, one red cross drawn as a shape (not text), soft pastel, thick outlines, white background, no text, 4:3" }
+          { "art": "align-correct", "label": "آحاد تحت آحاد وعشرات تحت عشرات", "image": "/curriculum/y1/math/y1m43-align-ok.png", "imagePrompt": "Flat vector kids illustration: vertical addition correctly aligned, ones over ones and tens over tens on a grid, one green check mark drawn as a shape (not text), soft pastel, thick outlines, white background, no text, 4:3" },
+          { "art": "align-wrong", "label": "غير محاذٍ بين المرتبتين", "image": "/curriculum/y1/math/y1m43-align-no.png", "imagePrompt": "Flat vector kids illustration: vertical addition badly aligned, ones shifted under tens, one red cross drawn as a shape (not text), soft pastel, thick outlines, white background, no text, 4:3" }
         ],
         "answer": 0
       },
