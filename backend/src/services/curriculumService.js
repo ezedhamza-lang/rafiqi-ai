@@ -389,7 +389,7 @@ function adaptAnisiLessons(book) {
       const words = anisiLessonWords(lesson);
       const seed = (unit.unit_number * 100 + (lesson.lesson_number || 0)) * 7 + 3;
       const qs = ch ? anisiLetterQuestions(ch, words, allLetters, seed) : [];
-      qs.forEach((q, i) => blocks.push({ ...q, title: `تعليم ${i + 1}` }));
+      qs.forEach((q, i) => blocks.push({ ...q, title: `تعليم ${i + 1}`, points: q.options ? 2 : 3 }));
       pages.push({
         id: `u${unit.unit_number}-l${lesson.lesson_number}`,
         title: `حرف ${lesson.letter}`,
