@@ -76,6 +76,25 @@ router.post(
   validateBody(subscriptionRequestSchema),
   asyncHandler(async (req, res) => {
     const { firstName, lastName, birthDate, cin, gender, level, schoolYear, schoolName, notes } = req.body;
+    const finalYear = schoolYear || currentSchoolYear();
+
+    // منع التكرار: طلب معلّق مماثل لنفس الابن من نفس الولي ⇒ نعيد الموجود بدل إنشاء مكرر.
+    const includeReq = {
+      class: { select: { id: true, name: true, level: true } },
+      parent: { select: { id: true, firstName: true, lastName: true, email: true, phone: true } }
+    };
+    const existing = await prisma.subscriptionRequest.findFirst({
+      where: {
+        parentId: req.user.id,
+        firstName: String(firstName).trim(),
+        lastName: String(lastName).trim(),
+        level,
+        schoolYear: finalYear,
+        status: { in: ['PENDING_APPROVAL', 'PENDING_PAYMENT'] }
+      },
+      include: includeReq
+    });
+    if (existing) return res.status(200).json({ ...existing, _deduped: true });
 
     const request = await prisma.subscriptionRequest.create({
       data: {
@@ -86,7 +105,7 @@ router.post(
         cin: cin || null,
         gender: gender || null,
         level,
-        schoolYear: schoolYear || currentSchoolYear(),
+        schoolYear: finalYear,
         schoolName: schoolName || null,
         notes: notes || null
       },

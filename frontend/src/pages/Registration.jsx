@@ -23,6 +23,7 @@ export default function Registration() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(true);
+  const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
     Promise.all([api.get('/public/levels'), api.get('/subscription-requests/mine')])
@@ -36,15 +37,20 @@ export default function Registration() {
 
   const submit = async (e) => {
     e.preventDefault();
+    if (submitting) return;
     setError('');
     setSuccess('');
+    setSubmitting(true);
     try {
-      const created = await api.post('/subscription-requests', form);
-      setRequests((prev) => [created, ...prev]);
+      await api.post('/subscription-requests', form);
+      const fresh = await api.get('/subscription-requests/mine');
+      setRequests(fresh);
       setSuccess(t('registration.success'));
       setForm(EMPTY_FORM);
     } catch (err) {
       setError(err.message);
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -125,8 +131,8 @@ export default function Registration() {
           <label>{t('registration.notes')}</label>
           <textarea value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} placeholder={t('registration.notesPlaceholder')} />
         </div>
-        <button className="btn btn-primary" type="submit">
-          <span className="material-icons">send</span> {t('registration.submit')}
+        <button className="btn btn-primary" type="submit" disabled={submitting}>
+          {submitting ? <span className="spinner" style={{ fontSize: 18 }} /> : <span className="material-icons">send</span>} {submitting ? t('registration.submitting', '...جارٍ الإرسال') : t('registration.submit')}
         </button>
       </form>
 
