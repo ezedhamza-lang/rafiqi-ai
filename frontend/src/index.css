@@ -1807,7 +1807,7 @@ tr:hover td {
 }
 
 .tab-content {
-  min-height: 50vh;
+  min-height: 0;
 }
 
 /* ---------- Student Tabs Navigation ---------- */
@@ -5939,6 +5939,38 @@ tr:hover td {
 .lb-modal-actions { display: flex; justify-content: center; margin-top: 0.7rem; }
 .lb-modal .ui-leaderboard { max-height: 60vh; overflow-y: auto; }
 
+/* --- Sidebar groups + lighter sidebar --- */
+.sidebar-group { display: flex; flex-direction: column; gap: 0.22rem; }
+.sidebar-group + .sidebar-group { margin-top: 0.7rem; }
+.sidebar-group-label {
+  font-size: 0.68rem; font-weight: 800; letter-spacing: .04em;
+  color: var(--sidebar-muted); padding: 0.15rem 0.7rem 0.3rem; text-transform: none;
+}
+.sidebar-group-sep { height: 1px; background: rgba(255,255,255,.14); margin: 0.35rem 8px; }
+.student-sidebar.is-light { box-shadow: 0 6px 18px rgba(2,6,23,.18); border-radius: 14px; }
+.student-sidebar.is-light .student-sidebar-head { padding-bottom: 0.45rem; }
+
+/* --- Tighter, denser main content (student/parent/super spaces) --- */
+.student-space--v2 .container,
+.parent-space .container,
+.superadmin-space .container { padding-top: 0.4rem; }
+
+.ui-card { padding: 1rem 1.1rem; }
+.ui-card-head { margin-bottom: 0.7rem; }
+.ui-card-title { font-size: 1.02rem; }
+
+/* Twin / analytics compaction */
+.student-main .twin-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin: 0.2rem 0 0; }
+.student-main .sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; margin-top: 0.85rem !important; }
+.student-main .card-item { padding: 0.75rem 0.9rem; }
+.student-main .card-item h4 { margin: 0 0 0.4rem; }
+.student-main .card-item ul { margin: 0; padding-inline-start: 1.1rem; }
+.student-main .card-item li { margin: 0.15rem 0; }
+.student-main .intro-video-card { margin-bottom: 0.5rem; }
+.student-main .badges-row { gap: 0.5rem; }
+.student-main > section + section,
+.student-main > div + div { }
+
 /* Floating mobile menu button for shared SpaceShell */
 .sidebar-fab {
   display: none; position: fixed; inset-block-end: 18px; inset-inline-start: 18px;
@@ -5948,5 +5980,11 @@ tr:hover td {
 }
 @media (max-width: 980px) {
   .sidebar-fab { display: inline-flex; }
+  .student-main .twin-cards { grid-template-columns: 1fr; gap: 0.5rem; }
+  .student-main .sub-grid { grid-template-columns: 1fr; gap: 0.5rem; margin-top: 0.6rem !important; }
+  .student-main .badges-row { gap: 0.35rem; flex-wrap: wrap; }
+  .ui-card { padding: 0.8rem 0.9rem; }
+  .student-profile-card .profile-details { gap: 0.2rem; }
+  .student-profile-card .profile-grade { display: none; }
 }
 

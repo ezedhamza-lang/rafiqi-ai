@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Routes, Route, NavLink, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useI18n } from '../../i18n/index.jsx';
 import { api } from '../../api/client.js';
+import SpaceShell from '../../components/SpaceShell.jsx';
 import StudentQuizzes from './StudentQuizzes.jsx';
 import StudentOfficialExams from './StudentOfficialExams.jsx';
 import StudentBooks from './StudentBooks.jsx';
@@ -23,35 +24,10 @@ import StudentDailyRoutine from './StudentDailyRoutine.jsx';
 import StudentFlashcards from './StudentFlashcards.jsx';
 import SchoolCalendar from '../../components/SchoolCalendar.jsx';
 
-const TABS = [
-  { to: '', end: true, icon: 'home', key: 'home', color: '#ff6a00' },
-  { to: 'books', icon: 'auto_stories', key: 'books', color: '#14b8a6' },
-  { to: 'stories', icon: 'library_books', key: 'stories', color: '#06b6d4' },
-  { to: 'subjects', icon: 'menu_book', key: 'subjects', color: '#10b981' },
-  { to: 'quizzes', icon: 'quiz', key: 'quizzes', color: '#ef4444' },
-  { to: 'official-exams', icon: 'description', key: 'officialExams', color: '#3b82f6' },
-  { to: 'assignments', icon: 'assignment', key: 'assignments', color: '#f97316' },
-  { to: 'routine', icon: 'today', key: 'routine', color: '#8b5cf6' },
-  { to: 'flashcards', icon: 'style', key: 'flashcards', color: '#eab308' },
-  { to: 'live', icon: 'live_tv', key: 'live', color: '#22c55e' },
-  { to: 'paper-exam', icon: 'document_scanner', key: 'paperExam', color: '#6366f1' },
-  { to: 'play', icon: 'sports_esports', key: 'play', color: '#ec4899' },
-  { to: 'adaptive', icon: 'psychology', key: 'adaptive', color: '#a855f7' },
-  { to: 'plan', icon: 'route', key: 'plan', color: '#f59e0b' },
-  { to: 'videos', icon: 'smart_display', key: 'videos', color: '#0ea5e9' },
-  { to: 'calendar', icon: 'calendar_month', key: 'calendar', color: '#8b5cf6' },
-  { to: 'refeeqi', icon: 'smart_toy', key: 'refeeqi', color: '#3b82f6' },
-  { to: 'twin', icon: 'insights', key: 'twin', color: '#10b981' },
-  { to: 'schedule', icon: 'calendar_view_week', key: 'schedule', color: '#f97316' }
-];
-
 export default function StudentSpace() {
   const { user } = useAuth();
   const { t } = useI18n();
-  const location = useLocation();
   const [profile, setProfile] = useState(null);
-  const [collapsed, setCollapsed] = useState(() => localStorage.getItem('rafiqi-student-sidebar') === 'collapsed');
-  const [mobileOpen, setMobileOpen] = useState(false);
 
   const load = useCallback(async () => {
     try {
@@ -66,90 +42,69 @@ export default function StudentSpace() {
     load();
   }, [load]);
 
-  useEffect(() => {
-    localStorage.setItem('rafiqi-student-sidebar', collapsed ? 'collapsed' : 'expanded');
-  }, [collapsed]);
-
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [location.pathname]);
-
   if (!user || user.role !== 'STUDENT') {
     return <Navigate to="/dashboard" replace />;
   }
 
-  const aside = (
-    <aside className={`student-sidebar ${collapsed ? 'is-collapsed' : ''} ${mobileOpen ? 'is-open' : ''}`}>
-      <div className="student-sidebar-head">
-        <span className="student-sidebar-title">{t('studentSpace.sidebarTitle')}</span>
-        <button
-          type="button"
-          className="sidebar-toggle"
-          onClick={() => setCollapsed((v) => !v)}
-          aria-label={collapsed ? t('studentSpace.expand') : t('studentSpace.collapse')}
-          title={collapsed ? t('studentSpace.expand') : t('studentSpace.collapse')}
-        >
-          <span className="material-icons">{collapsed ? 'chevron_left' : 'chevron_right'}</span>
-        </button>
-      </div>
-      <nav className="student-sidebar-nav">
-        {TABS.map((tab) => (
-          <NavLink
-            key={tab.to}
-            to={`/student-space/${tab.to}`}
-            end={tab.end}
-            className={({ isActive }) => `student-nav-item ${isActive ? 'active' : ''}`}
-            style={{ '--c': tab.color }}
-            title={t(`studentSpace.tabs.${tab.key}`)}
-          >
-            <span className="nav-dot" aria-hidden="true" />
-            <span className="material-icons nav-ico">{tab.icon}</span>
-            <span className="nav-label">{t(`studentSpace.tabs.${tab.key}`)}</span>
-          </NavLink>
-        ))}
-      </nav>
-    </aside>
-  );
+  const L = (k) => t(`studentSpace.tabs.${k}`);
+  const GROUPS = [
+    { label: t('studentSpace.groups.main'), items: [
+      { to: '', end: true, icon: 'home', label: L('home'), color: '#ff6a00' },
+      { to: 'twin', icon: 'insights', label: L('twin'), color: '#10b981' },
+    ] },
+    { label: t('studentSpace.groups.learning'), items: [
+      { to: 'books', icon: 'auto_stories', label: L('books'), color: '#14b8a6' },
+      { to: 'stories', icon: 'library_books', label: L('stories'), color: '#06b6d4' },
+      { to: 'subjects', icon: 'menu_book', label: L('subjects'), color: '#10b981' },
+      { to: 'plan', icon: 'route', label: L('plan'), color: '#f59e0b' },
+      { to: 'adaptive', icon: 'psychology', label: L('adaptive'), color: '#a855f7' },
+      { to: 'flashcards', icon: 'style', label: L('flashcards'), color: '#eab308' },
+      { to: 'routine', icon: 'today', label: L('routine'), color: '#8b5cf6' },
+      { to: 'videos', icon: 'smart_display', label: L('videos'), color: '#0ea5e9' },
+      { to: 'refeeqi', icon: 'smart_toy', label: L('refeeqi'), color: '#3b82f6' },
+    ] },
+    { label: t('studentSpace.groups.exams'), items: [
+      { to: 'quizzes', icon: 'quiz', label: L('quizzes'), color: '#ef4444' },
+      { to: 'official-exams', icon: 'description', label: L('officialExams'), color: '#3b82f6' },
+      { to: 'assignments', icon: 'assignment', label: L('assignments'), color: '#f97316' },
+      { to: 'live', icon: 'live_tv', label: L('live'), color: '#22c55e' },
+      { to: 'paper-exam', icon: 'document_scanner', label: L('paperExam'), color: '#6366f1' },
+      { to: 'schedule', icon: 'calendar_view_week', label: L('schedule'), color: '#f97316' },
+      { to: 'calendar', icon: 'calendar_month', label: L('calendar'), color: '#8b5cf6' },
+    ] },
+    { label: t('studentSpace.groups.activities'), items: [
+      { to: 'play', icon: 'sports_esports', label: L('play'), color: '#ec4899' },
+    ] },
+  ];
 
   return (
     <div className="student-space student-space--v2">
       <div className="container">
-        <StudentProfile profile={profile} onMenu={() => setMobileOpen(true)} />
-
-        <div className="student-layout">
-          {aside}
-          <div className="tab-content student-main">
-            <Routes>
-              <Route index element={<StudentTwin />} />
-              <Route path="routine" element={<StudentDailyRoutine />} />
-              <Route path="flashcards" element={<StudentFlashcards />} />
-              <Route path="subjects" element={<StudentSubjects />} />
-              <Route path="quizzes" element={<StudentQuizzes onChanged={load} />} />
-              <Route path="official-exams" element={<StudentOfficialExams onChanged={load} />} />
-              <Route path="assignments" element={<StudentAssignments onChanged={load} />} />
-              <Route path="live" element={<StudentLiveSessions />} />
-              <Route path="paper-exam" element={<PaperExamScan />} />
-              <Route path="play" element={<PlayZone />} />
-              <Route path="books" element={<StudentBooks />} />
-              <Route path="adaptive" element={<StudentAdaptive />} />
-              <Route path="plan" element={<StudentLearningPlan />} />
-              <Route path="videos" element={<StudentVideos />} />
-              <Route path="stories" element={<StudentStories />} />
-              <Route path="calendar" element={<SchoolCalendar />} />
-              <Route path="refeeqi" element={<AskRefeeqi />} />
-              <Route path="twin" element={<StudentTwin />} />
-              <Route path="schedule" element={<StudentSchedule />} />
-            </Routes>
-          </div>
-        </div>
+        <StudentProfile profile={profile} />
+        <SpaceShell base="/student-space" title={t('studentSpace.sidebarTitle')} storageKey="rafiqi-student-sidebar" sections={GROUPS}>
+          <Routes>
+            <Route index element={<StudentTwin />} />
+            <Route path="routine" element={<StudentDailyRoutine />} />
+            <Route path="flashcards" element={<StudentFlashcards />} />
+            <Route path="subjects" element={<StudentSubjects />} />
+            <Route path="quizzes" element={<StudentQuizzes onChanged={load} />} />
+            <Route path="official-exams" element={<StudentOfficialExams onChanged={load} />} />
+            <Route path="assignments" element={<StudentAssignments onChanged={load} />} />
+            <Route path="live" element={<StudentLiveSessions />} />
+            <Route path="paper-exam" element={<PaperExamScan />} />
+            <Route path="play" element={<PlayZone />} />
+            <Route path="books" element={<StudentBooks />} />
+            <Route path="adaptive" element={<StudentAdaptive />} />
+            <Route path="plan" element={<StudentLearningPlan />} />
+            <Route path="videos" element={<StudentVideos />} />
+            <Route path="stories" element={<StudentStories />} />
+            <Route path="calendar" element={<SchoolCalendar />} />
+            <Route path="refeeqi" element={<AskRefeeqi />} />
+            <Route path="twin" element={<StudentTwin />} />
+            <Route path="schedule" element={<StudentSchedule />} />
+          </Routes>
+        </SpaceShell>
       </div>
-
-      {mobileOpen && (
-        <>
-          <div className="sidebar-backdrop" onClick={() => setMobileOpen(false)} />
-          <div className="student-sidebar-drawer">{aside}</div>
-        </>
-      )}
     </div>
   );
 }

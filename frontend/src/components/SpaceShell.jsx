@@ -3,10 +3,11 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useI18n } from '../i18n/index.jsx';
 
 /**
- * SpaceShell — تخطيط موحّد: Sidebar جانبية (يمين RTL / يسار LTR) + مساحة محتوى.
- * items: [{ to, end?, icon, key|label, color }] ; base: بادئة المسار ; children: المحتوى/الـRoutes.
+ * SpaceShell — Sidebar موحّدة (يمين RTL / يسار LTR)، أخفّ بصريًا، بمجموعات منطقية.
+ * إما items=[{to,end,icon,key|label,color}] مسطّح،
+ * أو sections=[{label, items:[...]}] للمجموعات.
  */
-export default function SpaceShell({ items, base, title, storageKey = 'rafiqi-sidebar', children }) {
+export default function SpaceShell({ base, title, storageKey = 'rafiqi-sidebar', items, sections, children }) {
   const { t } = useI18n();
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(() => localStorage.getItem(storageKey) === 'collapsed');
@@ -15,8 +16,25 @@ export default function SpaceShell({ items, base, title, storageKey = 'rafiqi-si
   useEffect(() => { localStorage.setItem(storageKey, collapsed ? 'collapsed' : 'expanded'); }, [collapsed, storageKey]);
   useEffect(() => { setMobileOpen(false); }, [location.pathname]);
 
+  const groups = sections && sections.length ? sections : [{ label: null, items: items || [] }];
+
+  const linkFor = (tab) => (
+    <NavLink
+      key={tab.to}
+      to={tab.to === '' ? base : `${base}/${tab.to}`}
+      end={tab.end}
+      className={({ isActive }) => `student-nav-item ${isActive ? 'active' : ''}`}
+      style={{ '--c': tab.color || '#38bdf8' }}
+      title={tab.label || t(tab.key)}
+    >
+      <span className="nav-dot" aria-hidden="true" />
+      <span className="material-icons nav-ico">{tab.icon}</span>
+      <span className="nav-label">{tab.label || t(tab.key)}</span>
+    </NavLink>
+  );
+
   const aside = (
-    <aside className={`student-sidebar ${collapsed ? 'is-collapsed' : ''}`}>
+    <aside className={`student-sidebar is-light ${collapsed ? 'is-collapsed' : ''}`}>
       <div className="student-sidebar-head">
         <span className="student-sidebar-title">{title}</span>
         <button
@@ -30,19 +48,12 @@ export default function SpaceShell({ items, base, title, storageKey = 'rafiqi-si
         </button>
       </div>
       <nav className="student-sidebar-nav">
-        {items.map((tab) => (
-          <NavLink
-            key={tab.to}
-            to={tab.to === '' ? base : `${base}/${tab.to}`}
-            end={tab.end}
-            className={({ isActive }) => `student-nav-item ${isActive ? 'active' : ''}`}
-            style={{ '--c': tab.color || '#38bdf8' }}
-            title={tab.label || t(tab.key)}
-          >
-            <span className="nav-dot" aria-hidden="true" />
-            <span className="material-icons nav-ico">{tab.icon}</span>
-            <span className="nav-label">{tab.label || t(tab.key)}</span>
-          </NavLink>
+        {groups.map((g, gi) => (
+          <div className="sidebar-group" key={g.label || gi}>
+            {g.label && !collapsed && <div className="sidebar-group-label">{g.label}</div>}
+            {g.label && collapsed && <div className="sidebar-group-sep" aria-hidden="true" />}
+            {g.items.map(linkFor)}
+          </div>
         ))}
       </nav>
     </aside>

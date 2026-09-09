@@ -1242,6 +1242,12 @@
   },
   "studentSpace": {
     "sidebarTitle": "Sections",
+    "groups": {
+      "main": "Home",
+      "learning": "Learning",
+      "exams": "Assessments",
+      "activities": "Activities"
+    },
     "collapse": "Collapse menu",
     "expand": "Expand menu",
     "menu": "Menu",
