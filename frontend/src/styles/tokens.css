@@ -8,18 +8,24 @@
   color-scheme: light;
 
   /* Brand colors — Orange primary (العلامة) */
-  --primary: #f97316;
-  --primary-dark: #ea580c;
+  --primary: #ff6a00;
+  --primary-dark: #e85d00;
   --primary-darker: #c2410c;
-  --primary-light: #ffedd5;
+  --primary-light: #fff0e6;
   --accent: #fbbf24;
   --accent-dark: #d97706;
   --accent-light: #fef3c7;
   --brand-pink: #9d174d;
 
+  /* Sidebar blue theme */
+  --sidebar-bg: linear-gradient(180deg, #0b2a52, #123a6b);
+  --sidebar-surface: rgba(255,255,255,0.06);
+  --sidebar-text: #e6eefc;
+  --sidebar-muted: #9fb6d9;
+
   /* Calm, harmonious section-dot tone (موحّد لكل الأقسام) */
-  --dot: #f59e0b;
-  --dot-soft: rgba(249, 115, 22, 0.12);
+  --dot: #ff6a00;
+  --dot-soft: rgba(255, 106, 0, 0.14);
 
   /* Semantic surface colors */
   --bg: #f6f8fb;
@@ -88,8 +94,8 @@
   --shadow-header: 0 4px 16px rgba(2, 6, 23, 0.06);
 
   /* Gradients — هويّة برتقالية متناسقة */
-  --gradient-brand: linear-gradient(135deg, #f97316, #c2410c);
-  --gradient-accent: linear-gradient(90deg, #f97316, #fbbf24);
+  --gradient-brand: linear-gradient(135deg, #ff6a00, #c2410c);
+  --gradient-accent: linear-gradient(90deg, #ff6a00, #fbbf24);
 
   /* Z-index scale */
   --z-dropdown: 1000;
@@ -104,12 +110,12 @@
 [data-theme='dark'] {
   color-scheme: dark;
 
-  --primary: #fb923c;
-  --primary-dark: #fdba74;
-  --primary-darker: #f97316;
+  --primary: #ff8a3d;
+  --primary-dark: #ffb073;
+  --primary-darker: #ff6a00;
   --primary-light: #431407;
-  --dot: #f59e0b;
-  --dot-soft: rgba(249, 115, 22, 0.18);
+  --dot: #ff6a00;
+  --dot-soft: rgba(255, 106, 0, 0.20);
   --accent: #fbbf24;
   --accent-dark: #f59e0b;
   --accent-light: #451a03;

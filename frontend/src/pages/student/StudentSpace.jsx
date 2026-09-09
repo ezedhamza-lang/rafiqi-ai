@@ -24,25 +24,25 @@ import StudentFlashcards from './StudentFlashcards.jsx';
 import SchoolCalendar from '../../components/SchoolCalendar.jsx';
 
 const TABS = [
-  { to: '', end: true, icon: 'home', key: 'home' },
-  { to: 'routine', icon: 'today', key: 'routine' },
-  { to: 'flashcards', icon: 'style', key: 'flashcards' },
-  { to: 'subjects', icon: 'menu_book', key: 'subjects' },
-  { to: 'quizzes', icon: 'quiz', key: 'quizzes' },
-  { to: 'official-exams', icon: 'description', key: 'officialExams' },
-  { to: 'assignments', icon: 'assignment', key: 'assignments' },
-  { to: 'live', icon: 'live_tv', key: 'live' },
-  { to: 'paper-exam', icon: 'document_scanner', key: 'paperExam' },
-  { to: 'play', icon: 'sports_esports', key: 'play' },
-  { to: 'books', icon: 'auto_stories', key: 'books' },
-  { to: 'adaptive', icon: 'psychology', key: 'adaptive' },
-  { to: 'plan', icon: 'route', key: 'plan' },
-  { to: 'videos', icon: 'smart_display', key: 'videos' },
-  { to: 'stories', icon: 'library_books', key: 'stories' },
-  { to: 'calendar', icon: 'calendar_month', key: 'calendar' },
-  { to: 'refeeqi', icon: 'smart_toy', key: 'refeeqi' },
-  { to: 'twin', icon: 'insights', key: 'twin' },
-  { to: 'schedule', icon: 'calendar_view_week', key: 'schedule' }
+  { to: '', end: true, icon: 'home', key: 'home', color: '#ff6a00' },
+  { to: 'books', icon: 'auto_stories', key: 'books', color: '#14b8a6' },
+  { to: 'stories', icon: 'library_books', key: 'stories', color: '#06b6d4' },
+  { to: 'subjects', icon: 'menu_book', key: 'subjects', color: '#10b981' },
+  { to: 'quizzes', icon: 'quiz', key: 'quizzes', color: '#ef4444' },
+  { to: 'official-exams', icon: 'description', key: 'officialExams', color: '#3b82f6' },
+  { to: 'assignments', icon: 'assignment', key: 'assignments', color: '#f97316' },
+  { to: 'routine', icon: 'today', key: 'routine', color: '#8b5cf6' },
+  { to: 'flashcards', icon: 'style', key: 'flashcards', color: '#eab308' },
+  { to: 'live', icon: 'live_tv', key: 'live', color: '#22c55e' },
+  { to: 'paper-exam', icon: 'document_scanner', key: 'paperExam', color: '#6366f1' },
+  { to: 'play', icon: 'sports_esports', key: 'play', color: '#ec4899' },
+  { to: 'adaptive', icon: 'psychology', key: 'adaptive', color: '#a855f7' },
+  { to: 'plan', icon: 'route', key: 'plan', color: '#f59e0b' },
+  { to: 'videos', icon: 'smart_display', key: 'videos', color: '#0ea5e9' },
+  { to: 'calendar', icon: 'calendar_month', key: 'calendar', color: '#8b5cf6' },
+  { to: 'refeeqi', icon: 'smart_toy', key: 'refeeqi', color: '#3b82f6' },
+  { to: 'twin', icon: 'insights', key: 'twin', color: '#10b981' },
+  { to: 'schedule', icon: 'calendar_view_week', key: 'schedule', color: '#f97316' }
 ];
 
 export default function StudentSpace() {
@@ -99,6 +99,7 @@ export default function StudentSpace() {
             to={`/student-space/${tab.to}`}
             end={tab.end}
             className={({ isActive }) => `student-nav-item ${isActive ? 'active' : ''}`}
+            style={{ '--c': tab.color }}
             title={t(`studentSpace.tabs.${tab.key}`)}
           >
             <span className="nav-dot" aria-hidden="true" />
