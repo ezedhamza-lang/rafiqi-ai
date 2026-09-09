@@ -19,6 +19,25 @@ const router = Router();
 
 /**
  * @swagger
+ * /api/public/schools:
+ *   get:
+ *     summary: قائمة المدارس النشطة (لاختيارها عند التسجيل)
+ *     tags: [public]
+ *     responses:
+ *       200:
+ *         description: المدارس المتاحة
+ */
+router.get('/schools', asyncHandler(async (_req, res) => {
+  const schools = await prisma.school.findMany({
+    where: { status: 'ACTIVE' },
+    select: { id: true, code: true, name: true },
+    orderBy: { name: 'asc' }
+  });
+  res.json(schools);
+}));
+
+/**
+ * @swagger
  * /api/public/announcements:
  *   get:
  *     summary: الإعلانات

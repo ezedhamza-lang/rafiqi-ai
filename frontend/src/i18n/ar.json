@@ -211,6 +211,8 @@
     "passwordLabel": "كلمة السر",
     "passwordPlaceholder": "6 أحرف على الأقل",
     "confirmLabel": "تأكيد كلمة السر",
+    "schoolLabel": "المدرسة",
+    "schoolPlaceholder": "اختر مدرستك",
     "creating": "جاري الإنشاء...",
     "submit": "إنشاء الحساب",
     "passwordMismatch": "كلمتا السر غير متطابقتين",

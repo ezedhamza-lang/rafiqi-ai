@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useI18n } from '../i18n/index.jsx';
+import { api } from '../api/client.js';
 import { Button, Input } from '../components/ui/index.js';
 
 export default function Register() {
@@ -14,10 +15,16 @@ export default function Register() {
     email: '',
     phone: '',
     password: '',
-    confirm: ''
+    confirm: '',
+    schoolId: ''
   });
+  const [schools, setSchools] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    api.get('/public/schools').then((d) => setSchools(Array.isArray(d) ? d : [])).catch(() => {});
+  }, []);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -33,7 +40,8 @@ export default function Register() {
         lastName: form.lastName,
         email: form.email,
         phone: form.phone,
-        password: form.password
+        password: form.password,
+        schoolId: form.schoolId ? Number(form.schoolId) : undefined
       });
       navigate('/dashboard');
     } catch (err) {
@@ -110,6 +118,22 @@ export default function Register() {
               autoComplete="new-password"
             />
           </div>
+          {schools.length > 1 && (
+            <div className="form-group" style={{ marginBottom: '0.8rem' }}>
+              <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.3rem' }}>{t('register.schoolLabel', 'المدرسة')}</label>
+              <select
+                required
+                value={form.schoolId}
+                onChange={(e) => setForm({ ...form, schoolId: e.target.value })}
+                style={{ width: '100%', padding: '0.6rem 0.8rem', borderRadius: 10, border: '1px solid #d1d5db', fontSize: '1rem' }}
+              >
+                <option value="" disabled>{t('register.schoolPlaceholder', 'اختر مدرستك')}</option>
+                {schools.map((s) => (
+                  <option key={s.id} value={s.id}>{s.name}</option>
+                ))}
+              </select>
+            </div>
+          )}
           <Button type="submit" disabled={loading} block size="lg">
             {loading ? t('register.creating') : t('register.submit')}
           </Button>

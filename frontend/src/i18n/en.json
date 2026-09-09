@@ -210,6 +210,8 @@
     "passwordLabel": "Password",
     "passwordPlaceholder": "At least 6 characters",
     "confirmLabel": "Confirm password",
+    "schoolLabel": "School",
+    "schoolPlaceholder": "Select your school",
     "creating": "Creating...",
     "submit": "Create account",
     "passwordMismatch": "Passwords do not match",

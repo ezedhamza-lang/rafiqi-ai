@@ -77,11 +77,21 @@ router.post(
   '/register',
   validateBody(registerSchema),
   asyncHandler(async (req, res) => {
-    const { firstName, lastName, email, phone, password } = req.body;
+    const { firstName, lastName, email, phone, password, schoolId } = req.body;
     const emailNorm = email.toLowerCase();
 
     const existing = await prisma.user.findUnique({ where: { email: emailNorm } });
     if (existing) throw new ApiError(409, AR.EMAIL_TAKEN);
+
+    // تحديد المدرسة: يحدّدها الولي من القائمة؛ وإن وُجدت مدرسة نشطة واحدة فقط، تُسنَد تلقائياً.
+    let resolvedSchoolId = schoolId != null ? Number(schoolId) : null;
+    if (resolvedSchoolId != null) {
+      const school = await prisma.school.findFirst({ where: { id: resolvedSchoolId, status: 'ACTIVE' } });
+      if (!school) throw new ApiError(400, 'المدرسة المختارة غير متوفّرة');
+    } else {
+      const active = await prisma.school.findMany({ where: { status: 'ACTIVE' }, select: { id: true }, take: 2 });
+      if (active.length === 1) resolvedSchoolId = active[0].id;
+    }
 
     const passwordHash = await bcrypt.hash(password, 10);
     const user = await prisma.user.create({
@@ -90,7 +100,8 @@ router.post(
         lastName,
         email: emailNorm,
         phone: phone || null,
-        passwordHash
+        passwordHash,
+        schoolId: resolvedSchoolId
       }
     });
 

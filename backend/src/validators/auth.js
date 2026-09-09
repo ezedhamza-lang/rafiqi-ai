@@ -11,7 +11,8 @@ export const registerSchema = z.object({
   lastName: z.string().trim().min(2, { error: 'اللقب يجب أن يحتوي على حرفين على الأقل' }),
   email: emailSchema,
   phone: z.string().trim().optional().nullable(),
-  password: z.string().min(6, { error: 'كلمة السر يجب أن تحتوي على 6 أحرف على الأقل' })
+  password: z.string().min(6, { error: 'كلمة السر يجب أن تحتوي على 6 أحرف على الأقل' }),
+  schoolId: z.coerce.number().int().positive({ error: 'المدرسة غير صالحة' }).optional().nullable()
 });
 
 export const loginSchema = z.object({
