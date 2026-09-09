@@ -15,6 +15,71 @@ const PERIOD_NAMES = {
   1: 'الأُولَى', 2: 'الثَّانِيَة', 3: 'الثَّالِثَة', 4: 'الرَّابِعَة', 5: 'الخَامِسَة', 6: 'السَّادِسَة'
 };
 
+// لوحة رسم حقيقية (قابلة للإجابة) داخل ورقة التقويم
+function PaperDrawing({ blockId, value, onAnswer }) {
+  const ref = useRef(null);
+  const drawing = useRef(false);
+  const saved = useRef(false);
+  const pos = (e) => {
+    const c = ref.current; const r = c.getBoundingClientRect();
+    const t = e.touches ? e.touches[0] : e;
+    return { x: t.clientX - r.left, y: t.clientY - r.top };
+  };
+  const start = (e) => { drawing.current = true; const ctx = ref.current.getContext('2d'); const p = pos(e); ctx.beginPath(); ctx.moveTo(p.x, p.y); e.preventDefault(); };
+  const move = (e) => { if (!drawing.current) return; const ctx = ref.current.getContext('2d'); const p = pos(e); ctx.lineWidth = 3; ctx.lineCap = 'round'; ctx.strokeStyle = '#333'; ctx.lineTo(p.x, p.y); ctx.stroke(); e.preventDefault(); };
+  const end = () => { if (!drawing.current) return; drawing.current = false; const url = ref.current.toDataURL('image/png'); saved.current = true; onAnswer(blockId, { kind: 'drawing', dataUrl: url, name: `drawing-${blockId}.png` }); };
+  const clear = () => { const c = ref.current; c.getContext('2d').clearRect(0, 0, c.width, c.height); onAnswer(blockId, null); saved.current = false; };
+  return (
+    <div style={{ marginTop: 6 }}>
+      <canvas
+        ref={ref} width={360} height={180}
+        onMouseDown={start} onMouseMove={move} onMouseUp={end} onMouseLeave={end}
+        onTouchStart={start} onTouchMove={move} onTouchEnd={end}
+        style={{ border: '2px solid #1976d2', borderRadius: 8, background: '#fff', width: '100%', maxWidth: 360, touchAction: 'none', cursor: 'crosshair' }}
+      />
+      <div style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 4 }}>
+        <button type="button" className="btn btn-sm" onClick={clear}>مسح الرسم</button>
+        {saved.current && <span style={{ color: '#2e7d32', fontSize: 18 }}>✓ رُسمت الإجابة</span>}
+      </div>
+    </div>
+  );
+}
+
+// جدول قابل للتعبئة (خلايا فارغة يكتبها التلميذ)
+function PaperTable({ ex, blockId, answers, onAnswer }) {
+  const cols = ex.columns || [];
+  const rows = ex.rows || [];
+  let saved = {};
+  try { saved = JSON.parse(answers[blockId] || '{}'); } catch { saved = {}; }
+  const set = (key, val) => onAnswer(blockId, JSON.stringify({ ...saved, [key]: val }));
+  return (
+    <table style={{ borderCollapse: 'collapse', margin: '8px 0', fontSize: 24 }}>
+      {cols.length > 0 && (
+        <thead>
+          <tr>{cols.map((h, i) => <th key={i} style={{ border: '2px solid #333', padding: '6px 14px', background: '#f0f0f0' }}>{h}</th>)}</tr>
+        </thead>
+      )}
+      <tbody>
+        {rows.map((row, r) => (
+          <tr key={r}>
+            {row.map((cell, c) => {
+              const key = `${r}-${c}`;
+              if (cell === '' || cell == null) {
+                return <td key={c} style={{ border: '2px solid #333', padding: 0 }}>
+                  <input value={saved[key] || ''} onChange={(e) => set(key, e.target.value)}
+                    style={{ width: 60, textAlign: 'center', fontSize: 24, border: 'none', outline: 'none', padding: '6px 4px' }} />
+                </td>;
+              }
+              return <td key={c} style={{ border: '2px solid #333', padding: '6px 14px', textAlign: 'center' }}>{cell}</td>;
+            })}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
+
 export default function AssessmentPaper({ lesson, answers, onAnswer, submitting, submitResult, onSubmit }) {
   const [studentName, setStudentName] = useState('');
   const [studentClass, setStudentClass] = useState('');
@@ -31,7 +96,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
       // كل مفهوم قسم مستقل بعنوانه (لا دمج) حتى يميّز التلميذ الهدف/السند/الملاحظة/القاعدة.
       if (current) passages.push(current);
       current = { passage: b, exercises: [] };
-    } else if (['question', 'math-input', 'textarea', 'drawing', 'match-pairs', 'picture-choice'].includes(b.kind)) {
+    } else if (['question', 'math-input', 'textarea', 'drawing', 'match-pairs', 'picture-choice', 'table'].includes(b.kind)) {
       exNum++;
       const ex = { ...b, _num: exNum, _blockIdx: bi };
       if (current) {
@@ -48,7 +113,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
     const allEx = [];
     for (let bi = 0; bi < blocks.length; bi++) {
       const b = blocks[bi];
-      if (['question', 'math-input', 'textarea', 'drawing', 'match-pairs', 'picture-choice'].includes(b.kind)) {
+      if (['question', 'math-input', 'textarea', 'drawing', 'match-pairs', 'picture-choice', 'table'].includes(b.kind)) {
         exNum++;
         allEx.push({ ...b, _num: exNum, _blockIdx: bi });
       }
@@ -470,11 +535,14 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
                       />
                     )}
 
-                    {/* Drawing */}
+                    {/* Drawing (canvas حقيقي قابل للإجابة) */}
                     {ex.kind === 'drawing' && (
-                      <div className="paper-art-container">
-                        <span style={{ fontSize: 13, color: '#888' }}>(يُمْكِنُكَ الرَّسْمُ هُنَا)</span>
-                      </div>
+                      <PaperDrawing blockId={blockId} value={savedVal} onAnswer={onAnswer} />
+                    )}
+
+                    {/* Table (جدول قابل للتعبئة) */}
+                    {ex.kind === 'table' && (
+                      <PaperTable ex={ex} blockId={blockId} answers={answers} onAnswer={onAnswer} />
                     )}
 
                     {/* Match Pairs */}
