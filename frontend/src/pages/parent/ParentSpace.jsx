@@ -13,10 +13,12 @@ import ChildAnalytics from './ChildAnalytics.jsx';
 import ParentLiveSessions from './ParentLiveSessions.jsx';
 import ParentInsights from './ParentInsights.jsx';
 import ParentNotes from './ParentNotes.jsx';
+import ChildCredentials from './ChildCredentials.jsx';
 
 const TABS = [
   { to: '', end: true, icon: 'monitor_heart', key: 'progress' },
   { to: 'insights', icon: 'auto_awesome', key: 'insights' },
+  { to: 'credentials', icon: 'vpn_key', key: 'credentials' },
   { to: 'assignments', icon: 'assignment', key: 'assignments' },
   { to: 'live', icon: 'live_tv', key: 'live' },
   { to: 'analytics', icon: 'monitoring', key: 'analytics' },
@@ -80,6 +82,7 @@ export default function ParentSpace() {
           <Routes>
             <Route index element={<ChildProgress childrenData={children} />} />
             <Route path="insights" element={<ParentInsights childrenData={children} />} />
+            <Route path="credentials" element={<ChildCredentials />} />
             <Route path="assignments" element={<ChildAssignments />} />
             <Route path="live" element={<ParentLiveSessions />} />
             <Route path="analytics" element={<ChildAnalytics childrenData={children} />} />

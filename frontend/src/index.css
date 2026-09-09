@@ -4289,6 +4289,28 @@ tr:hover td {
 .lesson-source .lesson-block-text { font-size: 1.08rem; line-height: 1.9; color: #1f2937; }
 .lesson-source img { max-width: 100%; border-radius: 14px; margin: 0.5rem 0; }
 .block-points { display:inline-block; margin-inline-start:8px; padding:2px 10px; border-radius:999px; background:var(--primary-soft,#eef2ff); color:var(--primary,#4f46e5); font-weight:700; font-size:0.8rem; vertical-align:middle; }
+
+/* بطاقات بيانات الأبناء — تقلّب 180° مع شريط ذهبي لامع */
+.cred-grid { display:flex; flex-wrap:wrap; gap:1.2rem; justify-content:center; margin-top:0.6rem; }
+.cred-card { perspective:1200px; width:260px; height:180px; cursor:pointer; }
+.cred-inner { position:relative; width:100%; height:100%; transition:transform .8s cubic-bezier(.4,.2,.2,1); transform-style:preserve-3d; }
+.cred-card.flipped .cred-inner { transform:rotateY(180deg); }
+.cred-face { position:absolute; inset:0; -webkit-backface-visibility:hidden; backface-visibility:hidden; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:1rem; box-shadow:0 10px 28px rgba(0,0,0,.16); overflow:hidden; }
+.cred-front { background:linear-gradient(135deg,#4f46e5,#7c3aed); color:#fff; }
+.cred-back { background:#fff; color:#1f2937; transform:rotateY(180deg); border:1px solid rgba(212,175,55,.5); }
+.cred-icon { font-size:2rem; opacity:.9; }
+.cred-name { font-weight:800; font-size:1.15rem; }
+.cred-level { font-size:.85rem; opacity:.85; }
+.cred-tap { margin-top:.4rem; font-size:.72rem; opacity:.8; }
+.cred-field { width:100%; text-align:center; margin:.15rem 0; }
+.cred-field label { font-size:.72rem; color:#6b7280; }
+.cred-val { display:flex; align-items:center; justify-content:center; gap:.4rem; font-weight:700; }
+.cred-pw { letter-spacing:3px; }
+.cred-copy { border:1px solid #e5e7eb; background:#f9fafb; border-radius:6px; cursor:pointer; padding:0 .4rem; line-height:1.6; }
+.cred-note { font-size:.68rem; color:#9ca3af; margin-top:.3rem; }
+/* الشريط الذهبي اللامع */
+.cred-ribbon { position:absolute; top:0; inset-inline:0; height:6px; background:linear-gradient(90deg,#b8860b,#ffd700,#fffbe6,#ffd700,#b8860b); background-size:220% 100%; animation:gold-shine 2.6s linear infinite; box-shadow:0 0 10px rgba(255,215,0,.55); }
+@keyframes gold-shine { 0%{background-position:0% 0;} 100%{background-position:220% 0;} }
 /* علبة القاعدة/التقويم */
 .lesson-rule {
   max-width: 820px;

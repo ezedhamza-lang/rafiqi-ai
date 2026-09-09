@@ -148,6 +148,33 @@ router.get('/children/progress', asyncHandler(async (req, res) => {
  *       200:
  *         description: قائمة المعلمين
  */
+/**
+ * @swagger
+ * /api/parent/children/credentials:
+ *   get:
+ *     summary: بيانات دخول الأبناء (البريد وكلمة السر) للولي
+ *     tags: [parent]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: قائمة بيانات الأبناء
+ */
+router.get('/children/credentials', asyncHandler(async (req, res) => {
+  const students = await prisma.student.findMany({
+    where: { userId: req.user.id, tempPassword: { not: null } },
+    include: { account: { select: { email: true } } },
+    orderBy: { firstName: 'asc' }
+  });
+  res.json(students.map((s) => ({
+    id: s.id,
+    name: `${s.firstName} ${s.lastName}`,
+    level: s.level,
+    email: s.account?.email || null,
+    password: s.tempPassword
+  })));
+}));
+
 router.get('/teacher-list', asyncHandler(async (req, res) => {
   const students = await prisma.student.findMany({
     where: { userId: req.user.id },

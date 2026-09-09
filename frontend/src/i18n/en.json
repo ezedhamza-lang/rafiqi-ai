@@ -631,7 +631,13 @@
       "report": "Weekly report",
       "documents": "Administrative documents",
       "health": "Health record",
-      "notes": "My notes"
+      "notes": "My notes",
+      "credentials": "Login details"
+    },
+    "credentials": {
+      "title": "My children's login details",
+      "hint": "Tap a card to flip it and reveal the email and password",
+      "empty": "No login details yet — they appear here once the admin approves your child's request."
     },
     "notes": {
       "title": "Notes to teacher",
