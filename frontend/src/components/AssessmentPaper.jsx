@@ -16,7 +16,7 @@ const PERIOD_NAMES = {
 };
 
 // لوحة رسم حقيقية (قابلة للإجابة) داخل ورقة التقويم
-function PaperDrawing({ blockId, value, onAnswer }) {
+function PaperDrawing({ blockId, onAnswer }) {
   const ref = useRef(null);
   const drawing = useRef(false);
   const saved = useRef(false);

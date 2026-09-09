@@ -677,35 +677,32 @@ function FileUploadBlock({ block, onAnswer, blockId }) {
 
 // Dispatcher without hooks — safe to reuse across lessons with different
 // block kinds at the same list positions (React hooks rules).
+const TASK_KINDS = ['question','math-input','textarea','drawing','picture-choice','match-pairs','activity','experiment'];
+
 function Block({ block, onAnswer = () => {}, blockId = '' }) {
   const kind = block?.kind || 'concept';
   const icon = BLOCK_ICONS[kind] || 'article';
-  switch (kind) {
-    case 'question':
-      return <QuestionBlock block={block} />;
-    case 'experiment':
-      return <ExperimentBlock block={block} />;
-    case 'summary':
-      return <SummaryBlock block={block} />;
-    case 'vocabulary':
-      return <VocabularyBlock block={block} />;
-    case 'reward':
-      return <RewardBlock block={block} />;
-    case 'textarea':
-      return <TextareaBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
-    case 'math-input':
-      return <MathInputBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
-    case 'drawing':
-      return <DrawingBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
-    case 'picture-choice':
-      return <PictureChoiceBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
-    case 'match-pairs':
-      return <MatchPairsBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
-    case 'file-upload':
-      return <FileUploadBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
-    default:
-      return <DefaultBlock block={block} kind={kind} icon={icon} />;
+  const inner = () => {
+    switch (kind) {
+      case 'question': return <QuestionBlock block={block} />;
+      case 'experiment': return <ExperimentBlock block={block} />;
+      case 'summary': return <SummaryBlock block={block} />;
+      case 'vocabulary': return <VocabularyBlock block={block} />;
+      case 'reward': return <RewardBlock block={block} />;
+      case 'textarea': return <TextareaBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
+      case 'math-input': return <MathInputBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
+      case 'drawing': return <DrawingBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
+      case 'picture-choice': return <PictureChoiceBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
+      case 'match-pairs': return <MatchPairsBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
+      case 'file-upload': return <FileUploadBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
+      default: return <DefaultBlock block={block} kind={kind} icon={icon} />;
+    }
+  };
+  const el = inner();
+  if (block.points != null && TASK_KINDS.includes(kind)) {
+    return (<> {el} <span className="block-points">+{block.points} ن.ن</span> </>);
   }
+  return el;
 }
 
 export { Block };
@@ -793,6 +790,10 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
           {lesson.domain && <span className="badge">{lesson.domain}</span>}
           {lesson.letter && <span className="badge accent">حرف {lesson.letter}</span>}
           {completed && <span className="badge ok">مُنجز ✓</span>}
+          {(() => {
+            const tp = (lesson.blocks || []).reduce((s, b) => s + ((b.points && TASK_KINDS.includes(b.kind)) ? b.points : 0), 0);
+            return tp > 0 ? <span className="badge accent">المجموع: {tp} ن.ن</span> : null;
+          })()}
         </div>
         <div className="lesson-page-actions">
           {!completed && (
