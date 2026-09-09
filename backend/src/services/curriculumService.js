@@ -381,7 +381,7 @@ function adaptAnisiLessons(book) {
   for (const unit of units) {
     for (const lesson of unit.lessons || []) {
       const blocks = [
-        { kind: 'objective', title: 'الأهداف', text: `أن يتعرّف المتعلّم على حرف ${lesson.letter} وينطقه ويقرأه ويكتبه في كلمات.` }
+        { kind: 'concept', title: '🎯 الهدف', text: `أن يتعرّف المتعلّم على حرف ${lesson.letter} وينطقه ويقرأه ويكتبه في كلمات.`, ...(lesson.image ? { image: lesson.image } : {}) }
       ];
       const story = (lesson.story_text || []).join(' ');
       if (story) blocks.push({ kind: 'concept', title: 'نص الانطلاق', text: story });
@@ -398,6 +398,8 @@ function adaptAnisiLessons(book) {
         bookPage: lesson.book_page,
         image: lesson.image,
         noEnrich: true,
+        isAssessment: true,
+        subject: 'القراءة',
         blocks
       });
     }

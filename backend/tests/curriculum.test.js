@@ -82,10 +82,11 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
       .send();
     const all = res.body.flatMap((p) => p.blocks || []);
     const kinds = new Set(all.map((b) => b.kind));
-    // العقد الحالي لأنيسي س1: أهداف + نص انطلاق + أسئلة قابلة للإجابة (حُذفت المفردات والجمل المفتاحية عمدًا)
-    for (const k of ['objective', 'concept', 'question']) {
+    // العقد الجديد لأنيسي س1: ورقة رسمية مثل الرياضيات — أقسام (concept) + أسئلة، وكل درس ورقة تقويم
+    for (const k of ['concept', 'question']) {
       expect(kinds.has(k), `نوع الكتلة ${k} يجب أن يكون مدعوماً`).toBe(true);
     }
+    for (const p of res.body) expect(p.isAssessment).toBe(true);
     // كل سؤال يجب أن يكون قابلًا للإجابة: خيارات مع إجابة، أو فراغ مع إجابة
     for (const q of all.filter((b) => b.kind === 'question')) {
       const hasMCQ = Array.isArray(q.options) && q.options.length > 0 && typeof q.answer === 'number';
