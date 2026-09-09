@@ -28,16 +28,9 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
   for (let bi = 0; bi < blocks.length; bi++) {
     const b = blocks[bi];
     if (b.kind === 'concept') {
-      // دمج الكتل المفهومية المتتالية (مثل القاعدة + الأمثلة) في سند واحد
-      // ما دامت لم تليها تمارين، ثم إرفاق التمارين بالسند السابق.
-      if (current && current.passage && current.exercises.length === 0) {
-        const extra = [b.title ? `**${b.title}**` : '', b.text].filter(Boolean).join('\n');
-        const mergedText = [current.passage.text, extra].filter(Boolean).join('\n\n');
-        current.passage = { ...current.passage, text: mergedText };
-      } else {
-        if (current) passages.push(current);
-        current = { passage: b, exercises: [] };
-      }
+      // كل مفهوم قسم مستقل بعنوانه (لا دمج) حتى يميّز التلميذ الهدف/السند/الملاحظة/القاعدة.
+      if (current) passages.push(current);
+      current = { passage: b, exercises: [] };
     } else if (['question', 'math-input', 'textarea', 'drawing', 'match-pairs', 'picture-choice'].includes(b.kind)) {
       exNum++;
       const ex = { ...b, _num: exNum, _blockIdx: bi };
