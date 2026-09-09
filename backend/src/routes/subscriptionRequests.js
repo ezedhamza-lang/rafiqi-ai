@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import prisma from '../db.js';
 import { authMiddleware, requireRole } from '../auth.js';
-import { notifyRole } from '../services/notify.js';
+import { notify } from '../services/notify.js';
 import { currentSchoolYear } from '../services/schoolYear.js';
 import { validateBody } from '../middleware/validate.js';
 import { subscriptionRequestSchema } from '../validators/subscription.js';
@@ -96,12 +96,22 @@ router.post(
       }
     });
 
-    await notifyRole(['SCHOOL_DIRECTOR', 'ADMIN'], {
-      type: 'SUBSCRIPTION_REQUEST',
-      title: 'طلب إضافة تلميذ جديد',
-      body: `${firstName} ${lastName} (${level}) ينتظر المصادقة من طرف الولي`,
-      link: '/director/requests'
+    // توجيه التنبيه لمدرسة الولي فقط (مديرو مدرسته + الإدارة/المشرف)، لا كل مديري المنصة.
+    const parentSchoolId = req.user?.schoolId ?? null;
+    const directors = await prisma.user.findMany({
+      where: { role: 'SCHOOL_DIRECTOR', ...(parentSchoolId != null ? { schoolId: parentSchoolId } : { schoolId: -1 }) },
+      select: { id: true }
     });
+    const managers = await prisma.user.findMany({ where: { role: { in: ['ADMIN', 'SUPER_ADMIN'] } }, select: { id: true } });
+    const recipientIds = [...new Set([...directors.map((d) => d.id), ...managers.map((m) => m.id)])];
+    if (recipientIds.length) {
+      await notify(recipientIds, {
+        type: 'SUBSCRIPTION_REQUEST',
+        title: 'طلب إضافة تلميذ جديد',
+        body: `${firstName} ${lastName} (${level}) ينتظر المصادقة من طرف الولي`,
+        link: '/director/requests'
+      });
+    }
 
     res.status(201).json(request);
   })
