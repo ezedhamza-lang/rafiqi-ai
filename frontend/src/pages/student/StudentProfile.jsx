@@ -1,7 +1,7 @@
 import { Badge, BadgeItem } from '../../components/ui/index.js';
 import { useI18n } from '../../i18n/index.jsx';
 
-export default function StudentProfile({ profile }) {
+export default function StudentProfile({ profile, onMenu }) {
   const { t } = useI18n();
   if (!profile) return null;
   const { user, class: cls, badges } = profile;
@@ -9,12 +9,17 @@ export default function StudentProfile({ profile }) {
 
   return (
     <div className="student-profile-card">
+      {onMenu && (
+        <button type="button" className="profile-menu-btn" onClick={onMenu} aria-label={t('studentSpace.menu')}>
+          <span className="material-icons">menu</span>
+        </button>
+      )}
       <div className="profile-avatar" aria-hidden="true">
         <span className="material-icons" style={{ fontSize: '3rem', color: '#fff' }}>person</span>
       </div>
       <div className="profile-info">
         <h3>{user.firstName} {user.lastName}</h3>
-        <p className="sub">{cls ? `${cls.name} — ${t(`studentSpace.profile.levels.${cls.level}`)}` : t('studentSpace.profile.noClass')}</p>
+        <p className="sub">{cls ? `${t('studentSpace.profile.classPrefix')}: ${cls.name}${cls.level ? ` — ${cls.level}` : ''}` : t('studentSpace.profile.noClass')}</p>
         <div className="profile-xp">
           <span className="xp-badge">{t('studentSpace.profile.level', { n: user.level })}</span>
           <span className="xp-badge">{t('studentSpace.profile.xp', { n: user.xp })}</span>

@@ -1242,6 +1242,10 @@
     "accountCreated": "تم إنشاء الحساب:"
   },
   "studentSpace": {
+    "sidebarTitle": "الأقسام",
+    "collapse": "طيّ القائمة",
+    "expand": "توسيع القائمة",
+    "menu": "القائمة",
     "tabs": {
       "home": "ملخصي",
       "subjects": "موادي",
@@ -1275,6 +1279,7 @@
     },
     "profile": {
       "noClass": "بدون قسم",
+      "classPrefix": "القسم",
       "level": "⭐ المستوى {{n}}",
       "xp": "⚡ {{n}} XP",
       "coins": "🪙 {{n}}",
@@ -1610,6 +1615,7 @@
       "badgesCount": "شاراتي ({{n}})",
       "noBadgesYet": "أنجز اختباراتك الأولى لتكسب شارات!",
       "classLeaderboard": "لوحة ترتيب القسم",
+      "viewAll": "عرض الكل",
       "activityLog": "سجل الأنشطة",
       "noActivitiesYet": "لا توجد أنشطة بعد.",
       "colActivity": "النشاط",

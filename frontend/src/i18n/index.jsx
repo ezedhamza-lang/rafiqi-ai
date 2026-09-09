@@ -49,7 +49,15 @@ export function I18nProvider({ children }) {
   const t = useCallback((path, params) => {
     let value = lookup(dictionaries[lang], path);
     if (value === undefined) value = lookup(dictionaries[FALLBACK_LANG], path);
-    if (value === undefined) return path;
+    if (value === undefined) {
+      // لا نعرض أي مفتاح برمجي للمستخدم: نرجع آخر مقطع من المسار
+      // (وهو غالباً القيمة الحقيقية مثل اسم المستوى)، وإلا سلسلة فارغة إن كان المقطع مفتاحاً.
+      const segs = String(path).split('.');
+      const last = segs[segs.length - 1] ?? '';
+      const looksLikeKey = /^[a-z][a-zA-Z0-9]*$/.test(last) && /[a-z][A-Z]/.test(last);
+      const fallback = looksLikeKey ? '' : last;
+      return params ? interpolate(fallback, params) : fallback;
+    }
     return interpolate(value, params);
   }, [lang]);
 

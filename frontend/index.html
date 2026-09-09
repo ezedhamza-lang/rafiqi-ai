@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>بوابة رفيقي للحياة المدرسية</title>
     <meta name="description" content="بوابة رفيقي للحياة المدرسية — منصة تونسية رقمية للتلاميذ والأولياء والأساتذة والإدارة" />
-    <meta name="theme-color" content="#0ea5e9" />
+    <meta name="theme-color" content="#f97316" />
     <link rel="manifest" href="/manifest.webmanifest" />
     <link rel="icon" type="image/png" href="/icons/icon-192.png" />
     <link rel="apple-touch-icon" href="/icons/icon-192.png" />
@@ -46,9 +46,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
-    <!-- Fonts: Tajawal for Arabic, Nunito for English/Latin text -->
+    <!-- Fonts: Geist for Latin/numbers, Noto Sans Arabic for Arabic -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     
@@ -61,8 +61,8 @@
     <!-- Batch 6: Critical CSS for RTL/LTR transition (inline for performance) -->
     <style>
       /* Prevent flash during direction change */
-      html[dir='rtl'] { font-family: 'Tajawal', sans-serif; }
-      html[dir='ltr'] { font-family: 'Nunito', 'Tajawal', sans-serif; }
+      html[dir='rtl'] { font-family: 'Noto Sans Arabic', 'Geist', sans-serif; }
+      html[dir='ltr'] { font-family: 'Geist', 'Noto Sans Arabic', sans-serif; }
       
       /* Smooth direction transitions */
       .direction-changing * {
@@ -87,8 +87,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+      font-family: 'Noto Sans Arabic', 'Tajawal', sans-serif;
       z-index: 9999;
     ">
       <div style="text-align: center;">
@@ -96,12 +96,12 @@
           width: 48px;
           height: 48px;
           margin: 0 auto 1rem;
-          border: 4px solid #bfdbfe;
-          border-top-color: #0ea5e9;
+          border: 4px solid #fed7aa;
+          border-top-color: #f97316;
           border-radius: 50%;
           animation: spin 1s linear infinite;
         "></div>
-        <p style="color: #0369a1; margin: 0; font-weight: 500;">جارٍ التحميل...</p>
+        <p style="color: #c2410c; margin: 0; font-weight: 500;">جارٍ التحميل...</p>
       </div>
     </div>
     

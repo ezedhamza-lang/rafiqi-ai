@@ -1241,6 +1241,10 @@
     "accountCreated": "Account created:"
   },
   "studentSpace": {
+    "sidebarTitle": "Sections",
+    "collapse": "Collapse menu",
+    "expand": "Expand menu",
+    "menu": "Menu",
     "tabs": {
       "home": "My Summary",
       "subjects": "My Subjects",
@@ -1274,6 +1278,7 @@
     },
     "profile": {
       "noClass": "No class",
+      "classPrefix": "Class",
       "level": "⭐ Level {{n}}",
       "xp": "⚡ {{n}} XP",
       "coins": "🪙 {{n}}",
@@ -1609,6 +1614,7 @@
       "badgesCount": "My Badges ({{n}})",
       "noBadgesYet": "Complete your first quizzes to earn badges!",
       "classLeaderboard": "Class Leaderboard",
+      "viewAll": "View all",
       "activityLog": "Activity Log",
       "noActivitiesYet": "No activities yet.",
       "colActivity": "Activity",

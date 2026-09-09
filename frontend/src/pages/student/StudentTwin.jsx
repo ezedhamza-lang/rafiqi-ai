@@ -7,6 +7,7 @@ export default function StudentTwin() {
   const { t, lang } = useI18n();
   const [profile, setProfile] = useState(null);
   const [leaderboard, setLeaderboard] = useState({ rows: [] });
+  const [boardAll, setBoardAll] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -85,7 +86,27 @@ export default function StudentTwin() {
           )}
         </Card>
 
-        <Leaderboard title={t('studentSpace.twin.classLeaderboard')} rows={leaderboard.rows || []} emptyText={t('studentSpace.twin.noBadgesYet')} />
+        <div className="ui-leaderboard-wrap">
+          <Leaderboard title={t('studentSpace.twin.classLeaderboard')} rows={(leaderboard.rows || []).slice(0, 10)} emptyText={t('studentSpace.twin.noBadgesYet')} />
+          {(leaderboard.rows || []).length > 10 && (
+            <div className="lb-modal-actions">
+              <button type="button" className="btn btn-sm btn-outline" onClick={() => setBoardAll(true)}>
+                {t('studentSpace.twin.viewAll')}
+              </button>
+            </div>
+          )}
+        </div>
+        {boardAll && (
+          <div className="modal-overlay" onClick={() => setBoardAll(false)}>
+            <div className="modal lb-modal" onClick={(e) => e.stopPropagation()}>
+              <div className="modal-head">
+                <h3>{t('studentSpace.twin.classLeaderboard')}</h3>
+                <button className="btn btn-ghost btn-sm" onClick={() => setBoardAll(false)}>{t('common.close')}</button>
+              </div>
+              <Leaderboard title="" rows={leaderboard.rows || []} emptyText={t('studentSpace.twin.noBadgesYet')} />
+            </div>
+          </div>
+        )}
       </div>
 
       <div style={{ marginTop: '1.5rem' }}>
