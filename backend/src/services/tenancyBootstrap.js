@@ -61,8 +61,26 @@ async function ensureStudentCredentials(prisma) {
   return fixed;
 }
 
+async function dedupePendingRequests(prisma) {
+  // يدمج الطلبات المكرّرة المعلّقة (نفس الولي+الاسم+المستوى+السنة): يُبقي الأقدم ويحذف التوأم.
+  const pend = await prisma.subscriptionRequest.findMany({
+    where: { status: 'PENDING_APPROVAL' },
+    orderBy: { createdAt: 'asc' }
+  });
+  const seen = new Map();
+  const toDelete = [];
+  for (const r of pend) {
+    const key = `${r.parentId}|${r.firstName.trim()}|${r.lastName.trim()}|${r.level}|${r.schoolYear}`;
+    if (seen.has(key)) toDelete.push(r.id);
+    else seen.set(key, r.id);
+  }
+  if (toDelete.length) await prisma.subscriptionRequest.deleteMany({ where: { id: { in: toDelete } } });
+  return toDelete.length;
+}
+
 export async function runTenancyBootstrap(prisma) {
   const classes = await ensureClasses(prisma);
   const creds = await ensureStudentCredentials(prisma);
-  if (classes || creds) console.log(`tenancy bootstrap: +${classes} classes, ${creds} student credential sets`);
+  const dupes = await dedupePendingRequests(prisma);
+  if (classes || creds || dupes) console.log(`tenancy bootstrap: +${classes} classes, ${creds} cred sets, ${dupes} duplicate requests removed`);
 }
