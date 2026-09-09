@@ -10,6 +10,14 @@ export function actorSchoolId(req) {
   return req.user?.schoolId ?? null;
 }
 
+// لقيادة تسجيل ولي لم تُسنَد لمدرسة بعد (schoolId=null) — يراها المدير ليُعطي عليها
+// بالإضافة إلى طلبات مدرسته. للمشرف العام (sid=null) لا قيد.
+export function leadParentFilter(req) {
+  const sid = req.user?.schoolId;
+  if (sid == null) return {};
+  return { OR: [{ schoolId: sid }, { schoolId: null }] };
+}
+
 // مقيد Prisma يفرض schoolId على استعلامات الجداول التي تحمل schoolId مباشرة (User/Class).
 // يرجّع {} للمشرف العام (بدون تقييد).
 export function schoolScope(req) {

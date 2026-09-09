@@ -122,4 +122,20 @@ describe('عزل المدارس (Multi-tenancy)', () => {
     const r = await request(app).get('/api/director/classes').set('Authorization', `Bearer ${ts}`);
     expect(r.body.length).toBeGreaterThanOrEqual(3);
   });
+
+  it('الطلبات: المدير يرى طلبات مدرسته والقادة غير المسندين، لا طلبات مدرسة أخرى', async () => {
+    const tA = await tok('dira@test.tn');
+    const mkReq = async (email, schoolId) => {
+      const p = await mkUser(email, 'PARENT', schoolId);
+      return prisma.subscriptionRequest.create({ data: { parentId: p.id, firstName: 'تلميذ', lastName: email.split('@')[0], birthDate: new Date('2019-01-01'), level: 'السنة الأولى أساسي', schoolYear: '2026-2027' } });
+    };
+    const rA = await mkReq('para@test.tn', schoolAId);
+    const rNull = await mkReq('parnull@test.tn', null);
+    const rB = await mkReq('parb@test.tn', schoolBId);
+    const res = await request(app).get('/api/director/requests').set('Authorization', `Bearer ${tA}`);
+    const ids = res.body.map((x) => x.id);
+    expect(ids).toContain(rA.id);
+    expect(ids).toContain(rNull.id);
+    expect(ids).not.toContain(rB.id);
+  });
 });

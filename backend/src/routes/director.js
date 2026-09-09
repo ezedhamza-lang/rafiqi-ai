@@ -3,7 +3,7 @@ import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import prisma from '../db.js';
 import { authMiddleware, adminMiddleware, requireRole } from '../auth.js';
-import { actorSchoolId } from '../tenant.js';
+import { actorSchoolId, leadParentFilter } from '../tenant.js';
 import { notify, notifyRole } from '../services/notify.js';
 import { schoolYearBounds, priceForType } from '../services/schoolYear.js';
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
@@ -57,7 +57,7 @@ router.get('/dashboard', asyncHandler(async (req, res) => {
     prisma.submission.count({ where: inSchool('student') }),
     prisma.memo.count({ where: inSchool('teacher') }),
     prisma.message.count({ where: { recipientId: req.user.id, readAt: null } }),
-    prisma.subscriptionRequest.count({ where: { status: 'PENDING_APPROVAL', ...(sid != null ? { parent: { schoolId: sid } } : {}) } })
+    prisma.subscriptionRequest.count({ where: { status: 'PENDING_APPROVAL', parent: leadParentFilter(req) } })
   ]);
 
   res.json({ totals: { classes, students, teachers, parents, quizzes, submissions, memos, unreadMessages: messages, pendingRequests } });
@@ -346,11 +346,10 @@ router.post('/notifications/read', asyncHandler(async (req, res) => {
  *         description: قائمة الطلبات
  */
 router.get('/requests', validateQuery(directorStatusQuerySchema), asyncHandler(async (req, res) => {
-  const sid = actorSchoolId(req);
   const { status } = req.query;
   const where = {};
   if (status) where.status = status;
-  if (sid != null) where.parent = { schoolId: sid };
+  where.parent = leadParentFilter(req);
   const requests = await prisma.subscriptionRequest.findMany({
     where,
     include: {
@@ -395,7 +394,7 @@ router.get('/requests', validateQuery(directorStatusQuerySchema), asyncHandler(a
 router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validateParams(directorRequestIdParamSchema), validateBody(directorRequestApproveSchema), asyncHandler(async (req, res) => {
   const sid = actorSchoolId(req);
   const { classId } = req.body;
-  const request = await prisma.subscriptionRequest.findFirst({ where: { id: Number(req.params.id), ...(sid != null ? { parent: { schoolId: sid } } : {}) } });
+  const request = await prisma.subscriptionRequest.findFirst({ where: { id: Number(req.params.id), parent: leadParentFilter(req) } });
   if (!request) throw new ApiError(404, 'الطلب غير موجود');
   if (request.status !== 'PENDING_APPROVAL') {
     throw new ApiError(400, 'هذا الطلب تمت معالجته مسبقا');
@@ -508,9 +507,8 @@ router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validatePara
  *         description: الطلب غير موجود
  */
 router.put('/requests/:id/reject', requireRole('SCHOOL_DIRECTOR'), validateParams(directorRequestIdParamSchema), validateBody(directorRequestRejectSchema), asyncHandler(async (req, res) => {
-  const sid = actorSchoolId(req);
   const { reason } = req.body;
-  const request = await prisma.subscriptionRequest.findFirst({ where: { id: Number(req.params.id), ...(sid != null ? { parent: { schoolId: sid } } : {}) } });
+  const request = await prisma.subscriptionRequest.findFirst({ where: { id: Number(req.params.id), parent: leadParentFilter(req) } });
   if (!request) throw new ApiError(404, 'الطلب غير موجود');
   if (request.status !== 'PENDING_APPROVAL') {
     throw new ApiError(400, 'هذا الطلب تمت معالجته مسبقا');
