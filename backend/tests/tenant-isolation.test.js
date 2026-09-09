@@ -123,7 +123,7 @@ describe('عزل المدارس (Multi-tenancy)', () => {
     expect(r.body.length).toBeGreaterThanOrEqual(3);
   });
 
-  it('طلبات الإضافة صندوقُ وارد مشترك (تُسنَد للمدرسة عند الموافقة)، مع بقاء عزل الأقسام', async () => {
+  it('الطلبات: المدير يرى طلبات مدرسته والقادة غير المسندين فقط (توجيه صارم)', async () => {
     const tA = await tok('dira@test.tn');
     const mkReq = async (email, schoolId) => {
       const p = await mkUser(email, 'PARENT', schoolId);
@@ -136,6 +136,6 @@ describe('عزل المدارس (Multi-tenancy)', () => {
     const ids = res.body.map((x) => x.id);
     expect(ids).toContain(rA.id);
     expect(ids).toContain(rNull.id);
-    expect(ids).toContain(rB.id); // وارد مشترك للمصادقة
+    expect(ids).not.toContain(rB.id); // مدرسة أخرى لا تظهر له
   });
 });

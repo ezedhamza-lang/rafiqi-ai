@@ -55,6 +55,7 @@ import memoRoutes from './routes/memos.js';
 import { setupWs } from './ws.js';
 import { startRenewalScheduler, runRenewalSweep } from './services/subscriptionRenewalService.js';
 import { runSqlFile } from './services/migrationRunner.js';
+import { runTenancyBootstrap } from './services/tenancyBootstrap.js';
 import { startParentInsightScheduler, runParentInsightSweep } from './services/parentInsightNotifyService.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
 import { localeMiddleware } from './middleware/locale.js';
@@ -350,6 +351,8 @@ async function start() {
       const migDir = path.join(__dirname, '../prisma/migrations');
       await runSqlFile(prisma, path.join(migDir, '20260908000000_money_decimal/migration.sql'));
       await runSqlFile(prisma, path.join(migDir, '20260908120000_multi_tenancy/migration.sql'));
+      await runSqlFile(prisma, path.join(migDir, '20260908140000_student_temp_password/migration.sql'));
+      await runTenancyBootstrap(prisma);
     }).catch((err) => {
       console.error('startup migrations skipped:', err.message);
     })

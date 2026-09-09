@@ -284,6 +284,7 @@ model Student {
   level         String
   schoolYear    String   @default("2026-2027")
   schoolName    String?
+  tempPassword  String?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 

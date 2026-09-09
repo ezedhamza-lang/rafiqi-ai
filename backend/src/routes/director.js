@@ -3,7 +3,7 @@ import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import prisma from '../db.js';
 import { authMiddleware, adminMiddleware, requireRole } from '../auth.js';
-import { actorSchoolId } from '../tenant.js';
+import { actorSchoolId, leadParentFilter } from '../tenant.js';
 import { notify, notifyRole } from '../services/notify.js';
 import { schoolYearBounds, priceForType } from '../services/schoolYear.js';
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
@@ -57,7 +57,7 @@ router.get('/dashboard', asyncHandler(async (req, res) => {
     prisma.submission.count({ where: inSchool('student') }),
     prisma.memo.count({ where: inSchool('teacher') }),
     prisma.message.count({ where: { recipientId: req.user.id, readAt: null } }),
-    prisma.subscriptionRequest.count({ where: { status: 'PENDING_APPROVAL' } })
+    prisma.subscriptionRequest.count({ where: { status: 'PENDING_APPROVAL', parent: leadParentFilter(req) } })
   ]);
 
   res.json({ totals: { classes, students, teachers, parents, quizzes, submissions, memos, unreadMessages: messages, pendingRequests } });
@@ -349,6 +349,7 @@ router.get('/requests', validateQuery(directorStatusQuerySchema), asyncHandler(a
   const { status } = req.query;
   const where = {};
   if (status) where.status = status;
+  where.parent = leadParentFilter(req);
   const requests = await prisma.subscriptionRequest.findMany({
     where,
     include: {
@@ -393,7 +394,7 @@ router.get('/requests', validateQuery(directorStatusQuerySchema), asyncHandler(a
 router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validateParams(directorRequestIdParamSchema), validateBody(directorRequestApproveSchema), asyncHandler(async (req, res) => {
   const sid = actorSchoolId(req);
   const { classId } = req.body;
-  const request = await prisma.subscriptionRequest.findFirst({ where: { id: Number(req.params.id) } });
+  const request = await prisma.subscriptionRequest.findFirst({ where: { id: Number(req.params.id), parent: leadParentFilter(req) } });
   if (!request) throw new ApiError(404, 'الطلب غير موجود');
   if (request.status !== 'PENDING_APPROVAL') {
     throw new ApiError(400, 'هذا الطلب تمت معالجته مسبقا');
@@ -401,16 +402,24 @@ router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validatePara
   const klass = await prisma.class.findFirst({ where: { id: Number(classId), ...(sid != null ? { schoolId: sid } : {}) } });
   if (!klass) throw new ApiError(404, 'القسم غير موجود');
 
-  const temporaryPassword = `Refeeqi-${crypto.randomBytes(3).toString('hex')}`;
+  const temporaryPassword = String(100000 + crypto.randomInt(0, 900000)); // رقم 6 يسهل كتابته
   const { start, end } = schoolYearBounds(request.schoolYear);
   const schoolId = klass.schoolId ?? sid ?? null;
+
+  // بريد قصير وفريد
+  let studentEmail = `t${Date.now().toString(36)}@refeeqi.tn`;
+  for (let i = 0; i < 8; i++) {
+    const candidate = `t${crypto.randomBytes(3).toString('hex')}@refeeqi.tn`;
+    const taken = await prisma.user.findUnique({ where: { email: candidate } });
+    if (!taken) { studentEmail = candidate; break; }
+  }
 
   try {
     const studentAccount = await prisma.user.create({
       data: {
         firstName: request.firstName,
         lastName: request.lastName,
-        email: `s${request.parentId}-${Date.now()}@refeeqi.tn`,
+        email: studentEmail,
         passwordHash: await bcrypt.hash(temporaryPassword, 10),
         role: 'STUDENT',
         accountStatus: 'PENDING_PAYMENT',
@@ -430,7 +439,8 @@ router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validatePara
         gender: request.gender,
         level: request.level,
         schoolYear: request.schoolYear,
-        schoolName: request.schoolName
+        schoolName: request.schoolName,
+        tempPassword: temporaryPassword
       }
     });
 
@@ -465,9 +475,9 @@ router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validatePara
     });
     await notify([request.parentId], {
       type: 'APPROVED',
-      title: 'تمت المصادقة على طلبك',
-      body: `وافق مدير المدرسة على تسجيل ${request.firstName} ${request.lastName}، أكمل عملية الدفع لتفعيل الحساب`,
-      link: '/my-requests'
+      title: `تم قبول ابنكم ${request.firstName} في المنصة`,
+      body: `بيانات الدخول — البريد: ${studentEmail} | كلمة السر: ${temporaryPassword}. أكمل عملية الدفع لتفعيل الحساب. ننصح بتغيير كلمة السر بعد أول دخول.`,
+      link: '/parent'
     });
 
     res.json({ ...updated, credentials: { email: studentAccount.email, password: temporaryPassword } });
@@ -507,7 +517,7 @@ router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validatePara
  */
 router.put('/requests/:id/reject', requireRole('SCHOOL_DIRECTOR'), validateParams(directorRequestIdParamSchema), validateBody(directorRequestRejectSchema), asyncHandler(async (req, res) => {
   const { reason } = req.body;
-  const request = await prisma.subscriptionRequest.findFirst({ where: { id: Number(req.params.id) } });
+  const request = await prisma.subscriptionRequest.findFirst({ where: { id: Number(req.params.id), parent: leadParentFilter(req) } });
   if (!request) throw new ApiError(404, 'الطلب غير موجود');
   if (request.status !== 'PENDING_APPROVAL') {
     throw new ApiError(400, 'هذا الطلب تمت معالجته مسبقا');
