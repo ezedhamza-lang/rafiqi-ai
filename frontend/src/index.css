@@ -5939,3 +5939,14 @@ tr:hover td {
 .lb-modal-actions { display: flex; justify-content: center; margin-top: 0.7rem; }
 .lb-modal .ui-leaderboard { max-height: 60vh; overflow-y: auto; }
 
+/* Floating mobile menu button for shared SpaceShell */
+.sidebar-fab {
+  display: none; position: fixed; inset-block-end: 18px; inset-inline-start: 18px;
+  width: 52px; height: 52px; border-radius: 50%; border: none; cursor: pointer; z-index: 950;
+  background: var(--primary); color: #fff; box-shadow: 0 8px 22px rgba(0,0,0,.28);
+  align-items: center; justify-content: center;
+}
+@media (max-width: 980px) {
+  .sidebar-fab { display: inline-flex; }
+}
+

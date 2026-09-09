@@ -1,16 +1,17 @@
-import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useI18n } from '../../i18n/index.jsx';
 import Licenses from './Licenses.jsx';
 import Subscriptions from './Subscriptions.jsx';
 import UsersAdmin from './UsersAdmin.jsx';
 import Schools from './Schools.jsx';
+import SpaceShell from '../../components/SpaceShell.jsx';
 
 const TABS = [
-  { to: '', end: true, icon: 'vpn_key', key: 'licenses' },
-  { to: 'subscriptions', icon: 'subscriptions', key: 'subscriptions' },
-  { to: 'users', icon: 'manage_accounts', key: 'users' },
-  { to: 'schools', icon: 'school', key: 'schools' }
+  { to: '', end: true, icon: 'vpn_key', key: 'licenses', color: '#f59e0b' },
+  { to: 'subscriptions', icon: 'subscriptions', key: 'subscriptions', color: '#0ea5e9' },
+  { to: 'users', icon: 'manage_accounts', key: 'users', color: '#10b981' },
+  { to: 'schools', icon: 'school', key: 'schools', color: '#8b5cf6' }
 ];
 
 export default function SuperAdminDashboard() {
@@ -31,23 +32,19 @@ export default function SuperAdminDashboard() {
           </div>
         </div>
 
-        <nav className="teacher-tabs">
-          {TABS.map((tb) => (
-            <NavLink key={tb.to} to={`/superadmin/${tb.to}`} end={tb.end} className={({ isActive }) => (isActive ? 'active' : '')}>
-              <span className="material-icons">{tb.icon}</span>
-              {t(`superadmin.tabs.${tb.key}`)}
-            </NavLink>
-          ))}
-        </nav>
-
-        <div className="tab-content">
+        <SpaceShell
+          base="/superadmin"
+          title={t('superadmin.title')}
+          storageKey="rafiqi-super-sidebar"
+          items={TABS.map((tb) => ({ ...tb, label: t(`superadmin.tabs.${tb.key}`) }))}
+        >
           <Routes>
             <Route index element={<Licenses />} />
             <Route path="subscriptions" element={<Subscriptions />} />
             <Route path="users" element={<UsersAdmin />} />
             <Route path="schools" element={<Schools />} />
           </Routes>
-        </div>
+        </SpaceShell>
       </div>
     </div>
   );
