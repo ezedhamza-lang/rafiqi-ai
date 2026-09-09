@@ -4,7 +4,8 @@ import { config } from '../config.js';
 const store = new Map();
 
 function toArabicDigits(n) {
-  return String(n).replace(/\d/g, (d) => '٠١٢٣٤٥٦٧٨٩'[Number(d)]);
+  // تونس تستعمل الأرقام الغربية (0-9)؛ نُبقيها كما هي.
+  return String(n).replace(/\d/g, (d) => '0123456789'[Number(d)]);
 }
 
 function makeChallenge() {

@@ -35,6 +35,7 @@
 - **بنية «ورقة التقويم» (نفس سلسلة المواقف س5) لكل درس:** تُعرَض كل درس عبر `AssessmentPaper` (`isAssessment:true`). كل كتلة `concept` قسمٌ **مستقل بعنوانه** (لا دمج) حتى يميّز التلميذ: **🎯 الهدف / 🖼️ السند / 🔍 ألاحظ / 📌 القاعدة**. داخل السند: **الصورة أولاً ثم النص تحتها**. لا تُكرَّر عبارة العنوان في بداية المتن (مثال مرفوض: عنوان «أنظر إلى صورة القسم» ثم يبدأ النص بـ«في القسم: …»).
 - **الصورة أولاً/السند أولاً:** يبدأ الدرس بسند (وضعية/نص/صورة كبيرة) تُبنى **كل** الأسئلة عليه (مسترسلة)، وتنوَّع الأنواع كورقة الامتحان.
 - **لا صوت ولا قراءة آلية في الدروس/الكتب** (أُزيلت أزرار الاستماع من عارض الدروس).
+- **الأرقام غربّية دائمًا (تونس):** نستعمل `0-9` وليس `٠-٩` (العربية-الهندية) في كل النصوص والإجابات والمخرجات. أي محتوى يُولَّد يجب أن يُستعمل فيه الأرقام الغربية.
 - **الصور:** أسلوب موحّد: `flat vector children-book illustration, soft pastel palette, rounded shapes, thick clean outlines, warm light, white background, no text, no letters, no watermark, 4:3`.
 - تُخزَّن في `frontend/public/curriculum/<year>/<subject>/` وتُخدم من `/curriculum/<year>/<subject>/...` (لا `backend/uploads` فهو مُستثنى من Docker).
 - تُكتب داخل `backend/curriculum/<year>/<subject>-units.json`؛ رياضيات س1 ببنية `studentBlocks` (أنواع: concept/question/picture-choice/math-input/textarea/drawing/match-pairs/summary).
