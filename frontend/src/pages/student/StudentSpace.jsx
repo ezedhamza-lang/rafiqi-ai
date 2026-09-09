@@ -47,6 +47,20 @@ export default function StudentSpace() {
   }
 
   const L = (k) => t(`studentSpace.tabs.${k}`);
+  const DECOR = [
+    { e: '⭐', top: '8%',  is: '6%',  s: 26, d: '0s' },
+    { e: '✨', top: '16%', is: '88%', s: 22, d: '1.2s' },
+    { e: '🌸', top: '30%', is: '4%',  s: 30, d: '0.6s' },
+    { e: '🌟', top: '42%', is: '94%', s: 20, d: '2s' },
+    { e: '💫', top: '55%', is: '3%',  s: 24, d: '1.6s' },
+    { e: '🌼', top: '68%', is: '92%', s: 28, d: '0.3s' },
+    { e: '✨', top: '80%', is: '8%',  s: 20, d: '2.4s' },
+    { e: '⭐', top: '90%', is: '86%', s: 24, d: '1s' },
+    { e: '🌷', top: '24%', is: '50%', s: 18, d: '1.8s' },
+    { e: '🦋', top: '60%', is: '48%', s: 22, d: '0.9s' },
+    { e: '🔯', top: '48%', is: '70%', s: 16, d: '2.2s' },
+    { e: '🌸', top: '86%', is: '40%', s: 22, d: '1.4s' }
+  ];
   const GROUPS = [
     { label: t('studentSpace.groups.main'), items: [
       { to: '', end: true, icon: 'home', label: L('home'), color: '#ff6a00' },
@@ -79,6 +93,17 @@ export default function StudentSpace() {
 
   return (
     <div className="student-space student-space--v2">
+      <div className="space-decor" aria-hidden="true">
+        {DECOR.map((d, i) => (
+          <span
+            key={i}
+            className="decor"
+            style={{ insetBlockStart: d.top, insetInlineStart: d.is, fontSize: d.s, animationDelay: d.d }}
+          >
+            {d.e}
+          </span>
+        ))}
+      </div>
       <div className="container">
         <StudentProfile profile={profile} />
         <SpaceShell base="/student-space" title={t('studentSpace.sidebarTitle')} storageKey="rafiqi-student-sidebar" sections={GROUPS}>
