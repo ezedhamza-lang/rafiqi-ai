@@ -54,7 +54,7 @@ import adminInsightsRoutes from './routes/adminInsights.js';
 import memoRoutes from './routes/memos.js';
 import { setupWs } from './ws.js';
 import { startRenewalScheduler, runRenewalSweep } from './services/subscriptionRenewalService.js';
-import { runSqlFile } from './services/migrationRunner.js';
+import { runSqlFileOnce } from './services/migrationRunner.js';
 import { runTenancyBootstrap } from './services/tenancyBootstrap.js';
 import { startParentInsightScheduler, runParentInsightSweep } from './services/parentInsightNotifyService.js';
 import { errorHandler, notFoundHandler } from './middleware/errorHandler.js';
@@ -353,11 +353,14 @@ async function start() {
     // idempotent + داخل .catch فلا يُعطّل الإقلاع. يعالج حالة الاستضافة التي
     // تُشغّل الصورة بلا `prisma migrate deploy` (مثل Render على الخطة المجانية).
     .then(async () => {
-      // تطبيق الهجرات idempotent عند الإقلاع (الاستضافة بلا Shell/migrate deploy).
+      // تطبيق الهجرات عند الإقلاع (الاستضافة بلا Shell/migrate deploy) — «لمرة
+      // واحدة» لكل قاعدة عبر سجلّ ledger، حتى لا يُعاد تنفيذ backfill التعددية
+      // (الذي كان يعيد ربط كل مستخدم بلا مدرسة بمدرسة DEFAULT عند كل إقلاع).
       const migDir = path.join(__dirname, '../prisma/migrations');
-      await runSqlFile(prisma, path.join(migDir, '20260908000000_money_decimal/migration.sql'));
-      await runSqlFile(prisma, path.join(migDir, '20260908120000_multi_tenancy/migration.sql'));
-      await runSqlFile(prisma, path.join(migDir, '20260908140000_student_temp_password/migration.sql'));
+      await runSqlFileOnce(prisma, path.join(migDir, '20260908000000_money_decimal/migration.sql'));
+      await runSqlFileOnce(prisma, path.join(migDir, '20260908120000_multi_tenancy/migration.sql'));
+      await runSqlFileOnce(prisma, path.join(migDir, '20260908140000_student_temp_password/migration.sql'));
+      await runSqlFileOnce(prisma, path.join(migDir, '20260910120000_drift_indexes/migration.sql'));
       await runTenancyBootstrap(prisma);
     }).catch((err) => {
       console.error('startup migrations skipped:', err.message);

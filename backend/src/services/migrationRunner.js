@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 // يقسّم نص SQL إلى جملات مستقلة، مع احترام:
 //  - اقتباس الدولار $$ ... $$ (كتل DO/الدوال)
@@ -63,4 +64,28 @@ export async function runSqlFile(prisma, file) {
       console.error(`migration statement skipped (${file}):`, err.message);
     }
   }
+}
+
+// ===== تشغيل لمرة واحدة (ledger) =====
+// بعض الملفات تحوي backfill بيانات (مثل ربط مستخدمين بلا مدرسة بمدرسة DEFAULT)
+// يجب ألا يُعاد كل إقلاع وإلا أعاد تصنيف من تُرِكوا بلا مدرسة عمداً.
+// جدول سجل صغير يضمن تنفيذ كل ملف مرة واحدة فقط على هذه القاعدة.
+async function ensureLedger(prisma) {
+  await prisma.$executeRawUnsafe(
+    `CREATE TABLE IF NOT EXISTS "_RafiqiMigrationLedger" ("key" TEXT PRIMARY KEY, "appliedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP)`
+  );
+}
+
+async function isApplied(prisma, key) {
+  const rows = await prisma.$queryRawUnsafe(`SELECT 1 FROM "_RafiqiMigrationLedger" WHERE "key" = $1 LIMIT 1`, key);
+  return Array.isArray(rows) ? rows.length > 0 : Boolean(rows);
+}
+
+export async function runSqlFileOnce(prisma, file) {
+  await ensureLedger(prisma);
+  const key = file.split(path.sep).slice(-2).join('/');
+  if (await isApplied(prisma, key)) return;
+  await runSqlFile(prisma, file);
+  await prisma.$executeRawUnsafe(`INSERT INTO "_RafiqiMigrationLedger" ("key") VALUES ($1) ON CONFLICT ("key") DO NOTHING`, key);
+  console.log(`startup migration applied and recorded: ${key}`);
 }

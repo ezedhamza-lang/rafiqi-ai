@@ -269,6 +269,7 @@ model Class {
   liveSessions         LiveSession[]
 
   @@index([schoolId])
+  @@index([teacherId])
 }
 
 model Student {
@@ -293,6 +294,8 @@ model Student {
   class         Class?         @relation(fields: [classId], references: [id], onDelete: SetNull)
   registrations Registration[]
   documents     ParentDocument[]
+  @@index([userId])
+  @@index([classId])
 }
 
 model Registration {
@@ -310,6 +313,9 @@ model Registration {
   user    User    @relation(fields: [userId], references: [id])
   student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
   class   Class?  @relation(fields: [classId], references: [id], onDelete: SetNull)
+  @@index([userId])
+  @@index([studentId])
+  @@index([classId])
 }
 
 model Announcement {
@@ -375,6 +381,7 @@ model Quiz {
   teacher     User         @relation(fields: [teacherId], references: [id])
   class       Class?       @relation(fields: [classId], references: [id], onDelete: SetNull)
   submissions Submission[]
+  @@index([teacherId])
 }
 
 model Submission {
@@ -410,6 +417,7 @@ model OfficialExam {
   teacher     User                 @relation(fields: [teacherId], references: [id])
   class       Class?               @relation(fields: [classId], references: [id], onDelete: SetNull)
   submissions OfficialSubmission[]
+  @@index([teacherId])
 }
 
 model OfficialSubmission {
@@ -503,6 +511,7 @@ model AnnualPlan {
   updatedAt DateTime @updatedAt
 
   teacher User @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+  @@index([teacherId])
 }
 
 model Schedule {
@@ -680,6 +689,7 @@ model Subscription {
 
   @@index([userId, status])
   @@index([status, endDate])
+  @@index([studentId])
 }
 
 model Payment {
@@ -696,6 +706,7 @@ model Payment {
   invoice      Invoice?
 
   @@index([subscriptionId])
+  @@index([paidByUserId])
 }
 
 model SubscriptionRequest {
@@ -806,6 +817,7 @@ model HelpRequest {
   createdAt   DateTime @default(now())
 
   user User? @relation(fields: [userId], references: [id])
+  @@index([userId])
 }
 
 model ContactMessage {
@@ -870,6 +882,7 @@ model SubmittedExam {
 
   @@index([studentId])
   @@index([teacherId, status])
+  @@index([classId])
 }
 
 model ParentDocument {
@@ -911,6 +924,7 @@ model AttendanceRecord {
 
   @@unique([classId, studentId, date])
   @@index([studentId, date])
+  @@index([recordedBy])
 }
 
 model CalendarEvent {
@@ -927,6 +941,7 @@ model CalendarEvent {
   creator User @relation(fields: [createdBy], references: [id])
 
   @@index([date])
+  @@index([createdBy])
 }
 
 model HealthRecord {
@@ -1065,7 +1080,7 @@ model DiscountCode {
   id          Int          @id @default(autoincrement())
   code        String       @unique
   type        DiscountType @default(PERCENTAGE)
-  value       Float
+  value       Decimal @db.Decimal(12, 3)
   description String?
   usageLimit  Int?
   usedCount   Int          @default(0)
@@ -1079,6 +1094,7 @@ model DiscountCode {
 
   @@index([active])
   @@index([expiresAt])
+  @@index([createdBy])
 }
 
 model Refund {
@@ -1100,6 +1116,7 @@ model Refund {
   @@index([invoiceId])
   @@index([subscriptionId])
   @@index([refundedAt])
+  @@index([refundedBy])
 }
 
 model FinancialAnomaly {
