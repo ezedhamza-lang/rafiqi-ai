@@ -96,6 +96,25 @@ const lessons = [
 async function main() {
   console.log('Start seeding...');
 
+  // أمان: كلمات سر البذور من البيئة مع قيمة افتراضية للتطوير فقط؛
+  // في الإنتاج يجب ضبطها صراحةً وإلا يُرفض التشغيل.
+  const isProd = process.env.NODE_ENV === 'production';
+  if (isProd && !process.env.SEED_DEMO_PASSWORD) {
+    throw new Error('SEED_DEMO_PASSWORD مطلوب لتشغيل البذور في الإنتاج');
+  }
+  const DEMO_PW = process.env.SEED_DEMO_PASSWORD || 'qarn-zeft-7alib-2026!';
+  const SUPER_PW = process.env.SEED_SUPER_ADMIN_PASSWORD || (isProd ? DEMO_PW : 'Super-Owner-2026!');
+
+  // upsert بمفتاح مستقر (العنوان/السؤال) — الصيغة القديمة where:{id:0}
+  // كانت تُدرج نسخة مكررة من كل محتوى في كل تشغيل للـseed.
+  async function upsertContent(model, uniqueField, rows) {
+    for (const r of rows) {
+      const found = await model.findFirst({ where: { [uniqueField]: r[uniqueField] }, select: { id: true } });
+      if (found) await model.update({ where: { id: found.id }, data: r });
+      else await model.create({ data: r });
+    }
+  }
+
   for (const name of delegations) {
     await prisma.delegation.upsert({
       where: { name },
@@ -104,29 +123,9 @@ async function main() {
     });
   }
 
-  for (const a of announcements) {
-    await prisma.announcement.upsert({
-      where: { id: a.id ?? 0 },
-      update: a,
-      create: a
-    });
-  }
-
-  for (const a of articles) {
-    await prisma.article.upsert({
-      where: { id: a.id ?? 0 },
-      update: a,
-      create: a
-    });
-  }
-
-  for (const f of faqs) {
-    await prisma.faq.upsert({
-      where: { id: f.id ?? 0 },
-      update: f,
-      create: f
-    });
-  }
+  await upsertContent(prisma.announcement, 'title', announcements);
+  await upsertContent(prisma.article, 'title', articles);
+  await upsertContent(prisma.faq, 'question', faqs);
 
   await prisma.lesson.deleteMany({});
   for (const l of lessons) {
@@ -134,16 +133,16 @@ async function main() {
   }
 
   const demoUsers = [
-    { firstName: 'مدير', lastName: 'المنصة', email: 'admin@education.tn', phone: '70017032', password: 'qarn-zeft-7alib-2026!', role: 'ADMIN' },
-    { firstName: 'أحمد', lastName: 'التلميذ', email: 'student@test.tn', phone: '20000001', password: 'qarn-zeft-7alib-2026!', role: 'STUDENT' },
-    { firstName: 'محمد', lastName: 'الولي', email: 'parent@test.tn', phone: '20000002', password: 'qarn-zeft-7alib-2026!', role: 'PARENT' },
-    { firstName: 'فاطمة', lastName: 'المعلمة', email: 'teacher@test.tn', phone: '20000003', password: 'qarn-zeft-7alib-2026!', role: 'TEACHER' },
-    { firstName: 'خالد', lastName: 'مدير المدرسة', email: 'director@test.tn', phone: '20000004', password: 'qarn-zeft-7alib-2026!', role: 'SCHOOL_DIRECTOR' },
-    { firstName: 'نظامي', lastName: 'المنصة', email: 'super@education.tn', phone: '70017033', password: 'Super-Owner-2026!', role: 'SUPER_ADMIN' },
+    { firstName: 'مدير', lastName: 'المنصة', email: 'admin@education.tn', phone: '70017032', password: DEMO_PW, role: 'ADMIN' },
+    { firstName: 'أحمد', lastName: 'التلميذ', email: 'student@test.tn', phone: '20000001', password: DEMO_PW, role: 'STUDENT' },
+    { firstName: 'محمد', lastName: 'الولي', email: 'parent@test.tn', phone: '20000002', password: DEMO_PW, role: 'PARENT' },
+    { firstName: 'فاطمة', lastName: 'المعلمة', email: 'teacher@test.tn', phone: '20000003', password: DEMO_PW, role: 'TEACHER' },
+    { firstName: 'خالد', lastName: 'مدير المدرسة', email: 'director@test.tn', phone: '20000004', password: DEMO_PW, role: 'SCHOOL_DIRECTOR' },
+    { firstName: 'نظامي', lastName: 'المنصة', email: 'super@education.tn', phone: '70017033', password: SUPER_PW, role: 'SUPER_ADMIN' },
     // حساب الاستكشاف: دور تلميذ عمداً بلا سجل في جدول Student (لا قسم ولا مستوى)،
     // فيرى محتوى كل المستويات س1-س6 (القفل يُرفع عند غياب المستوى فقط).
     // التكليفات/الاختبارات المرتبطة بالقسم تعيد له قائمة فارغة بأمان.
-    { firstName: 'مستكشف', lastName: 'المنصة', email: 'explorer@test.tn', phone: '20000005', password: 'qarn-zeft-7alib-2026!', role: 'STUDENT' }
+    { firstName: 'مستكشف', lastName: 'المنصة', email: 'explorer@test.tn', phone: '20000005', password: DEMO_PW, role: 'STUDENT' }
   ];
 
   const users = {};
@@ -168,7 +167,8 @@ async function main() {
       });
     }
     users[u.email] = user;
-    console.log(`Demo user: ${u.email} / ${u.password} (${u.role})`);
+    // لا نطبع كلمات السر في السجلات (تسريب للسياق/CI)؛ المصدر معروف: SEED_DEMO_PASSWORD
+    console.log(`Demo user ready: ${u.email} (${u.role})`);
   }
 
   const badges = [
