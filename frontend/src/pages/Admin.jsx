@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { api } from '../api/client.js';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useI18n } from '../i18n/index.jsx';
-import { canManage, helpStatusLabel } from '../roles.js';
+import { canManage, helpStatusLabel, getHomePath } from '../roles.js';
 import AdminAiKey from './AdminAiKey.jsx';
 
 const STATUS = ['PENDING', 'PROCESSING', 'VALIDATED', 'REJECTED'];
@@ -26,7 +26,7 @@ export default function Admin() {
   }, [tab]);
 
   if (user && !canManage(user)) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to={getHomePath(user)} replace />;
   }
 
   const updateHelp = async (id, status) => {

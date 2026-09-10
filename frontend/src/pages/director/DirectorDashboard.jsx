@@ -11,7 +11,7 @@ import DirectorDocuments from './DirectorDocuments.jsx';
 import AdminSubscriptions from './AdminSubscriptions.jsx';
 import FinanceDashboard from './FinanceDashboard.jsx';
 import SchoolCalendar from '../../components/SchoolCalendar.jsx';
-import { canManageFinance } from '../../roles.js';
+import { canManageFinance, getHomePath } from '../../roles.js';
 
 const TABS = [
   { to: '', end: true, icon: 'dashboard', key: 'dashboard' },
@@ -36,7 +36,7 @@ export default function DirectorDashboard() {
   }, [user]);
 
   if (!user || !['SCHOOL_DIRECTOR', 'ADMIN'].includes(user.role)) {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to={getHomePath(user)} replace />;
   }
 
   const tabs = canManageFinance(user)
@@ -79,6 +79,7 @@ export default function DirectorDashboard() {
             <Route path="notifications" element={<DirectorNotifications />} />
             {canManageFinance(user) && <Route path="subscriptions" element={<AdminSubscriptions />} />}
             {canManageFinance(user) && <Route path="finance" element={<FinanceDashboard />} />}
+            <Route path="*" element={<Navigate to="." replace />} />
           </Routes>
         </div>
       </div>

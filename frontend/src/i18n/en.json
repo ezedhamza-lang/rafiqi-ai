@@ -6,6 +6,8 @@
   "common": {
     "loading": "Loading...",
     "skipToContent": "Skip to main content",
+    "notFound": "Page not found",
+    "backHome": "Back to home",
     "close": "Close",
     "noData": "No data yet",
     "cancel": "Cancel"

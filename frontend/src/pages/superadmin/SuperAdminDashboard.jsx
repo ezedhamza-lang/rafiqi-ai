@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
+import { getHomePath } from '../../roles.js';
 import { useI18n } from '../../i18n/index.jsx';
 import Licenses from './Licenses.jsx';
 import Subscriptions from './Subscriptions.jsx';
@@ -19,7 +20,7 @@ export default function SuperAdminDashboard() {
   const { t } = useI18n();
 
   if (!user || user.role !== 'SUPER_ADMIN') {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to={getHomePath(user)} replace />;
   }
 
   return (
@@ -43,6 +44,7 @@ export default function SuperAdminDashboard() {
             <Route path="subscriptions" element={<Subscriptions />} />
             <Route path="users" element={<UsersAdmin />} />
             <Route path="schools" element={<Schools />} />
+            <Route path="*" element={<Navigate to="." replace />} />
           </Routes>
         </SpaceShell>
       </div>

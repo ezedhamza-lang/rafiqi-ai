@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
+import { getHomePath } from '../../roles.js';
 import { useI18n } from '../../i18n/index.jsx';
 import { api } from '../../api/client.js';
 import SpaceShell from '../../components/SpaceShell.jsx';
@@ -43,7 +44,7 @@ export default function StudentSpace() {
   }, [load]);
 
   if (!user || user.role !== 'STUDENT') {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to={getHomePath(user)} replace />;
   }
 
   const L = (k) => t(`studentSpace.tabs.${k}`);
@@ -127,6 +128,7 @@ export default function StudentSpace() {
             <Route path="refeeqi" element={<AskRefeeqi />} />
             <Route path="twin" element={<StudentTwin />} />
             <Route path="schedule" element={<StudentSchedule />} />
+            <Route path="*" element={<Navigate to="." replace />} />
           </Routes>
         </SpaceShell>
       </div>

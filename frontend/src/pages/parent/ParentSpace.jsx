@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
+import { getHomePath } from '../../roles.js';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 import ChildProgress from './ChildProgress.jsx';
@@ -56,7 +57,7 @@ export default function ParentSpace() {
   }, [load, loadUnread]);
 
   if (!user || user.role !== 'PARENT') {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to={getHomePath(user)} replace />;
   }
 
   return (
@@ -88,6 +89,7 @@ export default function ParentSpace() {
             <Route path="report" element={<WeeklyReport childrenData={children} />} />
             <Route path="documents" element={<ParentDocuments />} />
             <Route path="health" element={<ParentHealth />} />
+            <Route path="*" element={<Navigate to="." replace />} />
           </Routes>
         </SpaceShell>
       </div>

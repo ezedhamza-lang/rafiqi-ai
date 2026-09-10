@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext.jsx';
 import { useI18n } from '../../i18n/index.jsx';
 import { api } from '../../api/client.js';
 import { Badge } from '../../components/ui/index.js';
+import { getHomePath } from '../../roles.js';
 import UnitAnalysis from './UnitAnalysis.jsx';
 import Quizzes from './Quizzes.jsx';
 import OfficialExams from './OfficialExams.jsx';
@@ -56,7 +57,7 @@ export default function TeacherDashboard() {
   }, [load]);
 
   if (!user || user.role !== 'TEACHER') {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to={getHomePath(user)} replace />;
   }
 
   return (
@@ -101,6 +102,7 @@ export default function TeacherDashboard() {
             <Route path="live" element={<LiveSessions />} />
             <Route path="worksheets" element={<TeacherWorksheets />} />
             <Route path="suggestions" element={<Suggestions />} />
+            <Route path="*" element={<Navigate to="." replace />} />
           </Routes>
         </div>
       </div>
