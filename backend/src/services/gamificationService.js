@@ -23,11 +23,13 @@ export async function awardXp(studentId, points, type, detail = null) {
     data: { studentId, type, points, detail }
   });
   const newLevel = levelFromXp(user.xp);
-  const leveledUp = newLevel > user.level;
-  if (leveledUp) {
-    await prisma.user.update({ where: { id: studentId }, data: { level: newLevel } });
-  }
-  return { xp: user.xp, coins: user.coins, level: newLevel, leveledUp };
+  // ترقية المستوى ذرّية وباتجاه واحد فقط: updateMany بشرط level < newLevel
+  // يمنع كتابة متزامنة أقدم أن تخفض مستوى جُمع للتو.
+  const promoted = await prisma.user.updateMany({
+    where: { id: studentId, level: { lt: newLevel } },
+    data: { level: newLevel }
+  });
+  return { xp: user.xp, coins: user.coins, level: newLevel, leveledUp: promoted.count > 0 };
 }
 
 export async function checkBadges(studentId) {
@@ -74,8 +76,12 @@ export async function checkBadges(studentId) {
         satisfied = false;
     }
     if (satisfied) {
-      await prisma.studentBadge.create({ data: { studentId, badgeId: badge.id } });
-      newEarned.push(badge);
+      // upsert-like آمنة: createMany+skipDuplicates يمنع P2002 عند التزامن
+      const res = await prisma.studentBadge.createMany({
+        data: [{ studentId, badgeId: badge.id }],
+        skipDuplicates: true
+      });
+      if (res.count > 0) newEarned.push(badge);
     }
   }
   return newEarned;
@@ -88,22 +94,29 @@ function startOfDay(date) {
 }
 
 export async function registerDailyActivity(studentId) {
-  const user = await prisma.user.findUnique({ where: { id: studentId } });
+  const user = await prisma.user.findUnique({
+    where: { id: studentId },
+    select: { streakDays: true, lastActiveAt: true }
+  });
   if (!user) return;
-  const todayStart = startOfDay(new Date());
-  const lastActiveStart = user.updatedAt ? startOfDay(new Date(user.updatedAt)) : null;
+  const now = new Date();
+  const todayStart = startOfDay(now);
+  // حارس العبور: آخر نشاط يجب أن يكون قبل بداية اليوم الحالي، وإلا فقد
+  // عدّاد التزامن نوبةَ اليوم بالفعل — لا زيادة مزدوجة.
+  const counted = await prisma.user.updateMany({
+    where: {
+      id: studentId,
+      OR: [{ lastActiveAt: null }, { lastActiveAt: { lt: todayStart } }]
+    },
+    data: { lastActiveAt: now }
+  });
+  if (counted.count === 0) return; // استُعالج اليوم في طلب متزامن آخر
+
+  const last = user.lastActiveAt ? startOfDay(new Date(user.lastActiveAt)) : null;
   const yesterdayStart = new Date(todayStart.getTime() - 86400000);
   let streak = 1;
-  if (lastActiveStart && lastActiveStart.getTime() === todayStart.getTime()) {
-    streak = user.streakDays || 1;
-  } else if (lastActiveStart && lastActiveStart.getTime() === yesterdayStart.getTime()) {
+  if (last && last.getTime() === yesterdayStart.getTime()) {
     streak = (user.streakDays || 0) + 1;
   }
-  await prisma.user.update({
-    where: { id: studentId },
-    data: {
-      streakDays: streak,
-      updatedAt: new Date()
-    }
-  });
+  await prisma.user.update({ where: { id: studentId }, data: { streakDays: streak } });
 }

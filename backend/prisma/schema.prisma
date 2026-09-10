@@ -143,6 +143,7 @@ model User {
   coins         Int           @default(0)
   level         Int           @default(1)
   streakDays    Int           @default(0)
+  lastActiveAt  DateTime?
   notifyEmail   Boolean       @default(false)
   notifyPush    Boolean       @default(true)
   notifySms     Boolean       @default(false)
