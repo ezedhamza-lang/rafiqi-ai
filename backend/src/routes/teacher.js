@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import prisma from '../db.js';
 import { authMiddleware, teacherMiddleware, studentMiddleware } from '../auth.js';
+import { assertClassInSchool } from '../tenant.js';
 import { gradeQuiz } from '../services/gradingService.js';
 import { awardXp, checkBadges, registerDailyActivity, XP_QUIZ } from '../services/gamificationService.js';
 import { gradeOfficialExam } from '../services/officialExamService.js';
@@ -122,6 +123,7 @@ router.get('/quizzes', teacherMiddleware, asyncHandler(async (req, res) => {
  */
 router.post('/quizzes', teacherMiddleware, validateBody(quizCreateSchema), asyncHandler(async (req, res) => {
   const { title, subject, classId, questions } = req.body;
+  await assertClassInSchool(prisma, req, classId, ApiError);
   let normalized;
   try {
     normalized = validateQuestions(questions);
@@ -202,6 +204,7 @@ router.get('/quizzes/:id', teacherMiddleware, validateParams(quizIdParamSchema),
  */
 router.put('/quizzes/:id', teacherMiddleware, validateParams(quizIdParamSchema), validateBody(quizUpdateSchema), asyncHandler(async (req, res) => {
   const { title, subject, classId, questions } = req.body;
+  if (classId !== undefined) await assertClassInSchool(prisma, req, classId, ApiError);
   let normalized;
   if (questions !== undefined) {
     try {

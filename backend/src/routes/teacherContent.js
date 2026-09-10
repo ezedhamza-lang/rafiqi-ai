@@ -5,6 +5,7 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import prisma from '../db.js';
 import { authMiddleware, teacherMiddleware } from '../auth.js';
+import { assertClassInSchool } from '../tenant.js';
 import { buildMemo, rebuildMemo } from '../services/memoService.js';
 import { buildResource, rebuildResource } from '../services/resourceService.js';
 import { getBankExam, buildExamContent, officialExamSummary, saveAiExamToBank } from '../services/officialExamService.js';
@@ -523,6 +524,7 @@ router.get('/exams', teacherMiddleware, asyncHandler(async (req, res) => {
  */
 router.post('/exams', teacherMiddleware, validateBody(teacherExamCreateSchema), asyncHandler(async (req, res) => {
   const { title, subject, classId, trimester, content } = req.body;
+  await assertClassInSchool(prisma, req, classId, ApiError);
   const exam = await prisma.officialExam.create({
     data: {
       teacherId: req.user.id,
@@ -565,6 +567,7 @@ router.post('/exams', teacherMiddleware, validateBody(teacherExamCreateSchema), 
 router.post('/exams/instantiate', teacherMiddleware, asyncHandler(async (req, res) => {
   const { bankId, classId } = req.body || {};
   if (!bankId) throw new ApiError(400, 'معرف قالب الاختبار مطلوب');
+  await assertClassInSchool(prisma, req, classId, ApiError);
   const bankExam = getBankExam(bankId);
   if (!bankExam) throw new ApiError(404, 'قالب الاختبار غير موجود');
   // بيانات ظرفية (اسم المعلّم/المدرسة/السنة الدراسية) تُمرَّر هنا من سياق
@@ -621,6 +624,7 @@ router.post('/exams/instantiate', teacherMiddleware, asyncHandler(async (req, re
 router.post('/exams/generate-ai', teacherMiddleware, asyncHandler(async (req, res) => {
   const { subject, level, trimester, title, lessonTitle, count, classId, durationMinutes } = req.body || {};
   if (!subject) throw new ApiError(400, 'المادة مطلوبة');
+  await assertClassInSchool(prisma, req, classId, ApiError);
 
   let aiQuestions = null;
   try {
@@ -762,6 +766,7 @@ router.get('/exams/:id/preview', teacherMiddleware, validateParams(teacherConten
  */
 router.put('/exams/:id', teacherMiddleware, validateParams(teacherContentIdParamSchema), validateBody(teacherExamUpdateSchema), asyncHandler(async (req, res) => {
   const { title, classId, trimester, content, published } = req.body;
+  if (classId !== undefined) await assertClassInSchool(prisma, req, classId, ApiError);
   const r = await prisma.officialExam.updateMany({
     where: { id: Number(req.params.id), teacherId: req.user.id },
     data: {
@@ -969,6 +974,7 @@ router.post('/exams/generate-docx', teacherMiddleware, asyncHandler(async (req, 
   const { subject, level, trimester, title, durationMinutes, content: examContent, classId } = req.body;
 
   if (!subject) throw new ApiError(400, 'المادة مطلوبة');
+  await assertClassInSchool(prisma, req, classId, ApiError);
 
   const docxData = prepareExamForDocx(examContent || {}, {
     subject,

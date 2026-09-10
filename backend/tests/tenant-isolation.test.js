@@ -138,4 +138,29 @@ describe('عزل المدارس (Multi-tenancy)', () => {
     expect(ids).toContain(rNull.id);
     expect(ids).not.toContain(rB.id); // مدرسة أخرى لا تظهر له
   });
+
+  it('أستاذ أ لا ينشر اختباراً/واجباً لقسم مدرسة ب (403)، وقسمه هو يمر', async () => {
+    // اختبار «نقل المستخدم» السابق نقل ta إلى مدرسة ب — نُثبّته في مدرسته لأمان الفرضية
+    await prisma.user.update({ where: { id: teacherAId }, data: { schoolId: schoolAId } });
+    const tAt = await tok('ta@test.tn');
+    const questions = [{ id: 'q1', type: 'MCQ', prompt: 'س؟', points: 1, options: ['أ', 'ب'], correctOption: '0' }];
+
+    const badQuiz = await request(app).post('/api/teacher/quizzes').set('Authorization', `Bearer ${tAt}`)
+      .send({ title: 'اختراق', subject: 'MATH', classId: classBId, questions });
+    expect(badQuiz.status).toBe(403);
+
+    const badAssign = await request(app).post('/api/teacher/assignments').set('Authorization', `Bearer ${tAt}`)
+      .send({ title: 'اختراق', subject: 'MATH', classId: classBId, questions });
+    expect(badAssign.status).toBe(403);
+
+    const badExam = await request(app).post('/api/teacher/exams').set('Authorization', `Bearer ${tAt}`)
+      .send({ title: 'اختراق', subject: 'MATH', classId: classBId });
+    expect(badExam.status).toBe(403);
+
+    // مسار شرعي: أستاذ أ ⇒ قسمه (نفس المدرسة) يمر
+    const classesA = await prisma.class.findFirst({ where: { teacherId: teacherAId } });
+    const okQuiz = await request(app).post('/api/teacher/quizzes').set('Authorization', `Bearer ${tAt}`)
+      .send({ title: 'عادي', subject: 'MATH', classId: classesA.id, questions });
+    expect(okQuiz.status).toBe(201);
+  });
 });

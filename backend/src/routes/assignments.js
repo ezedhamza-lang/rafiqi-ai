@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import prisma from '../db.js';
 import { authMiddleware, teacherMiddleware, studentMiddleware } from '../auth.js';
+import { assertClassInSchool } from '../tenant.js';
 import { gradeQuiz } from '../services/gradingService.js';
 import { awardXp, checkBadges, registerDailyActivity, XP_QUIZ } from '../services/gamificationService.js';
 import { notify } from '../services/notify.js';
@@ -124,6 +125,7 @@ router.get('/assignments', teacherMiddleware, asyncHandler(async (req, res) => {
  */
 router.post('/assignments', teacherMiddleware, validateBody(assignmentCreateSchema), asyncHandler(async (req, res) => {
   const { title, subject, classId, description, dueDate, status, questions } = req.body;
+  await assertClassInSchool(prisma, req, classId, ApiError);
   try {
     const assignment = await prisma.assignment.create({
       data: {
@@ -216,6 +218,7 @@ router.get('/assignments/:id', teacherMiddleware, validateParams(assignmentIdPar
  */
 router.put('/assignments/:id', teacherMiddleware, validateParams(assignmentIdParamSchema), validateBody(assignmentUpdateSchema), asyncHandler(async (req, res) => {
   const { title, subject, classId, description, dueDate, status, questions } = req.body;
+  if (classId !== undefined) await assertClassInSchool(prisma, req, classId, ApiError);
   try {
     const assignment = await prisma.assignment.findFirst({
       where: { id: Number(req.params.id), teacherId: req.user.id }
