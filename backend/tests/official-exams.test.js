@@ -27,6 +27,17 @@ async function loginAs(role) {
   return res.body.token;
 }
 
+// المسار العام يُجرّد مفاتيح الإجابة (سلوك صحيح). اختبارات المحرك/الصيغة تحتاج
+// بيانات البنك الخام تماماً كما يقرأها مسار instantiate على الخادم.
+async function rawList(opts) {
+  const { listBankExams } = await import('../src/services/officialExamService.js');
+  return listBankExams(opts || {});
+}
+async function rawExam(id) {
+  const { getBankExam } = await import('../src/services/officialExamService.js');
+  return getBankExam(id);
+}
+
 describe('المرحلة 6.3 — بنك الاختبارات الرسمية ومحرك التصحيح', () => {
   it('البنك يحتوي اختبارات حقيقية لكل ثلاثي ومادة متوفرة (س1 وس2)', async () => {
     const res = await request(app).get('/api/public/official-exams-bank').send();
@@ -92,8 +103,7 @@ describe('المرحلة 6.3 — بنك الاختبارات الرسمية وم
   });
 
   it('محرك التصحيح: إجابات صحيحة كلها تعطي 20، وخطأ كله يعطي 0', async () => {
-    const list = await request(app).get('/api/public/official-exams-bank').send();
-    const mathExam = list.body.find((e) => e.subject === 'math' && e.trimester === 1 && e.level === 'year1');
+    const mathExam = (await rawList()).find((e) => e.subject === 'math' && e.trimester === 1 && e.level === 'year1');
 
     const full = {};
     for (const q of mathExam.questions) {
@@ -127,8 +137,7 @@ describe('المرحلة 6.3 — بنك الاختبارات الرسمية وم
     const teacherToken = await loginAs('teacher');
     const studentToken = await loginAs('student');
 
-    const list = await request(app).get('/api/public/official-exams-bank?level=year1&subject=science').send();
-    const bankExam = list.body[0];
+    const bankExam = (await rawList({ level: 'year1', subject: 'science' }))[0];
 
     const created = await request(app)
       .post('/api/teacher/exams/instantiate')
@@ -215,8 +224,7 @@ describe('البنك المدمج — 240 أنموذجاً للسنة الأول
   });
 
   it('كل قالب مدمج يحترم الصيغة: أنواع صحيحة، معرّفات فريدة، مفاتيح صواب/خطأ، معايير 20/20', async () => {
-    const res = await request(app).get('/api/public/official-exams-bank?level=year1').send();
-    const merged = res.body.filter((e) => e.id.startsWith('off-'));
+    const merged = (await rawList({ level: 'year1' })).filter((e) => e.id.startsWith('off-'));
     expect(merged.length).toBe(240);
     const ids = new Set();
     for (const e of merged) {
@@ -237,12 +245,12 @@ describe('البنك المدمج — 240 أنموذجاً للسنة الأول
   });
 
   it('نموذج مدمج (off-math-t1-m1) يُبنى ويُصحَّح 20/20 بالإجابات الكاملة', async () => {
-    const res = await request(app).get('/api/public/official-exams-bank/off-math-t1-m1').send();
-    expect(res.status).toBe(200);
-    expect(res.body.level).toBe('year1');
-    expect(res.body.subject).toBe('math');
+    const exam = await rawExam('off-math-t1-m1');
+    expect(exam).toBeTruthy();
+    expect(exam.level).toBe('year1');
+    expect(exam.subject).toBe('math');
     const { buildExamContent, gradeOfficialExam } = await import('../src/services/officialExamService.js');
-    const content = buildExamContent(res.body);
+    const content = buildExamContent(exam);
     const answers = {};
     for (const q of content.questions) {
       if (q.type === 'MCQ') answers[q.id] = q.correct;

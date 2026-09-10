@@ -215,9 +215,12 @@ describe('live sessions (الحصص المباشرة — 5.1)', () => {
     expect(end.body.session.status).toBe('ENDED');
     expect(end.body.recording).toBeTruthy();
     expect(end.body.recording.status).toBe('AVAILABLE');
-    expect(end.body.recording.fileUrl).toMatch(/^\/uploads\/recordings\/.+\.wav$/);
+    // تسجيلات الحصص صارت خلف روابط موقّعة قصيرة العمر (أصوات قُصّر — P1-D)
+    const recUrl = new URL(end.body.recording.fileUrl, 'http://local');
+    expect(recUrl.pathname).toMatch(/^\/uploads\/recordings\/.+\.wav$/);
+    expect(recUrl.searchParams.get('st')).toBeTruthy();
 
-    const filePath = path.join(REC_DIR, path.basename(end.body.recording.fileUrl));
+    const filePath = path.join(REC_DIR, path.basename(recUrl.pathname));
     expect(fs.existsSync(filePath)).toBe(true);
   });
 
