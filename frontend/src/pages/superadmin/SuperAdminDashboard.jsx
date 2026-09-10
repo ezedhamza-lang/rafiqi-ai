@@ -1,11 +1,12 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { getHomePath } from '../../roles.js';
 import { useI18n } from '../../i18n/index.jsx';
-import Licenses from './Licenses.jsx';
-import Subscriptions from './Subscriptions.jsx';
-import UsersAdmin from './UsersAdmin.jsx';
-import Schools from './Schools.jsx';
+const Licenses = lazy(() => import('./Licenses.jsx'));
+const Subscriptions = lazy(() => import('./Subscriptions.jsx'));
+const UsersAdmin = lazy(() => import('./UsersAdmin.jsx'));
+const Schools = lazy(() => import('./Schools.jsx'));
 import SpaceShell from '../../components/SpaceShell.jsx';
 
 const TABS = [
@@ -39,6 +40,7 @@ export default function SuperAdminDashboard() {
           storageKey="rafiqi-super-sidebar"
           items={TABS.map((tb) => ({ ...tb, label: t(`superadmin.tabs.${tb.key}`) }))}
         >
+          <Suspense fallback={null}>
           <Routes>
             <Route index element={<Licenses />} />
             <Route path="subscriptions" element={<Subscriptions />} />
@@ -46,6 +48,7 @@ export default function SuperAdminDashboard() {
             <Route path="schools" element={<Schools />} />
             <Route path="*" element={<Navigate to="." replace />} />
           </Routes>
+        </Suspense>
         </SpaceShell>
       </div>
     </div>

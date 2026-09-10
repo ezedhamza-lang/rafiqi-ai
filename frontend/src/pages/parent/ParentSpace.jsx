@@ -1,20 +1,20 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback , lazy, Suspense} from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { getHomePath } from '../../roles.js';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
-import ChildProgress from './ChildProgress.jsx';
-import Messages from '../Messages.jsx';
-import WeeklyReport from './WeeklyReport.jsx';
-import ParentDocuments from './ParentDocuments.jsx';
-import ParentHealth from './ParentHealth.jsx';
-import ChildAssignments from './ChildAssignments.jsx';
-import ChildAnalytics from './ChildAnalytics.jsx';
-import ParentLiveSessions from './ParentLiveSessions.jsx';
-import ParentInsights from './ParentInsights.jsx';
-import ParentNotes from './ParentNotes.jsx';
-import ChildCredentials from './ChildCredentials.jsx';
+const ChildProgress = lazy(() => import('./ChildProgress.jsx'));
+const Messages = lazy(() => import('../Messages.jsx'));
+const WeeklyReport = lazy(() => import('./WeeklyReport.jsx'));
+const ParentDocuments = lazy(() => import('./ParentDocuments.jsx'));
+const ParentHealth = lazy(() => import('./ParentHealth.jsx'));
+const ChildAssignments = lazy(() => import('./ChildAssignments.jsx'));
+const ChildAnalytics = lazy(() => import('./ChildAnalytics.jsx'));
+const ParentLiveSessions = lazy(() => import('./ParentLiveSessions.jsx'));
+const ParentInsights = lazy(() => import('./ParentInsights.jsx'));
+const ParentNotes = lazy(() => import('./ParentNotes.jsx'));
+const ChildCredentials = lazy(() => import('./ChildCredentials.jsx'));
 import SpaceShell from '../../components/SpaceShell.jsx';
 
 const TABS = [
@@ -77,6 +77,7 @@ export default function ParentSpace() {
           storageKey="rafiqi-parent-sidebar"
           items={TABS.map((tb) => ({ ...tb, label: t(`parentSpace.tabs.${tb.key}`) }))}
         >
+          <Suspense fallback={null}>
           <Routes>
             <Route index element={<ChildProgress childrenData={children} />} />
             <Route path="insights" element={<ParentInsights childrenData={children} />} />
@@ -91,6 +92,7 @@ export default function ParentSpace() {
             <Route path="health" element={<ParentHealth />} />
             <Route path="*" element={<Navigate to="." replace />} />
           </Routes>
+        </Suspense>
         </SpaceShell>
       </div>
     </div>

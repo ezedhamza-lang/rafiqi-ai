@@ -1,34 +1,34 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback , lazy, Suspense} from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useI18n } from '../../i18n/index.jsx';
 import { api } from '../../api/client.js';
 import { Badge } from '../../components/ui/index.js';
 import { getHomePath } from '../../roles.js';
-import UnitAnalysis from './UnitAnalysis.jsx';
-import Quizzes from './Quizzes.jsx';
-import OfficialExams from './OfficialExams.jsx';
-import Correction from './Correction.jsx';
-import Results from './Results.jsx';
-import Averages from './Averages.jsx';
-import Memos from './Memos.jsx';
-import Resources from './Resources.jsx';
-import LessonPlan from './LessonPlan.jsx';
-import AnnualPlans from './AnnualPlans.jsx';
-import TeacherAI from './TeacherAI.jsx';
-import Schedules from './Schedules.jsx';
-import Suggestions from './Suggestions.jsx';
-import ClassSubjects from './ClassSubjects.jsx';
-import Attendance from './Attendance.jsx';
-import HealthRecords from './HealthRecords.jsx';
-import Library from './Library.jsx';
-import Assignments from './Assignments.jsx';
-import Analytics from './Analytics.jsx';
-import LiveSessions from './LiveSessions.jsx';
-import TeacherGradebook from './TeacherGradebook.jsx';
-import TeacherLessonProgress from './TeacherLessonProgress.jsx';
-import TeacherNotes from './TeacherNotes.jsx';
-import TeacherWorksheets from './TeacherWorksheets.jsx';
+const UnitAnalysis = lazy(() => import('./UnitAnalysis.jsx'));
+const Quizzes = lazy(() => import('./Quizzes.jsx'));
+const OfficialExams = lazy(() => import('./OfficialExams.jsx'));
+const Correction = lazy(() => import('./Correction.jsx'));
+const Results = lazy(() => import('./Results.jsx'));
+const Averages = lazy(() => import('./Averages.jsx'));
+const Memos = lazy(() => import('./Memos.jsx'));
+const Resources = lazy(() => import('./Resources.jsx'));
+const LessonPlan = lazy(() => import('./LessonPlan.jsx'));
+const AnnualPlans = lazy(() => import('./AnnualPlans.jsx'));
+const TeacherAI = lazy(() => import('./TeacherAI.jsx'));
+const Schedules = lazy(() => import('./Schedules.jsx'));
+const Suggestions = lazy(() => import('./Suggestions.jsx'));
+const ClassSubjects = lazy(() => import('./ClassSubjects.jsx'));
+const Attendance = lazy(() => import('./Attendance.jsx'));
+const HealthRecords = lazy(() => import('./HealthRecords.jsx'));
+const Library = lazy(() => import('./Library.jsx'));
+const Assignments = lazy(() => import('./Assignments.jsx'));
+const Analytics = lazy(() => import('./Analytics.jsx'));
+const LiveSessions = lazy(() => import('./LiveSessions.jsx'));
+const TeacherGradebook = lazy(() => import('./TeacherGradebook.jsx'));
+const TeacherLessonProgress = lazy(() => import('./TeacherLessonProgress.jsx'));
+const TeacherNotes = lazy(() => import('./TeacherNotes.jsx'));
+const TeacherWorksheets = lazy(() => import('./TeacherWorksheets.jsx'));
 
 export default function TeacherDashboard() {
   const { user } = useAuth();
@@ -77,6 +77,7 @@ export default function TeacherDashboard() {
         </div>
 
         <div className="tab-content">
+          <Suspense fallback={null}>
           <Routes>
             <Route index element={<UnitAnalysis classes={classes} />} />
             <Route path="quizzes" element={<Quizzes classes={classes} onChanged={load} />} />
@@ -104,6 +105,7 @@ export default function TeacherDashboard() {
             <Route path="suggestions" element={<Suggestions />} />
             <Route path="*" element={<Navigate to="." replace />} />
           </Routes>
+        </Suspense>
         </div>
       </div>
     </div>

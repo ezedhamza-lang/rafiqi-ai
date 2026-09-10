@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect , lazy, Suspense} from 'react';
 import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
-import DirectorHome from './DirectorHome.jsx';
-import DirectorClasses from './DirectorClasses.jsx';
-import DirectorNotifications from './DirectorNotifications.jsx';
-import DirectorRequests from './DirectorRequests.jsx';
-import DirectorDocuments from './DirectorDocuments.jsx';
-import AdminSubscriptions from './AdminSubscriptions.jsx';
-import FinanceDashboard from './FinanceDashboard.jsx';
-import SchoolCalendar from '../../components/SchoolCalendar.jsx';
+const DirectorHome = lazy(() => import('./DirectorHome.jsx'));
+const DirectorClasses = lazy(() => import('./DirectorClasses.jsx'));
+const DirectorNotifications = lazy(() => import('./DirectorNotifications.jsx'));
+const DirectorRequests = lazy(() => import('./DirectorRequests.jsx'));
+const DirectorDocuments = lazy(() => import('./DirectorDocuments.jsx'));
+const AdminSubscriptions = lazy(() => import('./AdminSubscriptions.jsx'));
+const FinanceDashboard = lazy(() => import('./FinanceDashboard.jsx'));
+const SchoolCalendar = lazy(() => import('../../components/SchoolCalendar.jsx'));
 import { canManageFinance, getHomePath } from '../../roles.js';
 
 const TABS = [
@@ -70,6 +70,7 @@ export default function DirectorDashboard() {
         </nav>
 
         <div className="tab-content">
+          <Suspense fallback={null}>
           <Routes>
             <Route index element={<DirectorHome />} />
             <Route path="requests" element={<DirectorRequests />} />
@@ -81,6 +82,7 @@ export default function DirectorDashboard() {
             {canManageFinance(user) && <Route path="finance" element={<FinanceDashboard />} />}
             <Route path="*" element={<Navigate to="." replace />} />
           </Routes>
+        </Suspense>
         </div>
       </div>
     </div>

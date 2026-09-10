@@ -1,29 +1,29 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback , lazy, Suspense} from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { getHomePath } from '../../roles.js';
 import { useI18n } from '../../i18n/index.jsx';
 import { api } from '../../api/client.js';
 import SpaceShell from '../../components/SpaceShell.jsx';
-import StudentQuizzes from './StudentQuizzes.jsx';
-import StudentOfficialExams from './StudentOfficialExams.jsx';
-import StudentBooks from './StudentBooks.jsx';
-import StudentVideos from './StudentVideos.jsx';
-import StudentAdaptive from './StudentAdaptive.jsx';
-import StudentLearningPlan from './StudentLearningPlan.jsx';
-import StudentStories from './StudentStories.jsx';
-import StudentTwin from './StudentTwin.jsx';
-import AskRefeeqi from './AskRefeeqi.jsx';
-import StudentSchedule from './StudentSchedule.jsx';
-import StudentProfile from './StudentProfile.jsx';
-import StudentSubjects from './StudentSubjects.jsx';
-import PlayZone from './PlayZone.jsx';
-import PaperExamScan from './PaperExamScan.jsx';
-import StudentAssignments from './StudentAssignments.jsx';
-import StudentLiveSessions from './StudentLiveSessions.jsx';
-import StudentDailyRoutine from './StudentDailyRoutine.jsx';
-import StudentFlashcards from './StudentFlashcards.jsx';
-import SchoolCalendar from '../../components/SchoolCalendar.jsx';
+const StudentQuizzes = lazy(() => import('./StudentQuizzes.jsx'));
+const StudentOfficialExams = lazy(() => import('./StudentOfficialExams.jsx'));
+const StudentBooks = lazy(() => import('./StudentBooks.jsx'));
+const StudentVideos = lazy(() => import('./StudentVideos.jsx'));
+const StudentAdaptive = lazy(() => import('./StudentAdaptive.jsx'));
+const StudentLearningPlan = lazy(() => import('./StudentLearningPlan.jsx'));
+const StudentStories = lazy(() => import('./StudentStories.jsx'));
+const StudentTwin = lazy(() => import('./StudentTwin.jsx'));
+const AskRefeeqi = lazy(() => import('./AskRefeeqi.jsx'));
+const StudentSchedule = lazy(() => import('./StudentSchedule.jsx'));
+const StudentProfile = lazy(() => import('./StudentProfile.jsx'));
+const StudentSubjects = lazy(() => import('./StudentSubjects.jsx'));
+const PlayZone = lazy(() => import('./PlayZone.jsx'));
+const PaperExamScan = lazy(() => import('./PaperExamScan.jsx'));
+const StudentAssignments = lazy(() => import('./StudentAssignments.jsx'));
+const StudentLiveSessions = lazy(() => import('./StudentLiveSessions.jsx'));
+const StudentDailyRoutine = lazy(() => import('./StudentDailyRoutine.jsx'));
+const StudentFlashcards = lazy(() => import('./StudentFlashcards.jsx'));
+const SchoolCalendar = lazy(() => import('../../components/SchoolCalendar.jsx'));
 
 export default function StudentSpace() {
   const { user } = useAuth();
@@ -106,8 +106,11 @@ export default function StudentSpace() {
         ))}
       </div>
       <div className="container">
-        <StudentProfile profile={profile} />
+        <Suspense fallback={null}>
+          <StudentProfile profile={profile} />
+        </Suspense>
         <SpaceShell base="/student-space" title={t('studentSpace.sidebarTitle')} storageKey="rafiqi-student-sidebar" sections={GROUPS}>
+          <Suspense fallback={null}>
           <Routes>
             <Route index element={<StudentTwin />} />
             <Route path="routine" element={<StudentDailyRoutine />} />
@@ -130,6 +133,7 @@ export default function StudentSpace() {
             <Route path="schedule" element={<StudentSchedule />} />
             <Route path="*" element={<Navigate to="." replace />} />
           </Routes>
+        </Suspense>
         </SpaceShell>
       </div>
     </div>
