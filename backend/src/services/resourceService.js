@@ -49,6 +49,12 @@ const AI_PROMPTS = {
     '{"cards":[{"front":"السؤال أو المفهوم","back":"الإجابة أو التعريف"}]}\n' +
     'أنشئ 8-10 بطاقات مراجعة.',
 
+  LESSON_PLAN: (lessonTitle, subject) =>
+    `أنشئ خطة درس بيداغوجية كاملة وفق المقاربة بالكفاءات للدرس "${lessonTitle}" في مادة ${subject || 'المادة المحددة'}.\n` +
+    'أخرج JSON فقط بالبنية:\n' +
+    '{"title":"...","duration":45,"objectives":["كفاءة مستهدفة وأهداف إجرائية"],"materials":["السبورة","الكتاب","بطاقات"],"stages":[{"time":"10 د","name":"التمهيد","goal":"...","activity":"..."}],"evaluation":"...","homework":"..."}\n' +
+    'المراحل من 4 إلى 6 تغطي: التمهيد، البناء، التثبيت، التقويم والختام. أخرج JSON فقط.',
+
   PRESENTATION: (lessonTitle, subject) =>
     `أنت مدرّس تونسي. أنشئ عرضاً تقديرياً للدرس "${lessonTitle}" في مادة ${subject || 'متنوعة'}.\n` +
     'أعد JSON فقط بالشكل:\n' +
@@ -79,6 +85,23 @@ const FALLBACK = {
       { front: `مثال على "${lessonTitle}"`, back: 'مثال توضيحي' }
     ]
   }),
+  LESSON_PLAN: (lessonTitle) => ({
+    title: `خطة حصة: ${lessonTitle}`,
+    duration: 45,
+    objectives: [
+      'اكتساب مفاهيم الدرس وتوظيفها في وضعيات متنوعة',
+      'تنمية الكفاءة المستهدفة عبر أنشطة الملاحظة والمناولة والتصنيف'
+    ],
+    materials: ['السبورة', 'الكتاب المدرسي', 'بطاقات ووثائق', 'أدوات المناولة'],
+    stages: [
+      { time: '5 د', name: 'التمهيد والتهيؤ', goal: 'استثارة الانتباه وربط المكتسبات السابقة', activity: `وضعيات انطلاق حول ${lessonTitle}` },
+      { time: '15 د', name: 'البناء والتعلم', goal: 'بناء المفهوم الجديد عبر الملاحظة والمناولة', activity: `دراسة أمثلة وأمثلة ضد حول ${lessonTitle} ثم استنتاج القاعدة جماعيا` },
+      { time: '15 د', name: 'التثبيت والتطبيق', goal: 'توظيف المفهوم في تمارين متدرجة الصعوبة', activity: `تمارين فردية ثم ثنائية حول ${lessonTitle} مع متابعة وتصحيح جماعي` },
+      { time: '10 د', name: 'التقويم والختام', goal: 'قياس مدى تحقق الكفاءة المستهدفة', activity: 'تقويم تكويني سريع ثم بطاقة تقنية وخطة عمل للبيت' }
+    ],
+    evaluation: 'شبكة تقويم بالمعايير (صائب / بصدد الاكتساب / غير مكتسب) وتقويم تكويني شفهي',
+    homework: 'إنجاز بطاقات تقنية حول الدرس'
+  }),
   PRESENTATION: (lessonTitle) => ({
     title: `عرض تقديمي: ${lessonTitle}`,
     slides: [
@@ -102,7 +125,11 @@ export async function buildResource({ teacherId, kind, subject, level, lessonTit
     content = null;
   }
 
-  if (!content || !content.exercises && !content.tasks && !content.cards && !content.slides) {
+  // تحقق صريح من البنية المطلوبة لكل نوع (الشرط القديم لم يكن يغطي LESSON_PLAN)
+  const REQUIRED_LIST = { WORKSHEET: 'exercises', HOMEWORK: 'tasks', FLASHCARDS: 'cards', PRESENTATION: 'slides', LESSON_PLAN: 'stages' };
+  const reqKey = REQUIRED_LIST[kind];
+  const shapeOk = content && Array.isArray(content[reqKey]) && content[reqKey].length > 0;
+  if (!shapeOk) {
     content = FALLBACK[kind](lessonTitle);
   }
 

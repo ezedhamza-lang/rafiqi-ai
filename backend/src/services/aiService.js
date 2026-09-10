@@ -330,7 +330,11 @@ export async function generatePresentation(teacherId, { subject, level, lessonTi
   const user = `المادة: ${subject}\nالمستوى: ${level}\nالدرس: ${lessonTitle}\n${context ? `محتوى الدرس المرجعي:\n${context}\n` : ''}\nأنشئ ${slideCount} شرائح بصيغة JSON على الشكل:\n[{"title":"...","body":"..."}]\nأول شريحة للعنوان ثم الأهداف ثم المحتوى ثم الأمثلة ثم التقويم. أعد JSON فقط.`;
   const text = await generateText(teacherId, system, user);
   const parsed = extractJson(text);
-  return Array.isArray(parsed) ? parsed : null;
+  // تطبيع: قد يرجع النموذج مصفوفة عارية أو غلافا {slides:[...]} أو {presentation:{slides:[...]}}
+  const slides = Array.isArray(parsed)
+    ? parsed
+    : (Array.isArray(parsed?.slides) ? parsed.slides : (Array.isArray(parsed?.presentation?.slides) ? parsed.presentation.slides : null));
+  return slides && slides.length ? slides : null;
 }
 
 // ===== المرحلة 7.3 — رؤى الولي (ملخص + أنشطة) فوق البيانات الحقيقية =====

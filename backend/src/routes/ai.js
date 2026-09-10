@@ -469,8 +469,12 @@ router.post('/generate-lesson-plan', teacherMiddleware, validateBody(aiLessonPla
       subjectId,
       lessonId
     });
+    if (!lessonPlan) {
+      throw new ApiError(502, 'تعذر توليد خطة الدرس — أعد المحاولة أو غيّر صياغة عنوان الدرس');
+    }
     res.json({ lessonPlan });
   } catch (e) {
+    if (e instanceof ApiError) throw e;
     throw aiError(e);
   }
 }));
@@ -559,8 +563,12 @@ router.post('/generate-presentation', teacherMiddleware, validateBody(aiPresenta
       subjectId,
       lessonId
     });
+    if (!slides) {
+      throw new ApiError(502, 'تعذر توليد الشرائح من الذكاء الاصطناعي — أعد المحاولة أو غيّر صياغة عنوان الدرس');
+    }
     res.json({ slides });
   } catch (e) {
+    if (e instanceof ApiError) throw e;
     throw aiError(e);
   }
 }));
