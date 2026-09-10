@@ -112,11 +112,12 @@ app.use((req, res, next) => {
   next();
 });
 
-// ===== روابط محمية موقّعة للملفات الحساسة (أوراق الامتحانات + وثائق الأولياء) =====
+// ===== روابط محمية موقّعة للملفات الحساسة (أوراق الامتحانات + وثائق الأولياء + تسجيلات الحصص) =====
 // هذه الملفات تُفتح من الواجهة عبر <a href> مباشرة (بلا ترويسة مصادقة)، لذا
 // نوقّعها وقت الاستجابة برمز قصير العمر. الملكية مضمونة لأن الـAPI الذي يُرجع
 // الرابط محمي بالصلاحيات أصلاً — فلا يحصل المستخدم على رابط إلا لما يُسمح له برؤيته.
-const PROTECTED_UPLOAD_PREFIXES = ['/uploads/exams/', '/uploads/documents/'];
+// تسجيلات الحصص (أصوات دروس فيها قُصّر) محمية بالمثل.
+const PROTECTED_UPLOAD_PREFIXES = ['/uploads/exams/', '/uploads/documents/', '/uploads/recordings/'];
 const SIGNED_URL_TTL_MS = 15 * 60 * 1000;
 
 function isProtectedUploadPath(p) {
@@ -296,6 +297,11 @@ app.use('/uploads/exams', (req, res, next) => {
 });
 app.use('/uploads/documents', (req, res, next) => {
   const urlPath = `/uploads/documents${req.path.split('?')[0]}`;
+  if (verifyUploadSignature(urlPath, req.query.st)) return next();
+  return res.status(403).json({ error: 'رابط غير صالح أو منتهي الصلاحية' });
+});
+app.use('/uploads/recordings', (req, res, next) => {
+  const urlPath = `/uploads/recordings${req.path.split('?')[0]}`;
   if (verifyUploadSignature(urlPath, req.query.st)) return next();
   return res.status(403).json({ error: 'رابط غير صالح أو منتهي الصلاحية' });
 });

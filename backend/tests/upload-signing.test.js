@@ -44,4 +44,14 @@ describe('حارس الملفات المحمية (أوراق الامتحانا�
     const ok = await request(app).get(`/uploads/documents/x.pdf?st=${st}`);
     expect(ok.status).toBe(404);
   });
+
+  it('يحمي تسجيلات الحصص /uploads/recordings (أصوات قُصّر)', async () => {
+    const noSig = await request(app).get('/uploads/recordings/room-1.wav');
+    expect(noSig.status).toBe(403);
+    const badSig = await request(app).get('/uploads/recordings/room-1.wav?st=99999999999999.deadbeef');
+    expect(badSig.status).toBe(403);
+    const st = sign('/uploads/recordings/room-1.wav');
+    const ok = await request(app).get(`/uploads/recordings/room-1.wav?st=${st}`);
+    expect(ok.status).toBe(404);
+  });
 });
