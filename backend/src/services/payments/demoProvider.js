@@ -5,6 +5,28 @@ function isConfigured() {
   return Boolean(config.payment.demoWebhookSecret);
 }
 
+// أمان: صفحة الدفع التجريبية تُفتح في المتصفح (توجيه مباشر بلا ترويسة
+// Authorization) وقد يُعاد فتحها لاحقاً من بطاقة «تجديد معلّق»، لذا نمنح
+// الرابط «صلاحية موقّعة» ثابتة (HMAC على معرّف العملية فقط) — من لا يحصل على
+// الرابط من واجهة الدفع المحمية بالملكية لا يستطيع تصفّح صفحة غيره ولا فرْض
+// معرّفات متسلسلة. في الإنتاج تُحجب الصفحة كاملةً ما لم يُصرَّح بالـ DEMO.
+export function demoCheckoutToken(intentId) {
+  return crypto.createHmac('sha256', config.jwtSecret).update(`demo-checkout.${intentId}`).digest('hex');
+}
+
+export function verifyDemoCheckoutToken(intentId, token) {
+  const expected = demoCheckoutToken(intentId);
+  if (!token || typeof token !== 'string') return false;
+  try {
+    const a = Buffer.from(expected, 'hex');
+    const b = Buffer.from(String(token), 'hex');
+    if (a.length !== b.length) return false;
+    return crypto.timingSafeEqual(a, b);
+  } catch {
+    return false;
+  }
+}
+
 export const demoProvider = {
   name: 'DEMO',
   label: 'المزود التجريبي (محاكاة داخل المنصة)',
@@ -22,7 +44,7 @@ export const demoProvider = {
 
   async createCheckout({ intent }) {
     return {
-      checkoutUrl: `/api/payments/demo-checkout/${intent.id}`,
+      checkoutUrl: `/api/payments/demo-checkout/${intent.id}?t=${encodeURIComponent(demoCheckoutToken(intent.id))}`,
       providerReference: `DEMO-${intent.id}-${Date.now().toString(36)}`
     };
   },

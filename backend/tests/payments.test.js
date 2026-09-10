@@ -125,8 +125,24 @@ describe('Checkout (بدء عملية الدفع)', () => {
     expect(res.body.status).toBe('PENDING');
     expect(res.body.provider).toBe('DEMO');
     expect(res.body.amount).toBe(147);
-    expect(res.body.checkoutUrl).toBe(`/api/payments/demo-checkout/${res.body.id}`);
+    expect(res.body.checkoutUrl).toMatch(new RegExp(`^/api/payments/demo-checkout/${res.body.id}\\?t=`));
     expect(res.body.providerReference).toBeTruthy();
+  });
+
+  it('بوابة demo-checkout ترفض بلا توقيع صالح وتقبل بتوقيع المنصة', async () => {
+    const token = await getToken('parent@test.tn', 'parent123');
+    const prisma = (await import('../src/db.js')).default;
+    const sub = await createPendingSubscription(prisma);
+    const res = await startCheckout(token, sub.id);
+    const id = res.body.id;
+    const noSig = await request(app).get(`/api/payments/demo-checkout/${id}`);
+    expect(noSig.status).toBe(403);
+    const badSig = await request(app).get(`/api/payments/demo-checkout/${id}?t=${Date.now() + 99999}${'.deadbeef'}`);
+    expect(badSig.status).toBe(403);
+    const { demoCheckoutToken } = await import('../src/services/payments/demoProvider.js');
+    const good = await request(app).get(`/api/payments/demo-checkout/${id}?t=${encodeURIComponent(demoCheckoutToken(id))}`);
+    expect(good.status).toBe(200);
+    expect(good.text).toContain('DEMO');
   });
 
   it('يمنع غير الولي/غير مالك الاشتراك من الدفع', async () => {

@@ -8,6 +8,7 @@ import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 import { createCaptcha } from '../services/captchaService.js';
 import { listProviders, getProvider, normalizeProviderName } from '../services/payments/provider.js';
 import { createCheckoutIntent, processWebhookEvent, PAYABLE_STATUSES } from '../services/paymentService.js';
+import { verifyDemoCheckoutToken, demoCheckoutToken } from '../services/payments/demoProvider.js';
 import { audit, requestContext } from '../services/auditService.js';
 import { getInvoiceWithRelations, buildInvoicePdf, INVOICE_INCLUDE } from '../services/invoiceService.js';
 import { cancelAutoRenewal, enableAutoRenewal, runRenewalSweep } from '../services/subscriptionRenewalService.js';
@@ -657,8 +658,15 @@ router.get(
 router.get(
   '/demo-checkout/:intentId',
   asyncHandler(async (req, res) => {
+    if (config.nodeEnv === 'production' && !config.payment.allowDemoPayments) {
+      throw new ApiError(404, 'صفحة الدفع غير موجودة');
+    }
+    const intentId = Number(req.params.intentId);
+    if (!verifyDemoCheckoutToken(intentId, req.query.t)) {
+      throw new ApiError(403, 'رابط الدفع غير صالح أو منتهي الصلاحية');
+    }
     const intent = await prisma.paymentIntent.findUnique({
-      where: { id: Number(req.params.intentId) },
+      where: { id: intentId },
       include: { subscription: { include: { user: { select: { firstName: true, lastName: true, email: true } } } } }
     });
     if (!intent || intent.provider !== 'DEMO') throw new ApiError(404, 'صفحة الدفع غير موجودة');
@@ -948,6 +956,15 @@ router.post(
   })
 );
 
+function escHtml(v) {
+  return String(v ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function renderConfirmPage(outcome, intentId) {
   const isSuccess = outcome === 'success';
   const icon = isSuccess ? '✅' : '↩️';
@@ -974,7 +991,7 @@ function renderConfirmPage(outcome, intentId) {
     <div class="icon">${icon}</div>
     <div class="title">${title}</div>
     <div class="body">${body}</div>
-    <a class="btn" href="${intentId ? `/api/payments/demo-checkout/${intentId}` : '/login'}">العودة</a>
+    <a class="btn" href="${intentId ? `/api/payments/demo-checkout/${intentId}?t=${encodeURIComponent(demoCheckoutToken(intentId))}` : '/login'}">العودة</a>
   </div>
 </body>
 </html>`;
@@ -983,9 +1000,11 @@ function renderConfirmPage(outcome, intentId) {
 function renderDemoCheckoutPage(intent) {
   const sub = intent.subscription;
   const owner = sub?.user || {};
-  const amount = `${intent.amount} ${intent.currency === 'TND' ? 'د.ت' : intent.currency}`;
-  const plan = sub?.plan || 'اشتراك المنصة';
-  const schoolYear = sub?.schoolYear || '';
+  const ownerName = escHtml([owner.firstName, owner.lastName].filter(Boolean).join(' '));
+  const amount = `${intent.amount} ${intent.currency === 'TND' ? 'د.ت' : escHtml(intent.currency)}`;
+  const plan = escHtml(sub?.plan || 'اشتراك المنصة');
+  const schoolYear = escHtml(sub?.schoolYear || '');
+  const providerRef = escHtml(intent.providerReference || '—');
   return `<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -1018,9 +1037,9 @@ function renderDemoCheckoutPage(intent) {
   <div class="card">
     <span class="badge">وضع اختبار — Sandbox</span>
     <h1>${plan}</h1>
-    <p class="plan">${owner.firstName ? `${owner.firstName} ${owner.lastName}` : ''} ${schoolYear ? '· ' + schoolYear : ''}</p>
+    <p class="plan">${ownerName}${schoolYear ? ' · ' + schoolYear : ''}</p>
     <div class="price">${amount}</div>
-    <p class="meta">مرجع العملية: ${intent.providerReference || '—'}</p>
+    <p class="meta">مرجع العملية: ${providerRef}</p>
     <div class="sub">هذه صفحة <b>المزود التجريبي DEMO</b> التي تحاكي بوابة الدفع. اختر نتيجة لاختبار كيف تتعامل المنصة مع كل حالة (نجاح / فشل / إلغاء).</div>
     <button class="btn btn-success" data-result="success">إتمام الدفع بنجاح</button>
     <button class="btn btn-fail" data-result="failure">محاكاة فشل الدفع</button>
