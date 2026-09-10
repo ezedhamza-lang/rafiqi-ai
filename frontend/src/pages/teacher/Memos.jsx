@@ -135,6 +135,14 @@ export default function Memos({ onChanged }) {
     onChanged && onChanged();
   };
 
+  const printPdf = async () => {
+    try {
+      await api.download(`/teacher/memos/${view.id}/pdf`, `memo-${view.lessonTitle || view.id}.pdf`);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   const openSaved = (m) => {
     setForm({ subject: m.subject, level: m.level, lessonTitle: m.lessonTitle, lessonType: m.lessonType || '', unit: m.unit || '' });
     setView(m);
@@ -258,7 +266,7 @@ export default function Memos({ onChanged }) {
           <div className="panel-head">
             <h4>{t('teacherSpace.memos.memoLabel', { title: view.lessonTitle })}</h4>
             <div className="btn-group">
-              <button className="btn" onClick={() => window.print()}>{t('teacherSpace.memos.print')}</button>
+              <button className="btn" onClick={printPdf}>{t('teacherSpace.memos.print')}</button>
               <button className="btn" onClick={rebuild}>{t('teacherSpace.memos.rebuild')}</button>
               <button className="btn" onClick={() => setView(null)}>{t('teacherSpace.memos.back')}</button>
             </div>

@@ -48,8 +48,8 @@ function baseHtml(title, body) {
   .note { font-size: 10.5px; color: #64748b; text-align: center; margin-top: 14px; }
   .page { padding: 0 4px; }
   .wm {
-    position: fixed; top: 30%; left: 12%; right: 12%; width: 76%; text-align: center; z-index: 0;
-    transform: rotate(-24deg); opacity: .06; font-size: 17px; font-weight: 800;
+    position: fixed; top: 28%; left: 6%; right: 6%; width: 88%; text-align: center; z-index: 0;
+    transform: rotate(-24deg); opacity: .11; font-size: 17px; font-weight: 800;
     color: #0b2a52; line-height: 2.1; pointer-events: none; overflow: hidden;
   }
   .credit {
@@ -178,4 +178,50 @@ export function childReportHtml({ student, report }) {
   <p class="note">رفيقي — الحياة المدرسية</p>
 </div>`;
   return baseHtml('تقرير تقدم التلميذ', body);
+}
+
+// ===== مذكرة الأستاذ (درس/حصة) =====
+export function memoHtml(memo) {
+  let c = memo.content;
+  if (typeof c === 'string') { try { c = JSON.parse(c); } catch { c = {}; } }
+  c = c || {};
+  const secs = [];
+  if (c.methodologyTitle) {
+    secs.push('<h2>البروفايل المنهجي المعتمد</h2><p><b>' + esc(c.methodologyTitle) + '</b>' + (c.principle ? '<br/>' + esc(c.principle) : '') + '</p>');
+  }
+  if (c.header && (c.header.columns || []).length) {
+    const vals = c.header.values || {};
+    secs.push('<h2>بيانات الحصة</h2><table class="kv"><tbody>' + c.header.columns.map((k) => '<tr><td>' + esc(k) + '</td><td><b>' + esc(vals[k] || '—') + '</b></td></tr>').join('') + '</tbody></table>');
+  }
+  if ((c.warmup || []).length) {
+    secs.push('<h2>التمهيد</h2><ul>' + c.warmup.map((w) => '<li>' + esc(w) + '</li>').join('') + '</ul>');
+  }
+  if (c.table && (c.table.columns || []).length) {
+    const cols = (c.table.columns || []).map((x) => '<th>' + esc(x) + '</th>').join('');
+    const rows = (c.table.rows || []).map((r) => '<tr>' + c.table.columns.map((col) => '<td>' + esc(r[col] || '—') + '</td>').join('') + '</tr>').join('');
+    secs.push('<h2>جدول سير الحصة</h2><table><thead><tr>' + cols + '</tr></thead><tbody>' + rows + '</tbody></table>');
+  }
+  if ((c.phases || []).length) {
+    secs.push('<h2>مراحل الحصة</h2>' + c.phases.map((p, i) => {
+      let s = '<div class="phase"><p><b>' + (i + 1) + '. ' + esc(p.name || '') + '</b></p>';
+      if (p.goal) s += '<p>' + esc(p.goal) + '</p>';
+      if ((p.activities || []).length) s += '<ul>' + p.activities.map((a) => '<li>' + esc(a) + '</li>').join('') + '</ul>';
+      if ((p.notes || []).length) s += '<ul>' + p.notes.map((n) => '<li>' + esc(n) + '</li>').join('') + '</ul>';
+      return s + '</div>';
+    }).join(''));
+  }
+  if ((c.keywords || []).length) {
+    secs.push('<h2>الكلمات المفتاحية</h2><p>' + c.keywords.map((k) => esc(k)).join(' ، ') + '</p>');
+  }
+  if ((c.definitions || []).length) {
+    secs.push('<h2>المفاهيم</h2><ul>' + c.definitions.map((d) => '<li><b>' + esc(d) + '</b></li>').join('') + '</ul>');
+  }
+  if ((c.domainNotes || []).length) {
+    secs.push('<h2>ملاحظات حسب المجال</h2>' + c.domainNotes.map((dn) => '<p><b>' + esc(dn.domain || '') + ':</b> ' + esc(dn.note || '') + '</p>').join(''));
+  }
+  if ((c.closing || []).length) {
+    secs.push('<h2>الختام</h2><ul>' + c.closing.map((x) => '<li>' + esc(x) + '</li>').join('') + '</ul>');
+  }
+  const body = '<div class="page">' + (secs.join('') || '<p>لا تحتوي هذه المذكرة على محتوى.</p>') + '</div>';
+  return baseHtml('مذكرة حصة: ' + (memo.lessonTitle || ''), body);
 }

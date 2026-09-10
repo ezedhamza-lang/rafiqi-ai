@@ -1,5 +1,5 @@
 import { renderPdfFromHtml } from './browserPdf.js';
-import { gradesHtml, childReportHtml } from './pdfTemplates.js';
+import { gradesHtml, childReportHtml, memoHtml } from './pdfTemplates.js';
 import { subjectLabel, percent } from './analyticsService.js';
 import { createDoc, docToBuffer, PdfLayout, COLORS, CONTENT_WIDTH, PAGE } from './pdfUtils.js';
 
@@ -112,4 +112,31 @@ export async function buildChildReportPdf({ student, report }) {
   const viaBrowser = await renderPdfFromHtml(childReportHtml({ student, report }));
   if (viaBrowser) return viaBrowser;
   return buildChildReportPdfLegacy({ student, report });
+}
+
+export async function buildMemoPdf(memo) {
+  const viaBrowser = await renderPdfFromHtml(memoHtml(memo));
+  if (viaBrowser) return viaBrowser;
+  return buildMemoPdfLegacy(memo);
+}
+
+async function buildMemoPdfLegacy(memo) {
+  let c = memo.content;
+  if (typeof c === 'string') { try { c = JSON.parse(c); } catch { c = {}; } }
+  c = c || {};
+  const doc = createDoc();
+  const layout = new PdfLayout(doc);
+  layout.heading('مذكرة حصة: ' + (memo.lessonTitle || ''), { size: 16, color: COLORS.cyan });
+  if (c.methodologyTitle) { layout.line('البروفايل المنهجي: ' + c.methodologyTitle, { size: 12 }); }
+  if ((c.warmup || []).length) { layout.heading('التمهيد', { size: 13 }); c.warmup.forEach((w) => layout.line('• ' + w)); }
+  if ((c.phases || []).length) {
+    layout.heading('مراحل الحصة', { size: 13 });
+    c.phases.forEach((p, i) => {
+      layout.line((i + 1) + '. ' + (p.name || ''), { size: 12, font: 'AmiriBold' });
+      (p.activities || []).forEach((a) => layout.line('   • ' + a));
+    });
+  }
+  if ((c.closing || []).length) { layout.heading('الختام', { size: 13 }); c.closing.forEach((x) => layout.line('• ' + x)); }
+  layout.footer('رفيقي — مذكرة الأستاذ');
+  return docToBuffer(doc);
 }

@@ -1052,4 +1052,15 @@ router.get('/exams/:id/preview-docx', teacherMiddleware, validateParams(teacherC
   res.send(Buffer.from(buffer));
 }));
 
+
+router.get('/memos/:id/pdf', teacherMiddleware, validateParams(teacherContentIdParamSchema), asyncHandler(async (req, res) => {
+  const memo = await prisma.memo.findFirst({ where: { id: Number(req.params.id), teacherId: req.user.id } });
+  if (!memo) throw new ApiError(404, 'المذكرة غير موجودة');
+  const { buildMemoPdf } = await import('../services/exportService.js');
+  const buffer = await buildMemoPdf(memo);
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename="memo-' + memo.id + '.pdf"');
+  res.send(buffer);
+}));
+
 export default router;

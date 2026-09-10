@@ -276,6 +276,11 @@ export default function Header() {
               <button className="icon-btn" title={t('header.myBoard')} aria-label={t('header.myBoard')} onClick={goHome}>
                 <span className="material-icons">grid_view</span>
               </button>
+              {['TEACHER', 'ADMIN', 'SCHOOL_DIRECTOR'].includes(user.role) && (
+                <a className="icon-btn" href="/teacher-guide.pdf" target="_blank" rel="noreferrer" title={t('header.teacherGuide')} aria-label={t('header.teacherGuide')}>
+                  <span className="material-icons">menu_book</span>
+                </a>
+              )}
               <button className="btn btn-outline btn-sm" onClick={handleLogout}>
                 {t('header.logout')}
               </button>
