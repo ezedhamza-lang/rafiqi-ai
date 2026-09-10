@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
-import { api, getToken, setToken, setRefreshToken, getStoredUser, setStoredUser, clearSession } from '../api/client.js';
+import { api, getToken, setToken, setRefreshToken, getRefreshToken, getStoredUser, setStoredUser, clearSession } from '../api/client.js';
 
 const AuthContext = createContext(null);
 
@@ -42,7 +42,7 @@ export function AuthProvider({ children }) {
 
   const logout = useCallback(async () => {
     try {
-      await api.post('/auth/logout', { refreshToken: localStorage.getItem('school_refresh_token') });
+      await api.post('/auth/logout', { refreshToken: getRefreshToken() });
     } catch {
       // إبطال الرمز فشل (شبكة...) — الجلسة المحلية تُمسح دائماً
     }

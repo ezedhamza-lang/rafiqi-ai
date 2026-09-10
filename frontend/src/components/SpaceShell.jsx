@@ -15,6 +15,17 @@ export default function SpaceShell({ base, title, storageKey = 'rafiqi-sidebar',
 
   useEffect(() => { localStorage.setItem(storageKey, collapsed ? 'collapsed' : 'expanded'); }, [collapsed, storageKey]);
   useEffect(() => { setMobileOpen(false); }, [location.pathname]);
+  useEffect(() => {
+    if (!mobileOpen) return undefined;
+    const onKey = (e) => { if (e.key === 'Escape') setMobileOpen(false); };
+    document.addEventListener('keydown', onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [mobileOpen]);
 
   const groups = sections && sections.length ? sections : [{ label: null, items: items || [] }];
 
@@ -70,8 +81,13 @@ export default function SpaceShell({ base, title, storageKey = 'rafiqi-sidebar',
 
       {mobileOpen && (
         <>
-          <div className="sidebar-backdrop" onClick={() => setMobileOpen(false)} />
-          <div className="student-sidebar-drawer">{aside}</div>
+          <div className="sidebar-backdrop" aria-hidden="true" onClick={() => setMobileOpen(false)} />
+          <div className="student-sidebar-drawer" role="dialog" aria-modal="true" aria-label={title}>
+            {aside}
+            <button type="button" className="drawer-close" onClick={() => setMobileOpen(false)} aria-label={t('common.close')}>
+              <span className="material-icons">close</span>
+            </button>
+          </div>
         </>
       )}
     </div>

@@ -40,7 +40,7 @@ export default defineConfig({
         ws: true
       }
     },
-    allowedHosts: ['.monkeycode-ai.live']
+    allowedHosts: []
   },
   build: {
     // livekit-client is a large third-party SDK, already lazy-loaded on demand.

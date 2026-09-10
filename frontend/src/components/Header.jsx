@@ -204,11 +204,7 @@ export default function Header() {
         </div>
         <div className="header-actions">
           {/* Batch 6: Enhanced Language Switcher */}
-          <MiniLanguageSwitcher 
-            onLanguageChange={(newLang, dir) => {
-              console.log(`Language changed to: ${newLang}, direction: ${dir}`);
-            }} 
-          />
+          <MiniLanguageSwitcher />
           <button
             className="icon-btn"
             onClick={toggle}

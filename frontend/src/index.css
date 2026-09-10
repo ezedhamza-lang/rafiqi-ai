@@ -5978,6 +5978,16 @@ tr:hover td {
   background: var(--primary); color: #fff; box-shadow: 0 8px 22px rgba(0,0,0,.28);
   align-items: center; justify-content: center;
 }
+.drawer-close {
+  position: absolute; top: 12px; inset-inline-start: 232px; z-index: 1002;
+  width: 36px; height: 36px; border-radius: 10px; cursor: pointer;
+  border: 1px solid rgba(255,255,255,.22); background: rgba(255,255,255,.10); color: #fff;
+  display: inline-grid; place-items: center;
+}
+.drawer-close:hover { background: rgba(255,255,255,.2); }
+.student-sidebar-drawer { position: fixed; inset: 0; z-index: 1001; pointer-events: none; }
+.student-sidebar-drawer .student-sidebar,
+.student-sidebar-drawer .drawer-close { pointer-events: auto; }
 @media (max-width: 980px) {
   .sidebar-fab { display: inline-flex; }
   .student-main .twin-cards { grid-template-columns: 1fr; gap: 0.5rem; }

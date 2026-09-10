@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useRef, useState, useCallback } from 'react';
+import { createContext, useContext, useEffect, useRef, useState, useCallback, useMemo } from 'react';
 import { useAuth } from './AuthContext.jsx';
 import { getToken, api } from '../api/client.js';
 
@@ -11,6 +11,10 @@ export function ChatProvider({ children }) {
   const wsRef = useRef(null);
   const listenersRef = useRef(new Set());
   const enabled = !!user && user.role !== 'STUDENT';
+
+  useEffect(() => {
+    if (!user) setUnread(0);
+  }, [user]);
 
   const refreshUnread = useCallback(() => {
     if (!enabled) {
@@ -101,7 +105,10 @@ export function ChatProvider({ children }) {
     return () => listenersRef.current.delete(fn);
   }, []);
 
-  const value = { unread, refreshUnread, sendEvent, subscribe, connected };
+  const value = useMemo(
+    () => ({ unread, refreshUnread, sendEvent, subscribe, connected }),
+    [unread, refreshUnread, sendEvent, subscribe, connected]
+  );
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
 }

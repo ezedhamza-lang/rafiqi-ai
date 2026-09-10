@@ -15,6 +15,7 @@ export default function Modal({
 }) {
   const [mounted, setMounted] = useState(open);
   const overlayRef = useRef(null);
+  const dialogRef = useRef(null);
   const titleId = useId();
 
   useEffect(() => {
@@ -38,6 +39,40 @@ export default function Modal({
       document.body.style.overflow = prevOverflow;
     };
   }, [open, handleClose]);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const prevFocused = document.activeElement;
+    const FOCUSABLE = 'a[href],button:not([disabled]),textarea:not([disabled]),input:not([disabled]):not([type=hidden]),select:not([disabled]),[tabindex]:not([tabindex="-1"])';
+    const focusFirst = () => {
+      const target = initialFocusRef?.current || dialogRef.current?.querySelector(FOCUSABLE);
+      target?.focus?.();
+    };
+    const timer = setTimeout(focusFirst, 0);
+    const onTab = (e) => {
+      if (e.key !== 'Tab' || !dialogRef.current) return;
+      const items = [...dialogRef.current.querySelectorAll(FOCUSABLE)].filter((el) => el.offsetParent !== null);
+      if (!items.length) return;
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      } else if (!dialogRef.current.contains(document.activeElement)) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', onTab);
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('keydown', onTab);
+      if (prevFocused && prevFocused.focus) prevFocused.focus();
+    };
+  }, [open, initialFocusRef]);
 
   useEffect(() => {
     if (open && initialFocusRef?.current) {
@@ -64,6 +99,7 @@ export default function Modal({
       aria-hidden={!open}
     >
       <div
+        ref={dialogRef}
         className={`ui-modal ${sizeClass}`}
         role="dialog"
         aria-modal="true"

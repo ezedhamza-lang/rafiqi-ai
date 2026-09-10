@@ -410,7 +410,7 @@ export default function PaymentCenter() {
             </div>
             <div style={{ padding: '1.2rem 1.4rem 1.4rem' }}>
 
-            <div style={{ background: 'var(--surface-2)', padding: '12px', borderRadius: '10px', marginBottom: '1rem' }}>
+            <div style={{ background: 'var(--bg-subtle)', padding: '12px', borderRadius: '10px', marginBottom: '1rem' }}>
               <div className="form-row" style={{ marginBottom: 0 }}>
                 <div className="form-group grow">
                   <label>{t('paymentCenter.plan')}</label>

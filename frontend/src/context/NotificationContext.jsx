@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, useCallback } from 'react';
+import { createContext, useContext, useEffect, useState, useCallback, useMemo } from 'react';
 import { useAuth } from './AuthContext.jsx';
 import { useChat } from './ChatContext.jsx';
 import { api } from '../api/client.js';
@@ -11,6 +11,13 @@ export function NotificationProvider({ children }) {
   const [unreadCount, setUnreadCount] = useState(0);
   const [recent, setRecent] = useState([]);
   const [preferences, setPreferences] = useState({ notifyEmail: false, notifyPush: true, notifySms: false });
+
+  useEffect(() => {
+    if (!user) {
+      setUnreadCount(0);
+      setRecent([]);
+    }
+  }, [user]);
 
   const refresh = useCallback(() => {
     if (!user) return Promise.resolve();
@@ -71,7 +78,10 @@ export function NotificationProvider({ children }) {
     return d;
   }, []);
 
-  const value = { unreadCount, recent, preferences, refresh, markAllRead, markRead, updatePreferences };
+  const value = useMemo(
+    () => ({ unreadCount, recent, preferences, refresh, markAllRead, markRead, updatePreferences }),
+    [unreadCount, recent, preferences, refresh, markAllRead, markRead, updatePreferences]
+  );
 
   return <NotificationContext.Provider value={value}>{children}</NotificationContext.Provider>;
 }
