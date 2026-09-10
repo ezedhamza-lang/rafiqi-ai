@@ -132,6 +132,27 @@ export function requireRole(...roles) {
   };
 }
 
+// مصادقة اختيارية لمسارات عامة (مثل نموذج المساعدة): إن وُجد توكن صالح
+// NON-موقوف يُعبَّأ req.user، وإلا يُكمل مجهولاً بلا خطأ. يمنع أنتحال
+// الهوية عبر إرسال userId من عميل غير مصادَق.
+export async function optionalAuth(req, _res, next) {
+  const header = req.headers.authorization || '';
+  const token = header.startsWith('Bearer ') ? header.slice(7) : null;
+  if (token) {
+    try {
+      const payload = jwt.verify(token, JWT_SECRET);
+      const user = await prisma.user.findUnique({
+        where: { id: payload.id },
+        select: { accountStatus: true }
+      });
+      if (user && user.accountStatus === 'ACTIVE') req.user = payload;
+    } catch {
+      /* مجهول */
+    }
+  }
+  next();
+}
+
 export const adminMiddleware = requireRole('ADMIN', 'SCHOOL_DIRECTOR', 'SUPER_ADMIN');
 export const superAdminMiddleware = requireRole('SUPER_ADMIN');
 export const teacherMiddleware = requireRole('TEACHER', 'ADMIN', 'SCHOOL_DIRECTOR', 'SUPER_ADMIN');

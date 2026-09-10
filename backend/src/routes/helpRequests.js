@@ -3,29 +3,27 @@ import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import prisma from '../db.js';
-import { authMiddleware } from '../auth.js';
+import { authMiddleware, optionalAuth } from '../auth.js';
 import { validateBody } from '../middleware/validate.js';
 import { helpRequestCreateSchema, contactMessageSchema } from '../validators/helpRequest.js';
-import { asyncHandler } from '../middleware/errorHandler.js';
+import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
+import { validateUploadedFiles } from '../utils/fileSecurity.js';
+import { strictExtFilter, safeFilename } from '../utils/uploadSafe.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const HELP_EXT = ['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx'];
+const HELP_MAGIC = ['pdf', 'jpeg', 'png', 'doc', 'zip'];
+
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, path.join(__dirname, '../../uploads')),
-  filename: (_req, file, cb) => {
-    const safe = file.originalname.replace(/[^a-zA-Z0-9.\-\u0600-\u06FF]/g, '_');
-    cb(null, `${Date.now()}-${safe}`);
-  }
+  filename: safeFilename('help')
 });
 
 const upload = multer({
   storage,
   limits: { fileSize: 10 * 1024 * 1024 },
-  fileFilter: (_req, file, cb) => {
-    const allowed = /pdf|jpg|jpeg|png|doc|docx/;
-    const ok = allowed.test(file.mimetype) || allowed.test(file.originalname);
-    cb(null, ok);
-  }
+  fileFilter: strictExtFilter(HELP_EXT)
 });
 
 const router = Router();
@@ -83,10 +81,15 @@ router.get('/types', asyncHandler(async (_req, res) => {
  */
 router.post(
   '/',
+  optionalAuth,
   upload.single('attachment'),
   validateBody(helpRequestCreateSchema),
   asyncHandler(async (req, res) => {
-    const { firstName, lastName, phone, email, requestType, delegation, description, userId } = req.body;
+    const { firstName, lastName, phone, email, requestType, delegation, description } = req.body;
+    if (req.file) {
+      const badFiles = validateUploadedFiles([req.file], HELP_MAGIC);
+      if (badFiles.length) throw new ApiError(400, 'محتوى المرفق لا يطابق الأنواع المسموح بها');
+    }
     const data = {
       firstName: String(firstName).trim(),
       lastName: String(lastName).trim(),
@@ -97,10 +100,8 @@ router.post(
       description: description || null,
       attachment: req.file ? `/uploads/${req.file.filename}` : null
     };
-    if (userId) {
-      const parsed = Number(userId);
-      if (!Number.isNaN(parsed)) data.userId = parsed;
-    }
+    // أمان: لا يُربط الحساب إلا لمستخدم مصادَق فعلاً — لا من جسم الطلب
+    if (req.user?.id) data.userId = req.user.id;
     const request = await prisma.helpRequest.create({ data });
     res.status(201).json(request);
   })

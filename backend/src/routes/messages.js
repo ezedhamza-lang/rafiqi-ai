@@ -9,6 +9,8 @@ import { sendToUser, broadcastUnread } from '../ws.js';
 import { isAllowedContact, scopedRecipientIds, MESSAGE_POLICY, MESSAGE_POLICY_TEXT } from '../services/messagingPolicy.js';
 import { validateBody, validateQuery, validateParams } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
+import { validateUploadedFiles } from '../utils/fileSecurity.js';
+import { strictExtFilter, safeFilename } from '../utils/uploadSafe.js';
 import {
   userIdParamSchema,
   messageCreateSchema,
@@ -19,21 +21,18 @@ import {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const MSG_EXT = ['pdf', 'jpg', 'jpeg', 'png', 'webp', 'doc', 'docx'];
+const MSG_MAGIC = ['pdf', 'jpeg', 'png', 'webp', 'doc', 'zip'];
+
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, path.join(__dirname, '../../uploads')),
-  filename: (_req, file, cb) => {
-    const safe = file.originalname.replace(/[^a-zA-Z0-9.\-\u0600-\u06FF]/g, '_');
-    cb(null, `${Date.now()}-${safe}`);
-  }
+  filename: safeFilename('att')
 });
 
 const upload = multer({
   storage,
   limits: { fileSize: 10 * 1024 * 1024 },
-  fileFilter: (_req, file, cb) => {
-    const allowed = /pdf|jpg|jpeg|png|doc|docx|webp/;
-    cb(null, allowed.test(file.mimetype) || allowed.test(file.originalname));
-  }
+  fileFilter: strictExtFilter(MSG_EXT)
 });
 
 const POLICY = MESSAGE_POLICY;
@@ -253,6 +252,10 @@ router.get('/unread-count', asyncHandler(async (req, res) => {
  */
 router.post('/messages', upload.single('attachment'), validateBody(messageCreateSchema), asyncHandler(async (req, res) => {
   const { recipientId, subject, body } = req.body;
+  if (req.file) {
+    const badFiles = validateUploadedFiles([req.file], MSG_MAGIC);
+    if (badFiles.length) throw new ApiError(400, 'محتوى المرفق لا يطابق الأنواع المسموح بها (PDF أو صور أو Word)');
+  }
   const recipient = await prisma.user.findUnique({ where: { id: Number(recipientId) } });
   if (!recipient) throw new ApiError(404, 'المستلم غير موجود');
   if (!(await isAllowedContact(req.user, recipient))) {

@@ -9,24 +9,21 @@ import { validateBody, validateParams, validateQuery } from '../middleware/valid
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 import { parentDocCreateSchema, docReviewSchema, parentDocStatusQuerySchema, parentDocIdParamSchema } from '../validators/parentDocument.js';
 import { validateUploadedFiles } from '../utils/fileSecurity.js';
+import { strictExtFilter, safeFilename } from '../utils/uploadSafe.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const DOC_EXT = ['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx'];
+
 const storage = multer.diskStorage({
   destination: (_req, _file, cb) => cb(null, path.join(__dirname, '../../uploads/documents')),
-  filename: (_req, file, cb) => {
-    const safe = file.originalname.replace(/[^a-zA-Z0-9.\-\u0600-\u06FF]/g, '_');
-    cb(null, `${Date.now()}-${safe}`);
-  }
+  filename: safeFilename('pdoc')
 });
 
 const upload = multer({
   storage,
   limits: { fileSize: 10 * 1024 * 1024 },
-  fileFilter: (_req, file, cb) => {
-    const allowed = /pdf|jpg|jpeg|png|doc|docx/;
-    cb(null, allowed.test(file.mimetype) || allowed.test(file.originalname));
-  }
+  fileFilter: strictExtFilter(DOC_EXT)
 });
 
 export const PARENT_DOC_TYPES = [
