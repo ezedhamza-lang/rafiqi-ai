@@ -38,6 +38,21 @@ async function getStudentRecord(userId) {
   return prisma.student.findFirst({ where: { accountUserId: userId } });
 }
 
+// أمان: أسئلة الواجبات تحمل مفاتيح الإجابة (correctOption/correctAnswer/orderItems).
+// لا تُرسل للتلميذ أبداً — نتائج الفردي تعرضها submission.graded.
+const ASSIGNMENT_ANSWER_KEYS = new Set(['correctOption', 'correctAnswer', 'orderItems']);
+
+function sanitizeAssignmentForStudent(assignment) {
+  const questions = Array.isArray(assignment.questions)
+    ? assignment.questions.map((q) => {
+        const clean = { ...q };
+        ASSIGNMENT_ANSWER_KEYS.forEach((k) => delete clean[k]);
+        return clean;
+      })
+    : assignment.questions;
+  return { ...assignment, questions };
+}
+
 async function notifyClassStudents(classId, payload) {
   const students = await prisma.student.findMany({
     where: { classId },
@@ -437,7 +452,7 @@ router.get('/student/assignments', studentMiddleware, asyncHandler(async (req, r
       const sub = subMap.get(a.id);
       const overdue = a.dueDate && new Date(a.dueDate) < new Date();
       return {
-        ...a,
+        ...sanitizeAssignmentForStudent(a),
         done: !!sub,
         overdue,
         submission: sub
@@ -506,7 +521,7 @@ router.get('/student/assignments/:id', studentMiddleware, validateParams(assignm
       }
     : null;
 
-  res.json({ ...assignment, submission: sub });
+  res.json({ ...sanitizeAssignmentForStudent(assignment), submission: sub });
 }));
 
 /**

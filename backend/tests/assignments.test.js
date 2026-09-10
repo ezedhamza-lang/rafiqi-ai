@@ -114,6 +114,44 @@ describe('assignments (المرحلة 3.1 — التكليفات)', () => {
     expect(studentList.body[0].done).toBe(false);
   });
 
+  it('أمان: التلميذ لا يتلقى مفاتيح الإجابات لا في القائمة ولا التفاصيل', async () => {
+    const prisma = (await import('../src/db.js')).default;
+    const klass = await prisma.class.findFirst();
+    const teacherToken = await getToken('teacher@test.tn', 'teacher123');
+    const studentToken = await getToken('student@test.tn', 'student123');
+
+    const create = await request(app)
+      .post('/api/teacher/assignments')
+      .set('Authorization', `Bearer ${teacherToken}`)
+      .send({ title: 'واجب سري', subject: 'MATH', classId: klass.id, questions: SAMPLE_QUESTIONS });
+    const assignmentId = create.body.id;
+
+    const strip = (qs) => {
+      const blob = JSON.stringify(qs);
+      expect(blob).not.toMatch(/correctOption|correctAnswer|orderItems/);
+    };
+
+    const list = await request(app)
+      .get('/api/teacher/student/assignments')
+      .set('Authorization', `Bearer ${studentToken}`);
+    expect(list.status).toBe(200);
+    strip(list.body[0].questions);
+
+    const detail = await request(app)
+      .get(`/api/teacher/student/assignments/${assignmentId}`)
+      .set('Authorization', `Bearer ${studentToken}`);
+    expect(detail.status).toBe(200);
+    strip(detail.body.questions);
+
+    // التسليم والتصحّح لا يزالان يعملان (التصحّح من قاعدة البيانات لا من المفاتيح الظاهرة)
+    const submit = await request(app)
+      .post(`/api/teacher/student/assignments/${assignmentId}/submit`)
+      .set('Authorization', `Bearer ${studentToken}`)
+      .send({ answers: { q1: '1', q2: 'TRUE', q3: '5' } });
+    expect(submit.status).toBe(201);
+    expect(submit.body.score).toBe(4);
+  });
+
   it('يصحح التلميذ التكليف آليا وتحصل على النتيجة', async () => {
     const prisma = (await import('../src/db.js')).default;
     const klass = await prisma.class.findFirst();

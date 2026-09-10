@@ -41,6 +41,14 @@ function sanitizeQuizForStudent(quiz) {
   return { ...quiz, questions };
 }
 
+// عزل: التلميذ يُقيَّد بقسمه دائماً؛ تلميذ بلا قسم ⇒ صنف مستحيل المطابقة
+// (لا يرى بنوك بقية المدارس). الأدوار غير التلميذية (معلّم/إدارة) بلا قيد.
+function studentClassFilter(req, studentRecord) {
+  if (studentRecord?.classId) return { classId: studentRecord.classId };
+  if (req.user.role === 'STUDENT') return { classId: -1 };
+  return {};
+}
+
 /**
  * @swagger
  * /api/teacher/classes:
@@ -427,7 +435,7 @@ router.get('/student/quizzes/:id', studentMiddleware, validateParams(quizIdParam
     where: { accountUserId: req.user.id }
   });
   const quiz = await prisma.quiz.findFirst({
-    where: { id: Number(req.params.id), ...(studentRecord?.classId ? { classId: studentRecord.classId } : {}) }
+    where: { id: Number(req.params.id), ...(studentClassFilter(req, studentRecord)) }
   });
   if (!quiz) throw new ApiError(404, 'الاختبار غير موجود');
   const existing = await prisma.submission.findFirst({
@@ -474,7 +482,7 @@ router.post('/student/quizzes/:id/submit', studentMiddleware, validateParams(qui
     where: { accountUserId: req.user.id }
   });
   const quiz = await prisma.quiz.findFirst({
-    where: { id: Number(req.params.id), ...(studentRecord?.classId ? { classId: studentRecord.classId } : {}) }
+    where: { id: Number(req.params.id), ...(studentClassFilter(req, studentRecord)) }
   });
   if (!quiz) throw new ApiError(404, 'الاختبار غير موجود');
 
@@ -654,7 +662,7 @@ router.get('/student/official-exams/:id', studentMiddleware, validateParams(quiz
     where: {
       id: Number(req.params.id),
       published: true,
-      ...(studentRecord?.classId ? { classId: studentRecord.classId } : {})
+      ...(studentClassFilter(req, studentRecord))
     }
   });
   if (!exam) throw new ApiError(404, 'الاختبار غير موجود');
@@ -698,7 +706,7 @@ router.post('/student/official-exams/:id/submit', studentMiddleware, validatePar
     where: {
       id: Number(req.params.id),
       published: true,
-      ...(studentRecord?.classId ? { classId: studentRecord.classId } : {})
+      ...(studentClassFilter(req, studentRecord))
     }
   });
   if (!exam) throw new ApiError(404, 'الاختبار غير موجود');
