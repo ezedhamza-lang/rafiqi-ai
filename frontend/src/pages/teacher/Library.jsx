@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 import { subjectLabel, SUBJECT_CODES } from '../../utils/labels';
+import ResourcePaper from '../../components/ResourcePaper.jsx';
 
 const RESOURCE_KIND_CODES = ['WORKSHEET', 'HOMEWORK', 'FLASHCARDS', 'PRESENTATION', 'LESSON_PLAN'];
 const LEVELS = [
@@ -32,7 +33,6 @@ export default function Library() {
     load();
   }, [load]);
 
-  const content = view?.content || {};
 
   return (
     <div className="panel">
@@ -116,40 +116,7 @@ export default function Library() {
             </div>
           </div>
 
-          {view.kind === 'WORKSHEET' && (
-            <div>
-              <p><strong>{t('teacherSpace.library.instructionsLabel')}</strong> {content.instructions}</p>
-              {content.exercises?.map((ex, i) => (
-                <div key={i} className="stage-item">
-                  <p><strong>{i + 1}. </strong>{ex.prompt}</p>
-                  {ex.options && <p className="muted">{ex.options.join(' — ')}</p>}
-                </div>
-              ))}
-            </div>
-          )}
-          {view.kind === 'HOMEWORK' && (
-            <div>
-              <p><strong>{t('teacherSpace.library.durationDaysLabel')}</strong> {content.dueDays} {t('teacherSpace.library.daysSuffix')}</p>
-              <ul>{content.tasks?.map((tItem, i) => <li key={i}>{tItem}</li>)}</ul>
-            </div>
-          )}
-          {view.kind === 'FLASHCARDS' && (
-            <div className="cards-grid">
-              {content.cards?.map((c, i) => (
-                <div key={i} className="card-item"><strong>{c.front}</strong><p className="muted">{c.back}</p></div>
-              ))}
-            </div>
-          )}
-          {view.kind === 'PRESENTATION' && (
-            <div>
-              {content.slides?.map((s, i) => (
-                <div key={i} className="stage-item slide-card">
-                  <h5>{t('teacherSpace.library.slideLabel', { n: i + 1, title: s.title })}</h5>
-                  <p>{s.body}</p>
-                </div>
-              ))}
-            </div>
-          )}
+          <ResourcePaper resource={view} />
         </div>
       )}
     </div>

@@ -6073,3 +6073,19 @@ tr:hover td {
   .space-decor .decor { animation: none; }
 }
 
+
+/* --- ResourcePaper: ورقة رسمية للموارد المولّدة --- */
+.rp-section-title { font-weight: 800; margin: 0.9rem 0 0.4rem; }
+.rp-block { margin-top: 0.6rem; }
+.rp-ul { margin: 0.2rem 0 0; padding-inline-start: 1.4rem; }
+.rp-task { margin: 0.35rem 0; }
+.rp-fill { color: #475569; }
+.rp-blank { letter-spacing: 2px; color: #94a3b8; }
+.rp-slide { padding: 0.5rem 0; border-bottom: 1px dashed #e2e8f0; }
+.rp-slide-head { font-weight: 800; display: flex; align-items: center; gap: 8px; }
+.rp-slide-body { margin: 0.3rem 0 0; color: #475569; }
+.rp-key { margin-top: 1rem; }
+@media print {
+  .memo-view .btn-group { display: none !important; }
+  .rp-key .btn { display: none; }
+}

@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 import { subjectLabel, SUBJECT_CODES } from '../../utils/labels';
+import ResourcePaper from '../../components/ResourcePaper.jsx';
 
 const LEVELS = [
   'السنة الأولى أساسي',
@@ -77,7 +78,6 @@ export default function Resources() {
     }
   };
 
-  const content = view?.content || {};
   const kindLabel = t(`teacherSpace.common.resourceKinds.${kind}`);
 
   return (
@@ -174,63 +174,7 @@ export default function Resources() {
             </div>
           </div>
 
-          {kind === 'WORKSHEET' && (
-            <div>
-              <p><strong>{t('teacherSpace.resources.instructionsLabel')}</strong> {content.instructions}</p>
-              {content.exercises?.map((ex, i) => (
-                <div key={i} className="stage-item">
-                  <p><strong>{i + 1}. </strong>{ex.prompt}</p>
-                  {ex.options && <p className="muted">{ex.options.join(' — ')}</p>}
-                </div>
-              ))}
-            </div>
-          )}
-
-          {kind === 'HOMEWORK' && (
-            <div>
-              <p><strong>{t('teacherSpace.resources.durationDaysLabel')}</strong> {content.dueDays} {t('teacherSpace.resources.daysSuffix')}</p>
-              <ul>
-                {content.tasks?.map((tItem, i) => (
-                  <li key={i}>{tItem}</li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {kind === 'FLASHCARDS' && (
-            <div className="cards-grid">
-              {content.cards?.map((c, i) => (
-                <div key={i} className="card-item">
-                  <strong>{c.front}</strong>
-                  <p className="muted">{c.back}</p>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {kind === 'PRESENTATION' && (
-            <div>
-              {content.slides?.map((s, i) => (
-                <div key={i} className="stage-item slide-card">
-                  <h5>{t('teacherSpace.resources.slideLabel', { n: i + 1, title: s.title })}</h5>
-                  <p>{s.body}</p>
-                </div>
-              ))}
-            </div>
-          )}
-
-          {kind === 'LESSON_PLAN' && (
-            <div>
-              {content.duration && <p><strong>{t('teacherSpace.resources.durationLabel')}:</strong> {content.duration} دقيقة</p>}
-              {content.stages?.map((s, i) => (
-                <div key={i} className="stage-item">
-                  <p><strong>{s.time} — {s.name}</strong></p>
-                  <p className="muted">{s.goal}</p>
-                  <p>{s.activity}</p>
-                </div>
-              ))}
-            </div>
-          )}
+          <ResourcePaper resource={view} />
         </div>
       )}
     </div>

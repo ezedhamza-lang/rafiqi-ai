@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import ResourcePaper from '../../components/ResourcePaper.jsx';
 
 export default function LessonPlan() {
   const { t } = useI18n();
@@ -63,18 +64,7 @@ export default function LessonPlan() {
               <button className="btn" onClick={() => setPlan(null)}>{t('teacherSpace.lessonPlan.newPlan')}</button>
             </div>
           </div>
-          <div className="lesson-plan">
-            {content.stages?.map((s, i) => (
-              <div key={i} className="stage-item plan-stage">
-                <div className="stage-head">
-                  <strong>{i + 1}. {s.name}</strong>
-                  <span className="badge">{s.time} {t('teacherSpace.lessonPlan.minutesSuffix')}</span>
-                </div>
-                <p><strong>{t('teacherSpace.lessonPlan.goalLabel')}</strong> {s.goal}</p>
-                <p><strong>{t('teacherSpace.lessonPlan.activityLabel')}</strong> {s.activity}</p>
-              </div>
-            ))}
-          </div>
+          <ResourcePaper resource={plan} />
         </div>
       )}
     </div>
