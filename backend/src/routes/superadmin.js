@@ -2,7 +2,7 @@ import { Router } from 'express';
 import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import prisma from '../db.js';
-import { authMiddleware, superAdminMiddleware } from '../auth.js';
+import { authMiddleware, superAdminMiddleware, revokeAllUserTokens } from '../auth.js';
 import { currentSchoolYear, schoolYearBounds, priceForType } from '../services/schoolYear.js';
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
@@ -311,6 +311,8 @@ router.post('/subscriptions/:id/suspend', validateParams(superAdminIdParamSchema
     data: { status: 'SUSPENDED' }
   });
   await prisma.user.update({ where: { id: sub.userId }, data: { accountStatus: 'SUSPENDED' } });
+  // إيقاف الحساب يُسقط الجلسات فوراً (لا يبقى موقوف متصل بتوكن سارٍ)
+  await revokeAllUserTokens(sub.userId);
   res.json(sub);
 }));
 
@@ -443,7 +445,11 @@ router.put('/users/:id/school', validateParams(superAdminIdParamSchema), validat
 
 router.put('/users/:id/role', validateParams(superAdminIdParamSchema), validateBody(superAdminRoleUpdateSchema), asyncHandler(async (req, res) => {
   const { role } = req.body;
-  await prisma.user.update({ where: { id: Number(req.params.id) }, data: { role } });
+  const userId = Number(req.params.id);
+  await prisma.user.update({ where: { id: userId }, data: { role } });
+  // تغيير الدور يبطل كل الجلسات القديمة حتى لا تبقى صلاحيات الدور السابق
+  // فعّالة عبر توكن وصول سارٍ أو تجديد مسروق.
+  await revokeAllUserTokens(userId);
   res.json({ ok: true });
 }));
 
@@ -478,6 +484,8 @@ router.put('/users/:id/password', validateParams(superAdminIdParamSchema), valid
   if (!user) throw new ApiError(404, 'المستخدم غير موجود');
   const plain = (req.body.password || '').trim() || `Rafeeqi-${crypto.randomBytes(3).toString('hex')}`;
   await prisma.user.update({ where: { id: user.id }, data: { passwordHash: await bcrypt.hash(plain, 10) } });
+  // إعادة التعيين تُسقط كل الجلسات/التجديدات القديمة فوراً (المالك فقد سرّه)
+  await revokeAllUserTokens(user.id);
   res.json({ ok: true, email: user.email, password: plain });
 }));
 
