@@ -80,7 +80,7 @@ router.post(
   asyncHandler(async (req, res) => {
     const providerName = normalizeProviderName(req.params.provider);
     const provider = getProvider(providerName);
-    const verified = provider.verifyWebhook(req);
+    const verified = await provider.verifyWebhook(req);
     if (!verified) throw new ApiError(400, 'توقيع webhook غير صالح');
 
     const event = {

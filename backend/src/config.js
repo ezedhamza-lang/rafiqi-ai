@@ -36,6 +36,12 @@ export const config = {
     stbMerchantId: process.env.STB_MERCHANT_ID || '',
     stbSecret: process.env.STB_SECRET || '',
     demoWebhookSecret: process.env.DEMO_WEBHOOK_SECRET || '',
+    // PayPal (دولي). webhookId إلزامي للتحقق الحقيقي من توقيع الأحداث عبر
+    // /v1/notifications/verify-webhook-signature — بدونه تُرفض كل الأحداث.
+    paypalClientId: process.env.PAYPAL_CLIENT_ID || '',
+    paypalSecret: process.env.PAYPAL_SECRET || '',
+    paypalMode: process.env.PAYPAL_MODE || 'sandbox',
+    paypalWebhookId: process.env.PAYPAL_WEBHOOK_ID || '',
     // المزود التجريبي DEMO مسموح في التطوير/الاختبار فقط. في الإنتاج يجب
     // إما ضبط مزود حقيقي أو تعيين ALLOW_DEMO_PAYMENTS=true صراحةً (للعروض).
     allowDemoPayments: process.env.ALLOW_DEMO_PAYMENTS === 'true',

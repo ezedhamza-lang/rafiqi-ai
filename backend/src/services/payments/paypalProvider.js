@@ -12,6 +12,12 @@ function isConfigured() {
   return Boolean(config.payment?.paypalClientId && config.payment?.paypalSecret);
 }
 
+function apiBase() {
+  return config.payment?.paypalMode === 'live'
+    ? 'https://api-m.paypal.com'
+    : 'https://api-m.sandbox.paypal.com';
+}
+
 /**
  * Supported currencies by PayPal
  */
@@ -74,7 +80,7 @@ export const paypalProvider = {
         }
       };
 
-      const orderRes = await fetch('https://api-m.sandbox.paypal.com/v2/checkout/orders', {
+      const orderRes = await fetch(`${apiBase()}/v2/checkout/orders`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -113,7 +119,7 @@ export const paypalProvider = {
     
     const credentials = Buffer.from(`${clientId}:${secret}`).toString('base64');
     
-    const res = await fetch('https://api-m.sandbox.paypal.com/v1/oauth2/token', {
+    const res = await fetch(`${apiBase()}/v1/oauth2/token`, {
       method: 'POST',
       headers: {
         'Authorization': `Basic ${credentials}`,
@@ -132,21 +138,54 @@ export const paypalProvider = {
     return data.access_token;
   },
 
-  verifyWebhook(req) {
-    // PayPal webhook verification requires their SDK in production
-    // For now, basic signature check
-    const transmissionId = req.headers['paypal-transmission-id'];
-    const timestamp = req.headers['paypal-transmission-time'];
-    const actualSig = req.headers['paypal-cert-url'];
-    const authAlgo = req.headers['paypal-auth-algo'];
-    
-    // In production, verify against PayPal's certificate
-    // For sandbox, we can be more lenient
-    if (this.mode === 'sandbox') {
-      return !!(transmissionId && timestamp);
+  /**
+   * تحقق حقيقي من توقيع أحداث PayPal عبر نقطة /v1/notifications/verify-webhook-signature
+   * (المعتمدة رسمياً: تربط cert_url + auth_algo + transmission-id + timestamp + جسم
+   * الحدث + webhookId). فشل-مغلق: أي خطأ شبكة/إعداد/توقيع ⇒ رفض. لا يُقبل أي حدث
+   * بدون PAYPAL_WEBHOOK_ID مضبوط.
+   */
+  async verifyWebhook(req) {
+    if (!isConfigured()) return false;
+    if (!config.payment.paypalWebhookId) {
+      console.error('PAYPAL_WEBHOOK_ID غير مضبوط — رفض حدث PayPal (لا يمكن التحقق من التوقيع)');
+      return false;
     }
-    
-    return !!(transmissionId && timestamp && actualSig && authAlgo);
+    const transmissionId = req.headers['paypal-transmission-id'];
+    const transmissionTime = req.headers['paypal-transmission-time'];
+    const certUrl = req.headers['paypal-cert-url'];
+    const authAlgo = req.headers['paypal-auth-algo'];
+    if (!transmissionId || !transmissionTime || !certUrl || !authAlgo) return false;
+    // صدقة للدفاع: شهادة PayPal فقط من نطاق paypal.com
+    try {
+      const cu = new URL(certUrl);
+      if (!/(^|\.)paypal\.com$/i.test(cu.hostname) || cu.protocol !== 'https:') return false;
+    } catch {
+      return false;
+    }
+    const rawBody = Buffer.isBuffer(req.body) ? req.body.toString('utf8') : String(req.body ?? '{}');
+    try {
+      const token = await this._getAccessToken();
+      const res = await fetch(`${apiBase()}/v1/notifications/verify-webhook-signature`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          auth_algo: authAlgo,
+          cert_url: certUrl,
+          transmission_id: transmissionId,
+          transmission_time: transmissionTime,
+          webhook_id: config.payment.paypalWebhookId,
+          webhook_event: JSON.parse(rawBody)
+        }),
+        signal: AbortSignal.timeout(15000)
+      });
+      const data = await res.json().catch(() => ({}));
+      return res.ok && data.verification_status === 'SUCCESS';
+    } catch {
+      return false;
+    }
   },
 
   parseWebhook(req) {
@@ -198,7 +237,7 @@ export const paypalProvider = {
 
     const token = await this._getAccessToken();
     
-    const res = await fetch(`https://api-m.sandbox.paypal.com/v2/checkout/orders/${orderId}/capture`, {
+    const res = await fetch(`${apiBase()}/v2/checkout/orders/${orderId}/capture`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
