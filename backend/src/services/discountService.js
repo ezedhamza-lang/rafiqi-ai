@@ -41,7 +41,9 @@ export async function validateDiscountCode(code, amount) {
 export async function consumeDiscountCode(code) {
   const normalized = normalizeDiscountCode(code);
   if (!normalized) return;
-  await prisma.discountCode.update({
+  // updateMany: لا يرمي إن حُذف الكود بعد الدفع — الاستهلاك best-effort
+  // داخل finalize ولا يجوز أن يُبطل دفعة ناجحة.
+  await prisma.discountCode.updateMany({
     where: { code: normalized },
     data: { usedCount: { increment: 1 } }
   });

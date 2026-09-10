@@ -181,7 +181,11 @@ async function activateSubscription(subscriptionId, amount, method, reference, a
 }
 
 export async function processWebhookEvent(event) {
-  const { provider, type, providerReference, metadata } = event;
+  const { provider, providerReference, metadata } = event;
+  // تطبيع دفاعي: بعض المنصات ترسل CANCELLED (بLLLL) بدل CANCELED — نوحّد
+  // لتفادي سقوط الحدث في default: رغم أنه صالح.
+  const rawType = String(event.type || '').toUpperCase();
+  const type = rawType === 'CANCELLED' ? 'CANCELED' : rawType;
 
   let intent = null;
   if (providerReference) {
