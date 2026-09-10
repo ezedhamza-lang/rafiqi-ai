@@ -370,6 +370,7 @@ async function start() {
       await runSqlFileOnce(prisma, path.join(migDir, '20260910150000_tenant_calendar_announcements/migration.sql'));
       await runSqlFileOnce(prisma, path.join(migDir, '20260910180000_gamification_streak/migration.sql'));
       await runSqlFileOnce(prisma, path.join(migDir, '20260910190000_refund_unique/migration.sql'));
+      await runSqlFileOnce(prisma, path.join(migDir, '20260910200000_fk_restrict_history/migration.sql'));
       await runTenancyBootstrap(prisma);
     }).catch((err) => {
       console.error('startup migrations skipped:', err.message);

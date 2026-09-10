@@ -81,5 +81,9 @@ describe('تقوية المدفوعات (R2a)', () => {
         data: { invoiceId: invoice.id, subscriptionId, amount: 50, refundedBy: adminId }
       })
     ).rejects.toMatchObject({ code: 'P2002' });
+
+    // R2d: الفاتورة تحمي دفعتها — حذف Payment مرتبط بفاتورة يُرفض في القاعدة
+    await expect(prisma.payment.delete({ where: { id: payment.id } })).rejects.toThrow(/violat|23001|23503|constraint|foreign key/i);
+    expect(await prisma.payment.count({ where: { id: payment.id } })).toBe(1);
   });
 });

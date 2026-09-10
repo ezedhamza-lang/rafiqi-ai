@@ -163,4 +163,23 @@ describe('عزل المدارس (Multi-tenancy)', () => {
       .send({ title: 'عادي', subject: 'MATH', classId: classesA.id, questions });
     expect(okQuiz.status).toBe(201);
   });
+
+  it('R2d: قسم فيه حضور لا يُحذف (Restrict)، ومدرسة فيها أقسام لا تُحذف (400)', async () => {
+    const ts = await tok('supertest@test.tn');
+
+    // قسم جديد في مدرسة أ + تسجيل حضور واحد ⇒ حذف القسم يجب أن يُرفض (RESTRICT)
+    const klass = await prisma.class.create({ data: { name: 'قسم الحراسة', level: 'السنة الأولى أساسي', schoolId: schoolAId } });
+    const stud = await mkUser(`att-${Date.now()}@test.tn`, 'STUDENT', schoolAId);
+    await prisma.attendanceRecord.create({
+      data: { classId: klass.id, studentId: stud.id, date: new Date('2026-09-16'), recordedBy: teacherAId }
+    });
+    await expect(prisma.class.delete({ where: { id: klass.id } })).rejects.toThrow(/violat|23001|23503|constraint|foreign key/i);
+    expect(await prisma.class.count({ where: { id: klass.id } })).toBe(1); // لم يُحذف
+
+    // مدرسة بلا مستخدمين لكن فيها قسم ⇒ حذفها مرفوض (400)
+    const schoolC = await prisma.school.create({ data: { code: 'SCH-C', name: 'مدرسة ج' } });
+    await prisma.class.create({ data: { name: 'قسم ج-1', level: 'السنة الأولى أساسي', schoolId: schoolC.id } });
+    const del = await request(app).delete(`/api/superadmin/schools/${schoolC.id}`).set('Authorization', `Bearer ${ts}`);
+    expect(del.status).toBe(400);
+  });
 });

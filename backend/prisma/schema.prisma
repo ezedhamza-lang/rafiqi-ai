@@ -925,7 +925,7 @@ model AttendanceRecord {
   recordedBy Int
   createdAt  DateTime @default(now())
 
-  class    Class @relation(fields: [classId], references: [id], onDelete: Cascade)
+  class    Class @relation(fields: [classId], references: [id], onDelete: Restrict)
   student  User  @relation("AttendanceStudent", fields: [studentId], references: [id], onDelete: Cascade)
   recorder User  @relation("AttendanceRecorder", fields: [recordedBy], references: [id])
 
@@ -1078,7 +1078,7 @@ model Invoice {
   createdAt      DateTime      @default(now())
 
   subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
-  payment      Payment      @relation(fields: [paymentId], references: [id], onDelete: Cascade)
+  payment      Payment      @relation(fields: [paymentId], references: [id], onDelete: Restrict)
   refund       Refund?
 
   @@unique([paymentId])

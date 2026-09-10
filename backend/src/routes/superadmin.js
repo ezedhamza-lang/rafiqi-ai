@@ -61,6 +61,8 @@ router.delete('/schools/:id', validateParams(superAdminIdParamSchema), asyncHand
   if (id === 1) throw new ApiError(400, 'لا يمكن حذف المدرسة الافتراضية');
   const counts = await prisma.user.count({ where: { schoolId: id } });
   if (counts > 0) throw new ApiError(400, 'لا يمكن حذف مدرسة لديها مستخدمون — انقلهم لمدرسة أخرى أولا');
+  const classCount = await prisma.class.count({ where: { schoolId: id } });
+  if (classCount > 0) throw new ApiError(400, 'لا يمكن حذف مدرسة لديها أقسام — انقل أو احذف الأقسام أولا');
   await prisma.school.delete({ where: { id } });
   res.json({ ok: true });
 }));
