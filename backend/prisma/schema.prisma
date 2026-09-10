@@ -1079,7 +1079,7 @@ model Invoice {
 
   subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
   payment      Payment      @relation(fields: [paymentId], references: [id], onDelete: Cascade)
-  refunds      Refund[]
+  refund       Refund?
 
   @@unique([paymentId])
   @@index([subscriptionId])
@@ -1123,7 +1123,7 @@ model Refund {
   subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
   refundedByUser User    @relation("RefundBy", fields: [refundedBy], references: [id])
 
-  @@index([invoiceId])
+  @@unique([invoiceId])
   @@index([subscriptionId])
   @@index([refundedAt])
   @@index([refundedBy])

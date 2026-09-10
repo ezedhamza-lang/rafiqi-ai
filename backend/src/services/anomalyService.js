@@ -335,6 +335,17 @@ export async function refundInvoice({ invoiceId, reason = null, actorId }) {
     });
     if (claim.count === 0) throw new Error('هذه الفاتورة مُرجَعة مسبقا');
 
+    // سقف تراكمي: مجموع الاسترجاعات (بما فيها هذا) لا يتجاوز إجمالي الفاتورة
+    const prev = await tx.refund.aggregate({
+      where: { invoiceId: invoice.id },
+      _sum: { amount: true }
+    });
+    const alreadyRefunded = Number(prev._sum.amount ?? 0);
+    const refundAmount = Number(invoice.total);
+    if (alreadyRefunded + refundAmount > Number(invoice.total) + 1e-6) {
+      throw new Error('مجموع الاسترجاعات يتجاوز مبلغ الفاتورة المدفوع');
+    }
+
     const rec = await tx.refund.create({
       data: {
         invoiceId: invoice.id,

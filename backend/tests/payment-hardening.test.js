@@ -65,4 +65,21 @@ describe('تقوية المدفوعات (R2a)', () => {
     expect(after.usedCount).toBe(1);
     await expect(validateDiscountCode(code, 100)).rejects.toThrow(/أقصى عدد استعمال/);
   });
+
+  it('قيد فريد على مستوى القاعدة: لا استرجاع ثانٍ لنفس الفاتورة (R2c)', async () => {
+    const payment = await prisma.payment.create({
+      data: { subscriptionId, amount: 147, method: 'ONLINE', paidByUserId: adminId }
+    });
+    const invoice = await prisma.invoice.create({
+      data: { subscriptionId, paymentId: payment.id, amount: 147, total: 147, status: 'PAID' }
+    });
+    await prisma.refund.create({
+      data: { invoiceId: invoice.id, subscriptionId, amount: 147, refundedBy: adminId }
+    });
+    await expect(
+      prisma.refund.create({
+        data: { invoiceId: invoice.id, subscriptionId, amount: 50, refundedBy: adminId }
+      })
+    ).rejects.toMatchObject({ code: 'P2002' });
+  });
 });
