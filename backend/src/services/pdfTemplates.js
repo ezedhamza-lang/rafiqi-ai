@@ -31,7 +31,7 @@ function baseHtml(title, body) {
     font-family: "Noto Naskh Arabic", "Amiri", "Segoe UI", Tahoma, Arial, sans-serif;
     color: #1f2937; margin: 0; line-height: 1.7; font-size: 12px;
     -webkit-user-select: none; -moz-user-select: none; user-select: none;
-    -webkit-touch-callout: none;
+    -webkit-touch-callout: none; overflow-x: hidden;
   }
   .banner {
     background: linear-gradient(135deg, #0b2a52, #123a6b 55%, #0FA6E8);
@@ -48,9 +48,9 @@ function baseHtml(title, body) {
   .note { font-size: 10.5px; color: #64748b; text-align: center; margin-top: 14px; }
   .page { padding: 0 4px; }
   .wm {
-    position: fixed; top: 30%; left: 0; right: 0; text-align: center; z-index: 0;
-    transform: rotate(-24deg); opacity: .06; font-size: 26px; font-weight: 800;
-    color: #0b2a52; line-height: 2.2; pointer-events: none;
+    position: fixed; top: 30%; left: 12%; right: 12%; width: 76%; text-align: center; z-index: 0;
+    transform: rotate(-24deg); opacity: .06; font-size: 17px; font-weight: 800;
+    color: #0b2a52; line-height: 2.1; pointer-events: none; overflow: hidden;
   }
   .credit {
     position: fixed; bottom: 0; left: 0; right: 0; text-align: center;
