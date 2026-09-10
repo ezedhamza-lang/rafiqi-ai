@@ -164,9 +164,21 @@ app.use((req, res, next) => {
   next();
 });
 
+// تحديد المعدّل العام — يُعرَّف هنا (قبل التركيب) ليُطبَّق على مسارات الدفع
+// أيضاً. ملاحظة: وسيط الحدّ من المعدّل لا يقرأ الجسم، فلا يتعارض مع طلب
+// الـWebhooks الخام. فيُركَّب على /api/payments لحماية checkout/webhook/demo
+// من brute-force على المعرّفات المتسلسلة والتوقيع.
+const limiter = rateLimit({
+  windowMs: config.rateLimitWindowMs,
+  max: config.rateLimitMax,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'طلبات كثيرة جدا، يرجى المحاولة لاحقا' }
+});
+
 // مسارات الدفع تُركَّب قبل محلل JSON العام حتى تحصل الـ Webhooks على البنية الخام (Raw Body)
-// لتوقيعها والتحقق منه (Stripe Signature ...).
-app.use('/api/payments', paymentRoutes);
+// لتوقيعها والتحقق منه (Stripe Signature ...). وتُقيَّد بالمعدّل العام الآن.
+app.use('/api/payments', limiter, paymentRoutes);
 
 app.use(express.json({ limit: config.bodyLimit }));
 
@@ -190,17 +202,11 @@ app.get(['/api/health', '/health'], async (_req, res) => {
 // Batch 4: Global locale middleware - extracts ?lang= from all requests
 app.use(localeMiddleware);
 
-const limiter = rateLimit({
-  windowMs: config.rateLimitWindowMs,
-  max: config.rateLimitMax,
-  standardHeaders: true,
-  legacyHeaders: false,
-  message: { error: 'طلبات كثيرة جدا، يرجى المحاولة لاحقا' }
-});
 // إصلاح أمني: كان تحديد معدّل الطلبات (Rate Limiting) مطبَّقاً فقط على
 // /api/auth. الآن يُطبَّق حدّ عام (أوسع) على كل /api لحماية بقية المسارات
 // من إغراق الخادم بالطلبات، مع حدّ أضيق وأكثر صرامة يبقى خاصاً بمسارات
 // تسجيل الدخول/التسجيل (الأكثر استهدافاً في هجمات محاولة كسر كلمات السر).
+// ملاحظة: `limiter` مُعرَّف أعلاه (قبل /api/payments) ويُعاد استعماله هنا.
 app.use('/api', limiter);
 
 const authLimiter = rateLimit({
