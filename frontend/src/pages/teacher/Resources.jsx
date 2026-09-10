@@ -150,7 +150,7 @@ export default function Resources() {
                       <td className="actions">
                         <button className="btn btn-sm" onClick={() => setView(r)}>{t('teacherSpace.resources.view')}</button>
                         <button
-                          className={`btn btn-sm ${r.isShared ? '' : 'btn-outline'}`}
+                          className="btn btn-sm btn-primary"
                           onClick={() => toggleShare(r)}
                           title={r.isShared ? t('teacherSpace.resources.unshareTitle') : t('teacherSpace.resources.shareTitle')}
                         >
@@ -172,7 +172,7 @@ export default function Resources() {
             <div className="btn-group">
               <button className="btn" onClick={() => window.print()}>{t('teacherSpace.resources.print')}</button>
               <button
-                className={`btn ${view.isShared ? '' : 'btn-outline'}`}
+                className="btn btn-primary"
                 onClick={() => toggleShare(view)}
                 title={view.isShared ? t('teacherSpace.resources.unshareTitle') : t('teacherSpace.resources.shareTitle')}
               >

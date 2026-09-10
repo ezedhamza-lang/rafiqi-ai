@@ -71,7 +71,7 @@ export default function LessonPlan() {
               <button className="btn" onClick={() => window.print()}>{t('teacherSpace.lessonPlan.print')}</button>
               <button className="btn" onClick={rebuild}>{t('teacherSpace.lessonPlan.rebuild')}</button>
               <button
-                className={`btn ${plan.isShared ? '' : 'btn-outline'}`}
+                className="btn btn-primary"
                 onClick={toggleShare}
                 title={plan.isShared ? t('teacherSpace.resources.unshareTitle') : t('teacherSpace.resources.shareTitle')}
               >
