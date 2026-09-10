@@ -327,7 +327,7 @@ export default function Header() {
                       {child.group ? (
                         <span className="dropdown-group-label" style={{ '--group-color': child.groupColor }}>
                           <span className="material-icons" style={{ color: child.groupColor }}>{child.groupIcon}</span>
-                          {child.groupLabel}
+                          {t(`nav.groups.${child.group}`)}
                         </span>
                       ) : (
                         <NavLink

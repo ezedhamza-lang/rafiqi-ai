@@ -50,6 +50,7 @@ export function I18nProvider({ children }) {
     let value = lookup(dictionaries[lang], path);
     if (value === undefined) value = lookup(dictionaries[FALLBACK_LANG], path);
     if (value === undefined) {
+      if (import.meta.env.DEV) console.warn(`[i18n] missing key: ${path} (lang=${lang})`);
       // لا نعرض أي مفتاح برمجي للمستخدم: نرجع آخر مقطع من المسار
       // (وهو غالباً القيمة الحقيقية مثل اسم المستوى)، وإلا سلسلة فارغة إن كان المقطع مفتاحاً.
       const segs = String(path).split('.');

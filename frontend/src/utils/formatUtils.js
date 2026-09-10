@@ -121,7 +121,7 @@ export function timeAgo(iso, lang, t) {
   if (hrs < 24) return t('time.hours', { n: hrs });
   
   const days = Math.floor(hrs / 24);
-  if (days < 7) return t('time.days', { n: days });
+  if (days < 7) return t('time.daysAgo', { n: days });
   
   // Fallback to formatted date for older dates
   return formatDate(iso, lang);

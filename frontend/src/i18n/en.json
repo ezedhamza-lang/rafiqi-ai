@@ -13,6 +13,15 @@
     "cancel": "Cancel"
   },
   "nav": {
+    "groups": {
+      "analysis": "Analysis & assessment",
+      "exams": "Exams",
+      "subjects": "Subjects & content",
+      "results": "Results & reports",
+      "progress": "Progress & follow-up",
+      "planning": "Planning & organization",
+      "tools": "Tools & resources"
+    },
     "home": "Home",
     "studentSection": "Student section",
     "help": "Request help",
@@ -23,6 +32,7 @@
     "assignments": "Assignments",
     "analyticsExport": "Analytics and export",
     "officialExams": "Official exams",
+    "teacherWorksheets": "Official worksheets",
     "classSubjects": "Class subjects",
     "correction": "Correction",
     "results": "Results",
@@ -115,6 +125,7 @@
       "Saturday"
     ],
     "period": "Period {{n}}",
+    "daysAgo": "{{n}} d ago",
     "trueLabel": "True",
     "falseLabel": "False"
   },
@@ -250,6 +261,7 @@
     "notes": "Notes (optional)",
     "notesPlaceholder": "Any additional information...",
     "submit": "Submit registration request",
+    "submitting": "Submitting...",
     "myRequests": "My requests",
     "success": "The student registration request has been sent successfully and will be reviewed by the school director for approval",
     "cancelConfirm": "Do you want to cancel this request?",
