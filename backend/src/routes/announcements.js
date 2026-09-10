@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import prisma from '../db.js';
 import { authMiddleware, adminMiddleware } from '../auth.js';
+import { actorSchoolId } from '../tenant.js';
 import { validateBody, validateQuery } from '../middleware/validate.js';
 import { asyncHandler } from '../middleware/errorHandler.js';
 import { publishAnnouncement, resolveAudienceUserIds } from '../services/announcementService.js';
@@ -52,6 +53,7 @@ router.post('/', validateBody(announcementCreateSchema), asyncHandler(async (req
     level,
     link,
     createdBy: req.user.id,
+    schoolId: actorSchoolId(req),
     channels
   });
   res.status(201).json(result);
@@ -70,7 +72,9 @@ router.post('/', validateBody(announcementCreateSchema), asyncHandler(async (req
  *         description: قائمة الإعلانات
  */
 router.get('/', asyncHandler(async (req, res) => {
+  const sid = actorSchoolId(req);
   const items = await prisma.schoolAnnouncement.findMany({
+    where: sid != null ? { schoolId: sid } : {},
     include: {
       creator: { select: { id: true, firstName: true, lastName: true } },
       _count: { select: { notifications: true } }
@@ -105,7 +109,7 @@ router.get('/audience-count', validateQuery(audienceCountQuerySchema), asyncHand
     .split(',')
     .map((s) => s.trim())
     .filter(Boolean);
-  const ids = await resolveAudienceUserIds({ audience, level: req.query.level || undefined });
+  const ids = await resolveAudienceUserIds({ audience, level: req.query.level || undefined, schoolId: actorSchoolId(req) });
   res.json({ count: ids.length });
 }));
 

@@ -4,6 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import prisma from '../db.js';
 import { authMiddleware, requireRole } from '../auth.js';
+import { actorSchoolId } from '../tenant.js';
 import { notify } from '../services/notify.js';
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
@@ -131,9 +132,13 @@ router.post('/documents', requireRole('PARENT'), upload.single('file'), validate
     include: { student: { select: { id: true, firstName: true, lastName: true, level: true } } }
   });
 
+  // إشعار مستهدف: مديرو مدرسة الولي فقط (+ إدارة المنصة) — لا بث لكل مديري المنصة
+  const directorWhere = req.user.schoolId != null
+    ? { OR: [{ role: 'ADMIN' }, { role: 'SCHOOL_DIRECTOR', schoolId: req.user.schoolId }] }
+    : { role: { in: ['ADMIN', 'SCHOOL_DIRECTOR'] } };
   await prisma.notification.createMany({
     data: (
-      await prisma.user.findMany({ where: { role: { in: ['SCHOOL_DIRECTOR', 'ADMIN'] } }, select: { id: true } })
+      await prisma.user.findMany({ where: directorWhere, select: { id: true } })
     ).map((u) => ({
       userId: u.id,
       type: 'PARENT_DOCUMENT',
@@ -166,6 +171,9 @@ router.get('/documents/all', requireRole('SCHOOL_DIRECTOR', 'ADMIN', 'SUPER_ADMI
   const { status } = req.query;
   const where = {};
   if (status) where.status = status;
+  // عزل مدارس: مدير مدرسة يرى وثائق أولياء مدرسته فقط (المشرف العام يرى الكل)
+  const sid = actorSchoolId(req);
+  if (sid != null) where.parent = { schoolId: sid };
   const docs = await prisma.parentDocument.findMany({
     where,
     include: {
@@ -238,7 +246,11 @@ router.get('/documents/:id', requireRole('PARENT'), validateParams(parentDocIdPa
  */
 router.put('/documents/:id/review', requireRole('SCHOOL_DIRECTOR', 'ADMIN'), validateParams(parentDocIdParamSchema), validateBody(docReviewSchema), asyncHandler(async (req, res) => {
   const { status, directorReply } = req.body;
-  const doc = await prisma.parentDocument.findUnique({ where: { id: Number(req.params.id) } });
+  // عزل مدارس: لا يراجع مديرٌ وثيقة ولي من مدرسة أخرى
+  const sid = actorSchoolId(req);
+  const doc = await prisma.parentDocument.findFirst({
+    where: { id: Number(req.params.id), ...(sid != null ? { parent: { schoolId: sid } } : {}) }
+  });
   if (!doc) throw new ApiError(404, 'الوثيقة غير موجودة');
   if (doc.status !== 'PENDING' && doc.status !== 'UNDER_REVIEW') {
     throw new ApiError(400, 'تمت مراجعة هذه الوثيقة مسبقا');

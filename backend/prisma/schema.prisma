@@ -604,17 +604,20 @@ model SchoolAnnouncement {
   level       String?
   link        String?
   status      String   @default("PUBLISHED")
+  schoolId    Int?
   createdBy   Int
   publishedAt DateTime @default(now())
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   creator       User           @relation("AnnouncementCreator", fields: [createdBy], references: [id], onDelete: Cascade)
+  school        School?        @relation(fields: [schoolId], references: [id], onDelete: SetNull)
   notifications Notification[]
 
   @@index([status])
   @@index([createdBy])
   @@index([publishedAt])
+  @@index([schoolId])
 }
 
 model NotificationOutbox {
@@ -649,6 +652,9 @@ model School {
 
   users   User[]  @relation("SchoolUsers")
   classes Class[]
+
+  calendarEvents CalendarEvent[]
+  announcements  SchoolAnnouncement[]
 
   @@index([status])
 }
@@ -935,13 +941,16 @@ model CalendarEvent {
   date        DateTime          @db.Date
   level       String?
   audience    String            @default("ALL")
+  schoolId    Int?
   createdBy   Int
   createdAt   DateTime          @default(now())
 
-  creator User @relation(fields: [createdBy], references: [id])
+  creator User   @relation(fields: [createdBy], references: [id])
+  school  School? @relation(fields: [schoolId], references: [id], onDelete: SetNull)
 
   @@index([date])
   @@index([createdBy])
+  @@index([schoolId])
 }
 
 model HealthRecord {

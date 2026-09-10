@@ -12,7 +12,8 @@ const AUDIENCE_ROLES = {
   ADMIN: ['ADMIN', 'SUPER_ADMIN']
 };
 
-export async function resolveAudienceUserIds({ audience, level }) {
+// schoolId != null ⇒ الجمهور محصور بتلك المدرسة (عزل مدارس). null ⇒ عالمي (للمشرف/الإدارة).
+export async function resolveAudienceUserIds({ audience, level, schoolId = null }) {
   const raw = Array.isArray(audience) && audience.length ? audience : ['ALL'];
   const roles = [...new Set(raw.flatMap((a) => AUDIENCE_ROLES[a] || [a]))];
   if (!roles.length) return [];
@@ -20,7 +21,8 @@ export async function resolveAudienceUserIds({ audience, level }) {
   const users = await prisma.user.findMany({
     where: {
       role: { in: roles },
-      accountStatus: 'ACTIVE'
+      accountStatus: 'ACTIVE',
+      ...(schoolId != null ? { schoolId } : {})
     },
     select: { id: true, role: true }
   });
@@ -28,7 +30,7 @@ export async function resolveAudienceUserIds({ audience, level }) {
   let studentIdSet = null;
   if (level && roles.includes('STUDENT')) {
     const students = await prisma.student.findMany({
-      where: { level },
+      where: { level, ...(schoolId != null ? { schoolId } : {}) },
       select: { accountUserId: true }
     });
     studentIdSet = new Set(students.map((s) => s.accountUserId).filter(Boolean));
@@ -39,7 +41,7 @@ export async function resolveAudienceUserIds({ audience, level }) {
     .map((u) => u.id);
 }
 
-export async function publishAnnouncement({ title, body, category, priority, audience, level, link, createdBy, channels }) {
+export async function publishAnnouncement({ title, body, category, priority, audience, level, link, createdBy, schoolId = null, channels }) {
   const announcement = await prisma.schoolAnnouncement.create({
     data: {
       title: String(title).trim().slice(0, 200),
@@ -50,11 +52,12 @@ export async function publishAnnouncement({ title, body, category, priority, aud
       level: level || null,
       link: link || null,
       status: 'PUBLISHED',
+      schoolId,
       createdBy
     }
   });
 
-  const userIds = await resolveAudienceUserIds({ audience: announcement.audience, level: announcement.level });
+  const userIds = await resolveAudienceUserIds({ audience: announcement.audience, level: announcement.level, schoolId });
 
   await notify(userIds, {
     type: 'ANNOUNCEMENT',

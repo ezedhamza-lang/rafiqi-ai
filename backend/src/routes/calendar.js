@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import prisma from '../db.js';
 import { authMiddleware, requireRole } from '../auth.js';
+import { actorSchoolId } from '../tenant.js';
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
 import { calendarEventCreateSchema, calendarEventUpdateSchema } from '../validators/calendar.js';
 import { idParamSchema, calendarEventsQuerySchema } from '../validators/common.js';
@@ -70,6 +71,10 @@ router.get(
       where = {};
     }
 
+    // عزل مدارس: مستخدمو مدرسة يرون أحداث مدرستهم + الأحداث العالمية (schoolId=null)
+    const sid = actorSchoolId(req);
+    if (sid != null) where.AND = [...(where.AND || []), { OR: [{ schoolId: sid }, { schoolId: null }] }];
+
     if (month) {
       const [y, m] = month.split('-').map((n) => parseInt(n, 10));
       const start = new Date(y, m - 1, 1);
@@ -130,6 +135,7 @@ router.post(
         date: new Date(`${date}T00:00:00.000Z`),
         level: level || null,
         audience: audience || 'ALL',
+        schoolId: actorSchoolId(req),
         createdBy: req.user.id
       },
       include: { creator: { select: { id: true, firstName: true, lastName: true } } }
@@ -179,6 +185,9 @@ router.put(
   asyncHandler(async (req, res) => {
     const { title, description, type, date, level, audience } = req.body;
     const where = { id: req.params.id };
+    // عزل مدارس: لا يعبث بمدرسة غيره؛ الأحداث العالمية للمشرف فقط
+    const sidEdit = actorSchoolId(req);
+    if (sidEdit != null) where.schoolId = sidEdit;
     if (req.user.role === 'TEACHER') where.createdBy = req.user.id;
 
     const event = await prisma.calendarEvent.findFirst({ where });
@@ -225,6 +234,8 @@ router.delete(
   validateParams(idParamSchema),
   asyncHandler(async (req, res) => {
     const where = { id: req.params.id };
+    const sidDel = actorSchoolId(req);
+    if (sidDel != null) where.schoolId = sidDel;
     if (req.user.role === 'TEACHER') where.createdBy = req.user.id;
     const result = await prisma.calendarEvent.deleteMany({ where });
     if (result.count === 0) throw new ApiError(404, 'الحدث غير موجود أو لا تملك صلاحية حذفه');
