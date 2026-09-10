@@ -1,4 +1,4 @@
-FROM node:22-bookworm-slim
+﻿FROM node:22-bookworm-slim
 
 ENV NODE_ENV=production \
     PUPPETEER_SKIP_DOWNLOAD=1 \
@@ -13,7 +13,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/*
 
 COPY backend/package*.json ./
-RUN npm ci
+RUN npm install --no-audit --no-fund
 
 COPY backend/prisma ./prisma
 RUN npx prisma generate
