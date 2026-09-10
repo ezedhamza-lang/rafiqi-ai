@@ -4,7 +4,8 @@ import {
   normalizeArabic,
   loadRegistry,
   findGradeByLevel,
-  searchLesson
+  searchLesson,
+  getLessonPages
 } from './curriculumService.js';
 import * as lessonMemos from '../repositories/lessonMemos.js';
 
@@ -63,6 +64,34 @@ function findLesson(subjectId, level, lessonTitle, gradeId) {
   const norm = normalizeArabic(lessonTitle);
   const exact = pages.find((p) => normalizeArabic(p.title) === norm);
   return exact || pages[0];
+}
+
+// اقتراحات عندما يفشل البحث: أقرب عناوين الدروس المرقمنة في هذا الكتاب
+function suggestLessons(subjectId, level, lessonTitle, gradeId) {
+  try {
+    const all = getLessonPages(subjectId, level, gradeId);
+    const seen = new Set();
+    const titles = [];
+    for (const pg of all) {
+      const t = String(pg.title || '').trim();
+      if (!t || seen.has(t)) continue;
+      seen.add(t);
+      titles.push(t);
+    }
+    const normQ = normalizeArabic(lessonTitle || '');
+    const qWords = normQ.split(/\s+/).filter((w) => w.length >= 3);
+    const score = (t) => {
+      const nt = normalizeArabic(t);
+      let sc = nt.includes(normQ) || normQ.includes(nt) ? 100 : 0;
+      for (const w of qWords) if (nt.includes(w)) sc += 1;
+      return sc;
+    };
+    titles.sort((a, b) => score(b) - score(a));
+    const matched = titles.filter((t) => score(t) > 0).slice(0, 5);
+    return matched.length ? matched : titles.slice(0, 6);
+  } catch {
+    return [];
+  }
 }
 
 // ===== بناء محتوى المذكرة =====
@@ -268,9 +297,13 @@ export async function generateMemo({ teacherId, subject, level, lessonTitle, les
 
   const lesson = findLesson(book.subjectId, levelValue, lessonTitle, book.gradeId);
   if (!lesson) {
+    const hints = suggestLessons(book.subjectId, levelValue, lessonTitle, book.gradeId);
     throw new MemoBuildError(
       'LESSON_NOT_FOUND',
-      `لم يُعثر على درس "${lessonTitle}" في محتوى المنهج (${book.gradeTitle} — ${book.subjectTitle}).`
+      `لم يُعثر على درس "${lessonTitle}" في محتوى المنهج (${book.gradeTitle} — ${book.subjectTitle}).` +
+        (hints.length
+          ? ` أقرب الدروس المتاحة: ${hints.map((h) => '«' + h + '»').join(' ، ')}`
+          : ' لا توجد دروس مرقمنة لهذا المستوى بعد.')
     );
   }
 
