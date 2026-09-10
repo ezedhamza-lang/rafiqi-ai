@@ -74,39 +74,11 @@ parentRouter.get('/analytics/children/:studentId/pdf', requireRole('PARENT'), va
   const submissions = await prisma.assignmentSubmission.findMany({ where: { studentId: student.accountUserId } });
   const report = buildStudentReport({ student, klass: student.class, assignments, submissions });
 
-  const { PdfLayout, COLORS, docToBuffer, createDoc } = await import('../services/pdfUtils.js');
-  const doc = createDoc();
-  const layout = new PdfLayout(doc);
-  const { summary, strengths, weaknesses, trend } = report;
-
-  layout.heading(`تقرير تقدم التلميذ — ${student.account?.firstName || ''} ${student.account?.lastName || ''}`, { size: 18, color: COLORS.cyan });
-  layout.rule();
-  layout.line(`القسم: ${student.class?.name || '—'}  |  السنة الدراسية: ${student.schoolYear || '—'}`);
-  layout.line(`الدقة العامة: ${summary.avgPercent}%  |  الإنجاز: ${summary.completionRate}%  |  التقييمات المنجزة: ${summary.gradedCount} من ${summary.assignmentsTotal}`);
-
-  layout.heading('نقاط القوة', { size: 14, color: COLORS.cyan });
-  if (strengths.length) strengths.forEach((s) => layout.line(`• ${s.label}: ${s.avgPercent}%`));
-  else layout.line('— لا توجد بعد');
-
-  layout.heading('نقاط الضعف (تحتاج مرافقة)', { size: 14, color: COLORS.cyan });
-  if (weaknesses.length) weaknesses.forEach((w) => layout.line(`• ${w.label}: ${w.avgPercent}%`));
-  else layout.line('— لا توجد بعد');
-
-  layout.heading('آخر النتائج', { size: 14, color: COLORS.cyan });
-  const recent = trend.slice(-12);
-  if (recent.length) {
-    layout.tableRow(['التقييم', 'المادة', 'النتيجة'], [0.45, 0.3, 0.25], { header: true });
-    recent.forEach((t, i) => layout.tableRow([t.title, t.subjectLabel, `${t.percent}%`], [0.45, 0.3, 0.25], { highlight: i % 2 === 0 }));
-  } else {
-    layout.line('— لا توجد نتائج بعد');
-  }
-
-  layout.footer('رفيقي — الحياة المدرسية');
-
-  const buf = await docToBuffer(doc);
+  const { buildChildReportPdf } = await import('../services/exportService.js');
+  const buffer = await buildChildReportPdf({ student, report });
   res.setHeader('Content-Type', 'application/pdf');
   res.setHeader('Content-Disposition', `attachment; filename="report-${student.accountUserId}.pdf"`);
-  res.send(buf);
+  res.send(buffer);
 }));
 
 /**

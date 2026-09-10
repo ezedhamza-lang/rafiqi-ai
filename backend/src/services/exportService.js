@@ -1,3 +1,5 @@
+import { renderPdfFromHtml } from './browserPdf.js';
+import { gradesHtml, childReportHtml } from './pdfTemplates.js';
 import { subjectLabel, percent } from './analyticsService.js';
 import { createDoc, docToBuffer, PdfLayout, COLORS, CONTENT_WIDTH, PAGE } from './pdfUtils.js';
 
@@ -27,7 +29,7 @@ export function buildGradesCsv({ klass, rows, assignments }) {
   return bom + lines.join('\r\n');
 }
 
-export async function buildGradesPdf({ klass, rows, assignments }) {
+async function buildGradesPdfLegacy({ klass, rows, assignments }) {
   const doc = createDoc();
   const layout = new PdfLayout(doc);
 
@@ -77,3 +79,37 @@ export function setAttachment(res, filename, contentType, buffer) {
 }
 
 export { percent };
+
+export async function buildGradesPdf(data) {
+  const viaBrowser = await renderPdfFromHtml(gradesHtml(data));
+  if (viaBrowser) return viaBrowser;
+  return buildGradesPdfLegacy(data);
+}
+
+async function buildChildReportPdfLegacy({ student, report }) {
+  const doc = createDoc();
+  const layout = new PdfLayout(doc);
+  const { summary, strengths, weaknesses, trend } = report;
+  layout.heading(`تقرير تقدم التلميذ — ${student.account?.firstName || ''} ${student.account?.lastName || ''}`, { size: 18, color: COLORS.cyan });
+  layout.rule();
+  layout.line(`القسم: ${student.class?.name || '—'}  |  السنة الدراسية: ${student.schoolYear || '—'}`);
+  layout.line(`الدقة العامة: ${summary.avgPercent}%  |  الإنجاز: ${summary.completionRate}%  |  التقييمات المنجزة: ${summary.gradedCount} من ${summary.assignmentsTotal}`);
+  layout.heading('نقاط القوة', { size: 14, color: COLORS.cyan });
+  if (strengths.length) strengths.forEach((s) => layout.line(`• ${s.label}: ${s.avgPercent}%`)); else layout.line('— لا توجد بعد');
+  layout.heading('نقاط الضعف (تحتاج مرافقة)', { size: 14, color: COLORS.cyan });
+  if (weaknesses.length) weaknesses.forEach((w) => layout.line(`• ${w.label}: ${w.avgPercent}%`)); else layout.line('— لا توجد بعد');
+  layout.heading('آخر النتائج', { size: 14, color: COLORS.cyan });
+  const recent = trend.slice(-12);
+  if (recent.length) {
+    layout.tableRow(['التقييم', 'المادة', 'النتيجة'], [0.45, 0.3, 0.25], { header: true });
+    recent.forEach((t, i) => layout.tableRow([t.title, t.subjectLabel, `${t.percent}%`], [0.45, 0.3, 0.25], { highlight: i % 2 === 0 }));
+  } else layout.line('— لا توجد نتائج بعد');
+  layout.footer('رفيقي — الحياة المدرسية');
+  return docToBuffer(doc);
+}
+
+export async function buildChildReportPdf({ student, report }) {
+  const viaBrowser = await renderPdfFromHtml(childReportHtml({ student, report }));
+  if (viaBrowser) return viaBrowser;
+  return buildChildReportPdfLegacy({ student, report });
+}

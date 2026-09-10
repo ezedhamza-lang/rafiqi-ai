@@ -1,3 +1,5 @@
+import { renderPdfFromHtml } from './browserPdf.js';
+import { invoiceHtml } from './pdfTemplates.js';
 import prisma from '../db.js';
 import { createDoc, docToBuffer, PdfLayout, COLORS, CONTENT_WIDTH, PAGE } from './pdfUtils.js';
 
@@ -52,7 +54,7 @@ export function money(value, currency = 'TND') {
   return `${n} ${currency === 'TND' ? 'د.ت' : currency}`;
 }
 
-export async function buildInvoicePdf(invoice) {
+async function buildInvoicePdfLegacy(invoice) {
   const doc = createDoc();
   const layout = new PdfLayout(doc);
 
@@ -122,4 +124,10 @@ export async function buildInvoicePdf(invoice) {
   layout.footer();
 
   return docToBuffer(doc);
+}
+
+export async function buildInvoicePdf(invoice) {
+  const viaBrowser = await renderPdfFromHtml(invoiceHtml(invoice));
+  if (viaBrowser) return viaBrowser;
+  return buildInvoicePdfLegacy(invoice);
 }

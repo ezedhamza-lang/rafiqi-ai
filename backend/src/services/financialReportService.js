@@ -1,3 +1,5 @@
+import { renderPdfFromHtml } from './browserPdf.js';
+import { financialReportHtml } from './pdfTemplates.js';
 import prisma from '../db.js';
 import { createDoc, docToBuffer, PdfLayout, COLORS, CONTENT_WIDTH, PAGE } from './pdfUtils.js';
 import { schoolYearBounds } from './schoolYear.js';
@@ -379,7 +381,7 @@ export async function buildReconciliation() {
   };
 }
 
-export async function buildReportPdf(report) {
+async function buildReportPdfLegacy(report) {
   const doc = createDoc();
   const layout = new PdfLayout(doc);
 
@@ -528,3 +530,9 @@ export function buildReportCsv(report) {
 }
 
 export const roleLabel = (role) => ROLE_LABELS[role] || role || '—';
+
+export async function buildReportPdf(report) {
+  const viaBrowser = await renderPdfFromHtml(financialReportHtml(report));
+  if (viaBrowser) return viaBrowser;
+  return buildReportPdfLegacy(report);
+}

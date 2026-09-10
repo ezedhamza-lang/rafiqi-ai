@@ -53,6 +53,7 @@ import adminAiKeyRoutes from './routes/adminAiKey.js';
 import adminInsightsRoutes from './routes/adminInsights.js';
 import memoRoutes from './routes/memos.js';
 import { setupWs } from './ws.js';
+import { browserPdfStatus } from './services/browserPdf.js';
 import { startRenewalScheduler, runRenewalSweep } from './services/subscriptionRenewalService.js';
 import { runSqlFileOnce } from './services/migrationRunner.js';
 import { runTenancyBootstrap } from './services/tenancyBootstrap.js';
@@ -197,7 +198,7 @@ app.get(['/api/health', '/health'], async (_req, res) => {
   } catch {
     db = 'down';
   }
-  res.json({ status: 'ok', db, uptime: Math.round(process.uptime()), at: new Date().toISOString() });
+  res.json({ status: 'ok', db, uptime: Math.round(process.uptime()), at: new Date().toISOString(), pdf: browserPdfStatus().executable ? 'browser' : 'legacy' });
 });
 
 // Batch 4: Global locale middleware - extracts ?lang= from all requests
