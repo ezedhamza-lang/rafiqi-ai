@@ -405,6 +405,7 @@ router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validatePara
   const temporaryPassword = String(100000 + crypto.randomInt(0, 900000)); // رقم 6 يسهل كتابته
   const { start, end } = schoolYearBounds(request.schoolYear);
   const schoolId = klass.schoolId ?? sid ?? null;
+  const passwordHash = await bcrypt.hash(temporaryPassword, 10);
 
   // بريد قصير وفريد
   let studentEmail = `t${Date.now().toString(36)}@refeeqi.tn`;
@@ -414,23 +415,32 @@ router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validatePara
     if (!taken) { studentEmail = candidate; break; }
   }
 
-  try {
-    const studentAccount = await prisma.user.create({
+  // ذرّية: مطالبة مشروطة بحالة الطلب داخل معاملة تفاعلية — طلبان متزامنان
+  // على نفس الطلب يفوز أحدهما فقط (الصف يُقفل)، وأي فشل لاحق يُرجع كل شيء
+  // فلا يبقى حساب/طالب/اشتراك يتيم نصف منشأ.
+  const { updated, studentAccount } = await prisma.$transaction(async (tx) => {
+    const claim = await tx.subscriptionRequest.updateMany({
+      where: { id: request.id, status: 'PENDING_APPROVAL' },
+      data: { status: 'PENDING_PAYMENT' }
+    });
+    if (claim.count === 0) throw new ApiError(400, 'هذا الطلب تمت معالجته مسبقا');
+
+    const account = await tx.user.create({
       data: {
         firstName: request.firstName,
         lastName: request.lastName,
         email: studentEmail,
-        passwordHash: await bcrypt.hash(temporaryPassword, 10),
+        passwordHash,
         role: 'STUDENT',
         accountStatus: 'PENDING_PAYMENT',
         schoolId
       }
     });
 
-    const student = await prisma.student.create({
+    const student = await tx.student.create({
       data: {
         userId: request.parentId,
-        accountUserId: studentAccount.id,
+        accountUserId: account.id,
         classId: klass.id,
         firstName: request.firstName,
         lastName: request.lastName,
@@ -444,9 +454,9 @@ router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validatePara
       }
     });
 
-    const subscription = await prisma.subscription.create({
+    const subscription = await tx.subscription.create({
       data: {
-        userId: studentAccount.id,
+        userId: account.id,
         type: 'STUDENT',
         plan: 'اشتراك تلميذ',
         schoolYear: request.schoolYear,
@@ -458,33 +468,32 @@ router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validatePara
       }
     });
 
-    const updated = await prisma.subscriptionRequest.update({
+    const row = await tx.subscriptionRequest.update({
       where: { id: request.id },
-      data: { status: 'PENDING_PAYMENT', classId: klass.id, studentId: student.id, subscriptionId: subscription.id },
+      data: { classId: klass.id, studentId: student.id, subscriptionId: subscription.id },
       include: {
         class: { select: { id: true, name: true, level: true } },
         parent: { select: { id: true, firstName: true, lastName: true, email: true, phone: true } }
       }
     });
 
-    await notifyRole(['ADMIN'], {
-      type: 'PAYMENT_PENDING',
-      title: 'اشتراك جديد مستحق للدفع',
-      body: `${request.firstName} ${request.lastName} — مصادق عليه و في انتظار تفعيل الاشتراك (${request.schoolYear})`,
-      link: '/director/subscriptions'
-    });
-    await notify([request.parentId], {
-      type: 'APPROVED',
-      title: `تم قبول ابنكم ${request.firstName} في المنصة`,
-      body: `بيانات الدخول — البريد: ${studentEmail} | كلمة السر: ${temporaryPassword}. أكمل عملية الدفع لتفعيل الحساب. ننصح بتغيير كلمة السر بعد أول دخول.`,
-      link: '/parent'
-    });
+    return { updated: row, studentAccount: account };
+  });
 
-    res.json({ ...updated, credentials: { email: studentAccount.email, password: temporaryPassword } });
-  } catch (e) {
-    console.error('approve request failed:', e);
-    res.status(500).json({ error: 'تعذّر إتمام الموافقة على الطلب' });
-  }
+  await notifyRole(['ADMIN'], {
+    type: 'PAYMENT_PENDING',
+    title: 'اشتراك جديد مستحق للدفع',
+    body: `${request.firstName} ${request.lastName} — مصادق عليه و في انتظار تفعيل الاشتراك (${request.schoolYear})`,
+    link: '/director/subscriptions'
+  });
+  await notify([request.parentId], {
+    type: 'APPROVED',
+    title: `تم قبول ابنكم ${request.firstName} في المنصة`,
+    body: `بيانات الدخول — البريد: ${studentEmail} | كلمة السر: ${temporaryPassword}. أكمل عملية الدفع لتفعيل الحساب. ننصح بتغيير كلمة السر بعد أول دخول.`,
+    link: '/parent'
+  });
+
+  res.json({ ...updated, credentials: { email: studentAccount.email, password: temporaryPassword } });
 }));
 
 /**

@@ -24,26 +24,30 @@ export async function renewSubscription({ subscriptionId, actorId, provider, ref
   const schoolYear = nextSchoolYear(sub.schoolYear);
   const { start, end } = schoolYearBounds(schoolYear);
 
-  await prisma.subscription.update({
-    where: { id: sub.id },
-    data: { schoolYear, startDate: start, endDate: end, status: 'ACTIVE', cancelledAt: null }
-  });
-  if (['STUDENT', 'TEACHER'].includes(sub.user.role)) {
-    await prisma.user.update({ where: { id: sub.user.id }, data: { accountStatus: 'ACTIVE' } });
-  }
-  await prisma.subscriptionRequest.updateMany({
-    where: { subscriptionId: sub.id },
-    data: { status: 'ACTIVE', schoolYear }
-  });
-
-  const payment = await prisma.payment.create({
-    data: {
-      subscriptionId: sub.id,
-      amount,
-      method: provider || 'ONLINE',
-      reference: reference || null,
-      paidByUserId: actorId
+  // ذرّية: نقل السنة/التواريخ + تنشيط الحساب + ترقية الطلب + تسجيل الدفعة —
+  // كلها أو لا شيء (لا سنة مُجدَّدة بلا دفع ولا العكس).
+  const payment = await prisma.$transaction(async (tx) => {
+    await tx.subscription.update({
+      where: { id: sub.id },
+      data: { schoolYear, startDate: start, endDate: end, status: 'ACTIVE', cancelledAt: null }
+    });
+    if (['STUDENT', 'TEACHER'].includes(sub.user.role)) {
+      await tx.user.update({ where: { id: sub.user.id }, data: { accountStatus: 'ACTIVE' } });
     }
+    await tx.subscriptionRequest.updateMany({
+      where: { subscriptionId: sub.id },
+      data: { status: 'ACTIVE', schoolYear }
+    });
+
+    return tx.payment.create({
+      data: {
+        subscriptionId: sub.id,
+        amount,
+        method: provider || 'ONLINE',
+        reference: reference || null,
+        paidByUserId: actorId
+      }
+    });
   });
 
   const parents = await parentIdsOf(sub.user.id);

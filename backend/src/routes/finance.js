@@ -148,19 +148,29 @@ router.post(
 
     const paidAmount = amount != null ? Number(amount) : sub.amount || 0;
 
-    const payment = await prisma.payment.create({
-      data: {
-        subscriptionId: sub.id,
-        amount: paidAmount,
-        method: method || 'OFFLINE',
-        reference: reference || null,
-        paidByUserId: req.user.id
-      }
-    });
+    // ذرّية: مطالبة مشروطة (status != ACTIVE) داخل معاملة — إداريان متزامنان
+    // (أو إداري + webhook) لا يسجّلان دفعتين/فاتورتين لنفس الاشتراك.
+    const payment = await prisma.$transaction(async (tx) => {
+      const claim = await tx.subscription.updateMany({
+        where: { id: sub.id, status: { not: 'ACTIVE' } },
+        data: { status: 'ACTIVE' }
+      });
+      if (claim.count === 0) throw new ApiError(400, 'هذا الاشتراك مفعّل مسبقا');
 
-    await prisma.subscription.update({ where: { id: sub.id }, data: { status: 'ACTIVE' } });
-    await prisma.user.update({ where: { id: sub.userId }, data: { accountStatus: 'ACTIVE' } });
-    await prisma.subscriptionRequest.updateMany({ where: { subscriptionId: sub.id }, data: { status: 'ACTIVE' } });
+      const created = await tx.payment.create({
+        data: {
+          subscriptionId: sub.id,
+          amount: paidAmount,
+          method: method || 'OFFLINE',
+          reference: reference || null,
+          paidByUserId: req.user.id
+        }
+      });
+
+      await tx.user.update({ where: { id: sub.userId }, data: { accountStatus: 'ACTIVE' } });
+      await tx.subscriptionRequest.updateMany({ where: { subscriptionId: sub.id }, data: { status: 'ACTIVE' } });
+      return created;
+    });
 
     const invoice = await createInvoice({
       subscriptionId: sub.id,

@@ -325,8 +325,17 @@ export async function refundInvoice({ invoiceId, reason = null, actorId }) {
   if (!invoice) throw new Error('الفاتورة غير موجودة');
   if (invoice.status === 'REFUNDED') throw new Error('هذه الفاتورة مُرجَعة مسبقا');
 
-  const refund = await prisma.$transaction([
-    prisma.refund.create({
+  // ذرّية: فحص الحالة كان خارج المعاملة فيسمح لاستدعاءين متزامنين بإنشاء
+  // استرجاعين. المطالبة الآن داخل المعاملة وشرطية على الحالة الحالية —
+  // الفائز وحده يُنشئ سجل الاسترجاع (count===0 ⇒ رُجع مسبقاً).
+  const [created, updatedInvoice] = await prisma.$transaction(async (tx) => {
+    const claim = await tx.invoice.updateMany({
+      where: { id: invoice.id, status: { not: 'REFUNDED' } },
+      data: { status: 'REFUNDED' }
+    });
+    if (claim.count === 0) throw new Error('هذه الفاتورة مُرجَعة مسبقا');
+
+    const rec = await tx.refund.create({
       data: {
         invoiceId: invoice.id,
         paymentId: invoice.paymentId,
@@ -335,15 +344,11 @@ export async function refundInvoice({ invoiceId, reason = null, actorId }) {
         reason: reason || null,
         refundedBy: actorId
       }
-    }),
-    prisma.invoice.update({
-      where: { id: invoice.id },
-      data: { status: 'REFUNDED' }
-    })
-  ]);
+    });
+    const inv = await tx.invoice.findUnique({ where: { id: invoice.id } });
+    return [rec, inv];
+  });
 
-  const created = refund[0];
-  const updatedInvoice = refund[1];
   return { refund: created, invoice: updatedInvoice };
 }
 

@@ -146,20 +146,24 @@ async function activateSubscription(subscriptionId, amount, method, reference, a
   });
   if (!sub) throw new ApiError(404, 'الاشتراك غير موجود');
 
-  await prisma.subscription.update({ where: { id: sub.id }, data: { status: 'ACTIVE' } });
-  if (['STUDENT', 'TEACHER'].includes(sub.user.role)) {
-    await prisma.user.update({ where: { id: sub.user.id }, data: { accountStatus: 'ACTIVE' } });
-  }
-  await prisma.subscriptionRequest.updateMany({ where: { subscriptionId: sub.id }, data: { status: 'ACTIVE' } });
-
-  await prisma.payment.create({
-    data: {
-      subscriptionId: sub.id,
-      amount,
-      method: method || 'ONLINE',
-      reference: reference || null,
-      paidByUserId: actorId
+  // ذرّية: تفعيل الاشتراك + تنشيط الحساب + ترقية الطلب + تسجيل الدفعة تُطبَّق
+  // كلها أو لا شيء. لا يبقى اشتراك ACTIVE بلا Payment (فلوس بلا أثر).
+  const payment = await prisma.$transaction(async (tx) => {
+    await tx.subscription.update({ where: { id: sub.id }, data: { status: 'ACTIVE' } });
+    if (['STUDENT', 'TEACHER'].includes(sub.user.role)) {
+      await tx.user.update({ where: { id: sub.user.id }, data: { accountStatus: 'ACTIVE' } });
     }
+    await tx.subscriptionRequest.updateMany({ where: { subscriptionId: sub.id }, data: { status: 'ACTIVE' } });
+
+    return tx.payment.create({
+      data: {
+        subscriptionId: sub.id,
+        amount,
+        method: method || 'ONLINE',
+        reference: reference || null,
+        paidByUserId: actorId
+      }
+    });
   });
 
   const parentIds = await prisma.student
@@ -173,10 +177,7 @@ async function activateSubscription(subscriptionId, amount, method, reference, a
     link: '/my-requests'
   });
 
-  return prisma.payment.findFirst({
-    where: { subscriptionId: sub.id },
-    orderBy: { paidAt: 'desc' }
-  });
+  return payment;
 }
 
 export async function processWebhookEvent(event) {
@@ -239,9 +240,12 @@ export async function processWebhookEvent(event) {
       try {
         await finalizeSuccessfulPayment(intent, event);
       } catch (err) {
+        // لا نعيد الحالة إلى FAILED — المال محصَّل لدى المزود والclaim استُهلك،
+        // والتراجع يفقد الأثر المالي ويمنع إعادة المعالجة. نُبقي SUCCEEDED
+        // مع علامة فشل التفعيل ليُتدارك يدوياً/بمسح تشافي لاحق.
         await prisma.paymentIntent.update({
           where: { id: intent.id },
-          data: { status: 'FAILED', failureMessage: `تعذر إتمام التفعيل بعد نجاح الدفع: ${err.message}` }
+          data: { failureMessage: `تثبيت متأخر — فشل التفعيل بعد نجاح الدفع: ${err.message}` }
         });
         await audit({
           actorId: intent.userId,
@@ -251,7 +255,7 @@ export async function processWebhookEvent(event) {
           resourceId: intent.id,
           ip: event.ip || null,
           userAgent: event.userAgent || null,
-          metadata: { provider, type, error: err.message, subscriptionId: intent.subscriptionId }
+          metadata: { provider, type, error: err.message, subscriptionId: intent.subscriptionId, needsManualFinalize: true }
         });
         throw new ApiError(502, 'تعذر إتمام عملية التفعيل بعد نجاح الدفع، تواصل مع الإدارة');
       }
@@ -338,6 +342,18 @@ export async function processWebhookEvent(event) {
 async function finalizeSuccessfulPayment(intent, event) {
   const kind = intent.metadata?.kind === 'RENEWAL' ? 'RENEWAL' : 'INITIAL';
 
+  // حماية إعادة التشغيل (idempotency): إن وُجدت دفعة مسجَّلة لمرجع المزود نفسه
+  // فلا نُنشئ أخرى — نضمن الفاتورة فقط ونعيد. يمنع ازدواج المال عند التثبيت
+  // المتأخر/إعادة المعالجة اليدوية.
+  if (intent.providerReference) {
+    const existingPayment = await prisma.payment.findFirst({ where: { reference: intent.providerReference } });
+    if (existingPayment) {
+      const existingInvoice = await prisma.invoice.findFirst({ where: { paymentId: existingPayment.id } });
+      if (existingInvoice) return existingInvoice;
+      return createInvoice({ subscriptionId: existingPayment.subscriptionId, paymentId: existingPayment.id, intent });
+    }
+  }
+
   let payment;
   if (kind === 'RENEWAL') {
     const renewal = await renewSubscription({
@@ -353,7 +369,13 @@ async function finalizeSuccessfulPayment(intent, event) {
   }
 
   if (intent.metadata?.discountCode) {
-    await consumeDiscountCode(intent.metadata.discountCode);
+    // فشل استهلاك الكود (حُذف/استُعمل) يجب ألا يُجهض تثبيت دفعة ناجحة —
+    // يسجَّل للمراجعة فقط.
+    try {
+      await consumeDiscountCode(intent.metadata.discountCode);
+    } catch (err) {
+      console.error('consumeDiscountCode failed (payment still valid):', err.message);
+    }
   }
 
   const invoice = await createInvoice({
