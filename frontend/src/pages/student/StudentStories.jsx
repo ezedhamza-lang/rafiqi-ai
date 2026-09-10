@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { api } from '../../api/client.js';
 import StoryExercises from './StoryExercises.jsx';
 import AssessmentPaper from '../../components/AssessmentPaper.jsx';
+import { imgSrc, restoreOriginalImg } from '../../utils/imgSrc';
 import { bidiNodes } from '../../utils/bidi';
 import { useI18n } from '../../i18n/index.jsx';
 import { useStudentLevel } from '../../hooks/useStudentLevel.js';
@@ -187,7 +188,7 @@ export default function StudentStories() {
                 <div key={story.id} className="card story-card">
                   {img ? (
                     <div className="story-cover">
-                      <img src={img} alt={story.title} loading="lazy" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                      <img src={imgSrc(img)} alt={story.title} loading="lazy" decoding="async" onError={(e) => { if (restoreOriginalImg(e, img)) return; e.currentTarget.style.display = 'none'; }} />
                     </div>
                   ) : (
                     <div className="lesson-head" style={{ background: 'linear-gradient(135deg, #7b3fa0, #a86bc8)' }}>
@@ -247,10 +248,12 @@ export default function StudentStories() {
               <>
               {(openStory.image || openStory.imageUrl) && (
                 <img
-                  src={openStory.image || openStory.imageUrl}
+                  src={imgSrc(openStory.image || openStory.imageUrl)}
                   alt={openStory.title}
                   className="story-hero"
-                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  loading="lazy"
+                  decoding="async"
+                  onError={(e) => { if (restoreOriginalImg(e, openStory.image || openStory.imageUrl)) return; e.currentTarget.style.display = 'none'; }}
                 />
               )}
               {(openStory.text || []).length > 0 && (

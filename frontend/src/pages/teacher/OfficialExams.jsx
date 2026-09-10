@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import { imgSrc, restoreOriginalImg } from '../../utils/imgSrc';
 import ExamPaper from '../../components/ExamPaper.jsx';
 
 const LEVELS = [
@@ -594,7 +595,7 @@ export default function OfficialExams({ classes }) {
                   </label>
                 </div>
                 {(p.image || p.visual) && (
-                  <img src={p.image || p.visual} alt="" style={{ maxWidth: '160px', maxHeight: '120px', marginTop: '4px' }} />
+                  <img src={imgSrc(p.image || p.visual)} alt="" loading="lazy" decoding="async" onError={(e) => { restoreOriginalImg(e, p.image || p.visual); }} style={{ maxWidth: '160px', maxHeight: '120px', marginTop: '4px' }} />
                 )}
               </div>
             ))}
@@ -648,7 +649,7 @@ export default function OfficialExams({ classes }) {
                     )}
                   </div>
                   {(q.visual || q.image) && (
-                    <img src={q.visual || q.image} alt="" style={{ maxWidth: '160px', maxHeight: '120px', marginTop: '4px' }} />
+                    <img src={imgSrc(q.visual || q.image)} alt="" loading="lazy" decoding="async" onError={(e) => { restoreOriginalImg(e, q.visual || q.image); }} style={{ maxWidth: '160px', maxHeight: '120px', marginTop: '4px' }} />
                   )}
                 </div>
                 <div className="form-row">

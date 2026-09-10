@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import SvgArt from './SvgArt';
 import { bidiNodes } from '../utils/bidi';
+import { imgSrc, restoreOriginalImg } from '../utils/imgSrc';
 
 function rich(text) {
   if (!text) return null;
@@ -468,7 +469,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
                 <h3>{pg.passage.title}</h3>
                 {pg.passage.image && (
                   <div className="paper-art-container">
-                    <img src={pg.passage.image} alt={pg.passage.title} style={{ maxWidth: '100%', borderRadius: 8, border: '2px solid #e0d8a0' }} />
+                    <img src={imgSrc(pg.passage.image)} alt={pg.passage.title} loading="lazy" decoding="async" onError={(e) => { restoreOriginalImg(e, pg.passage.image); }} style={{ maxWidth: '100%', borderRadius: 8, border: '2px solid #e0d8a0' }} />
                   </div>
                 )}
                 {pg.passage.art && !pg.passage.image && (

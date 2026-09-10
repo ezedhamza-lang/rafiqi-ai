@@ -5,6 +5,7 @@ import VideoCard from './VideoCard.jsx';
 import SvgArt from './SvgArt.jsx';
 import AssessmentPaper from './AssessmentPaper.jsx';
 import { bidiNodes } from '../utils/bidi';
+import { imgSrc, restoreOriginalImg } from '../utils/imgSrc';
 
 const BLOCK_ICONS = {
   objective: 'track_changes',
@@ -161,7 +162,7 @@ function DefaultBlock({ block, kind, icon }) {
       </div>
       {showImg ? (
         <div style={{ textAlign: 'center', margin: '0.5rem 0' }}>
-          <img src={block.image} alt={block.title || ''} onError={() => setImgErr(true)} style={{ maxWidth: '100%', maxHeight: 320, borderRadius: 14, border: '2px solid #dbead2' }} />
+          <img src={imgSrc(block.image)} alt={block.title || ''} loading="lazy" decoding="async" onError={(e) => { if (restoreOriginalImg(e, block.image)) return; setImgErr(true); }} style={{ maxWidth: '100%', maxHeight: 320, borderRadius: 14, border: '2px solid #dbead2' }} />
         </div>
       ) : block.art && <SvgArt id={block.art} />}
       <p className="lesson-block-text">{rich(block.text)}</p>
@@ -215,7 +216,7 @@ function PictureChoiceBlock({ block, onAnswer, blockId }) {
             onClick={() => { setSel(i); setChecked(false); }}
           >
             {opt.image ? (
-              <img src={opt.image} alt={opt.label || ''} onError={(e) => { e.currentTarget.style.display = 'none'; }} style={{ maxWidth: 150, maxHeight: 110, borderRadius: 10, objectFit: 'contain' }} />
+              <img src={imgSrc(opt.image)} alt={opt.label || ''} loading="lazy" decoding="async" onError={(e) => { if (restoreOriginalImg(e, opt.image)) return; e.currentTarget.style.display = 'none'; }} style={{ maxWidth: 150, maxHeight: 110, borderRadius: 10, objectFit: 'contain' }} />
             ) : opt.art && <SvgArt id={opt.art} size={96} />}
             <span>{opt.label || ''}</span>
           </button>
@@ -826,7 +827,7 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
       <h2 className="lesson-page-title">{lesson.title}</h2>
       {lesson.image && (
         <div className="lesson-page-image">
-          <img src={lesson.image} alt={lesson.title} loading="lazy" />
+          <img src={imgSrc(lesson.image)} alt={lesson.title} loading="lazy" decoding="async" onError={(e) => { restoreOriginalImg(e, lesson.image); }} />
         </div>
       )}
 
@@ -1072,10 +1073,12 @@ function LessonViewer({ book, onClose }) {
                     <button type="button" onClick={() => go(i)} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                       {l.image && (
                         <img
-                          src={l.image}
+                          src={imgSrc(l.image)}
                           alt=""
+                          loading="lazy"
+                          decoding="async"
                           style={{ width: 40, height: 40, objectFit: 'cover', borderRadius: 6, flexShrink: 0, border: '1px solid rgba(0,0,0,.08)' }}
-                          onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                          onError={(e) => { if (restoreOriginalImg(e, l.image)) return; e.currentTarget.style.display = 'none'; }}
                         />
                       )}
                       <span className="toc-num">{i + 1}</span>

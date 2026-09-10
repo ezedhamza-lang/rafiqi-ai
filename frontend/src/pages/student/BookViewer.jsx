@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useI18n } from '../../i18n/index.jsx';
+import { imgSrc, restoreOriginalImg } from '../../utils/imgSrc';
 
 function pageUrl(imageBase, imageExt, page) {
   const num = String(page).padStart(3, '0');
@@ -38,10 +39,11 @@ export default function BookViewer({ book, onClose }) {
           ) : (
             <img
               key={src}
-              src={src}
+              src={imgSrc(src)}
               alt={t('studentSpace.bookViewer.pageAlt', { title: book.title, page })}
               className="viewer-page"
-              onError={() => setImgError(true)}
+              decoding="async"
+              onError={(e) => { if (restoreOriginalImg(e, src)) return; setImgError(true); }}
             />
           )}
         </div>
