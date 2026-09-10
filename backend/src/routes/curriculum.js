@@ -12,7 +12,7 @@ import {
   getPlans,
   listCountries
 } from '../services/curriculumService.js';
-import { listBankExams, getBankExam, listBankSubjects, listBankLevels } from '../services/officialExamService.js';
+import { listBankExams, getBankExam, listBankSubjects, listBankLevels, sanitizeBankExamForStudent } from '../services/officialExamService.js';
 import { listVideos, getVideo } from '../services/videoCatalogService.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 
@@ -291,7 +291,7 @@ router.get('/official-exams-bank', asyncHandler(async (req, res) => {
       level,
       subject,
       trimester: trimester === undefined || trimester === '' ? undefined : Number(trimester)
-    })
+    }).map(sanitizeBankExamForStudent)
   );
 }));
 
@@ -343,7 +343,7 @@ router.get('/official-exams-bank/subjects', asyncHandler(async (_req, res) => {
 router.get('/official-exams-bank/:id', asyncHandler(async (req, res) => {
   const exam = getBankExam(req.params.id);
   if (!exam) throw new ApiError(404, 'الاختبار غير موجود');
-  res.json(exam);
+  res.json(sanitizeBankExamForStudent(exam));
 }));
 
 /**

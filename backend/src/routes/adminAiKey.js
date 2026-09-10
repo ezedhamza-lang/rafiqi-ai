@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { authMiddleware, adminMiddleware } from '../auth.js';
+import { authMiddleware, requireRole } from '../auth.js';
 import { validateBody } from '../middleware/validate.js';
 import { asyncHandler } from '../middleware/errorHandler.js';
 import {
@@ -24,7 +24,8 @@ router.use(authMiddleware);
  *       200:
  *         description: هل المفتاح مهيأ ومن أين (قاعدة بيانات / متغير بيئة / غير مهيأ)
  */
-router.get('/key', adminMiddleware, asyncHandler(async (req, res) => {
+// مفتاح AI منصة-عابر (كل المدارس تُ billed منه): إدارة المنصة فقط — لا مديرو المدارس
+router.get('/key', requireRole('ADMIN', 'SUPER_ADMIN'), asyncHandler(async (req, res) => {
   const platform = await getPlatformAiKey();
   const source = platform ? 'db' : process.env.GEMINI_API_KEY ? 'env' : null;
   res.json({ configured: Boolean(source), source, hasValue: false });
@@ -53,7 +54,7 @@ router.get('/key', adminMiddleware, asyncHandler(async (req, res) => {
  *       400:
  *         description: المفتاح مطلوب
  */
-router.post('/key', adminMiddleware, validateBody(aiKeySchema), asyncHandler(async (req, res) => {
+router.post('/key', requireRole('ADMIN', 'SUPER_ADMIN'), validateBody(aiKeySchema), asyncHandler(async (req, res) => {
   const { apiKey } = req.body;
   await savePlatformAiKey(req.user.id, String(apiKey).trim());
   res.json({ ok: true });
@@ -71,7 +72,7 @@ router.post('/key', adminMiddleware, validateBody(aiKeySchema), asyncHandler(asy
  *       200:
  *         description: تم الحذف
  */
-router.delete('/key', adminMiddleware, asyncHandler(async (req, res) => {
+router.delete('/key', requireRole('ADMIN', 'SUPER_ADMIN'), asyncHandler(async (req, res) => {
   await deletePlatformAiKey();
   res.json({ ok: true });
 }));

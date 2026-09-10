@@ -45,6 +45,13 @@ describe('المرحلة 7.3 — إدارة مفتاح الذكاء الاصطن
       .set('Authorization', `Bearer ${teacherToken}`)
       .send({ apiKey: 'x' });
     expect(res2.status).toBe(403);
+
+    // مديرو المدارس ليسوا إدارة منصة — لا يعبثون بمفتاح AI المشترك
+    const dres = await login('director@test.tn', 'director123');
+    const dget = await request(app).get('/api/admin/ai/key').set('Authorization', `Bearer ${dres.body.token}`);
+    expect(dget.status).toBe(403);
+    const ddel = await request(app).delete('/api/admin/ai/key').set('Authorization', `Bearer ${dres.body.token}`);
+    expect(ddel.status).toBe(403);
   });
 
   it('يتطلب مصادقة (401 بدون توكن)', async () => {

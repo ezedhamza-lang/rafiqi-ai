@@ -267,4 +267,17 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
     expect(ids).toEqual(expect.arrayContaining(['math', 'anisi', 'science']));
     expect(ids).not.toContain('french');
   });
+
+  it('أمان: بنك الاختبارات العام لا يسرّب مفاتيح الإجابات (التفاصيل والقائمة)', async () => {
+    const detail = await request(app).get('/api/public/official-exams-bank/year1-t1-math-noor');
+    expect(detail.status).toBe(200);
+    const blob = JSON.stringify(detail.body);
+    expect(blob).not.toMatch(/"correct"|"correctAnswer"|"orderItems"/);
+    expect((detail.body.questions || []).length).toBeGreaterThan(0);
+
+    const list = await request(app).get('/api/public/official-exams-bank');
+    expect(list.status).toBe(200);
+    expect(list.body.length).toBeGreaterThan(0);
+    expect(JSON.stringify(list.body)).not.toMatch(/"correct"|"correctAnswer"|"orderItems"/);
+  });
 });
