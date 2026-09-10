@@ -19,6 +19,10 @@ export default function Login() {
     setLoading(true);
     try {
       const user = await login(form.email, form.password);
+      if (user.mustChangePassword) {
+        navigate('/account', { replace: true });
+        return;
+      }
       navigate(getHomePath(user));
     } catch (err) {
       setError(err.message);

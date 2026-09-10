@@ -24,6 +24,7 @@ const Messages = lazy(() => import('./pages/Messages.jsx'));
 const MessageCenter = lazy(() => import('./pages/MessageCenter.jsx'));
 const HelpRequest = lazy(() => import('./pages/HelpRequest.jsx'));
 const Admin = lazy(() => import('./pages/Admin.jsx'));
+const AccountSettings = lazy(() => import('./pages/AccountSettings.jsx'));
 const TeacherDashboard = lazy(() => import('./pages/teacher/TeacherDashboard.jsx'));
 const StudentSpace = lazy(() => import('./pages/student/StudentSpace.jsx'));
 const ParentSpace = lazy(() => import('./pages/parent/ParentSpace.jsx'));
@@ -71,6 +72,7 @@ export default function App() {
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<GuestOnly><Login /></GuestOnly>} />
                 <Route path="/register" element={<GuestOnly><Register /></GuestOnly>} />
+                <Route path="/account" element={<RequireRole><AccountSettings /></RequireRole>} />
                 <Route element={<DashboardLayout />}>
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/students" element={<Students />} />

@@ -269,6 +269,10 @@ export default function Header() {
           )}
           {user ? (
             <>
+              <button className="icon-btn" title={t('header.account')} aria-label={t('header.account')} onClick={() => navigate('/account')} style={{ position: 'relative' }}>
+                <span className="material-icons">person</span>
+                {user.mustChangePassword && <span className="notif-badge">!</span>}
+              </button>
               <button className="icon-btn" title={t('header.myBoard')} aria-label={t('header.myBoard')} onClick={goHome}>
                 <span className="material-icons">grid_view</span>
               </button>

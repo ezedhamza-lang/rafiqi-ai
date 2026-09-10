@@ -40,8 +40,16 @@ export function AuthProvider({ children }) {
     return data.user;
   }, []);
 
-  const logout = useCallback(async () => {
-    try {
+  const changePassword = useCallback(async (currentPassword, newPassword) => {
+    const data = await api.put('/auth/change-password', { currentPassword, newPassword });
+    setToken(data.token);
+    if (data.refreshToken) setRefreshToken(data.refreshToken);
+    setStoredUser(data.user);
+    setUser(data.user);
+    return data.user;
+  }, []);
+
+  const logout = useCallback(async () => {    try {
       await api.post('/auth/logout', { refreshToken: getRefreshToken() });
     } catch {
       // إبطال الرمز فشل (شبكة...) — الجلسة المحلية تُمسح دائماً
@@ -51,7 +59,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, changePassword }}>
       {children}
     </AuthContext.Provider>
   );

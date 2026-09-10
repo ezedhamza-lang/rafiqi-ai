@@ -23,3 +23,8 @@ export const loginSchema = z.object({
 export const refreshSchema = z.object({
   refreshToken: z.string().min(20, { error: 'رمز التجديد غير صالح' })
 });
+
+export const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1, { error: 'كلمة السر الحالية مطلوبة' }),
+  newPassword: z.string().min(6, { error: 'كلمة السر الجديدة يجب أن تحتوي على 6 أحرف على الأقل' })
+});

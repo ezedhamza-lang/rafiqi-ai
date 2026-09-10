@@ -10,7 +10,20 @@
     "backHome": "Back to home",
     "close": "Close",
     "noData": "No data yet",
+    "error": "Something went wrong. Please try again.",
     "cancel": "Cancel"
+  },
+  "account": {
+    "changePassword": "Change password",
+    "changePasswordHint": "Choose a strong password you don't use anywhere else. All other sessions will be signed out.",
+    "currentPassword": "Current password",
+    "newPassword": "New password",
+    "confirmPassword": "Confirm new password",
+    "save": "Update password",
+    "passwordsMismatch": "The new password and confirmation do not match.",
+    "passwordTooShort": "The new password must be at least 6 characters.",
+    "passwordChanged": "Password changed successfully.",
+    "mustChangeNotice": "Your account was created with a temporary password — please choose a new one before continuing."
   },
   "nav": {
     "groups": {
@@ -90,6 +103,7 @@
     "parentNotes": "My notes"
   },
   "header": {
+    "account": "My account",
     "brandAlt": "Rafiqi logo",
     "brandTitle": "Rafiqi School Life Portal",
     "themeToLight": "Switch to light mode",

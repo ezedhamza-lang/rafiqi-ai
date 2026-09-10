@@ -8,10 +8,11 @@ import {
   issueRefreshToken,
   rotateRefreshToken,
   revokeRefreshToken,
+  revokeAllUserTokens,
   purgeExpiredRefreshTokens
 } from '../auth.js';
 import { validateBody } from '../middleware/validate.js';
-import { registerSchema, loginSchema, refreshSchema } from '../validators/auth.js';
+import { registerSchema, loginSchema, refreshSchema, changePasswordSchema } from '../validators/auth.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 import { AR } from '../middleware/messages.js';
 
@@ -27,6 +28,17 @@ function toPublicUser(user) {
     role: user.role,
     accountStatus: user.accountStatus
   };
+}
+
+// حساب التلميذ أُنشئ بكلمة سر مؤقتة (موافقة المدير) ولم يغيّرها بعد ⇒ يُوجَّه
+// لتغييرها عند أول دخول. لا عمود إضافي — الحالة مشتقة من وجود tempPassword.
+async function withMustChange(publicUser) {
+  let mustChangePassword = false;
+  if (publicUser.role === 'STUDENT') {
+    const linked = await prisma.student.count({ where: { accountUserId: publicUser.id, tempPassword: { not: null } } });
+    mustChangePassword = linked > 0;
+  }
+  return { ...publicUser, mustChangePassword };
 }
 
 async function issuePair(user) {
@@ -155,8 +167,56 @@ router.post(
     const pair = await issuePair(user);
     res.json({
       ...pair,
-      user: toPublicUser(user)
+      user: await withMustChange(toPublicUser(user))
     });
+  })
+);
+
+/**
+ * @swagger
+ * /api/auth/change-password:
+ *   put:
+ *     summary: تغيير كلمة السر ذاتياً (يبطل كل الجلسات عدا الحالية)
+ *     tags: [auth]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [currentPassword, newPassword]
+ *             properties:
+ *               currentPassword: { type: string }
+ *               newPassword: { type: string }
+ *     responses:
+ *       200: { description: تم التغيير مع زوج رموز جديد للجلسة الحالية }
+ *       401: { description: كلمة السر الحالية غير صحيحة }
+ */
+router.put(
+  '/change-password',
+  authMiddleware,
+  validateBody(changePasswordSchema),
+  asyncHandler(async (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+    const user = await prisma.user.findUnique({ where: { id: req.user.id } });
+    if (!user) throw new ApiError(401, AR.SESSION_EXPIRED);
+    const valid = await bcrypt.compare(currentPassword, user.passwordHash);
+    if (!valid) throw new ApiError(401, 'كلمة السر الحالية غير صحيحة');
+    if (currentPassword === newPassword) throw new ApiError(400, 'كلمة السر الجديدة يجب أن تختلف عن الحالية');
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { passwordHash: await bcrypt.hash(newPassword, 10) }
+    });
+    // مسح الكلمة المؤقتة المرتبطة (إن وُجدت لحساب تلميذ) ⇒ ينتهي إلزام التغيير
+    await prisma.student.updateMany({ where: { accountUserId: user.id }, data: { tempPassword: null } });
+
+    // إبطال كل الجلسات ثم إصدار زوج جديد للجلسة الحالية فقط
+    await revokeAllUserTokens(user.id);
+    const pair = await issuePair(user);
+    res.json({ ...pair, user: toPublicUser(user) });
   })
 );
 
@@ -256,15 +316,7 @@ router.get(
   asyncHandler(async (req, res) => {
     const user = await prisma.user.findUnique({ where: { id: req.user.id } });
     if (!user) throw new ApiError(404, AR.USER_NOT_FOUND);
-    res.json({
-      id: user.id,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      phone: user.phone,
-      role: user.role,
-      accountStatus: user.accountStatus
-    });
+    res.json(await withMustChange(toPublicUser(user)));
   })
 );
 
