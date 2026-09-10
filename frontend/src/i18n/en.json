@@ -642,6 +642,7 @@
     "READING": "Reading",
     "SCIENCE": "Science",
     "STORIES": "Stories",
+    "ANISI": "Anisi (reading)",
     "GENERAL": "General",
     "PRODUCTION": "Writing production"
   },
@@ -1519,7 +1520,6 @@
     },
     "books": {
       "title": "Interactive Books",
-      "allLevels": "All Levels",
       "booksCount": "{{n}} books",
       "empty": "No books available for this subject at this level yet — wait for lessons your teacher will send.",
       "pagesCount": "{{n}} pages",
@@ -1599,7 +1599,6 @@
     "videos": {
       "title": "Short Videos",
       "allSubjects": "All Subjects",
-      "allLevels": "All Levels",
       "empty": "No videos available yet — short videos for each lesson from approved official sources will be added soon."
     },
     "stories": {
@@ -2255,6 +2254,8 @@
     },
     "resources": {
       "title": "Auto-Generated Teaching Resources",
+      "subjectLabel": "Subject",
+      "levelLabel": "Level",
       "kindLabel": "Resource Type",
       "lessonTitleLabel": "Lesson Title",
       "lessonTitlePlaceholder": "e.g. Addition",
@@ -2342,6 +2343,7 @@
       "subtitle": "Resources teachers publish to collaborate — publish your own resources from the \"Teaching Resources\" tab.",
       "subjectLabel": "Subject",
       "allSubjects": "All",
+      "allLevels": "All levels",
       "levelLabel": "Level",
       "levelPlaceholder": "Grade 1",
       "kindLabel": "Type",

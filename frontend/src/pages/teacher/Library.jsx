@@ -1,9 +1,17 @@
 import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import { subjectLabel, SUBJECT_CODES } from '../../utils/labels';
 
 const RESOURCE_KIND_CODES = ['WORKSHEET', 'HOMEWORK', 'FLASHCARDS', 'PRESENTATION', 'LESSON_PLAN'];
-
+const LEVELS = [
+  'السنة الأولى أساسي',
+  'السنة الثانية أساسي',
+  'السنة الثالثة أساسي',
+  'السنة الرابعة أساسي',
+  'السنة الخامسة أساسي',
+  'السنة السادسة أساسي'
+];
 export default function Library() {
   const { t } = useI18n();
   const [resources, setResources] = useState([]);
@@ -40,14 +48,19 @@ export default function Library() {
           <label>{t('teacherSpace.library.subjectLabel')}</label>
           <select value={filters.subject} onChange={(e) => setFilters({ ...filters, subject: e.target.value })}>
             <option value="">{t('teacherSpace.library.allSubjects')}</option>
-            {['MATH', 'READING', 'SCIENCE', 'STORIES'].map((s) => (
-              <option key={s} value={s}>{s}</option>
+            {SUBJECT_CODES.map((s) => (
+              <option key={s} value={s}>{subjectLabel(t, s)}</option>
             ))}
           </select>
         </div>
         <div className="form-group">
           <label>{t('teacherSpace.library.levelLabel')}</label>
-          <input value={filters.level} onChange={(e) => setFilters({ ...filters, level: e.target.value })} placeholder={t('teacherSpace.library.levelPlaceholder')} />
+          <select value={filters.level} onChange={(e) => setFilters({ ...filters, level: e.target.value })}>
+            <option value="">{t('teacherSpace.library.allLevels')}</option>
+            {LEVELS.map((lv) => (
+              <option key={lv} value={lv}>{lv}</option>
+            ))}
+          </select>
         </div>
         <div className="form-group">
           <label>{t('teacherSpace.library.kindLabel')}</label>
@@ -80,7 +93,7 @@ export default function Library() {
                 {resources.map((r) => (
                   <tr key={r.id}>
                     <td>{r.title}</td>
-                    <td>{r.subject}</td>
+                    <td>{subjectLabel(t, r.subject)}</td>
                     <td>{r.level}</td>
                     <td>{t(`teacherSpace.common.resourceKinds.${r.kind}`) || r.kind}</td>
                     <td>{r.teacher ? `${r.teacher.firstName} ${r.teacher.lastName}` : '—'}</td>

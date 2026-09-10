@@ -18,7 +18,7 @@ export const resourceCreateSchema = z.object({
   subject: z.string().trim().max(50, { error: 'المادة غير صالحة' }).optional().nullable(),
   level: z.string().trim().max(100, { error: 'المستوى طويل جدا' }).optional().nullable(),
   lessonTitle: z.string({ error: 'عنوان الدرس مطلوب' }).trim().min(1, { error: 'عنوان الدرس مطلوب' }).max(300, { error: 'عنوان الدرس طويل جدا' }),
-  input: z.string().trim().max(5000, { error: 'الإدخال طويل جدا' }).optional().nullable()
+  input: z.union([z.string().trim().max(5000), z.record(z.unknown())]).optional().nullable()
 });
 
 export const resourceContentSchema = z.object({

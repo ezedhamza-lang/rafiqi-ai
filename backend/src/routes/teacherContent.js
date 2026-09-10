@@ -439,7 +439,7 @@ router.put('/resources/:id/share', teacherMiddleware, validateParams(teacherCont
 router.get('/library', teacherMiddleware, validateQuery(libraryQuerySchema), asyncHandler(async (req, res) => {
   const { subject, level, kind } = req.query;
   const where = { isShared: true };
-  if (subject) where.subject = subject;
+  if (subject) where.subject = { equals: subject, mode: 'insensitive' };
   if (level) where.level = level;
   if (kind) where.kind = kind;
   const resources = await prisma.teachingResource.findMany({

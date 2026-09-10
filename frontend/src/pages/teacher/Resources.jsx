@@ -1,6 +1,16 @@
 import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import { subjectLabel, SUBJECT_CODES } from '../../utils/labels';
+
+const LEVELS = [
+  'السنة الأولى أساسي',
+  'السنة الثانية أساسي',
+  'السنة الثالثة أساسي',
+  'السنة الرابعة أساسي',
+  'السنة الخامسة أساسي',
+  'السنة السادسة أساسي'
+];
 
 const RESOURCE_KIND_CODES = ['WORKSHEET', 'HOMEWORK', 'FLASHCARDS', 'PRESENTATION', 'LESSON_PLAN'];
 
@@ -8,6 +18,8 @@ export default function Resources() {
   const { t } = useI18n();
   const [resources, setResources] = useState([]);
   const [kind, setKind] = useState('WORKSHEET');
+  const [subject, setSubject] = useState('MATH');
+  const [level, setLevel] = useState(LEVELS[0]);
   const [form, setForm] = useState({ lessonTitle: '' });
   const [view, setView] = useState(null);
   const [error, setError] = useState('');
@@ -31,8 +43,8 @@ export default function Resources() {
     try {
       const res = await api.post('/teacher/resources', {
         kind,
-        subject: 'MATH',
-        level: 'السنة الأولى أساسي',
+        subject,
+        level,
         lessonTitle: form.lessonTitle,
         input: {}
       });
@@ -76,6 +88,22 @@ export default function Resources() {
       {error && <div className="form-error">{error}</div>}
 
       <div className="form-row">
+        <div className="form-group">
+          <label>{t('teacherSpace.resources.subjectLabel')}</label>
+          <select value={subject} onChange={(e) => setSubject(e.target.value)}>
+            {SUBJECT_CODES.map((s) => (
+              <option key={s} value={s}>{subjectLabel(t, s)}</option>
+            ))}
+          </select>
+        </div>
+        <div className="form-group">
+          <label>{t('teacherSpace.resources.levelLabel')}</label>
+          <select value={level} onChange={(e) => setLevel(e.target.value)}>
+            {LEVELS.map((lv) => (
+              <option key={lv} value={lv}>{lv}</option>
+            ))}
+          </select>
+        </div>
         <div className="form-group">
           <label>{t('teacherSpace.resources.kindLabel')}</label>
           <select value={kind} onChange={(e) => { setKind(e.target.value); setView(null); }}>
