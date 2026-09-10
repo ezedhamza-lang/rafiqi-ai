@@ -71,8 +71,10 @@ export default function Resources() {
 
   const toggleShare = async (r) => {
     try {
-      await api.put(`/teacher/resources/${r.id}/share`, { shared: !r.isShared });
+      const next = !r.isShared;
+      await api.put(`/teacher/resources/${r.id}/share`, { shared: next });
       load(kind);
+      setView((v) => (v && v.id === r.id ? { ...v, isShared: next } : v));
     } catch (err) {
       setError(err.message);
     }
@@ -169,6 +171,13 @@ export default function Resources() {
             <h4>{view.title}</h4>
             <div className="btn-group">
               <button className="btn" onClick={() => window.print()}>{t('teacherSpace.resources.print')}</button>
+              <button
+                className={`btn ${view.isShared ? '' : 'btn-outline'}`}
+                onClick={() => toggleShare(view)}
+                title={view.isShared ? t('teacherSpace.resources.unshareTitle') : t('teacherSpace.resources.shareTitle')}
+              >
+                {view.isShared ? t('teacherSpace.resources.shared') : t('teacherSpace.resources.share')}
+              </button>
               <button className="btn" onClick={rebuild}>{t('teacherSpace.resources.rebuild')}</button>
               <button className="btn" onClick={() => setView(null)}>{t('teacherSpace.resources.back')}</button>
             </div>

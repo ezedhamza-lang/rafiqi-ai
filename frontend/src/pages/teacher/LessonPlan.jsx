@@ -31,6 +31,15 @@ export default function LessonPlan() {
     setPlan(res);
   };
 
+  const toggleShare = async () => {
+    try {
+      await api.put(`/teacher/resources/${plan.id}/share`, { shared: !plan.isShared });
+      setPlan({ ...plan, isShared: !plan.isShared });
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
   const content = plan?.content || {};
 
   return (
@@ -61,6 +70,13 @@ export default function LessonPlan() {
             <div className="btn-group">
               <button className="btn" onClick={() => window.print()}>{t('teacherSpace.lessonPlan.print')}</button>
               <button className="btn" onClick={rebuild}>{t('teacherSpace.lessonPlan.rebuild')}</button>
+              <button
+                className={`btn ${plan.isShared ? '' : 'btn-outline'}`}
+                onClick={toggleShare}
+                title={plan.isShared ? t('teacherSpace.resources.unshareTitle') : t('teacherSpace.resources.shareTitle')}
+              >
+                {plan.isShared ? t('teacherSpace.resources.shared') : t('teacherSpace.resources.share')}
+              </button>
               <button className="btn" onClick={() => setPlan(null)}>{t('teacherSpace.lessonPlan.newPlan')}</button>
             </div>
           </div>
