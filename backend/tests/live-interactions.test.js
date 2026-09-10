@@ -12,7 +12,7 @@ const WS_URL = 'ws://localhost:3999/ws';
 
 function connectWs(token) {
   return new Promise((resolve, reject) => {
-    const ws = new WebSocket(`${WS_URL}?token=${token}`);
+    const ws = new WebSocket(WS_URL, [`bearer-${token}`]);
     ws.on('open', () => resolve(ws));
     ws.on('error', (err) => reject(err));
   });

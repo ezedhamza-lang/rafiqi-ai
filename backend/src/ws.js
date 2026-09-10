@@ -379,19 +379,17 @@ export function setupWs(server) {
   wss.on('connection', (ws, req) => {
     let userId = null;
     try {
-      const url = new URL(req.url, 'http://localhost');
-      let token = url.searchParams.get('token');
-      if (!token) {
-        const proto = String(req.headers['sec-websocket-protocol'] || '');
-        const bearer = proto.split(',').map((s) => s.trim()).find((p) => p.startsWith('bearer-'));
-        if (bearer) token = bearer.slice('bearer-'.length);
-      }
+      // أمان: التوكن عبر البروتوكول الفرعي فقط — لا عبر ?token= في الرابط
+      // (روابط الاستعلام تُسجَّل في سجلات الوسيط/المتصفح).
+      const proto = String(req.headers['sec-websocket-protocol'] || '');
+      const bearer = proto.split(',').map((s) => s.trim()).find((p) => p.startsWith('bearer-'));
+      const token = bearer ? bearer.slice('bearer-'.length) : null;
       if (token) {
         const payload = jwt.verify(token, JWT_SECRET);
         userId = payload.id;
       }
     } catch {
-      /* ignore */
+      /* invalid token */
     }
 
     if (!userId) {
@@ -399,9 +397,26 @@ export function setupWs(server) {
       return;
     }
 
+    // التسجيل متزامن فوراً (حتى لا تسبق الأحداث اكتمالَ الفحص غير المتزامن)،
+    // ثم فحص حالة الحساب: الموقوف/المنتهي يُفصل ويُسحب من الشبكة.
     ws.userId = userId;
     if (!clients.has(userId)) clients.set(userId, new Set());
     clients.get(userId).add(ws);
+
+    prisma.user
+      .findUnique({ where: { id: userId }, select: { accountStatus: true } })
+      .then((account) => {
+        if (!account || account.accountStatus !== 'ACTIVE') {
+          clients.get(userId)?.delete(ws);
+          if (clients.get(userId)?.size === 0) clients.delete(userId);
+          try { ws.close(4003, 'account-inactive'); } catch { /* ignore */ }
+        }
+      })
+      .catch(() => {
+        clients.get(userId)?.delete(ws);
+        if (clients.get(userId)?.size === 0) clients.delete(userId);
+        try { ws.close(4001, 'unauthorized'); } catch { /* ignore */ }
+      });
 
     ws.on('message', (raw) => {
       let data;
