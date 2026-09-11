@@ -61,6 +61,12 @@ export default function Memos({ onChanged }) {
 
   const year = useMemo(() => yearOf(form.level), [form.level]);
 
+  // السنة الواحدة للمادة قد تخدمها عدة كتب (كتابي في الرياضيات، رياضياتي 2، المتميز...)
+  const bookMatchesSubject = useCallback(
+    (b) => b && matchesLevel(b, form.level) && ((b.subjectKey || b.subject) === form.subject || b.subject === form.subject),
+    [form.level, form.subject]
+  );
+
   const lessonTypes = useMemo(() => {
     return (methodologies || [])
       .filter(
@@ -73,8 +79,8 @@ export default function Memos({ onChanged }) {
   }, [methodologies, form.subject, year]);
 
   const hasContentBook = useMemo(
-    () => (books || []).some((b) => matchesLevel(b, form.level) && b.subject === form.subject),
-    [books, form.level, form.subject]
+    () => (books || []).some(bookMatchesSubject),
+    [books, bookMatchesSubject]
   );
 
   useEffect(() => {
@@ -82,16 +88,27 @@ export default function Memos({ onChanged }) {
       setLessonOptions([]);
       return;
     }
-    const book = (books || []).find((b) => matchesLevel(b, form.level) && b.subject === form.subject);
-    if (!book) {
+    const matched = (books || []).filter(bookMatchesSubject);
+    if (!matched.length) {
       setLessonOptions([]);
       return;
     }
-    api
-      .get(`/public/curriculum/books/${book.gradeId}/${book.subjectId}/lessons`)
-      .then((lessons) => setLessonOptions((lessons || []).map((l) => l.title).filter(Boolean)))
-      .catch(() => setLessonOptions([]));
-  }, [form.subject, form.level, books]);
+    let alive = true;
+    Promise.all(
+      matched.map((b) =>
+        api
+          .get(`/public/curriculum/books/${b.gradeId}/${b.subjectId}/lessons`)
+          .then((lessons) => (lessons || []).map((l) => ({ title: l.title, book: b.subject })))
+          .catch(() => [])
+      )
+    ).then((lists) => {
+      if (!alive) return;
+      const flat = lists.flat();
+      const seen = new Set();
+      setLessonOptions(flat.filter((x) => x.title && !seen.has(x.title) && seen.add(x.title)));
+    });
+    return () => { alive = false; };
+  }, [form.subject, form.level, books, bookMatchesSubject]);
 
   const generate = async (e) => {
     e.preventDefault();
@@ -190,8 +207,8 @@ export default function Memos({ onChanged }) {
                   placeholder={t('teacherSpace.memos.lessonTitlePlaceholder')}
                 />
                 <datalist id="memo-lessons">
-                  {lessonOptions.map((tOpt) => (
-                    <option key={tOpt} value={tOpt} />
+                  {lessonOptions.map((o) => (
+                    <option key={o.title} value={o.title}>{o.book ? `${o.title} — ${o.book}` : o.title}</option>
                   ))}
                 </datalist>
               </div>

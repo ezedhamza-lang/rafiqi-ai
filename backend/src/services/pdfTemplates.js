@@ -10,8 +10,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
  * حتى يراها محرك Chromium في PDF المذكرة دون اعتماد على رابط خارجي.
  */
 export async function inlineImageForPdf(src) {
-  if (typeof src !== 'string' || !src.startsWith('/curriculum/')) return null;
-  const rel = src.replace(/^\/curriculum\//, '');
+  const m = typeof src === 'string' && src.match(/^\/(curriculum|story-covers)\/(.+)$/);
+  if (!m) return null;
+  const rel = path.join(m[1] === 'curriculum' ? '' : m[1], m[2]);
   const roots = [
     path.join(__dirname, '../../curriculum/img'),
     path.join(__dirname, '../../uploads/curriculum')

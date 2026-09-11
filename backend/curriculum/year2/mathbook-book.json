@@ -1,6 +1,6 @@
 {
-  "title": "رياضيّات — كتابي في الرياضيات",
-  "subtitle": "السّنة الثّانية من التعليم الأساسيّ",
+  "title": "رياضياتي 2",
+  "subtitle": "الكتاب الرسمي — السنة الثانية من التعليم الابتدائي (ست فترات)",
   "imageBase": "/assets/books/math2/",
   "imageExt": ".jpg",
   "totalPages": 122,
@@ -73,5 +73,6 @@
       "startPage": 119,
       "endPage": 122
     }
-  ]
+  ],
+  "paperStyle": true
 }

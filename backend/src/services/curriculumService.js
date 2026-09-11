@@ -134,9 +134,11 @@ function listBooks(country) {
         levelId: grade.levelId,
         subjectId: subject.id,
         subject: subject.title,
+        subjectKey: subject.subjectKey || subject.title,
         title: book.title,
         subtitle: book.subtitle,
         paperOnly: !!book.paperOnly,
+        paperStyle: !!book.paperStyle,
         imageBase: book.imageBase,
         imageExt: book.imageExt || '.jpg',
         totalPages: book.totalPages,
@@ -552,9 +554,10 @@ export function getLessonPages(subjectCode, level, gradeId, country) {
   if (!subject) return [];
 
   let code = String(subjectCode || '').toLowerCase();
-  if (code === 'math-sit') code = 'math';
+  if (code === 'math-sit' || code === 'math2') code = 'math';
+  const adapter = String(subject.adapter || '').toLowerCase();
   let pages;
-  if (code === 'math') {
+  if (code === 'math' || adapter === 'math') {
     const lessons = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile || 'math-units.json'));
     if (!lessons) return [];
     if (subject.adapter === 'generic' || grade.id === 'year6') {
@@ -574,13 +577,13 @@ export function getLessonPages(subjectCode, level, gradeId, country) {
       return pages;
     }
     pages = adaptMathUnits(lessons);
-  } else if (code === 'anisi' || code === 'reading' || code === 'arabic') {
+  } else if (code === 'anisi' || code === 'reading' || code === 'arabic' || adapter === 'anisi' || adapter === 'reading') {
     const book = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile || 'anisi-lessons-full.json'));
     if (!book) return [];
     // السنة الأولى: محوّل الحروف (أنيسي). السنة 2-6: محوّل النصوص القرائية.
     const isLetterBook = Array.isArray(book.units) && book.units.some((u) => Array.isArray(u.lessons) && u.lessons.some((l) => l.letter));
     pages = isLetterBook ? adaptAnisiLessons(book) : adaptReadingBook(book);
-  } else if (code === 'science') {
+  } else if (code === 'science' || adapter === 'science') {
     if (subject.lessonsFile) {
       const lessons = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile));
       if (lessons) pages = adaptMathUnits(lessons);
@@ -589,7 +592,7 @@ export function getLessonPages(subjectCode, level, gradeId, country) {
       const book = readJson(path.join(curriculumDir, grade.dir, subject.bookFile || 'science-book.json'));
       pages = book ? adaptScienceBook(book) : [];
     }
-  } else if (code === 'production' || code === 'writing') {
+  } else if (code === 'production' || code === 'writing' || adapter === 'production') {
     const book = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile || 'production-units.json'));
     if (!book) return [];
     if (Array.isArray(book.units)) {
@@ -617,11 +620,15 @@ export function searchLesson(subjectCode, level, lessonTitle, gradeId, country) 
 export function getSubjectsForLevel(level, country) {
   const grade = findGradeByLevel(level, country);
   if (!grade) return [];
-  return (grade.subjects || []).map((s) => ({
-    id: s.id,
-    title: s.title,
-    aliases: s.aliases || []
-  }));
+  const seen = new Set();
+  const out = [];
+  for (const s of grade.subjects || []) {
+    const key = s.subjectKey || s.title;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push({ id: s.id, title: key, aliases: s.aliases || [] });
+  }
+  return out;
 }
 
 // ===== Stories =====
@@ -816,7 +823,7 @@ export function getBookExercises(subjectCode, level, gradeId, country) {
   if (!grade) grade = findGradeByLevel(level, country);
   if (!grade) return [];
   let code = String(subjectCode || '').toLowerCase();
-  if (code === 'math-sit') code = 'math';
+  if (code === 'math-sit' || code === 'math2') code = 'math';
   const subject = findSubject(grade, code);
   if (!subject) return [];
 

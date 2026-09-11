@@ -100,12 +100,13 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(values['الهدف المميّز']).toContain('أعضاء جسمه');
   });
 
-  it('لا يختلق محتوى: يرفض مادة بلا منهجية مُعرَّفة (NO_METHODOLOGY أو درس غير موجود)', async () => {
+  it('لا يختلق محتوى: يرفض مادة بلا أي كتاب في registry.json', async () => {
     const res = await request(app)
       .post('/api/memos/generate')
       .set('Authorization', `Bearer ${token}`)
-      .send({ subject: 'رياضيات', level: 'السنة الثانية أساسي', lessonTitle: 'أصابع اليد' });
-    expect([400, 404]).toContain(res.status);
+      .send({ subject: 'فرنسية', level: 'السنة الثانية أساسي', lessonTitle: 'Le corps' });
+    expect(res.status).toBe(400);
+    expect(res.body.error).toContain('لا يوجد محتوى منهج');
   });
 
   it('لا يختلق محتوى: يرفض مادة بلا كتاب (NO_BOOK)', async () => {
@@ -200,7 +201,7 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     const res = await request(app)
       .post('/api/memos/generate')
       .set('Authorization', `Bearer ${token}`)
-      .send({ subject: 'رياضيات', level: 'السنة الثانية أساسي', lessonTitle: 'الأعداد من 0 إلى 499: الطرح دون زيادة ولا تفكيك' });
+      .send({ subject: 'رياضياتي 2', level: 'السنة الثانية أساسي', lessonTitle: 'الأعداد من 0 إلى 499: الطرح دون زيادة ولا تفكيك' });
     expect(res.status).toBe(200);
     const memo = res.body.memo;
     expect(memo.methodologyId).toBe('year2-math-standard');
@@ -214,7 +215,7 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     const res = await request(app)
       .post('/api/memos/generate')
       .set('Authorization', `Bearer ${token}`)
-      .send({ subject: 'رياضيات', level: 'السنة الثانية أساسي', lessonTitle: 'القطع النقديّة المتداولة 5، 10، 20، 50، 100، 200: التصرّف فيها' });
+      .send({ subject: 'رياضياتي 2', level: 'السنة الثانية أساسي', lessonTitle: 'القطع النقديّة المتداولة 5، 10، 20، 50، 100، 200: التصرّف فيها' });
     expect(res.status).toBe(200);
     const memo = res.body.memo;
     expect(memo.lessonId).toBe('y2m50');
@@ -229,8 +230,8 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(pdf.body.length).toBeGreaterThan(40000);
   });
 
-  it('كتاب س2 الرسمي: 63 درسًا بمحتوى المصدر وصوره بلا إجابات مكشوفة', async () => {
-    const res = await request(app).get('/api/public/curriculum/books/year2/math/lessons');
+  it('كتاب رياضياتي 2 الرسمي: 63 درسًا بمحتوى المصدر وصوره بلا إجابات مكشوفة', async () => {
+    const res = await request(app).get('/api/public/curriculum/books/year2/math2/lessons');
     expect(res.status).toBe(200);
     expect(res.body.length).toBeGreaterThanOrEqual(60);
     const blob = JSON.stringify(res.body);
@@ -241,6 +242,27 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(first.blocks.some((b) => b.blockId && b.blockId.startsWith('b'))).toBe(true);
     const imgBlock = first.blocks.find((b) => b.image);
     expect(imgBlock.imageId).toMatch(/^img-y2m01-\d+$/);
+  });
+
+  it('مادة واحدة بعدة كتب: «رياضيات» س2 تولّد من الكتابين وكل مذكرة بصور كتابها', async () => {
+    const r1 = await request(app)
+      .post('/api/memos/generate')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ subject: 'رياضيات', level: 'السنة الثانية أساسي', lessonTitle: 'القطع النقديّة المتداولة 5، 10، 20، 50، 100، 200: التصرّف فيها' });
+    expect(r1.status).toBe(200);
+    expect(r1.body.memo.bookId).toBe('year2/math2');
+    expect((r1.body.memo.content.images || []).length).toBeGreaterThan(0);
+    expect(r1.body.memo.content.sourceBook).toBe('رياضياتي 2');
+
+    const r2 = await request(app)
+      .post('/api/memos/generate')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ subject: 'رياضيات', level: 'السنة الثانية أساسي', lessonTitle: 'أصابع اليد' });
+    expect(r2.status).toBe(200);
+    expect(r2.body.memo.bookId).toBe('year2/math');
+    expect(r2.body.memo.content.sourceBook).toBe('رياضيات');
+    expect((r2.body.memo.content.images || []).length).toBeGreaterThan(0);
+    expect(r2.body.memo.content.images[0].src).toMatch(/^\/story-covers\//);
   });
 
   it('تغطية كاملة: 6 سنوات × 4 مواد أساسية بلا أي «لا توجد منهجية»', async () => {

@@ -57,6 +57,13 @@ export function normalizeSubject(subject) {
     .trim();
 }
 
+// للمنهجية فقط: «رياضياتي» و«رياضياتي 2» و«الكتاب الرسمي» كلها تحت إطار مادة الرياضيات.
+function methodologySubjectKey(subject) {
+  const s = normalizeSubject(subject);
+  if (s.startsWith('رياضيات')) return 'رياضيات';
+  return s;
+}
+
 function readProfile(file) {
   const abs = path.join(METHODOLOGIES_DIR, file);
   if (!fs.existsSync(abs)) return null;
@@ -84,10 +91,10 @@ export function extractYear(level) {
 }
 
 function listRuleCandidates({ subject, year }) {
-  const subj = normalizeSubject(subject);
+  const subj = methodologySubjectKey(subject);
   return RULES.filter((r) => {
     const yearMatch = !r.year || (year && r.year === year);
-    return yearMatch && normalizeSubject(r.subject) === subj;
+    return yearMatch && methodologySubjectKey(r.subject) === subj;
   });
 }
 
@@ -110,8 +117,8 @@ export function resolveMethodology({ subject, level, lessonType }) {
 
   if (!candidates.length) {
     // احتياط: لا نترك معلّمًا بلا بروفايل — أقرب سنة لنفس المادة (كل الطور نفسه إطار واحد)
-    const subj = normalizeSubject(subject);
-    const subjRules = RULES.filter((r) => r.year && normalizeSubject(r.subject) === subj);
+    const subj = methodologySubjectKey(subject);
+    const subjRules = RULES.filter((r) => r.year && methodologySubjectKey(r.subject) === subj);
     if (subjRules.length) {
       let best = subjRules[0];
       if (year) {

@@ -734,6 +734,19 @@ function FileUploadBlock({ block, onAnswer, blockId }) {
 // block kinds at the same list positions (React hooks rules).
 const TASK_KINDS = ['question','math-input','textarea','drawing','picture-choice','match-pairs','activity','experiment'];
 
+// في عرض «ورقة الاختبار»: الكتل التعليمية تصبح سندًا مقروءًا بدل أن تُهمل
+function paperReadyBlocks(blocks) {
+  return (blocks || []).map((b) => {
+    const kind = b && b.kind;
+    if (kind === 'objective' || kind === 'vocabulary' || kind === 'reward' || kind === 'summary') {
+      const text = b.text || (b.points || []).join(' ، ') || (b.words || []).map((w) => w.word).join(' ، ');
+      const title = b.title || { objective: 'أهداف الدرس', vocabulary: 'رصيد كلمات', summary: 'خلاصة', reward: 'إثراء' }[kind];
+      return { ...b, kind: 'concept', title, text };
+    }
+    return b;
+  });
+}
+
 function Block({ block, onAnswer = () => {}, blockId = '', gates = null, onCheck = null, onReveal = null }) {
   const kind = block?.kind || 'concept';
   const icon = BLOCK_ICONS[kind] || 'article';
@@ -939,9 +952,9 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
       )}
 
       {/* Assessment Paper View vs Normal Lesson View */}
-      {((lesson.isAssessment) || /^y\d+a\d+$/.test(lesson.id)) ? (
+      {((lesson.isAssessment) || /^y\d+a\d+$/.test(lesson.id) || book?.paperStyle) ? (
         <AssessmentPaper
-          lesson={lesson}
+          lesson={{ ...lesson, blocks: paperReadyBlocks(lesson.blocks) }}
           answers={answers}
           onAnswer={handleAnswer}
           submitting={submitting}

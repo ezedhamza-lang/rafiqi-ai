@@ -39,23 +39,46 @@ function findGradeLenient(level) {
   return findGradeByLevel(level);
 }
 
-function resolveBook(subject, level) {
+// طيّ أسماء المواد للمذكرات: «رياضياتي 2» و«المتميز في الرياضيات»均属 رياضيات
+function subjectFold(s) {
+  const n = normalizeSubject(s);
+  if (n.startsWith('رياضيات')) return 'رياضيات';
+  return n;
+}
+
+/**
+ * كل كتب المادة لهذه السنة (قد يكون لسنة واحدة عدة كتب: كتابي في الرياضيات،
+ * رياضياتي 2، المتميز، الشامل...). المطابقة المباشرة أولًا ثم التجميع بـ subjectKey.
+ */
+function resolveBookCandidates(subject, level) {
   const grade = findGradeLenient(level);
-  if (!grade) return null;
+  if (!grade) return [];
   const norm = normalizeSubject(subject);
-  const subjectDef = (grade.subjects || []).find((s) => {
-    if (normalizeSubject(s.id) === norm) return true;
-    if (normalizeSubject(s.title) === norm) return true;
-    return (s.aliases || []).some((a) => normalizeSubject(a) === norm);
-  });
-  if (!subjectDef) return null;
-  return {
-    bookId: `${grade.id}/${subjectDef.id}`,
-    gradeId: grade.id,
-    subjectId: subjectDef.id,
-    subjectTitle: subjectDef.title,
-    gradeTitle: grade.title
-  };
+  const fold = subjectFold(subject);
+  const direct = [];
+  const grouped = [];
+  for (const s of grade.subjects || []) {
+    if (!s.bookFile && !s.lessonsFile) continue;
+    const isDirect =
+      normalizeSubject(s.id) === norm ||
+      normalizeSubject(s.title) === norm ||
+      (s.aliases || []).some((a) => normalizeSubject(a) === norm);
+    const entry = {
+      bookId: `${grade.id}/${s.id}`,
+      gradeId: grade.id,
+      subjectId: s.id,
+      subjectTitle: s.title,
+      gradeTitle: grade.title
+    };
+    if (isDirect) direct.push(entry);
+    else if (subjectFold(s.subjectKey || s.title) === fold) grouped.push(entry);
+  }
+  return [...direct, ...grouped];
+}
+
+function resolveBook(subject, level) {
+  const candidates = resolveBookCandidates(subject, level);
+  return candidates[0] || null;
 }
 
 function findLesson(subjectId, level, lessonTitle, gradeId) {
@@ -66,17 +89,22 @@ function findLesson(subjectId, level, lessonTitle, gradeId) {
   return exact || pages[0];
 }
 
-// اقتراحات عندما يفشل البحث: أقرب عناوين الدروس المرقمنة في هذا الكتاب
-function suggestLessons(subjectId, level, lessonTitle, gradeId) {
+// اقتراحات عندما يفشل البحث: أقرب عناوين الدروس عبر كل كتب المادة المرشّحة
+function suggestLessons(candidates, level, lessonTitle) {
   try {
-    const all = getLessonPages(subjectId, level, gradeId);
+    const list = Array.isArray(candidates) ? candidates : [{ subjectId: candidates, gradeId: null }];
     const seen = new Set();
-    const titles = [];
-    for (const pg of all) {
-      const t = String(pg.title || '').trim();
-      if (!t || seen.has(t)) continue;
-      seen.add(t);
-      titles.push(t);
+    const entries = [];
+    for (const cand of list) {
+      const all = getLessonPages(cand.subjectId, level, cand.gradeId);
+      for (const pg of all) {
+        const t = String(pg.title || '').trim();
+        if (!t) continue;
+        const key = normalizeArabic(t);
+        if (seen.has(key)) continue;
+        seen.add(key);
+        entries.push({ title: t, book: cand.subjectTitle || cand.subjectId });
+      }
     }
     const normQ = normalizeArabic(lessonTitle || '');
     const qWords = normQ.split(/\s+/).filter((w) => w.length >= 3);
@@ -86,9 +114,9 @@ function suggestLessons(subjectId, level, lessonTitle, gradeId) {
       for (const w of qWords) if (nt.includes(w)) sc += 1;
       return sc;
     };
-    titles.sort((a, b) => score(b) - score(a));
-    const matched = titles.filter((t) => score(t) > 0).slice(0, 5);
-    return matched.length ? matched : titles.slice(0, 6);
+    entries.sort((a, b) => score(b.title) - score(a.title));
+    const matched = entries.filter((e) => score(e.title) > 0).slice(0, 6);
+    return matched.length ? matched : entries.slice(0, 8);
   } catch {
     return [];
   }
@@ -286,6 +314,7 @@ export function buildMemoContent(methodology, lesson, ctx) {
     keywords: byKind(lesson, 'keyword').slice(0, 8),
     definitions: byKind(lesson, 'definition').slice(0, 6),
     source: 'curriculum',
+    sourceBook: ctx.sourceBook || ctx.subject || '',
     sourceText: sourceBlocks.slice(0, 12).join('\n').slice(0, 3000)
   };
 }
@@ -295,22 +324,29 @@ export function buildMemoContent(methodology, lesson, ctx) {
 export async function generateMemo({ teacherId, subject, level, lessonTitle, lessonType, unit }) {
   const levelValue = level || 'السنة الأولى أساسي';
 
-  const book = resolveBook(subject, levelValue);
-  if (!book) {
+  const candidates = resolveBookCandidates(subject, levelValue);
+  if (!candidates.length) {
     throw new MemoBuildError(
       'NO_BOOK',
       `لا يوجد محتوى منهج لـ ${subject} — ${levelValue} في curriculum/registry.json. أضف محتوى الكتاب أولًا.`
     );
   }
 
-  const lesson = findLesson(book.subjectId, levelValue, lessonTitle, book.gradeId);
+  // سنة/مادة قد يخدمهما عدة كتب — نبحث الدرس في كل كتب المادة ونولد من الكتاب الذي يحويه
+  let book = null;
+  let lesson = null;
+  for (const cand of candidates) {
+    const found = findLesson(cand.subjectId, levelValue, lessonTitle, cand.gradeId);
+    if (found) { book = cand; lesson = found; break; }
+  }
   if (!lesson) {
-    const hints = suggestLessons(book.subjectId, levelValue, lessonTitle, book.gradeId);
+    book = candidates[0];
+    const hints = suggestLessons(candidates, levelValue, lessonTitle);
     throw new MemoBuildError(
       'LESSON_NOT_FOUND',
-      `لم يُعثر على درس "${lessonTitle}" في محتوى المنهج (${book.gradeTitle} — ${book.subjectTitle}).` +
+      `لم يُعثر على درس "${lessonTitle}" في ${candidates.map((c) => `«${c.subjectTitle}»`).join(' ، ')} (${book.gradeTitle}).` +
         (hints.length
-          ? ` أقرب الدروس المتاحة: ${hints.map((h) => '«' + h + '»').join(' ، ')}`
+          ? ` أقرب الدروس المتاحة: ${hints.map((h) => `«${h.title}» (${h.book})`).join(' ، ')}`
           : ' لا توجد دروس مرقمنة لهذا المستوى بعد.')
     );
   }
@@ -329,9 +365,9 @@ export async function generateMemo({ teacherId, subject, level, lessonTitle, les
     return { memo: cached, cached: true };
   }
 
-  const ctx = { subject: book.subjectTitle, level: levelValue, lessonTitle, lessonType, unit };
+  const ctx = { subject: book.subjectTitle, level: levelValue, lessonTitle, lessonType, unit, sourceBook: book.subjectTitle };
   const content = buildMemoContent(methodology, lesson, ctx);
-  const hash = contentHash([book.bookId, lesson.id, methodology.methodId]);
+  const hash = contentHash([book.bookId, lesson.id, methodology.methodId, 'v2']);
 
   const memo = await lessonMemos.upsert({
     teacherId,
@@ -353,12 +389,11 @@ export async function generateMemo({ teacherId, subject, level, lessonTitle, les
 
 export async function rebuildMemo({ teacherId, subject, level, lessonTitle, lessonType, unit }) {
   const levelValue = level || 'السنة الأولى أساسي';
-  const book = resolveBook(subject, levelValue);
-  if (book) {
-    const lesson = findLesson(book.subjectId, levelValue, lessonTitle, book.gradeId);
-    if (lesson) await lessonMemos.deleteByLesson(book.bookId, lesson.id);
+  for (const cand of resolveBookCandidates(subject, levelValue)) {
+    const lesson = findLesson(cand.subjectId, levelValue, lessonTitle, cand.gradeId);
+    if (lesson) await lessonMemos.deleteByLesson(cand.bookId, lesson.id);
   }
   return generateMemo({ teacherId, subject, level, lessonTitle, lessonType, unit });
 }
 
-export { resolveBook, findLesson };
+export { resolveBook, resolveBookCandidates, findLesson };

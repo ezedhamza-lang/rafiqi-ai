@@ -7,11 +7,24 @@ import { useStudentLevel } from '../../hooks/useStudentLevel.js';
 
 const SUBJECTS = [
   { code: 'math', key: 'math', icon: 'calculate', color: '#233863', bg: 'linear-gradient(135deg, #233863, #2f4a7d)' },
-  { code: 'math-sit', key: 'math', icon: 'calculate', color: '#233863', bg: 'linear-gradient(135deg, #233863, #2f4a7d)' },
   { code: 'anisi', key: 'anisi', icon: 'menu_book', color: '#b06b00', bg: 'linear-gradient(135deg, #f4ab2c, #fd8b15)' },
   { code: 'science', key: 'science', icon: 'science', color: '#0e6b4f', bg: 'linear-gradient(135deg, #0e6b4f, #17a076)' },
   { code: 'production', key: 'production', icon: 'edit', color: '#6b3fa0', bg: 'linear-gradient(135deg, #6b3fa0, #9d6bdc)' }
 ];
+
+// كل كتب المادة الواحدة (كثيرًا ما للسنة كتب متعددة لنفس المادة) تُجمّع تحت تبويب واحد
+function bookTab(b) {
+  const k = String(b.subjectKey || b.subject || '')
+    .replace(/[إأآٱ]/g, 'ا')
+    .replace(/ة/g, 'ه')
+    .replace(/[\u064B-\u0652]/g, '')
+    .trim();
+  if (k.startsWith('رياضيات')) return 'math';
+  if (k.includes('قراء') || k.includes('انيس')) return 'anisi';
+  if (k.includes('ايقاظ') || k.includes('علوم')) return 'science';
+  if (k.includes('انتاج')) return 'production';
+  return b.subjectId || 'math';
+}
 
 export default function StudentBooks() {
   const { t } = useI18n();
@@ -36,7 +49,7 @@ export default function StudentBooks() {
     : [...new Set(books.map((b) => b.gradeId))].sort((a, b) => Number(a.replace(/\D/g, '')) - Number(b.replace(/\D/g, '')));
   const filtered = books.filter(
     (b) =>
-      b.subjectId === activeSubject &&
+      bookTab(b) === activeSubject &&
       (ownLevel ? b.gradeId === ownLevel : activeGrade === 'all' || b.gradeId === activeGrade)
   );
 
@@ -56,7 +69,7 @@ export default function StudentBooks() {
           >
             <span className="material-icons">{s.icon}</span>
             {t(`studentSpace.books.subjects.${s.key}`)}
-            <span className="subject-count">{t('studentSpace.books.booksCount', { n: books.filter((b) => b.subjectId === s.code).length })}</span>
+            <span className="subject-count">{t('studentSpace.books.booksCount', { n: books.filter((b) => bookTab(b) === s.code).length })}</span>
           </button>
         ))}
       </div>
@@ -93,9 +106,9 @@ export default function StudentBooks() {
         <div className="card-grid">
           {filtered.map((book) => (
             <div key={`${book.gradeId}-${book.subjectId}-${book.title}`} className="card">
-              <div className="lesson-head" style={{ background: SUBJECTS.find((s) => s.code === book.subjectId)?.bg }}>
+              <div className="lesson-head" style={{ background: (SUBJECTS.find((s) => s.code === bookTab(book)) || SUBJECTS[0]).bg }}>
                 <span className="material-icons" style={{ fontSize: '2.4rem', color: '#fff' }}>
-                  {SUBJECTS.find((s) => s.code === book.subjectId)?.icon}
+                  {(SUBJECTS.find((s) => s.code === bookTab(book)) || SUBJECTS[0]).icon}
                 </span>
                 <span className="lesson-num">{book.grade}</span>
               </div>

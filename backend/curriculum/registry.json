@@ -139,6 +139,7 @@
       "subjects": [
         {
           "id": "math",
+          "subjectKey": "رياضيات",
           "title": "رياضيات",
           "aliases": [
             "رياضيات",
@@ -146,22 +147,24 @@
             "math",
             "maths"
           ],
-          "bookFile": "mathbook-book.json",
-          "lessonsFile": "math-units.json",
+          "bookFile": "math-situations-book.json",
+          "lessonsFile": "math-situations.json",
           "skillsMapFile": "skills-map-math.json",
           "adapter": "math"
         },
         {
-          "id": "math-sit",
-          "title": "وضعيات الرياضيات",
+          "id": "math2",
+          "subjectKey": "رياضيات",
+          "title": "رياضياتي 2",
           "aliases": [
-            "وضعيات",
-            "وضعيات الرياضيات",
-            "situations"
+            "رياضياتي",
+            "رياضياتي 2",
+            "الكتاب الرسمي",
+            "math2"
           ],
-          "bookFile": "math-situations-book.json",
-          "lessonsFile": "math-situations.json",
-          "skillsMapFile": null,
+          "bookFile": "mathbook-book.json",
+          "lessonsFile": "math-units.json",
+          "skillsMapFile": "skills-map-math.json",
           "adapter": "math"
         },
         {
