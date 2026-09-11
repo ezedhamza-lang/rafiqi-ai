@@ -21,20 +21,29 @@ const RULES = [
   { year: '1', subject: 'إيقاظ علمي', file: 'year1-science-awakening.json' },
   { year: '1', subject: 'إنتاج كتابي', file: 'year1-writing-production.json' },
   { year: '2', subject: 'قراءة', lessonType: 'نص سردي أو شعري', file: 'year2-reading-narrative.json' },
+  { year: '2', subject: 'رياضيات', file: 'year2-math-standard.json' },
   { year: '2', subject: 'إيقاظ علمي', file: 'year2-science-awakening.json' },
   { year: '2', subject: 'إنتاج كتابي', file: 'year2-writing-narrative.json' },
+  { year: '3', subject: 'رياضيات', file: 'year3-math-standard.json' },
   { year: '4', subject: 'رياضيات', file: 'year4-math-standard.json' },
+  { year: '5', subject: 'رياضيات', file: 'year5-math-standard.json' },
+  { year: '6', subject: 'رياضيات', file: 'year6-math-standard.json' },
   { subject: 'تواصل شفوي', file: 'oral-communication-standard.json' }
 ];
 
 const YEAR_WORDS = {
-  'الاولي': '1',
+  'الأولى': '1',
   'الثانية': '2',
   'الثالثة': '3',
   'الرابعة': '4',
   'الخامسة': '5',
   'السادسة': '6'
 };
+
+// مفاتيح موحّدة (نفس توحيد normalizeArabic) للمقارنة الآمنة
+const YEAR_WORDS_NORM = Object.fromEntries(
+  Object.entries(YEAR_WORDS).map(([w, d]) => [normalizeArabic(w), d])
+);
 
 /**
  * توحيد اسم المادة قبل المقارنة: إزالة الهمزات المختلفة، توحيد المسافات،
@@ -64,8 +73,9 @@ function readProfile(file) {
  */
 export function extractYear(level) {
   const norm = normalizeArabic(level || '');
-  const wordMatch = norm.match(/السنه\s+(الاولي|الثانية|الثالثة|الرابعة|الخامسة|السادسة)/);
-  if (wordMatch) return YEAR_WORDS[wordMatch[1]];
+  for (const [word, digit] of Object.entries(YEAR_WORDS_NORM)) {
+    if (norm.includes(word)) return digit;
+  }
   const digitMatch = norm.match(/السنه\s*(\d)/);
   if (digitMatch) return digitMatch[1];
   const standaloneMatch = norm.match(/^\s*(\d)\s*$/);
@@ -97,6 +107,23 @@ export class MethodologyError extends Error {
 export function resolveMethodology({ subject, level, lessonType }) {
   const year = extractYear(level);
   const candidates = listRuleCandidates({ subject, year });
+
+  if (!candidates.length) {
+    // احتياط: لا نترك معلّمًا بلا بروفايل — أقرب سنة لنفس المادة (كل الطور نفسه إطار واحد)
+    const subj = normalizeSubject(subject);
+    const subjRules = RULES.filter((r) => r.year && normalizeSubject(r.subject) === subj);
+    if (subjRules.length) {
+      let best = subjRules[0];
+      if (year) {
+        best = subjRules.reduce(
+          (a, b) => (Math.abs(Number(b.year) - Number(year)) < Math.abs(Number(a.year) - Number(year)) ? b : a),
+          subjRules[0]
+        );
+      }
+      const profile = readProfile(best.file);
+      if (profile) return profile;
+    }
+  }
 
   const typeNorm = lessonType ? normalizeArabic(lessonType) : null;
   const exact = candidates.filter(

@@ -31,10 +31,10 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(res.status).toBe(400);
   });
 
-  it('يعرض كل بروفايلات المنهجية (9 بروفايلات رسمية)', async () => {
+  it('يعرض كل بروفايلات المنهجية (13 بروفايلًا رسميًا يشمل رياضيات السنين 1-6)', async () => {
     const res = await request(app).get('/api/memos/methodologies').set('Authorization', `Bearer ${token}`);
     expect(res.status).toBe(200);
-    expect(res.body.length).toBe(9);
+    expect(res.body.length).toBe(13);
     const reading = res.body.find((m) => m.appliesTo?.subject === 'قراءة');
     expect(reading).toBeTruthy();
     expect(reading.phases.length).toBeGreaterThan(0);
@@ -196,6 +196,39 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(missing.body.error).toContain('غير موجودة');
   });
 
+  it('مذكرة رياضيات س2 من الكتاب الرسمي الجديد تسحب درسها ومراحلها الخمس', async () => {
+    const res = await request(app)
+      .post('/api/memos/generate')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ subject: 'رياضيات', level: 'السنة الثانية أساسي', lessonTitle: 'الأعداد من 0 إلى 499: الطرح دون زيادة ولا تفكيك' });
+    expect(res.status).toBe(200);
+    const memo = res.body.memo;
+    expect(memo.methodologyId).toBe('year2-math-standard');
+    expect(memo.lessonId).toBe('y2m49');
+    expect(memo.content.phases.length).toBe(5);
+    const allText = JSON.stringify(memo.content);
+    expect(allText).toContain('الطرح');
+  });
+
+  it('مذكرة س2 للدرس ذي الصور تحمل صور كتاب التلميذ وتطبعها في PDF', async () => {
+    const res = await request(app)
+      .post('/api/memos/generate')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ subject: 'رياضيات', level: 'السنة الثانية أساسي', lessonTitle: 'القطع النقديّة المتداولة 5، 10، 20، 50، 100، 200: التصرّف فيها' });
+    expect(res.status).toBe(200);
+    const memo = res.body.memo;
+    expect(memo.lessonId).toBe('y2m50');
+    expect((memo.content.images || []).length).toBeGreaterThan(0);
+
+    const pdf = await request(app)
+      .get(`/api/memos/${memo.id}/pdf`)
+      .set('Authorization', `Bearer ${token}`)
+      .buffer();
+    expect(pdf.status).toBe(200);
+    expect(Buffer.from(pdf.body).subarray(0, 4).toString()).toBe('%PDF');
+    expect(pdf.body.length).toBeGreaterThan(40000);
+  });
+
   it('كتاب س2 الرسمي: 63 درسًا بمحتوى المصدر وصوره بلا إجابات مكشوفة', async () => {
     const res = await request(app).get('/api/public/curriculum/books/year2/math/lessons');
     expect(res.status).toBe(200);
@@ -208,5 +241,18 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(first.blocks.some((b) => b.blockId && b.blockId.startsWith('b'))).toBe(true);
     const imgBlock = first.blocks.find((b) => b.image);
     expect(imgBlock.imageId).toMatch(/^img-y2m01-\d+$/);
+  });
+
+  it('تغطية كاملة: 6 سنوات × 4 مواد أساسية بلا أي «لا توجد منهجية»', async () => {
+    const { resolveMethodology } = await import('../src/services/methodologyResolver.js');
+    const years = ['الأولى', 'الثانية', 'الثالثة', 'الرابعة', 'الخامسة', 'السادسة'];
+    for (const y of years) {
+      for (const s of ['رياضيات', 'قراءة', 'إيقاظ علمي', 'إنتاج كتابي']) {
+        const p = resolveMethodology({ subject: s, level: `السنة ${y} أساسي` });
+        expect(p, `${s} — السنة ${y}`).toBeTruthy();
+        expect((p.phases || []).length).toBeGreaterThan(0);
+      }
+    }
+    expect(() => resolveMethodology({ subject: 'فرنسية', level: 'السنة الأولى أساسي' })).toThrow();
   });
 });
