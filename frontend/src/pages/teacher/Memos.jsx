@@ -137,7 +137,7 @@ export default function Memos({ onChanged }) {
 
   const printPdf = async () => {
     try {
-      await api.download(`/teacher/memos/${view.id}/pdf`, `memo-${view.lessonTitle || view.id}.pdf`);
+      await api.download(`/memos/${view.id}/pdf`, `memo-${view.lessonTitle || view.id}.pdf`);
     } catch (err) {
       setError(err.message);
     }

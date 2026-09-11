@@ -164,6 +164,35 @@ router.get('/', teacherMiddleware, validateQuery(memosListQuerySchema), asyncHan
  *       200:
  *         description: تم الحذف
  */
+/**
+ * @swagger
+ * /api/memos/{id}/pdf:
+ *   get:
+ *     summary: تنزيل المذكرة الرسمية PDF (محفوظة باسم المعلّم)
+ *     tags: [memos]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: integer }
+ *     responses:
+ *       200:
+ *         description: ملف PDF
+ *       404:
+ *         description: المذكرة غير موجودة
+ */
+router.get('/:id/pdf', teacherMiddleware, validateParams(memoIdParamSchema), asyncHandler(async (req, res) => {
+  const memo = await lessonMemos.findByIdForTeacher(req.params.id, req.user.id);
+  if (!memo) throw new ApiError(404, 'المذكرة غير موجودة');
+  const { buildMemoPdf } = await import('../services/exportService.js');
+  const buffer = await buildMemoPdf(memo);
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename="memo-' + memo.id + '.pdf"');
+  res.send(buffer);
+}));
+
 router.delete('/:id', teacherMiddleware, validateParams(memoIdParamSchema), asyncHandler(async (req, res) => {
   await lessonMemos.deleteById(req.params.id, req.user.id);
   res.json({ ok: true });

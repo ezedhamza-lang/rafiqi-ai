@@ -15,6 +15,10 @@ export async function findById(id) {
   return prisma.lessonMemo.findUnique({ where: { id: Number(id) } });
 }
 
+export async function findByIdForTeacher(id, teacherId) {
+  return prisma.lessonMemo.findFirst({ where: { id: Number(id), teacherId } });
+}
+
 export async function listForTeacher(teacherId, limit = 50) {
   return prisma.lessonMemo.findMany({
     where: { teacherId },

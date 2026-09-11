@@ -170,4 +170,27 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(res.status).toBe(200);
     expect(res.body.memo.methodologyId).toBe('year1-science-awakening');
   });
+
+  it('طباعة المذكرة تنزيل PDF حقيقي من نفس جدول lesson_memos', async () => {
+    const gen = await request(app)
+      .post('/api/memos/generate')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ subject: 'رياضيات', level: 'السنة الأولى أساسي', lessonTitle: 'آلة الجمع دون احتفاظ: الجمع العمودي' });
+    expect(gen.status).toBe(200);
+    const memoId = gen.body.memo.id;
+
+    const pdf = await request(app)
+      .get(`/api/memos/${memoId}/pdf`)
+      .set('Authorization', `Bearer ${token}`)
+      .buffer();
+    expect(pdf.status).toBe(200);
+    expect(pdf.headers['content-type']).toContain('application/pdf');
+    expect(Buffer.from(pdf.body).subarray(0, 4).toString()).toBe('%PDF');
+
+    const missing = await request(app)
+      .get('/api/memos/999999/pdf')
+      .set('Authorization', `Bearer ${token}`);
+    expect(missing.status).toBe(404);
+    expect(missing.body.error).toContain('غير موجودة');
+  });
 });
