@@ -13,9 +13,12 @@ export default function BookViewer({ book, onClose }) {
   const [imgError, setImgError] = useState(false);
   const [lift, setLift] = useState(null); // { next, angle, anim }
   const [full, setFull] = useState(true);
+  const [zoom, setZoom] = useState(1);
   const sceneRef = useRef(null);
   const dragRef = useRef({ startX: 0, width: 600, moved: false });
   const total = book.totalPages || 0;
+  const zoomIn = () => setZoom((z) => Math.min(3, +(z + 0.25).toFixed(2)));
+  const zoomOut = () => setZoom((z) => Math.max(0.5, +(z - 0.25).toFixed(2)));
 
   const go = (p) => {
     const target = Math.min(Math.max(1, p), total);
@@ -105,7 +108,7 @@ export default function BookViewer({ book, onClose }) {
           </div>
         </div>
 
-        <div className="viewer-stage">
+        <div className="viewer-stage flip-stage">
           {!book.hasImages || imgError ? (
             <div className="viewer-noimg">
               <span className="material-icons" style={{ fontSize: '3rem', color: 'var(--muted)' }}>auto_stories</span>
@@ -115,6 +118,7 @@ export default function BookViewer({ book, onClose }) {
             <div
               className="flip-scene"
               ref={sceneRef}
+              style={{ width: `calc(${zoom} * min(96vw, 1150px))` }}
               onPointerDown={onPointerDown}
               onPointerMove={onPointerMove}
               onPointerUp={onPointerUp}
@@ -163,6 +167,17 @@ export default function BookViewer({ book, onClose }) {
               <span className="material-icons" style={{ fontSize: '18px' }}>chevron_right</span>
               {t('studentSpace.bookViewer.prev')}
             </button>
+            <div className="viewer-zoom">
+              <button type="button" className="btn btn-ghost btn-sm" onClick={zoomOut} disabled={zoom <= 0.5} title="تصغير">
+                <span className="material-icons" style={{ fontSize: 18 }}>remove</span>
+              </button>
+              <button type="button" className="btn btn-ghost btn-sm" onClick={() => setZoom(1)} title="ملاءمة العرض (100%)">
+                {Math.round(zoom * 100)}%
+              </button>
+              <button type="button" className="btn btn-ghost btn-sm" onClick={zoomIn} disabled={zoom >= 3} title="تكبير">
+                <span className="material-icons" style={{ fontSize: 18 }}>add</span>
+              </button>
+            </div>
             <div className="viewer-pages">
               <span>{t('studentSpace.bookViewer.page')}</span>
               <input

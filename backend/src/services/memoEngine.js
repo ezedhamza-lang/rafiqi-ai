@@ -45,7 +45,9 @@ function blockSection(block) {
 // تصنيف دلالي للدور اعتمادًا على محتوى الكتلة نفسه (لا يعتمد على أيقونات المصدر)
 function blockRole(block, idx, total) {
   const b = block || {};
-  const t = normalizeArabic(`${b.title || ''} ${b.text || ''}`);
+  const t = normalizeArabic(`${b.text || ''} ${b.title || ''}`);
+  if (/ذهن|سريعا|سريع/.test(t) && (b.kind === 'question' || b.kind === 'math-input')) return 'warmup';
+  if (/اتذكر/.test(t)) return 'recall';
   if (b.kind === 'table') return 'practice';
   if (b.kind === 'question') {
     if (/^(انجز|اكمل|اكتب|احسب|رتب|ضع|مثل|ارسم|نصب|وزع|ملء)/.test(t) || /العمليات|الجدول|عمود|افقي|رأسيا/.test(t)) return 'practice';
@@ -56,7 +58,7 @@ function blockRole(block, idx, total) {
   }
   // concept
   if (/^تحد|تحدي/.test(t)) return 'apply';
-  if (/حاذي|منزل|بذلك|استنتاج|قاع|نستنتج|نحصل/.test(t)) return 'recall';
+  if (/حاذي|بذلك|القاعدة|الاستنتاج|نستنتج|نحصل/.test(t)) return 'recall';
   if (/وضع|مشكل|اراد|اشترى|باع|جمع|نفق|معرض|حديقة|مكتبة|قطف|اقتطع|انتج|وفر/.test(t)) return idx <= total * 0.5 ? 'explore' : 'apply';
   return 'misc';
 }
@@ -64,13 +66,14 @@ function blockRole(block, idx, total) {
 function classifyStages(lesson) {
   const blocks = lesson.blocks || [];
   const total = blocks.length;
-  const roles = { explore: [], recall: [], practice: [], apply: [] };
+  const roles = { warmup: [], explore: [], recall: [], practice: [], apply: [] };
   blocks.forEach((b, i) => {
     if (isPlaceholderBlock(b)) return;
+    if (b && b.teacherOnly) return;
     let r = blockRole(b, i, total);
     if (r === 'misc') {
       const docSec = b.section ? blockSection(b) : 'intro';
-      r = { recall: 'recall', practice: 'practice', apply: 'apply', challenge: 'apply', assessment: 'apply', explore: 'explore', warmup: 'explore' }[docSec] || 'explore';
+      r = { recall: 'recall', practice: 'practice', apply: 'apply', challenge: 'apply', assessment: 'apply', explore: 'explore', warmup: 'warmup' }[docSec] || 'explore';
     }
     (roles[r] = roles[r] || []).push({ block: b, idx: i });
   });
@@ -86,6 +89,8 @@ function groupBySection(lesson) {
 }
 
 const STAGE_META = [
+  { re: /ذهن/, skill: 'الحساب الذهني وسرعة الإنجاز', tools: ['الألواح'] },
+  { re: /استحضار|مكتسبات/, skill: 'تعهّد المكتسبات المستوجبة', tools: ['الألواح', 'السبورة'] },
   { re: /تمهيد|مكتسبات|تهيئة|انطلاق/, skill: 'استرجاع المكتسبات والحساب الذهني', tools: ['الألواح'] },
   { re: /استكشاف|استقر|إشكالي|تصور|فرض|وضعية/, skill: 'حل المشكلات وتنظيم كيفية التعلّم', tools: ['السبورة', 'كراسات المحاولات'] },
   { re: /استنتاج|بناء|تثبيت|مساعد|قاع/, skill: 'التفاوض والحوار', tools: ['السبورة', 'بطاقات'] },
@@ -98,6 +103,8 @@ function metaFor(stageName) {
   return STAGE_META.find((m) => m.re.test(hay)) || { skill: 'بناء المعرفة وتثبيتها', tools: ['السبورة', 'كتاب التلميذ'] };
 }
 
+function stripT(x) { return String(x).replace(/[\u064B-\u0652\u0670\u0640]/g, ''); }
+function toW(x) { return stripT(x).replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)); }
 function itemText(b) {
   const t = String(b.text || b.title || '').trim();
   if (!t) return '';
@@ -111,6 +118,10 @@ function isPlaceholderBlock(b) {
 }
 
 const TEACHER_TPL = {
+  warmup: (items, pages) => ({
+    teacher: 'يطرح سلسلة عمليات حساب ذهني مرتبطة بتقنية الدرس ويدعوهم إلى إنجازها على الألواح:\n' + items.map((i) => '• ' + i).join('\n') + '\n• ويدعوهم إلى بيان طريقة الحساب.',
+    learner: '• يُجري الحساب الذهني سريعًا على اللوح ويبيّن طريقته.'
+  }),
   recall: (items, pages) => ({
     teacher: `ينظّم النقاش ويدعوهم إلى مقارنة النتائج واستنتاج القاعدة${pages ? ` (كتاب التلميذ ص. ${pages})` : ''}:\n${items.map((i) => '• ' + i).join('\n')}\n• يثبّت القاعدة على السبورة ويطلب تدوينها.`,
     learner: '• يقارن نتائج الحالات ويبرّر.\n• يستنتج القاعدة وينقلها إلى كراسه.'
@@ -147,12 +158,12 @@ const TEACHER_TPL = {
 
 function rowRole(stageName) {
   const n = normalizeArabic(stageName || '');
-  if (/تمهيد|مكتسبات|تهيئة/.test(n)) return 'warmup';
-  if (/استكشاف|اشكالي|تصور|فرض|وضع/.test(n)) return 'explore';
-  if (/استنتاج|بناء|تثبيت|مساعد/.test(n)) return 'recall';
-  if (/تدر|تمرين|ممارس/.test(n)) return 'practice';
+  if (/ذهن/.test(n)) return 'warmup';
+  if (/استحضار|تمهيد|مكتسبات/.test(n)) return 'recall';
+  if (/استكشاف|استقر|اشكالي|تصور|فرض|وضع/.test(n)) return 'explore';
+  if (/منهجي|تدر|تمرين|ممارس|تنفيذ|انجاز/.test(n)) return 'practice';
   if (/توظيف|ادماج|نقل/.test(n)) return 'apply';
-  if (/تقو|تقي/.test(n)) return 'assessment';
+  if (/تقو|تقييم/.test(n)) return 'assessment';
   return 'explore';
 }
 
@@ -218,24 +229,16 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
   };
   const STAGE_KEYS = (name) => {
     const n = normalizeArabic(name);
-    if (/تمهيد|مكتسبات/.test(n)) return ['explore'];
-    if (/استكشاف|اشكالي|تصور|فرض|وضع/.test(n)) return ['explore'];
-    if (/مساعدة|استنتاج|بناء|تثبيت/.test(n)) return ['recall', 'explore'];
-    if (/تدر|تمرين|ممارس/.test(n)) return ['practice'];
-    if (/توظيف|ادماج|نقل/.test(n)) return ['apply'];
-    if (/تقو|تقي/.test(n)) return [];
+    if (/ذهن/.test(n)) return ['warmup'];
+    if (/استحضار|تمهيد|مكتسبات/.test(n)) return ['recall'];
+    if (/استكشاف|استقر|اشكالي|تصور|فرض|وضع/.test(n)) return ['explore', 'situation'];
+    if (/منهجي|تدر|تمرين|ممارس|تنفيذ|انجاز/.test(n)) return ['practice', 'steps'];
+    if (/توظيف|ادماج|نقل/.test(n)) return ['apply', 'challenge'];
+    if (/تقو|تقييم/.test(n)) return [];
     return [];
   };
 
   const allBlocks = lesson.blocks || [];
-  const REUSE = {
-    warmup: () => allBlocks.slice(0, 2),
-    explore: () => allBlocks.slice(0, 2),
-    recall: () => { const cs = allBlocks.filter((b) => b.kind === 'concept'); return (cs.length ? cs : allBlocks.slice(1, 3)).slice(0, 3); },
-    practice: () => allBlocks.slice(2, 6),
-    apply: () => allBlocks.slice(-3),
-    assessment: () => allBlocks.slice(-2)
-  };
   const rows = [];
   for (const name of stages) {
     let items = [];
@@ -243,20 +246,32 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
     if (/تقو|تقي/.test(normalizeArabic(name))) {
       const tail = allBlocks
         .map((b, i) => ({ b, i }))
-        .filter((x) => !consumed.has(x.i) && x.i >= allBlocks.length * 0.5)
+        .filter((x) => !consumed.has(x.i) && !(x.b && x.b.teacherOnly) && x.i >= allBlocks.length * 0.5)
+        .filter((x) => !(/=\s*[\d٠-٩]/.test(toW(stripT((x.b && x.b.text) || ''))) && !/\.\.\.|…/.test((x.b && x.b.text) || '')))
         .slice(0, 3);
       tail.forEach((x) => consumed.add(x.i));
       items = items.concat(tail.map((x) => x.b));
     }
-    if (!items.length) {
-      // بنية المرجع ثابتة: حتى لو كان الدرس تمارين فقط، نعيد توظيف نفس الأنشطة بدور مختلف في كل مرحلة
-      const role = rowRole(name);
-      items = (REUSE[role] || REUSE.explore)();
-    }
+    if (!items.length) continue;
     const row = buildRow(name, items, pages);
     if (row) rows.push(row);
   }
-  const leftoverBlocks = allBlocks.filter((b, i) => !consumed.has(i));
+  const rawLeft = allBlocks.filter((b, i) => !consumed.has(i) && !(b && b.teacherOnly));
+  const solvedLeft = rawLeft.filter((b) => /=\s*[\d٠-٩]/.test(toW(stripT(b.text || ''))) && !/\.\.\.|…/.test(b.text || ''));
+  const leftoverBlocks = rawLeft.filter((b) => !solvedLeft.includes(b));
+  const extraAnswers = solvedLeft.map((b) => b.text).filter(Boolean);
+  const answerBlocks = allBlocks.filter((b) => b && b.teacherOnly && !isPlaceholderBlock(b));
+  if (answerBlocks.length || extraAnswers.length) {
+    const ansText = answerBlocks.map((b) => '• ' + itemText(b)).concat(extraAnswers.map((x) => '• ' + x)).filter((x) => x.length > 2).slice(0, 8).join('\n');
+    rows.push({
+      stage: 'نموذج الإجابة والتحقّق',
+      teacherActivity: 'يعرض النموذج ويدعوهم إلى المقارنة والتصحيح الذاتي:\n' + ansText,
+      learnerActivity: '• يقارن إنتاجه بالنموذج ويصحّح بدفتره ويدوّن نسبة نجاحه.',
+      skill: 'تقدير الذات',
+      tools: ['كراسات المحاولات', 'شبكة التصحيح'],
+      images: []
+    });
+  }
   if (leftoverBlocks.length) {
     const practiceRow = rows.find((r) => /تدر|تمرين/.test(normalizeArabic(r.stage)));
     const extra = buildRow('تمارين إضافية من الكتاب', leftoverBlocks, pages);

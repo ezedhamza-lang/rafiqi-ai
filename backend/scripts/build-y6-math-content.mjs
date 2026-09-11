@@ -79,6 +79,8 @@ const BLANK = /(\.\.\.+|…+|ـ{2,}|__+)/;
 const SOLVED_EQ = /=\s*[\d٠-٩]+([.,][\d٠-٩]+)?\s*($|[.،؛)كلمةمباشرًا])|=\s*[\d٠-٩]+([.,][\d٠-٩]+)?\s+(مي|دج|كغ|غ|ل|ملم|سم|م|كم|°|ساعة|س|دقيقة|ق|نقطة)/;
 function stripTashkeel(s) { return String(s).replace(/[\u064B-\u0652\u0670\u0640]/g, ''); }
 function norm(s) { return stripTashkeel(String(s || '')).replace(/[أإآٱ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').replace(/[،؛:.!?ـ()\s]+/g, ' ').trim().toLowerCase(); }
+const SECTION_BY_LABEL = { 'اطبق': 'practice', 'اتذكر': 'recall', 'لاحظ': 'explore', 'فكر': 'explore', 'وضعية': 'situation', 'اتحقق': 'check', 'تحدى': 'challenge', 'ارسم': 'practice', 'الوضعية': 'situation', 'تقييم': 'assessment', 'اقوم': 'assessment' };
+function labelSection(label) { const n = norm(label || '').replace(/ال/g, ''); for (const k of Object.keys(SECTION_BY_LABEL)) if (n.startsWith(k)) return SECTION_BY_LABEL[k]; return null; }
 function cleanCell(t) {
   const s = String(t || '').trim();
   if (!s || s === '.' || s === '·' || BLANK.test(s) && s.length <= 4) return '';
@@ -122,6 +124,7 @@ for (const L of lessons) {
   let imgSeq = 0;
   let lastText = '';
   let subTitle = '';
+  let currentSection = 'intro';
   let pendingHint = '';
   let prevNorm = '';
 
@@ -139,11 +142,11 @@ for (const L of lessons) {
   };
   const pushImg = (im) => {
     const c = copyImg(im);
-    if (c) blocks.push({ kind: 'concept', title: subTitle || lesson.title, image: c.src, imageId: c.imageId, alt: c.caption });
+    if (c) blocks.push({ section: currentSection, kind: 'concept', title: subTitle || lesson.title, image: c.src, imageId: c.imageId, alt: c.caption });
   };
   const pushQuestion = (text, plain) => {
     if (/^(الإجابة|الجواب|الحل|الباحث)\s*[:：]/.test(String(text).trim())) {
-      blocks.push({ kind: 'concept', teacherOnly: true, title: '', text });
+      blocks.push({ section: currentSection, kind: 'concept', teacherOnly: true, title: '', text });
       return;
     }
     questionsTotal += 1;
@@ -167,18 +170,18 @@ for (const L of lessons) {
     if (VERB_CHOOSE.test(plain)) {
       const after = text.split(/[:：]/).slice(1).join(' ');
       const opts = after.split(/[،,]/).map((s) => s.trim()).filter((s) => s && s.length <= 24).slice(0, 5);
-      if (opts.length >= 2) { blocks.push({ kind: 'question', title: subTitle || 'اختر الإجابة الصحيحة', text: text.replace(/[:：].*$/, ''), options: opts }); return; }
+      if (opts.length >= 2) { blocks.push({ section: currentSection, kind: 'question', title: subTitle || 'اختر الإجابة الصحيحة', text: text.replace(/[:：].*$/, ''), options: opts }); return; }
       pendingHint = text;
       return;
     }
-    if (VERB_DRAW.test(plain)) { blocks.push({ kind: 'drawing', title: subTitle || 'أرسم', text }); return; }
-    if (VERB_TEXT.test(plain)) { blocks.push({ kind: 'textarea', title: subTitle || 'أُعبّر', text, rows: 2 }); return; }
+    if (VERB_DRAW.test(plain)) { blocks.push({ section: currentSection, kind: 'drawing', title: subTitle || 'أرسم', text }); return; }
+    if (VERB_TEXT.test(plain)) { blocks.push({ section: currentSection, kind: 'textarea', title: subTitle || 'أُعبّر', text, rows: 2 }); return; }
     const blanks = (toWestern(plain).match(/\.\.\.+/g) || []).length;
     if (VERB_NUMERIC.test(plain) && blanks <= 1) {
-      blocks.push({ kind: 'math-input', title: subTitle || 'أُكمل', text, placeholder: 'أُكْتُبُ إجابتي هنا' });
+      blocks.push({ section: currentSection, kind: 'math-input', title: subTitle || 'أُكمل', text, placeholder: 'أُكْتُبُ إجابتي هنا' });
       return;
     }
-    blocks.push({ kind: 'question', title: subTitle || 'تمرين', text, placeholder: 'أُكْتُبُ إجابتي هنا' });
+    blocks.push({ section: currentSection, kind: 'question', title: subTitle || 'تمرين', text, placeholder: 'أُكْتُبُ إجابتي هنا' });
   };
 
   for (const it of L.items) {
@@ -187,11 +190,11 @@ for (const L of lessons) {
       const raw = String(it.t || '').replace(/[\u200b-\u200f]/g, '').trim();
       if (!raw || /^\d{1,2}$/.test(raw)) continue;
       const emojiLabel = raw.match(/^[💡✏️📘🎯⚠️🧠📐🔷🔶⭐✨🖊✍️️]+\s*(.+)$/u);
-      if (emojiLabel && emojiLabel[1].length <= 24) { subTitle = stripTashkeel(emojiLabel[1]).slice(0, 40); continue; }
-      if (it.sub) { subTitle = stripTashkeel(raw).slice(0, 70); continue; }
+      if (emojiLabel && emojiLabel[1].length <= 24) { subTitle = stripTashkeel(emojiLabel[1]).slice(0, 40); currentSection = labelSection(emojiLabel[1]) || currentSection; continue; }
+      if (it.sub) { subTitle = stripTashkeel(raw).slice(0, 70); currentSection = labelSection(raw) || currentSection; continue; }
       let text = raw.replace(/^\d+\.\s*/, '').replace(LETTER_PREFIX, '').replace(/^[•▪◦·]+\s*/, '').trim();
       const emojiInText = text.match(/^[💡✏️📘🎯⚠️🧠📐🔷🔶⭐✨🖊✍️️]+\s*([\u0600-\u06FF]{2,12})\s+/u);
-      if (emojiInText) { subTitle = stripTashkeel(emojiInText[1]); text = text.slice(emojiInText[0].length); }
+      if (emojiInText) { subTitle = stripTashkeel(emojiInText[1]); currentSection = labelSection(emojiInText[1]) || currentSection; text = text.slice(emojiInText[0].length); }
       const plain = norm(text);
       lastText = text;
       const hasBlank = BLANK.test(text);
@@ -208,8 +211,8 @@ for (const L of lessons) {
       if (midAnswer && !BLANK.test(midAnswer[2])) {
         const qPart = midAnswer[1].trim();
         if (!(/\s=\s*[\d٠-٩]/.test(toWestern(stripTashkeel(qPart)))) || BLANK.test(qPart)) pushQuestion(qPart, norm(qPart));
-        else blocks.push({ kind: 'concept', title: subTitle || '', text: qPart });
-        blocks.push({ kind: 'concept', teacherOnly: true, title: '', text: midAnswer[2].trim() });
+        else blocks.push({ section: currentSection, kind: 'concept', title: subTitle || '', text: qPart });
+        blocks.push({ section: currentSection, kind: 'concept', teacherOnly: true, title: '', text: midAnswer[2].trim() });
         continue;
       }
       const arrowSplit = text.match(/^(.{6,}?)\s*[⟵←]\s+(.{4,})$/);
@@ -219,8 +222,8 @@ for (const L of lessons) {
         const qHasBlank = BLANK.test(qPart);
         if (!(/\s=\s*[\d٠-٩]/.test(toWestern(stripTashkeel(qPart)))) && !qHasBlank) pushQuestion(qPart, norm(qPart));
         else if (qHasBlank) pushQuestion(qPart, norm(qPart));
-        else blocks.push({ kind: 'concept', title: subTitle || '', text: qPart });
-        blocks.push({ kind: 'concept', teacherOnly: true, title: '', text: aPart });
+        else blocks.push({ section: currentSection, kind: 'concept', title: subTitle || '', text: qPart });
+        blocks.push({ section: currentSection, kind: 'concept', teacherOnly: true, title: '', text: aPart });
         continue;
       }
       const dashSplit = text.match(/^(.{8,}؟?)\s*[—–]\s+(.{6,})$/);
@@ -229,23 +232,23 @@ for (const L of lessons) {
         const aPart = dashSplit[2].trim();
         const qHasBlank = BLANK.test(qPart);
         const qSolved = /=\s*[\d٠-٩]/.test(toWestern(stripTashkeel(qPart))) && !qHasBlank;
-        if (ANSWER_PREFIX.test(norm(qPart))) blocks.push({ kind: 'concept', teacherOnly: true, title: '', text: qPart + ' — ' + aPart });
+        if (ANSWER_PREFIX.test(norm(qPart))) blocks.push({ section: currentSection, kind: 'concept', teacherOnly: true, title: '', text: qPart + ' — ' + aPart });
         else if (!qSolved) pushQuestion(qPart, norm(qPart));
-        blocks.push({ kind: 'concept', teacherOnly: true, title: '', text: aPart });
+        blocks.push({ section: currentSection, kind: 'concept', teacherOnly: true, title: '', text: aPart });
         continue;
       }
       if ((solved || answerShown) && !hasBlank) {
-        blocks.push({ kind: 'concept', teacherOnly: ANSWER_PREFIX.test(plain) || /(الإجابة|الجواب)\s*[:：]/.test(text), title: subTitle || '', text });
+        blocks.push({ section: currentSection, kind: 'concept', teacherOnly: ANSWER_PREFIX.test(plain) || /(الإجابة|الجواب)\s*[:：]/.test(text), title: subTitle || '', text });
       } else if (isDirective || hasBlank) {
         const paren = text.match(/^(.{6,}?)\s*[(（]((?:مثال|توضيح)[^)）]{6,})[)）]\s*$/);
         if (paren && (/لأن|=\s*[\d٠-٩]/.test(paren[2]))) {
           pushQuestion(paren[1].trim(), norm(paren[1]));
-          blocks.push({ kind: 'concept', teacherOnly: true, title: '', text: paren[2] });
+          blocks.push({ section: currentSection, kind: 'concept', teacherOnly: true, title: '', text: paren[2] });
         } else {
           pushQuestion(text, plain);
         }
       } else {
-        blocks.push({ kind: 'concept', teacherOnly: ANSWER_PREFIX.test(plain) || ANS_MARK.test(text), title: subTitle || '', text });
+        blocks.push({ section: currentSection, kind: 'concept', teacherOnly: ANSWER_PREFIX.test(plain) || ANS_MARK.test(text), title: subTitle || '', text });
       }
       continue;
     }
@@ -255,7 +258,7 @@ for (const L of lessons) {
       for (const r of rows) for (const c of r) for (const im of c.imgs || []) cellImgs.push(im);
       for (const im of cellImgs) pushImg(im);
       if (rows.length === 1 && rows[0].length === 1) {
-        blocks.push({ kind: 'concept', title: subTitle || '', text: rows[0][0].t });
+        blocks.push({ section: currentSection, kind: 'concept', title: subTitle || '', text: rows[0][0].t });
         continue;
       }
       const firstRowAllFilled = rows[0].every((c) => cleanCell(c.t) !== '');

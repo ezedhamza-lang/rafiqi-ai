@@ -311,7 +311,8 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(spec.competencies.distinctiveObjective).toContain('499');
     expect(spec.lessonObjectives.length).toBeGreaterThanOrEqual(1);
     expect(spec.lessonObjectives[0]).toMatch(/ينجز|يحل|يتعرّف|يوظّف/);
-    expect(spec.rows.length).toBe(5);
+    expect(spec.rows.length).toBeGreaterThanOrEqual(4);
+    expect(spec.rows.length).toBeLessThanOrEqual(7);
     const stages = spec.rows.map((r) => r.stage);
     expect(stages.join(' ')).toMatch(/استكشاف/);
     expect(stages.join(' ')).toMatch(/تقو|تقييم/);
