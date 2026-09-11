@@ -6,11 +6,18 @@ ENV NODE_ENV=production \
 
 WORKDIR /app
 
-# Chromium (moteur PDF pour l'arabe) + polices arabes (Amiri + Noto)
+# Paquets prouves existants par le log de build Render : chromium, ca-certificates,
+# fonts-noto-core, fonts-noto-extra (seul fonts-amiri absent -> remplacre par la
+# police Amiri embarquee dans le depot, etape ci-dessous). fontconfig vient en
+# dependance obligatoire de chromium -> fc-cache disponible.
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-      chromium ca-certificates fonts-amiri fonts-noto-core fonts-noto-extra \
+      chromium ca-certificates fonts-noto-core fonts-noto-extra \
  && rm -rf /var/lib/apt/lists/*
+
+# Police Amiri du projet elle-meme (meme TTF utilises par pdfkit) installee systeme
+COPY backend/src/assets/fonts /usr/local/share/fonts/rafiqi
+RUN fc-cache -f
 
 # Backend deps
 COPY backend/package*.json ./backend/

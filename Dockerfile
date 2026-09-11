@@ -6,10 +6,9 @@ ENV NODE_ENV=production \
 
 WORKDIR /app
 
-# Chromium (محرك توليد PDF العربي السليم) + خطوط عربية (Amiri + Noto Naskh)
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
-      chromium ca-certificates fonts-amiri fonts-noto-core fonts-noto-extra \
+      chromium ca-certificates fonts-noto-core fonts-noto-extra \
  && rm -rf /var/lib/apt/lists/*
 
 COPY backend/package*.json ./
@@ -19,8 +18,9 @@ COPY backend/prisma ./prisma
 RUN npx prisma generate
 
 COPY backend/ .
+COPY backend/src/assets/fonts /usr/local/share/fonts/rafiqi
+RUN fc-cache -f
 
-# الواجهة المبنية مسبقًا (نفس رابط المنصة بدون CORS)
 COPY frontend/dist /app/frontend/dist
 
 EXPOSE 3001
