@@ -200,7 +200,9 @@ app.get(['/api/health', '/health'], async (_req, res) => {
   } catch {
     db = 'down';
   }
-  res.json({ status: 'ok', db, uptime: Math.round(process.uptime()), at: new Date().toISOString(), pdf: browserPdfStatus().executable ? 'browser' : 'legacy' });
+  let memoProfiles = 0;
+  try { memoProfiles = (await import('./services/methodologyResolver.js')).listMethodologies().length; } catch { /* تجاهل */ }
+  res.json({ status: 'ok', db, uptime: Math.round(process.uptime()), at: new Date().toISOString(), pdf: browserPdfStatus().executable ? 'browser' : 'legacy', memoProfiles });
 });
 
 // Batch 4: Global locale middleware - extracts ?lang= from all requests
