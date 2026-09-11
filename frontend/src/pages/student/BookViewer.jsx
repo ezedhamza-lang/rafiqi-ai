@@ -12,6 +12,7 @@ export default function BookViewer({ book, onClose }) {
   const [page, setPage] = useState(book.totalPages ? 1 : 0);
   const [imgError, setImgError] = useState(false);
   const [lift, setLift] = useState(null); // { next, angle, anim }
+  const [full, setFull] = useState(true);
   const sceneRef = useRef(null);
   const dragRef = useRef({ startX: 0, width: 600, moved: false });
   const total = book.totalPages || 0;
@@ -84,14 +85,24 @@ export default function BookViewer({ book, onClose }) {
   const baseSrc = pageUrl(book.imageBase, book.imageExt, basePage);
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
-      <div className="modal viewer-modal" onClick={(e) => e.stopPropagation()}>
+    <div className={`modal-overlay${full ? ' viewer-full-overlay' : ''}`} onClick={onClose}>
+      <div className={`modal viewer-modal${full ? ' viewer-full' : ''}`} onClick={(e) => e.stopPropagation()}>
         <div className="modal-head">
           <div>
             <h3>{book.title}</h3>
             <p className="viewer-sub">{book.grade} - {book.subject}</p>
           </div>
-          <button className="btn btn-ghost btn-sm" onClick={onClose}>{t('common.close')}</button>
+          <div style={{ display: 'flex', gap: '0.4rem' }}>
+            <button
+              className="btn btn-ghost btn-sm"
+              onClick={() => setFull((v) => !v)}
+              title={full ? 'تصغير' : 'ملء الشاشة'}
+            >
+              <span className="material-icons" style={{ fontSize: 18 }}>{full ? 'fullscreen_exit' : 'fullscreen'}</span>
+              {full ? 'تصغير' : 'ملء الشاشة'}
+            </button>
+            <button className="btn btn-ghost btn-sm" onClick={onClose}>{t('common.close')}</button>
+          </div>
         </div>
 
         <div className="viewer-stage">
