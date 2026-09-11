@@ -3,6 +3,8 @@ import prisma from '../db.js';
 import { authMiddleware, teacherMiddleware, studentMiddleware } from '../auth.js';
 import { validateBody, validateParams } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
+import { actorSchoolId } from '../tenant.js';
+import { PERIOD_TIMES, canonicalSubject, subjectLabel } from '../services/gradeService.js';
 import {
   annualPlanCreateSchema,
   annualPlanContentSchema,
@@ -139,33 +141,43 @@ router.delete('/plans/:id', teacherMiddleware, validateParams(annualPlanIdParamS
  * @swagger
  * /api/teacher/schedules:
  *   get:
- *     summary: جداول أقسام الأستاذ
+ *     summary: جداول الأسابيع الرسمية (جدول ضرب الفترات) لكل أقسام الأستاذ/المدير
  *     tags: [teacher-plans]
  *     security:
  *       - bearerAuth: []
  *     responses:
- *       200:
- *         description: الجداول
+ *       200: { description: { slots, classes:[{class, grid, subjects}] } }
  */
 router.get('/schedules', teacherMiddleware, asyncHandler(async (req, res) => {
-  const classes = await prisma.class.findMany({
-    where: { teacherId: req.user.id },
-    select: { id: true }
-  });
-  const classIds = classes.map((c) => c.id);
-  const distributions = await prisma.subjectDistribution.findMany({
-    where: { classId: { in: classIds } },
-    include: { class: { select: { id: true, name: true } } },
-    orderBy: { grade: 'asc' }
-  });
-  res.json(distributions);
+  const sid = actorSchoolId(req);
+  const classWhere = req.user.role === 'TEACHER'
+    ? { teacherId: req.user.id }
+    : (sid != null ? { schoolId: sid } : {});
+  const classes = await prisma.class.findMany({ where: classWhere, orderBy: [{ level: 'asc' }, { name: 'asc' }] });
+  const ids = classes.map((c) => c.id);
+  const [rows, subjRows] = await Promise.all([
+    prisma.schedule.findMany({
+      where: { classId: { in: ids } },
+      include: { teacher: { select: { id: true, firstName: true, lastName: true } } }
+    }),
+    prisma.classSubject.findMany({
+      where: { classId: { in: ids } },
+      include: { teacher: { select: { id: true, firstName: true, lastName: true } } },
+      orderBy: { subject: 'asc' }
+    })
+  ]);
+  const byClass = {};
+  for (const c of classes) byClass[c.id] = { class: { id: c.id, name: c.name, level: c.level }, grid: [], subjects: [] };
+  for (const r of rows) if (byClass[r.classId]) byClass[r.classId].grid.push({ day: r.day, period: r.period, subject: r.subject });
+  for (const s of subjRows) if (byClass[s.classId]) byClass[s.classId].subjects.push({ subject: s.subject, coefficient: s.coefficient, teacher: s.teacher });
+  res.json({ slots: PERIOD_TIMES, classes: Object.values(byClass) });
 }));
 
 /**
  * @swagger
  * /api/teacher/schedules/{classId}:
  *   put:
- *     summary: حفظ جدول قسم
+ *     summary: حفظ جدول الأسبوع (يُرسَم في جدول Schedule الصحيح مع حراسة التعارض)
  *     tags: [teacher-plans]
  *     security:
  *       - bearerAuth: []
@@ -182,49 +194,93 @@ router.get('/schedules', teacherMiddleware, asyncHandler(async (req, res) => {
  *             type: object
  *             required: [grid]
  *             properties:
- *               grid: { type: array, description: مصفوفة 6 أيام × 6 حصص }
+ *               grid: { type: array, description: '[{day 1-6, period 1-6, subject}]' }
  *     responses:
- *       200:
- *         description: تم الحفظ
- *       400:
- *         description: الجدول يجب أن يحتوي 6 أيام
- *       404:
- *         description: القسم غير موجود
+ *       200: { description: تم الحفظ }
+ *       400: { description: مادة غير مبرمجة أو شبكة غير صالحة }
+ *       409: { description: تعارض توقيت الأستاذ }
  */
 router.put('/schedules/:classId', teacherMiddleware, validateParams(classIdParamSchema), asyncHandler(async (req, res) => {
   const classId = Number(req.params.classId);
-  const cls = await prisma.class.findFirst({ where: { id: classId, teacherId: req.user.id } });
+  const sid = actorSchoolId(req);
+  const cls = await prisma.class.findFirst({
+    where: { id: classId, ...(req.user.role === 'TEACHER' ? { teacherId: req.user.id } : (sid != null ? { schoolId: sid } : {})) }
+  });
   if (!cls) throw new ApiError(404, 'القسم غير موجود');
 
-  const { grade, subjects, timetable } = req.body;
+  const { grid } = req.body || {};
+  if (!Array.isArray(grid)) throw new ApiError(400, 'الشبكة غير صالحة');
+  if (grid.length > 36) throw new ApiError(400, 'الأسبوع 6 أيام × 6 فترات كحد أقصى');
 
-  await prisma.subjectDistribution.upsert({
-    where: { classId },
-    update: { grade, subjects, timetable: timetable || undefined },
-    create: { classId, grade, subjects, timetable: timetable || undefined }
-  });
+  const programmed = await prisma.classSubject.findMany({ where: { classId } });
+  const byCode = {};
+  for (const s of programmed) byCode[canonicalSubject(s.subject)] = s;
 
-  res.json({ ok: true, count: subjects?.length || 0 });
+  const cells = [];
+  const seen = new Set();
+  for (const cell of grid) {
+    const day = Number(cell?.day);
+    const period = Number(cell?.period);
+    if (!Number.isInteger(day) || day < 1 || day > 6 || !Number.isInteger(period) || period < 1 || period > 6) {
+      throw new ApiError(400, 'قيم الأيام والفترات يجب أن تكون بين 1 و6');
+    }
+    const code = canonicalSubject(cell?.subject || '');
+    if (!code) continue;
+    const key = `${day}-${period}`;
+    if (seen.has(key)) throw new ApiError(400, 'لا يمكن تكرار نفس الخلية');
+    seen.add(key);
+    const cs = byCode[code];
+    if (!cs) throw new ApiError(400, 'المادة غير مبرمجة لهذا القسم — برمجها أولاً من مواد الأقسام');
+    cells.push({ day, period, subject: cs.subject, teacherId: cs.teacherId });
+  }
+
+  for (const c of cells) {
+    if (!c.teacherId) continue;
+    const clash = await prisma.schedule.findFirst({
+      where: { teacherId: c.teacherId, day: c.day, period: c.period, classId: { not: classId } },
+      include: { class: { select: { name: true } } }
+    });
+    if (clash) {
+      throw new ApiError(409, `تعارض توقيت: الأستاذ يدرّس أصلاً قسم «${clash.class.name}» في اليوم ${c.day} الفقرة ${c.period}`);
+    }
+  }
+
+  const ops = [prisma.schedule.deleteMany({ where: { classId } })];
+  if (cells.length) ops.push(prisma.schedule.createMany({ data: cells.map((c) => ({ ...c, classId })) }));
+  await prisma.$transaction(ops);
+
+  res.json({ ok: true, count: cells.length });
 }));
 
 /**
  * @swagger
  * /api/teacher/schedules/student/my:
  *   get:
- *     summary: جدول التلميذ
+ *     summary: جدول الأسبوع الخاص بالتلميذ
  *     tags: [teacher-plans]
  *     security:
  *       - bearerAuth: []
  *     responses:
- *       200:
- *         description: الجدول
+ *       200: { description: { class, slots, subjects, grid } }
  */
 router.get('/schedules/student/my', studentMiddleware, asyncHandler(async (req, res) => {
   const student = await prisma.student.findFirst({ where: { accountUserId: req.user.id } });
-  if (!student?.classId) return res.json({ class: null, distribution: null });
+  if (!student?.classId) return res.json({ class: null, grid: [], subjects: [], slots: PERIOD_TIMES });
   const cls = await prisma.class.findUnique({ where: { id: student.classId } });
-  const distribution = await prisma.subjectDistribution.findUnique({ where: { classId: student.classId } });
-  res.json({ class: cls, distribution });
+  const [rows, subjRows] = await Promise.all([
+    prisma.schedule.findMany({
+      where: { classId: student.classId },
+      include: { teacher: { select: { id: true, firstName: true, lastName: true } } },
+      orderBy: [{ day: 'asc' }, { period: 'asc' }]
+    }),
+    prisma.classSubject.findMany({ where: { classId: student.classId }, orderBy: { subject: 'asc' } })
+  ]);
+  res.json({
+    class: cls,
+    slots: PERIOD_TIMES,
+    subjects: subjRows.map((s) => ({ subject: s.subject, coefficient: s.coefficient })),
+    grid: rows.map((r) => ({ day: r.day, period: r.period, subject: r.subject, subjectLabel: subjectLabel(r.subject), teacher: r.teacher }))
+  });
 }));
 
 /**

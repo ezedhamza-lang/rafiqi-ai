@@ -6089,3 +6089,17 @@ tr:hover td {
   .memo-view .btn-group { display: none !important; }
   .rp-key .btn { display: none; }
 }
+
+/* ===== new weekly schedule grid + grades chips ===== */
+.schedule-grid.new-grid { width: 100%; border-collapse: collapse; }
+.schedule-grid.new-grid th, .schedule-grid.new-grid td { border: 1px solid var(--border, #e2e8f0); padding: 4px; font-size: 0.82rem; text-align: center; vertical-align: top; }
+.schedule-grid.new-grid th { background: #eef6fb; color: #0b4a75; }
+.schedule-cell-select { width: 100%; border: none; background: transparent; font: inherit; color: inherit; }
+.schedule-cell-print { display: none; }
+.coef-input { width: 34px; border: 1px solid var(--border, #e2e8f0); border-radius: 6px; padding: 0 3px; font-size: 0.8rem; text-align: center; }
+.chip-toggle { border: 1px solid var(--border, #e2e8f0); background: #fff; border-radius: 999px; padding: 4px 14px; cursor: pointer; font-weight: 700; font-size: 0.85rem; }
+.chip-toggle.active { background: var(--primary, #ff6a00); border-color: var(--primary, #ff6a00); color: #fff; }
+@media print {
+  .schedule-cell-select { display: none; }
+  .schedule-cell-print { display: block; }
+}

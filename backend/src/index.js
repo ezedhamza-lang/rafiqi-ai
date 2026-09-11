@@ -29,6 +29,7 @@ import subscriptionRequestRoutes from './routes/subscriptionRequests.js';
 import financeRoutes from './routes/finance.js';
 import financialDashboardRoutes from './routes/financialDashboard.js';
 import classSubjectRoutes from './routes/classSubjects.js';
+import gradesRoutes from './routes/grades.js';
 import playZoneRoutes from './routes/playZone.js';
 import submittedExamRoutes from './routes/submittedExams.js';
 import parentDocumentRoutes from './routes/parentDocuments.js';
@@ -240,6 +241,7 @@ app.use('/api/teacher', teacherRoutes);
 app.use('/api/teacher', teacherContentRoutes);
 app.use('/api/teacher', teacherPlanRoutes);
 app.use('/api/teacher', classSubjectRoutes);
+app.use('/api/teacher/grades', gradesRoutes);
 app.use('/api/teacher', playZoneRoutes);
 app.use('/api/teacher', submittedExamRoutes);
 app.use('/api/ai', aiRoutes);
@@ -372,6 +374,7 @@ async function start() {
       await runSqlFileOnce(prisma, path.join(migDir, '20260910180000_gamification_streak/migration.sql'));
       await runSqlFileOnce(prisma, path.join(migDir, '20260910190000_refund_unique/migration.sql'));
       await runSqlFileOnce(prisma, path.join(migDir, '20260910200000_fk_restrict_history/migration.sql'));
+      await runSqlFileOnce(prisma, path.join(migDir, '20260911090000_grades_coefficients/migration.sql'));
       await runTenancyBootstrap(prisma);
     }).catch((err) => {
       console.error('startup migrations skipped:', err.message);

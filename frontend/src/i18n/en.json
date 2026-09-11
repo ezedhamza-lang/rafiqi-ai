@@ -100,7 +100,8 @@
     "gradebook": "Gradebook",
     "lessonProgress": "Lesson progress",
     "teacherNotes": "Parent notes",
-    "parentNotes": "My notes"
+    "parentNotes": "My notes",
+    "classGrades": "Grades & Certificates"
   },
   "header": {
     "account": "My account",
@@ -1332,10 +1333,21 @@
       }
     },
     "schedule": {
-      "title": "My Schedule",
-      "titleWithClass": "My Schedule — {{className}}",
-      "noClass": "You haven't been assigned a class yet.",
-      "dayHeader": "Day"
+      "title": "Timetable",
+      "titleWithClass": "Timetable — {{className}}",
+      "noClass": "No class assigned yet.",
+      "dayHeader": "Day",
+      "empty": "Weekly timetable not published yet.",
+      "day": "Day",
+      "periodN": "Period {{n}}",
+      "days": {
+        "mon": "Monday",
+        "tue": "Tuesday",
+        "wed": "Wednesday",
+        "thu": "Thursday",
+        "fri": "Friday",
+        "sat": "Saturday"
+      }
     },
     "quizzes": {
       "title": "My Quizzes",
@@ -1737,7 +1749,9 @@
       "addSubject": "Add Subject",
       "empty": "No subjects scheduled for any class yet.",
       "noSubjects": "No subjects.",
-      "removeTitle": "Remove subject"
+      "removeTitle": "Remove subject",
+      "coefficientLabel": "Coefficient",
+      "coefficientHint": "Defaults from the official coefficients, editable per class."
     },
     "attendance": {
       "title": "Digital Attendance",
@@ -2234,7 +2248,24 @@
       "saveSchedule": "Save Timetable",
       "savedMsg": "Timetable saved ({{n}} sessions) — it appears immediately for the class's students.",
       "dayHeader": "Day",
-      "note": "Click a cell to add a session, then choose the subject from the list. Click a filled cell to remove it."
+      "note": "Periods: morning 08:00–11:15 (break 10:15) and afternoon 13:30–15:00.",
+      "intro": "Official weekly grid: pick a class and fill cells from its programmed subjects; conflicts are guarded.",
+      "pickClass": "— Select class —",
+      "periodN": "Period {{n}}",
+      "savedOk": "Weekly schedule saved ✓",
+      "print": "Print",
+      "clear": "Clear grid",
+      "weeklyLoad": "Weekly load",
+      "minutesUnit": "min",
+      "noneProgrammed": "No subjects programmed for this class — program them first in Class subjects.",
+      "days": {
+        "mon": "Monday",
+        "tue": "Tuesday",
+        "wed": "Wednesday",
+        "thu": "Thursday",
+        "fri": "Friday",
+        "sat": "Saturday"
+      }
     },
     "suggestions": {
       "title": "Pedagogical Suggestions",
@@ -2389,6 +2420,27 @@
       "replyPlaceholder": "Write your reply...",
       "sendReply": "Send",
       "reply": "Reply"
+    },
+    "classGrades": {
+      "title": "Grades & Certificates",
+      "intro": "Official means: trimester = Σ(grade×coef)/Σcoef; annual = (T1 + T2 + 2×T3) / 4.",
+      "selectClass": "Class",
+      "pickClass": "— Select class —",
+      "pickFirst": "Pick a class to view marks.",
+      "colStudent": "Student",
+      "colMean": "Mean",
+      "colRank": "Rank",
+      "colMention": "Mention",
+      "colAnnual": "Annual",
+      "certificate": "Certificate",
+      "downloadBook": "Grades book (PDF)",
+      "formula": "Mean = Σ(grade × coefficient) ÷ Σ coefficients — coefficients are set in Class subjects.",
+      "periods": {
+        "t1": "Trimester 1",
+        "t2": "Trimester 2",
+        "t3": "Trimester 3",
+        "annual": "Annual"
+      }
     }
   }
 }

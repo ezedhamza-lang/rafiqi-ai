@@ -6,7 +6,7 @@ export default function ClassSubjects({ classes }) {
   const { t } = useI18n();
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
-  const [draft, setDraft] = useState({ classId: '', subject: 'MATH' });
+  const [draft, setDraft] = useState({ classId: '', subject: 'MATH', coefficient: '' });
 
   const load = useCallback(() => {
     api
@@ -27,8 +27,8 @@ export default function ClassSubjects({ classes }) {
       return;
     }
     try {
-      await api.post('/teacher/class-subjects', { classId: Number(draft.classId), subject: draft.subject });
-      setDraft({ classId: '', subject: 'MATH' });
+      await api.post('/teacher/class-subjects', { classId: Number(draft.classId), subject: draft.subject, ...(draft.coefficient ? { coefficient: Number(draft.coefficient) } : {}) });
+      setDraft({ classId: '', subject: 'MATH', coefficient: '' });
       load();
     } catch (err) {
       setError(err.message);
@@ -38,6 +38,16 @@ export default function ClassSubjects({ classes }) {
   const remove = async (id) => {
     try {
       await api.del(`/teacher/class-subjects/${id}`);
+      load();
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const setCoef = async (s, v) => {
+    const c = Math.min(6, Math.max(1, Number(v) || 1));
+    try {
+      await api.put(`/teacher/class-subjects/${s.id}`, { coefficient: c });
       load();
     } catch (err) {
       setError(err.message);
@@ -83,6 +93,11 @@ export default function ClassSubjects({ classes }) {
               ))}
             </select>
           </div>
+          <div className="form-group">
+            <label>{t('teacherSpace.classSubjects.coefficientLabel')}</label>
+            <input type="number" min="1" max="6" style={{ width: 90 }} value={draft.coefficient} placeholder="4"
+              onChange={(e) => setDraft({ ...draft, coefficient: e.target.value })} />
+          </div>
           <div className="form-group" style={{ alignSelf: 'flex-end' }}>
             <button className="btn btn-primary" type="submit">{t('teacherSpace.classSubjects.addSubject')}</button>
           </div>
@@ -101,7 +116,7 @@ export default function ClassSubjects({ classes }) {
               <div className="badges-row">
                 {group.items.map((s) => (
                   <span key={s.id} className="badge-chip">
-                    {s.subjectLabel}
+                    {s.subjectLabel} ×<input type="number" className="coef-input" min="1" max="6" value={s.coefficient ?? 1} onChange={(e) => setCoef(s, e.target.value)} />
                     {s.teacher && <em> — {s.teacher.firstName}</em>}
                     <button className="chip-remove" onClick={() => remove(s.id)} title={t('teacherSpace.classSubjects.removeTitle')}>×</button>
                   </span>

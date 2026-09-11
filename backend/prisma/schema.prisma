@@ -528,6 +528,7 @@ model Schedule {
   teacher User?  @relation("ScheduleTeacher", fields: [teacherId], references: [id], onDelete: SetNull)
 
   @@unique([classId, day, period])
+  @@index([teacherId, day, period])
 }
 
 model SubjectDistribution {
@@ -838,11 +839,12 @@ model ContactMessage {
 }
 
 model ClassSubject {
-  id        Int      @id @default(autoincrement())
-  classId   Int
-  subject   String
-  level     String
-  teacherId Int?
+  id          Int      @id @default(autoincrement())
+  classId     Int
+  subject     String
+  level       String
+  teacherId   Int?
+  coefficient Int      @default(1)
   createdAt DateTime @default(now())
 
   class   Class @relation(fields: [classId], references: [id], onDelete: Cascade)

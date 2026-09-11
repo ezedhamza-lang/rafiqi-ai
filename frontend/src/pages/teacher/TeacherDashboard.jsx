@@ -29,6 +29,7 @@ const TeacherGradebook = lazy(() => import('./TeacherGradebook.jsx'));
 const TeacherLessonProgress = lazy(() => import('./TeacherLessonProgress.jsx'));
 const TeacherNotes = lazy(() => import('./TeacherNotes.jsx'));
 const TeacherWorksheets = lazy(() => import('./TeacherWorksheets.jsx'));
+const ClassGrades = lazy(() => import('./ClassGrades.jsx'));
 
 export default function TeacherDashboard() {
   const { user } = useAuth();
@@ -103,6 +104,7 @@ export default function TeacherDashboard() {
             <Route path="live" element={<LiveSessions />} />
             <Route path="worksheets" element={<TeacherWorksheets />} />
             <Route path="suggestions" element={<Suggestions />} />
+            <Route path="grades" element={<ClassGrades />} />
             <Route path="*" element={<Navigate to="." replace />} />
           </Routes>
         </Suspense>

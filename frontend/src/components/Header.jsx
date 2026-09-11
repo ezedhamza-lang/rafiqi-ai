@@ -38,6 +38,7 @@ const TEACHER_SPACE_CHILDREN = [
   { to: '/teacher/results', icon: 'scoreboard', key: 'results' },
   { to: '/teacher/averages', icon: 'percent', key: 'averages' },
   { to: '/teacher/gradebook', icon: 'menu_book', key: 'gradebook' },
+  { to: '/teacher/grades', icon: 'workspace_premium', key: 'classGrades' },
 
   { group: 'progress', groupLabel: 'التقدم والمتابعة', groupIcon: 'trending_up', groupColor: '#f59e0b' },
   { to: '/teacher/lesson-progress', icon: 'fact_check', key: 'lessonProgress' },

@@ -1,5 +1,5 @@
 import { renderPdfFromHtml } from './browserPdf.js';
-import { gradesHtml, childReportHtml, memoHtml } from './pdfTemplates.js';
+import { gradesHtml, childReportHtml, memoHtml, gradesBookHtml, certificateHtml } from './pdfTemplates.js';
 import { subjectLabel, percent } from './analyticsService.js';
 import { createDoc, docToBuffer, PdfLayout, COLORS, CONTENT_WIDTH, PAGE } from './pdfUtils.js';
 
@@ -138,5 +138,34 @@ async function buildMemoPdfLegacy(memo) {
   }
   if ((c.closing || []).length) { layout.heading('الختام', { size: 13 }); c.closing.forEach((x) => layout.line('• ' + x)); }
   layout.footer('رفيقي — مذكرة الأستاذ');
+  return docToBuffer(doc);
+}
+
+// ===== بنّاءو PDF للنتائج والشهادات (محرك متصفح + بديل pdfkit) =====
+export async function buildGradesBookPdf(data) {
+  const viaBrowser = await renderPdfFromHtml(gradesBookHtml(data));
+  if (viaBrowser) return viaBrowser;
+  const doc = createDoc();
+  const layout = new PdfLayout(doc);
+  layout.heading(`دفتر الأعداد — ${data.class.name} (${data.periodLabel})`, { size: 15, color: COLORS.cyan });
+  layout.line(`المواد: ${data.subjects.map((s) => `${s.label} ×${s.coefficient}`).join(' | ')}`, { size: 10 });
+  for (const r of data.rows) {
+    const marks = data.subjects.map((s) => (r.marks[s.code] == null ? '—' : Number(r.marks[s.code]).toFixed(2))).join(' | ');
+    layout.line(`${r.firstName} ${r.lastName} — ${marks} | المعدل: ${r.mean == null ? '—' : r.mean.toFixed(2)} | الرتبة: ${r.rank ?? '—'}`, { size: 10, gap: 10 });
+  }
+  layout.footer();
+  return docToBuffer(doc);
+}
+
+export async function buildCertificatePdf(cert) {
+  const viaBrowser = await renderPdfFromHtml(certificateHtml(cert));
+  if (viaBrowser) return viaBrowser;
+  const doc = createDoc();
+  const layout = new PdfLayout(doc);
+  layout.heading(`بطاقة الأعداد — ${cert.student.firstName} ${cert.student.lastName} (${cert.periodLabel})`, { size: 14, color: COLORS.cyan });
+  layout.line(`القسم: ${cert.class.name} — السنة: ${cert.class.schoolYear || ''}`, { size: 11 });
+  for (const s of cert.subjects) layout.line(`• ${s.label} (×${s.coefficient}): ${s.mark == null ? '—' : s.mark.toFixed(2)}`, { size: 10, gap: 4 });
+  layout.line(`المعدل: ${cert.mean == null ? '—' : cert.mean.toFixed(2)} / 20 — الرتبة: ${cert.rank ?? '—'}/${cert.effectifs} — ${cert.mention || ''}`, { size: 12, font: 'AmiriBold' });
+  layout.footer();
   return docToBuffer(doc);
 }

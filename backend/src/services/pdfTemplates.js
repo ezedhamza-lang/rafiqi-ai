@@ -1,4 +1,4 @@
-import { subjectLabel } from './analyticsService.js';
+﻿import { subjectLabel } from './analyticsService.js';
 
 // ===== قوالب PDF الرسمية (تُرسم عبر محرك المتصفح — انظر browserPdf.js) =====
 // كل المستندات الديناميكية تُهرَّب بـesc() ضد الحقن، والنص غير قابل للتحديد
@@ -224,4 +224,64 @@ export function memoHtml(memo) {
   }
   const body = '<div class="page">' + (secs.join('') || '<p>لا تحتوي هذه المذكرة على محتوى.</p>') + '</div>';
   return baseHtml('مذكرة حصة: ' + (memo.lessonTitle || ''), body);
+}
+
+// ===== دفتر الأعداد =====
+export function gradesBookHtml(data) {
+  const cols = ['التلميذ', ...data.subjects.map((s) => `${s.label}<br/><span class="coef">معامل ${s.coefficient}</span>`), `معدل ${data.periodLabel}`, 'الرتبة', 'التجدير'];
+  const rows = data.rows.map((r) => '<tr><td class="nm">' + esc(`${r.firstName} ${r.lastName}`) + '</td>'
+    + data.subjects.map((s) => '<td>' + (r.marks[s.code] == null ? '—' : Number(r.marks[s.code]).toFixed(2)) + '</td>').join('')
+    + '<td class="mean">' + (r.mean == null ? '—' : Number(r.mean).toFixed(2)) + '</td>'
+    + '<td>' + (r.rank == null ? '—' : `${r.rank}/${data.effectifs}`) + '</td>'
+    + '<td>' + esc(r.mention || '—') + '</td></tr>').join('');
+  const body = `
+<div class="page">
+  <h2>دفتر الأعداد — ${esc(data.class.name)} (${esc(data.class.level)})</h2>
+  <p>السنة الدراسية: <b>${esc(data.class.schoolYear || '')}</b> — الفترة: <b>${esc(data.periodLabel)}</b> — عدد التلاميذ: ${data.studentsCount}</p>
+  <table class="gb"><thead><tr>${cols.map((c) => '<th>' + c + '</th>').join('')}</tr></thead><tbody>${rows || '<tr><td colspan=9>لا توجد بيانات</td></tr>'}</tbody></table>
+  <p class="note">المعدل = Σ(العدد × المعامل) ÷ Σ المعاملات، والمعدل السنوي = (الأول + الثاني + 2×الثالث) ÷ 4.</p>
+</div>
+<style>.gb th,.gb td{font-size:9.5px;padding:3px 4px;text-align:center}.gb .nm{text-align:right;white-space:nowrap}.gb .coef{font-weight:400;font-size:8.5px}.gb .mean{font-weight:800}</style>`;
+  return baseHtml('دفتر الأعداد', body);
+}
+
+// ===== شهادة / بطاقة الأعداد =====
+export function certificateHtml(cert) {
+  const triCols = ['1', '2', '3'].map((k) => '<td>' + (cert.triMeans && cert.triMeans[k] != null ? Number(cert.triMeans[k]).toFixed(2) : '—') + '</td>').join('');
+  const isAnnual = cert.period === 'annual';
+  const body = `
+<div class="page">
+  <div class="cert-head">
+    <div class="cert-rep">الجمهورية التونسية — وزارة التربية</div>
+    <div class="cert-school">${esc(cert.class.schoolName || '')} — إدارة المدرسة</div>
+    <h2>${isAnnual ? 'بطاقة المعدل السنوي' : 'بطاقة الأعداد — ' + esc(cert.periodLabel)}</h2>
+    <div class="cert-who">
+      <span>التلميذ(ة): <b>${esc(cert.student.firstName)} ${esc(cert.student.lastName)}</b></span>
+      <span>القسم: <b>${esc(cert.class.name)}</b></span>
+      <span>المستوى: <b>${esc(cert.class.level)}</b></span>
+      <span>السنة الدراسية: <b>${esc(cert.class.schoolYear || '')}</b></span>
+    </div>
+  </div>
+  <table class="cert">
+    <thead><tr><th>المادة</th><th>المعامل</th><th>${isAnnual ? 'المعدل السنوي للمادة' : 'العدد على 20'}</th>${isAnnual ? '' : '<th>الجداء</th>'}</tr></thead>
+    <tbody>
+      ${cert.subjects.map((s) => '<tr><td class="nm">' + esc(s.label) + '</td><td>' + (s.coefficient || 1) + '</td><td>' + (s.mark == null ? '—' : Number(s.mark).toFixed(2)) + '</td>' + (isAnnual ? '' : '<td>' + (s.product == null ? '—' : Number(s.product).toFixed(2)) + '</td>') + '</tr>').join('')}
+      <tr class="sum"><td>المجموع</td><td>${cert.sumCoefs}</td><td>${cert.sumProducts.toFixed(2)}</td><td></td></tr>
+    </tbody>
+  </table>
+  <div class="cert-result">
+    <div class="big">المعدل ${isAnnual ? 'السنوي' : 'الثلاثي'}: <b>${cert.mean == null ? '—' : Number(cert.mean).toFixed(2)}</b> / 20</div>
+    <div>الرتبة: <b>${cert.rank == null ? '—' : cert.rank}</b> من ${cert.effectifs}</div>
+    <div>التجدير: <b>${esc(cert.mention || '—')}</b></div>
+    ${!isAnnual ? '<div>الثلاثيات: ' + triCols + '</div><div>المعدل السنوي الحالي: ' + (cert.annual == null ? '—' : Number(cert.annual).toFixed(2)) + '</div>' : ''}
+    ${isAnnual && cert.decision ? '<div class="dec">القرار: <b>' + esc(cert.decision) + '</b></div>' : ''}
+  </div>
+  <div class="cert-signs">
+    <div>توقيع الأستاذ(ة)<br/><br/>………………</div>
+    <div>توقيع مدير(ة) المدرسة<br/><br/>………………</div>
+  </div>
+  <p class="note">وثيقة صادرة إلكترونيا من منصة «رفيقي» — المعدل محسوب وفق صيغة وزارة التربية: Σ(عدد×معامل)÷Σ المعاملات.</p>
+</div>
+<style>.cert-head{text-align:center;margin-bottom:8px}.cert-rep{font-weight:800}.cert-school{font-size:11px;color:#566}.cert h2{border:none;margin:6px 0}.cert-who{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:11.5px;background:#f4f8fb;border:1px solid #d7e5f0;padding:6px 10px;border-radius:8px;margin-top:6px}table.cert{width:100%}table.cert td,table.cert th{font-size:11px;padding:4px 6px}table.cert .nm{text-align:right}table.cert .sum td{font-weight:800;background:#eef6fb}.cert-result{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:12px;font-size:12px}.cert-result .big{font-size:14px}.cert-result .dec{width:100%;font-weight:700;color:#0b6ca8}.cert-signs{display:flex;justify-content:space-between;margin-top:26px;font-size:11px;text-align:center}</style>`;
+  return baseHtml(cert.period === 'annual' ? 'بطاقة المعدل السنوي' : 'بطاقة الأعداد', body);
 }

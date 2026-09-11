@@ -5,6 +5,7 @@ import { validateBody, validateParams } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 import { classSubjectCreateSchema, classSubjectUpdateSchema, classSubjectIdParamSchema } from '../validators/classSubject.js';
 import { actorSchoolId } from '../tenant.js';
+import { DEFAULT_COEFFICIENTS, SUBJECT_LABELS as OFFICIAL_LABELS } from '../services/gradeService.js';
 
 const router = Router();
 router.use(authMiddleware);
@@ -109,7 +110,8 @@ router.post('/class-subjects', teacherMiddleware, validateBody(classSubjectCreat
       classId: klass.id,
       subject,
       level: klass.level,
-      teacherId: teacher?.id || klass.teacherId || null
+      teacherId: teacher?.id || klass.teacherId || null,
+      coefficient: Number(req.body.coefficient) || DEFAULT_COEFFICIENTS[subject] || 1
     },
     include: {
       class: { select: { id: true, name: true, level: true } },
@@ -149,7 +151,7 @@ router.post('/class-subjects', teacherMiddleware, validateBody(classSubjectCreat
  *         description: المادة غير موجودة
  */
 router.put('/class-subjects/:id', teacherMiddleware, validateParams(classSubjectIdParamSchema), validateBody(classSubjectUpdateSchema), asyncHandler(async (req, res) => {
-  const { teacherId } = req.body;
+  const { teacherId, coefficient } = req.body;
   const item = await prisma.classSubject.findUnique({
     where: { id: Number(req.params.id) },
     include: { class: true }
@@ -163,7 +165,7 @@ router.put('/class-subjects/:id', teacherMiddleware, validateParams(classSubject
   }
   const updated = await prisma.classSubject.update({
     where: { id: item.id },
-    data: { teacherId: nextTeacher },
+    data: { teacherId: nextTeacher, ...(coefficient !== undefined ? { coefficient: Math.min(6, Math.max(1, Number(coefficient) || 1)) } : {}) },
     include: {
       class: { select: { id: true, name: true, level: true } },
       teacher: { select: { id: true, firstName: true, lastName: true } }
