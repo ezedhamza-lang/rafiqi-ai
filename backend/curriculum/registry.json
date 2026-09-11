@@ -436,6 +436,20 @@
           "skillsMapFile": "skills-map-math.json"
         },
         {
+          "id": "math-rafiqi",
+          "subjectKey": "رياضيات",
+          "title": "رفيقي في الرياضيات",
+          "aliases": [
+            "رفيقي في الرياضيات",
+            "كتاب ريفيقي",
+            "math-rafiqi"
+          ],
+          "bookFile": "rafiqi-math6-book.json",
+          "lessonsFile": null,
+          "skillsMapFile": null,
+          "adapter": "generic"
+        },
+        {
           "id": "anisi",
           "title": "قراءة",
           "aliases": [

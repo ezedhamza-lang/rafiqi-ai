@@ -139,11 +139,12 @@ function listBooks(country) {
         subtitle: book.subtitle,
         paperOnly: !!book.paperOnly,
         paperStyle: !!book.paperStyle,
+        scanReady: !!book.scanReady,
         imageBase: book.imageBase,
         imageExt: book.imageExt || '.jpg',
         totalPages: book.totalPages,
         units: (book.units || []).map((u) => ({ id: u.id, title: u.title, icon: u.icon, color: u.color, startPage: u.startPage, endPage: u.endPage })),
-        hasImages: book.imageBase ? fs.existsSync(path.join(UPLOADS_DIR, 'assets', 'books', book.imageBase.replace('/assets/books/', ''))) : false
+        hasImages: !!book.scanReady || (book.imageBase ? fs.existsSync(path.join(UPLOADS_DIR, 'assets', 'books', book.imageBase.replace('/assets/books/', ''))) : false)
       });
     }
   }

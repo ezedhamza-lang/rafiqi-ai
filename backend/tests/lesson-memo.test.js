@@ -265,6 +265,15 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(r2.body.memo.content.images[0].src).toMatch(/^\/story-covers\//);
   });
 
+  it('درس غير مرقمن (س6 رياضيات): رفض واضح بدل مذكرة بنص «قيد التحضير»', async () => {
+    const res = await request(app)
+      .post('/api/memos/generate')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ subject: 'رياضيات', level: 'السنة السادسة أساسي', lessonTitle: 'أُوَظّفُ الجمعَ والطّرحَ في مجموعةِ الأعدادِ العشريّةِ' });
+    expect(res.status).toBe(400);
+    expect(res.body.error).toContain('غير مرقمن');
+  });
+
   it('تغطية كاملة: 6 سنوات × 4 مواد أساسية بلا أي «لا توجد منهجية»', async () => {
     const { resolveMethodology } = await import('../src/services/methodologyResolver.js');
     const years = ['الأولى', 'الثانية', 'الثالثة', 'الرابعة', 'الخامسة', 'السادسة'];

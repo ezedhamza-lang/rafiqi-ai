@@ -90,6 +90,26 @@ function findLesson(subjectId, level, lessonTitle, gradeId) {
   return exact || pages[0];
 }
 
+// صفحات الكتب غير المرقمنة تولّد curriculumService كتلة عرض مؤقتة («قيد التحضير…») —
+// المذكرة يجب أن ترفض بوضوح بدل نسخ النص المؤقت إلى الجدول الرسمي.
+const PLACEHOLDER_RE = /التحضير|سيظهر هنا|واصل التقدم|لم ينشا/;
+function isPlaceholderBlock(b) {
+  if (!b || typeof b !== 'object') return true;
+  const hay = normalizeArabic(`${b.text || ''} ${b.title || ''}`);
+  return PLACEHOLDER_RE.test(hay);
+}
+export function lessonIsDigitized(lesson) {
+  const blocks = (lesson && lesson.blocks) || [];
+  const titleNorm = normalizeArabic((lesson && lesson.title) || '');
+  return blocks.some((b) => {
+    if (isPlaceholderBlock(b)) return false;
+    const rich = !!(b.image || (b.options && b.options.length) || (b.rows && b.rows.length) || (b.pairs && b.pairs.length) || b.kind === 'table' || b.kind === 'question' || b.kind === 'textarea' || b.kind === 'math-input');
+    if (rich) return true;
+    const t = normalizeArabic(b.text || '');
+    return !!t && t !== titleNorm && t.length > 40;
+  });
+}
+
 // اقتراحات عندما يفشل البحث: أقرب عناوين الدروس عبر كل كتب المادة المرشّحة
 function suggestLessons(candidates, level, lessonTitle) {
   try {
@@ -350,6 +370,14 @@ export async function generateMemo({ teacherId, subject, level, lessonTitle, les
         (hints.length
           ? ` أقرب الدروس المتاحة: ${hints.map((h) => `«${h.title}» (${h.book})`).join(' ، ')}`
           : ' لا توجد دروس مرقمنة لهذا المستوى بعد.')
+    );
+  }
+
+  // لا نُولّد مذكرة من كتاب غير مرقمن — نصّ «قيد التحضير» ليس محتوى درسًا
+  if (!lessonIsDigitized(lesson)) {
+    throw new MemoBuildError(
+      'NOT_DIGITIZED',
+      `درس «${lesson.title}» في «${book.subjectTitle}» (${levelValue}) غير مرقمن بعد: كتاب هذه السنة لم يُدوَّن بعد في المنصة. أرسل ملف الكتاب (docx) ليُضاف كتابًا مستقلًّا إلى جانب الكتب الحالية، وبعدها تُولَّد مذكراته بجميع صوره.`
     );
   }
 

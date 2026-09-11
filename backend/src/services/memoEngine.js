@@ -66,6 +66,7 @@ function classifyStages(lesson) {
   const total = blocks.length;
   const roles = { explore: [], recall: [], practice: [], apply: [] };
   blocks.forEach((b, i) => {
+    if (isPlaceholderBlock(b)) return;
     let r = blockRole(b, i, total);
     if (r === 'misc') {
       const docSec = b.section ? blockSection(b) : 'intro';
@@ -100,7 +101,13 @@ function metaFor(stageName) {
 function itemText(b) {
   const t = String(b.text || b.title || '').trim();
   if (!t) return '';
-  return t.length > 260 ? t.slice(0, 257) + '…' : t;
+  return t.length > 260 ? t.slice(0, 257) + '.' : t;
+}
+
+const PLACEHOLDER_TXT = /التحضير|سيظهر هنا|واصل التقدم|لم ينشا/;
+function isPlaceholderBlock(b) {
+  if (!b || typeof b !== 'object') return true;
+  return PLACEHOLDER_TXT.test(normalizeArabic(`${b.text || ''} ${b.title || ''}`));
 }
 
 const TEACHER_TPL = {
@@ -151,8 +158,8 @@ function rowRole(stageName) {
 
 function buildRow(stageName, blocks, ctxPages) {
   const role = rowRole(stageName);
-  const texts = blocks.map(itemText).filter(Boolean);
-  const tables = blocks.filter((b) => b.kind === 'table').length;
+  const texts = blocks.filter((b) => !isPlaceholderBlock(b)).map(itemText).filter(Boolean);
+  const tables = blocks.filter((b) => b.kind === 'table' && !isPlaceholderBlock(b)).length;
   if (!texts.length && !tables) return null;
   const tpl = TEACHER_TPL[role] || TEACHER_TPL.explore;
   const built = tpl(texts.slice(0, 6), ctxPages, tables);

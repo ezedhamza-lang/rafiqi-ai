@@ -314,6 +314,8 @@ app.use('/uploads/recordings', (req, res, next) => {
 });
 
 app.use('/uploads', express.static(path.join(__dirname, '../uploads'), staticOpts));
+// كتب PDF ملتزَمة في المستودع (نسخ طبق الأصل — تُقلَّب كما هي): تُخدم قبل /assets
+app.use('/assets/books', express.static(path.join(__dirname, '../curriculum/assets-books'), immutableOpts));
 app.use('/assets', express.static(path.join(__dirname, '../uploads/assets'), immutableOpts));
 app.use('/images', express.static(path.join(__dirname, '../uploads/images'), staticOpts));
 app.use('/media', express.static(path.join(__dirname, '../uploads/media'), staticOpts));
