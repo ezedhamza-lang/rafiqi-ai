@@ -1,4 +1,37 @@
-﻿import { subjectLabel } from './analyticsService.js';
+﻿import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { subjectLabel } from './analyticsService.js';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+/**
+ * تحويل مسار صورة منهجية (/curriculum/...) إلى data-URI مضمّن في الـHTML
+ * حتى يراها محرك Chromium في PDF المذكرة دون اعتماد على رابط خارجي.
+ */
+export async function inlineImageForPdf(src) {
+  if (typeof src !== 'string' || !src.startsWith('/curriculum/')) return null;
+  const rel = src.replace(/^\/curriculum\//, '');
+  const roots = [
+    path.join(__dirname, '../../curriculum/img'),
+    path.join(__dirname, '../../uploads/curriculum')
+  ];
+  for (const root of roots) {
+    for (const cand of [
+      path.join(root, rel.replace(/\.(png|jpe?g)$/i, '.webp')),
+      path.join(root, rel)
+    ]) {
+      try {
+        if (!fs.existsSync(cand)) continue;
+        const buf = fs.readFileSync(cand);
+        if (!buf.length) continue;
+        const mime = cand.endsWith('.webp') ? 'image/webp' : (/\.(jpe?g)$/i.test(cand) ? 'image/jpeg' : 'image/png');
+        return `data:${mime};base64,${buf.toString('base64')}`;
+      } catch { /* تجاهل */ }
+    }
+  }
+  return null;
+}
 
 // ===== قوالب PDF الرسمية (تُرسم عبر محرك المتصفح — انظر browserPdf.js) =====
 // كل المستندات الديناميكية تُهرَّب بـesc() ضد الحقن، والنص غير قابل للتحديد
@@ -181,7 +214,7 @@ export function childReportHtml({ student, report }) {
 }
 
 // ===== مذكرة الأستاذ (درس/حصة) =====
-export function memoHtml(memo) {
+export async function memoHtml(memo) {
   let c = memo.content;
   if (typeof c === 'string') { try { c = JSON.parse(c); } catch { c = {}; } }
   c = c || {};
@@ -192,6 +225,21 @@ export function memoHtml(memo) {
   if (c.header && (c.header.columns || []).length) {
     const vals = c.header.values || {};
     secs.push('<h2>بيانات الحصة</h2><table class="kv"><tbody>' + c.header.columns.map((k) => '<tr><td>' + esc(k) + '</td><td><b>' + esc(vals[k] || '—') + '</b></td></tr>').join('') + '</tbody></table>');
+  }
+  if ((c.images || []).length) {
+    const figs = [];
+    for (const im of c.images.slice(0, 6)) {
+      const dataUri = await inlineImageForPdf(im.src);
+      if (!dataUri) continue;
+      figs.push(
+        '<figure style="margin:0.6rem 0;text-align:center">' +
+        '<img src="' + dataUri + '" alt="" style="max-width:70%;max-height:260px;border:1px solid #ddd;border-radius:8px"/>' +
+        '<figcaption style="font-size:0.8rem;color:#444">' + esc(im.caption || '') +
+        (im.imageId ? ' <span style="color:#999">(' + esc(im.imageId) + ' — من كتاب التلميذ)</span>' : '') +
+        '</figcaption></figure>'
+      );
+    }
+    if (figs.length) secs.push('<h2>صور الدرس (هي نفسها في كتاب التلميذ)</h2>' + figs.join(''));
   }
   if ((c.warmup || []).length) {
     secs.push('<h2>التمهيد</h2><ul>' + c.warmup.map((w) => '<li>' + esc(w) + '</li>').join('') + '</ul>');

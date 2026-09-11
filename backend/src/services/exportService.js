@@ -115,7 +115,7 @@ export async function buildChildReportPdf({ student, report }) {
 }
 
 export async function buildMemoPdf(memo) {
-  const viaBrowser = await renderPdfFromHtml(memoHtml(memo));
+  const viaBrowser = await renderPdfFromHtml(await memoHtml(memo));
   if (viaBrowser) return viaBrowser;
   return buildMemoPdfLegacy(memo);
 }

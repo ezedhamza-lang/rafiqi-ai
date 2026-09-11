@@ -113,6 +113,9 @@ function sanitizeStudentPages(pages) {
         (b.answer !== undefined && b.answer !== null) ||
         (b.correctAnswer !== undefined && b.correctAnswer !== null) ||
         (b.correct !== undefined && b.correct !== null);
+      if (!clone.imageId && clone.image) {
+        clone.imageId = 'img-' + page.id + '-' + String(clone.image).split('/').pop().replace(/\.(png|jpe?g|webp)$/i, '');
+      }
       delete clone.answer;
       delete clone.correctAnswer;
       delete clone.correct;

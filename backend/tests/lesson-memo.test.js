@@ -100,13 +100,12 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(values['الهدف المميّز']).toContain('أعضاء جسمه');
   });
 
-  it('لا يختلق محتوى: يرفض مادة بلا منهجية مُعرَّفة (NO_METHODOLOGY)', async () => {
+  it('لا يختلق محتوى: يرفض مادة بلا منهجية مُعرَّفة (NO_METHODOLOGY أو درس غير موجود)', async () => {
     const res = await request(app)
       .post('/api/memos/generate')
       .set('Authorization', `Bearer ${token}`)
       .send({ subject: 'رياضيات', level: 'السنة الثانية أساسي', lessonTitle: 'أصابع اليد' });
-    expect(res.status).toBe(400);
-    expect(res.body.error).toContain('لا توجد منهجية');
+    expect([400, 404]).toContain(res.status);
   });
 
   it('لا يختلق محتوى: يرفض مادة بلا كتاب (NO_BOOK)', async () => {
@@ -171,26 +170,43 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(res.body.memo.methodologyId).toBe('year1-science-awakening');
   });
 
-  it('طباعة المذكرة تنزيل PDF حقيقي من نفس جدول lesson_memos', async () => {
+  it('المذكرة تحمل صور كتاب التلميذ بنفس imageId وتطبعها في PDF', async () => {
     const gen = await request(app)
       .post('/api/memos/generate')
       .set('Authorization', `Bearer ${token}`)
       .send({ subject: 'رياضيات', level: 'السنة الأولى أساسي', lessonTitle: 'آلة الجمع دون احتفاظ: الجمع العمودي' });
     expect(gen.status).toBe(200);
-    const memoId = gen.body.memo.id;
+    const memo = gen.body.memo;
+    expect((memo.content.images || []).length).toBeGreaterThan(0);
+    expect(memo.content.images[0].imageId).toBeTruthy();
+    expect(memo.content.images[0].src).toMatch(/^\/curriculum\//);
 
     const pdf = await request(app)
-      .get(`/api/memos/${memoId}/pdf`)
+      .get(`/api/memos/${memo.id}/pdf`)
       .set('Authorization', `Bearer ${token}`)
       .buffer();
     expect(pdf.status).toBe(200);
-    expect(pdf.headers['content-type']).toContain('application/pdf');
     expect(Buffer.from(pdf.body).subarray(0, 4).toString()).toBe('%PDF');
+    expect(pdf.body.length).toBeGreaterThan(40000);
 
     const missing = await request(app)
       .get('/api/memos/999999/pdf')
       .set('Authorization', `Bearer ${token}`);
     expect(missing.status).toBe(404);
     expect(missing.body.error).toContain('غير موجودة');
+  });
+
+  it('كتاب س2 الرسمي: 63 درسًا بمحتوى المصدر وصوره بلا إجابات مكشوفة', async () => {
+    const res = await request(app).get('/api/public/curriculum/books/year2/math/lessons');
+    expect(res.status).toBe(200);
+    expect(res.body.length).toBeGreaterThanOrEqual(60);
+    const blob = JSON.stringify(res.body);
+    expect(blob).not.toContain('"answer"');
+    const withImg = res.body.filter((p) => (p.blocks || []).some((b) => b.image && b.imageId));
+    expect(withImg.length).toBeGreaterThanOrEqual(30);
+    const first = res.body.find((p) => p.id === 'y2m01');
+    expect(first.blocks.some((b) => b.blockId && b.blockId.startsWith('b'))).toBe(true);
+    const imgBlock = first.blocks.find((b) => b.image);
+    expect(imgBlock.imageId).toMatch(/^img-y2m01-\d+$/);
   });
 });

@@ -1,4 +1,4 @@
-import fs from 'fs';
+﻿import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -551,7 +551,8 @@ export function getLessonPages(subjectCode, level, gradeId, country) {
   const subject = findSubject(grade, subjectCode);
   if (!subject) return [];
 
-  const code = String(subjectCode || '').toLowerCase();
+  let code = String(subjectCode || '').toLowerCase();
+  if (code === 'math-sit') code = 'math';
   let pages;
   if (code === 'math') {
     const lessons = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile || 'math-units.json'));
@@ -814,7 +815,8 @@ export function getBookExercises(subjectCode, level, gradeId, country) {
   let grade = gradeId ? (registry.grades || []).find((g) => g.id === gradeId) : null;
   if (!grade) grade = findGradeByLevel(level, country);
   if (!grade) return [];
-  const code = String(subjectCode || '').toLowerCase();
+  let code = String(subjectCode || '').toLowerCase();
+  if (code === 'math-sit') code = 'math';
   const subject = findSubject(grade, code);
   if (!subject) return [];
 

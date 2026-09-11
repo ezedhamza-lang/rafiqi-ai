@@ -273,6 +273,14 @@ export function buildMemoContent(methodology, lesson, ctx) {
     warmup,
     phases,
     table,
+    images: (lesson.blocks || [])
+      .filter((b) => b && typeof b === 'object' && b.image)
+      .slice(0, 6)
+      .map((b) => ({
+        imageId: b.imageId || `img-${lesson.id}-${String(b.image).split('/').pop().replace(/\.(png|jpe?g|webp)$/i, '')}`,
+        src: b.image,
+        caption: b.alt || b.title || ''
+      })),
     closing: profile.closingFields || [],
     domainNotes: buildDomainNotes(profile),
     keywords: byKind(lesson, 'keyword').slice(0, 8),

@@ -7,6 +7,7 @@ import { useStudentLevel } from '../../hooks/useStudentLevel.js';
 
 const SUBJECTS = [
   { code: 'math', key: 'math', icon: 'calculate', color: '#233863', bg: 'linear-gradient(135deg, #233863, #2f4a7d)' },
+  { code: 'math-sit', key: 'math', icon: 'calculate', color: '#233863', bg: 'linear-gradient(135deg, #233863, #2f4a7d)' },
   { code: 'anisi', key: 'anisi', icon: 'menu_book', color: '#b06b00', bg: 'linear-gradient(135deg, #f4ab2c, #fd8b15)' },
   { code: 'science', key: 'science', icon: 'science', color: '#0e6b4f', bg: 'linear-gradient(135deg, #0e6b4f, #17a076)' },
   { code: 'production', key: 'production', icon: 'edit', color: '#6b3fa0', bg: 'linear-gradient(135deg, #6b3fa0, #9d6bdc)' }

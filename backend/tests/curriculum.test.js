@@ -159,7 +159,7 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
   it('المرحلة 6.2: إثراء البنك موضوعي لا عشوائي — لا محتوى أجنبي داخل الدروس', async () => {
     // درس الأعداد في س2 («منازل الأعداد») يجب ألا يحمل محتوى قياس الطول (س1).
     const y2 = await request(app)
-      .get('/api/public/curriculum/books/year2/math/lessons')
+      .get('/api/public/curriculum/books/year2/math-sit/lessons')
       .send();
     const numbersLesson = y2.body.find((l) => l.id === 'y2m-08');
     expect(numbersLesson).toBeTruthy();
@@ -244,7 +244,7 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
       ['year1', 'math', 150],
       ['year1', 'anisi', 150],
       ['year1', 'science', 148],
-      ['year2', 'math', 150]
+      ['year2', 'math-sit', 150]
     ];
     for (const [gradeId, subjectId, min] of cases) {
       const res = await request(app)
