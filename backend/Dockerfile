@@ -28,7 +28,7 @@ RUN cd backend && npx prisma generate
 
 # Frontend build
 COPY frontend/package*.json frontend/
-RUN cd frontend && npm install --no-audit --no-fund
+RUN cd frontend && npm install --include=dev --no-audit --no-fund
 
 COPY frontend/ frontend/
 RUN cd frontend && npm run build
