@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+﻿import { useState, useEffect, useCallback, useMemo } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import { imgSrc, restoreOriginalImg } from '../../utils/imgSrc.js';
 
 const LEVELS = [
   'السنة الأولى أساسي',
@@ -166,6 +167,7 @@ export default function Memos({ onChanged }) {
   };
 
   const c = view?.content || {};
+  const spec = c.spec && c.spec.specVersion === 2 ? c.spec : null;
   const headerVals = c.header?.values || {};
 
   return (
@@ -297,7 +299,65 @@ export default function Memos({ onChanged }) {
             </div>
           )}
 
-          {c.header?.columns?.length > 0 && (
+
+          {spec && (
+            <div className="memo-section">
+              <div style={{ background: '#5b4636', color: '#fff', borderRadius: 10, padding: '10px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+                <strong>{spec.headerTitle}</strong>
+                <span style={{ display: 'flex', gap: 8 }}>
+                  <span style={{ background: '#c9a227', color: '#222', borderRadius: 8, padding: '2px 10px' }}>الفترة: {spec.period || '…'}</span>
+                  <span style={{ background: '#7a9e7e', color: '#fff', borderRadius: 8, padding: '2px 10px' }}>اليوم: {spec.day || '…'}</span>
+                </span>
+              </div>
+              <div style={{ border: '1.5px solid #cbd5c0', borderRadius: 12, padding: '8px 12px', margin: '10px 0', background: '#f7faf5' }}>
+                {spec.competencies?.domain && <div><b>كفاية المجال: </b>{spec.competencies.domain}</div>}
+                {spec.competencies?.subject && <div><b>كفاية المادة: </b>{spec.competencies.subject}</div>}
+                {spec.competencies?.component && <div><b>مكوّن الكفاية: </b>{spec.competencies.component}</div>}
+                {spec.competencies?.distinctiveObjective && <div><b>الهدف المميّز: </b>{spec.competencies.distinctiveObjective}</div>}
+                {(spec.lessonObjectives || []).map((o, i) => <div key={'o' + i}><b>{'هدف الحصّة ' + (i + 1) + ': '}</b>{o}</div>)}
+                {spec.content && <div style={{ background: '#eef4fb', borderRight: '4px solid #4a7fb5', borderRadius: 6, padding: '4px 10px', marginTop: 6 }}><b>المحتوى: </b>{spec.content}</div>}
+              </div>
+              <div style={{ textAlign: 'center', margin: '10px 0' }}>
+                <strong style={{ color: '#7a4b1f', fontSize: '1.1rem', borderBottom: '2px solid #c9a227', padding: '0 18px 2px' }}>ثانيًا: التمشّي البيداغوجي</strong>
+              </div>
+              <div className="table-wrap">
+                <table className="data-table" style={{ fontSize: 13 }}>
+                  <thead>
+                    <tr><th>المراحل</th><th>نشاط الأستاذ</th><th>نشاط المتعلّم</th><th>المهارة المستهدفة</th><th>الوسائل</th></tr>
+                  </thead>
+                  <tbody>
+                    {(spec.rows || []).map((r, i) => (
+                      <tr key={i}>
+                        <th className="memo-header-label" style={{ background: '#f3e9d2' }}>{r.stage}</th>
+                        <td>
+                          {String(r.teacherActivity || '').split('\n').map((ln, j) => <div key={j}>{ln}</div>)}
+                          {(r.images || []).map((im, k) => (
+                            <img key={k} src={imgSrc(im.src)} alt={im.caption || ''} loading="lazy" onError={(e) => restoreOriginalImg(e, im.src)} style={{ maxWidth: 170, borderRadius: 6, border: '1px solid #ccc', display: 'block', margin: '4px 0' }} />
+                          ))}
+                        </td>
+                        <td>{String(r.learnerActivity || '').split('\n').map((ln, j) => <div key={j}>{ln}</div>)}</td>
+                        <td style={{ color: '#3b5b3b' }}>{r.skill}</td>
+                        <td>{(r.tools || []).join(' + ')}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div style={{ border: '1.5px solid #cbd5c0', borderRadius: 12, padding: '10px 14px', marginTop: 10, background: '#fbf9f4' }}>
+                <div>
+                  <b>{spec.successRateLine || 'نسبة نجاح الدرس من خلال التمرين التطبيقي:'}</b>
+                  <span style={{ borderBottom: '2px dotted #777', display: 'inline-block', minWidth: 200, height: 18, marginInlineStart: 8 }} />
+                </div>
+                <div style={{ marginTop: 8 }}>
+                  <b>{spec.pedagogicalDecision || 'القرار البيداغوجي:'}</b>
+                  <span style={{ borderBottom: '2px dotted #777', display: 'inline-block', minWidth: 200, height: 18, marginInlineStart: 8 }} />
+                </div>
+                {spec.decisionHints && <div className="muted" style={{ fontSize: 11, marginTop: 4 }}>{spec.decisionHints}</div>}
+              </div>
+            </div>
+          )}
+
+          {!spec && c.header?.columns?.length > 0 && (
             <div className="memo-section">
               <h5>{t('teacherSpace.memos.sessionData')}</h5>
               <div className="table-wrap">
@@ -315,7 +375,7 @@ export default function Memos({ onChanged }) {
             </div>
           )}
 
-          {c.warmup?.length > 0 && (
+          {!spec && c.warmup?.length > 0 && (
             <div className="memo-section">
               <h5>{t('teacherSpace.memos.warmup')}</h5>
               <ul>
@@ -326,7 +386,7 @@ export default function Memos({ onChanged }) {
             </div>
           )}
 
-          {c.table?.columns?.length > 0 && (
+          {!spec && c.table?.columns?.length > 0 && (
             <div className="memo-section">
               <h5>{t('teacherSpace.memos.sessionTable')}</h5>
               <div className="table-wrap">
@@ -352,7 +412,7 @@ export default function Memos({ onChanged }) {
             </div>
           )}
 
-          {(c.phases || []).length > 0 && (
+          {!spec && (c.phases || []).length > 0 && (
             <div className="memo-section">
               <h5>{t('teacherSpace.memos.sessionPhases')}</h5>
               {(c.phases || []).map((p, i) => (
@@ -380,7 +440,7 @@ export default function Memos({ onChanged }) {
             </div>
           )}
 
-          {c.keywords?.length > 0 && (
+          {!spec && c.keywords?.length > 0 && (
             <div className="memo-section">
               <h5>{t('teacherSpace.memos.keywords')}</h5>
               <div className="chips">
@@ -391,7 +451,7 @@ export default function Memos({ onChanged }) {
             </div>
           )}
 
-          {c.definitions?.length > 0 && (
+          {!spec && c.definitions?.length > 0 && (
             <div className="memo-section">
               <h5>{t('teacherSpace.memos.concepts')}</h5>
               {c.definitions.map((d, i) => (
@@ -400,7 +460,7 @@ export default function Memos({ onChanged }) {
             </div>
           )}
 
-          {c.domainNotes?.length > 0 && (
+          {!spec && c.domainNotes?.length > 0 && (
             <div className="memo-section">
               <h5>{t('teacherSpace.memos.domainNotes')}</h5>
               {c.domainNotes.map((dn, i) => (
@@ -411,7 +471,7 @@ export default function Memos({ onChanged }) {
             </div>
           )}
 
-          {c.closing?.length > 0 && (
+          {!spec && c.closing?.length > 0 && (
             <div className="memo-section">
               <h5>{t('teacherSpace.memos.closing')}</h5>
               {c.closing.map((cf, i) => (

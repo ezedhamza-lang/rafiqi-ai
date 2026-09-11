@@ -1,4 +1,5 @@
 import { contentHash } from './memoService.js';
+import { buildSpecMemo } from './memoEngine.js';
 import { resolveMethodology, normalizeSubject } from './methodologyResolver.js';
 import {
   normalizeArabic,
@@ -315,6 +316,7 @@ export function buildMemoContent(methodology, lesson, ctx) {
     definitions: byKind(lesson, 'definition').slice(0, 6),
     source: 'curriculum',
     sourceBook: ctx.sourceBook || ctx.subject || '',
+    spec: buildSpecMemo({ profile, lesson, ctx }),
     sourceText: sourceBlocks.slice(0, 12).join('\n').slice(0, 3000)
   };
 }
@@ -360,14 +362,15 @@ export async function generateMemo({ teacherId, subject, level, lessonTitle, les
   }
   if (!methodology) throw new MemoBuildError('NO_METHODOLOGY', 'المنهجية غير متوفّرة.');
 
+  const specHash = contentHash([book.bookId, lesson.id, methodology.methodId, 'spec-v2']);
   const cached = await lessonMemos.findByLesson(book.bookId, lesson.id);
-  if (cached && cached.methodologyId === methodology.methodId) {
+  if (cached && cached.methodologyId === methodology.methodId && cached.hash === specHash) {
     return { memo: cached, cached: true };
   }
 
-  const ctx = { subject: book.subjectTitle, level: levelValue, lessonTitle, lessonType, unit, sourceBook: book.subjectTitle };
+  const ctx = { subject: book.subjectTitle, level: levelValue, lessonTitle, lessonType, unit, sourceBook: book.subjectTitle, gradeId: book.gradeId, subjectId: book.subjectId };
   const content = buildMemoContent(methodology, lesson, ctx);
-  const hash = contentHash([book.bookId, lesson.id, methodology.methodId, 'v2']);
+  const hash = specHash;
 
   const memo = await lessonMemos.upsert({
     teacherId,

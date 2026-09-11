@@ -219,6 +219,7 @@ export async function memoHtml(memo) {
   let c = memo.content;
   if (typeof c === 'string') { try { c = JSON.parse(c); } catch { c = {}; } }
   c = c || {};
+  if (c.spec && c.spec.specVersion === 2) return await memoSpecHtml(memo, c.spec);
   const secs = [];
   if (c.methodologyTitle) {
     secs.push('<h2>البروفايل المنهجي المعتمد</h2><p><b>' + esc(c.methodologyTitle) + '</b>' + (c.principle ? '<br/>' + esc(c.principle) : '') + '</p>');
@@ -333,4 +334,85 @@ export function certificateHtml(cert) {
 </div>
 <style>.cert-head{text-align:center;margin-bottom:8px}.cert-rep{font-weight:800}.cert-school{font-size:11px;color:#566}.cert h2{border:none;margin:6px 0}.cert-who{display:flex;justify-content:space-between;flex-wrap:wrap;gap:6px;font-size:11.5px;background:#f4f8fb;border:1px solid #d7e5f0;padding:6px 10px;border-radius:8px;margin-top:6px}table.cert{width:100%}table.cert td,table.cert th{font-size:11px;padding:4px 6px}table.cert .nm{text-align:right}table.cert .sum td{font-weight:800;background:#eef6fb}.cert-result{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:12px;font-size:12px}.cert-result .big{font-size:14px}.cert-result .dec{width:100%;font-weight:700;color:#0b6ca8}.cert-signs{display:flex;justify-content:space-between;margin-top:26px;font-size:11px;text-align:center}</style>`;
   return baseHtml(cert.period === 'annual' ? 'بطاقة المعدل السنوي' : 'بطاقة الأعداد', body);
+}
+
+// ===== مذكرة بيداغوجية — قالب المواصفات الرسمية (v2) =====
+async function memoSpecHtml(memo, s) {
+  const lines = (t) => esc(String(t || '')).replace(/\n/g, '<br/>');
+  const cellImgs = async (imgs) => {
+    const out = [];
+    for (const im of imgs || []) {
+      const uri = await inlineImageForPdf(im.src);
+      if (uri) out.push('<div style=\"text-align:center;margin:4px 0\"><img src=\"' + uri + '\" style=\"max-width:92%;max-height:110px;border:1px solid #bbb;border-radius:6px\"/>' + (im.caption ? '<div style=\"font-size:9px;color:#555\">' + esc(im.caption.slice(0, 90)) + '</div>' : '') + '</div>');
+    }
+    return out.join('');
+  };
+  const compRows = [];
+  const compDefs = [
+    ['كفاية المجال', s.competencies?.domain],
+    ['كفاية المادة', s.competencies?.subject],
+    ['مكوّن الكفاية', s.competencies?.component],
+    ['الهدف المميّز', s.competencies?.distinctiveObjective]
+  ];
+  for (const [label, val] of compDefs) {
+    if (val) compRows.push('<div class=\"cf\"><b>' + esc(label) + ' :</b> ' + esc(val) + '</div>');
+  }
+  for (let i = 0; i < (s.lessonObjectives || []).length; i++) {
+    compRows.push('<div class=\"cf\"><b>هدف الحصّة ' + (i + 1) + ' :</b> ' + esc(s.lessonObjectives[i]) + '</div>');
+  }
+  if (s.content) compRows.push('<div class=\"cf content\"><b>المحتوى :</b> ' + esc(s.content) + '</div>');
+  const trs = [];
+  for (const r of s.rows || []) {
+    trs.push(
+      '<tr>' +
+      '<td class=\"stg\">' + esc(r.stage) + '</td>' +
+      '<td>' + lines(r.teacherActivity) + (await cellImgs(r.images)) + '</td>' +
+      '<td>' + lines(r.learnerActivity) + '</td>' +
+      '<td class=\"skl\">' + esc(r.skill || '—') + '</td>' +
+      '<td class=\"tls\">' + esc((r.tools || []).join(' + ') || '—') + '</td>' +
+      '</tr>'
+    );
+  }
+  const imgsTop = [];
+  const used = new Set((s.rows || []).flatMap((r) => (r.images || []).map((i) => i.src)));
+  for (const im of (s.images || []).filter((i) => !used.has(i.src)).slice(0, 2)) {
+    const uri = await inlineImageForPdf(im.src);
+    if (uri) imgsTop.push('<div style=\"text-align:center;margin:6px 0\"><img src=\"' + uri + '\" style=\"max-width:45%;max-height:150px;border:1px solid #bbb;border-radius:8px\"/></div>');
+  }
+  const style = '<style>' +
+    '.mhead{background:#5b4636;color:#fff;padding:10px 14px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;direction:rtl}' +
+    '.mhead .box{display:flex;gap:8px}' +
+    '.mhead .pill{border-radius:8px;padding:2px 12px;color:#222;font-weight:700}' +
+    '.mcomp{border:1.5px solid #cbd5c0;border-radius:12px;padding:8px 12px;margin:10px 0;background:#f7faf5}' +
+    '.mcomp .cf{margin:2px 0;font-size:11.5px}' +
+    '.mcomp .cf.content{background:#eef4fb;border-right:4px solid #4a7fb5;padding:4px 10px;border-radius:6px;margin-top:6px}' +
+    '.mwalk{ text-align:center;font-size:15px;font-weight:800;color:#7a4b1f;margin:12px 0 6px;border-bottom:2px solid #c9a227;display:inline-block;padding:0 18px 2px}' +
+    '.mwrap{display:flex;justify-content:center}' +
+    'table.mtab{width:100%;border-collapse:collapse;font-size:11px}' +
+    'table.mtab th{background:#e8e6df;border:1.5px solid #555;padding:5px 6px;font-size:12px}' +
+    'table.mtab td{border:1.5px solid #777;padding:6px;vertical-align:top;line-height:1.6}' +
+    'table.mtab td.stg{background:#f3e9d2;font-weight:800;text-align:center;white-space:normal;width:9%;direction:rtl}' +
+    'table.mtab td.skl{width:11%;text-align:center;color:#3b5b3b;font-weight:700}' +
+    'table.mtab td.tls{width:11%;text-align:center;color:#444}' +
+    '.mend{border:1.5px solid #cbd5c0;border-radius:12px;padding:10px 14px;margin-top:12px;background:#fbf9f4}' +
+    '.mfill{border-bottom:2px dotted #777;height:26px;margin:4px 0 10px}' +
+    '.mtip{font-size:10px;color:#666;margin-top:2px}' +
+    '@media print { thead { display: table-header-group; } table.mtab tr { break-inside: avoid; } }' +
+    '</style>';
+  const body = '<div class="page">' + style +
+    '<div class=\"mhead\"><b>' + esc(s.headerTitle || ('مذكرة بيداغوجية: ' + (memo.lessonTitle || ''))) + '</b>' +
+    '<span class=\"box\"><span class=\"pill\" style=\"background:#c9a227\">الفترة: ' + esc(s.period || '…') + '</span>' +
+    '<span class=\"pill\" style=\"background:#7a9e7e;color:#fff\">اليوم: ' + esc(s.day || '…') + '</span></span></div>' +
+    '<div class=\"mcomp\">' + compRows.join('') + '</div>' +
+    imgsTop.join('') +
+    '<div class=\"mwrap\"><span class=\"mwalk\">ثانيًا: التمشّي البيداغوجي</span></div>' +
+    '<table class=\"mtab\"><thead><tr><th>المراحل</th><th>نشاط الأستاذ</th><th>نشاط المتعلّم</th><th>المهارة المستهدفة</th><th>الوسائل</th></tr></thead><tbody>' +
+    trs.join('') + '</tbody></table>' +
+    (s.assessment ? '<div style=\"margin-top:8px;font-size:11px\"><b>عناصر التقويم المطبَّقة:</b> ' + lines(s.assessment) + '</div>' : '') +
+    '<div class=\"mend\">' +
+    '<b>' + esc(s.successRateLine || 'نسبة نجاح الدرس من خلال التمرين التطبيقي:') + '</b><div class=\"mfill\"></div>' +
+    '<b>' + esc(s.pedagogicalDecision || 'القرار البيداغوجي:') + '</b><div class=\"mfill\"></div><div class=\"mfill\"></div>' +
+    (s.decisionHints ? '<div class=\"mtip\">' + esc(s.decisionHints) + '</div>' : '') +
+    '</div></div>';
+  return baseHtml('مذكرة بيداغوجية: ' + (memo.lessonTitle || ''), body);
 }

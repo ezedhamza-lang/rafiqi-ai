@@ -277,4 +277,42 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     }
     expect(() => resolveMethodology({ subject: 'فرنسية', level: 'السنة الأولى أساسي' })).toThrow();
   });
+
+  it('محرك المواصفات: مذكرة س2 تلتزم الهيكل الرسمي (رأس/كفايات/أهداف/تمشي 5 مراحل/خاتمة قرار)', async () => {
+    const res = await request(app)
+      .post('/api/memos/generate')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ subject: 'رياضيات', level: 'السنة الثانية أساسي', lessonTitle: 'الأعداد من 0 إلى 499: الطرح دون زيادة ولا تفكيك' });
+    expect(res.status).toBe(200);
+    const spec = res.body.memo.content.spec;
+    expect(spec.specVersion).toBe(2);
+    expect(spec.headerTitle).toContain('مذكرة بيداغوجية لحصة رياضيات');
+    expect(spec.period).toBe('05');
+    expect(spec.competencies.domain).toContain('وضعيات');
+    expect(spec.competencies.distinctiveObjective).toContain('499');
+    expect(spec.lessonObjectives.length).toBeGreaterThanOrEqual(1);
+    expect(spec.lessonObjectives[0]).toMatch(/ينجز|يحل|يتعرّف|يوظّف/);
+    expect(spec.rows.length).toBe(5);
+    const stages = spec.rows.map((r) => r.stage);
+    expect(stages.join(' ')).toMatch(/استكشاف/);
+    expect(stages.join(' ')).toMatch(/تقو|تقييم/);
+    for (const r of spec.rows) {
+      expect(r.teacherActivity.length).toBeGreaterThan(10);
+      expect(r.learnerActivity.length).toBeGreaterThan(5);
+      expect(r.teacherActivity).not.toBe(r.learnerActivity);
+      expect(r.skill.length).toBeGreaterThan(3);
+      expect(r.tools.length).toBeGreaterThan(0);
+    }
+    const teachers = new Set(spec.rows.map((r) => r.teacherActivity));
+    expect(teachers.size).toBeGreaterThanOrEqual(4);
+    expect(spec.successRateLine).toContain('نسبة نجاح الدرس');
+    expect(spec.pedagogicalDecision).toContain('القرار البيداغوجي');
+
+    const pdf = await request(app)
+      .get(`/api/memos/${res.body.memo.id}/pdf`)
+      .set('Authorization', `Bearer ${token}`)
+      .buffer();
+    expect(pdf.status).toBe(200);
+    expect(Buffer.from(pdf.body).subarray(0, 4).toString()).toBe('%PDF');
+  });
 });
