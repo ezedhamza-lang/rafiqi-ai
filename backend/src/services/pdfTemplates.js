@@ -380,23 +380,35 @@ async function memoSpecHtml(memo, s) {
     if (uri) imgsTop.push('<div style=\"text-align:center;margin:6px 0\"><img src=\"' + uri + '\" style=\"max-width:45%;max-height:150px;border:1px solid #bbb;border-radius:8px\"/></div>');
   }
   const style = '<style>' +
-    '.mhead{background:#5b4636;color:#fff;padding:10px 14px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;direction:rtl}' +
+    '.mhead{background:#5b4636;color:#fff;padding:12px 16px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;direction:rtl}' +
+    '.mhead b{font-size:21px}' +
     '.mhead .box{display:flex;gap:8px}' +
-    '.mhead .pill{border-radius:8px;padding:2px 12px;color:#222;font-weight:700}' +
-    '.mcomp{border:1.5px solid #cbd5c0;border-radius:12px;padding:8px 12px;margin:10px 0;background:#f7faf5}' +
-    '.mcomp .cf{margin:2px 0;font-size:11.5px}' +
-    '.mcomp .cf.content{background:#eef4fb;border-right:4px solid #4a7fb5;padding:4px 10px;border-radius:6px;margin-top:6px}' +
-    '.mwalk{ text-align:center;font-size:15px;font-weight:800;color:#7a4b1f;margin:12px 0 6px;border-bottom:2px solid #c9a227;display:inline-block;padding:0 18px 2px}' +
+    '.mhead .pill{border-radius:8px;padding:3px 14px;color:#222;font-weight:700;font-size:14px}' +
+    '.mcomp{border:2px solid #b9c8ae;border-radius:12px;padding:10px 14px;margin:12px 0;background:#f7faf5}' +
+    '.mcomp .cf{margin:3px 0;font-size:13.5px;line-height:1.9}' +
+    '.mcomp .cf.content{background:#eef4fb;border-right:5px solid #4a7fb5;padding:6px 12px;border-radius:6px;margin-top:8px;font-size:14px}' +
+    '.mwalk{ text-align:center;font-size:20px;font-weight:900;color:#7a4b1f;margin:14px 0 8px;border-bottom:3px solid #c9a227;display:inline-block;padding:0 22px 4px}' +
     '.mwrap{display:flex;justify-content:center}' +
-    'table.mtab{width:100%;border-collapse:collapse;font-size:11px}' +
-    'table.mtab th{background:#e8e6df;border:1.5px solid #555;padding:5px 6px;font-size:12px}' +
-    'table.mtab td{border:1.5px solid #777;padding:6px;vertical-align:top;line-height:1.6}' +
-    'table.mtab td.stg{background:#f3e9d2;font-weight:800;text-align:center;white-space:normal;width:9%;direction:rtl}' +
-    'table.mtab td.skl{width:11%;text-align:center;color:#3b5b3b;font-weight:700}' +
-    'table.mtab td.tls{width:11%;text-align:center;color:#444}' +
-    '.mend{border:1.5px solid #cbd5c0;border-radius:12px;padding:10px 14px;margin-top:12px;background:#fbf9f4}' +
-    '.mfill{border-bottom:2px dotted #777;height:26px;margin:4px 0 10px}' +
-    '.mtip{font-size:10px;color:#666;margin-top:2px}' +
+    'table.mtab{width:100%;border-collapse:collapse;font-size:14px}' +
+    'table.mtab th{border:2.5px solid #222;padding:8px 10px;font-size:16px;color:#1d2430}' +
+    'table.mtab thead th:nth-child(1){background:#d9b45b}' +
+    'table.mtab thead th:nth-child(2){background:#a8c8e8}' +
+    'table.mtab thead th:nth-child(3){background:#a9dcb9}' +
+    'table.mtab thead th:nth-child(4){background:#d3bce8}' +
+    'table.mtab thead th:nth-child(5){background:#f0c9b0}' +
+    'table.mtab td{border:2px solid #222;border-bottom:3.5px solid #111;padding:9px 10px;vertical-align:top;line-height:1.9}' +
+    'table.mtab td.stg{font-weight:800;text-align:center;white-space:normal;width:10%;direction:rtl;font-size:15px}' +
+    'table.mtab tbody tr:nth-child(6n+1) td.stg{background:#f3e2b6}' +
+    'table.mtab tbody tr:nth-child(6n+2) td.stg{background:#c9def3}' +
+    'table.mtab tbody tr:nth-child(6n+3) td.stg{background:#cdeed4}' +
+    'table.mtab tbody tr:nth-child(6n+4) td.stg{background:#e6d4f5}' +
+    'table.mtab tbody tr:nth-child(6n+5) td.stg{background:#f8d4c8}' +
+    'table.mtab tbody tr:nth-child(6n+6) td.stg{background:#d4ecec}' +
+    'table.mtab td.skl{width:12%;text-align:center;color:#274d27;font-weight:700}' +
+    'table.mtab td.tls{width:12%;text-align:center;color:#333;font-weight:600}' +
+    '.mend{border:2px solid #b9c8ae;border-radius:12px;padding:12px 16px;margin-top:14px;background:#fbf9f4;font-size:14.5px}' +
+    '.mfill{border-bottom:2.5px dotted #555;height:30px;margin:6px 0 12px}' +
+    '.mtip{font-size:12px;color:#666;margin-top:4px}' +
     '@media print { thead { display: table-header-group; } table.mtab tr { break-inside: avoid; } }' +
     '</style>';
   const body = '<div class="page">' + style +

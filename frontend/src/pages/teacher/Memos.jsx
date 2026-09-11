@@ -317,27 +317,33 @@ export default function Memos({ onChanged }) {
                 {(spec.lessonObjectives || []).map((o, i) => <div key={'o' + i}><b>{'هدف الحصّة ' + (i + 1) + ': '}</b>{o}</div>)}
                 {spec.content && <div style={{ background: '#eef4fb', borderRight: '4px solid #4a7fb5', borderRadius: 6, padding: '4px 10px', marginTop: 6 }}><b>المحتوى: </b>{spec.content}</div>}
               </div>
-              <div style={{ textAlign: 'center', margin: '10px 0' }}>
-                <strong style={{ color: '#7a4b1f', fontSize: '1.1rem', borderBottom: '2px solid #c9a227', padding: '0 18px 2px' }}>ثانيًا: التمشّي البيداغوجي</strong>
+              <div style={{ textAlign: 'center', margin: '12px 0' }}>
+                <strong style={{ color: '#7a4b1f', fontSize: '1.35rem', borderBottom: '3px solid #c9a227', padding: '0 20px 3px' }}>ثانيًا: التمشّي البيداغوجي</strong>
               </div>
               <div className="table-wrap">
-                <table className="data-table" style={{ fontSize: 13 }}>
+                <table className="data-table" style={{ fontSize: 14.5, borderCollapse: 'collapse', width: '100%' }}>
                   <thead>
-                    <tr><th>المراحل</th><th>نشاط الأستاذ</th><th>نشاط المتعلّم</th><th>المهارة المستهدفة</th><th>الوسائل</th></tr>
+                    <tr>
+                      {['المراحل', 'نشاط الأستاذ', 'نشاط المتعلّم', 'المهارة المستهدفة', 'الوسائل'].map((h, i) => (
+                        <th key={h} style={{ border: '2.5px solid #222', padding: '8px 10px', fontSize: 15.5, color: '#1d2430', background: ['#d9b45b', '#a8c8e8', '#a9dcb9', '#d3bce8', '#f0c9b0'][i] }}>{h}</th>
+                      ))}
+                    </tr>
                   </thead>
                   <tbody>
                     {(spec.rows || []).map((r, i) => (
                       <tr key={i}>
-                        <th className="memo-header-label" style={{ background: '#f3e9d2' }}>{r.stage}</th>
-                        <td>
+                        <th style={{ border: '2px solid #222', borderBottom: '3.5px solid #111', background: ['#f3e2b6', '#c9def3', '#cdeed4', '#e6d4f5', '#f8d4c8', '#d4ecec'][i % 6], padding: 8, fontSize: 15 }}>
+                          {r.stage}
+                        </th>
+                        <td style={{ border: '2px solid #222', borderBottom: '3.5px solid #111', padding: '9px 10px', lineHeight: 1.9 }}>
                           {String(r.teacherActivity || '').split('\n').map((ln, j) => <div key={j}>{ln}</div>)}
                           {(r.images || []).map((im, k) => (
-                            <img key={k} src={imgSrc(im.src)} alt={im.caption || ''} loading="lazy" onError={(e) => restoreOriginalImg(e, im.src)} style={{ maxWidth: 170, borderRadius: 6, border: '1px solid #ccc', display: 'block', margin: '4px 0' }} />
+                            <img key={k} src={imgSrc(im.src)} alt={im.caption || ''} loading="lazy" onError={(e) => restoreOriginalImg(e, im.src)} style={{ maxWidth: 200, borderRadius: 6, border: '1px solid #ccc', display: 'block', margin: '6px 0' }} />
                           ))}
                         </td>
-                        <td>{String(r.learnerActivity || '').split('\n').map((ln, j) => <div key={j}>{ln}</div>)}</td>
-                        <td style={{ color: '#3b5b3b' }}>{r.skill}</td>
-                        <td>{(r.tools || []).join(' + ')}</td>
+                        <td style={{ border: '2px solid #222', borderBottom: '3.5px solid #111', padding: '9px 10px', lineHeight: 1.9 }}>{String(r.learnerActivity || '').split('\n').map((ln, j) => <div key={j}>{ln}</div>)}</td>
+                        <td style={{ border: '2px solid #222', borderBottom: '3.5px solid #111', padding: 8, textAlign: 'center', color: '#274d27', fontWeight: 700 }}>{r.skill}</td>
+                        <td style={{ border: '2px solid #222', borderBottom: '3.5px solid #111', padding: 8, textAlign: 'center', fontWeight: 600 }}>{(r.tools || []).join(' + ')}</td>
                       </tr>
                     ))}
                   </tbody>
