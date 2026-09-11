@@ -282,26 +282,29 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
     expect(ids).not.toContain('french');
   });
 
-  it('كتاب س6 «رفيقي في الرياضيات»: نسخة مصوّرة كاملة 26 صفحة — بلا مساس بأي كتاب قائم', async () => {
+  it('كتاب س6 الرسمي: نسخة مصوّرة كاملة 101 صفحة + دروس تفاعلية بأوراق اختبار', async () => {
     const res = await request(app).get('/api/public/curriculum/books');
     expect(res.status).toBe(200);
-    const y6 = res.body.filter((b) => b.gradeId === 'year6');
-    expect(y6.map((b) => b.subjectId)).toEqual(expect.arrayContaining(['math', 'math-rafiqi', 'anisi', 'science', 'production']));
-    const raf = y6.find((b) => b.subjectId === 'math-rafiqi');
-    expect(raf.title).toBe('رفيقي في الرياضيات');
-    expect(raf.subjectKey).toBe('رياضيات');
-    expect(raf.scanReady).toBe(true);
-    expect(raf.hasImages).toBe(true);
-    expect(raf.totalPages).toBe(26);
-    expect(raf.imageBase).toBe('/assets/books/rafiqi-m6/');
+    const y6 = res.body.find((b) => b.gradeId === 'year6' && b.subjectId === 'math');
+    expect(y6).toBeTruthy();
+    expect(y6.scanReady).toBe(true);
+    expect(y6.hasImages).toBe(true);
+    expect(y6.totalPages).toBe(101);
+    expect(y6.paperStyle).toBe(true);
     const fs = await import('fs');
     const path = await import('path');
-    const dir = path.join(process.cwd(), 'curriculum/assets-books/rafiqi-m6');
+    const dir = path.join(process.cwd(), 'curriculum/assets-books/math6');
     expect(fs.existsSync(path.join(dir, 'page-001.webp'))).toBe(true);
-    expect(fs.existsSync(path.join(dir, 'page-026.webp'))).toBe(true);
-    // الكتاب الرسمي القديم لس6 لم يُمسّ
-    const old = y6.find((b) => b.subjectId === 'math');
-    expect(old.title).toBeTruthy();
+    expect(fs.existsSync(path.join(dir, 'page-101.webp'))).toBe(true);
+    const les = await request(app).get('/api/public/curriculum/books/year6/math/lessons');
+    expect(les.status).toBe(200);
+    expect(les.body.length).toBeGreaterThanOrEqual(61);
+    const blob = JSON.stringify(les.body);
+    expect(blob).not.toContain('"answer"');
+    expect(blob).not.toContain('الإجابة:');
+    expect(blob).not.toContain('قيد التحضير');
+    const withBlocks = les.body.filter((p) => (p.blocks || []).some((b) => b.kind === 'table' || b.kind === 'math-input' || b.kind === 'drawing'));
+    expect(withBlocks.length).toBeGreaterThanOrEqual(30);
   });
 
   it('أمان: بنك الاختبارات العام لا يسرّب مفاتيح الإجابات (التفاصيل والقائمة)', async () => {

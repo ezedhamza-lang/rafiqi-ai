@@ -184,7 +184,7 @@ function adaptMathUnits(lessons) {
     if (Array.isArray(item.studentBlocks) && item.studentBlocks.length) {
       const blocks = item.studentBlocks
         .filter((b) => b && typeof b === 'object' && (b.text || b.title || (b.points || []).length))
-        .map((b) => ({ kind: b.kind || 'concept', ...b }));
+        .map((b, i) => ({ kind: b.kind || 'concept', blockId: 'b' + i, ...b }));
       const firstText = (blocks.find((b) => b.text)?.text) || item.title;
       pages.push({ id, title: item.title, content: firstText, domain: item.domain, blocks, ...extra });
       continue;
@@ -561,7 +561,7 @@ export function getLessonPages(subjectCode, level, gradeId, country) {
   if (code === 'math' || adapter === 'math') {
     const lessons = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile || 'math-units.json'));
     if (!lessons) return [];
-    if (subject.adapter === 'generic' || grade.id === 'year6') {
+    if (subject.adapter === 'generic') {
       pages = [];
       for (const [id, item] of Object.entries(lessons)) {
         if (!item || typeof item !== 'object' || !item.title) continue;

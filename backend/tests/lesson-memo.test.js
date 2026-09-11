@@ -265,13 +265,23 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(r2.body.memo.content.images[0].src).toMatch(/^\/story-covers\//);
   });
 
-  it('درس غير مرقمن (س6 رياضيات): رفض واضح بدل مذكرة بنص «قيد التحضير»', async () => {
+  it('س6 الرياضيات بعد الترقيم: مذكرة حقيقية بمراحل المواصفات وصور الكتاب', async () => {
     const res = await request(app)
       .post('/api/memos/generate')
       .set('Authorization', `Bearer ${token}`)
       .send({ subject: 'رياضيات', level: 'السنة السادسة أساسي', lessonTitle: 'أُوَظّفُ الجمعَ والطّرحَ في مجموعةِ الأعدادِ العشريّةِ' });
-    expect(res.status).toBe(400);
-    expect(res.body.error).toContain('غير مرقمن');
+    expect(res.status).toBe(200);
+    const memo = res.body.memo;
+    expect(memo.bookId).toBe('year6/math');
+    expect(memo.content.spec.rows.length).toBeGreaterThanOrEqual(4);
+    const blob = JSON.stringify(memo.content.spec.rows);
+    expect(blob).toContain('9,9');
+    const pdf = await request(app)
+      .get(`/api/memos/${memo.id}/pdf`)
+      .set('Authorization', `Bearer ${token}`)
+      .buffer();
+    expect(pdf.status).toBe(200);
+    expect(Buffer.from(pdf.body).subarray(0, 4).toString()).toBe('%PDF');
   });
 
   it('تغطية كاملة: 6 سنوات × 4 مواد أساسية بلا أي «لا توجد منهجية»', async () => {

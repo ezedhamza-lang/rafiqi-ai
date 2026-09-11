@@ -965,7 +965,7 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
         <>
           <div className="lesson-blocks lesson-sheet">
             {(() => {
-              const blocks = lesson.blocks || [];
+              const blocks = (lesson.blocks || []).filter((b) => b && (b.kind !== 'concept' || b.text || b.image || b.art));
               const SOURCE = ['objective','concept','vocabulary','experiment'];
               const RULE = ['summary'];
               const isSrc = (b) => SOURCE.includes(b.kind);

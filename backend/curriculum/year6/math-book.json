@@ -1,9 +1,9 @@
 {
-  "title": "رياضيّات — كتابي في الرياضيات",
-  "subtitle": "السّنة السّادسة من التعليم الأساسيّ",
+  "title": "رياضياتي س6",
+  "subtitle": "كتاب التلميذ الرسمي — كاملًا (101 صفحة) + دروس تفاعلية بأوراق اختبار",
   "imageBase": "/assets/books/math6/",
-  "imageExt": ".jpg",
-  "totalPages": 173,
+  "imageExt": ".webp",
+  "totalPages": 101,
   "_meta": {
     "note": "حدود الفترات 1-5 مؤكَّدة (زوّدنا بها المستخدم مباشرة).",
     "status": "مكتمل — 5/5 فترات"
@@ -49,5 +49,7 @@
       "startPage": 133,
       "endPage": 173
     }
-  ]
+  ],
+  "scanReady": true,
+  "paperStyle": true
 }

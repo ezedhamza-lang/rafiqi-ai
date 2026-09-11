@@ -108,7 +108,18 @@ function sanitizeStudentPages(pages) {
     ...page,
     blocks: (page.blocks || []).map((b, i) => {
       const clone = JSON.parse(JSON.stringify(b));
-      clone.blockId = 'b' + i;
+      clone.blockId = clone.blockId || 'b' + i;
+      if (clone.teacherOnly) {
+        clone.text = '';
+        clone.title = '';
+        clone.image = null;
+        clone.options = undefined;
+        clone.rows = undefined;
+        clone.columns = undefined;
+        clone.pairs = undefined;
+        clone.checkable = false;
+        return clone;
+      }
       clone.checkable =
         (b.answer !== undefined && b.answer !== null) ||
         (b.correctAnswer !== undefined && b.correctAnswer !== null) ||

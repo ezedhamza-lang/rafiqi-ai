@@ -430,24 +430,11 @@
             "math",
             "maths"
           ],
-          "adapter": "generic",
+          "adapter": "math",
           "bookFile": "math-book.json",
           "lessonsFile": "math-lessons.json",
-          "skillsMapFile": "skills-map-math.json"
-        },
-        {
-          "id": "math-rafiqi",
-          "subjectKey": "رياضيات",
-          "title": "رفيقي في الرياضيات",
-          "aliases": [
-            "رفيقي في الرياضيات",
-            "كتاب ريفيقي",
-            "math-rafiqi"
-          ],
-          "bookFile": "rafiqi-math6-book.json",
-          "lessonsFile": null,
-          "skillsMapFile": null,
-          "adapter": "generic"
+          "skillsMapFile": "skills-map-math.json",
+          "subjectKey": "رياضيات"
         },
         {
           "id": "anisi",

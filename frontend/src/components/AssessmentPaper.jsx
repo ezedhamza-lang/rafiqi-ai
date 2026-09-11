@@ -86,7 +86,7 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
   const [studentClass, setStudentClass] = useState('');
   const paperRef = useRef(null);
 
-  const blocks = lesson.blocks || [];
+  const blocks = (lesson.blocks || []).filter((b) => b && (b.kind !== 'concept' || b.text || b.image || b.art));
   const passages = [];
   let current = null;
   let exNum = 0;
