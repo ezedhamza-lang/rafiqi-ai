@@ -87,8 +87,10 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
       expect(kinds.has(k), `نوع الكتلة ${k} يجب أن يكون مدعوماً`).toBe(true);
     }
     for (const p of res.body) expect(p.isAssessment).toBe(true);
-    // كل سؤال يجب أن يكون قابلًا للإجابة: خيارات مع إجابة، أو فراغ مع إجابة
-    for (const q of all.filter((b) => b.kind === 'question')) {
+    // الإجابات لم تعد تصل للواجهة العامة — قابلية الإجابة تُتحقق من المرجع الخادمي
+    expect(JSON.stringify(res.body)).not.toContain('"answer"');
+    const { getLessonPages } = await import('../src/services/curriculumService.js');
+    for (const q of getLessonPages('anisi', null, 'year1').flatMap((p) => p.blocks || []).filter((b) => b.kind === 'question')) {
       const hasMCQ = Array.isArray(q.options) && q.options.length > 0 && typeof q.answer === 'number';
       const hasFill = !q.options && q.answer !== undefined && q.answer !== null;
       expect(hasMCQ || hasFill, `السؤال "${(q.text || '').slice(0, 40)}" يجب أن يكون قابلًا للإجابة`).toBe(true);
@@ -114,8 +116,10 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
       expect(page.blocks.length).toBeGreaterThan(0);
     }
 
-    // كل سؤال قابل للإجابة
-    for (const q of blocks.filter((b) => b.kind === 'question')) {
+    // كل سؤال قابل للإجابة — يُتحقق من مرجع الخادم (الإجابات محجوبة عن الحمولة العامة)
+    expect(JSON.stringify(res.body)).not.toContain('"answer"');
+    const { getLessonPages } = await import('../src/services/curriculumService.js');
+    for (const q of getLessonPages('science', null, 'year1').flatMap((p) => p.blocks || []).filter((b) => b.kind === 'question')) {
       const hasMCQ = Array.isArray(q.options) && q.options.length > 0 && typeof q.answer === 'number';
       const hasFill = !q.options && q.answer !== undefined && q.answer !== null;
       expect(hasMCQ || hasFill, `سؤال بلا إجابة في ${q.title || ''}`).toBe(true);
@@ -134,10 +138,8 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
   });
 
   it('إيقاظ علمي س1: أسئلة الاختيار تحمل خيارات وإجابة قابلة للتحقق', async () => {
-    const res = await request(app)
-      .get('/api/public/curriculum/books/year1/science/lessons')
-      .send();
-    const questions = res.body.flatMap((p) => p.blocks || []).filter((b) => b.kind === 'question');
+    const { getLessonPages } = await import('../src/services/curriculumService.js');
+    const questions = getLessonPages('science', null, 'year1').flatMap((p) => p.blocks || []).filter((b) => b.kind === 'question');
     expect(questions.length).toBeGreaterThan(30);
 
     const mcq = questions.filter((q) => q.options && q.options.length > 0);
@@ -147,6 +149,11 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
       expect(Number(q.answer)).toBeGreaterThanOrEqual(0);
       expect(Number(q.answer)).toBeLessThan(q.options.length);
     }
+    // والواجهة العامة تعرض الخيارات بلا الإجابة
+    const res = await request(app).get('/api/public/curriculum/books/year1/science/lessons').send();
+    const pubMcq = res.body.flatMap((p) => p.blocks || []).filter((b) => b.kind === 'question' && b.options && b.options.length);
+    expect(pubMcq.length).toBeGreaterThan(30);
+    for (const q of pubMcq) expect(q.answer).toBeUndefined();
   });
 
   it('المرحلة 6.2: إثراء البنك موضوعي لا عشوائي — لا محتوى أجنبي داخل الدروس', async () => {
@@ -180,7 +187,7 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
     const y3Text = JSON.stringify(compose.blocks);
     expect(y3Text.includes('12 أَمْ 8')).toBe(false);
     expect(y3Text.includes('15 أَصْغَرُ مِنْ 10')).toBe(false);
-    for (const page of y3.body) {
+    for (const page of (await import('../src/services/curriculumService.js')).getLessonPages('math', null, 'year3')) {
       const qs = (page.blocks || []).filter((b) => b.kind === 'question');
       if (qs.length) {
         expect(page.lessonTestId, `درس ${page.id} فيه أسئلة دون lessonTestId`).toBeTruthy();
@@ -217,7 +224,14 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
       .send();
     const spatial = res.body.find((l) => l.title.includes('تعيين موقع شيء في الفضاء'));
     expect(spatial).toBeTruthy();
-    const qs = (spatial.blocks || []).filter((b) => b.kind === 'question' && b.options && b.answer !== undefined);
+    // الحمولة العامة: سؤال بإجابات بلا إجابة صحيحة
+    const pubQs = (spatial.blocks || []).filter((b) => b.kind === 'question' && b.options && b.options.length);
+    expect(pubQs.length).toBeGreaterThan(0);
+    for (const q of pubQs) expect(q.answer).toBeUndefined();
+    // المرجع الخادمي: قابل للتحقق وفي نفس الموضوع
+    const { getLessonPages } = await import('../src/services/curriculumService.js');
+    const srv = getLessonPages('math', null, 'year1').find((l) => l.title.includes('تعيين موقع شيء في الفضاء'));
+    const qs = (srv.blocks || []).filter((b) => b.kind === 'question' && b.options && b.answer !== undefined);
     expect(qs.length).toBeGreaterThan(0);
     for (const q of qs) {
       expect(Number(q.answer)).toBeGreaterThanOrEqual(0);

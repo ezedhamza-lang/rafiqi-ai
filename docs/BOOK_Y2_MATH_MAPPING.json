@@ -1,0 +1,9385 @@
+{
+ "source": "D:/livres eleves/Math_Grade2_Tunisia.docx",
+ "rule": "المطابقة بالموضع الرسمي داخل كل فترة (كود [Pn-k])؛ P5-6 (تدرب ثالث: تحرير حل مسألة) لا مقابل له في المنصة - بلا قرار أحادي.",
+ "mapping": [
+  {
+   "code": "P1-1",
+   "docTitle": "المجموعاتُ — المجموعاتُ ومكوِّناتُها والعلاقةُ بينَها",
+   "y2": "y2m01",
+   "y2Title": "المجموعات ومكوّناتها والعلاقة بينها",
+   "titleSim": 0.89,
+   "period": 1,
+   "docxPosInPeriod": 1,
+   "platformNum": 1,
+   "officialRefPages": "4",
+   "images": [
+    "media/image5.png",
+    "media/image12.png",
+    "media/image6.png",
+    "media/image7.png",
+    "media/image13.png",
+    "media/image8.png",
+    "media/image14.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P1-2",
+   "docTitle": "المجموعاتُ — متمُّمُّ مجموعةٍ في أخرى",
+   "y2": "y2m02",
+   "y2Title": "المجموعات: متمّم مجموعة في مجموعة أخرى",
+   "titleSim": 1.09,
+   "period": 1,
+   "docxPosInPeriod": 2,
+   "platformNum": 2,
+   "officialRefPages": "6",
+   "images": [
+    "media/image5.png",
+    "media/image15.png",
+    "media/image6.png",
+    "media/image7.png",
+    "media/image16.png",
+    "media/image17.png",
+    "media/image9.png",
+    "media/image3.png"
+   ],
+   "sectionNames": [
+    "intro"
+   ]
+  },
+  {
+   "code": "P1-3",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — تمثيلُ الوضعية برسمٍ",
+   "y2": "y2m03",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: تمثيل الوضعيّة برسم",
+   "titleSim": 1,
+   "period": 1,
+   "docxPosInPeriod": 3,
+   "platformNum": 3,
+   "officialRefPages": "8",
+   "images": [
+    "media/image11.png",
+    "media/image18.png",
+    "media/image7.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P1-4",
+   "docTitle": "الأعدادُ من 0 إلى 99 — الجمعُ بالاحتفاظ ومن دونِه",
+   "y2": "y2m04",
+   "y2Title": "الأعداد من 0 إلى 99: الجمع بالاحتفاظ ومن دونه",
+   "titleSim": 1,
+   "period": 1,
+   "docxPosInPeriod": 4,
+   "platformNum": 4,
+   "officialRefPages": "9",
+   "images": [
+    "media/image5.png",
+    "media/image19.png",
+    "media/image20.png",
+    "media/image6.png",
+    "media/image7.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P1-5",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — استخراجُ المعلوماتِ من نصِّ الوضعية",
+   "y2": "y2m05",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: استخراج المعلومات من نصّ الوضعيّة",
+   "titleSim": 1,
+   "period": 1,
+   "docxPosInPeriod": 5,
+   "platformNum": 5,
+   "officialRefPages": "11",
+   "images": [
+    "media/image11.png",
+    "media/image18.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P1-6",
+   "docTitle": "الأعدادُ من 0 إلى 99 — الطرحُ دون زيادةٍ ولا تفكيكٍ",
+   "y2": "y2m06",
+   "y2Title": "الأعداد من 0 إلى 99: الطرح دون زيادة ولا تفكيك",
+   "titleSim": 1,
+   "period": 1,
+   "docxPosInPeriod": 6,
+   "platformNum": 6,
+   "officialRefPages": "12",
+   "images": [
+    "media/image5.png",
+    "media/image21.png",
+    "media/image22.png",
+    "media/image6.png",
+    "media/image7.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P1-7",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — تمييزُ المعطياتِ الوثيقةِ الصِّلةِ بالوضعية",
+   "y2": "y2m07",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: تمييز المعطيات وثيقة الصّلة بالوضعيّة",
+   "titleSim": 0.9,
+   "period": 1,
+   "docxPosInPeriod": 7,
+   "platformNum": 7,
+   "officialRefPages": "14",
+   "images": [
+    "media/image11.png",
+    "media/image18.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P1-8",
+   "docTitle": "الخطُّ المستقيمُ والخطُّ المُنحني — الرَّسمُ والتوظيفُ",
+   "y2": "y2m08",
+   "y2Title": "الخط المستقيم والخط المنحني: الرسم والتوظيف",
+   "titleSim": 1,
+   "period": 1,
+   "docxPosInPeriod": 8,
+   "platformNum": 8,
+   "officialRefPages": "15",
+   "images": [
+    "media/image5.png",
+    "media/image23.png",
+    "media/image6.png",
+    "media/image7.png",
+    "media/image24.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P1-9",
+   "docTitle": "القطعُ النقديّةُ المتداولة — التصرُّفُ فيها (5، 10، 20، 50)",
+   "y2": "y2m09",
+   "y2Title": "القطع النقديّة المتداولة 5، 10، 20، 50: التصرّف فيها",
+   "titleSim": 1,
+   "period": 1,
+   "docxPosInPeriod": 9,
+   "platformNum": 9,
+   "officialRefPages": "17",
+   "images": [
+    "media/image5.png",
+    "media/image25.png",
+    "media/image6.png",
+    "media/image7.png",
+    "media/image26.png",
+    "media/image27.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P1-10",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — تحديدُ المطلوب",
+   "y2": "y2m10",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: تحديد المطلوب",
+   "titleSim": 1,
+   "period": 1,
+   "docxPosInPeriod": 10,
+   "platformNum": 10,
+   "officialRefPages": "20",
+   "images": [
+    "media/image11.png",
+    "media/image18.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P1-11",
+   "docTitle": "توظيفُ المكتسبات",
+   "y2": "y2m11",
+   "y2Title": "توظيف المكتسبات",
+   "titleSim": 1,
+   "period": 1,
+   "docxPosInPeriod": 11,
+   "platformNum": 11,
+   "officialRefPages": "21",
+   "images": [
+    "media/image11.png",
+    "media/image18.png",
+    "media/image28.png",
+    "media/image29.png",
+    "media/image2.png"
+   ],
+   "sectionNames": [
+    "intro"
+   ]
+  },
+  {
+   "code": "P2-1",
+   "docTitle": "الأعدادُ من 0 إلى 99 — مُكمِّلُ عددٍ إلى آخر",
+   "y2": "y2m12",
+   "y2Title": "الأعداد من 0 إلى 99: مكمّل عدد إلى آخر",
+   "titleSim": 1,
+   "period": 2,
+   "docxPosInPeriod": 1,
+   "platformNum": 12,
+   "officialRefPages": "22",
+   "images": [
+    "media/image30.png",
+    "media/image31.png",
+    "media/image6.png",
+    "media/image32.png",
+    "media/image33.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P2-2",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — تمثيلُ الوضعية بمخطط",
+   "y2": "y2m13",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: تمثيل الوضعيّة بمخطّط",
+   "titleSim": 1,
+   "period": 2,
+   "docxPosInPeriod": 2,
+   "platformNum": 13,
+   "officialRefPages": "24",
+   "images": [
+    "media/image11.png",
+    "media/image34.png",
+    "media/image18.png",
+    "media/image35.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P2-3",
+   "docTitle": "الأعدادُ من 0 إلى 99 — الجمعُ والطرحُ دون زيادةٍ ولا تفكيكٍ",
+   "y2": "y2m14",
+   "y2Title": "الأعداد من 0 إلى 99: الجمع دون زيادة ولا تفكيك",
+   "titleSim": 0.95,
+   "period": 2,
+   "docxPosInPeriod": 3,
+   "platformNum": 14,
+   "officialRefPages": "25",
+   "images": [
+    "media/image30.png",
+    "media/image6.png",
+    "media/image32.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P2-4",
+   "docTitle": "الخطُّ المُنكسِرُ — التعرُّفُ والاستعمالُ",
+   "y2": "y2m15",
+   "y2Title": "الخط المنكسر: التعرّف والاستعمال",
+   "titleSim": 1,
+   "period": 2,
+   "docxPosInPeriod": 4,
+   "platformNum": 15,
+   "officialRefPages": "27",
+   "images": [
+    "media/image30.png",
+    "media/image36.png",
+    "media/image6.png",
+    "media/image32.png",
+    "media/image37.png",
+    "media/image38.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P2-5",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — طرحُ أسئلةٍ توافقُ معطياتِ الوضعية",
+   "y2": "y2m16",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: استخراج أسئلة توافق معطيات الوضعيّة",
+   "titleSim": 0.9,
+   "period": 2,
+   "docxPosInPeriod": 5,
+   "platformNum": 16,
+   "officialRefPages": "30",
+   "images": [
+    "media/image11.png",
+    "media/image18.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P2-6",
+   "docTitle": "العددُ ⟦100⟧ — القراءةُ والكتابةُ والتمثيلُ",
+   "y2": "y2m17",
+   "y2Title": "العدد 100: القراءة والكتابة والتّمثيل",
+   "titleSim": 1,
+   "period": 2,
+   "docxPosInPeriod": 6,
+   "platformNum": 17,
+   "officialRefPages": "31",
+   "images": [
+    "media/image30.png",
+    "media/image39.png",
+    "media/image6.png",
+    "media/image32.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P2-7",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — إعادةُ صوغِ الوضعية بأسلوبٍ شخصيٍّ",
+   "y2": "y2m18",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: إعادة صوغ الوضعيّة بأسلوب شخصيّ",
+   "titleSim": 1,
+   "period": 2,
+   "docxPosInPeriod": 7,
+   "platformNum": 18,
+   "officialRefPages": "33",
+   "images": [
+    "media/image11.png",
+    "media/image18.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P2-8",
+   "docTitle": "العددُ ⟦100⟧ — التفكيكُ والتركيبُ",
+   "y2": "y2m19",
+   "y2Title": "العدد 100: التفكيك والتركيب",
+   "titleSim": 1,
+   "period": 2,
+   "docxPosInPeriod": 8,
+   "platformNum": 19,
+   "officialRefPages": "34",
+   "images": [
+    "media/image30.png",
+    "media/image40.png",
+    "media/image6.png",
+    "media/image32.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P2-9",
+   "docTitle": "القطعةُ النقديّةُ ⟦(100 مي)⟧ — التصرُّفُ فيها",
+   "y2": "y2m20",
+   "y2Title": "القطعة النقديّة 100 مي: التصرّف فيها",
+   "titleSim": 1,
+   "period": 2,
+   "docxPosInPeriod": 9,
+   "platformNum": 20,
+   "officialRefPages": "36",
+   "images": [
+    "media/image30.png",
+    "media/image41.png",
+    "media/image6.png",
+    "media/image32.png",
+    "media/image42.png",
+    "media/image43.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P2-10",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — صوغُ وضعيةٍ تُناسِبُ عمليةَ جمعٍ أو طرحٍ",
+   "y2": "y2m21",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: صوغ وضعيّة تناسب عملية جمع أو طرح",
+   "titleSim": 1,
+   "period": 2,
+   "docxPosInPeriod": 10,
+   "platformNum": 21,
+   "officialRefPages": "38",
+   "images": [
+    "media/image11.png",
+    "media/image18.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P2-11",
+   "docTitle": "توظيفُ المكتسبات",
+   "y2": "y2m22",
+   "y2Title": "توظيف المكتسبات",
+   "titleSim": 1,
+   "period": 2,
+   "docxPosInPeriod": 11,
+   "platformNum": 22,
+   "officialRefPages": "39",
+   "images": [
+    "media/image11.png",
+    "media/image18.png",
+    "media/image29.png",
+    "media/image28.png"
+   ],
+   "sectionNames": [
+    "intro"
+   ]
+  },
+  {
+   "code": "P3-1",
+   "docTitle": "الأعدادُ من 0 إلى 199 — القراءةُ والكتابةُ والتمثيلُ",
+   "y2": "y2m23",
+   "y2Title": "الأعداد من 0 إلى 199: القراءة والكتابة والتمثيل",
+   "titleSim": 1,
+   "period": 3,
+   "docxPosInPeriod": 1,
+   "platformNum": 23,
+   "officialRefPages": "40",
+   "images": [
+    "media/image44.png",
+    "media/image45.png",
+    "media/image6.png",
+    "media/image46.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P3-2",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — إنجازُ أسئلةٍ توافقُ معطياتِ الوضعية",
+   "y2": "y2m24",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: إنتاج أسئلة توافق معطيات الوضعيّة",
+   "titleSim": 0.9,
+   "period": 3,
+   "docxPosInPeriod": 2,
+   "platformNum": 24,
+   "officialRefPages": "43",
+   "images": [
+    "media/image11.png",
+    "media/image18.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P3-3",
+   "docTitle": "الأعدادُ من 0 إلى 199 — التفكيكُ والتركيبُ",
+   "y2": "y2m25",
+   "y2Title": "الأعداد من 0 إلى 199: التفكيك والتركيب",
+   "titleSim": 1,
+   "period": 3,
+   "docxPosInPeriod": 3,
+   "platformNum": 25,
+   "officialRefPages": "44",
+   "images": [
+    "media/image44.png",
+    "media/image47.png",
+    "media/image6.png",
+    "media/image46.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P3-4",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — صوغُ الإجابةِ اللفظيّةِ المناسبةِ",
+   "y2": "y2m26",
+   "y2Title": "صوغ الإجابات اللّفظيّة المناسبة",
+   "titleSim": 0.46,
+   "period": 3,
+   "docxPosInPeriod": 4,
+   "platformNum": 26,
+   "officialRefPages": "46",
+   "images": [
+    "media/image11.png",
+    "media/image18.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P3-5",
+   "docTitle": "الأعدادُ من 0 إلى 199 — المقارنةُ والترتيبُ",
+   "y2": "y2m27",
+   "y2Title": "الأعداد من 0 إلى 199: المقارنة والترتيب",
+   "titleSim": 1,
+   "period": 3,
+   "docxPosInPeriod": 5,
+   "platformNum": 27,
+   "officialRefPages": "47",
+   "images": [
+    "media/image44.png",
+    "media/image6.png",
+    "media/image46.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P3-6",
+   "docTitle": "الخطُّ المُنكسِرُ — الرَّسمُ والتوظيفُ",
+   "y2": "y2m28",
+   "y2Title": "الخطّ المنكسر: الرسم والتوظيف",
+   "titleSim": 1,
+   "period": 3,
+   "docxPosInPeriod": 6,
+   "platformNum": 28,
+   "officialRefPages": "50",
+   "images": [
+    "media/image44.png",
+    "media/image37.png",
+    "media/image6.png",
+    "media/image46.png",
+    "media/image36.png",
+    "media/image48.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro"
+   ]
+  },
+  {
+   "code": "P3-7",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — تحديدُ العلاقةِ بينِ خاصّياتِ المفاهيم",
+   "y2": "y2m29",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: تحديد العلاقة بين خاصّيّات المفاهيم",
+   "titleSim": 1,
+   "period": 3,
+   "docxPosInPeriod": 7,
+   "platformNum": 29,
+   "officialRefPages": "52",
+   "images": [
+    "media/image11.png",
+    "media/image49.png",
+    "media/image18.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P3-8",
+   "docTitle": "القطعُ النقديّةُ المتداولة — التصرُّفُ في القطعِ النقديّةِ (5، 10، 20، 50، 100)",
+   "y2": "y2m30",
+   "y2Title": "القطع النقديّة المتداولة (5، 10، 20، 50، 100): التصرّف في القطعة النقدية 100",
+   "titleSim": 0.96,
+   "period": 3,
+   "docxPosInPeriod": 8,
+   "platformNum": 30,
+   "officialRefPages": "54",
+   "images": [
+    "media/image44.png",
+    "media/image50.png",
+    "media/image6.png",
+    "media/image46.png",
+    "media/image51.png",
+    "media/image52.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P3-9",
+   "docTitle": "الأعدادُ من 0 إلى 199 — الجمعُ بالاحتفاظ",
+   "y2": "y2m31",
+   "y2Title": "الأعداد من 0 إلى 199: الجمع بالاحتفاظ",
+   "titleSim": 1,
+   "period": 3,
+   "docxPosInPeriod": 9,
+   "platformNum": 31,
+   "officialRefPages": "58",
+   "images": [
+    "media/image44.png",
+    "media/image6.png",
+    "media/image46.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P3-10",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — تحديدُ المطلوب",
+   "y2": "y2m32",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: تحديد المطلوب",
+   "titleSim": 1,
+   "period": 3,
+   "docxPosInPeriod": 10,
+   "platformNum": 32,
+   "officialRefPages": "60",
+   "images": [
+    "media/image11.png",
+    "media/image18.png",
+    "media/image53.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P3-11",
+   "docTitle": "توظيفُ المكتسبات",
+   "y2": "y2m33",
+   "y2Title": "توظيف المكتسبات",
+   "titleSim": 1,
+   "period": 3,
+   "docxPosInPeriod": 11,
+   "platformNum": 33,
+   "officialRefPages": "61",
+   "images": [
+    "media/image11.png",
+    "media/image18.png",
+    "media/image29.png",
+    "media/image2.png",
+    "media/image14.png"
+   ],
+   "sectionNames": [
+    "intro"
+   ]
+  },
+  {
+   "code": "P4-1",
+   "docTitle": "الأعدادُ من 0 إلى 199 — الجمعُ بالاحتفاظ ومن دونِه",
+   "y2": "y2m34",
+   "y2Title": "الأعداد من 0 إلى 199: الجمع",
+   "titleSim": 0.8,
+   "period": 4,
+   "docxPosInPeriod": 1,
+   "platformNum": 34,
+   "officialRefPages": "62",
+   "images": [
+    "media/image54.png",
+    "media/image55.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P4-2",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — إنجازُ وضعيةٍ تتطلَّبُ حلُّها توظيفَ الجمعِ أو الطرحِ",
+   "y2": "y2m35",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: إنتاج وضعيّة حلّها يتطلّب توظيف الجمع أو الطّرح",
+   "titleSim": 0.85,
+   "period": 4,
+   "docxPosInPeriod": 2,
+   "platformNum": 35,
+   "officialRefPages": "64",
+   "images": [
+    "media/image11.png",
+    "media/image18.png",
+    "media/image14.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P4-3",
+   "docTitle": "الأعدادُ من 0 إلى 199 — الطرحُ دون زيادةٍ ولا تفكيكٍ",
+   "y2": "y2m36",
+   "y2Title": "الأعداد من 0 إلى 199: الطرح دون زيادة ولا تفكيك",
+   "titleSim": 1,
+   "period": 4,
+   "docxPosInPeriod": 3,
+   "platformNum": 36,
+   "officialRefPages": "65",
+   "images": [
+    "media/image54.png",
+    "media/image6.png",
+    "media/image55.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P4-4",
+   "docTitle": "المضلَّعاتُ — التعرُّفُ على المضلَّعاتِ",
+   "y2": "y2m37",
+   "y2Title": "المضلّعات: تعرّف المضلّعات",
+   "titleSim": 0.57,
+   "period": 4,
+   "docxPosInPeriod": 4,
+   "platformNum": 37,
+   "officialRefPages": "67",
+   "images": [
+    "media/image54.png",
+    "media/image56.png",
+    "media/image6.png",
+    "media/image55.png",
+    "media/image57.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P4-5",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — إنجازُ وضعيةٍ تتطلَّبُ حلُّها توظيفَ الجمعِ أو الطرحِ",
+   "y2": "y2m38",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: إنتاج وضعيّة حلّها يتطلّب توظيف الجمع أو الطّرح",
+   "titleSim": 0.85,
+   "period": 4,
+   "docxPosInPeriod": 5,
+   "platformNum": 38,
+   "officialRefPages": "69",
+   "images": [
+    "media/image11.png",
+    "media/image18.png",
+    "media/image3.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P4-6",
+   "docTitle": "الأعدادُ من 0 إلى 199 — الجمعُ والطرحُ دون زيادةٍ ولا تفكيكٍ",
+   "y2": "y2m39",
+   "y2Title": "الأعداد من 0 إلى 199: الجمع والطرح دون زيادة ولا تفكيك",
+   "titleSim": 1,
+   "period": 4,
+   "docxPosInPeriod": 6,
+   "platformNum": 39,
+   "officialRefPages": "70",
+   "images": [
+    "media/image54.png",
+    "media/image6.png",
+    "media/image55.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P4-7",
+   "docTitle": "الأعدادُ من 0 إلى 499 — القراءةُ والكتابةُ والتمثيلُ",
+   "y2": "y2m40",
+   "y2Title": "الأعداد من 0 إلى 499: القراءة والكتابة والتمثيل",
+   "titleSim": 1,
+   "period": 4,
+   "docxPosInPeriod": 7,
+   "platformNum": 40,
+   "officialRefPages": "72",
+   "images": [
+    "media/image54.png",
+    "media/image58.png",
+    "media/image6.png",
+    "media/image55.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P4-8",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — إنجازُ وضعيةٍ تتطلَّبُ حلُّها توظيفَ الجمعِ أو الطرحِ",
+   "y2": "y2m41",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: إنتاج وضعيّة حلّها يتطلّب توظيف الجمع أو الطّرح أو المكمّل",
+   "titleSim": 0.86,
+   "period": 4,
+   "docxPosInPeriod": 8,
+   "platformNum": 41,
+   "officialRefPages": "74",
+   "images": [
+    "media/image11.png",
+    "media/image18.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P4-9",
+   "docTitle": "الأعدادُ من 0 إلى 499 — التفكيكُ والتركيبُ",
+   "y2": "y2m42",
+   "y2Title": "الأعداد من 0 إلى 499: التفكيك والتركيب",
+   "titleSim": 1,
+   "period": 4,
+   "docxPosInPeriod": 9,
+   "platformNum": 42,
+   "officialRefPages": "75",
+   "images": [
+    "media/image54.png",
+    "media/image6.png",
+    "media/image55.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P4-10",
+   "docTitle": "القطعةُ النقديّةُ ⟦(200 مي)⟧ — التصرُّفُ فيها",
+   "y2": "y2m43",
+   "y2Title": "القطع النقديّة المتداولة في التصرّف: القطعة النقديّة 200",
+   "titleSim": 0.71,
+   "period": 4,
+   "docxPosInPeriod": 10,
+   "platformNum": 43,
+   "officialRefPages": "77",
+   "images": [
+    "media/image54.png",
+    "media/image59.png",
+    "media/image6.png",
+    "media/image55.png",
+    "media/image60.png",
+    "media/image61.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P4-11",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — إنجازُ وضعيةٍ تتطلَّبُ حلُّها توظيفُ الجمعِ أو الطرحِ والتحكُّمُ في الحلِّ",
+   "y2": "y2m44",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: إنتاج وضعيّة حلّها يتطلّب توظيف الجمع أو الطّرح أو المكمّل",
+   "titleSim": 0.77,
+   "period": 4,
+   "docxPosInPeriod": 11,
+   "platformNum": 44,
+   "officialRefPages": "79",
+   "images": [
+    "media/image11.png",
+    "media/image18.png",
+    "media/image28.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P4-12",
+   "docTitle": "توظيفُ المكتسبات",
+   "y2": "y2m45",
+   "y2Title": "توظيف المكتسبات",
+   "titleSim": 1,
+   "period": 4,
+   "docxPosInPeriod": 12,
+   "platformNum": 45,
+   "officialRefPages": "80",
+   "images": [
+    "media/image11.png",
+    "media/image18.png",
+    "media/image29.png",
+    "media/image2.png",
+    "media/image3.png"
+   ],
+   "sectionNames": [
+    "intro"
+   ]
+  },
+  {
+   "code": "P5-1",
+   "docTitle": "الأعدادُ من 0 إلى 499 — المقارنةُ والترتيبُ",
+   "y2": "y2m46",
+   "y2Title": "الأعداد من 0 إلى 499: المقارنة والترتيب",
+   "titleSim": 1,
+   "period": 5,
+   "docxPosInPeriod": 1,
+   "platformNum": 46,
+   "officialRefPages": "81",
+   "images": [
+    "media/image62.png",
+    "media/image6.png",
+    "media/image63.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P5-2",
+   "docTitle": "الأعدادُ من 0 إلى 499 — الجمعُ بالاحتفاظ ومن دونِه",
+   "y2": "y2m47",
+   "y2Title": "الأعداد من 0 إلى 499: الجمع بالاحتفاظ ومن دونه",
+   "titleSim": 1,
+   "period": 5,
+   "docxPosInPeriod": 2,
+   "platformNum": 47,
+   "officialRefPages": "84",
+   "images": [
+    "media/image62.png",
+    "media/image6.png",
+    "media/image63.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P5-3",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — تحريرُ حلِّ مسألةٍ",
+   "y2": "y2m48",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: تحرير حلّ مسألة",
+   "titleSim": 1,
+   "period": 5,
+   "docxPosInPeriod": 3,
+   "platformNum": 48,
+   "officialRefPages": "86",
+   "images": [
+    "media/image11.png",
+    "media/image18.png",
+    "media/image21.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P5-4",
+   "docTitle": "الأعدادُ من 0 إلى 499 — الطرحُ دون زيادةٍ ولا تفكيكٍ",
+   "y2": "y2m49",
+   "y2Title": "الأعداد من 0 إلى 499: الطرح دون زيادة ولا تفكيك",
+   "titleSim": 1,
+   "period": 5,
+   "docxPosInPeriod": 4,
+   "platformNum": 49,
+   "officialRefPages": "87",
+   "images": [
+    "media/image62.png",
+    "media/image6.png",
+    "media/image63.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P5-5",
+   "docTitle": "القطعُ النقديّةُ المتداولة — التصرُّفُ في القطعِ النقديّةِ (5، 10، 20، 50، 100، 200)",
+   "y2": "y2m50",
+   "y2Title": "القطع النقديّة المتداولة 5، 10، 20، 50، 100، 200: التصرّف فيها",
+   "titleSim": 0.83,
+   "period": 5,
+   "docxPosInPeriod": 5,
+   "platformNum": 50,
+   "officialRefPages": "89",
+   "images": [
+    "media/image62.png",
+    "media/image64.png",
+    "media/image6.png",
+    "media/image63.png",
+    "media/image65.png",
+    "media/image66.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P5-6",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — تحريرُ حلِّ مسألةٍ",
+   "y2": null,
+   "y2Title": null,
+   "titleSim": null,
+   "period": 5,
+   "docxPosInPeriod": 6,
+   "platformNum": null,
+   "officialRefPages": null,
+   "images": [
+    "media/image11.png",
+    "media/image18.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P5-7",
+   "docTitle": "الأعدادُ من 0 إلى 499 — الجمعُ والطرحُ دون زيادةٍ",
+   "y2": "y2m51",
+   "y2Title": "الأعداد من 0 إلى 499: الجمع والطرح دون زيادة",
+   "titleSim": 1,
+   "period": 5,
+   "docxPosInPeriod": 7,
+   "platformNum": 51,
+   "officialRefPages": "93",
+   "images": [
+    "media/image62.png",
+    "media/image6.png",
+    "media/image63.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P5-8",
+   "docTitle": "المضلَّعاتُ — الرَّسمُ",
+   "y2": "y2m52",
+   "y2Title": "المضلّعات: الرسم",
+   "titleSim": 1,
+   "period": 5,
+   "docxPosInPeriod": 8,
+   "platformNum": 52,
+   "officialRefPages": "95",
+   "images": [
+    "media/image62.png",
+    "media/image67.png",
+    "media/image6.png",
+    "media/image63.png",
+    "media/image68.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P5-9",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — تحريرُ حلِّ مسألةٍ",
+   "y2": "y2m53",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: تحرير حلّ مسألة",
+   "titleSim": 1,
+   "period": 5,
+   "docxPosInPeriod": 9,
+   "platformNum": 53,
+   "officialRefPages": "97",
+   "images": [
+    "media/image11.png",
+    "media/image18.png",
+    "media/image3.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P5-10",
+   "docTitle": "توظيفُ المكتسبات",
+   "y2": "y2m54",
+   "y2Title": "توظيف المكتسبات",
+   "titleSim": 1,
+   "period": 5,
+   "docxPosInPeriod": 10,
+   "platformNum": 54,
+   "officialRefPages": "98",
+   "images": [
+    "media/image11.png",
+    "media/image18.png",
+    "media/image29.png",
+    "media/image14.png",
+    "media/image2.png"
+   ],
+   "sectionNames": [
+    "intro"
+   ]
+  },
+  {
+   "code": "P6-1",
+   "docTitle": "الأعدادُ من 0 إلى 999 — القراءةُ والكتابةُ والتمثيلُ",
+   "y2": "y2m55",
+   "y2Title": "الأعداد من 0 إلى 999: القراءة والكتابة والتمثيل",
+   "titleSim": 1,
+   "period": 6,
+   "docxPosInPeriod": 1,
+   "platformNum": 55,
+   "officialRefPages": "100",
+   "images": [
+    "media/image69.png",
+    "media/image70.png",
+    "media/image6.png",
+    "media/image71.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P6-2",
+   "docTitle": "الأعدادُ من 0 إلى 999 — التفكيكُ والتركيبُ والمقارنةُ والترتيبُ",
+   "y2": "y2m56",
+   "y2Title": "الأعداد من 0 إلى 999: التفكيك والتركيب والمقارنة والترتيب",
+   "titleSim": 1,
+   "period": 6,
+   "docxPosInPeriod": 2,
+   "platformNum": 56,
+   "officialRefPages": "103",
+   "images": [
+    "media/image69.png",
+    "media/image72.png",
+    "media/image6.png",
+    "media/image71.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P6-3",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — تحريرُ حلِّ مسألةٍ",
+   "y2": "y2m57",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: تحرير حلّ مسألة",
+   "titleSim": 1,
+   "period": 6,
+   "docxPosInPeriod": 3,
+   "platformNum": 57,
+   "officialRefPages": "105",
+   "images": [
+    "media/image11.png",
+    "media/image18.png",
+    "media/image21.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P6-4",
+   "docTitle": "الأعدادُ من 0 إلى 999 — الجمعُ والطرحُ دون زيادةٍ ولا تفكيكٍ",
+   "y2": "y2m58",
+   "y2Title": "الأعداد من 0 إلى 999: الجمع والطرح دون زيادة وتفكيك",
+   "titleSim": 0.86,
+   "period": 6,
+   "docxPosInPeriod": 4,
+   "platformNum": 58,
+   "officialRefPages": "107",
+   "images": [
+    "media/image69.png",
+    "media/image6.png",
+    "media/image71.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P6-5",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — تحريرُ حلِّ مسألةٍ",
+   "y2": "y2m59",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: تحرير حلّ مسألة",
+   "titleSim": 1,
+   "period": 6,
+   "docxPosInPeriod": 5,
+   "platformNum": 59,
+   "officialRefPages": "109",
+   "images": [
+    "media/image11.png",
+    "media/image18.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice"
+   ]
+  },
+  {
+   "code": "P6-6",
+   "docTitle": "القطعةُ النقديّةُ نصفُ دينارٍ — التصرُّفُ فيها",
+   "y2": "y2m60",
+   "y2Title": "القطعة النقديّة نصف دينار: التصرّف فيها",
+   "titleSim": 1,
+   "period": 6,
+   "docxPosInPeriod": 6,
+   "platformNum": 60,
+   "officialRefPages": "110",
+   "images": [
+    "media/image69.png",
+    "media/image73.png",
+    "media/image6.png",
+    "media/image71.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P6-7",
+   "docTitle": "المضلَّعاتُ — توظيفُ المضلَّعاتِ",
+   "y2": "y2m61",
+   "y2Title": "المضلّعات: توظيفها",
+   "titleSim": 0.4,
+   "period": 6,
+   "docxPosInPeriod": 7,
+   "platformNum": 61,
+   "officialRefPages": "113",
+   "images": [
+    "media/image69.png",
+    "media/image74.png",
+    "media/image6.png",
+    "media/image71.png",
+    "media/image38.png",
+    "media/image8.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  },
+  {
+   "code": "P6-8",
+   "docTitle": "التدرَّبُ على حلِّ الوضعية المشكِل — تقييمُ التمشِّي المُعتَمدِ والنتائجِ",
+   "y2": "y2m62",
+   "y2Title": "التدرّب على حلّ الوضعيّة المشكل: تقييم التمشّي المعتمد والنتائج",
+   "titleSim": 1,
+   "period": 6,
+   "docxPosInPeriod": 8,
+   "platformNum": 62,
+   "officialRefPages": "115",
+   "images": [
+    "media/image11.png",
+    "media/image18.png",
+    "media/image14.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "practice",
+    "situation"
+   ]
+  },
+  {
+   "code": "P6-9",
+   "docTitle": "توظيفُ المكتسبات",
+   "y2": "y2m63",
+   "y2Title": "توظيف المكتسبات",
+   "titleSim": 1,
+   "period": 6,
+   "docxPosInPeriod": 9,
+   "platformNum": 63,
+   "officialRefPages": "117",
+   "images": [
+    "media/image11.png",
+    "media/image18.png",
+    "media/image29.png",
+    "media/image28.png",
+    "media/image75.png"
+   ],
+   "sectionNames": [
+    "intro",
+    "challenge"
+   ]
+  }
+ ],
+ "sectionsByCode": {
+  "P1-1": {
+   "intro": [
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "المجموعاتُ",
+     "images": []
+    },
+    {
+     "text": "المجموعاتُ ومكوِّناتُها والعلاقةُ بينَها",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image5.png"
+     ]
+    },
+    {
+     "text": "أُلاحِظُ الصُّورَ ثم أُجيبُ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image12.png"
+     ]
+    },
+    {
+     "text": "1. أَعُدُّ عناصرَ كلِّ مجموعةٍ.",
+     "images": []
+    },
+    {
+     "text": "2. أَحَدِّدُ المجموعةَ التي فيها العناصرُ الأكثرُ، والمجموعةَ التي فيها العناصرُ الأقلُّ.",
+     "images": []
+    },
+    {
+     "text": "3. أَربِطُ كلَّ مجموعةٍ بعدَدِ عناصرِها:  5 ‬ ، 4 ،  6 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "المجموعةُ مجموعةٌ من الأشياءِ. كلُّ شيءٍ فيها يُسمَّى عنصرًا. ولمُعرفةِ عددِ عناصرِ المجموعةِ أَعُدُّ كلَّ عنصرٍ مرةً واحدةً: عنصرٌ واحدٌ، عنصرانِ، ثلاثةُ عناصرَ...",
+     "images": []
+    },
+    {
+     "text": "مجموعةٌ فيها  5 ‬ عناصرَ أكبرُ من مجموعةٍ فيها 3 عناصرَ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image7.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "أُلاحِظُ حَديقةَ الحيواناتِ الصَّغيرَةِ ثم أُجيبُ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image13.png"
+     ]
+    },
+    {
+     "text": "1. أَكُتُبُ عددَ عناصرِ كلِّ مجموعةٍ داخلَ المربَّعِ المخصَّصِ لها.",
+     "images": []
+    },
+    {
+     "text": "المجموعة",
+     "images": []
+    },
+    {
+     "text": "الكُراتُ",
+     "images": []
+    },
+    {
+     "text": "النُّجومُ",
+     "images": []
+    },
+    {
+     "text": "الأزهارُ",
+     "images": []
+    },
+    {
+     "text": "الأسماكُ",
+     "images": []
+    },
+    {
+     "text": "عددُ العناصر",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُلوِّنُ (بعلامة  ✓ ‬) المجموعةَ التي فيها 6 عناصرَ:",
+     "images": []
+    },
+    {
+     "text": "☐  مجموعةُ الكُراتِ",
+     "images": []
+    },
+    {
+     "text": "☐  مجموعةُ النُّجومِ",
+     "images": []
+    },
+    {
+     "text": "☐  مجموعةُ الأسماكِ",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أَرسُمُ مجموعةً فيها  4 ‬ عناصرَ من اختياري، ثم أَكُتُبُ عددَ عناصرِها.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: أَزِيدُ في المجموعةِ التي فيها  4 ‬ عناصرَ عنصرًا واحدًا في كلِّ مرةٍ حتى أَصِلَ إلى 7 عناصرَ. كمُّ عناصرًا أَضَفْتُ؟  7 - 4 = 3 ‬",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image14.png"
+     ]
+    },
+    {
+     "text": "في صَفِّنا مجموعةُ القارئاتِ ومجموعةُ الرسّامينَ. مجموعةُ القارئاتِ فيها  9 ‬ عناصرَ، ومجموعةُ الرسّامينَ فيها 6 عناصرَ.",
+     "images": []
+    },
+    {
+     "text": "1. أيُّ المجموعتينِ فيها عناصرُ أكثرُ؟",
+     "images": []
+    },
+    {
+     "text": "2. كمُّ عنصرًا الفارقُ بينَ المجموعتينِ؟  9 - 6 = 3 ‬",
+     "images": []
+    }
+   ]
+  },
+  "P1-2": {
+   "intro": [
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "المجموعاتُ",
+     "images": []
+    },
+    {
+     "text": "متمُّمُّ مجموعةٍ في أخرى",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image5.png"
+     ]
+    },
+    {
+     "text": "في الحَديقةِ مجموعةُ عصافيرَ ومجموعةُ أقفاصٍ. أُلاحِظُ ثم أُجيبُ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image15.png"
+     ]
+    },
+    {
+     "text": "1. كمُّ عصفورًا في المجموعةِ الأولى؟ وكمُّ بيضةً في الثانية؟",
+     "images": []
+    },
+    {
+     "text": "2. كلُّ بيضةٍ عصفورٌ صغيرٌ: أَربِطُ كلَّ عصفورٍ ببيضةٍ. أيُّ المجموعتينِ أكبرُ؟",
+     "images": []
+    },
+    {
+     "text": "3. كمُّ عنصرًا يَبقى بلا ازدواجٍ؟  8 - 5 = 3 ‬",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "لِإتمامِ مجموعةٍ في أخرى أَضيفُ إليها عناصرَ حتى تتساوى المجموعتانِ في عددِ العناصرِ.",
+     "images": []
+    },
+    {
+     "text": "مثالٌ: مجموعةٌ فيها  5 ‬ عناصرَ، وأخرى فيها 8 عناصرَ: أَضيفُ إلى الأولى  8 - 5 = 3 ‬ عناصرَ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image7.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُكَمِّلُ: كمُّ عنصرًا أَضيفُ لِكُلِّ مجموعةٍ لتصبحَ مثلَ الأخرى؟",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image16.png"
+     ]
+    },
+    {
+     "text": "المجموعةُ الأولى: أَضيفُ  9 - 6 = 3 ‬ عنصرًا.  المجموعةُ الثانية: أَضيفُ ........ عنصرًا.",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أَرْسُمُ في الفراغِ العناصرَ الناقصةَ لِتُصبحَ كلُّ مجموعةٍ فيها  10 ‬ عناصرَ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image17.png"
+     ]
+    },
+    {
+     "text": "الناقصُ:  10 - 7 = 3 ‬ عناصرَ.",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. سلمى جمعتْ  8 ‬ أصدقاءَ، وأمين جمعَ 5 أصدقاءَ. كمُّ صديقًا يَنقصُ أمينَ ليَصِلَ إلى عددِ أصدقاءِ سلمى؟  8 - 5 = 3 ‬",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image9.png"
+     ]
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image3.png"
+     ]
+    },
+    {
+     "text": "مجموعةٌ فيها  6 ‬ عناصرَ. أُضيفُ إليها 2 عنصرينَ، ثم أُضيفُ عنصرًا واحدًا. كمُّ عنصرًا صارَ فيها؟ وما الذي يَنقصُها ليَصِلَ إلى  10 ‬ عناصرَ؟ 6 + 2 + 1 = 9 ثم  10 - 9 = 1 ‬",
+     "images": []
+    }
+   ]
+  },
+  "P1-3": {
+   "intro": [
+    {
+     "text": "3",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "تمثيلُ الوضعية برسمٍ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "في فَريقِ المدرسةِ لكرةِ القدمِ  11 ‬ لاعبًا أساسيًّا، وقد دخَلَ في المباراةِ الأخيرةِ 3 لاعبينَ بِدلاءً.",
+     "images": []
+    },
+    {
+     "text": "اللاعبونَ الأساسيّونَ",
+     "images": []
+    },
+    {
+     "text": "اللاعبونَ البِدلاءُ",
+     "images": []
+    },
+    {
+     "text": "العددُ",
+     "images": []
+    },
+    {
+     "text": "11",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "1. أَمثِّلُ الوضعيةَ برسمٍ: أَرسُمُ دائرةً لِكُلِّ لاعبٍ.",
+     "images": []
+    },
+    {
+     "text": "2. كمُّ لاعبًا شاركَ في المباراةِ كلِّها؟  11 + 3 = 14 ‬",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "سلمى رَتَّبَتْ  7 ‬ كتبًا في الخزانةِ، وبقيَتْ عندها 4 كتبٌ خارجَها. كمُّ كتابًا كانَ عندها في البدايةِ؟",
+     "images": []
+    },
+    {
+     "text": "1. أَمثِّلُ الوضعيةَ برسمٍ بالدوائرِ: دائرةٌ لِكُلِّ كتابٍ داخلِ الخزانةِ ودائرةٌ لِكُلِّ كتابٍ خارجِها.",
+     "images": []
+    },
+    {
+     "text": "2. أَحسِبُ العددَ الكلِّيَّ:  7 + 4 = 11 ‬ كتابًا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image7.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "أتدرَّبُ: أَمثِّلُ بالرَّسمِ ثم أَحسِبُ: في السَّوقِ  6 ‬ سلالِ ملأها البائعُ بالبرتقالِ، ثم أضافَ 5 سلالٍ أخرى. كمُّ سلةً صارتْ في السُّوقِ؟  6 + 5 = 11 ‬",
+     "images": []
+    }
+   ]
+  },
+  "P1-4": {
+   "intro": [
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 99",
+     "images": []
+    },
+    {
+     "text": "الجمعُ بالاحتفاظ ومن دونِه",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image5.png"
+     ]
+    },
+    {
+     "text": "في مَكتَبةِ المدرسةِ جُمِّعَتْ كتبُ القصصِ في صندوقينِ: في الصندوقِ «أ»  34 ‬ كتابًا، وفي الصندوقِ «ب» 25 كتابًا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image19.png"
+     ]
+    },
+    {
+     "text": "1. أَحسِبُ عددَ الكتبِ في كلِّ صندوقٍ: عشراتٌ وآحادٌ.",
+     "images": []
+    },
+    {
+     "text": "الصندوق",
+     "images": []
+    },
+    {
+     "text": "العشرات",
+     "images": []
+    },
+    {
+     "text": "الآحاد",
+     "images": []
+    },
+    {
+     "text": "أ",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "ب",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "2. أَجْمَعُ العشراتِ مع العشراتِ:  30 + 20 = 50 ‬. ثم الآحادَ مع الآحادِ: 4 + 5 = 9.",
+     "images": []
+    },
+    {
+     "text": "3. المجموعُ:  50 + 9 = 59 ‬ كتابًا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image20.png"
+     ]
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "لِجمعِ عددينِ من رقمينِ: أَجْمَعُ الآحادَ أولًا، ثم العشراتِ.",
+     "images": []
+    },
+    {
+     "text": "إذا صارَ مجموعُ الآحادِ أكبرَ من  9 ‬ فَأُبقيُ (أُحتَفِظُ) بعشرةٍ وأَضيفُها إلى العشراتِ: هذه هي الجمعَةُ بالاحتفاظِ.",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "7 + 8 = 15 ‬: أُكْتُبُ 5 في الآحادِ وأُحتَفِظُ بـ  1 ‬ عشرةٍ. ثم 3 + 2 + 1 = 6 عشراتٍ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image7.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أَجْمَعُ من دونِ احتفاظٍ:",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أَجْمَعُ بالاحتفاظِ: أُكَمِّلُ العملياتِ العموديّةَ:",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "9",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أَصَحُّ الخطأَ: أمين جمعَ  37 + 28 ‬ فَكَتَبَ الناتجَ 55.",
+     "images": []
+    },
+    {
+     "text": "الخطأُ: نَسِيَ الاحتفاظَ بالعشرةِ. الصوابُ:  7 + 8 = 15 ‬ فنكتبُ 5 ونحتَفِظُ بـ 1 ‬، ثم 3 + 2 + 1 = 6؛ الناتجُ الصحيحُ  65 ‬.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: أُكَمِّلُ الفراغَ بالعددِ المناسبِ:  26 + .. = 51 ‬ ، .. + 34 = 75",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "سلمى جمعتْ  28 ‬ ورقةً ملوَّنةً، وأمين جمعَ 35 ورقةً. كمُّ ورقةً جمعاه معًا؟  28 + 35 = 63 ‬ ورقةً.",
+     "images": []
+    }
+   ]
+  },
+  "P1-5": {
+   "intro": [
+    {
+     "text": "5",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "استخراجُ المعلوماتِ من نصِّ الوضعية",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "في نادي الشطرنجِ بالمدرسةِ  25 ‬ بيدقًا، و13 فرسًا، و 16 ‬ قلعةً، وعددُ الأعضاءِ كلِّهم 85 عضوًا.",
+     "images": []
+    },
+    {
+     "text": "قطعُ الشطرنجِ",
+     "images": []
+    },
+    {
+     "text": "البيدقُ",
+     "images": []
+    },
+    {
+     "text": "الفرسُ",
+     "images": []
+    },
+    {
+     "text": "القلعةُ",
+     "images": []
+    },
+    {
+     "text": "العددُ",
+     "images": []
+    },
+    {
+     "text": "25",
+     "images": []
+    },
+    {
+     "text": "13",
+     "images": []
+    },
+    {
+     "text": "16",
+     "images": []
+    },
+    {
+     "text": "1. أُكَمِّلُ الجدولَ: كمُّ قطعةً من كلِّ نوعٍ؟",
+     "images": []
+    },
+    {
+     "text": "2. أَحسِبُ عددَ البيدقِ والفرسِ معًا:  25 + 13 = 38 ‬.",
+     "images": []
+    },
+    {
+     "text": "3. أَحسِبُ عددَ القلاعِ مع البيدقِ:  16 + 25 = 41 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "أهدى جدُّ مَرادٍ لهُ حبيباتَ لُعبةٍ مُخَتَّلِفةٍ:  45 ‬ حبةً حمراءَ، و10 مُربَّعاتٍ، و 5 ‬ كُرَاتٍ. أَرادَ مَرَادٌ أن يَعرِفَ عددَ الحبيباتِ الحمراءِ والمُربَّعاتِ معًا.",
+     "images": []
+    },
+    {
+     "text": "1. أَسْتَخْرِجُ المعلوماتَ: الحمراءُ  45 ‬، المُربَّعاتُ 10، البُقَرَاتُ  5 ‬.",
+     "images": []
+    },
+    {
+     "text": "2. أَحسِبُ:  45 + 10 = 55 ‬ حبّةً.",
+     "images": []
+    }
+   ]
+  },
+  "P1-6": {
+   "intro": [
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 99",
+     "images": []
+    },
+    {
+     "text": "الطرحُ دون زيادةٍ ولا تفكيكٍ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image5.png"
+     ]
+    },
+    {
+     "text": "في مَزرَعةِ جدّي  47 ‬ طائرًا: منها 25 دجاجةً والباقيُّ بَطٌّ. كمُّ بطةً في المزرعةِ؟",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image21.png"
+     ]
+    },
+    {
+     "text": "1. المعلوماتُ: عددُ الطيورِ كلِّها  47 ‬، عددُ الدجاجِ 25.",
+     "images": []
+    },
+    {
+     "text": "2. لِمَعرفةِ عددِ البطِّ أَطرَحُ:  47 - 25 ‬.",
+     "images": []
+    },
+    {
+     "text": "3. أَطرَحُ الآحادَ:  7 - 5 = 2 ‬. ثم العشراتِ: 40 - 20 = 20. الناتجُ:  22 ‬ بطةً.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image22.png"
+     ]
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "لِطرحِ عددٍ من آخرِ من رقمينِ: أَطرَحُ الآحادَ من الآحادِ، والعشراتَ من العشراتِ، مع مُحاذاةِ المنازلِ جيدًا.",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "-",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image7.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أَطرَحُ من دونِ زيادةٍ ولا تفكيكٍ:",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أَكْمِلُ العملياتِ العموديّةَ:",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "-",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "-",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "-",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أَكْتَشِفُ الخطأَ وأُصَحِّحُ: كُتِبَ  59 - 27 = 39 ‬.",
+     "images": []
+    },
+    {
+     "text": "التصحيحُ:  9 - 7 = 2 ‬ في الآحادِ و50 - 20 = 30 في العشراتِ؛ الناتجُ الصحيحُ  32 ‬.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: عددٌ إذا طَرَحتُ منه  34 ‬ صارَ 45. ما هو هذا العددُ؟  45 + 34 = 79 ‬",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "كان في قَفصِ الحديقةِ  66 ‬ زهرةً، قَطَفَ أمينُ منها 23 زهرةً لعيدِ الأمِّ. كمُّ زهرةً بقيتْ في القَفصِ؟  66 - 23 = 43 ‬ زهرةً.",
+     "images": []
+    }
+   ]
+  },
+  "P1-7": {
+   "intro": [
+    {
+     "text": "7",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "تمييزُ المعطياتِ الوثيقةِ الصِّلةِ بالوضعية",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "في مَتجَرِ الألعابِ: دُمْيَةٌ ثمنُها  26 ‬ دينارًا لونُها ورديٌّ، وكرةٌ ثمنُها 18 دينارًا. سلمى اشترتْ دُمْيَةً وكرةً.",
+     "images": []
+    },
+    {
+     "text": "1. أُميِّزُ المعطياتِ المُفيدةَ لِحِسابِ الثمنِ الكلِّيِّ: الثمنانِ  26 ‬ و18 (اللونُ ليسَ معطًى مفيدًا).",
+     "images": []
+    },
+    {
+     "text": "2. أَحسِبُ:  26 + 18 = 44 ‬ دينارًا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "في مَزرَعةِ العمَّارِ  12 ‬ بقرةً و7 خرفانًا و 5 ‬ دجاجاتٍ. أُريدُ مَعرفةَ عددِ الحيواناتِ الكبيرةِ (البقرُ والخرفانُ).",
+     "images": []
+    },
+    {
+     "text": "الحيوانُ",
+     "images": []
+    },
+    {
+     "text": "البقرةُ",
+     "images": []
+    },
+    {
+     "text": "الخروفُ",
+     "images": []
+    },
+    {
+     "text": "الدجاجةُ",
+     "images": []
+    },
+    {
+     "text": "العددُ",
+     "images": []
+    },
+    {
+     "text": "12",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "1. المعطيانِ الوثيقتانِ الصِّلةُ بالسُّؤالِ:  12 ‬ و7.",
+     "images": []
+    },
+    {
+     "text": "2. أَحسِبُ:  12 + 7 = 19 ‬ حيوانًا كبيرًا.",
+     "images": []
+    }
+   ]
+  },
+  "P1-8": {
+   "intro": [
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "الخطُّ المستقيمُ والخطُّ المُنحني",
+     "images": []
+    },
+    {
+     "text": "الرَّسمُ والتوظيفُ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image5.png"
+     ]
+    },
+    {
+     "text": "أُلاحِظُ الخطوطَ الأربعةَ ثم أُصنِّفُها: كلُّ خطٍّ مستقيمٌ أم مُنحنيٌّ؟",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image23.png"
+     ]
+    },
+    {
+     "text": "1. أَكُتُبُ تحتَ كلِّ خطٍّ: مستقيمٌ أو مُنحنٍ.",
+     "images": []
+    },
+    {
+     "text": "2. الخطُّ المستقيمُ لا ينحني إطلاقًا، والخطُّ المُنحنيُّ ينحني مثلَ الموجةِ أو القوسِ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "الخطُّ المستقيمُ: خطٌّ لا ينحني (مثلُ خيطٍ مشدودٍ). الخطُّ المُنحنيُّ: خطٌّ يتغيَّرُ اتجاهُهُ بانحناءٍ (مثلُ قوسِ القمرِ).",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image7.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أَرْسُمُ في الجدولِ خطًّا مستقيمًا وخطًّا مُنحنيًّا حسبَ المطلوبِ:",
+     "images": []
+    },
+    {
+     "text": "خطٌّ مستقيمٌ أُفقيٌّ",
+     "images": []
+    },
+    {
+     "text": "خطٌّ مُنحنٍ",
+     "images": []
+    },
+    {
+     "text": "خطٌّ مستقيمٌ مائلٌ",
+     "images": []
+    },
+    {
+     "text": "خطٌّ مُنحنٍ آخرُ",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُلاحِظُ الطريقَ من دارِ سلمى إلى المدرسةِ ثم أُجيبُ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image24.png"
+     ]
+    },
+    {
+     "text": "أَيُّ الطريقينِ مستقيمٌ؟ وأيُّهما مُنحنٍ؟ أَكُتُبُ الجوابَ في الجدولِ:",
+     "images": []
+    },
+    {
+     "text": "الرَّسمُ",
+     "images": []
+    },
+    {
+     "text": "الطريقُ الأخضرُ",
+     "images": []
+    },
+    {
+     "text": "الطريقُ الورديُّ",
+     "images": []
+    },
+    {
+     "text": "نوعُ المسلكِ",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "3. تحدٍّ: أَرْسُمُ بمنقلةِ الرَّسمِ (بالقدرةِ) خطًّا مستقيمًا يمرُّ بنقطتينِ أُسمِّيهما «أ» و«ب».",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "في نادي الرسمِ أنجزَ أمينُ لوحةً فيها  3 ‬ خطوطٍ مستقيمةٍ و4 خطوطٍ مُنحنيةٍ. كمُّ خطًّا في اللوحةِ كلِّها؟  3 + 4 = 7 ‬ خطوطًا.",
+     "images": []
+    }
+   ]
+  },
+  "P1-9": {
+   "intro": [
+    {
+     "text": "9",
+     "images": []
+    },
+    {
+     "text": "القطعُ النقديّةُ المتداولة",
+     "images": []
+    },
+    {
+     "text": "التصرُّفُ فيها  (5، 10، 20، 50) ‬",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image5.png"
+     ]
+    },
+    {
+     "text": "أُلاحِظُ القطعَ النقديّةَ التونسيّةَ ثم أُحسِبُ قِيَمَها:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image25.png"
+     ]
+    },
+    {
+     "text": "1. أَسمِّي كلَّ قطعةٍ بقيمتِها:  5 ‬ مي، 10 مي،  20 ‬ مي، 50 مي.",
+     "images": []
+    },
+    {
+     "text": "2. أَحسِبُ مجموعَ القطعِ الثلاثةِ الأولى:  5 + 10 + 20 = 35 ‬ مي.",
+     "images": []
+    },
+    {
+     "text": "3. أَحسِبُ مجموعَ القطعِ الأربعِ كلِّها:  5 + 10 + 20 + 50 = 85 ‬ مي.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "الدينارُ =  1000 ‬ مليم. القطعُ النقديّةُ المتداولةُ في دروسِنا: 5،  10 ‬، 20،  50 ‬ مي. لِحِسابِ مجموعٍ أُرتِّبُ القيمَ ثم أَجْمَعُ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image7.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أَحسِبُ مجموعَ كلِّ مجموعةٍ من القطعِ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image26.png"
+     ]
+    },
+    {
+     "text": "المجموعُ:  5 + 5 + 20 = 30 ‬ مي",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image27.png"
+     ]
+    },
+    {
+     "text": "المجموعُ:  10 + 10 + 50 = 70 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُكَمِّلُ الجدولَ بالقطعِ المناسبةِ:",
+     "images": []
+    },
+    {
+     "text": "المبلغُ المطلوبُ",
+     "images": []
+    },
+    {
+     "text": "القطعُ الممكنةُ",
+     "images": []
+    },
+    {
+     "text": "40 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "..........",
+     "images": []
+    },
+    {
+     "text": "60 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "..........",
+     "images": []
+    },
+    {
+     "text": "85 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "..........",
+     "images": []
+    },
+    {
+     "text": "مثالٌ:  40 = 20 + 20 ‬",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. مع أمينِ  50 ‬ مي. اشترى حلوى بـ 20 مي. كمُّ مليمًا بقِيَ معه؟  50 - 20 = 30 ‬ مي.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: أُصَوِّغُ مبلغًا بقيمتِهِ  75 ‬ مي بأكبرِ عددٍ ممكنٍ من القطعِ المختلفةِ. (اقتراحٌ: 50 + 20 + 5)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "سلمى معها ثلاثُ قطعٍ نُقديّةٍ. مجموعُ قيمتِها  80 ‬ مي، وكلُّ قطعةٍ أكبرُ من الأخرى التي تليها. ما هي القطعُ الثلاثُ؟ (اقتراحٌ: 50 + 20 + 10)",
+     "images": []
+    }
+   ]
+  },
+  "P1-10": {
+   "intro": [
+    {
+     "text": "10",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "تحديدُ المطلوب",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "ذَهَبَ أمينُ إلى السُّوقِ مع أمِّه. في السلةِ:  6 ‬ طماطماتٍ و4 برتقالاتٍ. ثمنُ السلةِ  12 ‬ دينارًا. أُريدُ مَعرفةَ عددِ الفواكهِ والخضرِ في السلةِ كلِّها.",
+     "images": []
+    },
+    {
+     "text": "1. المطلوبُ: عددُ الثمارِ في السلةِ كلِّها (وليسَ الثمنَ).",
+     "images": []
+    },
+    {
+     "text": "2. المعطيانِ المُفيدانِ:  6 ‬ و4. الثمنُ  12 ‬ دينارًا ليسَ مطلوبًا في هذا السُّؤالِ.",
+     "images": []
+    },
+    {
+     "text": "3. أَنجِزُ:  6 + 4 = 10 ‬ ثمارًا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "في صَفِّنا  14 ‬ تلميذًا يُحبُّونَ كرةَ القدمِ، و9 تلاميذَ يُحبُّونَ السباحةَ. مَرَادٌ يُريدُ مَعرفةَ: كمُّ تلميذًا يُحبُّونَ اللُّعبتينِ معًا؟",
+     "images": []
+    },
+    {
+     "text": "1. المطلوبُ: مجموعُ التلاميذِ. 2. أَنجِزُ:  14 + 9 = 23 ‬ تلميذًا.",
+     "images": []
+    }
+   ]
+  },
+  "P1-11": {
+   "intro": [
+    {
+     "text": "11",
+     "images": []
+    },
+    {
+     "text": "توظيفُ المكتسبات",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "لِإعْدادِ ملفِّ حافلاتِ المدرسةِ جُمِّعَتْ معلوماتٌ: في الحافلةِ الأولى  19 ‬ تلميذًا، وفي الثانيةِ 3 تلاميذَ أقلَّ من الأولى. كمُّ تلميذًا في الحافلةِ الثانيةِ؟  19 - 3 = 16 ‬ وكمُّ تلميذًا في الحافلتينِ معًا؟ 19 + 16 = 35",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "انطلَقَتْ حافلةٌ من الحَيِّ وعلَيها  14 ‬ راكبًا، وفي المحطةِ الأولى نَزَلَ منها 5 راكبينَ وصَعِدَ  7 ‬ راكبينَ. كمُّ راكبًا صارَ في الحافلةِ؟",
+     "images": []
+    },
+    {
+     "text": "أَنجِزُ:  14 - 5 + 7 = 16 ‬ راكبًا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image28.png"
+     ]
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image29.png"
+     ]
+    },
+    {
+     "text": "صَنَّفَ تلاميذُ الصَّفِّ مجموعتَ الطوابعِ في الجدولِ التَّالي: أُكَمِّلُ فراغاتِ الجدولِ ثم أُجيبُ:",
+     "images": []
+    },
+    {
+     "text": "المجموعةُ",
+     "images": []
+    },
+    {
+     "text": "طوابعٌ صغيرةٌ",
+     "images": []
+    },
+    {
+     "text": "طوابعٌ كبيرةٌ",
+     "images": []
+    },
+    {
+     "text": "العددُ الجُمليُّ",
+     "images": []
+    },
+    {
+     "text": "الأولى",
+     "images": []
+    },
+    {
+     "text": "26",
+     "images": []
+    },
+    {
+     "text": "49",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "الثانية",
+     "images": []
+    },
+    {
+     "text": "25",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "78",
+     "images": []
+    },
+    {
+     "text": "الثالثةُ",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "22",
+     "images": []
+    },
+    {
+     "text": "79",
+     "images": []
+    },
+    {
+     "text": "1. أَحسِبُ الفراغاتِ:  26 + 49 = 75 ‬ ، 78 - 25 = 53 ،  79 - 22 = 57 ‬.",
+     "images": []
+    },
+    {
+     "text": "2. أيُّ المجموعاتِ فيها أكبرُ عددٍ من الطوابعِ؟",
+     "images": []
+    },
+    {
+     "text": "الفترةُ الثانية",
+     "images": []
+    },
+    {
+     "text": "في هذه الفترةِ سأتعلَّمُ:",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 99: مُكمِّلُ عددٍ إلى آخر",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: تمثيلُ الوضعية بمخطط",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 99: الجمعُ والطرحُ دون زيادةٍ ولا تفكيكٍ",
+     "images": []
+    },
+    {
+     "text": "• الخطُّ المُنكسِرُ: التعرُّفُ والاستعمالُ",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: طرحُ أسئلةٍ توافقُ معطياتِ الوضعية",
+     "images": []
+    },
+    {
+     "text": "• العددُ  100 ‬: القراءةُ والكتابةُ والتمثيلُ",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: إعادةُ صوغِ الوضعية بأسلوبٍ شخصيٍّ",
+     "images": []
+    },
+    {
+     "text": "• العددُ  100 ‬: التفكيكُ والتركيبُ",
+     "images": []
+    },
+    {
+     "text": "• القطعةُ النقديّةُ  (100 مي) ‬: التصرُّفُ فيها",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: صوغُ وضعيةٍ تُناسِبُ عمليةَ جمعٍ أو طرحٍ",
+     "images": []
+    },
+    {
+     "text": "• توظيفُ المكتسبات",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image2.png"
+     ]
+    },
+    {
+     "text": "الفترةُ الثانية [F2]",
+     "images": []
+    }
+   ]
+  },
+  "P2-1": {
+   "intro": [
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 99",
+     "images": []
+    },
+    {
+     "text": "مُكمِّلُ عددٍ إلى آخر",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image30.png"
+     ]
+    },
+    {
+     "text": "صَفُّنا يحتاجُ إلى  10 ‬ مقاعدٍ مُرتَّبةٍ، وقد وُضِعَتْ 6 مقاعدٍ. كمُّ مقعدًا يَنقصُ؟",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image31.png"
+     ]
+    },
+    {
+     "text": "1. على المدرَّجِ: من  6 ‬ أَقفُزُ حتى 10:  6 → 7 → 8 → 9 → 10 ‬، أيِّ 4 قفزاتٍ.",
+     "images": []
+    },
+    {
+     "text": "2. إذن المُكمِّلُ:  6 + 4 = 10 ‬. نقولُ: مُكمِّلُ 6 إلى  10 ‬ هوَ 4.",
+     "images": []
+    },
+    {
+     "text": "3. أُكمِّلُ بالمثلِ: مُكمِّلُ  8 ‬ إلى 10 هوَ  2 ‬، ومُكمِّلُ 5 إلى  10 ‬ هوَ 5.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "مُكمِّلُ العددِ هوَ ما يَنقصُهُ ليَصِلَ إلى عددٍ آخرَ. لِإيجادِهِ أَعدُّ على المدرَّجِ أو أَطرَحُ: مُكمِّلُ  6 ‬ إلى 10 =  10 - 6 = 4 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image32.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُكمِّلُ على المدرَّجِ ثم أُكْتُبُ المُكمِّلَ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image33.png"
+     ]
+    },
+    {
+     "text": "مُكمِّلُ  12 ‬ إلى 20 هوَ  8 ‬. أُكمِّلُ وحدي: 15 إلى  20 ‬ = 5 ،  17 ‬ إلى 20 =  3 ‬.",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُكمِّلُ الأعدادَ في الجدولِ:",
+     "images": []
+    },
+    {
+     "text": "العددُ",
+     "images": []
+    },
+    {
+     "text": "مُكمِّلُهُ إلى  10 ‬",
+     "images": []
+    },
+    {
+     "text": "مُكمِّلُهُ إلى  20 ‬",
+     "images": []
+    },
+    {
+     "text": "7 ‬",
+     "images": []
+    },
+    {
+     "text": "14 ‬",
+     "images": []
+    },
+    {
+     "text": "9 ‬",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أَصِلُ بالعددِ إلى مُكمِّلِهِ: أَربِطُ كلَّ عددٍ بمُكمِّلِهِ إلى  20 ‬:",
+     "images": []
+    },
+    {
+     "text": "1.  11 ‬",
+     "images": []
+    },
+    {
+     "text": "أ.  9 ‬",
+     "images": []
+    },
+    {
+     "text": "2.  16 ‬",
+     "images": []
+    },
+    {
+     "text": "ب.  4 ‬",
+     "images": []
+    },
+    {
+     "text": "3.  13 ‬",
+     "images": []
+    },
+    {
+     "text": "ج.  7 ‬",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: رقمٌ سرِّي! مُكمِّلُهُ إلى  10 ‬ هوَ 6، ومُكمِّلُهُ إلى  20 ‬ هوَ 16. ما هو؟ (جوابٌ:  4 ‬)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "في صَفِّنا  24 ‬ مقعدًا، والحاضرونَ اليومَ 18 تلميذًا. كمُّ مقعدًا فارغًا؟ مُكمِّلُ  18 ‬ إلى 24 هوَ  24 - 18 = 6 ‬ مقاعدٍ.",
+     "images": []
+    }
+   ]
+  },
+  "P2-2": {
+   "intro": [
+    {
+     "text": "2",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "تمثيلُ الوضعية بمخطط",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "جاءتْ إلى حَفلِ المدرسةِ  15 ‬ تلميذةً و12 تلميذًا. كمُّ تلميذٍ حضرَ الحفلَ كلُّه؟",
+     "images": []
+    },
+    {
+     "text": "1. أَمثِّلُ الوضعيةَ بمخططِ الأشرطةِ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image34.png"
+     ]
+    },
+    {
+     "text": "2. الشريطُ الأطولُ يمثِّلُ عددَ التلميذاتِ ( 15 ‬) والآخِرُ عددَ التلاميذِ (12).",
+     "images": []
+    },
+    {
+     "text": "3. لِمَعرفةِ المجموعِ أَجْمَعُ:  15 + 12 = 27 ‬ تلميذًا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "في سَلَّةِ السوقِ  8 ‬ حباتِ تفاحٍ و6 حباتِ برتقالٍ. كمُّ حبةً في السلةِ؟ أُمثِّلُ بالمخططِ ثم أَحسِبُ:  8 + 6 = 14 ‬ حبةً.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image35.png"
+     ]
+    }
+   ]
+  },
+  "P2-3": {
+   "intro": [
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 99",
+     "images": []
+    },
+    {
+     "text": "الجمعُ والطرحُ دون زيادةٍ ولا تفكيكٍ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image30.png"
+     ]
+    },
+    {
+     "text": "في ورشةِ المدرسةِ  46 ‬ مكعَّبًا أحمرَ و32 مكعَّبًا أزرقَ.",
+     "images": []
+    },
+    {
+     "text": "العشرات",
+     "images": []
+    },
+    {
+     "text": "الآحاد",
+     "images": []
+    },
+    {
+     "text": "الأحمرُ",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "الأزرقُ",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "1. الجمعُ:  40 + 30 = 70 ‬ عشراتٍ و6 + 2 = 8 آحادٍ، أيِّ  78 ‬ مكعَّبًا.",
+     "images": []
+    },
+    {
+     "text": "2. الطرحُ: كمُّ مكعَّبًا أزرقَ يَنقصُ ليَساوي عددَ الأحمرِ؟  46 - 32 = 14 ‬.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "-",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "أُحاذي المنازلَ دائمًا: الآحادُ تحتَ الآحادِ والعشراتُ تحتَ العشراتِ. أَبدَأُ بالآحادِ في الجمعِ والطرحِ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image32.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُنْجِزُ العملياتِ ثم أُلوِّنُ كلَّ عمليةٍ: أزرقَ إن كانت جمعًا، وورديًّا إن كانت طرحًا:",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أَربِطُ كلَّ عمليةٍ بناتجِها:",
+     "images": []
+    },
+    {
+     "text": "1.  41 + 35 ‬",
+     "images": []
+    },
+    {
+     "text": "أ.  24 ‬",
+     "images": []
+    },
+    {
+     "text": "2.  76 - 52 ‬",
+     "images": []
+    },
+    {
+     "text": "ب.  87 ‬",
+     "images": []
+    },
+    {
+     "text": "3.  63 + 24 ‬",
+     "images": []
+    },
+    {
+     "text": "ج.  76 ‬",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أُكَمِّلُ جدولَ العملياتِ:",
+     "images": []
+    },
+    {
+     "text": "العمليةُ",
+     "images": []
+    },
+    {
+     "text": "43 + 25 ‬",
+     "images": []
+    },
+    {
+     "text": "87 - 43 ‬",
+     "images": []
+    },
+    {
+     "text": "52 + 36 ‬",
+     "images": []
+    },
+    {
+     "text": "98 - 65 ‬",
+     "images": []
+    },
+    {
+     "text": "الناتجُ",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: أُكَمِّلُ بالعددِ الناقصِ:  45 + .. = 79 ‬ ، .. - 23 = 54",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "مَكتَبةُ الصَّفِّ فيها  64 ‬ قصةً، استُعِيرَ منها 21 قصةً. كمُّ قصةً بقيتْ؟  64 - 21 = 43 ‬ قصةً.",
+     "images": []
+    }
+   ]
+  },
+  "P2-4": {
+   "intro": [
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "الخطُّ المُنكسِرُ",
+     "images": []
+    },
+    {
+     "text": "التعرُّفُ والاستعمالُ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image30.png"
+     ]
+    },
+    {
+     "text": "أُلاحِظُ الخطوطَ ثم أُجيبُ: أيُّها خطٌّ مُنكسِرٌ؟",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image36.png"
+     ]
+    },
+    {
+     "text": "1. الخطُّ المُنكسِرُ: خطٌّ مكوَّنٌ من قطعٍ مستقيمةٍ متَّصلةٍ تتغيَّرُ اتجاهُها بشكلٍ حادٍّ.",
+     "images": []
+    },
+    {
+     "text": "2. أَعُدُّ القطعَ المستقيمةَ في الخطِّ المرسومِ:  5 ‬ قطعٍ، وعددُ الزوايا: 4 زوايا.",
+     "images": []
+    },
+    {
+     "text": "3. أُلاحِظُ أنَّ كلَّ زاويةٍ بينَ قطعتينِ متجاورتين.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "الخطُّ المُنكسِرُ يتكوَّنُ من قطعٍ مستقيمةٍ متتاليةٍ غيرِ متَّجهةٍ في الاتجاهِ نفسِهِ. الزاويةُ هيَ منطقةُ تغيُّرِ الاتجاهِ بينَ قطعتينِ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image32.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أَعُدُّ قطعَ كلِّ خطٍّ مُنكسِرٍ وزواياَهُ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image37.png"
+     ]
+    },
+    {
+     "text": "عددُ القطعِ:  6 ‬ قطعٍ، وعددُ الزوايا: 5 زوايا.",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُميِّزُ المُنكسِرَ المغلقَ: أُلاحِظُ الشكلَ ثم أُجيبُ: هل هوَ خطٌّ مُنكسِرٌ مغلقٌ؟",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image38.png"
+     ]
+    },
+    {
+     "text": "نعم؛ لأنَّهُ مكوَّنٌ من قطعٍ مستقيمةٍ وانطبَقَ آخرُهُ على أوَّلِهِ.",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أَرْسُمُ خطًّا مُنكسِرًا من  4 ‬ قطعٍ في الفراغِ، ثم أَعُدُّ زوايايَ (3 زوايا).",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: خطٌّ مُنكسِرٌ فيه  8 ‬ قطعٍ. كمُّ زاويةً فيه؟ 7 زوايا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "سلكُ الهوائيِّ في بيتِ جدّي مُنكسِرٌ من  3 ‬ قطعٍ. رسمتُهُ في دفتري وأحصيتُ زوايايَه: 2 زاويتين.",
+     "images": []
+    }
+   ]
+  },
+  "P2-5": {
+   "intro": [
+    {
+     "text": "5",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "طرحُ أسئلةٍ توافقُ معطياتِ الوضعية",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "نظَّمَتْ مدرستُنا رحلةً: صعدَتْ الحافلةُ الأولى بـ 26 ‬ تلميذًا، والثانيةُ بـ14 تلميذًا، ومرافِقُ الرحلةِ  5 ‬ مُعلِّمينَ.",
+     "images": []
+    },
+    {
+     "text": "1. أَطرَحُ أسئلةً توافقُ المعطياتِ:",
+     "images": []
+    },
+    {
+     "text": "السؤالُ 1: كمُّ تلميذٍ في الحافلتينِ معًا؟  26 + 14 = 40 ‬.",
+     "images": []
+    },
+    {
+     "text": "السؤالُ 2: كمُّ شخصًا شاركَ في الرحلةِ مع المُعلِّمينَ؟  40 + 5 = 45 ‬.",
+     "images": []
+    },
+    {
+     "text": "2. أُلاحِظُ أنَّ كلَّ سؤالٍ يحتاجُ إلى معطياتٍ مُحدَّدةٍ من نصِّ الوضعية.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "في مكتبةِ الصَّفِّ  32 ‬ كتابًا بالعربيّةِ و21 كتابًا بالفرنسيّةِ. أَطرَحُ سؤالًا مناسبًا ثم أُجيبُ: كمُّ كتابًا في المكتبةِ كلِّها؟  32 + 21 = 53 ‬ كتابًا.",
+     "images": []
+    },
+    {
+     "text": "سؤالٌ آخرُ ممكنٌ: كمُّ كتابًا عربيًّا أكثرَ من الفرنسيّةِ؟  32 - 21 = 11 ‬ كتابًا.",
+     "images": []
+    }
+   ]
+  },
+  "P2-6": {
+   "intro": [
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "العددُ ⟦100⟧",
+     "images": []
+    },
+    {
+     "text": "القراءةُ والكتابةُ والتمثيلُ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image30.png"
+     ]
+    },
+    {
+     "text": "أُعدُّ العشراتِ حتى أَصِلَ إلى مئةٍ: عشرةٌ، عشرونَ، ثلاثونَ... تسعونَ، مئةٌ!",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image39.png"
+     ]
+    },
+    {
+     "text": "1. مئةٌ =  10 ‬ عشراتٍ = 100 وحداتٍ.",
+     "images": []
+    },
+    {
+     "text": "2. أَكُتُبُ العددَ بالأرقامِ:  100 ‬، وبالحروفِ: مئةٌ.",
+     "images": []
+    },
+    {
+     "text": "3. أُلاحِظُ: مئةٌ ثلاثةُ أرقامَ، ورقمُ المئاتِ فيه  1 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "المئةُ أصغرُ مئةٍ ( 100 ‬). أكتبُهُ: 100. أقرأُهُ: مئةٌ. أُمثِّلُهُ بعشرِ شرائطَ عشراتٍ كاملةً.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image32.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُلوِّنُ كلَّ شريطٍ كاملٍ بلونٍ، ثم أُجيبُ: كمُّ شريطًا يَصِلُ إلى مئةٍ؟  10 ‬ شرائطَ.",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُكَمِّلُ:  60 + 40 = 100 ‬ ، 30 + .. = 100 ،  .. + 70 = 100 ‬",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أَربِطُ كلَّ تمثيلٍ بالعددِ المناسبِ:",
+     "images": []
+    },
+    {
+     "text": "1.  9 ‬ عشراتٍ",
+     "images": []
+    },
+    {
+     "text": "أ.  50 ‬",
+     "images": []
+    },
+    {
+     "text": "2.  10 ‬ عشراتٍ",
+     "images": []
+    },
+    {
+     "text": "ب.  90 ‬",
+     "images": []
+    },
+    {
+     "text": "3.  5 ‬ عشراتٍ",
+     "images": []
+    },
+    {
+     "text": "ج.  100 ‬",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: عددُ العشراتِ في مئةٍ هوَ  10 ‬. كمُّ عشرةً في مئتينِ؟ (20 عشرةً)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "بَلَغَ عددُ القُراءِ في المكتَبةِ المدرسيّةِ  100 ‬ قارئًا هذا الشَّهرَ. صَنَعَنا لوحةَ الشَّرفِ وكتبنا: مئةُ قارئٍ = 100.",
+     "images": []
+    }
+   ]
+  },
+  "P2-7": {
+   "intro": [
+    {
+     "text": "7",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "إعادةُ صوغِ الوضعية بأسلوبٍ شخصيٍّ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "الأصلُ: «في مكتَبةِ المدرسةِ  45 ‬ قصةً و23 روايةً. كمُّ كتابًا في المكتَبةِ؟»",
+     "images": []
+    },
+    {
+     "text": "1. أُعيدُ صوغَ الوضعيةِ بأسلوبي أنا: «ذهبتُ إلى مكتَبةِ حَيِّنا فرأيتُ على الرفِّ  45 ‬ قصةً ملونةً، وإلى جانبِها 23 روايةً. أُريدُ مَعرفةَ عددِ الكتبِ على الرفِّ كلِّه».",
+     "images": []
+    },
+    {
+     "text": "2. المفاهيمُ بقيتْ نفسَها (الجمعُ بينَ  45 ‬ و23) مع تغيُّرِ السياقِ.",
+     "images": []
+    },
+    {
+     "text": "3. أُنجِزُ:  45 + 23 = 68 ‬ كتابًا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "الأصلُ: «أمينُ معه  36 ‬ صورةً وأعطى 12 صورةً لصديقِهِ. كمُّ صورةً بقيتْ معه؟»",
+     "images": []
+    },
+    {
+     "text": "أُعيدُ الصوغَ: «كانتْ سلمى تجمعُ الملصقاتِ: عندها  36 ‬ ملصقًا وهبتْ 12 منها لأختِها الصغيرةِ. كمُّ ملصقًا بقِيَ؟» ثم أُنجِزُ:  36 - 12 = 24 ‬ ملصقًا.",
+     "images": []
+    }
+   ]
+  },
+  "P2-8": {
+   "intro": [
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "العددُ ⟦100⟧",
+     "images": []
+    },
+    {
+     "text": "التفكيكُ والتركيبُ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image30.png"
+     ]
+    },
+    {
+     "text": "أُفَكِّكُ مئةً إلى عشراتٍ بطرقٍ مُخَتَّلِفةٍ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image40.png"
+     ]
+    },
+    {
+     "text": "1.  7 ‬ عشراتٍ أمامي: أُكمِّلُ إلى 10 عشراتٍ بـ 3 ‬ عشراتٍ: 70 + 30 = 100.",
+     "images": []
+    },
+    {
+     "text": "2. طرقٌ أخرى:  100 = 40 + 60 ‬ ، 100 = 80 + 20 ،  100 = 10 + 90 ‬.",
+     "images": []
+    },
+    {
+     "text": "3. التركيبُ هوَ العكسُ: أَجْمَعُ الأجزاءَ لأُكوِّنَ المئةَ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "تفكيكُ  100 ‬ هوَ كتابتُهُ على شكلِ مجموعِ عددينِ: 100 = 70 + 30. ولكلِّ تفكيكٍ تركيبٌ مُقابِلٌ:  70 + 30 = 100 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image32.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُفَكِّكُ ثم أُركِّبُ: أُكَمِّلُ الجدولَ:",
+     "images": []
+    },
+    {
+     "text": "100 ‬ =",
+     "images": []
+    },
+    {
+     "text": "90 ‬ + ..",
+     "images": []
+    },
+    {
+     "text": "100 ‬ =",
+     "images": []
+    },
+    {
+     "text": "20 ‬ + ..",
+     "images": []
+    },
+    {
+     "text": "100 ‬ =",
+     "images": []
+    },
+    {
+     "text": "55 ‬ + ..",
+     "images": []
+    },
+    {
+     "text": "الناتجُ",
+     "images": []
+    },
+    {
+     "text": "الأجوبةُ:  10 ‬ ، 80 ،  45 ‬.",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أَكتُبُ ثلاثَ طرقٍ مُخَتَّلِفةٍ لتفكيكِ  100 ‬: (مثالٌ: 100 = 10 + 90)",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أَكتَشِفُ الخطأَ: كُتِبَ  100 = 60 + 50 ‬. التصحيحُ: 60 + 40 = 100 لأنَّ  60 + 50 = 110 ‬.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: أفكِّكُ  100 ‬ إلى ثلاثةِ أعدادٍ مُتساويةٍ: 100 = 50 + 25 + 25؟ لا؛ جرِّبْ:  100 = 40 + 30 + 30 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "في مَرْحَضِ المدرسةِ  100 ‬ مقعدٍ: الصفُّ الأولُ ملأَ 60 مقعدًا. كمُّ مقعدًا يَبقى للصفِّ الثاني؟  100 - 60 = 40 ‬ مقعدًا.",
+     "images": []
+    }
+   ]
+  },
+  "P2-9": {
+   "intro": [
+    {
+     "text": "9",
+     "images": []
+    },
+    {
+     "text": "القطعةُ النقديّةُ ⟦(100 مي)⟧",
+     "images": []
+    },
+    {
+     "text": "التصرُّفُ فيها",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image30.png"
+     ]
+    },
+    {
+     "text": "أُلاحِظُ القطعةَ الكبيرةَ: قيمتُها  100 ‬ مي. أَبحثُ عن بدائلَ لها:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image41.png"
+     ]
+    },
+    {
+     "text": "1. بديلٌ 1: قطعتانِ من  50 ‬ مي: 50 + 50 = 100 مي.",
+     "images": []
+    },
+    {
+     "text": "2. بديلٌ 2: خمسُ قطعَ من  20 ‬ مي: 20 + 20 + 20 + 20 + 20 = 100 مي.",
+     "images": []
+    },
+    {
+     "text": "3. أُلاحِظُ أنَّ قيمتَها نفسُها مع اختلافِ عددِ القطعِ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "قطعةُ  100 ‬ مي تُعادِلُ: قطعتينِ من 50 مي، أو خمسَ قطعَ من  20 ‬ مي، أو عشرَ قطعَ من 10 مي.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image32.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُعوِّضُ قطعةَ  100 ‬ مي بقطعٍ أُخرَ في كلِّ حالةٍ:",
+     "images": []
+    },
+    {
+     "text": "البديلُ المطلوبُ",
+     "images": []
+    },
+    {
+     "text": "قطعُ  50 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "قطعُ  20 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "قطعُ  10 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "العددُ اللازمُ",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "الأجوبةُ:  2 ‬ ، 5 ،  10 ‬.",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أَحسِبُ ثم أُقارِنُ: أيُّ المجموعتينِ تساوي قطعةَ  100 ‬ مي؟",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image42.png"
+     ]
+    },
+    {
+     "text": "المجموعةُ أ:  50 + 20 + 20 = 90 ‬ مي (أقلُّ من 100)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image43.png"
+     ]
+    },
+    {
+     "text": "المجموعةُ ب:  50 + 50 = 100 ‬ مي (تساويها)",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. سلمى معها  100 ‬ مي واشترتْ مِسطرةً بـ60 مي. كمُّ مليمًا بقِيَ؟  100 - 60 = 40 ‬ مي.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: أشتريُ بقطعةِ  100 ‬ مي حاجتينِ مختلفتينِ. ما المجموعتانِ الممكنتانِ؟ (مثالٌ: 30 +  70 ‬)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "أهبتْ لنا المدرسةُ قطعةَ  100 ‬ مي لِشراءِ أقلامَ للفَريقِ. اشترينا أقلامًا بـ70 مي. كمُّ مليمًا رَدَّتْ علينا البائعةُ؟  100 - 70 = 30 ‬ مي.",
+     "images": []
+    }
+   ]
+  },
+  "P2-10": {
+   "intro": [
+    {
+     "text": "10",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "صوغُ وضعيةٍ تُناسِبُ عمليةَ جمعٍ أو طرحٍ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "العمليةُ المُعطاةُ:  24 + 15 = 39 ‬.",
+     "images": []
+    },
+    {
+     "text": "1. أُلاحِظُ: عمليةُ جمعٍ بينَ  24 ‬ و15.",
+     "images": []
+    },
+    {
+     "text": "2. أُصوغُ وضعيةً تُناسِبُها: «في سَلَّةِ الحَديقةِ  24 ‬ حبةَ ليمونٍ و15 حبةَ برتقالٍ. كمُّ حبةً في السلةِ؟»",
+     "images": []
+    },
+    {
+     "text": "3. أتأكَّدُ: المعطيانِ  24 ‬ و15، والسؤالُ يجمعُهُما، والناتجُ  39 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "العمليةُ المُعطاةُ:  52 - 30 = 22 ‬.",
+     "images": []
+    },
+    {
+     "text": "1. أُصوغُ وضعيةً لِلطَّرحِ: «كان في ورشةِ النادي  52 ‬ قصاصةً ملونةً، استُعمِلَتْ منها 30 في تزيينِ الحائطِ. كمُّ قصاصةً بقيتْ؟»",
+     "images": []
+    },
+    {
+     "text": "2. أُصوغُ أنا وضعيةً أخرى من عندي لنفسِ العمليةِ: ........................",
+     "images": []
+    }
+   ]
+  },
+  "P2-11": {
+   "intro": [
+    {
+     "text": "11",
+     "images": []
+    },
+    {
+     "text": "توظيفُ المكتسبات",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "في مَتجرِ القرطاسيّةِ: دفترٌ بـ 800 ‬ مليمًا (أيِّ 800 مي)، وقلمٌ بـ 400 ‬ مي. لدى أمينَ قطعتانِ من 500 مي وقطعةٌ من  200 ‬ مي: 500 + 500 + 200 = 1200 مي. هل يكفيُ ما معهُ لِشراءِ الدفترِ والقلمِ معًا؟ الثمنُ:  800 + 400 = 1200 ‬ مي. نعم، يكفي بالضَّبطِ!",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "في سَاحَةِ المدرسةِ وُضِعَتْ  45 ‬ كرسيًّا لِلحفلِ، ثم أُضيفَتْ 27 كرسيًّا للضُّيوفِ. كمُّ كرسيًّا صارَ في الساحةِ؟  45 + 27 = 72 ‬ كرسيًّا.",
+     "images": []
+    },
+    {
+     "text": "وبعدَ الحفلِ نُقِلَتْ  30 ‬ كرسيًّا إلى القاعةِ. كمُّ كرسيًّا بقِيَ في الساحةِ؟ 72 - 30 = 42 كرسيًّا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image29.png"
+     ]
+    },
+    {
+     "text": "حضَرَتْ سلمى عصيرًا من  12 ‬ ليمونةً لمَهرجانِ الربيعِ، وحضَرَ أمينُ عصيرًا من 9 ليموناتٍ. كمُّ ليمونةً استُعمِلَتْ كلُّها؟  12 + 9 = 21 ‬ ليمونةً.",
+     "images": []
+    },
+    {
+     "text": "وقد بقِيَ من العصيرِ كأسانِ فقط! كمُّ ليمونةً يُحتاجُ لإعدادِ كأسينِ آخرَينِ إذا كانتْ كلُّ كأسٍ بـ 3 ‬ ليموناتٍ؟ 3 + 3 = 6 ليموناتٍ.",
+     "images": []
+    },
+    {
+     "text": "الفترةُ الثالثة",
+     "images": []
+    },
+    {
+     "text": "في هذه الفترةِ سأتعلَّمُ:",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 199: القراءةُ والكتابةُ والتمثيلُ",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: إنجازُ أسئلةٍ توافقُ معطياتِ الوضعية",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 199: التفكيكُ والتركيبُ",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: صوغُ الإجابةِ اللفظيّةِ المناسبةِ",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 199: المقارنةُ والترتيبُ",
+     "images": []
+    },
+    {
+     "text": "• الخطُّ المُنكسِرُ: الرَّسمُ والتوظيفُ",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: تحديدُ العلاقةِ بينِ خاصّياتِ المفاهيم",
+     "images": []
+    },
+    {
+     "text": "• القطعُ النقديّةُ المتداولة: التصرُّفُ في القطعِ النقديّةِ (5، 10، 20، 50، 100)",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 199: الجمعُ بالاحتفاظ",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: تحديدُ المطلوب",
+     "images": []
+    },
+    {
+     "text": "• توظيفُ المكتسبات",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image28.png"
+     ]
+    },
+    {
+     "text": "الفترةُ الثالثة [F3]",
+     "images": []
+    }
+   ]
+  },
+  "P3-1": {
+   "intro": [
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 199",
+     "images": []
+    },
+    {
+     "text": "القراءةُ والكتابةُ والتمثيلُ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image44.png"
+     ]
+    },
+    {
+     "text": "في مَكتَبةِ الحَيِّ صندوقٌ كبيرٌ فيه  134 ‬ كتابًا. أُحلِّلُ هذا العددَ:",
+     "images": []
+    },
+    {
+     "text": "العددُ",
+     "images": []
+    },
+    {
+     "text": "المئاتُ",
+     "images": []
+    },
+    {
+     "text": "العشراتُ",
+     "images": []
+    },
+    {
+     "text": "الآحادُ",
+     "images": []
+    },
+    {
+     "text": "134",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "1. أَقْرَأُ: مئةٌ وأربعٌ وثلاثونَ. أَكُتُبُ بالحروفِ: مئةٌ وأربعةٌ وثلاثونَ... انتباهٌ: «أربعٌ وثلاثونَ» أيِّ  34 ‬.",
+     "images": []
+    },
+    {
+     "text": "2. التمثيلُ:  1 ‬ مئةٌ و3 عشراتٍ و 4 ‬ آحادٍ: 134 = 100 + 30 + 4.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image45.png"
+     ]
+    },
+    {
+     "text": "3. أُلاحِظُ أنَّ رقمَ المئاتِ يُكْتَبُ أولًا على اليسارِ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "العددُ من  100 ‬ إلى 199: أَقْرَأُ «مئةٌ» ثم أَقْرَأُ ما بعدها. مثالٌ:  147 ‬ = مئةٌ وسبعةٌ وأربعونَ = 100 + 40 + 7.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image46.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُحلِّلُ ثم أُكَمِّلُ:  152 = 100 + .. + 2 ‬ ، 168 = 100 + 60 + .. ،  190 = .. + 90 + 0 ‬",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أَكْتُبُ بالأرقامِ: مئةٌ وخمسةٌ وثلاثونَ =  135 ‬ ، مئةٌ وتسعةٌ = 109 ، مئةٌ وستونَ =  160 ‬.",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أُمثِّلُ كلَّ عددٍ بعشراتٍ وآحادٍ ثم أُكَمِّلُ الجدولَ:",
+     "images": []
+    },
+    {
+     "text": "العددُ",
+     "images": []
+    },
+    {
+     "text": "126 ‬",
+     "images": []
+    },
+    {
+     "text": "143 ‬",
+     "images": []
+    },
+    {
+     "text": "118 ‬",
+     "images": []
+    },
+    {
+     "text": "191 ‬",
+     "images": []
+    },
+    {
+     "text": "عددُ العشراتِ",
+     "images": []
+    },
+    {
+     "text": "عددُ الآحادِ",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: عددٌ مئتُهُ  1 ‬ وعشراتُهُ 9 وآحادُهُ  0 ‬. ما هو؟ (190) وما العددُ الذي يليه مباشرةً؟ ( 191 ‬)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "عدَّتْ سلمى صفحاتِ كتابِها:  156 ‬ صفحةً. أُكْتُبُ هذا العددَ بالحروفِ: مئةٌ وستةٌ وخمسونَ، وبالتفكيكِ: 156 = 100 + 50 + 6.",
+     "images": []
+    }
+   ]
+  },
+  "P3-2": {
+   "intro": [
+    {
+     "text": "2",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "إنجازُ أسئلةٍ توافقُ معطياتِ الوضعية",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "نظَّمَتِ المكتَبةُ المدرسيّةُ أسبوعَ القراءةِ: قُرِئَتْ  125 ‬ قصةً بالعربيّةِ، و112 قصةً بالفرنسيّةِ، وشاركَ فيها  58 ‬ تلميذًا.",
+     "images": []
+    },
+    {
+     "text": "1. أُنجِزُ أسئلةً توافقُ المعطياتِ:",
+     "images": []
+    },
+    {
+     "text": "السؤالُ 1: كمُّ قصةً قُرِئَتْ باللُّغتينِ معًا؟  125 + 112 = 237 ‬... انتباهٌ! هذا الجمعُ فيه احتفاظٌ سنتعلَّمُهُ لاحقًا؛ مُمكِنٌ أيضًا سؤالٌ آخرُ أبسَطُ:",
+     "images": []
+    },
+    {
+     "text": "السؤالُ 2: كمُّ تلميذًا يَنقصُ حتى نَصِلَ إلى  60 ‬ مشاركًا؟ 60 - 58 = 2 تلميذينِ.",
+     "images": []
+    },
+    {
+     "text": "2. أُلاحِظُ أنَّ السؤالَ الجيِّدَ يُناسِبُ المعطياتِ والمكتسَباتِ معًا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "جمعَتِ الخيريةُ المدرسيّةُ  186 ‬ كتابًا في حَملةِ التبرُّعِ، منها 85 كتابًا للأطفالِ الصِّغارِ. أُنجِزُ سؤالًا: كمُّ كتابًا لِلفئةِ الأخرى؟  186 - 85 = 101 ‬ كتابًا.",
+     "images": []
+    }
+   ]
+  },
+  "P3-3": {
+   "intro": [
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 199",
+     "images": []
+    },
+    {
+     "text": "التفكيكُ والتركيبُ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image44.png"
+     ]
+    },
+    {
+     "text": "أُفَكِّكُ العددَ  145 ‬ بمساعدةِ التمثيلِ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image47.png"
+     ]
+    },
+    {
+     "text": "1.  145 = 100 + 40 + 5 ‬ (مئةٌ وأربعُ عشراتٍ وخمسُ وحداتٍ).",
+     "images": []
+    },
+    {
+     "text": "2. طريقةٌ أخرى بالعشراتِ كلِّها:  145 = 100 + 45 ‬.",
+     "images": []
+    },
+    {
+     "text": "3. التركيبُ:  100 + 30 + 8 = 138 ‬. أَجْمَعُ المئاتِ ثم العشراتِ ثم الآحادَ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "تفكيكُ العددِ من  100 ‬ إلى 199: أَفْصِلُ المئةَ ثم العشراتِ ثم الآحادَ:  173 = 100 + 70 + 3 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image46.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُفَكِّكُ:  163 = .. + 60 + 3 ‬ ، 117 = 100 + .. + 7 ،  188 = .. + 80 + .. ‬",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُركِّبُ:  100 + 20 + 9 = .. ‬ ، 100 + 85 = .. ،  140 + 6 = .. ‬",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أُكَمِّلُ الجدولَ:",
+     "images": []
+    },
+    {
+     "text": "العددُ",
+     "images": []
+    },
+    {
+     "text": "المئةُ",
+     "images": []
+    },
+    {
+     "text": "العشراتُ",
+     "images": []
+    },
+    {
+     "text": "الآحادُ",
+     "images": []
+    },
+    {
+     "text": "129 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "156 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "194 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: ما العددُ الذي تفكيكُهُ  100 + 7 ‬؟ (107) وما العددُ الذي تفكيكُهُ  100 + 90 ‬؟ (190)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "كتابُ القصصِ الجديدِ فيه  128 ‬ صفحةً. أَكْتُبُ تفكيكَهُ: 128 = 100 + 20 + 8، ثم أُكْتُبُهُ بالحروفِ: مئةٌ وثمانيةٌ وعشرونَ.",
+     "images": []
+    }
+   ]
+  },
+  "P3-4": {
+   "intro": [
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "صوغُ الإجابةِ اللفظيّةِ المناسبةِ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "في نادي الرسمِ  34 ‬ قلمًا ملوَّنًا في العلبةِ الكبيرةِ و25 قلمًا في الصغيرةِ. المطلوبُ: عددُ الأقلامِ كلِّها.",
+     "images": []
+    },
+    {
+     "text": "1. أُنجِزُ العمليةَ:  34 + 25 = 59 ‬.",
+     "images": []
+    },
+    {
+     "text": "2. أُصوغُ الإجابةَ اللفظيّةَ الكاملةَ: «عددُ الأقلامِ في العلبتينِ معًا ⟩59 قلمًا».",
+     "images": []
+    },
+    {
+     "text": "3. أُلاحِظُ أنَّ الإجابةَ اللفظيّةَ تذكُرُ: ماذا حسبنا؟ وكمَ المقدارُ؟ وبأيِّ وحدةٍ؟",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "كان في حَوضِ الأسماكِ  47 ‬ سمكةً، أُضيفَ إليها 32 سمكةً جديدةً.",
+     "images": []
+    },
+    {
+     "text": "1. العمليةُ:  47 + 32 = 79 ‬.",
+     "images": []
+    },
+    {
+     "text": "2. أُصوغُ أنا الإجابةَ: «.................. سمكةً في الحوضِ الآن». (مئةٌ...) لا: «تسعةٌ وسبعونَ سمكةً»).",
+     "images": []
+    },
+    {
+     "text": "3. أُكَرِّرُ التدريبَ مع وضعيةِ الطيورِ: كان  66 ‬ عصفورًا وغادَرَ 24 عصفورًا:  66 - 24 = 42 ‬؛ الإجابةُ: «بقِيَ في الحديقةِ اثنانِ وأربعونَ عصفورًا».",
+     "images": []
+    }
+   ]
+  },
+  "P3-5": {
+   "intro": [
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 199",
+     "images": []
+    },
+    {
+     "text": "المقارنةُ والترتيبُ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image44.png"
+     ]
+    },
+    {
+     "text": "في سَباقِ القراءةِ: قرأَ أمينُ  118 ‬ صفحةً، وسلمى 131 صفحةً، ومَرادُ  105 ‬ صفحةً. مَن الَّذي قرأَ أكثرَ؟",
+     "images": []
+    },
+    {
+     "text": "1. أُقارِنُ مئةً بمئةٍ أولًا: كلُّها فيها  1 ‬ مئةٍ.",
+     "images": []
+    },
+    {
+     "text": "2. ثم أُقارِنُ العشراتِ:  3 ‬ عشراتٍ (سلمى) أكثرُ من 1 (أمين) و 0 ‬ (مَراد).",
+     "images": []
+    },
+    {
+     "text": "3. الترتيبُ من الأصغرِ إلى الأكبرِ:  105 < 118 < 131 ‬. الفائزةُ سلمى!",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "لِمُقارَنةِ عددينِ من  100 ‬ إلى 199: أُقارِنُ المئاتَ أولًا، فإنْ تساوتْ قارنتُ العشراتِ، فإنْ تساوتْ قارنتُ الآحادَ. الرموزُ:  < ‬ أصغرُ من، > أكبرُ من.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image46.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُقارِنُ بـ  > ‬ أو <:  123 .. 132 ‬ ، 199 .. 198 ،  140 .. 104 ‬ ، 111 .. 110",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُرتِّبُ تصاعديًّا (من الأصغرِ إلى الأكبرِ):  175 ‬ ، 157 ،  171 ‬ ، 150",
+     "images": []
+    },
+    {
+     "text": "الترتيبُ:  150 < 157 < 171 < 175 ‬.",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أُرتِّبُ تنازليًّا:  102 ‬ ، 120 ،  112 ‬ ، 121",
+     "images": []
+    },
+    {
+     "text": "الترتيبُ:  121 > 120 > 112 > 102 ‬.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: أُكَوِّنُ بِالأرقامِ  1، 5، 9 ‬ عددًا من 100 إلى  199 ‬ (مئةٌ ثم رقمُهما الآخرَينِ مرَّتينِ): الأكبرُ 195 والأصغرُ  159 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "في السباقِ الرياضيِّ: سجَّلَ الفريقُ الأحمرُ  146 ‬ نقطةً، والأزرقُ 164 نقطةً، والأخضرُ  140 ‬ نقطةً. أُرتِّبُ الفرقَ من الأكثرِ نقاطًا: الأزرقُ ثم الأحمرُ ثم الأخضرُ.",
+     "images": []
+    }
+   ]
+  },
+  "P3-6": {
+   "intro": [
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "الخطُّ المُنكسِرُ",
+     "images": []
+    },
+    {
+     "text": "الرَّسمُ والتوظيفُ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image44.png"
+     ]
+    },
+    {
+     "text": "خريطةُ مسارِ الرحلةِ المدرسيّةِ خطٌّ مُنكسِرٌ: أُلاحِظُ ثم أُنجِزُ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image37.png"
+     ]
+    },
+    {
+     "text": "1. أَعُدُّ القطعَ:  6 ‬ قطعٍ مستقيمةٍ.",
+     "images": []
+    },
+    {
+     "text": "2. أَرْسُمُ نقاطًا عندَ كلِّ تغيُّرِ اتجاهٍ ثم أُسمِّيها: أ، ب، ج، د...",
+     "images": []
+    },
+    {
+     "text": "3. أُلاحِظُ أنَّ المسارَ المغلقَ (مثلُ محيطِ الساحةِ) خطٌّ مُنكسِرٌ مغلقٌ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "لِرسمِ خطٍّ مُنكسِرٍ: أَوضَعُ نقاطًا، ثم أَصِلُ بينَها بخطوطٍ مستقيمةٍ متَّصلةٍ، مُغيِّرًا الاتجاهَ عندَ كلِّ نقطةٍ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image46.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أَرْسُمُ خطًّا مُنكسِرًا مفتوحًا من  4 ‬ قطعٍ، وآخَرَ مغلقًا من 5 قطعٍ، ثم أَعُدُّ زوايا كلٍّ منهما ( 3 ‬ و5).",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُكَمِّلُ الشكلَ: الشكلُ التَّالي خطٌّ مُنكسِرٌ ناقصٌ قطعةً واحدةً؛ أَرْسُمُ القطعةَ الناقصةَ ليُغلَقَ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image36.png"
+     ]
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. توظيفٌ: أَرْسُمُ على شبكةِ المربَّعاتِ مسارَ التنقُّلِ من البيتِ إلى المدرسةِ بخطٍّ مُنكسِرٍ من  5 ‬ قطعٍ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image48.png"
+     ]
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "مِرْسَمُ الحدائقِ صَمَّمَ ممرًّا مُنكسِرًا في حديقةِ المدرسةِ من  6 ‬ قطعٍ مستقيمةٍ. كمُّ زاويةً في الممرِّ؟ 5 زوايا.",
+     "images": []
+    }
+   ]
+  },
+  "P3-7": {
+   "intro": [
+    {
+     "text": "7",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "تحديدُ العلاقةِ بينِ خاصّياتِ المفاهيم",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "أُلاحِظُ وآخذُ في الاعتبارِ خُصوصيّاتِ كلِّ مفهومٍ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image49.png"
+     ]
+    },
+    {
+     "text": "1. خاصّيّةُ المثلثِ:  3 ‬ أضلاعٌ و3 رؤوسٍ. خاصّيّةُ المربَّعِ:  4 ‬ أضلاعٌ مُتساويةٌ. الخاصّيّةُ المشتركةُ بينَ الثلاثةِ الأولى: كلُّها مضلَّعاتٌ (خطٌّ مُنكسِرٌ مغلقٌ).",
+     "images": []
+    },
+    {
+     "text": "2. الدائرةُ ليستْ مضلَّعًا: ليسَ فيها أضلاعٌ مستقيمةٌ ولا رؤوسٌ.",
+     "images": []
+    },
+    {
+     "text": "3. العلاقةُ: كلُّ مضلَّعٍ عددُ أضلاعِهِ = عددُ رؤوسِهِ. أتحقَّقُ: الخماسيُّ  5 ‬ و5.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "عددٌ تفكيكُهُ  100 + 50 + 3 ‬: خاصّيّتُهُ: فيه 5 عشراتٍ و 3 ‬ آحادٍ. العلاقةُ بينَ التفكيكِ والمقارنةِ: هوَ أكبرُ من كلِّ عددٍ عشراتُهُ أقلَّ من 5، وأصغرُ من كلِّ عددٍ عشراتُهُ أكثرُ. أُقارِنُهُ بـ 149 ‬ و160:  149 < 153 < 160 ‬.",
+     "images": []
+    }
+   ]
+  },
+  "P3-8": {
+   "intro": [
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "القطعُ النقديّةُ المتداولة",
+     "images": []
+    },
+    {
+     "text": "التصرُّفُ في القطعِ النقديّةِ  (5، 10، 20، 50، 100) ‬",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image44.png"
+     ]
+    },
+    {
+     "text": "أُحضِّرُ جَعبةَ القسمِ: فيها قطعٌ من  5 ‬، 10،  20 ‬، 50،  100 ‬ مي. أُنظِّمُها في الجدولِ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image50.png"
+     ]
+    },
+    {
+     "text": "1. المجموعُ الكلِّيُّ للقطعِ الخمسِ:  5 + 10 + 20 + 50 + 100 = 185 ‬ مي.",
+     "images": []
+    },
+    {
+     "text": "2. أُكوِّنُ مبلغًا بـ 125 ‬ مي: 100 + 20 + 5. أو:  50 + 50 + 20 + 5 ‬.",
+     "images": []
+    },
+    {
+     "text": "3. أُلاحِظُ تعدُّدَ الطرقِ للوصولِ إلى المبلغِ نفسِهِ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "لِتصرُّفٍ في القطعِ النقديّةِ: أُرتِّبُ القيمَ من الأكبرِ إلى الأصغرِ ثم أُكوِّنُ المبلغَ المطلوبَ. للصرفِ: أُعوِّضُ كلَّ قطعةٍ بقطعٍ أصغرَ مجموعُها قيمتَها.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image46.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أَحسِبُ مجموعَ كلِّ مجموعةٍ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image51.png"
+     ]
+    },
+    {
+     "text": "المجموعُ:  170 ‬ مي",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image52.png"
+     ]
+    },
+    {
+     "text": "المجموعُ:  85 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُصْرِفُ: أُعوِّضُ القطعةَ الوسطى بالطريقةِ المناسبةِ:",
+     "images": []
+    },
+    {
+     "text": "القطعةُ",
+     "images": []
+    },
+    {
+     "text": "صرفُها بقطعِ  50 ‬",
+     "images": []
+    },
+    {
+     "text": "صرفُها بقطعِ  20 ‬",
+     "images": []
+    },
+    {
+     "text": "صرفُها بقطعِ  10 ‬",
+     "images": []
+    },
+    {
+     "text": "100 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "50 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "20 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "الأجوبةُ:  2 ‬ ، 5 ،  10 ‬ (لكلِّ صفٍّ حيثُ يُمكِنُ).",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أمينُ معه  85 ‬ مي واشترى مِمحاةً بـ15 مي. كمُّ مليمًا بقِيَ؟  85 - 15 = 70 ‬ مي.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: أُكوِّنُ أكبرَ مبلغٍ ممكنٍ بثلاثِ قطعٍ مُخَتَّلِفةٍ من:  5، 10، 20، 50، 100 ‬ (الجوابُ: 100 + 50 + 20 = 170 مي)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "جمعَ فَريقُ الخيريّةِ في صَندوقٍ واحدٍ:  100 ‬ مي و100 مي و 50 ‬ مي و20 مي. كمُّ مليمًا في الصندوقِ؟  100 + 100 + 50 + 20 = 270 ‬ مي.",
+     "images": []
+    }
+   ]
+  },
+  "P3-9": {
+   "intro": [
+    {
+     "text": "9",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 199",
+     "images": []
+    },
+    {
+     "text": "الجمعُ بالاحتفاظ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image44.png"
+     ]
+    },
+    {
+     "text": "صعدَ في الحافلةِ الأولى  58 ‬ تلميذًا، وفي الثانيةِ 37 تلميذًا. كمُّ تلميذًا في الحافلتينِ؟",
+     "images": []
+    },
+    {
+     "text": "1. أُحاذي المنازلَ ثم أَجْمَعُ الآحادَ:  8 + 7 = 15 ‬ — الناتجُ أكبرُ من 9!",
+     "images": []
+    },
+    {
+     "text": "2. أُكْتُبُ  5 ‬ في الآحادِ وأُحتَفِظُ بـ1 عشرةٍ (أُشِرُ إليها بـ 1 ‬ صغيرةٍ فوقَ العشراتِ).",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "9",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "3. أَجْمَعُ العشراتِ مع المحفوظِ:  5 + 3 + 1 = 9 ‬ عشراتٍ. الناتجُ: 95 تلميذًا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "الجمعُ بالاحتفاظِ من  100 ‬ إلى 199 نفسُ التقنيةِ: أَجْمَعُ الآحادَ، فإنْ زادتْ على  9 ‬ كتبتُ آحادَها واحتفظتُ بعشرةٍ أُضيفُها إلى العشراتِ.",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "6 + 7 = 13 ‬: أُكْتُبُ 3 وأحتَفِظُ بـ 1 ‬. ثم 2 + 4 + 1 = 7 عشراتٍ، و 1 ‬ مئةٍ. الناتجُ: 173.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image46.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُنْجِزُ بالاحتفاظِ:",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُكَمِّلُ العملياتِ العموديّةَ:",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "9",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أَكتَشِفُ الخطأَ:  138 + 27 = 155 ‬. الصوابُ: 8 + 7 = 15 نكتبُ  5 ‬ ونحتَفِظُ، ثم 3 + 2 + 1 = 6؛ الناتجُ  165 ‬.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: أكبرُ عددٍ من رقمينِ + أصغرُ عددٍ من رقمينِ بحيثُ المجموعُ  100 ‬: (مثالٌ: 99 + 1 = 100 أو  87 + 13 ‬)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "استعارَتِ المكتَبةُ  137 ‬ كتابًا جديدًا، وكانت تملكُ 48 كتابًا في الرفِّ نفسِهِ. كمُّ كتابًا في الرفِّ الآن؟  137 + 48 = 185 ‬ كتابًا.",
+     "images": []
+    }
+   ]
+  },
+  "P3-10": {
+   "intro": [
+    {
+     "text": "10",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "تحديدُ المطلوب",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "في المَخْبَزَةِ صباحًا:  125 ‬ خبزةً كبيرةً و113 خبزةً صغيرةً. بيعَ في الصَّباحِ  90 ‬ خبزةً من الكبيرةِ. المطلوبُ: كمُّ خبزةً كبيرةً بقيتْ؟",
+     "images": []
+    },
+    {
+     "text": "1. المطلوبُ فقط: الباقيُّ من الخبزِ الكبيرِ.",
+     "images": []
+    },
+    {
+     "text": "2. المعطى المُفيدُ:  125 ‬ و90. عددُ الصغيرةِ ( 113 ‬) ليسَ مطلوبًا هنا.",
+     "images": []
+    },
+    {
+     "text": "3. أُنجِزُ:  125 - 90 = 35 ‬ خبزةً كبيرةً.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "في مَخزَنِ الحَديقةِ المدرسيّةِ  65 ‬ زهرةً في أصصٍّ. أُريدُ مَعرفةَ عددِ الزهورِ في 9 أصُصَّ، إن كانَ في كلِّ أصيصٍ  5 ‬ زهراتٍ.",
+     "images": []
+    },
+    {
+     "text": "1. المطلوبُ: مجموعُ زهورِ الأصُصِّ التسعةِ.",
+     "images": []
+    },
+    {
+     "text": "2. أَعُدُّ بالقفزاتِ الخُمَسيّةِ على المدرَّجِ:  5، 10، 15، 20، 25، 30، 35، 40، 45 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image53.png"
+     ]
+    },
+    {
+     "text": "3. الإجابةُ اللفظيّةُ: «في الأصُصِّ التسعةِ خمسةٌ وأربعونَ زهرةً»، و 45 ‬ أصغرُ من 65 إذنْ الزهورُ الموجودةُ تكفي.",
+     "images": []
+    }
+   ]
+  },
+  "P3-11": {
+   "intro": [
+    {
+     "text": "11",
+     "images": []
+    },
+    {
+     "text": "توظيفُ المكتسبات",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "في نادي المسرحِ المدرسيِّ:  145 ‬ تذكرةً لِليلةِ الافتتاحِ، وبيعتْ 120 تذكرةً. كمُّ تذكرةً بقيتْ؟  145 - 120 = 25 ‬ تذكرةً.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "سافرَتْ رحلةٌ مدرسيّةٌ: في الحافلةِ الأولى  58 ‬ تلميذًا، وفي الثانيةِ 46 تلميذًا. كمُّ تلميذًا في الرحلةِ كلِّها؟",
+     "images": []
+    },
+    {
+     "text": "أُنجِزُ بالاحتفاظِ:  8 + 6 = 14 ‬ فأكتبُ 4 وأحتَفِظُ بـ 1 ‬، ثم 5 + 4 + 1 = 10 عشراتٍ أيِّ مئةٍ. الناتجُ:  58 + 46 = 104 ‬ تلميذًا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image29.png"
+     ]
+    },
+    {
+     "text": "في مَزرعةِ جدّي  115 ‬ شجرةَ زيتونٍ و84 شجرةَ لوزٍ. كمُّ شجرةً في المزرعةِ كلِّها؟",
+     "images": []
+    },
+    {
+     "text": "أُنجِزُ بالاحتفاظِ:  5 + 4 = 9 ‬ آحادًا، ثم 10 + 8 + 1 = 19 عشرةً، و 1 ‬ مئةٍ. الناتجُ: 115 + 84 = 199 شجرةً.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image2.png"
+     ]
+    },
+    {
+     "text": "الفترةُ الرابعة",
+     "images": []
+    },
+    {
+     "text": "في هذه الفترةِ سأتعلَّمُ:",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 199: الجمعُ بالاحتفاظ ومن دونِه",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: إنجازُ وضعيةٍ تتطلَّبُ حلُّها توظيفَ الجمعِ أو الطرحِ",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 199: الطرحُ دون زيادةٍ ولا تفكيكٍ",
+     "images": []
+    },
+    {
+     "text": "• المضلَّعاتُ: التعرُّفُ على المضلَّعاتِ",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: إنجازُ وضعيةٍ تتطلَّبُ حلُّها توظيفَ الجمعِ أو الطرحِ",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 199: الجمعُ والطرحُ دون زيادةٍ ولا تفكيكٍ",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 499: القراءةُ والكتابةُ والتمثيلُ",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: إنجازُ وضعيةٍ تتطلَّبُ حلُّها توظيفَ الجمعِ أو الطرحِ",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 499: التفكيكُ والتركيبُ",
+     "images": []
+    },
+    {
+     "text": "• القطعةُ النقديّةُ  (200 مي) ‬: التصرُّفُ فيها",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: إنجازُ وضعيةٍ تتطلَّبُ حلُّها توظيفُ الجمعِ أو الطرحِ والتحكُّمُ في الحلِّ",
+     "images": []
+    },
+    {
+     "text": "• توظيفُ المكتسبات",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image14.png"
+     ]
+    },
+    {
+     "text": "الفترةُ الرابعة [F4]",
+     "images": []
+    }
+   ]
+  },
+  "P4-1": {
+   "intro": [
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 199",
+     "images": []
+    },
+    {
+     "text": "الجمعُ بالاحتفاظ ومن دونِه",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image54.png"
+     ]
+    },
+    {
+     "text": "مراجعةٌ وتوسيعٌ: أَجْمَعُ بالاحتفاظِ ومن دونِهِ ضمن  199 ‬:",
+     "images": []
+    },
+    {
+     "text": "1. من دونِ احتفاظٍ:  123 + 34 = 157 ‬ لأنَّ 3 + 4 = 7 أقلُّ من  10 ‬.",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "2. بالاحتفاظِ:  145 + 38 = 183 ‬ لأنَّ 5 + 8 = 13 أكبرُ من  9 ‬: أُكْتُبُ 3 وأحتَفِظُ بـ 1 ‬.",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image55.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُصنِّفُ العملياتَ ثم أُنْجِزُها: اكتبْ تحتَ كلِّ عمليةٍ (بالاحتفاظِ) أو (من دونِهِ):",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُكَمِّلُ:  134 + 28 = .. ‬ ، 157 + 36 = .. ،  169 + 25 = .. ‬",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أَكتَشِفُ الخطأَ:  146 + 38 = 174 ‬. الصوابُ: 6 + 8 = 14 نكتبُ  4 ‬ ونحتَفِظُ بـ1، ثم  4 + 3 + 1 = 8 ‬؛ الناتجُ 184.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: أكبرُ مجموعٍ من عددينِ ضمن  199 ‬: 199 + 0؟ أم  100 + 99 ‬؟ الاثنانِ 199! أُكْتُبُ مجموعًا آخرَ ممكنًا:  120 + 79 = 199 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "في رِحابِ المدرسةِ  128 ‬ شجرةً، زرعَ نادي البيئةِ 67 شجرةً جديدةً. كمُّ شجرةً في الرباطِ الآن؟  128 + 67 = 195 ‬ شجرةً.",
+     "images": []
+    }
+   ]
+  },
+  "P4-2": {
+   "intro": [
+    {
+     "text": "2",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "إنجازُ وضعيةٍ تتطلَّبُ حلُّها توظيفَ الجمعِ أو الطرحِ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "لِلعنايةِ بحديقةِ المدرسةِ أنفَقَ التلاميذُ  26 ‬ دينارًا على أدواتِ العنايةِ، و40 دينارًا على شتلاتٍ.",
+     "images": []
+    },
+    {
+     "text": "1. المطلوبُ الأولُ: مجموعُ المصروفِ. أختارُ العمليةَ: الجمعَ  26 + 40 = 66 ‬ دينارًا.",
+     "images": []
+    },
+    {
+     "text": "2. المطلوبُ الثاني: كمَ بقيَ من مبلغٍ كانَ  80 ‬ دينارًا؟ أختارُ: الطرحَ 80 - 66 = 14 دينارًا.",
+     "images": []
+    },
+    {
+     "text": "3. أُلاحِظُ: الجمعُ لِجمعِ المصروفِ، والطرحُ لِمَعرفةِ الباقي.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "اشترى ناديُ البيئةِ ريشةً بـ 15 ‬ دينارًا ودلْوًا بـ22 دينارًا، ومعهُ ورقةُ نقدٍ من  50 ‬ دينارًا. كمُّ دينارًا رَدَّهُ البائعُ؟",
+     "images": []
+    },
+    {
+     "text": "1. أولًا أَحسِبُ الثمنَ الكلِّيَّ:  15 + 22 = 37 ‬ دينارًا (جمعٌ).",
+     "images": []
+    },
+    {
+     "text": "2. ثم أَحسِبُ الباقيَّ:  50 - 37 = 13 ‬ دينارًا (طرحٌ).",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image14.png"
+     ]
+    }
+   ]
+  },
+  "P4-3": {
+   "intro": [
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 199",
+     "images": []
+    },
+    {
+     "text": "الطرحُ دون زيادةٍ ولا تفكيكٍ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image54.png"
+     ]
+    },
+    {
+     "text": "في مَكتَبةِ الحَيِّ  168 ‬ كتابًا على الرفِّ الكبيرِ، منها 45 كتابًا للقصصِ. كمُّ كتابًا آخرَ على الرفِّ؟",
+     "images": []
+    },
+    {
+     "text": "1. أُحاذي المنازلَ:  168 - 45 ‬.",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "-",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "2. الآحادُ:  8 - 5 = 3 ‬. العشراتُ: 60 - 40 = 20. المئاتُ تبقى:  100 ‬. الناتجُ: 123 كتابًا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "الطرحُ من  100 ‬ إلى 199 من دونِ تفكيكٍ: أَطرَحُ الآحادَ من الآحادِ والعشراتَ من العشراتِ، والمئةُ تبقى كما هيَ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image55.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُنْجِزُ من دونِ تفكيكٍ:",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُكَمِّلُ العملياتَ العموديّةَ:",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "9",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "-",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "-",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "-",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أُكَمِّلُ الجدولَ:",
+     "images": []
+    },
+    {
+     "text": "189 - 65 ‬",
+     "images": []
+    },
+    {
+     "text": "176 - 52 ‬",
+     "images": []
+    },
+    {
+     "text": "198 - 74 ‬",
+     "images": []
+    },
+    {
+     "text": "155 - 31 ‬",
+     "images": []
+    },
+    {
+     "text": "الناتجُ",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: ما العددُ الذي إذا طَرَحتَ منهُ  53 ‬ صارَ 125؟  125 + 53 = 178 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "كُتِبَ في لافتةِ الحَفلِ:  195 ‬ مقعدًا. مُهِّدَتْ منها 72 مقعدًا للضُّيوفِ. كمُّ مقعدًا بقِيَ للتلاميذِ؟  195 - 72 = 123 ‬ مقعدًا.",
+     "images": []
+    }
+   ]
+  },
+  "P4-4": {
+   "intro": [
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "المضلَّعاتُ",
+     "images": []
+    },
+    {
+     "text": "التعرُّفُ على المضلَّعاتِ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image54.png"
+     ]
+    },
+    {
+     "text": "أُلاحِظُ الأشكالَ ثم أُصنِّفُها: أيُّها مضلَّعٌ وأيُّها ليسَ مضلَّعًا؟",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image56.png"
+     ]
+    },
+    {
+     "text": "1. المضلَّعُ: شكلٌ مغلقٌ حُدودُهُ قطعٌ مستقيمةٌ (خطٌّ مُنكسِرٌ مغلقٌ).",
+     "images": []
+    },
+    {
+     "text": "2. المثلثُ  3 ‬ أضلاعٍ، والمربَّعُ 4، والخماسيُّ  5 ‬ أضلاعٍ: كلُّها مضلَّعاتٌ.",
+     "images": []
+    },
+    {
+     "text": "3. الدائرةُ والشكلُ المُنحنيُّ ليسا مضلَّعينِ: حُدودُهُما مُنحنيةٌ لا قطعٌ مستقيمةٌ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "المضلَّعُ شكلٌ مغلقٌ حُدودُهُ خطٌّ مُنكسِرٌ مغلقٌ. عددُ أضلاعِهِ = عددُ رؤوسِهِ. نُسمِّيهِ بحسبِ عددِ أضلاعِهِ: مثلثٌ ( 3 ‬)، رُباعيٌّ (4)، خماسيٌّ ( 5 ‬)، سُداسيٌّ (6).",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image55.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُلوِّنُ بعلامةٍ تحتَ كلِّ شكلٍ: مضلَّعٌ أم ليسَ مضلَّعًا؟",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image57.png"
+     ]
+    },
+    {
+     "text": "السُّداسيُّ مضلَّعٌ، والشكلُ المُنحنيُّ ليسَ مضلَّعًا، والمثلثُ مضلَّعٌ.",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أَعُدُّ الأضلاعَ والرؤوسَ ثم أُكَمِّلُ الجدولَ:",
+     "images": []
+    },
+    {
+     "text": "الشكلُ",
+     "images": []
+    },
+    {
+     "text": "عددُ الأضلاعِ",
+     "images": []
+    },
+    {
+     "text": "عددُ الرؤوسِ",
+     "images": []
+    },
+    {
+     "text": "الاسمُ",
+     "images": []
+    },
+    {
+     "text": "الأولُ",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "الثانيُ",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "3. تحدٍّ: أَرْسُمُ مضلَّعًا من  6 ‬ أضلاعٍ (سُداسيًّا) في الفراغِ، ثم أَعُدُّ رؤوسَهُ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "قُطْعَةُ الشِّبسِ (البسكويتِ) على شكلِ مضلَّعٍ من  4 ‬ أضلاعٍ. ما اسمُ هذا المضلَّعِ؟ رُباعيُّ الأضلاعِ. كمَ رأسًا فيه؟ 4 رؤوسٍ.",
+     "images": []
+    }
+   ]
+  },
+  "P4-5": {
+   "intro": [
+    {
+     "text": "5",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "إنجازُ وضعيةٍ تتطلَّبُ حلُّها توظيفَ الجمعِ أو الطرحِ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "خرجَتْ عائلةٌ في نُزْهةٍ إلى مُحميّةٍ طبيعيّةٍ تبعدُ عن مدينتِها  185 ‬ كيلومترًا. توقَّفوا في مَقْهى بعدَ 57 كيلومترًا.",
+     "images": []
+    },
+    {
+     "text": "1. المطلوبُ الأول: كمَ كيلومترًا بقِيَ حتى المحميّةِ؟ لِلطَّرحِ  185 - 57 ‬ نحتاجُ إلى تفكيكٍ سنتعلَّمُهُ في الفترةِ القادمةِ؛ نُقَدِّرُ الآنَ بالعشراتِ: بما أنَّ 57 أقربُ إلى  60 ‬ فالباقيُّ قريبٌ من 185 - 60 = 125 كيلومترًا.",
+     "images": []
+    },
+    {
+     "text": "2. المطلوبُ الثاني: المسافةُ ذهابًا وإيابًا:  185 + 185 = 370 ‬ كيلومترًا؛ هذا الناتجُ أكبرُ من 199 فأُعبِّرُ عنهُ بالحروفِ: ثلاثُمئةٌ وسبعونَ كيلومترًا.",
+     "images": []
+    },
+    {
+     "text": "3. الخلاصةُ: أختارُ العمليةَ حسبَ المطلوبِ: جمعٌ للدُّمجِ وطرحٌ للباقي.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "في مَعْرَضِ الكتابِ: أمينُ اشترى قصتينِ بـ 12 ‬ دينارًا، وسلمى اشترتْ مجلَّةً بـ7 دينارٍ. كمَ دينارًا أنفَقَا معًا؟  12 + 7 = 19 ‬ دينارًا. وأمينُ أكبرُ إنفاقًا بـ12 - 7 = 5 دنانيرَ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image3.png"
+     ]
+    }
+   ]
+  },
+  "P4-6": {
+   "intro": [
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 199",
+     "images": []
+    },
+    {
+     "text": "الجمعُ والطرحُ دون زيادةٍ ولا تفكيكٍ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image54.png"
+     ]
+    },
+    {
+     "text": "جدولُ العملياتِ: أُكَمِّلُ النقائصَ (الفراغاتِ) في الجدولِ التَّالي:",
+     "images": []
+    },
+    {
+     "text": "العمليةُ",
+     "images": []
+    },
+    {
+     "text": "125 + 32 ‬",
+     "images": []
+    },
+    {
+     "text": "157 - 26 ‬",
+     "images": []
+    },
+    {
+     "text": "143 + 45 ‬",
+     "images": []
+    },
+    {
+     "text": "189 - 64 ‬",
+     "images": []
+    },
+    {
+     "text": "الناتجُ",
+     "images": []
+    },
+    {
+     "text": "1. أُنْجِزُ كلَّ عمليةٍ عموديًّا في دفتري ثم أُكْتُبُ الناتجَ:  157 ‬ ، 131 ،  188 ‬ ، 125.",
+     "images": []
+    },
+    {
+     "text": "2. أُلاحِظُ: لا احتفاظَ ولا تفكيكٍ في كلِّ العملياتِ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "أُحاذي المنازلَ أولًا: مئةٌ تحتَ مئةٍ، وعشرةٌ تحتَ عشرةٍ، ووحدةٌ تحتَ وحدةٍ، ثم أُنْجِزُ من الآحادِ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image55.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. جدولٌ مغلقٌ: أُكَمِّلُ الأعدادَ الناقصةَ:",
+     "images": []
+    },
+    {
+     "text": "العددُ الأولُ",
+     "images": []
+    },
+    {
+     "text": "العددُ الثانيُ",
+     "images": []
+    },
+    {
+     "text": "المجموعُ",
+     "images": []
+    },
+    {
+     "text": "124 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "156 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "35 ‬",
+     "images": []
+    },
+    {
+     "text": "187 ‬",
+     "images": []
+    },
+    {
+     "text": "146 ‬",
+     "images": []
+    },
+    {
+     "text": "52 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُنْجِزُ:",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "3. تحدٍّ: أُكَوِّنُ عمليةً ناتجُها  150 ‬ من دونِ احتفاظٍ ولا تفكيكٍ (مثالٌ: 125 + 25؟ لا: فيه احتفاظٌ؛ جرِّبْ  120 + 30 ‬ أو 185 - 35).",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "في الرِّحلةِ المدرسيّةِ  134 ‬ تلميذًا صعدوا في الباصَّ الأزرقِ و45 في الأحمرِ. كمُّ تلميذًا في الرِّحلةِ؟  134 + 45 = 179 ‬ تلميذًا. وفي العودةِ نَزَلَ 36 في المحطةِ الأولى:  179 - 36 = 143 ‬ تلميذًا.",
+     "images": []
+    }
+   ]
+  },
+  "P4-7": {
+   "intro": [
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 499",
+     "images": []
+    },
+    {
+     "text": "القراءةُ والكتابةُ والتمثيلُ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image54.png"
+     ]
+    },
+    {
+     "text": "مَعْرِضُ الحرفِ التونسيِّ عرضَ  357 ‬ عملًا يدويًّا! أُحلِّلُ هذا العددَ:",
+     "images": []
+    },
+    {
+     "text": "العددُ",
+     "images": []
+    },
+    {
+     "text": "المئاتُ",
+     "images": []
+    },
+    {
+     "text": "العشراتُ",
+     "images": []
+    },
+    {
+     "text": "الآحادُ",
+     "images": []
+    },
+    {
+     "text": "357",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "1. أَقْرَأُ: ثلاثُمئةٍ وسبعةٌ وخمسونَ. أَكْتُبُ بالتفكيكِ:  357 = 300 + 50 + 7 ‬.",
+     "images": []
+    },
+    {
+     "text": "2. أُمثِّلُ بالقطعِ النقديّةِ (كلُّ قطعةٍ كبيرةٍ =  100 ‬):",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image58.png"
+     ]
+    },
+    {
+     "text": "3. أُلاحِظُ: مئاتٌ ثلاثٌ وعشراتٌ خمسٌ وآحادٌ سبعٌ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "من  200 ‬ إلى 499: أَقْرَأُ المئاتَ (مئتانِ، ثلاثُمئةٍ، أربعُمئةٍ) ثم الباقي. مثالٌ:  428 ‬ = أربعُمئةٍ وثمانيةٌ وعشرونَ = 400 + 20 + 8.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image55.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أَكْتُبُ بالأرقامِ: ثلاثُمئةٌ وأربعةٌ وعشرونَ =  324 ‬ ، أربعُمئةٌ وتسعةٌ = 409 ، مئتانِ وستونَ =  260 ‬.",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُكَمِّلُ:  452 = .. + 50 + 2 ‬ ، 318 = 300 + .. + 8 ،  407 = .. + 7 ‬",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أُمثِّلُ كلَّ عددٍ بالقطعِ الكبيرةِ (مئات) ثم أُكْتُبُ ما يَلزمُ:",
+     "images": []
+    },
+    {
+     "text": "العددُ",
+     "images": []
+    },
+    {
+     "text": "عددُ القطعِ الكبيرةِ",
+     "images": []
+    },
+    {
+     "text": "ما بقيَ (عشراتٌ وآحادٌ)",
+     "images": []
+    },
+    {
+     "text": "386 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "415 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: أصغرُ عددٍ من ثلاثةِ أرقامَ مختلفةٍ ضمن  499 ‬ (مئةُهُ 2 أو أكثرَ):  203 ‬. وأكبرُ عددٍ: 498.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "في مَخْبَزَةِ الحَيِّ يُخْبَزُ يوميًّا نحوُ  450 ‬ خبزةً. أَكْتُبُ العددَ بالحروفِ: أربعُمئةٌ وخمسونَ، وبالتفكيكِ: 450 = 400 + 50.",
+     "images": []
+    }
+   ]
+  },
+  "P4-8": {
+   "intro": [
+    {
+     "text": "8",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "إنجازُ وضعيةٍ تتطلَّبُ حلُّها توظيفَ الجمعِ أو الطرحِ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "مَرَادٌ كتبُ عددًا: آحادُهُ  6 ‬، وعشراتُهُ 32. اقترحَ عليه أحمدُ الأعدادَ التَّالية:  263 ‬ ، 236 ،  362 ‬ ، 326 ،  262 ‬.",
+     "images": []
+    },
+    {
+     "text": "1. أُفَكِّكُ الاقتراحاتِ: عشراتٌ و 32 ‬ تعني 320! والآحادُ  6 ‬. إذاً العددُ 326.",
+     "images": []
+    },
+    {
+     "text": "2. أتحقَّقُ:  326 ‬ فيه 2 آحادٍ؟ لا: آحادُهُ  6 ‬ وعشراتُهُ 2... أُراجِعُ: العددُ الصحيحُ بحسبِ المعطياتِ: عشراتُهُ  32 ‬ أيِّ 320 + آحادُهُ  6 ‬ = 326... لكنَّ  326 ‬ عشراتُهُ المُظاهرةُ 2 فقط. الحلُّ: المعطى يقولُ «عشراتُهُ  32 ‬» أيِّ مجموعُ قيمتِها 320؛ إذاً الإجابةُ  326 ‬ مُقبولةٌ بقراءةِ القيمةِ. خلاصةُ التفكيرِ: المعطى يتحدَّثُ عن قيمةِ العشراتِ كلِّها (32 عشرةً) لا عن رقمِها فقط.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "في مُنافسةِ الحسابِ الذِّهنيِّ: مجموعُ عددينِ  450 ‬، وأحدهما 250. ما العددُ الآخرُ؟",
+     "images": []
+    },
+    {
+     "text": "1. العمليةُ المناسبةُ: الطرحُ  450 - 250 = 200 ‬.",
+     "images": []
+    },
+    {
+     "text": "2. أتحقَّقُ بالجمعِ:  250 + 200 = 450 ‬. صحيحٌ!",
+     "images": []
+    }
+   ]
+  },
+  "P4-9": {
+   "intro": [
+    {
+     "text": "9",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 499",
+     "images": []
+    },
+    {
+     "text": "التفكيكُ والتركيبُ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image54.png"
+     ]
+    },
+    {
+     "text": "أُفَكِّكُ  425 ‬ ثم أُركِّبُهُ من جديدٍ:",
+     "images": []
+    },
+    {
+     "text": "1. التفكيكُ الكاملُ:  425 = 400 + 20 + 5 ‬.",
+     "images": []
+    },
+    {
+     "text": "2. تفكيكٌ آخرُ:  425 = 400 + 25 ‬ ، أو 425 = 420 + 5.",
+     "images": []
+    },
+    {
+     "text": "3. التركيبُ:  300 + 40 + 6 = 346 ‬ ، 200 + 95 = 295.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "أُفَكِّكُ العددَ من  200 ‬ إلى 499: أَفْصِلُ المئاتَ ثم العشراتِ ثم الآحادَ:  361 = 300 + 60 + 1 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image55.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُفَكِّكُ:  472 = .. + 70 + 2 ‬ ، 308 = 300 + .. ،  450 = .. + 50 ‬",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُركِّبُ:  200 + 60 + 8 = .. ‬ ، 400 + 42 = .. ،  310 + 9 = .. ‬",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أُكَمِّلُ الجدولَ:",
+     "images": []
+    },
+    {
+     "text": "العددُ",
+     "images": []
+    },
+    {
+     "text": "المئاتُ",
+     "images": []
+    },
+    {
+     "text": "العشراتُ",
+     "images": []
+    },
+    {
+     "text": "الآحادُ",
+     "images": []
+    },
+    {
+     "text": "284 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "396 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "440 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: عددٌ تفكيكُهُ  300 + 9 ‬ فقط! ما هو؟ (309) ماذا تلاحَظَ في خانةِ العشراتِ؟ (صفرٌ)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "عددُ كتبِ المكتَبةِ العموميّةِ في حَيِّنا  478 ‬ كتابًا. أَكْتُبُ تفكيكَهُ الكاملَ: 478 = 400 + 70 + 8 ثم أُكْتُبُهُ بالحروفِ: أربعُمئةٍ وثمانيةٌ وسبعونَ.",
+     "images": []
+    }
+   ]
+  },
+  "P4-10": {
+   "intro": [
+    {
+     "text": "10",
+     "images": []
+    },
+    {
+     "text": "القطعةُ النقديّةُ ⟦(200 مي)⟧",
+     "images": []
+    },
+    {
+     "text": "التصرُّفُ فيها",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image54.png"
+     ]
+    },
+    {
+     "text": "قطعةٌ جديدةٌ في جَعبتِنا: قيمتُها  200 ‬ مي. أَبحثُ عن بدائلِها:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image59.png"
+     ]
+    },
+    {
+     "text": "1. بديلٌ: قطعتانِ من  100 ‬ مي: 100 + 100 = 200 مي.",
+     "images": []
+    },
+    {
+     "text": "2. بديلٌ: أربعُ قطعَ من  50 ‬ مي: 50 + 50 + 50 + 50 = 200 مي.",
+     "images": []
+    },
+    {
+     "text": "3. أُكوِّنُ  300 ‬ مي: 200 + 100 أو  100 + 100 + 100 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "قطعةُ  200 ‬ مي تُعادِلُ قطعتينِ من 100 مي أو أربعَ قطعَ من  50 ‬ مي. المئتانِ = 2 × مئةٌ (بمعنى عدِّ المئاتِ).",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image55.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُكَمِّلُ الجدولَ:",
+     "images": []
+    },
+    {
+     "text": "المبلغُ",
+     "images": []
+    },
+    {
+     "text": "الطريقةُ بالقطعِ",
+     "images": []
+    },
+    {
+     "text": "200 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "300 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "400 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "مقترحاتٌ:  200 = 100 + 100 ‬ ، 300 = 200 + 100 ،  400 = 200 + 200 ‬.",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أَحسِبُ مجموعَ كلِّ مجموعةٍ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image60.png"
+     ]
+    },
+    {
+     "text": "المجموعُ:  350 ‬ مي",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image61.png"
+     ]
+    },
+    {
+     "text": "المجموعُ:  200 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. مع سلمى قطعتانِ من  100 ‬ مي وقطعةٌ من 50 مي:  100 + 100 + 50 = 250 ‬ مي. هل تملكُ ما يُعادِلُ قطعةً واحدةً؟ لا؛ أقربُ قطعةٍ هيَ... لا توجدُ قطعةُ 250.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: كمُّ طريقةً مُخَتَّلِفةً أُكوِّنُ بها  200 ‬ مي بالقطعِ (100، 50، 20)؟ (ثلاثُ طرقٍ على الأقلِّ:  100+100 ‬ ، 100+50+50 ،  50+50+50+50 ‬)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "ثمنُ لُعبةٍ صغيرةٍ  250 ‬ مي. دفعتُ بقطعتَينِ من 100 مي وقطعةٍ من  50 ‬ مي: 250 مي بالضَّبطِ. لم يَرُدَّ البائعُ شيئًا!",
+     "images": []
+    }
+   ]
+  },
+  "P4-11": {
+   "intro": [
+    {
+     "text": "11",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "إنجازُ وضعيةٍ تتطلَّبُ حلُّها توظيفُ الجمعِ أو الطرحِ والتحكُّمُ في الحلِّ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "لِتجهيزِ القسمِ اشترينا دفترًا بـ 480 ‬ مي وقلمًا بـ220 مي. المطلوبُ: الثمنُ الكلِّيُّ ومقارنتُهُ بمبلغِ  700 ‬ مي.",
+     "images": []
+    },
+    {
+     "text": "1. أُنْجِزُ:  480 + 220 = 700 ‬ مي (بالاحتفاظِ في العشراتِ).",
+     "images": []
+    },
+    {
+     "text": "2. أُقارِنُ: الثمنُ = المبلغُ الموفَرُ؛ يكفي بالضَّبطِ.",
+     "images": []
+    },
+    {
+     "text": "3. أتحكَّمُ في حلِّي: أُعيدُ الجمعَ بطريقةٍ أخرى:  480 + 200 = 680 ‬ ثم 680 + 20 = 700؛ الناتجُ نفسُهُ  700 ‬. حلِّي صحيحٌ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "مع أمينِ  350 ‬ مي. اشترى مِسطرةً بـ150 مي. كمُّ مليمًا بقِيَ؟ أُنْجِزُ:  350 - 150 = 200 ‬ مي. وأتحكَّمُ: 200 + 150 = 350 صحيحٌ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image28.png"
+     ]
+    }
+   ]
+  },
+  "P4-12": {
+   "intro": [
+    {
+     "text": "12",
+     "images": []
+    },
+    {
+     "text": "توظيفُ المكتسبات",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "في مَشروعِ الصَّفِّ (جرْدةُ القسمِ): شترينا تربةً بـ 12 ‬ دينارًا وبُذورًا بـ8 دنانيرَ. كمَ دينارًا أنفقْنا؟  12 + 8 = 20 ‬ دينارًا. وقد جمعْنا تبرُّعاتٍ بقيمةِ 25 دينارًا: كمَ بقيَ؟  25 - 20 = 5 ‬ دنانيرَ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "في يومِ الرياضةِ: الفريقُ الأحمرُ جَمَعَ  145 ‬ نقطةً في الجولةِ الأولى و38 نقطةً في الثانيةِ. مجموعُهُ:  145 + 38 = 183 ‬ نقطةً. الفريقُ الأزرقُ جَمَعَ 171 نقطةً: مَن الفائزُ؟ أُقارِنُ:  183 > 171 ‬ الفائزُ الأحمرُ بـ183 - 171 = 12 نقطةً.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image29.png"
+     ]
+    },
+    {
+     "text": "أثناءَ زيارةِ سوقِ العطَّارينَ: اشترتْ سلمى  100 ‬ مي من الحُلْوَى و150 مي من الفُلافلِ. كمَ ميَّ أنفَقَتْ؟  100 + 150 = 250 ‬ مي. ومعها 300 مي: كمَ بقِيَ؟  300 - 250 = 50 ‬ مي.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image2.png"
+     ]
+    },
+    {
+     "text": "الفترةُ الخامسة",
+     "images": []
+    },
+    {
+     "text": "في هذه الفترةِ سأتعلَّمُ:",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 499: المقارنةُ والترتيبُ",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 499: الجمعُ بالاحتفاظ ومن دونِه",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: تحريرُ حلِّ مسألةٍ",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 499: الطرحُ دون زيادةٍ ولا تفكيكٍ",
+     "images": []
+    },
+    {
+     "text": "• القطعُ النقديّةُ المتداولة: التصرُّفُ في القطعِ النقديّةِ (5، 10، 20، 50، 100، 200)",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: تحريرُ حلِّ مسألةٍ",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 499: الجمعُ والطرحُ دون زيادةٍ",
+     "images": []
+    },
+    {
+     "text": "• المضلَّعاتُ: الرَّسمُ",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: تحريرُ حلِّ مسألةٍ",
+     "images": []
+    },
+    {
+     "text": "• توظيفُ المكتسبات",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image3.png"
+     ]
+    },
+    {
+     "text": "الفترةُ الخامسة [F5]",
+     "images": []
+    }
+   ]
+  },
+  "P5-1": {
+   "intro": [
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 499",
+     "images": []
+    },
+    {
+     "text": "المقارنةُ والترتيبُ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image62.png"
+     ]
+    },
+    {
+     "text": "في مَعْرَضِ الحِرَفِ التونسيّةِ: نُقوشٌ بعدَدها  342 ‬، وأجرَعٌ بعدَدها 324، وبلَاطٌ زُخْرَفيٌّ بعدَدهِ  415 ‬. أُرتِّبُ الأعدادَ:",
+     "images": []
+    },
+    {
+     "text": "1. أُقارِنُ المئاتَ أولًا:  3 ‬ و3 و 4 ‬: بلَاطُ الزُّخرفةِ الأكبرُ.",
+     "images": []
+    },
+    {
+     "text": "2. ثم أُقارِنُ العشراتِ بينَ  342 ‬ و324:  4 ‬ عشراتٍ أكبرُ من 2 عشرتينِ.",
+     "images": []
+    },
+    {
+     "text": "3. الترتيبُ التصاعديُّ:  324 < 342 < 415 ‬. والتنازليُّ: 415 > 342 > 324.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "المقارنةُ من  200 ‬ إلى 499 مثلُ ما سبَقَ: المئاتُ أولًا ثم العشراتُ ثم الآحادُ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image63.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُقارِنُ بـ  > ‬ أو <:  350 .. 305 ‬ ، 499 .. 501... انتباهُ:  501 ‬ خارجُ مجالِنا؛ أُقارِنُ فقط ضمن 499:  498 .. 489 ‬ ، 420 .. 402",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُرتِّبُ تصاعديًّا:  275 ‬ ، 257 ،  452 ‬ ، 245",
+     "images": []
+    },
+    {
+     "text": "الترتيبُ:  245 < 257 < 275 < 452 ‬.",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أُكَمِّلُ بالعددِ المناسبِ:  300 > .. ‬ ، .. > 480 ،  350 < .. < 360 ‬",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: بالأرقامِ  2، 4، 7 ‬ أُكَوِّنُ عددًا ضمن 499 أكبرَ من  420 ‬ وأصغرَ من 450: (الجوابُ  427 ‬)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "في مُنافسةِ الحفظِ: حفظَ أحمدُ  365 ‬ كلمةً، وحفظتْ ياسمينُ 356 كلمةً. مَن حفظَ أكثرَ؟ أُقارِنُ:  365 > 356 ‬؛ أحمدُ بـ9 كلماتٍ... المقدارُ الدَّقيقُ للفارقِ يُناقَشُ بعدَ التعلُّمِ التفكيكِ في الطرحِ.",
+     "images": []
+    }
+   ]
+  },
+  "P5-2": {
+   "intro": [
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 499",
+     "images": []
+    },
+    {
+     "text": "الجمعُ بالاحتفاظ ومن دونِه",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image62.png"
+     ]
+    },
+    {
+     "text": "في مَكتَبةِ المدرسةِ:  286 ‬ كتابًا في القسمِ الأولِ و135 كتابًا في القسمِ الثاني. كمُّ كتابًا في القسمينِ؟",
+     "images": []
+    },
+    {
+     "text": "1. أُحاذي المنازلَ وأَجْمَعُ الآحادَ:  6 + 5 = 11 ‬: أُكْتُبُ 1 وأحتَفِظُ بـ 1 ‬ عشرةٍ.",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "2. العشراتُ:  8 + 3 + 1 = 12 ‬ عشرةً: أُكْتُبُ 2 وأحتَفِظُ بـ 1 ‬ مئةٍ.",
+     "images": []
+    },
+    {
+     "text": "3. المئاتُ:  2 + 1 + 1 = 4 ‬ مئاتٍ. الناتجُ: 421 كتابًا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "الجمعُ حتى  499 ‬ نفسُ التقنيةِ: من الآحادِ إلى المئاتِ مع الاحتفاظِ عندَ الحاجةِ.",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image63.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُنْجِزُ:",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُكَمِّلُ العملياتَ العموديّةَ:",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "9",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "9",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "0",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أَكتَشِفُ الخطأَ:  248 + 176 = 314 ‬. الصوابُ: 8+6=14 نكتبُ  4 ‬ ونحتَفِظُ، 4+7+1=12 نكتبُ  2 ‬ ونحتَفِظُ، 2+1+1=4؛ الناتجُ  424 ‬.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: أُكَوِّنُ عمليةَ جمعٍ ناتجُها  499 ‬ بالاحتفاظِ (مثالٌ: 287 + 212).",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "حَضَرَ في المَلْهَى البلديِّ  267 ‬ مشاهدًا في الحلقةِ الأولى و158 في الثانيةِ. كمُّ مشاهدًا حضَرَ كلُّهُمْ؟  267 + 158 = 425 ‬ مشاهدًا.",
+     "images": []
+    }
+   ]
+  },
+  "P5-3": {
+   "intro": [
+    {
+     "text": "3",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "تحريرُ حلِّ مسألةٍ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "في زيارةٍ لِمَعْلَمِ الحضيرةِ (الموقعِ الأثريِّ): شاهَدَ التلاميذُ  236 ‬ عمودًا قديمًا في الجهةِ الأولى، و120 عمودًا في الجهةِ الثانيةِ. كمُّ عمودًا شاهَدوا في الموقعِ كلِّهِ؟",
+     "images": []
+    },
+    {
+     "text": "1. أفهمُ: المعطياتُ  236 ‬ و120، والمطلوبُ المجموعُ.",
+     "images": []
+    },
+    {
+     "text": "2. أخطِّطُ: أَجْمَعُ:  236 + 120 ‬.",
+     "images": []
+    },
+    {
+     "text": "3. أُنجِزُ:  236 + 120 = 356 ‬.",
+     "images": []
+    },
+    {
+     "text": "4. أُحرِّرُ الحلَّ بجملةٍ: «شاهَدَ التلاميذُ في الموقعِ كلِّهِ ثلاثُمئةٍ وستةٌ وخمسونَ عمودًا».",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "خَزَّنَ الفلاحُ زيتَ الزَّيتونِ في براميلَ:  185 ‬ ليترًا في البرميلِ الأولِ و210 ليترًا في الثاني. كمُّ ليترًا خزَّنَ كلُّهُ؟",
+     "images": []
+    },
+    {
+     "text": "1. أُنجِزُ:  185 + 210 = 395 ‬. 2. أُحرِّرُ: «خزَّنَ الفلاحُ ثلاثُمئةٍ وخمسةً وتسعينَ ليترًا من الزَّيتِ».",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image21.png"
+     ]
+    }
+   ]
+  },
+  "P5-4": {
+   "intro": [
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 499",
+     "images": []
+    },
+    {
+     "text": "الطرحُ دون زيادةٍ ولا تفكيكٍ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image62.png"
+     ]
+    },
+    {
+     "text": "في مَعْرَضِ الطُّيورِ  476 ‬ طائرًا، منها 52 طائرًا من النَّوعِ النادرِ. كمُّ طائرًا آخرَ في المعرضِ؟",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "-",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "1. الآحادُ:  6 - 2 = 4 ‬. العشراتُ: 70 - 50 = 20. المئاتُ:  400 ‬. الناتجُ: 424 طائرًا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "الطرحُ حتى  499 ‬ من دونِ تفكيكٍ: أُحاذي المنازلَ وأَطرَحُ منزلةً منزلةً من الآحادِ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image63.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُنْجِزُ:",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُكَمِّلُ العملياتَ العموديّةَ:",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "-",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "9",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "-",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "-",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أُكَمِّلُ الجدولَ:",
+     "images": []
+    },
+    {
+     "text": "العددُ",
+     "images": []
+    },
+    {
+     "text": "487 ‬",
+     "images": []
+    },
+    {
+     "text": "369 ‬",
+     "images": []
+    },
+    {
+     "text": "458 ‬",
+     "images": []
+    },
+    {
+     "text": "296 ‬",
+     "images": []
+    },
+    {
+     "text": "ناقصُهُ  24 ‬",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: ما العددانِ اللذانِ فرقُهُما  101 ‬ (ضمنَ 499 ومن دونِ تفكيكٍ في الطرحِ)؟ (مثالٌ:  345 ‬ و244)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "مكتبةُ الحَيِّ تملكُ  496 ‬ كتابًا في الرفِّ الجديدِ. نُقِلَتْ منها 63 كتابًا إلى مكتَبةِ الحَيِّ الأخرى. كمُّ كتابًا بقِيَ؟  496 - 63 = 433 ‬ كتابًا.",
+     "images": []
+    }
+   ]
+  },
+  "P5-5": {
+   "intro": [
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "القطعُ النقديّةُ المتداولة",
+     "images": []
+    },
+    {
+     "text": "التصرُّفُ في القطعِ النقديّةِ  (5، 10، 20، 50، 100، 200) ‬",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image62.png"
+     ]
+    },
+    {
+     "text": "جَعبةُ القسمِ الكاملةُ: أُحصي القيمَ الممكنةَ وأُكوِّنُ مبالغَ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image64.png"
+     ]
+    },
+    {
+     "text": "1. أكبرُ قطعةٍ  200 ‬ مي: بمجموعِ قطعتَينِ من كلِّ قيمةٍ أَصِلُ إلى: 200 + 200 = 400 مي.",
+     "images": []
+    },
+    {
+     "text": "2. أُكوِّنُ  320 ‬ مي: 200 + 100 + 20. وأُكوِّنُ  255 ‬ مي: 200 + 50 + 5.",
+     "images": []
+    },
+    {
+     "text": "3. أُلاحِظُ أنَّ القطعَ الكبيرةَ تُسرِّعُ تكوينَ المبالغِ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "أُرتِّبُ القيمَ من الأكبرِ إلى الأصغرِ ثم أُكوِّنُ المبلغَ المطلوبَ قطعةً قطعةً.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image63.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أَحسِبُ المجموعَ ثم أُكْتُبُهُ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image65.png"
+     ]
+    },
+    {
+     "text": "المجموعُ:  450 ‬ مي",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image66.png"
+     ]
+    },
+    {
+     "text": "المجموعُ:  185 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُكَمِّلُ الجدولَ بطريقةٍ واحدةٍ على الأقلِّ:",
+     "images": []
+    },
+    {
+     "text": "المبلغُ",
+     "images": []
+    },
+    {
+     "text": "طريقةُ التكوينِ",
+     "images": []
+    },
+    {
+     "text": "250 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "400 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "325 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "مقترحاتٌ:  200+50 ‬ ، 200+200 ،  200+100+20+5 ‬.",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أمينُ يملكُ  300 ‬ مي، وسلمى تملكُ 285 مي. مَن الأكثرُ مالًا؟  300 > 285 ‬ أمينُ بـ15 مي.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: بماذا أُعوِّضُ قطعتَينِ من  200 ‬ مي بقطعٍ من 50 و 20 ‬ فقط؟ (مثالٌ: 8 قطعَ من  50 ‬ أيِّ 400 مي)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "لِشراءِ هديّةِ نهايةِ السَّنةِ جمعَ الصَّفُّ:  200 ‬ + 200 +  100 ‬ = 500 مي. ثمنُ الهديّةِ  480 ‬ مي. كمَ يبقى من المبلغِ؟ 500 - 480 = 20 مي.",
+     "images": []
+    }
+   ]
+  },
+  "P5-6": {
+   "intro": [
+    {
+     "text": "6",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "تحريرُ حلِّ مسألةٍ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "في مَشغلِ الخياطةِ: قَصَّ الخيّاطُ  340 ‬ قطعةً من القماشِ في الأسبوعِ الأولِ و145 قطعةً في الثاني. كمُّ قطعةً قَصَّ في الأسبوعَينِ؟",
+     "images": []
+    },
+    {
+     "text": "1. أُنجِزُ:  340 + 145 = 485 ‬. 2. أُحرِّرُ الحلَّ: «قَصَّ الخيّاطُ في الأسبوعَينِ أربعُمئةٍ وخمسةً وثمانينَ قطعةً من القماشِ».",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "في مكتبةِ المدرسةِ  420 ‬ كتابًا. وُضِعَتْ منها 310 في الرفوفِ الجديدةِ. كمُّ كتابًا لم يُوضَعْ؟",
+     "images": []
+    },
+    {
+     "text": "1. أُنجِزُ:  420 - 310 = 110 ‬. 2. أُحرِّرُ: «بقِيَ مئةٌ وعشرةُ كتبٍ لم تُوضَعْ بعدُ».",
+     "images": []
+    }
+   ]
+  },
+  "P5-7": {
+   "intro": [
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 499",
+     "images": []
+    },
+    {
+     "text": "الجمعُ والطرحُ دون زيادةٍ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image62.png"
+     ]
+    },
+    {
+     "text": "أُنْجِزُ الجمعَ والطرحَ حتى  499 ‬ من دونِ زيادةٍ ولا تفكيكٍ، ثم أُكَمِّلُ الجدولَ:",
+     "images": []
+    },
+    {
+     "text": "العمليةُ",
+     "images": []
+    },
+    {
+     "text": "342 + 156 ‬",
+     "images": []
+    },
+    {
+     "text": "498 - 273 ‬",
+     "images": []
+    },
+    {
+     "text": "215 + 263 ‬",
+     "images": []
+    },
+    {
+     "text": "487 - 354 ‬",
+     "images": []
+    },
+    {
+     "text": "الناتجُ",
+     "images": []
+    },
+    {
+     "text": "الأجوبةُ:  498 ‬ ، 225 ،  478 ‬ ، 133.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "أُحاذي المنازلَ (مئاتٌ تحتَ مئاتٍ...) وأُنْجِزُ من الآحادِ إلى المئاتِ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image63.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُنْجِزُ:",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. جُمْلَةٌ ناقصةٌ:  123 + .. = 458 ‬ ثم .. - 234 = 154 (الأجوبةُ:  335 ‬ ، 388)",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "3. تحدٍّ: أُكَوِّنُ ثلاثَ عملياتِ جمعٍ من دونِ احتفاظٍ ناتجُها كلُّها  456 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "في قاعةِ المسرحِ المدرسيِّ  325 ‬ مقعدًا للعائلاتِ و142 مقعدًا للتلاميذِ. كمُّ مقعدًا في القاعةِ؟  325 + 142 = 467 ‬ مقعدًا.",
+     "images": []
+    }
+   ]
+  },
+  "P5-8": {
+   "intro": [
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "المضلَّعاتُ",
+     "images": []
+    },
+    {
+     "text": "الرَّسمُ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image62.png"
+     ]
+    },
+    {
+     "text": "أَرْسُمُ المضلَّعاتَ على شبكةِ المربَّعاتِ (المربَّعاتُ تُساعِدُني على الرَّسمِ الدَّقيقِ):",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image67.png"
+     ]
+    },
+    {
+     "text": "1. أَرْسُمُ رُباعيَّ الأضلاعِ بوصْلِ النقاطِ الأربعِ.",
+     "images": []
+    },
+    {
+     "text": "2. أُلاحِظُ: كلُّ ضلعٍ يسيرُ على خطوطِ الشبكةِ فيرسمُ زاويةً قائمةً.",
+     "images": []
+    },
+    {
+     "text": "3. أُحصي:  4 ‬ أضلاعٌ و4 رؤوسٍ: رُباعيٌّ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "لِرسمِ مضلَّعٍ على شبكةٍ: أَوضَعُ عددًا من النقاطِ يساوي عددَ الأضلاعِ المطلوبِ، ثم أَصِلُ بينَها بالتَّرتيبِ وأُغلِقُ الشكلَ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image63.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أَوْضَعُ ثلاثَ نقاطٍ على الشبكةِ ثم أَصِلُ بينَها: ما الشكلُ الناتجُ؟ (مثلثٌ)",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أَرْسُمُ على الشبكةِ مضلَّعًا من  6 ‬ أضلاعٍ ثم أَعُدُّ رؤوسَهُ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image68.png"
+     ]
+    },
+    {
+     "text": "3",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "3. تحدٍّ: أَرْسُمُ مضلَّعَينِ مُخَتَّلِفَينِ لهما عددُ الأضلاعِ نفسُهُ ( 4 ‬ أضلاعٌ): مثالٌ مربَّعٌ وشكلٌ آخرُ رُباعيٌّ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "صَمَّمَتِ مُهْنِدَسةُ الحدائقِ مَسارًا مضلَّعًا للمشيِ في حديقةِ المدرسةِ على شكلِ خماسيِّ الأضلاعِ. كمَ رأسًا في المسارِ؟  5 ‬ رؤوسٍ.",
+     "images": []
+    }
+   ]
+  },
+  "P5-9": {
+   "intro": [
+    {
+     "text": "9",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "تحريرُ حلِّ مسألةٍ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "في مسابقةِ الفكاهةِ المدرسيّةِ شاركَتِ المدرسةُ بمبلغِ  235 ‬ دينارًا للتجهيزاتِ، ومبلغِ 120 دينارًا للجوائزِ. كمَ دينارًا شاركتْ بهِ المدرسةُ كلُّها؟",
+     "images": []
+    },
+    {
+     "text": "1. أُنجِزُ:  235 + 120 = 355 ‬. 2. أُحرِّرُ: «شاركتِ المدرسةُ بثلاثُمئةٍ وخمسةٍ وخمسينَ دينارًا».",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "جُمِّعَ لِلْحَفْلِ الختاميِّ  460 ‬ دينارًا. صُرِفَ منها 240 دينارًا على التزيينِ. كمَ دينارًا بقِيَ للجوائزِ؟",
+     "images": []
+    },
+    {
+     "text": "1. أُنجِزُ:  460 - 240 = 220 ‬. 2. أُحرِّرُ: «بقِيَ مئتانِ وعشرونَ دينارًا للجوائزِ».",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image3.png"
+     ]
+    }
+   ]
+  },
+  "P5-10": {
+   "intro": [
+    {
+     "text": "10",
+     "images": []
+    },
+    {
+     "text": "توظيفُ المكتسبات",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "مَخْزَنُ المدرسةِ:  385 ‬ كرسيًّا. استُعِيرَتْ لِلْحَفْلِ 243 كرسيًّا. كمُّ كرسيًّا بقِيَ في المخزنِ؟  385 - 243 = 142 ‬ كرسيًّا. وبعدَ الحفلِ أُضيفَتْ 57 كرسيًّا جديدًا:  142 + 57 = 199 ‬ كرسيًّا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "في النُّزْهةِ السنويّةِ: أشترى التلاميذُ  268 ‬ عصيرةً في الصَّباحِ و175 عصيرةً في المساءِ. كمُّ عصيرةً بِيعَتْ كلُّها؟  268 + 175 = 443 ‬ عصيرةً (بالاحتفاظِ مرَّتينِ).",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image29.png"
+     ]
+    },
+    {
+     "text": "أعدادُ الأصدقاءِ في اللُّعبةِ: سلمى وصلتْ إلى  398 ‬ نقطةً في لعبةِ الذاكرةِ، وأمينُ إلى 389 نقطةً. مَن الفائزُ؟  398 > 389 ‬ سلمى. وكمَ فرقٌ تقريبًا؟ الفارقُ عشرَ نقاطٍ (398 أقربُ إلى  400 ‬ و389 أقربُ إلى  390 ‬).",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image14.png"
+     ]
+    },
+    {
+     "text": "الفترةُ السادسة",
+     "images": []
+    },
+    {
+     "text": "في هذه الفترةِ سأتعلَّمُ:",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 999: القراءةُ والكتابةُ والتمثيلُ",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 999: التفكيكُ والتركيبُ والمقارنةُ والترتيبُ",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: تحريرُ حلِّ مسألةٍ",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ من 0 إلى 999: الجمعُ والطرحُ دون زيادةٍ ولا تفكيكٍ",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: تحريرُ حلِّ مسألةٍ",
+     "images": []
+    },
+    {
+     "text": "• القطعةُ النقديّةُ نصفُ دينارٍ: التصرُّفُ فيها",
+     "images": []
+    },
+    {
+     "text": "• المضلَّعاتُ: توظيفُ المضلَّعاتِ",
+     "images": []
+    },
+    {
+     "text": "• التدرَّبُ على حلِّ الوضعية المشكِل: تقييمُ التمشِّي المُعتَمدِ والنتائجِ",
+     "images": []
+    },
+    {
+     "text": "• توظيفُ المكتسبات",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image2.png"
+     ]
+    },
+    {
+     "text": "الفترةُ السادسة [F6]",
+     "images": []
+    }
+   ]
+  },
+  "P6-1": {
+   "intro": [
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 999",
+     "images": []
+    },
+    {
+     "text": "القراءةُ والكتابةُ والتمثيلُ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image69.png"
+     ]
+    },
+    {
+     "text": "عددُ زُوَّارِ معرضِ الكتابِ في اليومِ الأولِ  743 ‬ زائرًا! أُحلِّلُ هذا العددَ الكبيرَ:",
+     "images": []
+    },
+    {
+     "text": "العددُ",
+     "images": []
+    },
+    {
+     "text": "المئاتُ",
+     "images": []
+    },
+    {
+     "text": "العشراتُ",
+     "images": []
+    },
+    {
+     "text": "الآحادُ",
+     "images": []
+    },
+    {
+     "text": "743",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "1. أَقْرَأُ: سبعُمئةٍ وثلاثةٌ وأربعونَ. أَكْتُبُ بالتفكيكِ:  743 = 700 + 40 + 3 ‬.",
+     "images": []
+    },
+    {
+     "text": "2. أُمثِّلُ:  7 ‬ قطعَ كبيرةَ (مئات) و4 شرائطَ عشراتٍ و 3 ‬ وحداتٍ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image70.png"
+     ]
+    },
+    {
+     "text": "3. أُلاحِظُ أنَّ العددَ أصبحَ ضمنَ  999 ‬: أوسعُ مجالٍ تعلَّمتُهُ هذه السَّنةَ!",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "من  500 ‬ إلى 999: أَقْرَأُ المئاتَ (خمسُمئةٍ، ستُّمئةٍ، سبعُمئةٍ، ثمانُمئةٍ، تسعُُمئةٍ) ثم العشراتِ ثم الآحادَ. مثالٌ:  907 ‬ = تسعُُمئةٍ وسبعةٌ (صفرُ عشراتٍ!).",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image71.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أَكْتُبُ بالأرقامِ: ستُّمئةٍ وثمانيةٌ وعشرونَ =  628 ‬ ، ثمانُُمئةٍ وخمسةٌ = 805 ، تسعُُمئةٌ وتسعونَ =  990 ‬.",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُكَمِّلُ:  856 = .. + 50 + 6 ‬ ، 704 = 700 + .. ،  999 = 900 + .. + 9 ‬",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أُكَمِّلُ الجدولَ:",
+     "images": []
+    },
+    {
+     "text": "العددُ",
+     "images": []
+    },
+    {
+     "text": "المئاتُ",
+     "images": []
+    },
+    {
+     "text": "العشراتُ",
+     "images": []
+    },
+    {
+     "text": "الآحادُ",
+     "images": []
+    },
+    {
+     "text": "674 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "809 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "950 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: أكبرُ عددٍ من ثلاثةِ أرقامَ مختلفةٍ ضمن  999 ‬: 987. وأصغرُ عددٍ من ثلاثةِ أرقامَ (المئةُ ليستْ صفرًا):  102 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "سجلَّتِ المدرسةُ  875 ‬ يومَ غيابٍ مُبرَّرٍ خلالَ السَّنةِ. أَكْتُبُ العددَ بالحروفِ: ثمانُُمئةٍ وخمسةٌ وسبعونَ، وبالتفكيكِ: 875 = 800 + 70 + 5.",
+     "images": []
+    }
+   ]
+  },
+  "P6-2": {
+   "intro": [
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 999",
+     "images": []
+    },
+    {
+     "text": "التفكيكُ والتركيبُ والمقارنةُ والترتيبُ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image69.png"
+     ]
+    },
+    {
+     "text": "أُطبِّقُ كلَّ ما تعلَّمتُهُ على العددِ  658 ‬:",
+     "images": []
+    },
+    {
+     "text": "1. التفكيكُ:  658 = 600 + 50 + 8 ‬. التركيبُ: 600 + 58 = 658.",
+     "images": []
+    },
+    {
+     "text": "2. المقارنةُ:  658 .. 685 ‬: المئاتُ متساويةٌ، العشراتُ 5 < 8؛ إذاً  658 < 685 ‬.",
+     "images": []
+    },
+    {
+     "text": "3. الترتيبُ: أُرتِّبُ تصاعديًّا:  568 ، 658 ، 685 ‬: 568 < 658 < 685.",
+     "images": []
+    },
+    {
+     "text": "4. الإزاحةُ على المدرَّجِ: من  658 ‬ أُزاحُ 2 إلى اليمينِ فأَصِلُ إلى  660 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image72.png"
+     ]
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "كلُّ مهاراتِ العددِ تعملُ بنفسِ الطريقةِ حتى  999 ‬: أفكِّكُ وأُركِّبُ وأُقارِنُ (مئاتٌ ثم عشراتٌ ثم آحادٌ) وأُرتِّبُ وأُزاحُ على المدرَّجِ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image71.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُفَكِّكُ وأُركِّبُ:  782 = .. + 80 + 2 ‬ ، 906 = 900 + .. ،  500 + 70 + 4 = .. ‬",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُقارِنُ:  759 .. 795 ‬ ، 899 .. 901 ،  640 .. 604 ‬ ، 888 .. 888",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أُرتِّبُ تنازليًّا:  563 ‬ ، 653 ،  635 ‬ ، 536",
+     "images": []
+    },
+    {
+     "text": "الترتيبُ:  653 > 635 > 563 > 536 ‬.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: ما العددانِ اللذانِ بينَهما  5 ‬ أعدادٍ على المدرَّجِ ومنهُما، والفارقُ بينَهما 6؟ (مثالٌ:  700 ‬ و706)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "في المُنافسةِ النهائيّةِ للحسابِ: نتيجةُ سلمى  846 ‬ نقطةً ونتيجةُ أمينَ 864 نقطةً. أُقارِنُ ثم أُرتِّبُ:  846 < 864 ‬؛ الفائزُ أمينُ.",
+     "images": []
+    }
+   ]
+  },
+  "P6-3": {
+   "intro": [
+    {
+     "text": "3",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "تحريرُ حلِّ مسألةٍ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "في العُطْلةِ الصِّيفيّةِ زارَ أمينُ جدَّه في البلادِ: في الطريقِ ركَبَ حافلةً لمسافةِ  145 ‬ كيلومترًا ثم قطارًا لمسافةِ 325 كيلومترًا. كمُّ كيلومترًا قطعَ كلُّهُ؟",
+     "images": []
+    },
+    {
+     "text": "1. أفهمُ وأخطِّطُ: أَجْمَعُ المسافتينِ.",
+     "images": []
+    },
+    {
+     "text": "2. أُنجِزُ:  145 + 325 = 470 ‬.",
+     "images": []
+    },
+    {
+     "text": "3. أُحرِّرُ الحلَّ: «قَطَعَ أمينُ في رحلتِهِ أربعُمئةٍ وسبعينَ كيلومترًا».",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "حَصَدَ جدُّ أمينَ  620 ‬ كيلوغرامًا من الزَّيتونِ، وباعَ منها 380 كيلوغرامًا. كمُّ كيلوغرامًا بقِيَ عنده؟",
+     "images": []
+    },
+    {
+     "text": "1. أُنجِزُ:  620 - 380 ‬... هذه عمليةٌ بالتفكيكِ لم نتعلَّمْها في الطرحِ بعد؛ أُحوِّلُ السُّؤالَ إلى مقارنةٍ مُتاحةٍ: أكثرُ من نصفِ الحصادِ بِيعَ (380 > 310)، فالباقيُّ أقلُّ من  310 ‬ كيلوغرامًا. والتحريرُ: «بقِيَ عن جدِّي أقلُّ من ثلاثُمئةٍ وعشرةَ كيلوغراماتٍ».",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image21.png"
+     ]
+    }
+   ]
+  },
+  "P6-4": {
+   "intro": [
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "الأعدادُ من 0 إلى 999",
+     "images": []
+    },
+    {
+     "text": "الجمعُ والطرحُ دون زيادةٍ ولا تفكيكٍ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image69.png"
+     ]
+    },
+    {
+     "text": "أُنْجِزُ العملياتَ الثلاثيّةَ من دونِ زيادةٍ ولا تفكيكٍ: أُحاذي المئاتِ والعشراتِ والآحادَ:",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "1. الآحادُ:  2 + 6 = 8 ‬. العشراتُ: 5 + 3 = 8. المئاتُ:  6 + 2 = 8 ‬. الناتجُ: 888!",
+     "images": []
+    },
+    {
+     "text": "9",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "-",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "2. الطرحُ بنفسِ الترتيبِ: الآحادُ ثم العشراتُ ثم المئاتُ:  333 ‬.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "مع ثلاثةِ منازلَ أنظَّمُ عموديًّا: مئةٌ تحتَ مئةٍ وعشرةٌ تحتَ عشرةٍ ووحدةٌ تحتَ وحدةٍ، ثم أُنْجِزُ من اليمينِ (الآحادِ).",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image71.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُنْجِزُ:",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُكَمِّلُ العملياتَ العموديّةَ:",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "9",
+     "images": []
+    },
+    {
+     "text": "-",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "5",
+     "images": []
+    },
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "+",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "8",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. أُكَمِّلُ جدولَ الأعدادِ الغائبةِ:",
+     "images": []
+    },
+    {
+     "text": "142 + .. = 587 ‬",
+     "images": []
+    },
+    {
+     "text": ".. + 236 = 789 ‬",
+     "images": []
+    },
+    {
+     "text": "898 - .. = 425 ‬",
+     "images": []
+    },
+    {
+     "text": "العددُ الغائبُ",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: عددٌ من ثلاثةِ أرقامَ مجموعُ أرقامِهِ  9 ‬، وكلُّ أرقامِهِ مُخَتَّلِفةٌ، وأصغرُ ما يُكْتَبُ: (108:  1+0+8=9 ‬)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "في مَكتَبةِ المدينةِ:  542 ‬ كتابًا بالعربيّةِ و356 كتابًا بالفرنسيّةِ في القاعةِ نفسِها (من دونِ احتفاظٍ). كمُّ كتابًا في القاعةِ؟  542 + 356 = 898 ‬ كتابًا.",
+     "images": []
+    }
+   ]
+  },
+  "P6-5": {
+   "intro": [
+    {
+     "text": "5",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "تحريرُ حلِّ مسألةٍ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "في مَسْرَحِ المدرسةِ: بيعَتْ  425 ‬ تذكرةً للأُسَرِ و342 تذكرةً للتلاميذِ. كمُّ تذكرةً بِيعَتْ كلُّها؟",
+     "images": []
+    },
+    {
+     "text": "1. أُنجِزُ:  425 + 342 = 767 ‬. 2. أُحرِّرُ: «بِيعَتْ في المسرحِ سبعُُمئةٍ وسبعةٌ وستونَ تذكرةً».",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "لجَمْعِ تبرُّعاتِ يومِ البيئةِ: جَمَعَ الصَّفُّ الأوَّلُ  356 ‬ مي وجرَّدَ الصَّفُّ الثانيُّ 523 مي. كمَ ميًّا جُمِعَ كلُّهُ؟ أيُّ الصَّفَّينِ جَمَعَ أكثرَ؟",
+     "images": []
+    },
+    {
+     "text": "1. أُنجِزُ:  356 + 523 = 879 ‬ مي. 2. أُقارِنُ: 523 > 356 الصَّفُّ الثانيُّ. 3. أُحرِّرُ: «جُمِعَ كلُّهُ ثمانُُمئةٍ وتسعةٌ وسبعونَ ميًّا، وجمعَ الصَّفُّ الثانيُّ أكثرَ».",
+     "images": []
+    }
+   ]
+  },
+  "P6-6": {
+   "intro": [
+    {
+     "text": "6",
+     "images": []
+    },
+    {
+     "text": "القطعةُ النقديّةُ نصفُ دينارٍ",
+     "images": []
+    },
+    {
+     "text": "التصرُّفُ فيها",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image69.png"
+     ]
+    },
+    {
+     "text": "قطعةُ نصفِ الدِّينارِ: قيمتُها  500 ‬ مي أيِّ نصفُ دينارٍ واحدٍ (لأنَّ الدِّينارَ = 1000 مي).",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image73.png"
+     ]
+    },
+    {
+     "text": "1. بدائلُ نصفِ الدِّينارِ:  200 + 200 + 100 ‬ ، أو 200 + 100 + 100 + 100 ، أو خمسُ قطعَ من  100 ‬ مي.",
+     "images": []
+    },
+    {
+     "text": "2. خليلٌ ونورٌ معهما معًا  605 ‬ مي: هل يملكانِ أكثرَ من نصفِ دينارٍ؟ 605 > 500 نعم.",
+     "images": []
+    },
+    {
+     "text": "3. وكمَ يزيدانِ على نصفِ الدِّينارِ تقريبًا؟ نحوُ  100 ‬ مي (أُقارِبُ: 605 أقربُ إلى  600 ‬).",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "الدِّينارُ =  1000 ‬ مي، ونصفُ الدِّينارِ = 500 مي. أُقارِنُ المبالغَ بها كما أُقارِنُ الأعدادَ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image71.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أُكَمِّلُ الجدولَ:",
+     "images": []
+    },
+    {
+     "text": "المبلغُ",
+     "images": []
+    },
+    {
+     "text": "هل يُعادِلُ نصفَ دينارٍ؟",
+     "images": []
+    },
+    {
+     "text": "500 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "480 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "520 ‬ مي",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "الأجوبةُ: نعم بالضَّبطِ / لا، أقلُّ / لا، أكثرُ.",
+     "images": []
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أَحسِبُ ثم أُجيبُ: مع سلمى  300 ‬ مي وأمينُ معهُ 200 مي. هل مجموعُ ما معهما يُعادِلُ نصفَ دينارٍ؟  300 + 200 = 500 ‬ مي: نعم بالضَّبطِ!",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    },
+    {
+     "text": "3. ثمنُ شطيرةٍ  450 ‬ مي. دفعتُ بنصفِ دينارٍ: كمَ ميًّا رَدَّتْ لي البائعةُ؟ 500 - 450 = 50 مي.",
+     "images": []
+    },
+    {
+     "text": "4",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "4. تحدٍّ: أُكوِّنُ  1000 ‬ مي (دينارًا واحدًا!) بقطعَينِ من نصفِ دينارٍ: 500 + 500 = 1000. كمَ طريقةً أُخرى أُكوِّنُ بها الدينارَ بقطعِ  200 ‬؟ (خمسَ قطعَ)",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "دُعِينا إلى حفلِ نهايةِ السَّنةِ: ثمنُ التذكرةِ الرمزيِّ نصفُ دينارٍ. جاءَ  342 ‬ متفرِّجًا دفعوا كلُّهمُ نصفَ دينارٍ... حسابُ الكلِّ صعبٌ الآنَ، لكنَّني أعرفُ أنَّ كلَّ تذكرةٍ = 500 مي! أُحصي ما تعلَّمتُهُ: التذكرةُ الواحدةُ قيمتُها أكبرُ من  400 ‬ مي وأصغرُ من 600 مي.",
+     "images": []
+    }
+   ]
+  },
+  "P6-7": {
+   "intro": [
+    {
+     "text": "7",
+     "images": []
+    },
+    {
+     "text": "المضلَّعاتُ",
+     "images": []
+    },
+    {
+     "text": "توظيفُ المضلَّعاتِ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image69.png"
+     ]
+    },
+    {
+     "text": "أُوظِّفُ كلَّ ما تعلَّمتُهُ عن المضلَّعاتِ: أُلاحِظُ الأشكالَ ثم أُصنِّفُها وأُسمِّيها:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image74.png"
+     ]
+    },
+    {
+     "text": "1. المضلَّعاتُ: الخماسيُّ والسُّداسيُّ والمثلثُ والمربَّعُ (رُباعيٌّ). الدائرةُ ليستْ مضلَّعًا.",
+     "images": []
+    },
+    {
+     "text": "2. أَتتبَّعُ (أُلَوِّنُ حدودَ) المضلَّعِ بإصبعي ثم بقلمي: أَبدَأُ من رأسٍ وأُغلِقُ عندَ الرأسِ نفسِهِ.",
+     "images": []
+    },
+    {
+     "text": "3. أُحصي أضلاعَ كلِّ مضلَّعٍ ورؤوسَهُ ثم أُسَمِّيهِ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image6.png"
+     ]
+    },
+    {
+     "text": "توصيفُ المضلَّعِ: (اسمُهُ – عددُ أضلاعِهِ – عددُ رؤوسِهِ). مثالٌ: سُداسيٌّ:  6 ‬ أضلاعٍ و6 رؤوسٍ.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image71.png"
+     ]
+    },
+    {
+     "text": "1",
+     "images": []
+    },
+    {
+     "text": "1. أَرْسُمُ خطًّا مستقيمًا أَتَحَكَّمُ بِهِ في إغلاقِ شكلٍ ناقصٍ ليصيرَ مضلَّعًا، ثم أُسَمِّيهِ:",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image38.png"
+     ]
+    },
+    {
+     "text": "2",
+     "images": []
+    },
+    {
+     "text": "2. أُكَمِّلُ الجدولَ بالتوصيفِ الصحيحِ:",
+     "images": []
+    },
+    {
+     "text": "الشكلُ",
+     "images": []
+    },
+    {
+     "text": "عددُ الأضلاعِ",
+     "images": []
+    },
+    {
+     "text": "عددُ الرؤوسِ",
+     "images": []
+    },
+    {
+     "text": "الاسمُ",
+     "images": []
+    },
+    {
+     "text": "الأولُ",
+     "images": []
+    },
+    {
+     "text": "5 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "الثانيُ",
+     "images": []
+    },
+    {
+     "text": "3 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "الثالثُ",
+     "images": []
+    },
+    {
+     "text": "6 ‬",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "..",
+     "images": []
+    },
+    {
+     "text": "3",
+     "images": []
+    }
+   ],
+   "challenge": [
+    {
+     "text": "3. تحدٍّ: في محيطي أنا أَرْسُمُ لوحةً من مضلَّعَينِ على الأقلِّ (مثلًا بيتٌ: رُباعيٌّ + مثلثٌ للسقفِ) ثم أُحصي كلَّ الأضلاعِ في لوحتي.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image8.png"
+     ]
+    },
+    {
+     "text": "إشارةُ المرورِ القريبةِ من مدرستي على شكلِ مثلثٍ، ولافتةُ الشارعِ على شكلِ رُباعيٍّ. أُحصي في الاثنينِ معًا:  3 + 4 = 7 ‬ أضلاعًا.",
+     "images": []
+    }
+   ]
+  },
+  "P6-8": {
+   "intro": [
+    {
+     "text": "8",
+     "images": []
+    }
+   ],
+   "practice": [
+    {
+     "text": "التدرَّبُ على حلِّ الوضعية المشكِل",
+     "images": []
+    },
+    {
+     "text": "تقييمُ التمشِّي المُعتَمدِ والنتائجِ",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "في مسابقةِ الاكتشافِ بينَ المجموعاتِ: قُدِّمَتْ لمجموعةٍ سلمى معطياتٌ وحلٌّ جاهزٌ. المطلوبُ: تقييمُ الحلِّ والنتائجِ.",
+     "images": []
+    },
+    {
+     "text": "الوضعيةُ: «جمعَتِ المجموعةُ  345 ‬ ورقةً في الأسبوعِ الأولِ و124 ورقةً في الثاني. قالَ أحدهم: المجموعُ  359 ‬ ورقةً».",
+     "images": []
+    },
+    {
+     "text": "1. أُقيِّمُ التمشِّي: العمليةُ صحيحةٌ (جمعٌ) لكنَّ الحسابَ خاطئٌ!",
+     "images": []
+    },
+    {
+     "text": "2. أتحقَّقُ:  5 + 4 = 9 ‬ ، 4 + 2 = 6 ،  3 + 1 = 4 ‬؛ الناتجُ الصحيحُ 469 ورقةً.",
+     "images": []
+    },
+    {
+     "text": "3. أُصَحِّحُ وأُحرِّرُ: «جمعَتِ المجموعةُ كلُّهُ أربعُمئةٍ وتسعةٌ وستونَ ورقةً». خلاصةُ التقييمِ: تحقَّقْ من كلِّ منزلةٍ!",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    }
+   ],
+   "situation": [
+    {
+     "text": "وضعيةُ التقييمِ الذاتيِّ: حللتُ وضعيةَ الشراءِ هكذا: «الثمنُ  480 ‬ مي + 150 مي =  530 ‬ مي، ومعي 600 مي إذنْ لا يكفي». أُقيِّمُ: هل الجمعُ صحيحٌ؟  480 + 150 ‬ فيه احتفاظٌ (8+5=13) والناتجُ  630 ‬. هل القرارُ صحيحٌ؟ 630 > 600 نعم لا يكفي! الحسابُ كانَ خاطئًا والقرارُ صادِفَ أنَّهُ صحيحٌ. الدَّرْسُ: أُصَحِّحُ الحسابَ دائمًا حتى لو بدا القرارُ منطقيًّا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image14.png"
+     ]
+    }
+   ]
+  },
+  "P6-9": {
+   "intro": [
+    {
+     "text": "9",
+     "images": []
+    },
+    {
+     "text": "توظيفُ المكتسبات",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image11.png"
+     ]
+    },
+    {
+     "text": "احتَرْتُ مكتبي وبسيمٌ مبلغًا لِشراءِ بضاعةِ الأدواتِ التَّاليةِ: مقلمةٌ بـ 200 ‬ مي، قلمٌ بـ120 مي، دفترٌ بـ 300 ‬ مي.",
+     "images": []
+    },
+    {
+     "text": "1. كمَ ميًّا تُكَلِّفُ المقلمةُ والقلمُ معًا؟  200 + 120 = 320 ‬ مي.",
+     "images": []
+    },
+    {
+     "text": "2. كمَ ميًّا تُكَلِّفُ الأدواتُ الثلاثُ كلُّها؟  320 + 300 = 620 ‬ مي.",
+     "images": []
+    },
+    {
+     "text": "3. هل يكفيُ نصفُ دينارٍ ( 500 ‬ مي) لِشرائها كلِّها؟ 620 > 500 لا يكفي.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image18.png"
+     ]
+    },
+    {
+     "text": "في يومِ التجهيزِ: وُزِّعَتْ على رفِّ القسمِ  425 ‬ كتابًا في الرفِّ الأوَّلِ و254 كتابًا في الثاني (من دونِ زيادةٍ). كمُّ كتابًا في الرفَّينِ؟  425 + 254 = 679 ‬ كتابًا.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image29.png"
+     ]
+    },
+    {
+     "text": "دفترُ ذكريَّاتِ السَّنةِ: عددُ الأيامِ التي حضَرْتُ فيها المدرسةَ قريبٌ من  180 ‬ يومًا! عددُ الدُّروسِ التي تعلَّمتُها في كتابِ الرياضياتِ: ستُّ فتراتٍ كاملةَ. أكبرُ عددٍ عملتُ به: 999. وأجملُ عددٍ تعلَّمتُهُ: مئةٌ، ألفُ مبروكٍ علينا!",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image28.png"
+     ]
+    }
+   ],
+   "challenge": [
+    {
+     "text": "تحدِّي الإجازةِ: أُكَوِّنُ بِالأرقامِ  1، 9، 9 ‬ أكبرَ عددٍ وأصغرَ عددٍ (مئةُهُ 1): الأكبرُ  991 ‬... انتباهُ: مئتُهُ يجبُ أن تكونَ 1 إذاً الأكبرُ  919 ‬ والأصغرُ 199.",
+     "images": []
+    },
+    {
+     "text": "ماذا تعلَّمتُ في سَنتي الثانية؟ [FC]",
+     "images": []
+    },
+    {
+     "text": "• الأعدادُ والحسابُ: أقرأُ وأكتبُ وأُمثِّلُ الأعدادَ من 0 إلى 999، وأُفَكِّكُها وأُركِّبُها وأُقارِنُها وأُرتِّبُها.",
+     "images": []
+    },
+    {
+     "text": "• الجمعُ والطرحُ: أجمعُ وأطرحُ بالاحتفاظِ ومن دونِهِ، ومن دونِ زيادةٍ ولا تفكيكٍ، عموديًّا وأفقيًّا.",
+     "images": []
+    },
+    {
+     "text": "• الهندسةُ: أُميِّزُ الخطَّ المستقيمَ والمُنحنيَ والمُنكسِرَ، وأتعرَّفُ المضلَّعاتِ وأرسمُها وأوظِّفُها.",
+     "images": []
+    },
+    {
+     "text": "• النقودُ: أتصرفُ في القطعِ النقديّةِ التونسيّةِ من  5 ‬ مي إلى نصفِ دينارٍ: أَحسِبُ المجاميعَ وأُصْرِفُ وأُقارِنُ.",
+     "images": []
+    },
+    {
+     "text": "• الوضعياتُ المشكِلةُ: أفهمُ وأخطِّطُ وأنجزُ وأتحقَّقُ، وأحرِّرُ حلّي بجُمْلَةٍ صحيحةٍ وأُقَوِّمُ تمشِيَّي.",
+     "images": []
+    },
+    {
+     "text": null,
+     "images": [
+      "media/image75.png"
+     ]
+    },
+    {
+     "text": "مبروكٌ عليكَ سَنتي الثانيةَ في الرياضياتِ! أستعدُّ للسَّنةِ القادمةِ بثقةٍ.",
+     "images": []
+    }
+   ]
+  }
+ }
+}

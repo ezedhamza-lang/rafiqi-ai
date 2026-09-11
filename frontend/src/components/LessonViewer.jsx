@@ -45,17 +45,59 @@ function rich(text) {
   return parts.map((p, i) => (i % 2 === 1 ? <strong key={i}>{bidiNodes(p)}</strong> : <span key={i}>{bidiNodes(p)}</span>));
 }
 
-function QuestionBlock({ block }) {
-  const [showAnswer, setShowAnswer] = useState(false);
+function useServerGate({ block, serverBid, gate, onCheck, onReveal }) {
+  const [result, setResult] = useState(null);
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState('');
+  const checkable = !!(block.checkable && serverBid && onCheck);
+  const attempts = (gate && gate.attempts) || (result && result.attempts) || 0;
+  const revealed = gate && gate.revealed ? gate : null;
+  const check = async (value) => {
+    setBusy(true); setErr('');
+    try {
+      const r = await onCheck(serverBid, value);
+      setResult({ ...r, for: value });
+      return r;
+    } catch (e) {
+      setErr(e.message || 'تعذّر الفحص');
+      return null;
+    } finally { setBusy(false); }
+  };
+  const reveal = async () => {
+    setBusy(true); setErr('');
+    try { await onReveal(serverBid); } catch (e) { setErr(e.message || 'تعذّر إظهار الإجابة'); } finally { setBusy(false); }
+  };
+  return { checkable, attempts, revealed, result, busy, err, check, reveal, gate };
+}
+
+function GateControls({ g, correctText, explanation }) {
+  if (!g.checkable) return null;
+  return (
+    <>
+      {g.err && <p className="lesson-hint">{g.err}</p>}
+      {g.attempts >= 1 && !g.revealed && (
+        <button type="button" className="btn btn-sm" disabled={g.busy} onClick={g.reveal}>إظهار الإجابة</button>
+      )}
+      {g.revealed && (
+        <span className="exercise-answer">الإجابة الصحيحة: {correctText}</span>
+      )}
+      {g.revealed && explanation && <p className="lesson-hint">لنراجع الطريقة: {explanation}</p>}
+    </>
+  );
+}
+
+function QuestionBlock({ block, serverBid, gate, onCheck, onReveal }) {
+  const g = useServerGate({ block, serverBid, gate, onCheck, onReveal });
   const [sel, setSel] = useState(null);
-  const [checked, setChecked] = useState(false);
+  const [text, setText] = useState('');
   const icon = BLOCK_ICONS.question;
   const isMCQ = block.options && block.options.length > 0;
-  const hasAnswer = block.answer !== undefined && block.answer !== null;
-  const answerIndex = hasAnswer && typeof block.answer === 'number'
-    ? Number(block.answer)
-    : (block.options || []).findIndex((o) => String(o) === String(block.answer));
-  const correct = sel != null && hasAnswer && sel === answerIndex;
+  const feedbackFor = !!g.result && String(g.result.for) === String(isMCQ ? sel : text);
+  const revealedIdx = g.revealed && isMCQ
+    ? (typeof g.revealed.answer === 'number' || /^\d+$/.test(String(g.revealed.answer))
+      ? Number(g.revealed.answer)
+      : (block.options || []).findIndex((o) => String(o) === String(g.revealed.answer)))
+    : -1;
   return (
     <div className="lesson-block lesson-block-question">
       <div className="lesson-block-head">
@@ -70,32 +112,50 @@ function QuestionBlock({ block }) {
               <button
                 key={i}
                 type="button"
-                className={`exercise-option ${sel === i ? 'selected' : ''} ${checked && hasAnswer && (i === sel ? (correct ? 'ok' : 'no') : i === answerIndex ? 'ok' : '')}`}
-                onClick={() => { setSel(i); setChecked(false); }}
+                className={`exercise-option ${sel === i ? 'selected' : ''} ${feedbackFor ? (i === sel ? (g.result.correct ? 'ok' : 'no') : '') : ''} ${g.revealed && i === revealedIdx ? 'ok' : ''}`}
+                onClick={() => { setSel(i); }}
               >
                 {opt}
               </button>
             ))}
           </div>
           <div className="exercise-check-row">
-            {hasAnswer && (
-              <button type="button" className="btn btn-sm" onClick={() => setChecked(true)}>تحقّق</button>
+            {g.checkable && (
+              <button type="button" className="btn btn-sm" disabled={sel === null || g.busy} onClick={() => g.check(sel)}>
+                {g.busy ? '...' : 'تحقّق'}
+              </button>
             )}
-            {checked && hasAnswer && (
-              <span className={`exercise-feedback ${correct ? 'ok' : 'no'}`}>
-                {correct ? '✓ صحيح' : '✗ خاطئ'}
+            {feedbackFor && (
+              <span className={`exercise-feedback ${g.result.correct ? 'ok' : 'no'}`}>
+                {g.result.correct ? '✓ صحيح' : '✗ حاول مرة أخرى'}
               </span>
             )}
-            {checked && hasAnswer && answerIndex >= 0 && <span className="exercise-answer">الإجابة: {block.options[answerIndex]}</span>}
+            <GateControls g={g} correctText={revealedIdx >= 0 ? block.options[revealedIdx] : String(g.revealed?.answer ?? '')} explanation={g.revealed?.explanation} />
           </div>
         </>
       ) : (
-        <div className="lesson-answer-toggle">
-          <button type="button" className="btn btn-sm" onClick={() => setShowAnswer((v) => !v)}>
-            {showAnswer ? 'إخفاء الإجابة' : 'إظهار الإجابة'}
-          </button>
-          {showAnswer && <span className="exercise-answer">الإجابة: {block.answer || block.text}</span>}
-        </div>
+        g.checkable ? (
+          <div className="lesson-answer-toggle">
+            <input
+              type="text"
+              className="lesson-inline-input kid-write"
+              dir="rtl"
+              value={text}
+              placeholder="اكتب إجابتك هنا..."
+              onChange={(e) => setText(e.target.value)}
+              aria-label="إجابتك"
+            />
+            <button type="button" className="btn btn-sm" disabled={!text.trim() || g.busy} onClick={() => g.check(text)}>
+              {g.busy ? '...' : 'تحقّق'}
+            </button>
+            {feedbackFor && (
+              <span className={`exercise-feedback ${g.result.correct ? 'ok' : 'no'}`}>
+                {g.result.correct ? '✓ صحيح' : '✗ حاول مرة أخرى'}
+              </span>
+            )}
+            <GateControls g={g} correctText={String(g.revealed?.answer ?? '')} explanation={g.revealed?.explanation} />
+          </div>
+        ) : null
       )}
     </div>
   );
@@ -190,14 +250,15 @@ function VocabularyBlock({ block }) {
   );
 }
 
-function PictureChoiceBlock({ block, onAnswer, blockId }) {
+function PictureChoiceBlock({ block, onAnswer, blockId, serverBid, gate, onCheck, onReveal }) {
+  const g = useServerGate({ block, serverBid, gate, onCheck, onReveal });
   const [sel, setSel] = useState(null);
-  const [checked, setChecked] = useState(false);
   const icon = BLOCK_ICONS.question;
-  const correct = sel !== null && sel === block.answer;
+  const feedbackFor = !!g.result && String(g.result.for) === String(sel);
+  const revealedIdx = g.revealed ? (typeof g.revealed.answer === 'number' || /^\d+$/.test(String(g.revealed.answer)) ? Number(g.revealed.answer) : -1) : -1;
   const verify = () => {
-    setChecked(true);
-    onAnswer(blockId, { type: 'picture', picked: sel, correct: sel === block.answer });
+    onAnswer(blockId, { type: 'picture', picked: sel });
+    g.check(sel);
   };
   return (
     <div className="lesson-block lesson-block-question">
@@ -212,8 +273,8 @@ function PictureChoiceBlock({ block, onAnswer, blockId }) {
           <button
             key={i}
             type="button"
-            className={`pic-card ${sel === i ? 'selected' : ''} ${checked && (i === sel ? (correct ? 'ok' : 'no') : i === block.answer ? 'ok' : '')}`}
-            onClick={() => { setSel(i); setChecked(false); }}
+            className={`pic-card ${sel === i ? 'selected' : ''} ${feedbackFor && i === sel ? (g.result.correct ? 'ok' : 'no') : ''} ${g.revealed && i === revealedIdx ? 'ok' : ''}`}
+            onClick={() => { setSel(i); }}
           >
             {opt.image ? (
               <img src={imgSrc(opt.image)} alt={opt.label || ''} loading="lazy" decoding="async" onError={(e) => { if (restoreOriginalImg(e, opt.image)) return; e.currentTarget.style.display = 'none'; }} style={{ maxWidth: 150, maxHeight: 110, borderRadius: 10, objectFit: 'contain' }} />
@@ -223,12 +284,15 @@ function PictureChoiceBlock({ block, onAnswer, blockId }) {
         ))}
       </div>
       <div className="exercise-check-row">
-        <button type="button" className="btn btn-sm" onClick={verify} disabled={sel === null}>تحقّق</button>
-        {checked && (
-          <span className={`exercise-feedback ${correct ? 'ok' : 'no'}`}>
-            {correct ? '✓ أحسنت' : '✗ حاول مجددًا'}
+        {g.checkable && (
+          <button type="button" className="btn btn-sm" onClick={verify} disabled={sel === null || g.busy}>{g.busy ? '...' : 'تحقّق'}</button>
+        )}
+        {feedbackFor && (
+          <span className={`exercise-feedback ${g.result.correct ? 'ok' : 'no'}`}>
+            {g.result.correct ? '✓ أحسنت' : '✗ حاول مجددًا'}
           </span>
         )}
+        <GateControls g={g} correctText={revealedIdx >= 0 ? (block.options[revealedIdx]?.label || block.options[revealedIdx]?.text || String(revealedIdx)) : String(g.revealed?.answer ?? '')} explanation={g.revealed?.explanation} />
       </div>
       {block.hint && <p className="lesson-hint">{block.hint}</p>}
     </div>
@@ -317,26 +381,15 @@ function useMemoShuffled(n, seed) {
   return order;
 }
 
-// Normalization mirrors backend gradingService (Arabic letters, tashkeel,
-// Arabic-Indic digits, whitespace) so instant checking matches server rules.
-function normAns(s) {
-  return String(s ?? '').trim()
-    .replace(/[أإآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي')
-    .replace(/[ً-ٟ]/g, '')
-    .replace(/[٠-٩]/g, (dd) => '٠١٢٣٤٥٦٧٨٩'.indexOf(dd))
-    .replace(/\s+/g, ' ');
-}
-
-function TextareaBlock({ block, onAnswer, blockId }) {
+function TextareaBlock({ block, onAnswer, blockId, serverBid, gate, onCheck, onReveal }) {
+  const g = useServerGate({ block, serverBid, gate, onCheck, onReveal });
   const [value, setValue] = useState('');
-  const [checked, setChecked] = useState(false);
-  const [ok, setOk] = useState(null);
   const onAnswerRef = useRef(onAnswer);
   onAnswerRef.current = onAnswer;
   useEffect(() => { onAnswerRef.current(blockId, value); }, [value, blockId]);
   const icon = BLOCK_ICONS.textarea;
-  const verifiable = block.answer !== undefined && block.answer !== null;
-  const check = () => { setChecked(true); setOk(normAns(value) === normAns(block.answer)); };
+  const verifiable = g.checkable;
+  const check = () => { g.check(value); };
   return (
     <div className="lesson-block lesson-block-textarea">
       <div className="lesson-block-head">
@@ -352,19 +405,20 @@ function TextareaBlock({ block, onAnswer, blockId }) {
           placeholder={block.placeholder || 'اكتب إجابتك هنا...'}
           rows={block.rows || 5}
           value={value}
-          onChange={(e) => { setValue(e.target.value); setChecked(false); }}
+          onChange={(e) => { setValue(e.target.value); }}
           dir="rtl"
           aria-label={block.title || 'مكان الإجابة'}
         />
       </div>
       {verifiable && (
         <div className="exercise-check-row">
-          <button type="button" className="btn btn-sm" onClick={check}>تحقّق</button>
-          {checked && (
-            <span className={`exercise-feedback ${ok ? 'ok' : 'no'}`}>
-              {ok ? '✓ صحيح' : '✗ حاول مجددًا'}
+          <button type="button" className="btn btn-sm" onClick={check} disabled={g.busy}>{g.busy ? '...' : 'تحقّق'}</button>
+          {g.result && (
+            <span className={`exercise-feedback ${g.result.correct ? 'ok' : 'no'}`}>
+              {g.result.correct ? '✓ صحيح' : '✗ حاول مجددًا'}
             </span>
           )}
+          <GateControls g={g} correctText={String(g.revealed?.answer ?? '')} explanation={g.revealed?.explanation} />
         </div>
       )}
       {block.hint && <p className="lesson-hint">{block.hint}</p>}
@@ -372,17 +426,16 @@ function TextareaBlock({ block, onAnswer, blockId }) {
   );
 }
 
-function MathInputBlock({ block, onAnswer, blockId }) {
+function MathInputBlock({ block, onAnswer, blockId, serverBid, gate, onCheck, onReveal }) {
+  const g = useServerGate({ block, serverBid, gate, onCheck, onReveal });
   const [value, setValue] = useState('');
-  const [checked, setChecked] = useState(false);
-  const [ok, setOk] = useState(null);
   const inputRef = useRef(null);
   const onAnswerRef = useRef(onAnswer);
   onAnswerRef.current = onAnswer;
   useEffect(() => { onAnswerRef.current(blockId, value); }, [value, blockId]);
   const icon = BLOCK_ICONS['math-input'];
-  const verifiable = block.answer !== undefined && block.answer !== null;
-  const check = () => { setChecked(true); setOk(normAns(value) === normAns(block.answer)); };
+  const verifiable = g.checkable;
+  const check = () => { g.check(value); };
   const insertSymbol = (sym) => {
     const el = inputRef.current;
     if (el && typeof el.selectionStart === 'number') {
@@ -414,7 +467,7 @@ function MathInputBlock({ block, onAnswer, blockId }) {
             placeholder={block.placeholder || 'اكتب العملية الحسابية...'}
             rows={block.rows || 6}
             value={value}
-            onChange={(e) => { setValue(e.target.value); setChecked(false); }}
+            onChange={(e) => { setValue(e.target.value); }}
             dir="rtl"
             spellCheck={false}
             aria-label={block.title || 'مكان العملية'}
@@ -435,12 +488,13 @@ function MathInputBlock({ block, onAnswer, blockId }) {
         </div>
         {verifiable && (
           <div className="exercise-check-row">
-            <button type="button" className="btn btn-sm" onClick={check}>تحقّق</button>
-            {checked && (
-              <span className={`exercise-feedback ${ok ? 'ok' : 'no'}`}>
-                {ok ? '✓ صحيح' : '✗ حاول مجددًا'}
+            <button type="button" className="btn btn-sm" onClick={check} disabled={g.busy}>{g.busy ? '...' : 'تحقّق'}</button>
+            {g.result && (
+              <span className={`exercise-feedback ${g.result.correct ? 'ok' : 'no'}`}>
+                {g.result.correct ? '✓ صحيح' : '✗ حاول مجددًا'}
               </span>
             )}
+            <GateControls g={g} correctText={String(g.revealed?.answer ?? '')} explanation={g.revealed?.explanation} />
           </div>
         )}
         {block.hint && <p className="lesson-hint">{block.hint}</p>}
@@ -680,20 +734,23 @@ function FileUploadBlock({ block, onAnswer, blockId }) {
 // block kinds at the same list positions (React hooks rules).
 const TASK_KINDS = ['question','math-input','textarea','drawing','picture-choice','match-pairs','activity','experiment'];
 
-function Block({ block, onAnswer = () => {}, blockId = '' }) {
+function Block({ block, onAnswer = () => {}, blockId = '', gates = null, onCheck = null, onReveal = null }) {
   const kind = block?.kind || 'concept';
   const icon = BLOCK_ICONS[kind] || 'article';
+  const serverBid = block && block.blockId ? block.blockId : '';
+  const gate = gates && serverBid ? gates[serverBid] : null;
+  const gateProps = { serverBid, gate, onCheck, onReveal };
   const inner = () => {
     switch (kind) {
-      case 'question': return <QuestionBlock block={block} />;
+      case 'question': return <QuestionBlock block={block} {...gateProps} />;
       case 'experiment': return <ExperimentBlock block={block} />;
       case 'summary': return <SummaryBlock block={block} />;
       case 'vocabulary': return <VocabularyBlock block={block} />;
       case 'reward': return <RewardBlock block={block} />;
-      case 'textarea': return <TextareaBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
-      case 'math-input': return <MathInputBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
+      case 'textarea': return <TextareaBlock block={block} onAnswer={onAnswer} blockId={blockId} {...gateProps} />;
+      case 'math-input': return <MathInputBlock block={block} onAnswer={onAnswer} blockId={blockId} {...gateProps} />;
       case 'drawing': return <DrawingBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
-      case 'picture-choice': return <PictureChoiceBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
+      case 'picture-choice': return <PictureChoiceBlock block={block} onAnswer={onAnswer} blockId={blockId} {...gateProps} />;
       case 'match-pairs': return <MatchPairsBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
       case 'file-upload': return <FileUploadBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
       default: return <DefaultBlock block={block} kind={kind} icon={icon} />;
@@ -733,6 +790,46 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
   const [answers, setAnswers] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [submitResult, setSubmitResult] = useState(null);
+  const [gates, setGates] = useState({});
+
+  useEffect(() => {
+    let alive = true;
+    setGates({});
+    if (!book?.gradeId || !book?.subjectId || !lesson?.id) return () => { alive = false; };
+    api
+      .get(`/student/lesson/attempts/${book.gradeId}/${book.subjectId}/${lesson.id}`)
+      .then((rows) => {
+        if (!alive) return;
+        const m = {};
+        (rows || []).forEach((r) => { m[r.blockId] = { attempts: r.attempts, correct: r.correct, revealed: r.revealed }; });
+        setGates(m);
+        (rows || []).filter((r) => r.revealed).forEach((r) => {
+          api
+            .post('/student/lesson/reveal', { gradeId: book.gradeId, subjectId: book.subjectId, lessonId: lesson.id, blockId: r.blockId })
+            .then((a) => {
+              if (alive) setGates((prev) => ({ ...prev, [r.blockId]: { ...(prev[r.blockId] || {}), revealed: true, answer: a.answer, explanation: a.explanation } }));
+            })
+            .catch(() => {});
+        });
+      })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, [lesson?.id, book?.gradeId, book?.subjectId]);
+
+  const handleCheck = async (serverBid, answer) => {
+    const r = await api.post('/student/lesson/check', {
+      gradeId: book?.gradeId, subjectId: book?.subjectId, lessonId: lesson.id, blockId: serverBid, answer
+    });
+    setGates((g) => ({ ...g, [serverBid]: { ...(g[serverBid] || {}), attempts: r.attempts, correct: r.correct } }));
+    return r;
+  };
+  const handleReveal = async (serverBid) => {
+    const r = await api.post('/student/lesson/reveal', {
+      gradeId: book?.gradeId, subjectId: book?.subjectId, lessonId: lesson.id, blockId: serverBid
+    });
+    setGates((g) => ({ ...g, [serverBid]: { ...(g[serverBid] || {}), attempts: (g[serverBid] || {}).attempts || 1, revealed: true, answer: r.answer, explanation: r.explanation } }));
+    return r;
+  };
 
   const handleAnswer = (blockId, answer) => {
     setAnswers((prev) => ({ ...prev, [blockId]: answer }));
@@ -867,20 +964,20 @@ function LessonPage({ lesson, index, total, onNav, lessonVideos, completed, onCo
               return (<>
                 {src.length > 0 && (
                   <div className="lesson-source">
-                    {src.map((b, i) => <Block key={'s' + i} block={b} onAnswer={handleAnswer} blockId={`${lesson.id}-s${i}`} />)}
+                    {src.map((b, i) => <Block key={'s' + i} block={b} onAnswer={handleAnswer} blockId={`${lesson.id}-s${i}`} gates={gates} onCheck={handleCheck} onReveal={handleReveal} />)}
                   </div>
                 )}
                 {ex.map((b, i) => (
                   <div key={i} className="lesson-sheet-item">
                     <span className="lesson-sheet-num">{i + 1}</span>
                     <div className="lesson-sheet-body">
-                      <Block block={b} onAnswer={handleAnswer} blockId={`${lesson.id}-${i}`} />
+                      <Block block={b} onAnswer={handleAnswer} blockId={`${lesson.id}-${i}`} gates={gates} onCheck={handleCheck} onReveal={handleReveal} />
                     </div>
                   </div>
                 ))}
                 {rule.length > 0 && (
                   <div className="lesson-rule">
-                    {rule.map((b, i) => <Block key={'r' + i} block={b} onAnswer={handleAnswer} blockId={`${lesson.id}-r${i}`} />)}
+                    {rule.map((b, i) => <Block key={'r' + i} block={b} onAnswer={handleAnswer} blockId={`${lesson.id}-r${i}`} gates={gates} onCheck={handleCheck} onReveal={handleReveal} />)}
                   </div>
                 )}
               </>);

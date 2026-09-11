@@ -6103,3 +6103,18 @@ tr:hover td {
   .schedule-cell-select { display: none; }
   .schedule-cell-print { display: block; }
 }
+
+/* Inline answer input — gated reveal (book) */
+.lesson-inline-input {
+  flex: 1;
+  min-width: 140px;
+  border: 2px solid #dbead2;
+  border-radius: 12px;
+  padding: 0.4rem 0.8rem;
+  font-size: 1.05rem;
+  background: #fffdf5;
+}
+.lesson-inline-input:focus {
+  outline: none;
+  border-color: #ff6a00;
+}

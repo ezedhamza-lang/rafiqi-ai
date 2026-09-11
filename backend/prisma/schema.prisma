@@ -205,6 +205,7 @@ model User {
   parentNotesAbout     ParentNote[]        @relation("ParentNoteStudent")
   parentNotesReceived  ParentNote[]        @relation("ParentNoteTeacher")
   lessonSubmissions    LessonSubmission[]  @relation("UserLessonSubmissions")
+  lessonAttempts       LessonAttempt[]
 
   @@index([role])
   @@index([schoolId])
@@ -1308,4 +1309,24 @@ model LessonSubmission {
   @@index([userId, lessonId])
   @@index([userId, status])
   @@index([status])
+}
+
+model LessonAttempt {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  gradeId    String
+  subjectId  String
+  lessonId   String
+  blockId    String
+  attempts   Int      @default(0)
+  correct    Boolean  @default(false)
+  revealed   Boolean  @default(false)
+  lastAnswer Json?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, gradeId, subjectId, lessonId, blockId])
+  @@index([userId, gradeId, subjectId, lessonId])
 }

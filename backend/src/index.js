@@ -53,6 +53,7 @@ import { parentRouter, teacherRouter } from './routes/parentExtras.js';
 import adminAiKeyRoutes from './routes/adminAiKey.js';
 import adminInsightsRoutes from './routes/adminInsights.js';
 import memoRoutes from './routes/memos.js';
+import lessonGatingRoutes from './routes/lessonGating.js';
 import { setupWs } from './ws.js';
 import { browserPdfStatus } from './services/browserPdf.js';
 import { startRenewalScheduler, runRenewalSweep } from './services/subscriptionRenewalService.js';
@@ -276,6 +277,7 @@ app.use('/api/director/announcements', announcementRoutes);
 app.use('/api/student', adaptiveRoutes);
 app.use('/api/student', progressRoutes);
 app.use('/api/student', studentExtrasRoutes);
+app.use('/api/student', lessonGatingRoutes);
 app.use('/api/teacher', teacherExtrasRoutes);
 app.use('/api/admin/ai', adminAiKeyRoutes);
 app.use('/api/admin/insights', adminInsightsRoutes);
@@ -375,6 +377,7 @@ async function start() {
       await runSqlFileOnce(prisma, path.join(migDir, '20260910190000_refund_unique/migration.sql'));
       await runSqlFileOnce(prisma, path.join(migDir, '20260910200000_fk_restrict_history/migration.sql'));
       await runSqlFileOnce(prisma, path.join(migDir, '20260911090000_grades_coefficients/migration.sql'));
+      await runSqlFileOnce(prisma, path.join(migDir, '20260911180000_lesson_attempts/migration.sql'));
       await runTenancyBootstrap(prisma);
     }).catch((err) => {
       console.error('startup migrations skipped:', err.message);

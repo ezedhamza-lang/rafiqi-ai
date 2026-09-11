@@ -99,12 +99,36 @@ router.get('/curriculum/books/:gradeId/:subjectId', asyncHandler(async (req, res
  *       404:
  *         description: الكتاب غير موجود
  */
+/**
+ * تعقيم حمولة كتاب التلميذ: لا تغادر الإجابات الخادم أبدًا.
+ * كل block يحصل على blockId ثابت b{index} للفحص والكشف server-side.
+ */
+function sanitizeStudentPages(pages) {
+  return (pages || []).map((page) => ({
+    ...page,
+    blocks: (page.blocks || []).map((b, i) => {
+      const clone = JSON.parse(JSON.stringify(b));
+      clone.blockId = 'b' + i;
+      clone.checkable =
+        (b.answer !== undefined && b.answer !== null) ||
+        (b.correctAnswer !== undefined && b.correctAnswer !== null) ||
+        (b.correct !== undefined && b.correct !== null);
+      delete clone.answer;
+      delete clone.correctAnswer;
+      delete clone.correct;
+      delete clone.explanation;
+      delete clone.solution;
+      return clone;
+    })
+  }));
+}
+
 router.get('/curriculum/books/:gradeId/:subjectId/lessons', asyncHandler(async (req, res) => {
   const country = req.query.country;
   const book = getBook(req.params.gradeId, req.params.subjectId, country);
   if (!book) throw new ApiError(404, 'الكتاب غير موجود');
   const pages = getLessonPages(req.params.subjectId, book.grade, req.params.gradeId, country);
-  res.json(pages);
+  res.json(sanitizeStudentPages(pages));
 }));
 
 /**
