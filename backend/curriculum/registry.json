@@ -369,6 +369,20 @@
           "adapter": "math"
         },
         {
+          "id": "math2",
+          "subjectKey": "رياضيات",
+          "title": "رفيقي في الرياضيات س5",
+          "aliases": [
+            "رفيقي في الرياضيات",
+            "رفيقي س5",
+            "math2"
+          ],
+          "bookFile": "rafiqi-math5-book.json",
+          "lessonsFile": "rafiqi-math5-lessons.json",
+          "skillsMapFile": null,
+          "adapter": "math"
+        },
+        {
           "id": "anisi",
           "title": "قراءة",
           "aliases": [

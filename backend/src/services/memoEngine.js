@@ -216,7 +216,8 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
       : '') || cw.distinctiveObjective || (mapLesson && mapLesson.competencies ? mapLesson.competencies[0] : '') || ''
   };
 
-  const subjectWord = normalizeArabic(ctx.subject || '').startsWith('رياضيات') ? 'رياضيات' : (ctx.subject || '');
+  const subjN = normalizeArabic(ctx.subject || '');
+  const subjectWord = subjN.includes('رياضيات') ? 'رياضيات' : (ctx.subject || '');
   const headerTitle = `مذكرة بيداغوجية لحصة ${subjectWord} — ${ctx.level || ''}`;
 
   const stages = (profile.phases || []).map((p) => p.name);

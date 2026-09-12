@@ -284,6 +284,31 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(Buffer.from(pdf.body).subarray(0, 4).toString()).toBe('%PDF');
   });
 
+  it('س5: مذكرة من كتاب «رفيقي في الرياضيات س5» بمراحل متمايزة بلا تكرار', async () => {
+    const res = await request(app)
+      .post('/api/memos/generate')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ subject: 'رياضيات', level: 'السنة الخامسة أساسي', lessonTitle: 'الأعداد الطبيعية (حتى المليارات)' });
+    expect(res.status).toBe(200);
+    const memo = res.body.memo;
+    expect(memo.bookId).toBe('year5/math2');
+    expect(memo.content.spec.headerTitle).toContain('لحصة رياضيات');
+    const rows = memo.content.spec.rows;
+    expect(rows.length).toBeGreaterThanOrEqual(3);
+    expect(new Set(rows.map((r) => r.teacherActivity)).size).toBe(rows.length);
+    for (const r of rows) {
+      expect(r.teacherActivity).not.toBe(r.learnerActivity);
+      expect(r.skill).toBeTruthy();
+      expect(r.tools.length).toBeGreaterThan(0);
+    }
+    const pdf = await request(app)
+      .get(`/api/memos/${memo.id}/pdf`)
+      .set('Authorization', `Bearer ${token}`)
+      .buffer();
+    expect(pdf.status).toBe(200);
+    expect(Buffer.from(pdf.body).subarray(0, 4).toString()).toBe('%PDF');
+  });
+
   it('تغطية كاملة: 6 سنوات × 4 مواد أساسية بلا أي «لا توجد منهجية»', async () => {
     const { resolveMethodology } = await import('../src/services/methodologyResolver.js');
     const years = ['الأولى', 'الثانية', 'الثالثة', 'الرابعة', 'الخامسة', 'السادسة'];

@@ -1,0 +1,7761 @@
+{
+ "r5m01": {
+  "id": "r5m01",
+  "num": 1,
+  "seq": 1,
+  "title": "الأعداد الطبيعية (حتى المليارات)",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نستعمل الأعداد في حياتنا اليومية لعدّ الأشياء وترتيبها وقياسها. في هذا الدرس سنتعلَّم كيف نقرأ ونكتب الأعداد الطبيعية الكبيرة ونُحرّرها، ونُميّز بين قيمة كلّ منزلة فيها. الأعداد الطبيعية لا نهائية: تبدأ من الصفر وتمتدّ إلى ما لا نهاية."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الأعداد الطبيعية (حتى المليارات)",
+    "image": "/curriculum/y5/rafiqi/r5m01-1.png",
+    "imageId": "img-r5m01-1",
+    "alt": "نستعمل الأعداد في حياتنا اليومية لعد الأشياء وترتيبها وقياسها. في هذا الدرس سنتعلم كيف نقرأ ونكتب الأعداد الطبيعية الكبيرة ونحررها، ونميز بين قيمة كل "
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 1."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "في إحدى المدن التونسية يعيش 1 245 780 نسمة. اقرأ هذا العدد جهرًا، ثم اكتبه بالحروف. لاحظ أن الأرقام مجمّعة في ثلاثيات لتسهيل القراءة. حاول أن تتعرَّف على كلّ فئة: آحاد، ألوف، ملايين."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظالأعداد الطبيعية هي: 0، 1، 2، 3، 4، 5، 6، 7، 8، 9، 10، 11، ...كلّ رقم في العدد له قيمة بحسب موقعه: الآحاد، العشرات، المئات، آحاد الألوف، ..."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الأعداد الطبيعية (حتى المليارات) (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "لتسهيل قراءة عدد كبير نُجمّع أرقامه في ثلاثيات من اليمين إلى اليسار."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "كلّ ثلاثية تُقرأ: آحاد، عشرات، مئات (من اليمين) ثم تُسمّى الفئة (ألوف، مليون، مليار)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "العدد 0 يعني غياب الكمّية، وهو أوّل عدد طبيعي."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةالفئات من اليمين لليسار: آحاد، ألوف، ملايين، مليارات.مثال: 7 045 200 تُقرأ: سبعة ملايين وخمسة وأربعون ألفًا ومئتان."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الأعداد الطبيعية (حتى المليارات)",
+    "image": "/curriculum/y5/rafiqi/r5m01-2.png",
+    "imageId": "img-r5m01-2",
+    "alt": "العدد 0 يعني غياب الكمية، وهو أول عدد طبيعي."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "1 اكتب ثلاثة مليارات ومئتا ألف وخمسة وأربعون"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "اكتب بالحروف العدد: 7 045 200",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الأعداد الطبيعية (حتى المليارات)",
+    "image": "/curriculum/y5/rafiqi/r5m01-3.png",
+    "imageId": "img-r5m01-3",
+    "alt": "اكتب بالحروف العدد: 7 045 200"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "قارن بوضع الرمز المناسب:",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الأعداد الطبيعية (حتى المليارات)",
+    "image": "/curriculum/y5/rafiqi/r5m01-4.png",
+    "imageId": "img-r5m01-4",
+    "alt": "قارن بوضع الرمز المناسب:"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "في مدرسة 2 456 تلميذًا، وفي أخرى 2 546. أيّهما أكبر؟ وبكم؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "رتّب الأعداد تنازليًّا: 9 999، 10 001، 9 990، 10 010.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الأعداد الطبيعية (حتى المليارات)",
+    "image": "/curriculum/y5/rafiqi/r5m01-5.png",
+    "imageId": "img-r5m01-5",
+    "alt": "رتب الأعداد تنازليا: 9 999، 10 001، 9 990، 10 010."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "اكتب أكبر عدد ممكن باستعمال الأرقام 5، 0، 3، 8، 1 مرّة واحدة فقط.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسياكتب أصغر عدد من 6 أرقام مختلفة.ما الفرق بين العدد والرقم؟ اشرح بمثال."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "textarea",
+    "title": "أُعبّر",
+    "text": "ما العدد الذي يسبق مباشرة 1 000 000 ؟",
+    "rows": 2
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم رقمًا في العدد 7 045 200؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m01-1",
+    "src": "/curriculum/y5/rafiqi/r5m01-1.png",
+    "caption": "نستعمل الأعداد في حياتنا اليومية لعد الأشياء وترتيبها وقياسها. في هذا الدرس سنتعلم كيف نقرأ ونكتب الأعداد الطبيعية الكبيرة ونحررها، ونميز بين قيمة كل "
+   },
+   {
+    "imageId": "img-r5m01-2",
+    "src": "/curriculum/y5/rafiqi/r5m01-2.png",
+    "caption": "العدد 0 يعني غياب الكمية، وهو أول عدد طبيعي."
+   },
+   {
+    "imageId": "img-r5m01-3",
+    "src": "/curriculum/y5/rafiqi/r5m01-3.png",
+    "caption": "اكتب بالحروف العدد: 7 045 200"
+   },
+   {
+    "imageId": "img-r5m01-4",
+    "src": "/curriculum/y5/rafiqi/r5m01-4.png",
+    "caption": "قارن بوضع الرمز المناسب:"
+   },
+   {
+    "imageId": "img-r5m01-5",
+    "src": "/curriculum/y5/rafiqi/r5m01-5.png",
+    "caption": "رتب الأعداد تنازليا: 9 999، 10 001، 9 990، 10 010."
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m01-1.png"
+ },
+ "r5m02": {
+  "id": "r5m02",
+  "num": 2,
+  "seq": 2,
+  "title": "الجمع والطرح",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الجمع عملية تُستعمل لإيجاد مجموع كمّيتين أو كلّ ما تجمَّع. أمّا الطرح فيُستعمل لإيجاد الباقي أو الفرق بين كمّيتين أو لإيجاد المكمِّل. هاتان العمليتان متعاكستان: كلّ عملية جمع تقابلها عملية طرح، والعكس صحيح."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 2."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "اشترت أمّي من السوق خضرًا بـ 1250 دينارًا وفواكهَ بـ 780 دينارًا."
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب المبلغ الذي دفعته أمّي في المجموع.............................................................",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب المبلغ المتبقّي لها من 2500 دينار.............................................................",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظنُسمّي نتيجة الجمع: المجموع.نُسمّي نتيجة الطرح: الفرق."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الجمع والطرح (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الجمع والطرح عمليتان متعاكستان: إذا كان a + b = c فإن c − b = a."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "في الجمع العمودية نُحاذي الأرقام حسب منازلها (الآحاد تحت الآحاد...).",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نبدأ بالجمع من اليمين (الآحاد) وننقل الزيادة إن وُجدت."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "في الطرح نُحاذي الأرقام أيضًا ونعمد إلى «الحذاء» (الاقتراض) عند الضرورة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةa + b = c ⇒ c − b = aعند الجمع: نحمل الزيادة إلى العمود التالي.عند الطرح: نستلف (نقترض) من العمود المجاور حين يصير الرقم الأعلى أصغر من الأسفل."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "أنجز: 3 456 + 2 789 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "أنجز: 8 004 − 3 567 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "في مدرسة 546 تلميذًا في الابتدائي و318 في التمهيدي. كم المجموع؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "إذا غاب 27 تلميذًا من 864، كم حضر؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "أنجز: 12 500 + 9 876 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "أنجز ذهنيًّا: 10 000 − 9 999 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسياختر ثلاثة أعداد من 3 أرقام، واحسب مجموعها ثم تحقَّق بالطّرح.اشرح بيئة منظومة لماذا 0 هو «العنصر المحايد» للجمع."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "التمرين 1: الربح"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "اشترى تاجرٌ بضاعةً بمبلغ 4500 د، ثم باعها بمبلغ 5200 د."
+   },
+   {
+    "section": "intro",
+    "kind": "textarea",
+    "title": "أُعبّر",
+    "text": "ما مقدار ربح التاجر؟",
+    "rows": 2
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "............................................................................",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "التمرين 2: عمر الأخوين"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "يبلغ مجموع عمري أخوين 25 سنة. عمر الأخ الأكبر 14 سنة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم يبلغ عمر الأخ الأصغر؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "............................................................................",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": []
+ },
+ "r5m03": {
+  "id": "r5m03",
+  "num": 3,
+  "seq": 3,
+  "title": "الضرب",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الضرب عملية مختصرة للجمع المتكرّر. نستعملها حين نريد جمع العدد نفسه عدّة مرّات. مثال: 4 × 3 تعني جمع العدد 3 أربع مرّات: 3 + 3 + 3 + 3 = 12. الضرب عملية إبدالية: يمكن تبديل العاملين دون تغيير الجداء."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الضرب",
+    "image": "/curriculum/y5/rafiqi/r5m03-1.png",
+    "imageId": "img-r5m03-1",
+    "alt": "الضرب عملية مختصرة للجمع المتكرر. نستعملها حين نريد جمع العدد نفسه عدة مرات. مثال: 4 × 3 تعني جمع العدد 3 أربع مرات: 3 + 3 + 3 + 3 = 12. الضرب عملية إ"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 3."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "في حديقة المدرسة 8 صفوف من الأشجار، في كلّ صفّ 12 شجرة. كم شجرة هناك في الحديقة؟ ولِمَ اختار المعلم عملية الضرب بدل الجمع المتكرّر؟ حاول أن تُمثِّل الموقف بمصفوفة (صفوف وأعمدة)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظعوامل الضرب: العددان اللذان نضربهما يُسمّيان عاملين، والنتيجة تُسمّى جداء.الضرب بـ 10، 100، 1000 يساوي إضافة أصفار إلى يمين العدد."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الضرب (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الضرب إبدالي: a × b = b × a."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الضرب تجميعي: (a × b) × c = a × (b × c)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "توزيعي على الجمع: a × (b + c) = a×b + a×c."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةa × b = b × a (إبدالية)a × 10 = a0 (إضافة صفر)a × 100 = a00 (إضافة صفرين)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الضرب",
+    "image": "/curriculum/y5/rafiqi/r5m03-2.png",
+    "imageId": "img-r5m03-2",
+    "alt": "توزيعي على الجمع: a × (b + c) = a×b + a×c."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 56 × 7 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 128 × 24 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الضرب",
+    "image": "/curriculum/y5/rafiqi/r5m03-3.png",
+    "imageId": "img-r5m03-3",
+    "alt": "احسب: 128 × 24 = ?"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 305 × 100 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "اشترى تاجر 25 صندوقًا، في كلّ صندوق 48 قارورة. كم قارورة؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الضرب",
+    "image": "/curriculum/y5/rafiqi/r5m03-4.png",
+    "imageId": "img-r5m03-4",
+    "alt": "اشترى تاجر 25 صندوقا، في كل صندوق 48 قارورة. كم قارورة؟"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 1 200 × 50 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب ذهنيًّا: 25 × 4 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسياحسب 25 × 40 دون احتساب مباشر، مستعملًا نتيجة 25 × 4.تلميذ قال: 99 × 5 = 500 − 5 = 495. هل طريقته صحيحة؟ علّل."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 99 × 5 = ? واشرح طريقتك.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "مكتبة فيها 12 رفًّا، في كلّ رفّ 15 كتابًا. كم كتابًا؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m03-1",
+    "src": "/curriculum/y5/rafiqi/r5m03-1.png",
+    "caption": "الضرب عملية مختصرة للجمع المتكرر. نستعملها حين نريد جمع العدد نفسه عدة مرات. مثال: 4 × 3 تعني جمع العدد 3 أربع مرات: 3 + 3 + 3 + 3 = 12. الضرب عملية إ"
+   },
+   {
+    "imageId": "img-r5m03-2",
+    "src": "/curriculum/y5/rafiqi/r5m03-2.png",
+    "caption": "توزيعي على الجمع: a × (b + c) = a×b + a×c."
+   },
+   {
+    "imageId": "img-r5m03-3",
+    "src": "/curriculum/y5/rafiqi/r5m03-3.png",
+    "caption": "احسب: 128 × 24 = ?"
+   },
+   {
+    "imageId": "img-r5m03-4",
+    "src": "/curriculum/y5/rafiqi/r5m03-4.png",
+    "caption": "اشترى تاجر 25 صندوقا، في كل صندوق 48 قارورة. كم قارورة؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m03-1.png"
+ },
+ "r5m04": {
+  "id": "r5m04",
+  "num": 4,
+  "seq": 4,
+  "title": "القسمة",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "القسمة عملية تُستعمل لتقسيم كمية إلى أجزاء متساوية أو لمعرفة كم مرّة يحتوي عددٌ عددًا آخر. نُسمّي العدد المقسوم (الذي نُقسّمه)، والقاسم (الذي نقسم عليه)، والخارج (النتيجة)، والباقي."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 4."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أراد معلّم أن يوزّع 144 قلمًا على 12 تلميذًا بالتساوي. كم قلمًا ينال كلّ تلميذ؟ لِمَ اختار القسمة لا الضرب؟ حاول أن تتحقَّق من إجابتك بالضرب."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظالقسمة Euclidean: مقسوم = قاسم × خارج + باقي، حيث الباقي < القاسم.إذا كان الباقي صفرًا نقول إن القسمة تامّة (العدد قابل للقسمة)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "القسمة (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "القسمة على 10، 100، 1000: نحذف أصفارًا من اليمين."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "القسمة عكس الضرب: إذا كان a × b = c فإن c ÷ b = a."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "لا يمكن القسمة على الصفر أبدًا."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةمقسوم = قاسم × خارج + باقيa ÷ 10 = حذف صفر، a ÷ 100 = حذف صفرينالتحقّق: قاسم × خارج + باقي = مقسوم"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "القسمة",
+    "image": "/curriculum/y5/rafiqi/r5m04-1.png",
+    "imageId": "img-r5m04-1",
+    "alt": "لا يمكن القسمة على الصفر أبدا."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 378 ÷ 6 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 945 ÷ 9 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "القسمة",
+    "image": "/curriculum/y5/rafiqi/r5m04-2.png",
+    "imageId": "img-r5m04-2",
+    "alt": "احسب: 945 ÷ 9 = ?"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 1 024 ÷ 8 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "وضع معلّم 96 كتابًا في صناديق كلّ واحد يتّسع لـ 8. كم صندوقًا؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "القسمة",
+    "image": "/curriculum/y5/rafiqi/r5m04-3.png",
+    "imageId": "img-r5m04-3",
+    "alt": "وضع معلم 96 كتابا في صناديق كل واحد يتسع ل 8. كم صندوقا؟"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 5 600 ÷ 100 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "هل 723 قابل للقسمة على 3؟ برّر.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيإذا أردنا صناديق تتّسع لـ 10 كتب، كم صندوقًا يلزم لـ 96 كتابًا على الأقلّ؟اشرح لماذا لا يمكن القسمة على الصفر."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": true,
+    "title": "",
+    "text": "تحقَّق: 567 ÷ 7 = 81 صحيح؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "وزّع 240 دينارًا على 6 أطفال. كم ينال كلّ طفل؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m04-1",
+    "src": "/curriculum/y5/rafiqi/r5m04-1.png",
+    "caption": "لا يمكن القسمة على الصفر أبدا."
+   },
+   {
+    "imageId": "img-r5m04-2",
+    "src": "/curriculum/y5/rafiqi/r5m04-2.png",
+    "caption": "احسب: 945 ÷ 9 = ?"
+   },
+   {
+    "imageId": "img-r5m04-3",
+    "src": "/curriculum/y5/rafiqi/r5m04-3.png",
+    "caption": "وضع معلم 96 كتابا في صناديق كل واحد يتسع ل 8. كم صندوقا؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m04-1.png"
+ },
+ "r5m05": {
+  "id": "r5m05",
+  "num": 5,
+  "seq": 5,
+  "title": "الكسور",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الكسر عدد يُمثّل جزءًا من كلّ واحد مقسَّم إلى أجزاء متساوية. يتكوّن الكسر من بسط (العدد الأعلى) ومقام (العدد الأسفل). البسط يُمثّل عدد الأجزاء المأخوذة، والمقام يُمثّل عدد الأجزاء الكلّية."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الكسور",
+    "image": "/curriculum/y5/rafiqi/r5m05-1.png",
+    "imageId": "img-r5m05-1",
+    "alt": "الكسر عدد يمثل جزءا من كل واحد مقسم إلى أجزاء متساوية. يتكون الكسر من بسط (العدد الأعلى) ومقام (العدد الأسفل). البسط يمثل عدد الأجزاء المأخوذة، والمقا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 5."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "قُسّمتْ قرصة بيتزا إلى 8 شرائح متساوية. أكل سليم 3 شرائح. ما الكسر الذي يمثّل ما أكله سليم؟ وما الكسر الذي يمثّل المتبقّي؟ ارسم دائرة ولوّن الجزء الذي أكله سليم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظالكسر a⁄b (حيث b ≠ 0) يعني: نقسم الكلّ إلى b أجزاء، ونأخذ منها a جزءًا.الكسور المتساوية: 1⁄2 = 2⁄4 = 3⁄6 = ... (نضرب أو نقسم البسط والمقام بنفس العدد)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الكسور (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "إذا كان البسط أصغر من المقام ⇒ كسر أصغر من 1."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "إذا تساوى البسط والمقام ⇒ الكسر = 1."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "إذا كان البسط أكبر من المقام ⇒ الكسر أكبر من 1."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةa⁄b = (a×k)⁄(b×k) (تكافؤ الكسور)لجمع كسرين بنفس المقام: نجمع البسطين ونُبقي المقام.a⁄b + c⁄b = (a+c)⁄b"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الكسور",
+    "image": "/curriculum/y5/rafiqi/r5m05-2.png",
+    "imageId": "img-r5m05-2",
+    "alt": "إذا كان البسط أكبر من المقام ⇒ الكسر أكبر من 1."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "اكتب الكسر الذي يمثّل 3 أجزاء من 7:",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الكسور",
+    "image": "/curriculum/y5/rafiqi/r5m05-3.png",
+    "imageId": "img-r5m05-3",
+    "alt": "اكتب الكسر الذي يمثل 3 أجزاء من 7:"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "بسّط الكسر: 6/8"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الكسور",
+    "image": "/curriculum/y5/rafiqi/r5m05-4.png",
+    "imageId": "img-r5m05-4",
+    "alt": "بسط الكسر: 6/8"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 1/4 + 2/4 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 5/7 − 3/7 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الكسور",
+    "image": "/curriculum/y5/rafiqi/r5m05-5.png",
+    "imageId": "img-r5m05-5",
+    "alt": "احسب: 5/7 − 3/7 = ?"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 4/9 + 3/9 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "هل 1/2 يساوي 2/4؟ برّر.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيفي قارورة 1 لتر، شرب سامي 1/4 لتر وأخته 2/4 لتر. ما الكسر الكلّي المشروب؟اشرح لماذا 1/2 = 2/4 برسم دائرة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "رتّب تصاعديًّا: 3/10 ، 7/10 ، 1/10 ، 5/10",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "قارن: 2/3 و 3/4",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m05-1",
+    "src": "/curriculum/y5/rafiqi/r5m05-1.png",
+    "caption": "الكسر عدد يمثل جزءا من كل واحد مقسم إلى أجزاء متساوية. يتكون الكسر من بسط (العدد الأعلى) ومقام (العدد الأسفل). البسط يمثل عدد الأجزاء المأخوذة، والمقا"
+   },
+   {
+    "imageId": "img-r5m05-2",
+    "src": "/curriculum/y5/rafiqi/r5m05-2.png",
+    "caption": "إذا كان البسط أكبر من المقام ⇒ الكسر أكبر من 1."
+   },
+   {
+    "imageId": "img-r5m05-3",
+    "src": "/curriculum/y5/rafiqi/r5m05-3.png",
+    "caption": "اكتب الكسر الذي يمثل 3 أجزاء من 7:"
+   },
+   {
+    "imageId": "img-r5m05-4",
+    "src": "/curriculum/y5/rafiqi/r5m05-4.png",
+    "caption": "بسط الكسر: 6/8"
+   },
+   {
+    "imageId": "img-r5m05-5",
+    "src": "/curriculum/y5/rafiqi/r5m05-5.png",
+    "caption": "احسب: 5/7 − 3/7 = ?"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m05-1.png"
+ },
+ "r5m06": {
+  "id": "r5m06",
+  "num": 6,
+  "seq": 6,
+  "title": "الأعداد العشرية",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "العدد العشري عدد يُكتب بفاصلة عشريَّة تُفصل الجزء الصحيح عن الجزء العشري. مثال: 3,75 تعني 3 وحدات و7 أعشار و5 من المئة. نستعمل الأعداد العشرية كثيرًا في النقود، القياس، النتائج المدرسية."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 6."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "اشترت سلمى دفترًا بثمن 2,750 دينار ومحفظة بـ 4,500 دينار. ما الثمن الإجمالي؟ وإذا دفعت 10 دنانير كم يتبقّى لها؟ لاحظ كيف تُحاذى الفاصلتان عند الجمع."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظالجزء الصحيح يقع يسار الفاصلة، والجزء العشري يقع يمينها.أوّل رقم بعد الفاصلة = الأعشار، ثاني رقم = المئات، ثالث = الألوف..."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الأعداد العشرية (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "كلّ عدد طبيعي هو عدد عشري بفاصلة وصفر: 5 = 5,0."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "لجمع أو طرح عددين عشريَّين: نُحاذي الفاصلتين ثم نُنجز العملية كالأعداد الطبيعية."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "للضرب بـ 10، 100، 1000: نُزيح الفاصلة يمينًا بقدر عدد الأصفار."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "للقسمة على 10، 100، 1000: نُزيح الفاصلة يسارًا."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةa,75 = a + 7/10 + 5/1000,5 = 1/2 = 5/10 (تكافؤ)a × 10 = إزاحة الفاصلة موضعًا يمينًا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الأعداد العشرية",
+    "image": "/curriculum/y5/rafiqi/r5m06-1.png",
+    "imageId": "img-r5m06-1",
+    "alt": "للقسمة على 10، 100، 1000: نزيح الفاصلة يسارا."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 3,5 + 2,8 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 12,75 − 4,6 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 0,25 × 10 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 45,7 ÷ 100 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الأعداد العشرية",
+    "image": "/curriculum/y5/rafiqi/r5m06-2.png",
+    "imageId": "img-r5m06-2",
+    "alt": "احسب: 45,7 ÷ 100 = ?"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "قارن: 4,75 و 4,8",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "قارن: 0,5 و 0,50",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيما العدد العشري الذي يقع منتصف بين 2,5 و2,6؟اشرح لماذا 0,5 = 1/2 برسم مستطيل."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حوّل الكسر 3/4 إلى عدد عشري.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "اكتب 2,499 مقرّبًا إلى جزأين عشريَّين.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m06-1",
+    "src": "/curriculum/y5/rafiqi/r5m06-1.png",
+    "caption": "للقسمة على 10، 100، 1000: نزيح الفاصلة يسارا."
+   },
+   {
+    "imageId": "img-r5m06-2",
+    "src": "/curriculum/y5/rafiqi/r5m06-2.png",
+    "caption": "احسب: 45,7 ÷ 100 = ?"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m06-1.png"
+ },
+ "r5m07": {
+  "id": "r5m07",
+  "num": 7,
+  "seq": 7,
+  "title": "النسبة المئوية",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "النِّسبة المئويَّة وسيلة للتعبير عن جزء من مئة. نكتبها بالرمز «%» وتعني «من المئة». نواجهها يوميًّا في التَّخفيضات، النَّتائج المدرسية، الإحصاءات، الفوائد البنكية."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "النسبة المئوية",
+    "image": "/curriculum/y5/rafiqi/r5m07-1.png",
+    "imageId": "img-r5m07-1",
+    "alt": "النسبة المئوية وسيلة للتعبير عن جزء من مئة. نكتبها بالرمز «%» وتعني «من المئة». نواجهها يوميا في التخفيضات، النتائج المدرسية، الإحصاءات، الفوائد البنك"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 7."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "في نهاية السنة، نجح 80% من تلاميذ القسم في الامتحان. إذا كان عدد التلاميذ 25، فكم تلميذًا نجح؟ حاول أن تُمثِّل ذلك برسم شبكة 10×10 ولوّن 80 خليّة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظx% تعني x ÷ 100. مثال: 25% = 25⁄100 = 0,25 = 1⁄4.لحساب x% من عدد N: نحسب (N × x) ÷ 100."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "النسبة المئوية (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "50% = 1/2 ، 25% = 1/4 ، 10% = 1/10 ، 75% = 3/4."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "100% تعني الكلّ، 0% تعني لا شيء."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "لتحويل كسر إلى نسبة مئوية: نضربه في 100 ونضيف الرمز %."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةx% من N = (N × x) ÷ 10050% = 1/2 = 0,525% = 1/4 = 0,25"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "النسبة المئوية",
+    "image": "/curriculum/y5/rafiqi/r5m07-2.png",
+    "imageId": "img-r5m07-2",
+    "alt": "لتحويل كسر إلى نسبة مئوية: نضربه في 100 ونضيف الرمز %."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حوّل إلى كسر: 50%",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حوّل إلى عدد عشري: 75%",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "النسبة المئوية",
+    "image": "/curriculum/y5/rafiqi/r5m07-3.png",
+    "imageId": "img-r5m07-3",
+    "alt": "حول إلى عدد عشري: 75%"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب 20% من 250:",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب 80% من 25:",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حسم 15% من حاسوب ثمنه 800 د. كم الحسم؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "textarea",
+    "title": "أُعبّر",
+    "text": "ما الثمن النهائي بعد الحسم؟",
+    "rows": 2
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيإذا زاد ثمن سلعة 10% ثم نقص 10%، هل يعود للثمن الأصلي؟ برّر.في امتحان من 20، حصل تلميذ على 15. ما النسبة المئوية؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "في قسم 30 تلميذًا، 18 بنتات. ما النسبة المئوية للبنات؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم نسبة 1/5؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m07-1",
+    "src": "/curriculum/y5/rafiqi/r5m07-1.png",
+    "caption": "النسبة المئوية وسيلة للتعبير عن جزء من مئة. نكتبها بالرمز «%» وتعني «من المئة». نواجهها يوميا في التخفيضات، النتائج المدرسية، الإحصاءات، الفوائد البنك"
+   },
+   {
+    "imageId": "img-r5m07-2",
+    "src": "/curriculum/y5/rafiqi/r5m07-2.png",
+    "caption": "لتحويل كسر إلى نسبة مئوية: نضربه في 100 ونضيف الرمز %."
+   },
+   {
+    "imageId": "img-r5m07-3",
+    "src": "/curriculum/y5/rafiqi/r5m07-3.png",
+    "caption": "حول إلى عدد عشري: 75%"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m07-1.png"
+ },
+ "r5m08": {
+  "id": "r5m08",
+  "num": 8,
+  "seq": 8,
+  "title": "مسائل متكاملة في الأعداد",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "في كثير من المسائل الحياتيَّة نحتاج إلى توظيف عدّة عمليَّات معًا (جمع، طرح، ضرب، قسمة). سنتدرَّب في هذا الدرس على تحليل المسألة واختيار العمليَّات المناسبة وترتيبها."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 8."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "ذهب تلميذ إلى السوق بـ 50 دينارًا. اشترى 3 كتب بـ 4,500 د لكلّ كتاب، ودفترًا بـ 2,750 د. كم تبقّى معه؟ وما النسبة المئوية للمبلغ المتبقّي؟ حلَّل المسألة إلى خطوات قبل الحساب."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظنقرأ المسألة مرّتين على الأقلّ قبل البدء.نُحدِّد المعطيات والمطلوب بوضوح."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مسائل متكاملة في الأعداد (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نُفكِّك المسألة إلى خطوات صغيرة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نُنجز العمليَّات بالترتيب المنطقي."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نتحقَّق من النتيجة بعملية عكسية إن أمكن."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةترتيب العمليَّات: الأقواس → الضرب/القسمة → الجمع/الطرحللتحقّق: نُعكس العملية (مثلاً الجمع عكس الطرح)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "3 كتب بـ 4,500 د لكلّ كتاب = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المجموع الكلّي = 13,500 + 2,750 = ؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المتبقّي = 50 − 16,250 = ؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "النسبة المئوية للمتبقّي:"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "بائع اشترى 40 كغ تفاح بـ 1,200 د/كغ، وباعها بـ 1,500 د/كغ. ما الربح؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "إذا باع 90% من الكمّية، كم كغ بقي؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسياخترع مسألة من حياتك تستعمل فيها الجمع والضرب والنسبة المئوية.حلَّل: «إذا تضاعف ثمن سلعة 3 مرات ثم نقص 50%، ما التغيُّر الكلّي؟»"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "ثلاثة أصدقاء اقتسموا فاتورة 75 د بالتساوي. كم دفع كلّ واحد؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "إذا أضاف كلّ واحد بقشيشًا 10%، كم دفع كلّ واحد؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "الدرس مراجعة مراجعة المحور 1: الأعداد والحساب"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "أنجز التمارين الآتية لترسيخ ما تعلّمته في محور الأعداد والحساب. غطَّت هذه المراجعة جميع الدروس الثمانية من المحور.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "kind": "table",
+    "title": "جدول",
+    "text": "",
+    "columns": [
+     "التمرين",
+     "النتيجة"
+    ],
+    "rows": [
+     [
+      "اكتب بالأرقام: سبعة مليارات ومئة وعشرون ألفًا وثلاثة.",
+      "7 000 120 003"
+     ],
+     [
+      "احسب: 1 256 + 879 = ؟",
+      "2 135"
+     ],
+     [
+      "احسب: 3 000 − 1 456 = ؟",
+      "1 544"
+     ],
+     [
+      "احسب: 245 × 12 = ؟",
+      "2 940"
+     ],
+     [
+      "احسب خارج: 936 ÷ 4 = ؟",
+      "234"
+     ],
+     [
+      "بسّط الكسر 6/8.",
+      "3/4"
+     ],
+     [
+      "احسب: 2,5 + 1,25 = ؟",
+      "3,75"
+     ],
+     [
+      "احسب 20% من 250.",
+      "50"
+     ],
+     [
+      "احسب 25% من 80.",
+      "20"
+     ],
+     [
+      "حوّل 3/4 إلى عدد عشري.",
+      "0,75"
+     ]
+    ]
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ أُقيّم نفسياختر ثلاثة أعداد طبيعية مختلفة، واحسب مجموعها ثم جداءها.اوُجد الكسر الذي يساوي 0,5 بطريقتين مختلفتين.صِف بكلمة واحدة (تجميع، تقسيم، جزء، كلّ) كلّ عمليَّة من العمليات الأربع.اقترح مسألة من حياتك اليومية تستعمل فيها النسبة المئوية."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "المحور 2الهندسةتعرّف المضلَّعات والرباعيَّات والمثلثات والدائرة، ودراسة الزوايا والتناظر المحوري وإنشاء الأشكال."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "مسائل متكاملة في الأعداد",
+    "image": "/curriculum/y5/rafiqi/r5m08-1.png",
+    "imageId": "img-r5m08-1",
+    "alt": "أنجز التمارين الآتية لترسيخ ما تعلمته في محور الأعداد والحساب. غطت هذه المراجعة جميع الدروس الثمانية من المحور."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m08-1",
+    "src": "/curriculum/y5/rafiqi/r5m08-1.png",
+    "caption": "أنجز التمارين الآتية لترسيخ ما تعلمته في محور الأعداد والحساب. غطت هذه المراجعة جميع الدروس الثمانية من المحور."
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m08-1.png"
+ },
+ "r5m09": {
+  "id": "r5m09",
+  "num": 1,
+  "seq": 9,
+  "title": "المضلعات والرباعيات",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "المضلَّع شكل هندسي مُغلَق يتكوّن من قطع مستقيمة متتالية تُسمّى أضلاعًا. تتلاقى الأضلاع في رؤوس. حسب عدد الأضلاع نُسمّي المضلَّع: مثلّث (3 أضلاع)، رباعيّ (4)، خماسيّ (5)، سداسيّ (6)...",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "المضلعات والرباعيات",
+    "image": "/curriculum/y5/rafiqi/r5m09-1.png",
+    "imageId": "img-r5m09-1",
+    "alt": "المضلع شكل هندسي مغلق يتكون من قطع مستقيمة متتالية تسمى أضلاعا. تتلاقى الأضلاع في رؤوس. حسب عدد الأضلاع نسمي المضلع: مثلث (3 أضلاع)، رباعي (4)، خماسي "
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 1."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "لاحظ الأشكال الأربعة في الصورة. ما الذي يُميّز المربّع عن المستطيل؟ وما الذي يجمعهما؟ وما الفرق بين المعيّن والمربّع؟ حاول أن تتعرَّف على كلّ شكل من خصائصه."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظالمضلَّع الذي له 4 أضلاع يُسمّى رباعيًّا.من أشهر الرباعيَّات: المربّع، المستطيل، المعيّن، شبه المنحرف."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المضلعات والرباعيات (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المربّع: 4 أضلاع متساوية + 4 زوايا قائمة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المستطيل: 4 زوايا قائمة + كلّ ضلعين متقابلين متوازيين ومتساويين."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المعيّن: 4 أضلاع متساوية + كلّ ضلعين متقابلين متوازيين."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شبه المنحرف: ضلعان متقابلان متوازيان فقط."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةالمربّع = مستطيل + معيّن (في آنٍ واحد)كلّ مربّع مستطيل، لكن ليس كلّ مستطيل مربّعًا.مجموع زوايا الرباعي = 360°"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "المضلعات والرباعيات",
+    "image": "/curriculum/y5/rafiqi/r5m09-2.png",
+    "imageId": "img-r5m09-2",
+    "alt": "شبه المنحرف: ضلعان متقابلان متوازيان فقط."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "صنّف: شكل له 4 زوايا قائمة وأضلاع غير متساوية."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "صنّف: شكل له 4 أضلاع متساوية وزوايا غير قائمة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "المضلعات والرباعيات",
+    "image": "/curriculum/y5/rafiqi/r5m09-3.png",
+    "imageId": "img-r5m09-3",
+    "alt": "صنف: شكل له 4 أضلاع متساوية وزوايا غير قائمة."
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم مربّعًا طول ضلعه 4 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم مستطيلًا طوله 5 cm وعرضه 3 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "المضلعات والرباعيات",
+    "image": "/curriculum/y5/rafiqi/r5m09-4.png",
+    "imageId": "img-r5m09-4",
+    "alt": "ارسم مستطيلا طوله 5 cm وعرضه 3 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "هل يمكن لرباعيّ أن يكون له 3 زوايا قائمة فقط؟ ما شكله؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "مجموع زوايا رباعي = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيارسم رباعيًّا ليس مستطيلًا ولا معيّنًا ولا شبه منحرف.أوجد مجموع زوايا مضلَّع خماسي (تلميح: 540°)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم شبه منحرف بقاعدتين 6 cm و 4 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم ضلعًا للمعيّن؟ وكم زاوية؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m09-1",
+    "src": "/curriculum/y5/rafiqi/r5m09-1.png",
+    "caption": "المضلع شكل هندسي مغلق يتكون من قطع مستقيمة متتالية تسمى أضلاعا. تتلاقى الأضلاع في رؤوس. حسب عدد الأضلاع نسمي المضلع: مثلث (3 أضلاع)، رباعي (4)، خماسي "
+   },
+   {
+    "imageId": "img-r5m09-2",
+    "src": "/curriculum/y5/rafiqi/r5m09-2.png",
+    "caption": "شبه المنحرف: ضلعان متقابلان متوازيان فقط."
+   },
+   {
+    "imageId": "img-r5m09-3",
+    "src": "/curriculum/y5/rafiqi/r5m09-3.png",
+    "caption": "صنف: شكل له 4 أضلاع متساوية وزوايا غير قائمة."
+   },
+   {
+    "imageId": "img-r5m09-4",
+    "src": "/curriculum/y5/rafiqi/r5m09-4.png",
+    "caption": "ارسم مستطيلا طوله 5 cm وعرضه 3 cm."
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m09-1.png"
+ },
+ "r5m10": {
+  "id": "r5m10",
+  "num": 2,
+  "seq": 10,
+  "title": "المثلثات",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المثلَّث مضلَّع له ثلاثة أضلاع وثلاثة رؤوس وثلاث زوايا. مجموع زوايا المثلّث دائمًا يساوي 180°، وهي خاصِّيَّة أساسيَّة تُستعمل في حلّ المسائل الهندسيَّة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "المثلثات",
+    "image": "/curriculum/y5/rafiqi/r5m10-1.png",
+    "imageId": "img-r5m10-1",
+    "alt": "المثلث مضلع له ثلاثة أضلاع وثلاثة رؤوس وثلاث زوايا. مجموع زوايا المثلث دائما يساوي 180°، وهي خاصية أساسية تستعمل في حل المسائل الهندسية."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 2."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم مثلَّثًا بأيّ أبعاد، ثمَّ قِس زواياه بالمنقلة واجمعها. ماذا تلاحظ؟ كرّر التجربة مع مثلَّثات مختلفة الشكل. هل تصل دائمًا إلى النتيجة نفسها؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظمجموع زوايا أيِّ مثلَّث = 180°.إذا عرفنا زاويتين، نجد الثالثة بالطرح من 180°."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المثلثات (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المثلَّث المتساوي الأضلاع: 3 أضلاع متساوية و3 زوايا متساوية (60°)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المثلَّث المتساوي الساقين: ضلعان متساويان وزاويتان متساويتان."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المثلَّث القائم: يحتوي زاوية قائمة (90°)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المثلَّث المنفرج: يحتوي زاوية منفرجة أكبر من 90°."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةمجموع زوايا المثلَّث = 180°زاوية ثالثة = 180° − (زاوية1 + زاوية2)في المتساوي الأضلاع: كلّ زاوية = 60°"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "المثلثات",
+    "image": "/curriculum/y5/rafiqi/r5m10-2.png",
+    "imageId": "img-r5m10-2",
+    "alt": "المثلث المنفرج: يحتوي زاوية منفرجة أكبر من 90°."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "في مثلَّث، الزاويتان 60° و80°. ما الثالثة؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "مثلَّث متساوي الأضلاع، ما قيس كلّ زاوية؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "المثلثات",
+    "image": "/curriculum/y5/rafiqi/r5m10-3.png",
+    "imageId": "img-r5m10-3",
+    "alt": "مثلث متساوي الأضلاع، ما قيس كل زاوية؟"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "مثلَّث قائم الزاوية، إحدى زاويتيه 35°. ما الأخرى؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم مثلَّثًا متساوي الأضلاع طول ضلعه 5 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "المثلثات",
+    "image": "/curriculum/y5/rafiqi/r5m10-4.png",
+    "imageId": "img-r5m10-4",
+    "alt": "ارسم مثلثا متساوي الأضلاع طول ضلعه 5 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "هل يُمكن لمثلَّث أن يحوي زاويتين قائمتين؟ علِّل.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "مثلَّث أضلاعه 3، 4، 5. ما نوعه؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "المثلثات",
+    "image": "/curriculum/y5/rafiqi/r5m10-5.png",
+    "imageId": "img-r5m10-5",
+    "alt": "مثلث أضلاعه 3، 4، 5. ما نوعه؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيارسم مثلَّثًا قائمًا متساوي الساقين. ما قيس زواياه؟أوجد زاوية مجهولة: الزاوية1 = 2×الزاوية2، والزاوية3 = 60°."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "مثلَّث زاوية فيه 120°. ما نوعه؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مجموع زاويتين في مثلَّث = 110°. ما الثالثة؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m10-1",
+    "src": "/curriculum/y5/rafiqi/r5m10-1.png",
+    "caption": "المثلث مضلع له ثلاثة أضلاع وثلاثة رؤوس وثلاث زوايا. مجموع زوايا المثلث دائما يساوي 180°، وهي خاصية أساسية تستعمل في حل المسائل الهندسية."
+   },
+   {
+    "imageId": "img-r5m10-2",
+    "src": "/curriculum/y5/rafiqi/r5m10-2.png",
+    "caption": "المثلث المنفرج: يحتوي زاوية منفرجة أكبر من 90°."
+   },
+   {
+    "imageId": "img-r5m10-3",
+    "src": "/curriculum/y5/rafiqi/r5m10-3.png",
+    "caption": "مثلث متساوي الأضلاع، ما قيس كل زاوية؟"
+   },
+   {
+    "imageId": "img-r5m10-4",
+    "src": "/curriculum/y5/rafiqi/r5m10-4.png",
+    "caption": "ارسم مثلثا متساوي الأضلاع طول ضلعه 5 cm."
+   },
+   {
+    "imageId": "img-r5m10-5",
+    "src": "/curriculum/y5/rafiqi/r5m10-5.png",
+    "caption": "مثلث أضلاعه 3، 4، 5. ما نوعه؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m10-1.png"
+ },
+ "r5m11": {
+  "id": "r5m11",
+  "num": 3,
+  "seq": 11,
+  "title": "الدائرة والقرص",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الدائرة هي مجموعة النقاط الواقعة على بُعد ثابت من نقطة ثابتة تُسمّى المركز. هذا البُعد الثابت يُسمّى نصف القطر. القرص هو المساحة المحصورة داخل الدائرة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الدائرة والقرص",
+    "image": "/curriculum/y5/rafiqi/r5m11-1.png",
+    "imageId": "img-r5m11-1",
+    "alt": "الدائرة هي مجموعة النقاط الواقعة على بعد ثابت من نقطة ثابتة تسمى المركز. هذا البعد الثابت يسمى نصف القطر. القرص هو المساحة المحصورة داخل الدائرة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 3."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم دائرة وقِس نصف قطرها. ثم ارسم قطرًا فيها. ما العلاقة بين نصف القطر والقطر؟ هل يمكنك إيجاد علاقة بين محيط الدائرة وقطرها؟ (نسبة تقريبية ≈ 3,14)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظالمركز: النقطة المركزية.نصف القطر (r): المسافة بين المركز وأيّ نقطة من الدائرة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الدائرة والقرص (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "القطر (D): قطعة تصل بين نقطتين من الدائرة وتمرّ بالمركز. D = 2 × r."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الوتر: قطعة تصل بين نقطتين من الدائرة دون المرور بالمركز."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "محيط الدائرة = π × القطر = 2 × π × r ، حيث π ≈ 3,14."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةD = 2 × rP = 2 × π × r أو P = π × Dπ ≈ 3,14 (نسبة تقريبية)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الدائرة والقرص",
+    "image": "/curriculum/y5/rafiqi/r5m11-2.png",
+    "imageId": "img-r5m11-2",
+    "alt": "محيط الدائرة = π × القطر = 2 × π × r ، حيث π ≈ 3,14."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب محيط دائرة قطرها 10 cm.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب محيط دائرة نصف قطرها 5 cm.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الدائرة والقرص",
+    "image": "/curriculum/y5/rafiqi/r5m11-3.png",
+    "imageId": "img-r5m11-3",
+    "alt": "احسب محيط دائرة نصف قطرها 5 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "احسب محيط دائرة نصف قطرها 7 cm (π=3,14)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "إذا كان المحيط 12,56 cm فما نصف القطر؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الدائرة والقرص",
+    "image": "/curriculum/y5/rafiqi/r5m11-4.png",
+    "imageId": "img-r5m11-4",
+    "alt": "إذا كان المحيط 12,56 cm فما نصف القطر؟"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم دائرة مركزها O ونصف قطرها 3 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "textarea",
+    "title": "أُعبّر",
+    "text": "ما الفرق بين الدائرة والقرص؟",
+    "rows": 2
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيإذا تضاعف نصف القطر، كم مرّة يتضاعف المحيط؟احسب الفرق بين محيطي دائرتين نصف قطرهما 5 cm و 10 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب القطر إذا كان نصف القطر 8 cm.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب محيط دائرة قطرها 20 cm.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m11-1",
+    "src": "/curriculum/y5/rafiqi/r5m11-1.png",
+    "caption": "الدائرة هي مجموعة النقاط الواقعة على بعد ثابت من نقطة ثابتة تسمى المركز. هذا البعد الثابت يسمى نصف القطر. القرص هو المساحة المحصورة داخل الدائرة."
+   },
+   {
+    "imageId": "img-r5m11-2",
+    "src": "/curriculum/y5/rafiqi/r5m11-2.png",
+    "caption": "محيط الدائرة = π × القطر = 2 × π × r ، حيث π ≈ 3,14."
+   },
+   {
+    "imageId": "img-r5m11-3",
+    "src": "/curriculum/y5/rafiqi/r5m11-3.png",
+    "caption": "احسب محيط دائرة نصف قطرها 5 cm."
+   },
+   {
+    "imageId": "img-r5m11-4",
+    "src": "/curriculum/y5/rafiqi/r5m11-4.png",
+    "caption": "إذا كان المحيط 12,56 cm فما نصف القطر؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m11-1.png"
+ },
+ "r5m12": {
+  "id": "r5m12",
+  "num": 4,
+  "seq": 12,
+  "title": "الزوايا",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الزاوية تتكوّن من نصفي مستقيم لهما أصل مشترك يُسمّى رأس الزاوية. نقيس الزاوية بالدرجة (°) باستعمال المنقلة. الزوايا تُصنَّف حسب قيسها."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الزوايا",
+    "image": "/curriculum/y5/rafiqi/r5m12-1.png",
+    "imageId": "img-r5m12-1",
+    "alt": "الزاوية تتكون من نصفي مستقيم لهما أصل مشترك يسمى رأس الزاوية. نقيس الزاوية بالدرجة (°) باستعمال المنقلة. الزوايا تصنف حسب قيسها."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 4."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم زاوية وقِسها بالمنقلة. ثم ارسم زوايا مختلفة: أصغر من 90°، تساوي 90°، أكبر من 90°، تساوي 180°. صنّف كلّ زاوية حسب نوعها."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظالزاوية الحادّة: أقل من 90°.الزاوية القائمة: تساوي 90°."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الزوايا (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الزاوية المنفرجة: أكبر من 90° وأقل من 180°."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الزاوية المستقيمة: تساوي 180°."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الزاويتان المتقابلتان بالرأس متساويتان."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "إذا كان مجموع زاويتين 90° فهما متكاملتان."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "إذا كان مجموع زاويتين 180° فهما متتامّتان."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةزاوية حادّة < 90° < زاوية منفرجة < 180°زاويتان متكاملتان: مجموعهما = 90°زاويتان متتامّتان: مجموعهما = 180°"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الزوايا",
+    "image": "/curriculum/y5/rafiqi/r5m12-2.png",
+    "imageId": "img-r5m12-2",
+    "alt": "إذا كان مجموع زاويتين 180° فهما متتامتان."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "صنّف: 45°؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "صنّف: 90°؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الزوايا",
+    "image": "/curriculum/y5/rafiqi/r5m12-3.png",
+    "imageId": "img-r5m12-3",
+    "alt": "صنف: 90°؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "صنّف: 120°؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "زاويتان 35° و55°. ما مجموعهما؟ وما نوع العلاقة؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الزوايا",
+    "image": "/curriculum/y5/rafiqi/r5m12-4.png",
+    "imageId": "img-r5m12-4",
+    "alt": "زاويتان 35° و55°. ما مجموعهما؟ وما نوع العلاقة؟"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم زاوية قائمة باستعمال المنقلة."
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم زاوية منفرجة قيسها 120°."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيهل يمكن لزاويتين متكاملتين أن تكونا منفرجتين؟ علِّل.ارسم زاويتين متقابلتين بالرأس وقِسهما. ماذا تلاحظ؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "زاوية 110°، ما مكملتها إلى 180°؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "زاوية 30°، ما مكمّلتها إلى 90°؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m12-1",
+    "src": "/curriculum/y5/rafiqi/r5m12-1.png",
+    "caption": "الزاوية تتكون من نصفي مستقيم لهما أصل مشترك يسمى رأس الزاوية. نقيس الزاوية بالدرجة (°) باستعمال المنقلة. الزوايا تصنف حسب قيسها."
+   },
+   {
+    "imageId": "img-r5m12-2",
+    "src": "/curriculum/y5/rafiqi/r5m12-2.png",
+    "caption": "إذا كان مجموع زاويتين 180° فهما متتامتان."
+   },
+   {
+    "imageId": "img-r5m12-3",
+    "src": "/curriculum/y5/rafiqi/r5m12-3.png",
+    "caption": "صنف: 90°؟"
+   },
+   {
+    "imageId": "img-r5m12-4",
+    "src": "/curriculum/y5/rafiqi/r5m12-4.png",
+    "caption": "زاويتان 35° و55°. ما مجموعهما؟ وما نوع العلاقة؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m12-1.png"
+ },
+ "r5m13": {
+  "id": "r5m13",
+  "num": 5,
+  "seq": 13,
+  "title": "التناظر المحوري",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "التَّناظر المحوري تحويل هندسي ينقل شكلًا إلى شكل آخر متناظر معه بالنسبة إلى مستقيم يُسمّى محور التَّناظر. الشكلان المتناظران متطابقان في الشكل والحجم، لكنهما معكوسان."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "التناظر المحوري",
+    "image": "/curriculum/y5/rafiqi/r5m13-1.png",
+    "imageId": "img-r5m13-1",
+    "alt": "التناظر المحوري تحويل هندسي ينقل شكلا إلى شكل آخر متناظر معه بالنسبة إلى مستقيم يسمى محور التناظر. الشكلان المتناظران متطابقان في الشكل والحجم، لكنهما"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 5."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم مستقيمًا عموديًّا (محور تناظر)، ثمَّ ارسم مثلَّثًا على يمينه. أنشئ صورة المثلَّث بالتناظر. ماذا تلاحظ؟ هل الشكلان متطابقان؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظكلّ نقطة M لها صورة M' بحيث يكون محور التَّناظر واسطًا للقطعة [MM'].المسافة بين النقطة ومحور التَّناظر = المسافة بين صورتها والمحور."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "التناظر المحوري (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الشكل وصورته بالتناظر متطابقان في الشكل والحجم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المثلَّث المتساوي الأضلاع له 3 محاور تناظر."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المربّع له 4 محاور تناظر."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المستطيل له 2 محاور تناظر."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الدائرة لها عدد لا نهائي من محاور التَّناظر."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةمحور التَّناظر ⊥ القطعة [MM'] وواسط لهاكلّ نقطة على المحور: صورتها = نفسها"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "التناظر المحوري",
+    "image": "/curriculum/y5/rafiqi/r5m13-2.png",
+    "imageId": "img-r5m13-2",
+    "alt": "الدائرة لها عدد لا نهائي من محاور التناظر."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم عدد محاور تناظر المربّع؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم عدد محاور تناظر المستطيل؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "التناظر المحوري",
+    "image": "/curriculum/y5/rafiqi/r5m13-3.png",
+    "imageId": "img-r5m13-3",
+    "alt": "كم عدد محاور تناظر المستطيل؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم عدد محاور تناظر المعيّن؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم عدد محاور تناظر الدائرة؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "التناظر المحوري",
+    "image": "/curriculum/y5/rafiqi/r5m13-4.png",
+    "imageId": "img-r5m13-4",
+    "alt": "كم عدد محاور تناظر الدائرة؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم عدد محاور تناظر المثلَّث المتساوي الأضلاع؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "التناظر المحوري",
+    "image": "/curriculum/y5/rafiqi/r5m13-5.png",
+    "imageId": "img-r5m13-5",
+    "alt": "كم عدد محاور تناظر المثلث المتساوي الأضلاع؟"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم مثلَّثًا وأنشئ صورته بالتناظر."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيارسم شكلًا له محورا تناظر اثنان.هل شبه المنحرف له محور تناظر؟ متى؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "هل الحرف «م» يملك محور تناظر؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "هل الدائرة متناظرة؟ كم محور لها؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m13-1",
+    "src": "/curriculum/y5/rafiqi/r5m13-1.png",
+    "caption": "التناظر المحوري تحويل هندسي ينقل شكلا إلى شكل آخر متناظر معه بالنسبة إلى مستقيم يسمى محور التناظر. الشكلان المتناظران متطابقان في الشكل والحجم، لكنهما"
+   },
+   {
+    "imageId": "img-r5m13-2",
+    "src": "/curriculum/y5/rafiqi/r5m13-2.png",
+    "caption": "الدائرة لها عدد لا نهائي من محاور التناظر."
+   },
+   {
+    "imageId": "img-r5m13-3",
+    "src": "/curriculum/y5/rafiqi/r5m13-3.png",
+    "caption": "كم عدد محاور تناظر المستطيل؟"
+   },
+   {
+    "imageId": "img-r5m13-4",
+    "src": "/curriculum/y5/rafiqi/r5m13-4.png",
+    "caption": "كم عدد محاور تناظر الدائرة؟"
+   },
+   {
+    "imageId": "img-r5m13-5",
+    "src": "/curriculum/y5/rafiqi/r5m13-5.png",
+    "caption": "كم عدد محاور تناظر المثلث المتساوي الأضلاع؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m13-1.png"
+ },
+ "r5m14": {
+  "id": "r5m14",
+  "num": 6,
+  "seq": 14,
+  "title": "إنشاءات هندسية",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الإنشاء الهندسي هو رسم شكل بدقّة باستعمال أدوات: المسطرة، المنقلة، الفرجار. نتعلَّم في هذا الدرس إنشاء المربّع، المستطيل، المثلَّث، والدائرة بدقّة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "إنشاءات هندسية",
+    "image": "/curriculum/y5/rafiqi/r5m14-1.png",
+    "imageId": "img-r5m14-1",
+    "alt": "الإنشاء الهندسي هو رسم شكل بدقة باستعمال أدوات: المسطرة، المنقلة، الفرجار. نتعلم في هذا الدرس إنشاء المربع، المستطيل، المثلث، والدائرة بدقة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 6."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم مربّعًا طول ضلعه 4 cm باستعمال المسطرة والمنقلة فقط. ثمَّ ارسم دائرة نصف قطرها 3 cm باستعمال الفرجار. ما الأدوات الأنسب لكلّ شكل؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظالمسطرة: لرسم القطع المستقيمة وقياس الأطوال.المنقلة: لقياس الزوايا ورسمها."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "إنشاءات هندسية (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الفرجار: لرسم الدوائر وأقواسها."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "لإنشاء مربّع: نرسم ضلعًا، ثمَّ نصعد عموديًّا 90° من كلّ طرف.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "لإنشاء دائرة: نُحدِّد المركز ونضبط الفرجار على نصف القطر."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةلرسم عمودي: زاوية 90° بالمنقلةلرسم دائرة: فرجار = نصف القطر"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "إنشاءات هندسية",
+    "image": "/curriculum/y5/rafiqi/r5m14-2.png",
+    "imageId": "img-r5m14-2",
+    "alt": "لإنشاء دائرة: نحدد المركز ونضبط الفرجار على نصف القطر."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم مستطيلًا 6 cm × 3 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم مربّعًا ضلعه 5 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "إنشاءات هندسية",
+    "image": "/curriculum/y5/rafiqi/r5m14-3.png",
+    "imageId": "img-r5m14-3",
+    "alt": "ارسم مربعا ضلعه 5 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم دائرة نصف قطرها 4 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم مثلَّثًا متساوي الأضلاع ضلعه 6 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "إنشاءات هندسية",
+    "image": "/curriculum/y5/rafiqi/r5m14-4.png",
+    "imageId": "img-r5m14-4",
+    "alt": "ارسم مثلثا متساوي الأضلاع ضلعه 6 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم زاوية 60° بالمنقلة."
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم قطعة مستقيمة طولها 7,5 cm."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيارسم نجمة سداسية باستعمال الفرجار فقط.أنشئ عموديًّا على قطعة من منتصفها (واسط القطعة)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "أنشئ عموديًّا على قطعة عند طرفها.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم دائرتين متجاورتين بنفس المركز."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "الدرس مراجعة مراجعة المحور 2: الهندسة"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "أنجز التمارين الآتية لإتقان الهندسة.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "kind": "table",
+    "title": "جدول",
+    "text": "",
+    "columns": [
+     "السُّؤال",
+     "الجواب"
+    ],
+    "rows": [
+     [
+      "مجموع زوايا المثلَّث؟",
+      "180°"
+     ],
+     [
+      "محيط دائرة نصف قطرها 5 cm (π=3,14)؟",
+      "31,4 cm"
+     ],
+     [
+      "عدد محاور تناظر المربّع؟",
+      "4"
+     ],
+     [
+      "زاوية قائمة قيسها؟",
+      "90°"
+     ],
+     [
+      "العلاقة بين القطر ونصف القطر؟",
+      "D = 2r"
+     ],
+     [
+      "مجموع زوايا رباعي؟",
+      "360°"
+     ],
+     [
+      "كم محور تناظر للدائرة؟",
+      "∞"
+     ],
+     [
+      "زاوية 100° نوعها؟",
+      "منفرجة"
+     ]
+    ]
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ أُقيّم نفسيارسم مربّعًا ومستطيلًا وصف الفرق بينهما.احسب محيط دائرة قطرها 8 cm.كم عدد زوايا المثلَّث المنفرج التي تزيد عن 90°؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "المحور 3القياسقياس الطول والكتلة والسعة والمدّة، وتحويل الوحدات، وحساب المساحة والمحيط."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "إنشاءات هندسية",
+    "image": "/curriculum/y5/rafiqi/r5m14-5.png",
+    "imageId": "img-r5m14-5",
+    "alt": "أنجز التمارين الآتية لإتقان الهندسة."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m14-1",
+    "src": "/curriculum/y5/rafiqi/r5m14-1.png",
+    "caption": "الإنشاء الهندسي هو رسم شكل بدقة باستعمال أدوات: المسطرة، المنقلة، الفرجار. نتعلم في هذا الدرس إنشاء المربع، المستطيل، المثلث، والدائرة بدقة."
+   },
+   {
+    "imageId": "img-r5m14-2",
+    "src": "/curriculum/y5/rafiqi/r5m14-2.png",
+    "caption": "لإنشاء دائرة: نحدد المركز ونضبط الفرجار على نصف القطر."
+   },
+   {
+    "imageId": "img-r5m14-3",
+    "src": "/curriculum/y5/rafiqi/r5m14-3.png",
+    "caption": "ارسم مربعا ضلعه 5 cm."
+   },
+   {
+    "imageId": "img-r5m14-4",
+    "src": "/curriculum/y5/rafiqi/r5m14-4.png",
+    "caption": "ارسم مثلثا متساوي الأضلاع ضلعه 6 cm."
+   },
+   {
+    "imageId": "img-r5m14-5",
+    "src": "/curriculum/y5/rafiqi/r5m14-5.png",
+    "caption": "أنجز التمارين الآتية لإتقان الهندسة."
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m14-1.png"
+ },
+ "r5m15": {
+  "id": "r5m15",
+  "num": 1,
+  "seq": 15,
+  "title": "قياس الطول",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الطول يُقيس المسافة بين نقطتين. الوحدات الرئيسية: الكيلومتر (km)، المتر (m)، الديسيمتر (dm)، السنتمتر (cm)، المليمتر (mm). كلّ وحدة تُساوي 10 أضعاف التي قبلها."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "قياس الطول",
+    "image": "/curriculum/y5/rafiqi/r5m15-1.png",
+    "imageId": "img-r5m15-1",
+    "alt": "الطول يقيس المسافة بين نقطتين. الوحدات الرئيسية: الكيلومتر (km)، المتر (m)، الديسيمتر (dm)، السنتمتر (cm)، المليمتر (mm). كل وحدة تساوي 10 أضعاف التي "
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 1."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "قِس طول قلمك بالمتر ثمَّ بالسنتمتر. ماذا تلاحظ؟ لماذا نستعمل وحدات مختلفة لأطوال مختلفة؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظ1 km = 1000 m ، 1 m = 10 dm = 100 cm = 1000 mm.للتحويل من وحدة أكبر إلى أصغر نَضرب."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "قياس الطول (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "من أصغر إلى أكبر نقسم.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نستعمل km للمسافات الكبيرة، m للغرف، cm للأشياء الصغيرة، mm للدقّة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدة1 km = 1000 m = 100 000 cm1 m = 10 dm = 100 cm = 1000 mmللتحويل يمينًا (لأصغر): ×10 ؛ يسارًا (لأكبر): ÷10"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "قياس الطول",
+    "image": "/curriculum/y5/rafiqi/r5m15-2.png",
+    "imageId": "img-r5m15-2",
+    "alt": "نستعمل km للمسافات الكبيرة، m للغرف، cm للأشياء الصغيرة، mm للدقة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حوّل: 3 m = ? cm",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حوّل: 5 km = ? m",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "قياس الطول",
+    "image": "/curriculum/y5/rafiqi/r5m15-3.png",
+    "imageId": "img-r5m15-3",
+    "alt": "حول: 5 km = ? m"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حوّل: 250 mm = ? cm",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حوّل: 1,5 m = ? mm",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "قياس الطول",
+    "image": "/curriculum/y5/rafiqi/r5m15-4.png",
+    "imageId": "img-r5m15-4",
+    "alt": "حول: 1,5 m = ? mm"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حوّل: 4 km 250 m = ? m",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "سار تلميذ 1 200 m إلى المدرسة. كم km؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "قياس الطول",
+    "image": "/curriculum/y5/rafiqi/r5m15-5.png",
+    "imageId": "img-r5m15-5",
+    "alt": "سار تلميذ 1 200 m إلى المدرسة. كم km؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيكم m في نصف km؟إذا مشى تلميذ 2 km يوميًّا، كم km يقطع في السنة الدراسية (180 يوم)؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "رتّب تنازليًّا: 1,2 km ، 1 050 m ، 11 500 dm.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم cm في 2,5 m؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m15-1",
+    "src": "/curriculum/y5/rafiqi/r5m15-1.png",
+    "caption": "الطول يقيس المسافة بين نقطتين. الوحدات الرئيسية: الكيلومتر (km)، المتر (m)، الديسيمتر (dm)، السنتمتر (cm)، المليمتر (mm). كل وحدة تساوي 10 أضعاف التي "
+   },
+   {
+    "imageId": "img-r5m15-2",
+    "src": "/curriculum/y5/rafiqi/r5m15-2.png",
+    "caption": "نستعمل km للمسافات الكبيرة، m للغرف، cm للأشياء الصغيرة، mm للدقة."
+   },
+   {
+    "imageId": "img-r5m15-3",
+    "src": "/curriculum/y5/rafiqi/r5m15-3.png",
+    "caption": "حول: 5 km = ? m"
+   },
+   {
+    "imageId": "img-r5m15-4",
+    "src": "/curriculum/y5/rafiqi/r5m15-4.png",
+    "caption": "حول: 1,5 m = ? mm"
+   },
+   {
+    "imageId": "img-r5m15-5",
+    "src": "/curriculum/y5/rafiqi/r5m15-5.png",
+    "caption": "سار تلميذ 1 200 m إلى المدرسة. كم km؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m15-1.png"
+ },
+ "r5m16": {
+  "id": "r5m16",
+  "num": 2,
+  "seq": 16,
+  "title": "قياس الكتلة والسعة",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الكتلة تُقاس بـ: الطن (t)، الكيلغرام (kg)، الغرام (g)، الميليغرام (mg). السعة (الحجم) تُقاس بـ: اللتر (L)، الديسيلتر (dL)، السنtilitter (cL)، الميليلتر (mL)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "قياس الكتلة والسعة",
+    "image": "/curriculum/y5/rafiqi/r5m16-1.png",
+    "imageId": "img-r5m16-1",
+    "alt": "الكتلة تقاس ب: الطن (t)، الكيلغرام (kg)، الغرام (g)، الميليغرام (mg). السعة (الحجم) تقاس ب: اللتر (L)، الديسيلتر (dL)، السنtilitter (cL)، الميليلتر (m"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 2."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "انظر إلى زجاجة ماء وعلبة حليب. ما وحدة السعة المكتوبة؟ ثمَّ انظر إلى كيسّ الأرز. ما وحدة الكتلة؟ كيف نحوّل بين الوحدات؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظ1 t = 1000 kg ، 1 kg = 1000 g ، 1 g = 1000 mg.1 L = 10 dL = 100 cL = 1000 mL."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "قياس الكتلة والسعة (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الكتلة تُقيس «الثِّقل»، والسعة تُقيس «الحجم»."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "للتحويل: نَضرب أو نقسم على 10 أو 1000 حسب الوحدة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدة1 t = 1000 kg = 1 000 000 g1 L = 10 dL = 100 cL = 1000 mL1 kg ≈ 1 L من الماء (تقريبًا)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "قياس الكتلة والسعة",
+    "image": "/curriculum/y5/rafiqi/r5m16-2.png",
+    "imageId": "img-r5m16-2",
+    "alt": "للتحويل: نضرب أو نقسم على 10 أو 1000 حسب الوحدة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حوّل: 3 kg 250 g = ? g",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حوّل: 2,5 kg = ? g",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "قياس الكتلة والسعة",
+    "image": "/curriculum/y5/rafiqi/r5m16-3.png",
+    "imageId": "img-r5m16-3",
+    "alt": "حول: 2,5 kg = ? g"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حوّل: 1,5 L = ? cL",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "زجاجة 1,5 L. كم mL تحتوي؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "قياس الكتلة والسعة",
+    "image": "/curriculum/y5/rafiqi/r5m16-4.png",
+    "imageId": "img-r5m16-4",
+    "alt": "زجاجة 1,5 L. كم mL تحتوي؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "شرب تلميذ 250 mL من قارورة 1,5 L. كم تبقّى؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حوّل: 5 000 g = ? kg",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيكم mL في 3,25 L؟إذا وزن كيسّ أرز 5 kg، كم كيسًا يلزم لِيصل الوزن إلى 1 طن؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حوّل: 750 cL = ? L",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "textarea",
+    "title": "أُعبّر",
+    "text": "ما الفرق بين الكتلة والسعة؟ أعطِ مثالًا.",
+    "rows": 2
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m16-1",
+    "src": "/curriculum/y5/rafiqi/r5m16-1.png",
+    "caption": "الكتلة تقاس ب: الطن (t)، الكيلغرام (kg)، الغرام (g)، الميليغرام (mg). السعة (الحجم) تقاس ب: اللتر (L)، الديسيلتر (dL)، السنtilitter (cL)، الميليلتر (m"
+   },
+   {
+    "imageId": "img-r5m16-2",
+    "src": "/curriculum/y5/rafiqi/r5m16-2.png",
+    "caption": "للتحويل: نضرب أو نقسم على 10 أو 1000 حسب الوحدة."
+   },
+   {
+    "imageId": "img-r5m16-3",
+    "src": "/curriculum/y5/rafiqi/r5m16-3.png",
+    "caption": "حول: 2,5 kg = ? g"
+   },
+   {
+    "imageId": "img-r5m16-4",
+    "src": "/curriculum/y5/rafiqi/r5m16-4.png",
+    "caption": "زجاجة 1,5 L. كم mL تحتوي؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m16-1.png"
+ },
+ "r5m17": {
+  "id": "r5m17",
+  "num": 3,
+  "seq": 17,
+  "title": "قياس المدة (الزمن)",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المدة تُقاس بـ: الساعة (h)، الدقيقة (min)، الثانية (s). 1 h = 60 min ، 1 min = 60 s ، 1 h = 3600 s. كما نستعمل اليوم والأسبوع والشهر والسنة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "قياس المدة (الزمن)",
+    "image": "/curriculum/y5/rafiqi/r5m17-1.png",
+    "imageId": "img-r5m17-1",
+    "alt": "المدة تقاس ب: الساعة (h)، الدقيقة (min)، الثانية (s). 1 h = 60 min ، 1 min = 60 s ، 1 h = 3600 s. كما نستعمل اليوم والأسبوع والشهر والسنة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 3."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "انظر إلى ساعة الحائط. كم دقيقة في الساعة؟ كم ثانية في الدقيقة؟ احسب كم ثانية في الساعة الواحدة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظ1 h = 60 min = 3600 s.1 min = 60 s."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "قياس المدة (الزمن) (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "1 يوم = 24 ساعة، 1 أسبوع = 7 أيام."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "للجمع أو طرح المدد: نُحاذي الساعات مع الساعات، والدقائق مع الدقائق."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "إذا تجاوزت الدقائق 60، نحوّل 60 دقيقة إلى ساعة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدة1 h = 60 min = 3600 s1 min = 60 sللجمع: نُحاذي ثم نحوّل الزيادة"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "قياس المدة (الزمن)",
+    "image": "/curriculum/y5/rafiqi/r5m17-2.png",
+    "imageId": "img-r5m17-2",
+    "alt": "إذا تجاوزت الدقائق 60، نحول 60 دقيقة إلى ساعة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 1 h 30 min + 2 h 45 min = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حصّة من 8:15 إلى 9:50. كم مدّتها؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "قياس المدة (الزمن)",
+    "image": "/curriculum/y5/rafiqi/r5m17-3.png",
+    "imageId": "img-r5m17-3",
+    "alt": "حصة من 8:15 إلى 9:50. كم مدتها؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "قطار من 7:20 إلى 10:05. كم استغرق؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم ثانية في 2 h 5 min؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "قياس المدة (الزمن)",
+    "image": "/curriculum/y5/rafiqi/r5m17-4.png",
+    "imageId": "img-r5m17-4",
+    "alt": "كم ثانية في 2 h 5 min؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم دقيقة في 3 h؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "فيلم مدّته 1 h 50 min. لو بدأ 20:30 متى ينتهي؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيكم ثانية في يوم كامل (24 h)؟إذا سافر قطر من 08:45 ووصل بعد 3 h 30 min، متى وصل؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 5 h 20 min − 2 h 45 min = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم يوم في 6 أسابيع؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m17-1",
+    "src": "/curriculum/y5/rafiqi/r5m17-1.png",
+    "caption": "المدة تقاس ب: الساعة (h)، الدقيقة (min)، الثانية (s). 1 h = 60 min ، 1 min = 60 s ، 1 h = 3600 s. كما نستعمل اليوم والأسبوع والشهر والسنة."
+   },
+   {
+    "imageId": "img-r5m17-2",
+    "src": "/curriculum/y5/rafiqi/r5m17-2.png",
+    "caption": "إذا تجاوزت الدقائق 60، نحول 60 دقيقة إلى ساعة."
+   },
+   {
+    "imageId": "img-r5m17-3",
+    "src": "/curriculum/y5/rafiqi/r5m17-3.png",
+    "caption": "حصة من 8:15 إلى 9:50. كم مدتها؟"
+   },
+   {
+    "imageId": "img-r5m17-4",
+    "src": "/curriculum/y5/rafiqi/r5m17-4.png",
+    "caption": "كم ثانية في 2 h 5 min؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m17-1.png"
+ },
+ "r5m18": {
+  "id": "r5m18",
+  "num": 4,
+  "seq": 18,
+  "title": "المساحة والمحيط",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "المحيط هو مجموع أطوال أضلاع الشكل. أمّا المساحة فهي قياس السطح الذي يحتلّه الشكل، وتُقاس بوحدات: m², cm², km²...",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "المساحة والمحيط",
+    "image": "/curriculum/y5/rafiqi/r5m18-1.png",
+    "imageId": "img-r5m18-1",
+    "alt": "المحيط هو مجموع أطوال أضلاع الشكل. أما المساحة فهي قياس السطح الذي يحتله الشكل، وتقاس بوحدات: m², cm², km²..."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 4."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "انظر إلى بلاطة أرضية مربّعة. قِس طول ضلعها. احسب محيطها ثمَّ مساحتها. ما الفرق بين المفهومين؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظالمحيط = مجموع أطوال الأضلاع.المساحة = السطح الذي يحتلّه الشكل."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المساحة والمحيط (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "وحدة المحيط: m, cm (وحدات طول)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "وحدة المساحة: m², cm² (وحدات مربّعة)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "للمستطيل: P = 2×(L+ℓ) ، A = L×ℓ."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "للمربّع: P = 4×a ، A = a×a = a²."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةP = 2 × (L + ℓ) ، A = L × ℓ (مستطيل)P = 4 × a ، A = a² (مربّع)وحدة المحيط: طول ؛ وحدة المساحة: طول²"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "المساحة والمحيط",
+    "image": "/curriculum/y5/rafiqi/r5m18-2.png",
+    "imageId": "img-r5m18-2",
+    "alt": "للمربع: P = 4×a ، A = a×a = a²."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مستطيل طوله 8 m وعرضه 5 m. احسب P و A."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مربّع ضلعه 6 cm. احسب P و A."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "المساحة والمحيط",
+    "image": "/curriculum/y5/rafiqi/r5m18-3.png",
+    "imageId": "img-r5m18-3",
+    "alt": "مربع ضلعه 6 cm. احسب P و A."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حديقة 25 m × 18 m. ما مساحتها؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "المساحة والمحيط",
+    "image": "/curriculum/y5/rafiqi/r5m18-4.png",
+    "imageId": "img-r5m18-4",
+    "alt": "حديقة 25 m × 18 m. ما مساحتها؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "إذا أردنا تسوير الحديقة، كم m من السياج؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "أرض مربّعة مساحتها 49 m². ما طول ضلعها؟ ومحيطها؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "غرفة 4 m × 3 m. ما مساحتها؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيإذا تضاعف طول وعرض مستطيل، كم مرّة تتضاعف مساحته؟ارسم مستطيلًا مساحته 24 cm² بأبعاد مختلفة (3 إمكانيات)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "طاولة مربّعة محيطها 20 m. ما طول ضلعها؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "حقل 100 m × 50 m. احسب مساحته بـ m²."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m18-1",
+    "src": "/curriculum/y5/rafiqi/r5m18-1.png",
+    "caption": "المحيط هو مجموع أطوال أضلاع الشكل. أما المساحة فهي قياس السطح الذي يحتله الشكل، وتقاس بوحدات: m², cm², km²..."
+   },
+   {
+    "imageId": "img-r5m18-2",
+    "src": "/curriculum/y5/rafiqi/r5m18-2.png",
+    "caption": "للمربع: P = 4×a ، A = a×a = a²."
+   },
+   {
+    "imageId": "img-r5m18-3",
+    "src": "/curriculum/y5/rafiqi/r5m18-3.png",
+    "caption": "مربع ضلعه 6 cm. احسب P و A."
+   },
+   {
+    "imageId": "img-r5m18-4",
+    "src": "/curriculum/y5/rafiqi/r5m18-4.png",
+    "caption": "حديقة 25 m × 18 m. ما مساحتها؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m18-1.png"
+ },
+ "r5m19": {
+  "id": "r5m19",
+  "num": 5,
+  "seq": 19,
+  "title": "الزمن والتقويم",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نتعرَّف في هذا الدرس على وحدات زمنيَّة أكبر: اليوم، الأسبوع، الشهر، السنة. كما نتعلَّم قراءة التَّقويم وحساب المدد بين تاريخين."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الزمن والتقويم",
+    "image": "/curriculum/y5/rafiqi/r5m19-1.png",
+    "imageId": "img-r5m19-1",
+    "alt": "نتعرف في هذا الدرس على وحدات زمنية أكبر: اليوم، الأسبوع، الشهر، السنة. كما نتعلم قراءة التقويم وحساب المدد بين تاريخين."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 5."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "انظر إلى تقويم الشهر الجاري. كم يومًا في هذا الشهر؟ كم أسبوعًا؟ ما أول يوم وآخر يوم؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظ1 دقيقة = 60 ثانية.1 ساعة = 60 دقيقة = 3600 ثانية."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الزمن والتقويم (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "1 يوم = 24 ساعة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "1 أسبوع = 7 أيام."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "1 شهر = 28 أو 29 أو 30 أو 31 يومًا."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "1 سنة = 12 شهرًا = 365 يومًا (366 في السنة الكبيسة)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدة1 يوم = 24 h = 1440 min1 أسبوع = 7 أيام1 سنة = 12 شهرًا = 365 يومًا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الزمن والتقويم",
+    "image": "/curriculum/y5/rafiqi/r5m19-2.png",
+    "imageId": "img-r5m19-2",
+    "alt": "1 سنة = 12 شهرا = 365 يوما (366 في السنة الكبيسة)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم يوم في أسبوعين؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم ساعة في 3 أيام؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الزمن والتقويم",
+    "image": "/curriculum/y5/rafiqi/r5m19-3.png",
+    "imageId": "img-r5m19-3",
+    "alt": "كم ساعة في 3 أيام؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم شهرًا في سنتين ونصف؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم يومًا في السنة الكبيسة؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "بداية الدوام 8:00، نهايته 16:00. كم ساعة؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "الزمن والتقويم",
+    "image": "/curriculum/y5/rafiqi/r5m19-4.png",
+    "imageId": "img-r5m19-4",
+    "alt": "بداية الدوام 8:00، نهايته 16:00. كم ساعة؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم أسبوعًا تقريبًا في السنة؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيكم ثانية في يوم كامل؟إذا كان اليوم الثلاثاء، فما اليوم بعد 100 يوم؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب: 2 h 15 min × 3 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "إجازة من 5 جوان إلى 25 جوان. كم يومًا؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "الدرس مراجعة مراجعة المحور 3: القياس"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "جدول مراجعة وحدات القياس:"
+   },
+   {
+    "kind": "table",
+    "title": "جدول",
+    "text": "",
+    "columns": [
+     "الكمِّيَّة",
+     "الوحدات الرَّئيسية"
+    ],
+    "rows": [
+     [
+      "الطول",
+      "km, m, dm, cm, mm"
+     ],
+     [
+      "الكتلة",
+      "t, kg, g, mg"
+     ],
+     [
+      "السعة",
+      "L, dL, cL, mL"
+     ],
+     [
+      "المدة",
+      "h, min, s"
+     ],
+     [
+      "المساحة",
+      "km², m², dm², cm²"
+     ]
+    ]
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ أُقيّم نفسيحوّل 5 km إلى m.احسب مساحة مستطيل 12 × 8 m.كم دقيقة في 2 h 30 min؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "المحور 4تنظيم ومعالجة البياناتقراءة وبناء الجداول والمخطَّطات البيانيَّة، وحساب المتوسِّط الحسابي وتفسير البيانات."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m19-1",
+    "src": "/curriculum/y5/rafiqi/r5m19-1.png",
+    "caption": "نتعرف في هذا الدرس على وحدات زمنية أكبر: اليوم، الأسبوع، الشهر، السنة. كما نتعلم قراءة التقويم وحساب المدد بين تاريخين."
+   },
+   {
+    "imageId": "img-r5m19-2",
+    "src": "/curriculum/y5/rafiqi/r5m19-2.png",
+    "caption": "1 سنة = 12 شهرا = 365 يوما (366 في السنة الكبيسة)."
+   },
+   {
+    "imageId": "img-r5m19-3",
+    "src": "/curriculum/y5/rafiqi/r5m19-3.png",
+    "caption": "كم ساعة في 3 أيام؟"
+   },
+   {
+    "imageId": "img-r5m19-4",
+    "src": "/curriculum/y5/rafiqi/r5m19-4.png",
+    "caption": "بداية الدوام 8:00، نهايته 16:00. كم ساعة؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m19-1.png"
+ },
+ "r5m20": {
+  "id": "r5m20",
+  "num": 1,
+  "seq": 20,
+  "title": "الجداول الإحصائية",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الجدول الإحصائي وسيلة لتنظيم البيانات في صفوف وأعمدة لتسهيل قراءتها وتفسيرها. هناك جداول بسيطة (صفّان) وجداول مركّبة (عدّة أعمدة)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 1."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظالجدول يتكوّن من صفوف (أفقية) وأعمدة (عمودية).الرأس (العنوان) يُحدِّد محتوى كلّ عمود."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الجداول الإحصائية (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نُسمّي الجدول باسم يُعبِّر عن محتواه."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "كلّ خلية تحتوي على قيمة واحدة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الجدول يُسهِّل المقارنة بين البيانات."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةالجدول = رأس + بياناتكلّ صفّ = حالة، كلّ عمود = متغيّر"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أنشئ جدولًا لِعلامات 5 تلاميذ: 14، 16، 12، 18، 15."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "من حصل على أعلى علامة؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "من حصل على أدنى علامة؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "textarea",
+    "title": "أُعبّر",
+    "text": "ما الفرق بين أعلى وأدنى علامة؟",
+    "rows": 2
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم تلميذًا حصل على علامة ≥ 15؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أنشئ جدولًا لأنواع الفواكه المفضّلة لِـ 20 تلميذًا."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيصمِّم جدولًا لمتابعة وزنك خلال أسبوع.كيف نُمثِّل بيانات نوعيّة (مثل اللون المفضّل)؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أنشئ جدولًا لأنشطة 10 تلاميذ في المساء."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": []
+ },
+ "r5m21": {
+  "id": "r5m21",
+  "num": 2,
+  "seq": 21,
+  "title": "المخطط بالأعمدة",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المخطَّط بالأعمدة وسيلة بصريَّة لعرض البيانات. كلّ قيمة تُمثَّل بعمود ارتفاعه يتناسب مع قيمتها. يُسهِّل المقارنة بين القيم المختلفة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 2."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "لاحظ المخطَّط بالأعمدة. ما المحور الأفقي؟ ما المحور العمودي؟ ما المقياس المستعمل؟ كيف نستخرج قيمة من العمود؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظالمخطَّط بالأعمدة له محوران: أفقي (الفئات) وعمودي (القيم).كلّ عمود يُمثِّل قيمة واحدة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المخطط بالأعمدة (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "ارتفاع العمود يُعطي القيمة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نختار مقياسًا مناسبًا للمحور العمودي."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نُسمّي المخطَّط باسم يُعبِّر عن محتواه."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةارتفاع العمود = القيمة المراد تمثيلهاالمقياس: مثلاً 1 cm لكلّ وحدة"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "في مخطَّط، ارتفاع العمود 5 cm والمقياس 1 cm=10. ما القيمة؟"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم مخطَّطًا بالأعمدة لِعلامات: 8، 12، 15، 10."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "أعمدة بكميات 30، 45، 50، 35. ما أعلى قيمة؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "textarea",
+    "title": "أُعبّر",
+    "text": "ما الفرق بين أعلى وأدنى قيمة؟",
+    "rows": 2
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم قيمة في المخطَّط إذا كان 6 أعمدة؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "في مخطَّط، قيمة عمود = 25. ما ارتفاعه إذا كان المقياس 1 cm = 5؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيمتى يكون المخطَّط بالأعمدة أفضل من الجدول؟ارسم مخطَّطًا بالأعمدة لِنشاطك اليومي."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم مخطَّطًا لِعدد كتب مقروءة شهريًّا."
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم مخطَّطًا لِألوان الفصول."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": []
+ },
+ "r5m22": {
+  "id": "r5m22",
+  "num": 3,
+  "seq": 22,
+  "title": "المتوسط الحسابي",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المتوسط الحسابي مقياس للنزعة المركزية، يُعطي فكرة عن القيمة «النموذجيَّة» لمجموعة بيانات. نحسبه بقسمة مجموع القيم على عددها."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 3."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "إذا حصل تلميذ على 14، 16، 12 في 3 فروض، ما متوسطه؟ هل المتوسط يساوي دائمًا إحدى القيم؟ اعطِ مثالًا."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظالمتوسط = (مجموع القيم) ÷ (عدد القيم).المتوسط ليس بالضرورة قيمة من القيم المُعطاة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المتوسط الحسابي (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المتوسط حسّاس للقيم المتطرّفة (الكبيرة جدًّا أو الصغيرة جدًّا)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "إذا أضفنا قيمة جديدة، قد يتغيّر المتوسط."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةالمتوسط = (مجموع القيم) ÷ (عدد القيم)مثال: متوسط 4 و 6 = (4+6)÷2 = 5"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب متوسط: 14، 16، 12، 18، 15.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب متوسط: 8، 10، 12، 14، 16.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب متوسط: 6، 8، 10، 12.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "متوسط 3 أعداد = 10. اثنان منها 8 و12. ما الثالث؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "مراجعة يوميَّة (بالدقائق): 30، 45، 20، 60، 25. ما المتوسط؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "أعمار 4 إخوة: 6، 9، 11، 14. ما المتوسط؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيإذا أضفنا قيمة 100 لمجموعة 4، 6، 8، كيف يتغيّر المتوسط؟هل المتوسط كافٍ لوصف البيانات؟ أعطِ مثالًا مضادًّا."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "درجات حرارة: 20، 22، 18، 24. ما المتوسط؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "متوسط 5 أعداد = 12. ما مجموعها؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": []
+ },
+ "r5m23": {
+  "id": "r5m23",
+  "num": 4,
+  "seq": 23,
+  "title": "المخططات الصورية والدائرية",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المخطَّط الصوري يستعمل رموزًا/أيقونات لِتمثيل البيانات، وهو مناسب للأطفال. المخطَّط الدائري يُمثِّل الكلّ بدائرة مقسَّمة إلى قطاعات متناسبة مع القيم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "المخططات الصورية والدائرية",
+    "image": "/curriculum/y5/rafiqi/r5m23-1.png",
+    "imageId": "img-r5m23-1",
+    "alt": "المخطط الصوري يستعمل رموزا/أيقونات لتمثيل البيانات، وهو مناسب للأطفال. المخطط الدائري يمثل الكل بدائرة مقسمة إلى قطاعات متناسبة مع القيم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 4."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "انظر إلى المخطَّط الدائري. ماذا يُمثِّل كلّ قطاع؟ كيف نعرف أيّ قطاع أكبر؟ وكيف نحسب نسبته من الكلّ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظالمخطَّط الصوري: كلّ رمز يُمثِّل عددًا ثابتًا (مثلاً رمز = 5 تلاميذ).المخطَّط الدائري: الكلّ = 360° = 100%."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المخططات الصورية والدائرية (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "كلّ قطاع يُمثِّل نسبة من الكلّ."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "زاوية القطاع = (القيمة ÷ المجموع) × 360°."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نستعمل المخطَّط الدائري لِإظهار النِّسب."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةزاوية القطاع = (القيمة ÷ المجموع) × 360°نسبة القطاع = (القيمة ÷ المجموع) × 100%"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "في مخطَّط دائري، قطاع 90°. ما نسبته؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "في مخطَّط صوري، 5 رموز وكلّ رمز = 4 تلاميذ. كم المجموع؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "قطاع 180° يُمثِّل نسبة: ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "إذا كان المجموع 100 وقيمة قطاع 25، ما زاويته؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "المخططات الصورية والدائرية",
+    "image": "/curriculum/y5/rafiqi/r5m23-2.png",
+    "imageId": "img-r5m23-2",
+    "alt": "إذا كان المجموع 100 وقيمة قطاع 25، ما زاويته؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "في فصل 30 تلميذًا، 12 بنتات. ما زاوية قطاع البنات؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "في مخطَّط صوري 8 رموز، كلّ رمز = 10. كم المجموع؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيارسم مخطَّطًا دائريًّا لِأنشطة يومك (نوم، مدرسة، لعب، أخرى).متى نستعمل المخطَّط الصوري ومتى الدائري؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "قطاع 120°. ما نسبته؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "drawing",
+    "title": "أرسم",
+    "text": "ارسم مخطَّطًا دائريًّا لِـ 4 ألوان متساوية."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "الدرس مراجعة مراجعة المحور 4: البيانات"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "أنجز التمارين الآتية لإتقان معالجة البيانات.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "kind": "table",
+    "title": "جدول",
+    "text": "",
+    "columns": [
+     "السُّؤال",
+     "الجواب"
+    ],
+    "rows": [
+     [
+      "متوسط 6، 8، 10، 12، 14؟",
+      "10"
+     ],
+     [
+      "زاوية قطاع 25% من الدائرة؟",
+      "90°"
+     ],
+     [
+      "ما مجموع زوايا الدائرة؟",
+      "360°"
+     ],
+     [
+      "في مخطَّط صوري 5 رموز × 4، المجموع؟",
+      "20"
+     ]
+    ]
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ أُقيّم نفسيأنشئ جدولًا لِنشاطك الأسبوعي.احسب متوسط علاماتك في 5 فروض.ارسم مخطَّطًا بالأعمدة لِبيانات من اختيارك."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "المحور 5الوضعيات الإدماجيَّةوضعيات مسائلية مدمجة تستدعي توظيف عدّة معارف رياضيَّة معًا لحلّ مشكلات مأخوذة من الحياة اليوميَّة."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m23-1",
+    "src": "/curriculum/y5/rafiqi/r5m23-1.png",
+    "caption": "المخطط الصوري يستعمل رموزا/أيقونات لتمثيل البيانات، وهو مناسب للأطفال. المخطط الدائري يمثل الكل بدائرة مقسمة إلى قطاعات متناسبة مع القيم."
+   },
+   {
+    "imageId": "img-r5m23-2",
+    "src": "/curriculum/y5/rafiqi/r5m23-2.png",
+    "caption": "إذا كان المجموع 100 وقيمة قطاع 25، ما زاويته؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m23-1.png"
+ },
+ "r5m24": {
+  "id": "r5m24",
+  "num": 1,
+  "seq": 24,
+  "title": "وضعية 1: في السوق",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "في هذه الوضعية نتدرَّب على توظيف الجمع والضرب والنسبة المئوية في سياق السوق التُّونسي. سنحسب المبالغ والبقايا والنِّسب."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 1."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "ذهبت أمّ سامي إلى السوق ومعها 50 دينارًا. اشترت 3 كيلوغرامات طماطم بثمن 1,800 د للكيلوغرام، و2 كيلوغرامات لحم بـ 18 د، و5 كيلوغرامات بطاطا بـ 0,900 د. كم تبقّى لها؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظنُحدِّد المعطيات والمطلوب بوضوح.نُفكِّك المسألة إلى خطوات: حساب كلّ نوع، ثم المجموع، ثم المتبقّي."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "وضعية 1: في السوق (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نستعمل الضرب لإيجاد ثمن كمّية بسعر الوحدة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نستعمل الجمع لإيجاد المجموع الكلّي."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نستعمل الطرح لإيجاد المتبقّي."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نستعمل القسمة لإيجاد النِّسبة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةثمن الكمّية = السعر للوحدة × عدد الوحداتالمجموع = ثمن النوع1 + ثمن النوع2 + ...المتبقّي = المبلغ الأوّل − المجموع"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "ثمن الطماطم: 3 × 1,800 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "ثمن اللحم: 2 × 18 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "ثمن البطاطا: 5 × 0,900 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المجموع الكلّي = 5,4 + 36 + 4,5 = ؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المتبقّي = 50 − 45,900 = ؟"
+   },
+   {
+    "section": "intro",
+    "kind": "textarea",
+    "title": "أُعبّر",
+    "text": "ما الكسر الذي يمثّله المتبقّي من المبلغ الأوّل؟",
+    "rows": 2
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسياقترح سيناريو مشابه لِوضعية عائلة تشتري خضرًا وفواكه.كيف تتغيّر الحسابات إذا ارتفعت أسعار الطماطم 20%؟"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "لو كان المبلغ 100 د، كم سيتبقّى؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "textarea",
+    "title": "أُعبّر",
+    "text": "ما نسبة ما أُنفق من المبلغ الأصلي؟",
+    "rows": 2
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": []
+ },
+ "r5m25": {
+  "id": "r5m25",
+  "num": 2,
+  "seq": 25,
+  "title": "وضعية 2: حديقة المدرسة",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "في هذه الوضعية نُطبِّق مفاهيم المحيط والمساحة والكسور في سياق حديقة مدرسيَّة. سنحسب السياج والمساحات المخصَّصة للأشجار والعشب."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "وضعية 2: حديقة المدرسة",
+    "image": "/curriculum/y5/rafiqi/r5m25-1.png",
+    "imageId": "img-r5m25-1",
+    "alt": "في هذه الوضعية نطبق مفاهيم المحيط والمساحة والكسور في سياق حديقة مدرسية. سنحسب السياج والمساحات المخصصة للأشجار والعشب."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 2."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "حديقة مدرسيَّة مستطيلة الشكل طولها 32 m وعرضها 18 m. أرادت إدارة المدرسة تسويرها، ثم زراعة 1/4 المساحة بالأشجار والباقي بالعشب."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظنُحدِّد الشكل (مستطيل) ومعطياته (طول وعرض).نحسب المحيط لإيجاد طول السياج."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "وضعية 2: حديقة المدرسة (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نحسب المساحة الكلّية."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نحسب الجزء المخصّص لِكلّ زراعة (كسر)."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نحسب الكلفة بِضرب المساحة في سعر الوحدة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةP = 2 × (L + ℓ)A = L × ℓالجزء = الكسر × المساحة الكلّيةالكلفة = المساحة × سعر الوحدة"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "وضعية 2: حديقة المدرسة",
+    "image": "/curriculum/y5/rafiqi/r5m25-2.png",
+    "imageId": "img-r5m25-2",
+    "alt": "نحسب الكلفة بضرب المساحة في سعر الوحدة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب محيط الحديقة.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب مساحة الحديقة.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "وضعية 2: حديقة المدرسة",
+    "image": "/curriculum/y5/rafiqi/r5m25-3.png",
+    "imageId": "img-r5m25-3",
+    "alt": "احسب مساحة الحديقة."
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب مساحة الأشجار (1/4).",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "math-input",
+    "title": "أُكمل",
+    "text": "احسب مساحة العشب.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "وضعية 2: حديقة المدرسة",
+    "image": "/curriculum/y5/rafiqi/r5m25-4.png",
+    "imageId": "img-r5m25-4",
+    "alt": "احسب مساحة العشب."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "إذا كلّف m² من العشب 2,500 د، ما كلفة العشب؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "textarea",
+    "title": "أُعبّر",
+    "text": "ما الكسر الذي يمثّله العشب؟",
+    "rows": 2
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيكيف تتغيّر المساحات لو خصَّصنا 1/3 لِلأشجار؟اقترح تصميمًا آخر لِحديقة بمساحة 400 m²."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "لو زرعنا 1/3 للأشجار، كم m²؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم شجرة يمكن زراعتها إذا أعطينا كلّ شجرة 4 m²؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m25-1",
+    "src": "/curriculum/y5/rafiqi/r5m25-1.png",
+    "caption": "في هذه الوضعية نطبق مفاهيم المحيط والمساحة والكسور في سياق حديقة مدرسية. سنحسب السياج والمساحات المخصصة للأشجار والعشب."
+   },
+   {
+    "imageId": "img-r5m25-2",
+    "src": "/curriculum/y5/rafiqi/r5m25-2.png",
+    "caption": "نحسب الكلفة بضرب المساحة في سعر الوحدة."
+   },
+   {
+    "imageId": "img-r5m25-3",
+    "src": "/curriculum/y5/rafiqi/r5m25-3.png",
+    "caption": "احسب مساحة الحديقة."
+   },
+   {
+    "imageId": "img-r5m25-4",
+    "src": "/curriculum/y5/rafiqi/r5m25-4.png",
+    "caption": "احسب مساحة العشب."
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m25-1.png"
+ },
+ "r5m26": {
+  "id": "r5m26",
+  "num": 3,
+  "seq": 26,
+  "title": "وضعية 3: رحلة مدرسية",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نُطبِّق في هذه الوضعية القسمة والضرب وحساب الزمن في سياق رحلة مدرسيَّة إلى متحف قرطاج. نحسب عدد الحافلات والتذاكر والمدّة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "وضعية 3: رحلة مدرسية",
+    "image": "/curriculum/y5/rafiqi/r5m26-1.png",
+    "imageId": "img-r5m26-1",
+    "alt": "نطبق في هذه الوضعية القسمة والضرب وحساب الزمن في سياق رحلة مدرسية إلى متحف قرطاج. نحسب عدد الحافلات والتذاكر والمدة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 3."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نظّمت مدرسة رحلة إلى متحف بقرطاج. اشترك 48 تلميذًا، ثمن التذكرة 3,500 د للطفل. الحافلة تَسَع 24 تلميذًا، وكلفة الحافلة 80 د. الرحلة من 7:30 إلى 16:15."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظنُحدِّد عدد الحافلات بقسمة عدد التلاميذ على سعة الحافلة.نحسب كلفة التذاكر بالضرب."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "وضعية 3: رحلة مدرسية (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نحسب كلفة الحافلات بالضرب."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نحسب الكلفة الكلّية بالجمع."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نحسب المُدّة بِطرح وقت البداية من النهاية."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نحسب حصّة كلّ تلميذ بقسمة كلفة الحافلات على عدد التلاميذ."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةعدد الحافلات = عدد التلاميذ ÷ سعة الحافلةكلفة التذاكر = ثمن التذكرة × عدد التلاميذالمدّة = وقت النهاية − وقت البداية"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم حافلة لزمت (48 ÷ 24)؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كلفة التذاكر: 48 × 3,500 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "وضعية 3: رحلة مدرسية",
+    "image": "/curriculum/y5/rafiqi/r5m26-2.png",
+    "imageId": "img-r5m26-2",
+    "alt": "كلفة التذاكر: 48 × 3,500 = ؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كلفة الحافلات: 2 × 80 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "الكلفة الكلّية: 168 + 160 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم استغرقت الرحلة (16:15 − 7:30)؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حصّة كلّ تلميذ من الحافلات (160 ÷ 48)؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيكيف تتغيّر الحسابات لِـ 72 تلميذًا؟اقترح رحلة افتراضيَّة وحسب كلفتها."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "لو كان 60 تلميذًا، كم حافلة؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "textarea",
+    "title": "أُعبّر",
+    "text": "ما الكلفة الكلّية لِـ 60 تلميذًا؟",
+    "rows": 2
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m26-1",
+    "src": "/curriculum/y5/rafiqi/r5m26-1.png",
+    "caption": "نطبق في هذه الوضعية القسمة والضرب وحساب الزمن في سياق رحلة مدرسية إلى متحف قرطاج. نحسب عدد الحافلات والتذاكر والمدة."
+   },
+   {
+    "imageId": "img-r5m26-2",
+    "src": "/curriculum/y5/rafiqi/r5m26-2.png",
+    "caption": "كلفة التذاكر: 48 × 3,500 = ؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m26-1.png"
+ },
+ "r5m27": {
+  "id": "r5m27",
+  "num": 4,
+  "seq": 27,
+  "title": "وضعية 4: في المزرعة",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نُطبِّق في هذه الوضعية الجمع والضرب والقسمة في سياق مزرعة تربية حيوانات. نحسب عدد الحيوانات، إنتاج البيض والحليب، والأرباح."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "وضعية 4: في المزرعة",
+    "image": "/curriculum/y5/rafiqi/r5m27-1.png",
+    "imageId": "img-r5m27-1",
+    "alt": "نطبق في هذه الوضعية الجمع والضرب والقسمة في سياق مزرعة تربية حيوانات. نحسب عدد الحيوانات، إنتاج البيض والحليب، والأرباح."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 4."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "في مزرعة 15 دجاجة، 8 أرنبًا، و4 بقرات. كلّ دجاجة تبيض 5 بيضات أسبوعيًّا، كلّ بقرة تُنتج 12 لتر حليب يوميًّا. ثمن البيضة 0,150 د، ولتر الحليب 0,800 د."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظنحسب الإنتاج بِضرب عدد الحيوانات في إنتاج الواحد.نحسب المداخيل بِضرب الإنتاج في السعر."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "وضعية 4: في المزرعة (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نحسب المجموع الكلّي بِجمع المداخيل."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نُحوِّل بين الوحدات عند الحاجة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةالإنتاج = عدد الحيوانات × إنتاج الواحدالمدخول = الإنتاج × سعر الوحدةالمجموع = مدخول1 + مدخول2 + ..."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "وضعية 4: في المزرعة",
+    "image": "/curriculum/y5/rafiqi/r5m27-2.png",
+    "imageId": "img-r5m27-2",
+    "alt": "نحول بين الوحدات عند الحاجة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "بيض الدجاج أسبوعيًّا: 15 × 5 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "مدخول البيض: 75 × 0,150 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "وضعية 4: في المزرعة",
+    "image": "/curriculum/y5/rafiqi/r5m27-3.png",
+    "imageId": "img-r5m27-3",
+    "alt": "مدخول البيض: 75 × 0,150 = ؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حليب البقر يوميًّا: 4 × 12 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "مدخول الحليب يوميًّا: 48 × 0,800 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "مدخول الحليب أسبوعيًّا: 38,4 × 7 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "وضعية 4: في المزرعة",
+    "image": "/curriculum/y5/rafiqi/r5m27-4.png",
+    "imageId": "img-r5m27-4",
+    "alt": "مدخول الحليب أسبوعيا: 38,4 × 7 = ؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "لو زادت الدجاج 20%، كم بيضة؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيإذا أضفنا 3 بقرات، كم يزيد المدخول اليومي؟صمّم مزرعة صغيرة وحسب مداخيلها الأسبوعيَّة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم يومًا لِيصل مدخول البيض 100 د؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "textarea",
+    "title": "أُعبّر",
+    "text": "ما الفرق بين مدخول الحليب والبيض (يومي)؟",
+    "rows": 2
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m27-1",
+    "src": "/curriculum/y5/rafiqi/r5m27-1.png",
+    "caption": "نطبق في هذه الوضعية الجمع والضرب والقسمة في سياق مزرعة تربية حيوانات. نحسب عدد الحيوانات، إنتاج البيض والحليب، والأرباح."
+   },
+   {
+    "imageId": "img-r5m27-2",
+    "src": "/curriculum/y5/rafiqi/r5m27-2.png",
+    "caption": "نحول بين الوحدات عند الحاجة."
+   },
+   {
+    "imageId": "img-r5m27-3",
+    "src": "/curriculum/y5/rafiqi/r5m27-3.png",
+    "caption": "مدخول البيض: 75 × 0,150 = ؟"
+   },
+   {
+    "imageId": "img-r5m27-4",
+    "src": "/curriculum/y5/rafiqi/r5m27-4.png",
+    "caption": "مدخول الحليب أسبوعيا: 38,4 × 7 = ؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m27-1.png"
+ },
+ "r5m28": {
+  "id": "r5m28",
+  "num": 5,
+  "seq": 28,
+  "title": "وضعية 5: حفلة القسم",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نُطبِّق في هذه الوضعية الكسور والنِّسب المئويَّة والقسمة في تنظيم حفلة قسم. نحسب الميزانيَّة، توزيع المهام، والكمّيات."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 5."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "أراد قسم 30 تلميذًا تنظيم حفلة. الميزانيَّة 120 د. 40% لِلحلوى، 30% لِلعصير، 30% لِلتزيين. كم يُخصَّص لكلّ بند؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظنحسب نسبة كلّ بند من الميزانيَّة.نقسم المبلغ على عدد التلاميذ لِحصّة كلّ واحد."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "وضعية 5: حفلة القسم (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نُوزِّع المهام بالتناسب."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نُتحقَّق بأنّ مجموع النِّسب = 100%."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةحصّة البند = النسبة × الميزانية الكلّيةحصّة التلميذ = الميزانية ÷ عدد التلاميذ"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حصّة الحلوى: 40% × 120 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حصّة العصير: 30% × 120 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "وضعية 5: حفلة القسم",
+    "image": "/curriculum/y5/rafiqi/r5m28-1.png",
+    "imageId": "img-r5m28-1",
+    "alt": "حصة العصير: 30% × 120 = ؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حصّة التزيين: 30% × 120 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "تحقَّق: 48 + 36 + 36 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "حصّة كلّ تلميذ: 120 ÷ 30 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "لو زادت الميزانيَّة 25%، كم تصبح؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيكيف تتغيّر الحصص لو خصَّصنا 50% لِلحلوى؟نظِّم حفلة بقسمك وحسب ميزانيَّتها."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "كم تلميذًا يلزم لِجمع 200 د إذا دفع كلّ واحد 4 د؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "textarea",
+    "title": "أُعبّر",
+    "text": "ما الكسر الذي يمثّله بند الحلوى؟",
+    "rows": 2
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m28-1",
+    "src": "/curriculum/y5/rafiqi/r5m28-1.png",
+    "caption": "حصة العصير: 30% × 120 = ؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m28-1.png"
+ },
+ "r5m29": {
+  "id": "r5m29",
+  "num": 6,
+  "seq": 29,
+  "title": "وضعية 6: يوم رياضي",
+  "officialRef": {
+   "source": "كتاب_الرياضيات_س5_تونس_موسع"
+  },
+  "studentBlocks": [
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نُطبِّق في هذه الوضعية قياس الزمن والمسافة وحساب المتوسط في سياق يوم رياضي مدرسي. نحسب سرعات الجري، ترتيب المتسابقين، والمتوسطات."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "وضعية 6: يوم رياضي",
+    "image": "/curriculum/y5/rafiqi/r5m29-1.png",
+    "imageId": "img-r5m29-1",
+    "alt": "نطبق في هذه الوضعية قياس الزمن والمسافة وحساب المتوسط في سياق يوم رياضي مدرسي. نحسب سرعات الجري، ترتيب المتسابقين، والمتوسطات."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "شكل توضيحي للدرس 6."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أكتشف"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "في سباق 100 m، سجَّل 4 تلاميذ الأزمنة: 15 s، 16 s، 14 s، 17 s. من الفائز؟ ما متوسط الزمن؟ ما الفرق بين أسرع وأبطأ تلميذ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "💡 ألاحظالسرعة = المسافة ÷ الزمن.أسرع متسابق = أقلّ زمن."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "وضعية 6: يوم رياضي (تابع)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أستنتج"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "المتوسط = مجموع الأزمنة ÷ عددها."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "نُرتِّب الأزمنة تصاعديًّا لِمعرفة الترتيب."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "📘 القاعدةالسرعة = المسافة ÷ الزمنالمتوسط = مجموع القيم ÷ عددهاالترتيب: تصاعدي حسب الزمن"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال مرئي على المفهوم."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "مثال محلول"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (1)"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين مباشرة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "من الفائز (أقلّ زمن)؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "textarea",
+    "title": "أُعبّر",
+    "text": "ما متوسط الزمن: (15+16+14+17) ÷ 4 = ؟",
+    "rows": 2
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "الفرق بين أسرع وأبطأ: 17 − 14 = ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب (2) + أتحدى"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أتدرب — تمارين تطبيقية"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "سرعة الفائز: 100 ÷ 14 ≈ ؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "وضعية 6: يوم رياضي",
+    "image": "/curriculum/y5/rafiqi/r5m29-2.png",
+    "imageId": "img-r5m29-2",
+    "alt": "سرعة الفائز: 100 ÷ 14 ≈ ؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "رتّب الأزمنة تصاعديًّا.",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "لو حسَّن الفائز زمنه بـ 1 s، ما زمنه الجديد؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "⭐ أتحدّى نفسيما العلاقة بين الزمن والسرعة؟احسب سرعة عدَّاء 200 m في 30 s."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أقيم نفسي"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتتأكَّد من إتقانك لِدرس اليوم. إن أجبت بشكل صحيح عن جميع الأسئلة، فأنت مستعدّ للدروس القادمة. وإن واجهت صعوبة، عُد إلى الشرح والأمثلة قبل المتابعة."
+   },
+   {
+    "section": "intro",
+    "kind": "textarea",
+    "title": "أُعبّر",
+    "text": "ما سرعة 100 m في 20 s؟",
+    "rows": 2
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "إذا جرى تلميذ 60 m في 12 s، ما سرعته؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ خلاصة الدرستذكَّر القاعدة الأساسية للدرس.راجع الأمثلة المحلولة قبل الانتقال.تدرَّب على 3 تمارين إضافية على الأقل."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "الدرس تقييم تقييم نهائي شامل"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "أجب عن الأسئلة الآتية لِتقيِّم ما اكتسبته خلال السنة. غطَّت الأسئلة جميع المحاور الخمسة: الأعداد، الهندسة، القياس، البيانات، الوضعيات."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الجزء 1: الأعداد والحساب"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "1 456 + 2 789 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "345 × 12 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "بسّط 8/12"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "5,75 + 2,25 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "20% من 250"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "936 ÷ 4 = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الجزء 2: الهندسة"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "مجموع زوايا المثلَّث؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "محيط دائرة r=7 cm (π=3,14)؟"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "عدد محاور تناظر المربّع؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "محيط مربّع ضلعه 9 cm؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الجزء 3: القياس"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "2,5 km = ? m"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "مساحة 10 m × 6 m؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "1 h 30 min + 45 min = ?",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "3 kg 250 g = ? g"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "الجزء 4: البيانات"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "متوسط 6، 8، 10، 12؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "زاوية قطاع 25% من دائرة؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "question",
+    "title": "تمرين",
+    "text": "في مخطَّط صوري 5 رموز × 4، المجموع؟",
+    "placeholder": "أُكْتُبُ إجابتي هنا"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "title": "",
+    "text": "✅ نصيحة أخيرةراجع إجاباتك بعناية وتحقّق من الحسابات.إن وجدت صعوبة في قسم، عُد إلى دروسه ومراجعاتها.تذكَّر: الرِّياضيَّات مهارة تُكتسب بالممارسة المنتظمة.كلّما حللتَ مسائل أكثر، كلّما أصبحتَ أكثر ثقة."
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "تمَّ بحمد الله"
+   },
+   {
+    "section": "intro",
+    "kind": "concept",
+    "teacherOnly": false,
+    "title": "",
+    "text": "كتاب الرياضيات الموسَّع للسنة الخامسة من التعليم الابتدائي — تونس"
+   }
+  ],
+  "images": [
+   {
+    "imageId": "img-r5m29-1",
+    "src": "/curriculum/y5/rafiqi/r5m29-1.png",
+    "caption": "نطبق في هذه الوضعية قياس الزمن والمسافة وحساب المتوسط في سياق يوم رياضي مدرسي. نحسب سرعات الجري، ترتيب المتسابقين، والمتوسطات."
+   },
+   {
+    "imageId": "img-r5m29-2",
+    "src": "/curriculum/y5/rafiqi/r5m29-2.png",
+    "caption": "سرعة الفائز: 100 ÷ 14 ≈ ؟"
+   }
+  ],
+  "image": "/curriculum/y5/rafiqi/r5m29-1.png"
+ }
+}

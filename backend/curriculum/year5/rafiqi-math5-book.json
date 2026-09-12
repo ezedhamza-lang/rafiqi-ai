@@ -1,0 +1,13 @@
+{
+  "title": "رفيقي في الرياضيات س5",
+  "subtitle": "الكتاب كاملًا كما هو — من الغلاف إلى آخر صفحة (نسخة مصوّرة طبق الأصل 172 صفحة)",
+  "imageBase": "/assets/books/math5/",
+  "imageExt": ".webp",
+  "totalPages": 172,
+  "scanReady": true,
+  "_meta": {
+    "source": "D:/livres eleves/Nouveau dossier/كتاب_الرياضيات_س5_تونس_موسع.pdf",
+    "note": "imported via scripts/import-book-pdf.mjs (zoom 2.2 webp q74). Added as a SECOND standalone book for السنة الخامسة; the existing math book was NOT replaced.",
+    "importedAt": "2026-09-12T06:06:24.943Z"
+  }
+}

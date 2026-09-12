@@ -307,6 +307,28 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
     expect(withBlocks.length).toBeGreaterThanOrEqual(30);
   });
 
+  it('س5: كتاب ثانٍ «رفيقي في الرياضيات س5» بجانب سلسلة المواقف — 172 صفحة و29 درسًا بلا تسريبات', async () => {
+    const res = await request(app).get('/api/public/curriculum/books');
+    expect(res.status).toBe(200);
+    const y5 = res.body.filter((b) => b.gradeId === 'year5');
+    expect(y5.map((b) => b.subjectId)).toEqual(expect.arrayContaining(['math', 'math2']));
+    const raf = y5.find((b) => b.subjectId === 'math2');
+    expect(raf.title).toBe('رفيقي في الرياضيات س5');
+    expect(raf.subjectKey).toBe('رياضيات');
+    expect(raf.scanReady).toBe(true);
+    expect(raf.hasImages).toBe(true);
+    expect(raf.totalPages).toBe(172);
+    const old = y5.find((b) => b.subjectId === 'math');
+    expect(old).toBeTruthy();
+    const les = await request(app).get('/api/public/curriculum/books/year5/math2/lessons');
+    expect(les.status).toBe(200);
+    expect(les.body.length).toBe(29);
+    const blob = JSON.stringify(les.body);
+    expect(blob).not.toContain('"answer"');
+    expect(blob).not.toContain('الإجابة:');
+    expect(les.body.filter((p) => (p.blocks || []).some((b) => b.image && b.imageId)).length).toBeGreaterThanOrEqual(15);
+  });
+
   it('أمان: بنك الاختبارات العام لا يسرّب مفاتيح الإجابات (التفاصيل والقائمة)', async () => {
     const detail = await request(app).get('/api/public/official-exams-bank/year1-t1-math-noor');
     expect(detail.status).toBe(200);
