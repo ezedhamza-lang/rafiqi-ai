@@ -337,21 +337,42 @@ export function certificateHtml(cert) {
 }
 
 // ===== مذكرة بيداغوجية — قالب المواصفات الرسمية (v2) =====
+// GLES match: 3 tables from the official Word template
+//   Table 0: Banner — 1 row × 3 cols (التوقيت | العنوان | المستوى)
+//   Table 1: Competency — 4 rows × 2 cols (empty | label)
+//   Table 2: Activity — header + N rows × 4 cols (المراحل | نشاط المعلّم | نشاط المتعلّم | الوسائل)
 async function memoSpecHtml(memo, s) {
   const lines = (t) => esc(String(t || '')).replace(/\n/g, '<br/>');
   const cellImgs = async (imgs) => {
     const out = [];
     for (const im of imgs || []) {
       const uri = await inlineImageForPdf(im.src);
-      if (uri) out.push('<div style=\"text-align:center;margin:4px 0\"><img src=\"' + uri + '\" style=\"max-width:92%;max-height:110px;border:1px solid #bbb;border-radius:6px\"/>' + (im.caption ? '<div style=\"font-size:9px;color:#555\">' + esc(im.caption.slice(0, 90)) + '</div>' : '') + '</div>');
+      if (uri) out.push('<div style="text-align:center;margin:4px 0"><img src="' + uri + '" style="max-width:92%;max-height:110px;border:1px solid #bbb;border-radius:6px"/>' + (im.caption ? '<div style="font-size:9px;color:#555">' + esc(im.caption.slice(0, 90)) + '</div>' : '') + '</div>');
     }
     return out.join('');
   };
-  const compRows = [];
+
+  // ── Table 0: Banner ──
+  const duration = esc((s.banner && s.banner.duration) || 'التوقيت: 60 دق');
+  const titleText = s.mathTemplate
+    ? esc((s.banner && s.banner.title) || 'مذكرة رياضيات')
+    : esc(s.headerTitle || ('مذكرة بيداغوجية: ' + (memo.lessonTitle || '')));
+  const levelText = s.mathTemplate
+    ? esc((s.banner && s.banner.level) || '')
+    : esc(s.period || '…');
+  const levelLabel = s.mathTemplate ? 'المستوى' : 'الفترة';
+  const bannerTable =
+    '<table class="mtpl"><tr>' +
+    '<td class="tpl-hdr">' + duration + '</td>' +
+    '<td class="tpl-hdr tpl-title">' + titleText + '</td>' +
+    '<td class="tpl-hdr">' + levelLabel + ' : ' + levelText + '</td>' +
+    '</tr></table>';
+
+  // ── Table 1: Competency block ──
   const compDefs = s.mathTemplate
     ? [
         ['مكون الكفاية', s.competencies?.component],
-        ['الهدف المميز', s.competencies?.distinctiveObjective],
+        ['الهدف الم瑕疵', s.competencies?.distinctiveObjective],
         ['المحتوى', s.content],
         ['هدف الحصة', (s.lessonObjectives || []).join('؛ ')]
       ]
@@ -361,53 +382,70 @@ async function memoSpecHtml(memo, s) {
         ['مكوّن الكفاية', s.competencies?.component],
         ['الهدف المميّز', s.competencies?.distinctiveObjective]
       ];
+  // RTL docx: Cell 0 = right, Cell 1 = left. Official template: Cell 0 empty, Cell 1 = label.
+  const compRows = [];
   for (const [label, val] of compDefs) {
-    if (val) compRows.push('<div class=\"cf\"><b>' + esc(label) + ' :</b> ' + esc(val) + '</div>');
-    else if (s.mathTemplate && label !== 'المحتوى') compRows.push('<div class=\"cf\"><b>' + esc(label) + ' :</b> ' + '.'.repeat(60) + '</div>');
+    if (val) compRows.push('<tr><td></td><td class="tpl-lbl">' + esc(label) + '</td></tr>');
+    else if (s.mathTemplate && label !== 'المحتوى') compRows.push('<tr><td></td><td class="tpl-lbl">' + esc(label) + '</td></tr>');
   }
   if (!s.mathTemplate) {
     for (let i = 0; i < (s.lessonObjectives || []).length; i++) {
-      compRows.push('<div class=\"cf\"><b>هدف الحصّة ' + (i + 1) + ' :</b> ' + esc(s.lessonObjectives[i]) + '</div>');
+      compRows.push('<tr><td></td><td class="tpl-lbl">هدف الحصّة ' + (i + 1) + '</td></tr>');
     }
   }
-  if (s.content && !s.mathTemplate) compRows.push('<div class=\"cf content\"><b>المحتوى :</b> ' + esc(s.content) + '</div>');
+  if (s.content && !s.mathTemplate) compRows.push('<tr><td></td><td class="tpl-lbl tpl-content">المحتوى</td></tr>');
+  const compTable = '<table class="mtpl mcomp">' + compRows.join('') + '</table>';
+
+  // ── Activity rows ──
   const trs = [];
   for (const r of s.rows || []) {
     trs.push(
       '<tr>' +
-      '<td class=\"stg\">' + esc(r.stage) + '</td>' +
+      '<td class="stg">' + esc(r.stage) + '</td>' +
       '<td>' + lines(r.teacherActivity) + (await cellImgs(r.images)) + '</td>' +
       '<td>' + lines(r.learnerActivity) + '</td>' +
-      (s.mathTemplate ? '' : '<td class=\"skl\">' + esc(r.skill || '—') + '</td>') +
-      '<td class=\"tls\">' + esc((r.tools || []).join(' + ') || '—') + '</td>' +
+      (s.mathTemplate ? '' : '<td class="skl">' + esc(r.skill || '—') + '</td>') +
+      '<td class="tls">' + esc((r.tools || []).join(' + ') || '—') + '</td>' +
       '</tr>'
     );
   }
+  const actColCount = s.mathTemplate ? 4 : 5;
+  const actHeaders = s.mathTemplate
+    ? '<th>المراحل</th><th>نشاط المعلّم</th><th>نشاط المتعلّم</th><th>الوسائل</th>'
+    : '<th>المراحل</th><th>نشاط الأستاذ</th><th>نشاط المتعلّم</th><th>المهارة المستهدفة</th><th>الوسائل</th>';
+  const actTable =
+    '<table class="mtab"><thead><tr>' + actHeaders + '</tr></thead><tbody>' +
+    trs.join('') + '</tbody></table>';
+
+  // ── Images ──
   const imgsTop = [];
   const used = new Set((s.rows || []).flatMap((r) => (r.images || []).map((i) => i.src)));
   for (const im of (s.images || []).filter((i) => !used.has(i.src)).slice(0, 2)) {
     const uri = await inlineImageForPdf(im.src);
-    if (uri) imgsTop.push('<div style=\"text-align:center;margin:6px 0\"><img src=\"' + uri + '\" style=\"max-width:45%;max-height:150px;border:1px solid #bbb;border-radius:8px\"/></div>');
+    if (uri) imgsTop.push('<div style="text-align:center;margin:6px 0"><img src="' + uri + '" style="max-width:45%;max-height:150px;border:1px solid #bbb;border-radius:8px"/></div>');
   }
+
+  // ── CSS ──
   const style = '<style>' +
-    '.mhead{background:#5b4636;color:#fff;padding:12px 16px;border-radius:10px 10px 0 0;display:flex;justify-content:space-between;align-items:center;direction:rtl}' +
-    '.mhead b{font-size:21px}' +
-    '.mhead .box{display:flex;gap:8px}' +
-    '.mhead .pill{border-radius:8px;padding:3px 14px;color:#222;font-weight:700;font-size:14px}' +
-    '.mcomp{border:2px solid #b9c8ae;border-radius:12px;padding:10px 14px;margin:12px 0;background:#f7faf5}' +
-    '.mcomp .cf{margin:3px 0;font-size:13.5px;line-height:1.9}' +
-    '.mcomp .cf.content{background:#eef4fb;border-right:5px solid #4a7fb5;padding:6px 12px;border-radius:6px;margin-top:8px;font-size:14px}' +
-    '.mwalk{ text-align:center;font-size:20px;font-weight:900;color:#7a4b1f;margin:14px 0 8px;border-bottom:3px solid #c9a227;display:inline-block;padding:0 22px 4px}' +
-    '.mwrap{display:flex;justify-content:center}' +
-    'table.mtab{width:100%;border-collapse:collapse;font-size:14px}' +
-    'table.mtab th{border:2.5px solid #222;padding:8px 10px;font-size:16px;color:#1d2430}' +
+    // Table 0-1 shared: official bordered look
+    'table.mtpl{width:100%;border-collapse:collapse;margin:0 0 10px;table-layout:fixed}' +
+    'table.mtpl td{border:1.5px solid #111;padding:7px 10px;font-size:13px;vertical-align:middle}' +
+    // Banner row
+    'table.mtpl .tpl-hdr{background:#f5edd6;text-align:center;font-weight:700;font-size:14px}' +
+    'table.mtpl .tpl-title{font-size:17px;background:#e8dfc4}' +
+    // Competency block: label column
+    'table.mtpl .tpl-lbl{background:#e8f5e2;text-align:center;font-weight:700;width:22%;white-space:nowrap}' +
+    'table.mtpl .tpl-content{background:#eef4fb}' +
+    // Activity table
+    'table.mtab{width:100%;border-collapse:collapse;font-size:13px;margin-top:2px}' +
+    'table.mtab th{border:2px solid #111;padding:7px 8px;font-size:14px;font-weight:700;color:#1d2430;text-align:center}' +
     'table.mtab thead th:nth-child(1){background:#d9b45b}' +
     'table.mtab thead th:nth-child(2){background:#a8c8e8}' +
     'table.mtab thead th:nth-child(3){background:#a9dcb9}' +
     'table.mtab thead th:nth-child(4){background:#d3bce8}' +
     'table.mtab thead th:nth-child(5){background:#f0c9b0}' +
-    'table.mtab td{border:2px solid #222;border-bottom:3.5px solid #111;padding:9px 10px;vertical-align:top;line-height:1.9}' +
-    'table.mtab td.stg{font-weight:800;text-align:center;white-space:normal;width:10%;direction:rtl;font-size:15px}' +
+    'table.mtab td{border:2px solid #111;padding:8px 9px;vertical-align:top;line-height:1.85}' +
+    'table.mtab td.stg{font-weight:800;text-align:center;white-space:normal;width:11%;direction:rtl;font-size:14px}' +
     'table.mtab tbody tr:nth-child(6n+1) td.stg{background:#f3e2b6}' +
     'table.mtab tbody tr:nth-child(6n+2) td.stg{background:#c9def3}' +
     'table.mtab tbody tr:nth-child(6n+3) td.stg{background:#cdeed4}' +
@@ -416,33 +454,24 @@ async function memoSpecHtml(memo, s) {
     'table.mtab tbody tr:nth-child(6n+6) td.stg{background:#d4ecec}' +
     'table.mtab td.skl{width:12%;text-align:center;color:#274d27;font-weight:700}' +
     'table.mtab td.tls{width:12%;text-align:center;color:#333;font-weight:600}' +
-    '.mend{border:2px solid #b9c8ae;border-radius:12px;padding:12px 16px;margin-top:14px;background:#fbf9f4;font-size:14.5px}' +
-    '.mfill{border-bottom:2.5px dotted #555;height:30px;margin:6px 0 12px}' +
-    '.mtip{font-size:12px;color:#666;margin-top:4px}' +
+    // Bottom section
+    '.mend{border:2px solid #b9c8ae;border-radius:8px;padding:12px 16px;margin-top:14px;background:#fbf9f4;font-size:13.5px}' +
+    '.mfill{border-bottom:2.5px dotted #555;height:28px;margin:6px 0 10px}' +
+    '.mtip{font-size:11px;color:#666;margin-top:4px}' +
     '@media print { thead { display: table-header-group; } table.mtab tr { break-inside: avoid; } }' +
     '</style>';
+
+  // ── Body ──
   const body = '<div class="page">' + style +
-    (s.mathTemplate
-      ? '<div class=\"mhead\"><b>' + esc((s.banner && s.banner.title) || 'مذكرة رياضيات') + '</b>' +
-        '<span class=\"box\"><span class=\"pill\" style=\"background:#c9a227\">' + esc((s.banner && s.banner.duration) || 'التوقيت: 60 دق') + '</span>' +
-        '<span class=\"pill\" style=\"background:#7a9e7e;color:#fff\">المستوى: ' + esc((s.banner && s.banner.level) || '') + '</span></span></div>'
-      : '<div class=\"mhead\"><b>' + esc(s.headerTitle || ('مذكرة بيداغوجية: ' + (memo.lessonTitle || ''))) + '</b>' +
-        '<span class=\"box\"><span class=\"pill\" style=\"background:#c9a227\">الفترة: ' + esc(s.period || '…') + '</span>' +
-        '<span class=\"pill\" style=\"background:#7a9e7e;color:#fff\">اليوم: ' + esc(s.day || '…') + '</span></span></div>') +
-    '<div class=\"mcomp\">' + compRows.join('') + '</div>' +
+    bannerTable +
+    compTable +
     imgsTop.join('') +
-    (s.mathTemplate ? '' : '<div class=\"mwrap\"><span class=\"mwalk\">ثانيًا: التمشّي البيداغوجي</span></div>') +
-    '<table class=\"mtab\"><thead><tr>' +
-    (s.mathTemplate
-      ? '<th>المراحل</th><th>نشاط المعلّم</th><th>نشاط المتعلّم</th><th>الوسائل</th>'
-      : '<th>المراحل</th><th>نشاط الأستاذ</th><th>نشاط المتعلّم</th><th>المهارة المستهدفة</th><th>الوسائل</th>') +
-    '</tr></thead><tbody>' +
-    trs.join('') + '</tbody></table>' +
-    (s.assessment ? '<div style=\"margin-top:8px;font-size:11px\"><b>عناصر التقويم المطبَّقة:</b> ' + lines(s.assessment) + '</div>' : '') +
-    '<div class=\"mend\">' +
-    '<b>' + esc(s.successRateLine || 'نسبة نجاح الدرس من خلال التمرين التطبيقي:') + '</b><div class=\"mfill\"></div>' +
-    '<b>' + esc(s.pedagogicalDecision || 'القرار البيداغوجي:') + '</b><div class=\"mfill\"></div><div class=\"mfill\"></div>' +
-    (s.decisionHints ? '<div class=\"mtip\">' + esc(s.decisionHints) + '</div>' : '') +
+    actTable +
+    (s.assessment ? '<div style="margin-top:8px;font-size:11px"><b>عناصر التقويم المطبَّقة:</b> ' + lines(s.assessment) + '</div>' : '') +
+    '<div class="mend">' +
+    '<b>' + esc(s.successRateLine || 'نسبة نجاح الدرس من خلال التمرين التطبيقي:') + '</b><div class="mfill"></div>' +
+    '<b>' + esc(s.pedagogicalDecision || 'القرار البيداغوجي:') + '</b><div class="mfill"></div><div class="mfill"></div>' +
+    (s.decisionHints ? '<div class="mtip">' + esc(s.decisionHints) + '</div>' : '') +
     '</div></div>';
   return baseHtml('مذكرة بيداغوجية: ' + (memo.lessonTitle || ''), body);
 }
