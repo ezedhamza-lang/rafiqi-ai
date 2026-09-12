@@ -128,6 +128,7 @@ const EMOJI_RE = /^[💡✏️📘🎯⚠️🧠📐🔷🔶⭐✨🖊✍️️]
 function cleanMemoText(t) {
   return String(t || '')
     .replace(EMOJI_RE, '')
+    .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}\u{FE0F}\u{200D}]/gu, '')
     .replace(/\*\*/g, '')
     .replace(LABEL_RE, '$1 :')
     .replace(/\s+/g, ' ')
@@ -143,8 +144,12 @@ function domainFields(lesson) {
   if (/هندس|شكل|زاوية|استقام|متعامد|متوازي/.test(d)) return { component: 'بناء الأشكال واستعمال أدوات الهندسة', distinctive: 'تعرّف الأشكال وخصائصها والبناء بمسطرة والترجية أو المركّب.' };
   if (/احتمال|بيانات|جدول|مخطط/.test(d)) return { component: 'معالجة البيانات وقراءة الجداول والمخططات', distinctive: 'قراءة البيانات وتنظيمها واستخراج النتائج واتخاذ القرار.' };
   if (/نقود|ثمن|اشاري|تسوق/.test(d)) return { component: 'توظيف العمليات في الحساب النقدي', distinctive: 'حساب الأثمان والبواقي وتقييم المعروضات.' };
+  if (/نقود|ثمن|اشاري|تسوق|مليم|ملاليم|دين|اشتري|باع|حصاد|حصاد|قطاف/.test(d)) return { component: 'توظيف العمليات في الحساب النقدي وحل وضعيات من الحياة', distinctive: 'استعمال العمليات على الأعداد في وضعيات الشراء والبيع والتوزيع وحساب البواقي.' };
+  if (/سعه|سعة|لتر|عصير|قاروره|قارورات|كيلو|كيلومتر|جري|سباق|رحله|رحلة|وقت|ساعه|دقيقه|طول|كتله|temperature|حراره/.test(d)) return { component: 'استعمال وحدات القيس وتحويلها', distinctive: 'التعرّف على وحدات القيس (الطول والكتلة والسعة والزمن) وتحويلها واستعمالها في وضعيات.' };
+  if (/نصف|ثلث|ربع|قطعه|قطعة|كعكه|كعكة|كسري|كسريه/.test(d)) return { component: 'توظيف الأعداد الكسرية والعمليات عليها', distinctive: 'التعرّف على الكسور وتمثيلها ومقارنتها وتوظيفها في وضعيات قسمة وتوزيع.' };
   if (/طبيعي|ملايين|مليارات/.test(d)) return { component: 'التعرف على بنية الأعداد وترقيم المنازل', distinctive: 'قراءة الأعداد الطبيعية الكبيرة وكتابتها وترتيبها ومقارنتها وتقريبها واستعمالها في وضعيات.' };
-  return { component: 'حلّ وضعيات مشكلة دالّة بتوظيف العمليات على الأعداد', distinctive: to ? `التصرّف في الأعداد من 0 إلى ${to} قراءةً وكتابةً وتمثيلًا ومقارنةً وترتيبًا وتفكيكًا وتجميعًا.` : '' };
+  if (/عدد|اعداد|موقع|فضاء|شكل|ترتي|تجزئه|تجزئة|رتبي|رتبي|مفرد|مضاعف|قابل/i.test(d)) return { component: 'حلّ وضعيات مشكلة دالّة بتوظيف العمليات على الأعداد', distinctive: 'توظيف العمليات على الأعداد ومفهوم العدد في وضعيات حياتية وقراءة النتائج وتفسيرها.' };
+  return { component: 'حلّ وضعيات مشكلة دالّة بتوظيف العمليات على الأعداد', distinctive: to ? `التصرّف في الأعداد من 0 إلى ${to} قراءةً وكتابةً وتمثيلًا ومقارنةً وترتيبًا وتفكيكًا وتجميعًا.` : 'توظيف العمليات على الأعداد في وضعيات دالّة وقراءة النتائج وتفسيرها.' };
 }
 
 const TEACHER_TPL = {
@@ -275,6 +280,7 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
     ];
     const dots = (n, w) => { const out = []; for (let i = 0; i < n; i++) out.push('.'.repeat(w)); return out.join('\n'); };
     const usedPrompts = new Set();
+    const seenTexts = new Set();
     for (let si = 0; si < MATH_STAGES.length; si++) {
       const st = MATH_STAGES[si];
       let items = [];
@@ -296,13 +302,41 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
           const s = `${m.prompt} — الطريقة المتوقعة: ${m.strategy}`;
           if (!usedPrompts.has(m.prompt)) { usedPrompts.add(m.prompt); genTexts.push(s); }
         });
-      } else if (si === 1) genTexts = memoPrereqItems(ctx.gradeId || 'year3', lesson.id, 3).map((m) => m.prompt);
-      else if (si === 4) {
+      } else if (si === 1) {
+        memoPrereqItems(ctx.gradeId || 'year3', lesson.id, 3).forEach((m) => {
+          if (!usedPrompts.has(m.prompt)) { usedPrompts.add(m.prompt); genTexts.push(m.prompt); }
+        });
+      } else if (si === 4) {
         const extra = memoMentalItems(ctx.gradeId || 'year3', lesson.id + 'T', 4, lesson.title).filter((m) => !usedPrompts.has(m.prompt)).slice(0, 2);
         extra.forEach((m) => usedPrompts.add(m.prompt));
         genTexts = extra.map((m) => m.prompt);
       }
-      const merged = (si === 1 ? genTexts : texts).concat((si === 1 ? texts : genTexts).filter((g) => !(si === 1 ? texts : texts).some((t) => t.includes(g.slice(0, 18)))));
+      let merged = (si === 1 ? genTexts.concat(texts) : texts.concat(genTexts)).filter((x, i, arr) => arr.indexOf(x) === i);
+      merged = merged.filter((x) => {
+        const key = x.split(' — ')[0].replace(/^•\s*/, '');
+        if (seenTexts.has(key)) return false;
+        seenTexts.add(key);
+        return true;
+      });
+      if (!merged.length) {
+        const rescue = memoMentalItems(ctx.gradeId || 'year3', lesson.id + 'r' + si, 6, lesson.title)
+          .map((m) => `${m.prompt} — الطريقة المتوقعة: ${m.strategy}`)
+          .filter((x) => { const key = x.split(' — ')[0]; if (seenTexts.has(key)) return false; seenTexts.add(key); return true; })
+          .slice(0, 3);
+        merged = rescue;
+      }
+      if (!merged.length) {
+        const fallbacks = [
+          'عمليات حساب ذهني قصيرة مرتبطة بوضع الدرس تُنجز على الألواح مع بيان الطريقة.',
+          'روابط سريعة على الألواح: أكمل لتصل إلى 10، فكّك عددًا إلى عشرات وآحاد، قارن كميات.',
+          'يُستكشَف وضعُ الدرس الوارد بكتاب التلميذ عملًا فريقًا ثم يُثبَّت الاستنتاج جماعيًّا.',
+          'وضعية إدماجية قصيرة تجمع مكتسبات الدرس تُنجز فرديًا ثم تُناقش وتصحَّح.',
+          'تمارين تقويم قصيرة تُنجز فرديًا مع شبكة تصحيح ذاتي وتدوين نسبة النجاح.'
+        ];
+        const fb = `${fallbacks[si] || fallbacks[2]} (مرجع: «${lesson.title}»)`.slice(0, 160);
+        seenTexts.add(fb);
+        merged = [fb];
+      }
       const bullets = merged.slice(0, Math.max(2, st.space - 2)).map((x) => '• ' + x);
       const remain = Math.max(1, st.space - bullets.length);
       const teacherActivity = bullets.join('\n') + (bullets.length ? '\n' : '') + dots(remain, st.w + si);
@@ -356,7 +390,7 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
   const extraAnswers = solvedLeft.map((b) => b.text).filter(Boolean);
   const answerBlocks = allBlocks.filter((b) => b && b.teacherOnly && !isPlaceholderBlock(b));
   if (answerBlocks.length || extraAnswers.length) {
-    const ansText = answerBlocks.map((b) => '• ' + itemText(b)).concat(extraAnswers.map((x) => '• ' + x)).filter((x) => x.length > 2).slice(0, 8).join('\n');
+    const ansText = answerBlocks.map((b) => '• ' + cleanMemoText(itemText(b))).concat(extraAnswers.map((x) => '• ' + cleanMemoText(x))).filter((x) => x.length > 2).slice(0, 8).join('\n');
     rows.push({
       stage: 'نموذج الإجابة والتحقّق',
       teacherActivity: 'يعرض النموذج ويدعوهم إلى المقارنة والتصحيح الذاتي:\n' + ansText,
