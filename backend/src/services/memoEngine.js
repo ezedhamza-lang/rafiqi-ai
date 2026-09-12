@@ -118,6 +118,35 @@ function isPlaceholderBlock(b) {
   return PLACEHOLDER_TXT.test(normalizeArabic(`${b.text || ''} ${b.title || ''}`));
 }
 
+function isLabelNoise(t) {
+  const n = normalizeArabic(t).replace(/[\s\d().,+]+/g, '');
+  return /^(اتدرب|اتحدى|اطبق|اراجع|افكر|احكم|اقوم|اتحقق|وضعيت|وضعيه|تذكر|استنتج|لاحظ)/.test(n) && n.length <= 16;
+}
+
+const LABEL_RE = /^(ألاحظ|أستنتج|استنتج|أتذكر|تذكر|أكتب|اكتب|أتحدّى نفسي|أتحدى نفسي|أُقيّم نفسي|اقوم نفسي|وضعية إدماجية|وضعية|أُطبّق|اطبق|أُراجع)(?=[^\s:：،.])/u;
+const EMOJI_RE = /^[💡✏️📘🎯⚠️🧠📐🔷🔶⭐✨🖊✍️️]+\s*/u;
+function cleanMemoText(t) {
+  return String(t || '')
+    .replace(EMOJI_RE, '')
+    .replace(/\*\*/g, '')
+    .replace(LABEL_RE, '$1 :')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function domainFields(lesson) {
+  const d = normalizeArabic(`${lesson.domain || ''} ${lesson.title || ''}`);
+  const m = RANGE_RE.exec(toWestern(lesson.title));
+  const to = m ? m[2] : '';
+  if (/عشري|كسري/.test(d)) return { component: 'توظيف الأعداد الكسرية والعشرية والعمليات عليها', distinctive: 'التعرّف على الأعداد الكسرية العشرية وكتابتها بمنازلها وتحويلها وإنجاز العمليات عليها.' };
+  if (/قياس/.test(d)) return { component: 'استعمال وحدات القيس وتحويلها', distinctive: 'التصرّف في وحدات القياس (الطول والكتلة والسعة) وتحويلها وحل وضعيات من الحياة.' };
+  if (/هندس|شكل|زاوية|استقام|متعامد|متوازي/.test(d)) return { component: 'بناء الأشكال واستعمال أدوات الهندسة', distinctive: 'تعرّف الأشكال وخصائصها والبناء بمسطرة والترجية أو المركّب.' };
+  if (/احتمال|بيانات|جدول|مخطط/.test(d)) return { component: 'معالجة البيانات وقراءة الجداول والمخططات', distinctive: 'قراءة البيانات وتنظيمها واستخراج النتائج واتخاذ القرار.' };
+  if (/نقود|ثمن|اشاري|تسوق/.test(d)) return { component: 'توظيف العمليات في الحساب النقدي', distinctive: 'حساب الأثمان والبواقي وتقييم المعروضات.' };
+  if (/طبيعي|ملايين|مليارات/.test(d)) return { component: 'التعرف على بنية الأعداد وترقيم المنازل', distinctive: 'قراءة الأعداد الطبيعية الكبيرة وكتابتها وترتيبها ومقارنتها وتقريبها واستعمالها في وضعيات.' };
+  return { component: 'حلّ وضعيات مشكلة دالّة بتوظيف العمليات على الأعداد', distinctive: to ? `التصرّف في الأعداد من 0 إلى ${to} قراءةً وكتابةً وتمثيلًا ومقارنةً وترتيبًا وتفكيكًا وتجميعًا.` : '' };
+}
+
 const TEACHER_TPL = {
   warmup: (items, pages) => ({
     teacher: 'يطرح سلسلة عمليات حساب ذهني مرتبطة بتقنية الدرس ويدعوهم إلى إنجازها على الألواح:\n' + items.map((i) => '• ' + i).join('\n') + '\n• ويدعوهم إلى بيان طريقة الحساب.',
@@ -170,7 +199,7 @@ function rowRole(stageName) {
 
 function buildRow(stageName, blocks, ctxPages) {
   const role = rowRole(stageName);
-  const texts = blocks.filter((b) => !isPlaceholderBlock(b)).map(itemText).filter(Boolean);
+  const texts = blocks.filter((b) => !isPlaceholderBlock(b)).map((b) => cleanMemoText(String(b.text || (b.kind !== 'concept' ? b.title || '' : '')))).filter((x) => x && !isLabelNoise(x));
   const tables = blocks.filter((b) => b.kind === 'table' && !isPlaceholderBlock(b)).length;
   if (!texts.length && !tables) return null;
   const tpl = TEACHER_TPL[role] || TEACHER_TPL.explore;
@@ -191,7 +220,7 @@ function toWestern(s) { return String(s || '').replace(/[٠-٩]/g, (d) => '٠١�
 export function buildSpecMemo({ profile, lesson, ctx }) {
   const g = groupBySection(lesson);
   const sMap = loadSkillsMap(ctx.gradeId || '', ctx.subjectId || '');
-  const mapLesson = sMap && sMap.lessons ? sMap.lessons[lesson.id] : null;
+  const mapLesson = sMap ? ((sMap.lessons && sMap.lessons[lesson.id]) || sMap[lesson.id] || null) : null;
   const pages = lesson.officialRef ? toWestern(lesson.officialRef.pages) : '';
 
   const concept = normalizeArabic(lesson.title).includes(':')
@@ -208,13 +237,14 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
       ];
 
   const cw = profile.competencyFramework || {};
+  const domX = domainFields(lesson);
   const competencies = {
     domain: cw.domainCompetency || (profile.appliesTo?.subject === 'رياضيات' ? 'حلّ وضعيات مشكلة دالّة.' : ''),
     subject: cw.subjectCompetency || (profile.appliesTo?.subject === 'رياضيات' ? 'حلّ وضعيات مشكلة دالّة إسهامًا للتفكير الرياضي.' : ''),
-    component: (mapLesson && mapLesson.competencies ? mapLesson.competencies.filter(Boolean).join(' ؛ ') : '') || cw.component || '',
+    component: (mapLesson && mapLesson.competencies ? mapLesson.competencies.filter(Boolean).join(' ؛ ') : '') || cw.component || domX.component || '',
     distinctiveObjective: (rangeTxt
       ? `التصرّف في الأعداد بين ${rangeM[1]} و${rangeM[2]} قراءةً وكتابةً وتمثيلًا ومقارنةً وترتيبًا وتفكيكًا وتجميعًا.`
-      : '') || cw.distinctiveObjective || (mapLesson && mapLesson.competencies ? mapLesson.competencies[0] : '') || ''
+      : '') || cw.distinctiveObjective || (mapLesson && mapLesson.competencies ? mapLesson.competencies[0] : '') || domX.distinctive || ''
   };
 
   const subjN = normalizeArabic(ctx.subject || '');
@@ -244,6 +274,7 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
       { label: 'تقييم', keys: ['assessment'], space: 7, w: 58, tools: ['كراس المحاولات', 'شبكة التصحيح'], learner: ['• ينجز فرديًا ثم يصحّح بشبكة التقويم.'] }
     ];
     const dots = (n, w) => { const out = []; for (let i = 0; i < n; i++) out.push('.'.repeat(w)); return out.join('\n'); };
+    const usedPrompts = new Set();
     for (let si = 0; si < MATH_STAGES.length; si++) {
       const st = MATH_STAGES[si];
       let items = [];
@@ -257,10 +288,20 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
         tail.forEach((x) => consumed.add(x.i));
         items = items.concat(tail.map((x) => x.b));
       }
-      const texts = items.filter((b) => !isPlaceholderBlock(b)).map(itemText).filter(Boolean);
+      const texts = items.filter((b) => !isPlaceholderBlock(b) && String(b.text || '').trim()).map((b) => cleanMemoText(b.text)).filter((x) => x && !isLabelNoise(x));
+      texts.forEach((x) => usedPrompts.add(x));
       let genTexts = [];
-      if (si === 0) genTexts = memoMentalItems(ctx.gradeId || 'year3', lesson.id, 3).map((m) => `${m.prompt} — الطريقة المتوقعة: ${m.strategy}`);
-      else if (si === 1) genTexts = memoPrereqItems(ctx.gradeId || 'year3', lesson.id, 3).map((m) => m.prompt);
+      if (si === 0) {
+        memoMentalItems(ctx.gradeId || 'year3', lesson.id, 3, lesson.title).forEach((m) => {
+          const s = `${m.prompt} — الطريقة المتوقعة: ${m.strategy}`;
+          if (!usedPrompts.has(m.prompt)) { usedPrompts.add(m.prompt); genTexts.push(s); }
+        });
+      } else if (si === 1) genTexts = memoPrereqItems(ctx.gradeId || 'year3', lesson.id, 3).map((m) => m.prompt);
+      else if (si === 4) {
+        const extra = memoMentalItems(ctx.gradeId || 'year3', lesson.id + 'T', 4, lesson.title).filter((m) => !usedPrompts.has(m.prompt)).slice(0, 2);
+        extra.forEach((m) => usedPrompts.add(m.prompt));
+        genTexts = extra.map((m) => m.prompt);
+      }
       const merged = (si === 1 ? genTexts : texts).concat((si === 1 ? texts : genTexts).filter((g) => !(si === 1 ? texts : texts).some((t) => t.includes(g.slice(0, 18)))));
       const bullets = merged.slice(0, Math.max(2, st.space - 2)).map((x) => '• ' + x);
       const remain = Math.max(1, st.space - bullets.length);

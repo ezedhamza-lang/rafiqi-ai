@@ -306,8 +306,8 @@ export function memoPrereqItems(gradeId, lessonId, n = 3) {
   return buildPrereqSession(gradeId, seed, n);
 }
 
-/** أنشطة مذكرة: حساب ذهني بطرق اليوم (أنواع موجّهة فقط) */
-export function memoMentalItems(gradeId, lessonId, n = 3) {
+/** أنشطة مذكرة: حساب ذهني بطرق اليوم (موجّه لموضوع الدرس) */
+export function memoMentalItems(gradeId, lessonId, n = 3, lessonTitle = '') {
   let seed = 7;
   for (const ch of String(lessonId || '')) seed = (seed * 31 + ch.charCodeAt(0)) >>> 0;
   const rng = mulberry32(seed);
@@ -315,7 +315,33 @@ export function memoMentalItems(gradeId, lessonId, n = 3) {
   const savedKinds = plan.kinds;
   plan.kinds = ['direct', 'fill', 'chain'];
   const out = [];
+  const dec = /عشري|كسري/.test(lessonTitle);
+  const measure = /قياس|الطول|الكتلة|السعة/.test(lessonTitle);
   for (let i = 0; i < n; i++) {
+    if (dec) {
+      const da = ri(rng, 2, 9) / 10;
+      const dacs = (Number(da.toFixed(1)) + '').replace('.', ',');
+      const dbc = (Number((1 - da).toFixed(1)) + '').replace('.', ',');
+      const half = ri(rng, 2, 9) * 5;
+      const q4 = pick(rng, [400, 800, 1200, 2000]);
+      const q = pick(rng, ['add', 'half', 'quarter']);
+      const it = q === 'add'
+        ? { prompt: `أحسب ذهنيًا: ${dacs} + ${dbc} = ؟`, answer: 1, strategy: 'أصدقاء الواحد العشري', explain: `${dacs} ينقصها ${dbc} ليُكمل واحدًا صحيحًا.` }
+        : q === 'half'
+          ? { prompt: `نصف العدد ${half * 2} = ؟`, answer: half, strategy: 'نصف مضاعف معروف', explain: `${half * 2} : 2 = ${half}.` }
+          : { prompt: `ربع العدد ${q4} = ؟`, answer: q4 / 4, strategy: 'نصفُ النصف', explain: `نصف ${q4} هو ${q4 / 2}، ونصفه الثاني ${q4 / 4}.` };
+      out.push(it);
+      continue;
+    }
+    if (measure) {
+      const conv = pick(rng, [
+        { prompt: 'كم سنتمترًا في 3 م؟', answer: 300, strategy: 'جدول التحويل', explain: '1 م = 100 سم ⇒ 3 م = 300 سم.' },
+        { prompt: 'كم دقيقة في نصف ساعة؟', answer: 30, strategy: 'نصف 60', explain: '60 : 2 = 30 د.' },
+        { prompt: '1 كغ و 250 غ = كم غرامًا؟', answer: 1250, strategy: 'توحيد الوحدة', explain: '1 كغ = 1000 غ، + 250 = 1250 غ.' }
+      ]);
+      out.push(conv);
+      continue;
+    }
     const it = buildItem(rng, gradeId, 100 + i);
     out.push({ prompt: it.prompt, answer: it.answer, strategy: STRATEGIES[it.strategy]?.label || '', explain: it.explain, hint: it.hint });
   }
