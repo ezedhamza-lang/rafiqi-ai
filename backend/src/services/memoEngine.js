@@ -220,7 +220,8 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
   const subjectWord = subjN.includes('رياضيات') ? 'رياضيات' : (ctx.subject || '');
   const headerTitle = `مذكرة بيداغوجية لحصة ${subjectWord} — ${ctx.level || ''}`;
 
-  const stages = (profile.phases || []).map((p) => p.name);
+  const subjNorm = normalizeArabic(ctx.subject || '');
+  const isMathTemplate = subjNorm.includes('رياضيات');
   const roles = classifyStages(lesson);
   const consumed = new Set();
   const takeRole = (name) => {
@@ -228,6 +229,43 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
     arr.forEach((x) => consumed.add(x.idx));
     return arr.map((x) => x.block);
   };
+  const allBlocks = lesson.blocks || [];
+  const rows = [];
+
+  if (isMathTemplate) {
+    // القالب الرسمي الموحد (مثال فارغ لمذكرة درس رياضيات): خمس مراحل ثابتة لا تُحذف،
+    // وفراغات منقّطة للكتابة اليدوية في كل خلية كما في النموذج.
+    const MATH_STAGES = [
+      { label: 'حساب ذهني', keys: ['warmup'], space: 5, w: 55, tools: ['الألواح'], learner: ['• يُجري الحساب سريعًا على اللوح ويبيّن طريقته.'] },
+      { label: 'تعهّد المكتسبات', keys: ['recall'], space: 6, w: 60, tools: ['الألواح', 'السبورة'], learner: ['• يستحضر القواعد والتقنيات المستوجبة ويثبّتها.'] },
+      { label: 'الوضعية الاستكشافية\nالتعلّم المنهجي / الآلي', keys: ['explore', 'situation', 'practice', 'steps'], space: 12, w: 68, tools: ['السبورة', 'كراس المحاولات', 'كتاب التلميذ'], learner: ['• يلاحظ ويجرّب ويناقش.', '• يستنتج القاعدة ويضبطها بدفتر محاولاته.'] },
+      { label: 'تعلّم إدماجي', keys: ['apply', 'challenge'], space: 9, w: 64, tools: ['كراس القسم', 'السبورة'], learner: ['• يوظّف مكتسباته في الوضعية ويبرّر جوابه.'] },
+      { label: 'تقييم', keys: ['assessment'], space: 7, w: 58, tools: ['كراس المحاولات', 'شبكة التصحيح'], learner: ['• ينجز فرديًا ثم يصحّح بشبكة التقويم.'] }
+    ];
+    const dots = (n, w) => { const out = []; for (let i = 0; i < n; i++) out.push('.'.repeat(w)); return out.join('\n'); };
+    for (let si = 0; si < MATH_STAGES.length; si++) {
+      const st = MATH_STAGES[si];
+      let items = [];
+      for (const k of st.keys) items = items.concat(takeRole(k));
+      if (st.keys[0] === 'assessment') {
+        const tail = allBlocks
+          .map((b, i) => ({ b, i }))
+          .filter((x) => !consumed.has(x.i) && !(x.b && x.b.teacherOnly) && x.i >= allBlocks.length * 0.5)
+          .filter((x) => !(/=\s*[\d٠-٩]/.test(toW(stripT((x.b && x.b.text) || ''))) && !/\.\.\.|…/.test((x.b && x.b.text) || '')))
+          .slice(0, 3);
+        tail.forEach((x) => consumed.add(x.i));
+        items = items.concat(tail.map((x) => x.b));
+      }
+      const texts = items.filter((b) => !isPlaceholderBlock(b)).map(itemText).filter(Boolean);
+      const bullets = texts.slice(0, Math.max(2, st.space - 2)).map((x) => '• ' + x);
+      const remain = Math.max(1, st.space - bullets.length);
+      const teacherActivity = bullets.join('\n') + (bullets.length ? '\n' : '') + dots(remain, st.w + si);
+      const learnerActivity = st.learner.join('\n') + '\n' + dots(Math.max(1, Math.ceil(st.space / 2)), Math.max(26, st.w - 28) + si);
+      const images = items.filter((b) => b && b.image).slice(0, 2).map((b) => ({ imageId: b.imageId || null, src: b.image, caption: b.alt || b.title || '' }));
+      rows.push({ stage: st.label, teacherActivity, learnerActivity, skill: '', tools: st.tools, images });
+    }
+  } else {
+  const stages = (profile.phases || []).map((p) => p.name);
   const STAGE_KEYS = (name) => {
     const n = normalizeArabic(name);
     if (/ذهن/.test(n)) return ['warmup'];
@@ -238,9 +276,6 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
     if (/تقو|تقييم/.test(n)) return [];
     return [];
   };
-
-  const allBlocks = lesson.blocks || [];
-  const rows = [];
   for (const name of stages) {
     let items = [];
     for (const k of STAGE_KEYS(name)) items = items.concat(takeRole(k));
@@ -256,6 +291,18 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
     if (!items.length) continue;
     const row = buildRow(name, items, pages);
     if (row) rows.push(row);
+  }
+  if (!rows.length) {
+    const flat = (lesson.blocks || []).map(itemText).filter(Boolean).slice(0, 8);
+    rows.push({
+      stage: stages[0] || 'التمهيد',
+      teacherActivity: `يدعوهم إلى ما يلي:\n${flat.map((i) => '• ' + i).join('\n')}`,
+      learnerActivity: '• يُنجز ويشارك ويدوّن النتيجة.',
+      skill: metaFor(stages[0]).skill,
+      tools: metaFor(stages[0]).tools,
+      images: []
+    });
+  }
   }
   const rawLeft = allBlocks.filter((b, i) => !consumed.has(i) && !(b && b.teacherOnly));
   const solvedLeft = rawLeft.filter((b) => /=\s*[\d٠-٩]/.test(toW(stripT(b.text || ''))) && !/\.\.\.|…/.test(b.text || ''));
@@ -273,7 +320,7 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
       images: []
     });
   }
-  if (leftoverBlocks.length) {
+  if (!isMathTemplate && leftoverBlocks.length) {
     const practiceRow = rows.find((r) => /تدر|تمرين/.test(normalizeArabic(r.stage)));
     const extra = buildRow('تمارين إضافية من الكتاب', leftoverBlocks, pages);
     if (extra && practiceRow) {
@@ -283,17 +330,6 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
     } else if (extra) {
       rows.push(extra);
     }
-  }
-  if (!rows.length) {
-    const flat = (lesson.blocks || []).map(itemText).filter(Boolean).slice(0, 8);
-    rows.push({
-      stage: stages[0] || 'التمهيد',
-      teacherActivity: `يدعوهم إلى ما يلي:\n${flat.map((i) => '• ' + i).join('\n')}`,
-      learnerActivity: '• يُنجز ويشارك ويدوّن النتيجة.',
-      skill: metaFor(stages[0]).skill,
-      tools: metaFor(stages[0]).tools,
-      images: []
-    });
   }
 
   const assessmentItems = [];
@@ -308,6 +344,8 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
 
   return {
     specVersion: 2,
+    mathTemplate: isMathTemplate,
+    banner: isMathTemplate ? { duration: 'التوقيت: 60 دق', title: 'مذكرة رياضيات', level: ctx.level || '' } : null,
     headerTitle,
     period: lesson.period ? String(lesson.period).padStart(2, '0') : '',
     day: '',

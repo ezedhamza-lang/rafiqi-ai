@@ -348,19 +348,29 @@ async function memoSpecHtml(memo, s) {
     return out.join('');
   };
   const compRows = [];
-  const compDefs = [
-    ['كفاية المجال', s.competencies?.domain],
-    ['كفاية المادة', s.competencies?.subject],
-    ['مكوّن الكفاية', s.competencies?.component],
-    ['الهدف المميّز', s.competencies?.distinctiveObjective]
-  ];
+  const compDefs = s.mathTemplate
+    ? [
+        ['مكون الكفاية', s.competencies?.component],
+        ['الهدف المميز', s.competencies?.distinctiveObjective],
+        ['المحتوى', s.content],
+        ['هدف الحصة', (s.lessonObjectives || []).join('؛ ')]
+      ]
+    : [
+        ['كفاية المجال', s.competencies?.domain],
+        ['كفاية المادة', s.competencies?.subject],
+        ['مكوّن الكفاية', s.competencies?.component],
+        ['الهدف المميّز', s.competencies?.distinctiveObjective]
+      ];
   for (const [label, val] of compDefs) {
     if (val) compRows.push('<div class=\"cf\"><b>' + esc(label) + ' :</b> ' + esc(val) + '</div>');
+    else if (s.mathTemplate && label !== 'المحتوى') compRows.push('<div class=\"cf\"><b>' + esc(label) + ' :</b> ' + '.'.repeat(60) + '</div>');
   }
-  for (let i = 0; i < (s.lessonObjectives || []).length; i++) {
-    compRows.push('<div class=\"cf\"><b>هدف الحصّة ' + (i + 1) + ' :</b> ' + esc(s.lessonObjectives[i]) + '</div>');
+  if (!s.mathTemplate) {
+    for (let i = 0; i < (s.lessonObjectives || []).length; i++) {
+      compRows.push('<div class=\"cf\"><b>هدف الحصّة ' + (i + 1) + ' :</b> ' + esc(s.lessonObjectives[i]) + '</div>');
+    }
   }
-  if (s.content) compRows.push('<div class=\"cf content\"><b>المحتوى :</b> ' + esc(s.content) + '</div>');
+  if (s.content && !s.mathTemplate) compRows.push('<div class=\"cf content\"><b>المحتوى :</b> ' + esc(s.content) + '</div>');
   const trs = [];
   for (const r of s.rows || []) {
     trs.push(
@@ -368,7 +378,7 @@ async function memoSpecHtml(memo, s) {
       '<td class=\"stg\">' + esc(r.stage) + '</td>' +
       '<td>' + lines(r.teacherActivity) + (await cellImgs(r.images)) + '</td>' +
       '<td>' + lines(r.learnerActivity) + '</td>' +
-      '<td class=\"skl\">' + esc(r.skill || '—') + '</td>' +
+      (s.mathTemplate ? '' : '<td class=\"skl\">' + esc(r.skill || '—') + '</td>') +
       '<td class=\"tls\">' + esc((r.tools || []).join(' + ') || '—') + '</td>' +
       '</tr>'
     );
@@ -412,13 +422,21 @@ async function memoSpecHtml(memo, s) {
     '@media print { thead { display: table-header-group; } table.mtab tr { break-inside: avoid; } }' +
     '</style>';
   const body = '<div class="page">' + style +
-    '<div class=\"mhead\"><b>' + esc(s.headerTitle || ('مذكرة بيداغوجية: ' + (memo.lessonTitle || ''))) + '</b>' +
-    '<span class=\"box\"><span class=\"pill\" style=\"background:#c9a227\">الفترة: ' + esc(s.period || '…') + '</span>' +
-    '<span class=\"pill\" style=\"background:#7a9e7e;color:#fff\">اليوم: ' + esc(s.day || '…') + '</span></span></div>' +
+    (s.mathTemplate
+      ? '<div class=\"mhead\"><b>' + esc((s.banner && s.banner.title) || 'مذكرة رياضيات') + '</b>' +
+        '<span class=\"box\"><span class=\"pill\" style=\"background:#c9a227\">' + esc((s.banner && s.banner.duration) || 'التوقيت: 60 دق') + '</span>' +
+        '<span class=\"pill\" style=\"background:#7a9e7e;color:#fff\">المستوى: ' + esc((s.banner && s.banner.level) || '') + '</span></span></div>'
+      : '<div class=\"mhead\"><b>' + esc(s.headerTitle || ('مذكرة بيداغوجية: ' + (memo.lessonTitle || ''))) + '</b>' +
+        '<span class=\"box\"><span class=\"pill\" style=\"background:#c9a227\">الفترة: ' + esc(s.period || '…') + '</span>' +
+        '<span class=\"pill\" style=\"background:#7a9e7e;color:#fff\">اليوم: ' + esc(s.day || '…') + '</span></span></div>') +
     '<div class=\"mcomp\">' + compRows.join('') + '</div>' +
     imgsTop.join('') +
-    '<div class=\"mwrap\"><span class=\"mwalk\">ثانيًا: التمشّي البيداغوجي</span></div>' +
-    '<table class=\"mtab\"><thead><tr><th>المراحل</th><th>نشاط الأستاذ</th><th>نشاط المتعلّم</th><th>المهارة المستهدفة</th><th>الوسائل</th></tr></thead><tbody>' +
+    (s.mathTemplate ? '' : '<div class=\"mwrap\"><span class=\"mwalk\">ثانيًا: التمشّي البيداغوجي</span></div>') +
+    '<table class=\"mtab\"><thead><tr>' +
+    (s.mathTemplate
+      ? '<th>المراحل</th><th>نشاط المعلّم</th><th>نشاط المتعلّم</th><th>الوسائل</th>'
+      : '<th>المراحل</th><th>نشاط الأستاذ</th><th>نشاط المتعلّم</th><th>المهارة المستهدفة</th><th>الوسائل</th>') +
+    '</tr></thead><tbody>' +
     trs.join('') + '</tbody></table>' +
     (s.assessment ? '<div style=\"margin-top:8px;font-size:11px\"><b>عناصر التقويم المطبَّقة:</b> ' + lines(s.assessment) + '</div>' : '') +
     '<div class=\"mend\">' +

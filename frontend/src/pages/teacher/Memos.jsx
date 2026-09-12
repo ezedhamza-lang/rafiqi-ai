@@ -303,28 +303,49 @@ export default function Memos({ onChanged }) {
           {spec && (
             <div className="memo-section">
               <div style={{ background: '#5b4636', color: '#fff', borderRadius: 10, padding: '10px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
-                <strong>{spec.headerTitle}</strong>
+                <strong>{spec.mathTemplate ? (spec.banner && spec.banner.title) || 'مذكرة رياضيات' : spec.headerTitle}</strong>
                 <span style={{ display: 'flex', gap: 8 }}>
-                  <span style={{ background: '#c9a227', color: '#222', borderRadius: 8, padding: '2px 10px' }}>الفترة: {spec.period || '…'}</span>
-                  <span style={{ background: '#7a9e7e', color: '#fff', borderRadius: 8, padding: '2px 10px' }}>اليوم: {spec.day || '…'}</span>
+                  {spec.mathTemplate ? (
+                    <>
+                      <span style={{ background: '#c9a227', color: '#222', borderRadius: 8, padding: '2px 10px' }}>{(spec.banner && spec.banner.duration) || 'التوقيت: 60 دق'}</span>
+                      <span style={{ background: '#7a9e7e', color: '#fff', borderRadius: 8, padding: '2px 10px' }}>المستوى: {(spec.banner && spec.banner.level) || ''}</span>
+                    </>
+                  ) : (
+                    <>
+                      <span style={{ background: '#c9a227', color: '#222', borderRadius: 8, padding: '2px 10px' }}>الفترة: {spec.period || '…'}</span>
+                      <span style={{ background: '#7a9e7e', color: '#fff', borderRadius: 8, padding: '2px 10px' }}>اليوم: {spec.day || '…'}</span>
+                    </>
+                  )}
                 </span>
               </div>
               <div style={{ border: '1.5px solid #cbd5c0', borderRadius: 12, padding: '8px 12px', margin: '10px 0', background: '#f7faf5' }}>
-                {spec.competencies?.domain && <div><b>كفاية المجال: </b>{spec.competencies.domain}</div>}
-                {spec.competencies?.subject && <div><b>كفاية المادة: </b>{spec.competencies.subject}</div>}
-                {spec.competencies?.component && <div><b>مكوّن الكفاية: </b>{spec.competencies.component}</div>}
-                {spec.competencies?.distinctiveObjective && <div><b>الهدف المميّز: </b>{spec.competencies.distinctiveObjective}</div>}
-                {(spec.lessonObjectives || []).map((o, i) => <div key={'o' + i}><b>{'هدف الحصّة ' + (i + 1) + ': '}</b>{o}</div>)}
-                {spec.content && <div style={{ background: '#eef4fb', borderRight: '4px solid #4a7fb5', borderRadius: 6, padding: '4px 10px', marginTop: 6 }}><b>المحتوى: </b>{spec.content}</div>}
+                {spec.mathTemplate && (
+                  <>
+                    {spec.competencies?.component && <div><b>مكون الكفاية: </b>{spec.competencies.component}</div>}
+                    {spec.competencies?.distinctiveObjective && <div><b>الهدف المميز: </b>{spec.competencies.distinctiveObjective}</div>}
+                    {spec.content && <div><b>المحتوى: </b>{spec.content}</div>}
+                    <div><b>هدف الحصة: </b>{(spec.lessonObjectives || []).join('؛ ')}</div>
+                  </>
+                )}
+                {!spec.mathTemplate && spec.competencies?.domain && <div><b>كفاية المجال: </b>{spec.competencies.domain}</div>}
+                {!spec.mathTemplate && spec.competencies?.subject && <div><b>كفاية المادة: </b>{spec.competencies.subject}</div>}
+                {!spec.mathTemplate && spec.competencies?.component && <div><b>مكوّن الكفاية: </b>{spec.competencies.component}</div>}
+                {!spec.mathTemplate && spec.competencies?.distinctiveObjective && <div><b>الهدف المميّز: </b>{spec.competencies.distinctiveObjective}</div>}
+                {!spec.mathTemplate && (spec.lessonObjectives || []).map((o, i) => <div key={'o' + i}><b>{'هدف الحصّة ' + (i + 1) + ': '}</b>{o}</div>)}
+                {!spec.mathTemplate && spec.content && <div style={{ background: '#eef4fb', borderRight: '4px solid #4a7fb5', borderRadius: 6, padding: '4px 10px', marginTop: 6 }}><b>المحتوى: </b>{spec.content}</div>}
               </div>
-              <div style={{ textAlign: 'center', margin: '12px 0' }}>
-                <strong style={{ color: '#7a4b1f', fontSize: '1.35rem', borderBottom: '3px solid #c9a227', padding: '0 20px 3px' }}>ثانيًا: التمشّي البيداغوجي</strong>
-              </div>
+              {!spec.mathTemplate && (
+                <div style={{ textAlign: 'center', margin: '12px 0' }}>
+                  <strong style={{ color: '#7a4b1f', fontSize: '1.35rem', borderBottom: '3px solid #c9a227', padding: '0 20px 3px' }}>ثانيًا: التمشّي البيداغوجي</strong>
+                </div>
+              )}
               <div className="table-wrap">
                 <table className="data-table" style={{ fontSize: 14.5, borderCollapse: 'collapse', width: '100%' }}>
                   <thead>
                     <tr>
-                      {['المراحل', 'نشاط الأستاذ', 'نشاط المتعلّم', 'المهارة المستهدفة', 'الوسائل'].map((h, i) => (
+                      {(spec.mathTemplate
+                        ? ['المراحل', 'نشاط المعلّم', 'نشاط المتعلّم', 'الوسائل']
+                        : ['المراحل', 'نشاط الأستاذ', 'نشاط المتعلّم', 'المهارة المستهدفة', 'الوسائل']).map((h, i) => (
                         <th key={h} style={{ border: '2.5px solid #222', padding: '8px 10px', fontSize: 15.5, color: '#1d2430', background: ['#d9b45b', '#a8c8e8', '#a9dcb9', '#d3bce8', '#f0c9b0'][i] }}>{h}</th>
                       ))}
                     </tr>
@@ -342,7 +363,7 @@ export default function Memos({ onChanged }) {
                           ))}
                         </td>
                         <td style={{ border: '2px solid #222', borderBottom: '3.5px solid #111', padding: '9px 10px', lineHeight: 1.9 }}>{String(r.learnerActivity || '').split('\n').map((ln, j) => <div key={j}>{ln}</div>)}</td>
-                        <td style={{ border: '2px solid #222', borderBottom: '3.5px solid #111', padding: 8, textAlign: 'center', color: '#274d27', fontWeight: 700 }}>{r.skill}</td>
+                        {!spec.mathTemplate && <td style={{ border: '2px solid #222', borderBottom: '3.5px solid #111', padding: 8, textAlign: 'center', color: '#274d27', fontWeight: 700 }}>{r.skill}</td>}
                         <td style={{ border: '2px solid #222', borderBottom: '3.5px solid #111', padding: 8, textAlign: 'center', fontWeight: 600 }}>{(r.tools || []).join(' + ')}</td>
                       </tr>
                     ))}
