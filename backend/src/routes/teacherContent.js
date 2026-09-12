@@ -9,6 +9,7 @@ import { assertClassInSchool } from '../tenant.js';
 import { buildMemo, rebuildMemo } from '../services/memoService.js';
 import { buildResource, rebuildResource } from '../services/resourceService.js';
 import { getBankExam, buildExamContent, officialExamSummary, saveAiExamToBank } from '../services/officialExamService.js';
+import { buildExam } from '../services/examBuilder.js';
 import { generateQuizQuestions } from '../services/aiService.js';
 // Dynamic import for docx service — loaded lazily to avoid crashing server if docx package unavailable
 let _docxService = null;
@@ -589,6 +590,39 @@ router.post('/exams/instantiate', teacherMiddleware, asyncHandler(async (req, re
     }
   });
   res.status(201).json({ ...exam, summary: officialExamSummary(content) });
+}));
+
+/**
+ * @swagger
+ * /api/teacher/exams/from-books:
+ *   get:
+ *     summary: معاينة اختبار مبني من أسئلة كتب السنة الحقيقية (بلا إجابات، حتمي بالبذرة)
+ *     tags: [teacher-content]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: gradeId
+ *         required: true
+ *         schema: { type: string, example: year6 }
+ *       - in: query
+ *         name: seed
+ *         schema: { type: integer, example: 1 }
+ *       - in: query
+ *         name: size
+ *         schema: { type: integer, example: 8 }
+ *     responses:
+ *       200: { description: نسخة الاختبار }
+ *       404: { description: لا توجد أسئلة مرقمنة لهذه السنة بعد }
+ */
+router.get('/exams/from-books', teacherMiddleware, asyncHandler(async (req, res) => {
+  const gradeId = String(req.query.gradeId || '');
+  if (!/^year[1-6]$/.test(gradeId)) throw new ApiError(400, 'gradeId غير صالح (year1..year6)');
+  const seed = Number(req.query.seed) || 1;
+  const size = Math.min(20, Math.max(4, Number(req.query.size) || 8));
+  const exam = buildExam(gradeId, seed, size);
+  if (!exam) throw new ApiError(404, `لا توجد أسئلة مرقمنة في كتب ${gradeId} بعد — أضف الكتاب مرقمنًا أولًا.`);
+  res.json(exam);
 }));
 
 /**
