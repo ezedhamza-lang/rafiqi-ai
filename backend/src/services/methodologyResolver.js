@@ -57,10 +57,10 @@ export function normalizeSubject(subject) {
     .trim();
 }
 
-// للمنهجية فقط: «رياضياتي» و«رياضياتي 2» و«الكتاب الرسمي» كلها تحت إطار مادة الرياضيات.
+// للمنهجية فقط: «رياضياتي» و«رياضياتي 2» و«الكتاب الرسمي» و«math-tunsi/math-rasmi/math2…» كلها تحت إطار مادة الرياضيات.
 function methodologySubjectKey(subject) {
   const s = normalizeSubject(subject);
-  if (s.startsWith('رياضيات')) return 'رياضيات';
+  if (s.startsWith('رياضيات') || s.startsWith('math') || /math/i.test(s)) return 'رياضيات';
   return s;
 }
 
