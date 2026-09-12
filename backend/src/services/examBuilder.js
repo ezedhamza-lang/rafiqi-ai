@@ -1,5 +1,5 @@
 import { getLessonPages } from './curriculumService.js';
-import { normalizeArabic } from './curriculumService.js';
+import { normalizeArabic, loadRegistry } from './curriculumService.js';
 
 /**
  * مجمّع الاختبارات: يبني اختبارات من أسئلة كتب السنة نفسها (تمارين حقيقية
@@ -49,7 +49,17 @@ function clean(t) {
 export function collectGradeQuestions(gradeId) {
   const pool = [];
   const seen = new Set();
-  for (const sid of ['math2', 'math']) {
+  // نجمع كل مواد الرياضيات في السنة بدلاً من القائمة الثابتة (math, math2, math-rasmi...)
+  const registry = loadRegistry();
+  const grade = (registry.grades || []).find((g) => g.id === gradeId);
+  const mathSubjects = (grade?.subjects || [])
+    .filter((s) => {
+      const sk = (s.subjectKey || s.title || '').normalize('NFD').replace(/[\u064B-\u065F]/g, '');
+      return sk.includes('رياضيات') || sk.includes('math') || /math/i.test(s.id);
+    })
+    .filter((s) => !!s.lessonsFile)
+    .map((s) => s.id);
+  for (const sid of (mathSubjects.length ? mathSubjects : ['math2', 'math'])) {
     let pages = [];
     try { pages = getLessonPages(sid, null, gradeId); } catch { pages = []; }
     for (const lesson of pages) {

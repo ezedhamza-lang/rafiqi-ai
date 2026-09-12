@@ -438,6 +438,7 @@
         {
           "id": "math",
           "title": "رياضيات",
+          "subjectKey": "رياضيات",
           "aliases": [
             "رياضيات",
             "الرياضيات",
@@ -447,8 +448,35 @@
           "adapter": "math",
           "bookFile": "math-book.json",
           "lessonsFile": "math-lessons.json",
-          "skillsMapFile": "skills-map-math.json",
-          "subjectKey": "رياضيات"
+          "skillsMapFile": "skills-map-math.json"
+        },
+        {
+          "id": "math-rasmi",
+          "title": "الكتاب الرسمي رياضيات س6",
+          "subjectKey": "رياضيات",
+          "aliases": [
+            "الكتاب الرسمي",
+            "الكتاب الرسمي رياضيات",
+            "math-rasmi"
+          ],
+          "adapter": "math",
+          "bookFile": "rasi-math6-book.json",
+          "lessonsFile": null,
+          "skillsMapFile": null
+        },
+        {
+          "id": "math-kras",
+          "title": "كراس الرياضيات س6",
+          "subjectKey": "رياضيات",
+          "aliases": [
+            "كراس الرياضيات",
+            "الكراس",
+            "math-kras"
+          ],
+          "adapter": "math",
+          "bookFile": "kras-math6-book.json",
+          "lessonsFile": null,
+          "skillsMapFile": null
         },
         {
           "id": "anisi",

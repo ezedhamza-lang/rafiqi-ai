@@ -55,7 +55,7 @@ export default function Memos({ onChanged }) {
   }, [load]);
 
   const subjects = useMemo(() => {
-    const fromBooks = (books || []).map((b) => b.subject).filter(Boolean);
+    const fromBooks = (books || []).map((b) => b.subjectKey || b.subject).filter(Boolean);
     const fromMeth = (methodologies || []).map((m) => m.appliesTo?.subject).filter(Boolean);
     return [...new Set([...fromBooks, ...fromMeth])].sort((a, b) => a.localeCompare(b, 'ar'));
   }, [books, methodologies]);
