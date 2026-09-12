@@ -312,7 +312,7 @@
             "arabic"
           ],
           "bookFile": "reading-book.json",
-          "lessonsFile": "reading-units.json",
+          "lessonsFile": null,
           "skillsMapFile": "skills-map-anisi.json",
           "adapter": "anisi"
         },

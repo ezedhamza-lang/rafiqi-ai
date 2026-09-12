@@ -9,7 +9,7 @@ import { assertClassInSchool } from '../tenant.js';
 import { buildMemo, rebuildMemo } from '../services/memoService.js';
 import { buildResource, rebuildResource } from '../services/resourceService.js';
 import { getBankExam, buildExamContent, officialExamSummary, saveAiExamToBank } from '../services/officialExamService.js';
-import { buildExam } from '../services/examBuilder.js';
+import { buildExam, SUBJECT_KEYS, subjectFold } from '../services/examBuilder.js';
 import { generateQuizQuestions } from '../services/aiService.js';
 // Dynamic import for docx service — loaded lazily to avoid crashing server if docx package unavailable
 let _docxService = null;
@@ -618,10 +618,13 @@ router.post('/exams/instantiate', teacherMiddleware, asyncHandler(async (req, re
 router.get('/exams/from-books', teacherMiddleware, asyncHandler(async (req, res) => {
   const gradeId = String(req.query.gradeId || '');
   if (!/^year[1-6]$/.test(gradeId)) throw new ApiError(400, 'gradeId غير صالح (year1..year6)');
+  const rawSubject = String(req.query.subject || 'رياضيات');
+  const subject = SUBJECT_KEYS.find((k) => subjectFold(k) === subjectFold(rawSubject));
+  if (!subject) throw new ApiError(400, `المادة يجب أن تكون إحدى: ${SUBJECT_KEYS.join(' ، ')}`);
   const seed = Number(req.query.seed) || 1;
   const size = Math.min(20, Math.max(4, Number(req.query.size) || 8));
-  const exam = buildExam(gradeId, seed, size);
-  if (!exam) throw new ApiError(404, `لا توجد أسئلة مرقمنة في كتب ${gradeId} بعد — أضف الكتاب مرقمنًا أولًا.`);
+  const exam = buildExam(gradeId, seed, size, subject);
+  if (!exam) throw new ApiError(404, `لا توجد أسئلة مرقمنة في كتب ${subject} — ${gradeId} بعد — أضف الكتاب مرقمنًا أولًا.`);
   res.json(exam);
 }));
 
