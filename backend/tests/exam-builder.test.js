@@ -68,6 +68,19 @@ describe('مجمّع الاختبارات — 60 اختبارًا (10 لكل س�
     }
   });
 
+  it('الكتاب الرسمي س6 مرقمن: دروسه تدخل بنك الاختبار بلا تسريب', () => {
+    const books = gradeSubjectBooks('year6', 'رياضيات');
+    expect(books).toContain('math-rasmi');
+    const pool = collectGradeQuestions('year6', 'رياضيات');
+    const fromRasmi = pool.filter((q) => q.source.startsWith('year6/math-rasmi/'));
+    expect(fromRasmi.length).toBeGreaterThanOrEqual(100);
+    expect(pool.every((q) => !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE00}-\u{FE0F}]/u.test(q.prompt))).toBe(true);
+    const exam = buildExam('year6', 909, 8, 'رياضيات');
+    expect(exam.items.length).toBeGreaterThanOrEqual(6);
+    const blob = JSON.stringify(exam);
+    expect(/(الإجابة|الجواب|الحل)\s*[:：=]/.test(blob)).toBe(false);
+  });
+
   it('3 اختبارات × 6 سنوات × 4 مواد: نظيفة (بلا إجابات/إيموجي/حشو/فراغ) حيثما وُجد مخزون', () => {
     let built = 0;
     for (const grade of YEARS) {

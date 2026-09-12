@@ -461,7 +461,7 @@
           ],
           "adapter": "math",
           "bookFile": "rasi-math6-book.json",
-          "lessonsFile": null,
+          "lessonsFile": "rasmi-math6-lessons.json",
           "skillsMapFile": null
         },
         {
