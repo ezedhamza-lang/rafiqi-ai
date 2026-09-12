@@ -1,4 +1,4 @@
-import { contentHash } from './memoService.js';
+﻿import { contentHash } from './memoService.js';
 import { buildSpecMemo } from './memoEngine.js';
 import { resolveMethodology, normalizeSubject } from './methodologyResolver.js';
 import {
@@ -390,7 +390,7 @@ export async function generateMemo({ teacherId, subject, level, lessonTitle, les
   }
   if (!methodology) throw new MemoBuildError('NO_METHODOLOGY', 'المنهجية غير متوفّرة.');
 
-  const specHash = contentHash([book.bookId, lesson.id, methodology.methodId, 'spec-v5']);
+  const specHash = contentHash([book.bookId, lesson.id, methodology.methodId, 'spec-v6']);
   const cached = await lessonMemos.findByLesson(book.bookId, lesson.id);
   if (cached && cached.methodologyId === methodology.methodId && cached.hash === specHash) {
     return { memo: cached, cached: true };

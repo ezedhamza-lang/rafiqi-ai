@@ -206,6 +206,7 @@ model User {
   parentNotesReceived  ParentNote[]        @relation("ParentNoteTeacher")
   lessonSubmissions    LessonSubmission[]  @relation("UserLessonSubmissions")
   lessonAttempts       LessonAttempt[]
+  mentalMathAttempts   MentalMathAttempt[]
 
   @@index([role])
   @@index([schoolId])
@@ -1329,4 +1330,26 @@ model LessonAttempt {
 
   @@unique([userId, gradeId, subjectId, lessonId, blockId])
   @@index([userId, gradeId, subjectId, lessonId])
+}
+
+model MentalMathAttempt {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  gradeId       String
+  itemId        String
+  kind          String
+  skill         String
+  strategy      String
+  prompt        String
+  studentAnswer String
+  correct       Boolean
+  errorPattern  String?
+  ms          Int?
+  hintUsed      Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, skill])
+  @@index([userId, createdAt])
 }

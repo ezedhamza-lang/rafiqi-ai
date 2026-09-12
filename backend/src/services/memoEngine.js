@@ -2,6 +2,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { normalizeArabic } from './curriculumService.js';
+import { memoMentalItems, memoPrereqItems } from './mentalMath.js';
 
 /**
  * محرك المذكرة البيداغوجية — وفق «مواصفات تنفيذ المذكرة البيداغوجية في منصة رفيقي».
@@ -257,7 +258,11 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
         items = items.concat(tail.map((x) => x.b));
       }
       const texts = items.filter((b) => !isPlaceholderBlock(b)).map(itemText).filter(Boolean);
-      const bullets = texts.slice(0, Math.max(2, st.space - 2)).map((x) => '• ' + x);
+      let genTexts = [];
+      if (si === 0) genTexts = memoMentalItems(ctx.gradeId || 'year3', lesson.id, 3).map((m) => `${m.prompt} — الطريقة المتوقعة: ${m.strategy}`);
+      else if (si === 1) genTexts = memoPrereqItems(ctx.gradeId || 'year3', lesson.id, 3).map((m) => m.prompt);
+      const merged = (si === 1 ? genTexts : texts).concat((si === 1 ? texts : genTexts).filter((g) => !(si === 1 ? texts : texts).some((t) => t.includes(g.slice(0, 18)))));
+      const bullets = merged.slice(0, Math.max(2, st.space - 2)).map((x) => '• ' + x);
       const remain = Math.max(1, st.space - bullets.length);
       const teacherActivity = bullets.join('\n') + (bullets.length ? '\n' : '') + dots(remain, st.w + si);
       const learnerActivity = st.learner.join('\n') + '\n' + dots(Math.max(1, Math.ceil(st.space / 2)), Math.max(26, st.w - 28) + si);

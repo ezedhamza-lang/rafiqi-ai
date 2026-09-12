@@ -1,4 +1,4 @@
-import express from 'express';
+﻿import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
@@ -53,6 +53,7 @@ import { parentRouter, teacherRouter } from './routes/parentExtras.js';
 import adminAiKeyRoutes from './routes/adminAiKey.js';
 import adminInsightsRoutes from './routes/adminInsights.js';
 import memoRoutes from './routes/memos.js';
+import mentalMathRoutes from './routes/mentalMath.js';
 import lessonGatingRoutes from './routes/lessonGating.js';
 import { setupWs } from './ws.js';
 import { browserPdfStatus } from './services/browserPdf.js';
@@ -284,6 +285,7 @@ app.use('/api/teacher', teacherExtrasRoutes);
 app.use('/api/admin/ai', adminAiKeyRoutes);
 app.use('/api/admin/insights', adminInsightsRoutes);
 app.use('/api/memos', memoRoutes);
+app.use('/api/student', mentalMathRoutes);
 
 // الملفات الثابتة — مع تخزين مؤقت طويل للأصول المجزأة (hashed)
 const staticOpts = { maxAge: '7d', etag: true };
@@ -382,6 +384,7 @@ async function start() {
       await runSqlFileOnce(prisma, path.join(migDir, '20260910200000_fk_restrict_history/migration.sql'));
       await runSqlFileOnce(prisma, path.join(migDir, '20260911090000_grades_coefficients/migration.sql'));
       await runSqlFileOnce(prisma, path.join(migDir, '20260911180000_lesson_attempts/migration.sql'));
+      await runSqlFileOnce(prisma, path.join(migDir, '20260912120000_mental_math_attempts/migration.sql'));
       await runTenancyBootstrap(prisma);
     }).catch((err) => {
       console.error('startup migrations skipped:', err.message);
