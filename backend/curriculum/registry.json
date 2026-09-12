@@ -461,7 +461,22 @@
           ],
           "adapter": "math",
           "bookFile": "rasi-math6-book.json",
-          "lessonsFile": "rasmi-math6-lessons.json",
+          "lessonsFile": null,
+          "skillsMapFile": null
+        },
+        {
+          "id": "math-tunsi",
+          "title": "كتاب الرياضيات — السنة السادسة (تونس)",
+          "subjectKey": "رياضيات",
+          "aliases": [
+            "كتاب الرياضيات السنة السادسة تونس",
+            "الكتاب التونسي س6",
+            "math-tunsi",
+            "تونس"
+          ],
+          "adapter": "math",
+          "bookFile": "tunsi-math6-book.json",
+          "lessonsFile": "tunsi-math6-lessons.json",
           "skillsMapFile": null
         },
         {

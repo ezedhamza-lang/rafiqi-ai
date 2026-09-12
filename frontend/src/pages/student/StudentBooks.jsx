@@ -117,15 +117,15 @@ export default function StudentBooks() {
                 <p>{book.subtitle}</p>
                 <div className="card-footer">
                   <span className="date-value">{book.totalPages ? t('studentSpace.books.pagesCount', { n: book.totalPages }) : t('studentSpace.books.lessonContent')}</span>
-                  {!book.scanReady && (
-                    <button className="btn btn-primary btn-sm" onClick={() => setOpenBook(book)}>
+                  {book.lessonsCount > 0 && (
+                    <button className={`btn ${!book.hasImages ? 'btn-primary' : 'btn-ghost'} btn-sm`} onClick={() => setOpenBook(book)}>
                       <span className="material-icons" style={{ fontSize: '16px' }}>visibility</span>
-                      {t('studentSpace.books.interactiveLessons')}
+                      {t('studentSpace.books.interactiveLessons')} ({book.lessonsCount})
                     </button>
                   )}
                   {book.hasImages && (
                     <button
-                      className={`btn ${book.scanReady ? 'btn-primary' : 'btn-ghost'} btn-sm`}
+                      className={`btn ${book.scanReady && !(book.lessonsCount > 0) ? 'btn-primary' : 'btn-ghost'} btn-sm`}
                       onClick={() => setOpenScanBook(book)}
                     >
                       <span className="material-icons" style={{ fontSize: '16px' }}>auto_stories</span>

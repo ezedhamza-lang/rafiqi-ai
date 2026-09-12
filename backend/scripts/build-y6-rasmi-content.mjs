@@ -209,6 +209,6 @@ function pushPara(t) {
   stats.blocks++;
 }
 
-const dest = path.join(ROOT, 'backend', 'curriculum', 'year6', 'rasmi-math6-lessons.json');
+const dest = path.join(ROOT, 'backend', 'curriculum', 'year6', 'tunsi-math6-lessons.json');
 fs.writeFileSync(dest, JSON.stringify(out, null, 1), 'utf8');
 console.log(`rasmi lessons: ${Object.keys(out).length - 1} | blocks=${stats.blocks} tables=${stats.tables} questions=${stats.questions} teacherOnly=${stats.teacherOnly}`);

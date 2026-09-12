@@ -127,6 +127,11 @@ function listBooks(country) {
       if (!bookFile) continue;
       const book = readJson(path.join(curriculumDir, grade.dir, bookFile));
       if (!book) continue;
+      let lessonsCount = 0;
+      if (subject.lessonsFile) {
+        const ldata = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile));
+        if (ldata) lessonsCount = Object.entries(ldata).filter(([k, v]) => k !== '_meta' && v && v.title).length;
+      }
       books.push({
         gradeId: grade.id,
         grade: grade.title,
@@ -140,6 +145,7 @@ function listBooks(country) {
         paperOnly: !!book.paperOnly,
         paperStyle: !!book.paperStyle,
         scanReady: !!book.scanReady,
+        lessonsCount,
         imageBase: book.imageBase,
         imageExt: book.imageExt || '.jpg',
         totalPages: book.totalPages,
