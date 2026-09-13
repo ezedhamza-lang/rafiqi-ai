@@ -304,7 +304,7 @@ export async function buildMemoDocx(memo) {
   const title = (s.banner && s.banner.title) || (isMath ? 'مذكرة رياضيات' : 'مذكرة ' + (c.subjectWord || ''));
   const level = isMath
     ? ((s.banner && s.banner.level) || '')
-    : (s.period || '');
+    : ('المستوى : ' + (s.period || '…'));
 
   // ── Competency ──
   const compDefs = isMath
