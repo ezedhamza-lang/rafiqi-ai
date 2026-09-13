@@ -94,7 +94,17 @@ for (const b of books) {
       if (!isTask && /اكتب اجابتك|اكتب إجابتك|اكتب جوابك/.test(ntext) && !(bl.answer !== undefined)) {
         add('D', b.gradeId, b.subjectId, lesson.id, i, 'عبارة «اكتب إجابتك» في كتلة غير تفاعلية', text);
       }
-      // E. duplicates in the same lesson (blocks differing only by image/art are distinct pages)
+        // H. نصّ يطرح سؤالًا صريحًا ثم يكشف جوابه في نفس الكتلة: «…؟ 11 + 3 = 14»
+        //    لا يشمل القصص الحوارية التعليمية («سألت الأستاذه… أجابت فاطمة…») فهي أسلوب الكتاب.
+        if (bl.kind === 'concept' && !bl.teacherOnly && i > 0 && stripTashkeel(String(bl.text || '')).length <= 200) {
+          const s = stripTashkeel(String(bl.text || ''));
+          if (!/سالت|كتبت|اجاب|اجابت|قالت|الاستاذه|نلاحظ|نجمع|نطرح/.test(s)) {
+            const qm = [...s.matchAll(/[؟?]/g)].map((m) => m.index);
+            const leakInSame = qm.some((idx) => FULL_CALC.test(s.slice(idx + 1, idx + 80)));
+            if (leakInSame) add('H', b.gradeId, b.subjectId, lesson.id, i, 'سؤال صريح وجوابه المحسوب في النص نفسه', bl.text);
+          }
+        }
+        // E. duplicates in the same lesson (blocks differing only by image/art are distinct pages)
       const key = `${ntext}§${bl.image || bl.art || ''}§${JSON.stringify(bl.rows || '')}§${JSON.stringify(bl.options || '')}`;
       if (ntext.length > 25) {
         if (seen.has(key)) add('E', b.gradeId, b.subjectId, lesson.id, i, `تكرار مع الكتلة #${seen.get(key)}`, text);
