@@ -1370,14 +1370,17 @@
       "lessonsCompleted": "📚 {{n}} درساً مكتملاً",
       "badgesCount": "{{n}} شارة",
       "levelProgressAria": "تقدم المستوى {{n}}%",
-      "levels": {
-        "1": "السنة الأولى أساسي",
-        "2": "السنة الثانية أساسي",
-        "3": "السنة الثالثة أساسي",
-        "4": "السنة الرابعة أساسي",
-        "5": "السنة الخامسة أساسي",
-        "6": "السنة السادسة أساسي"
-      }
+      "greeting": {
+        "morning": "صباح الخير يا {{name}}! ☀️",
+        "afternoon": "مساء الخير يا {{name}}! 🌤️",
+        "evening": "مساء النور يا {{name}}! 🌙",
+        "night": "مساء الخير يا {{name}}! 🌙"
+      },
+      "levelShort": "المستوى",
+      "streakShort": "متتالي",
+      "coinsShort": "النقاط",
+      "lessonsShort": "الدروس",
+      "badgesShort": "الشارات"
     },
     "schedule": {
       "title": "جدول الأوقات",
@@ -1713,7 +1716,17 @@
       "colActivity": "النشاط",
       "colPoints": "النقاط",
       "colDate": "التاريخ",
-      "quizActivity": "اختبار: {{detail}}"
+      "quizActivity": "اختبار: {{detail}}",
+      "qaBooks": "كتبي",
+      "qaQuizzes": "اختباراتي",
+      "qaRefeeqi": "اسأل رفيقي",
+      "qaPlay": "اللعب",
+      "dailyChallenge": "تحدي اليوم",
+      "dailyChallengeDesc": "أنجز 3 اختبارات + 5 دروس + سلسلة 7 أيام!",
+      "goalQuizzes": "اختبارات",
+      "goalLessons": "دروس",
+      "goalStreak": "أيام متتالية",
+      "startEarning": "ابدأ الآن"
     },
     "bookViewer": {
       "noImages": "لا تتوفّر صور صفحات هذا الكتاب حاليا.",

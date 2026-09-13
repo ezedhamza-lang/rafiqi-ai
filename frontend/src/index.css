@@ -2758,56 +2758,229 @@ tr:hover td {
   font-weight: 700;
 }
 
-/* ملف التلميذ */
-.student-profile-card {
-  display: flex;
+/* ═══════════════════════════════════════════════════════
+   Student Profile v3 — Greeting + Progress Ring + Stats
+   ═══════════════════════════════════════════════════════ */
+.student-profile-card.sp-v3 {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 1.2rem;
-  background: linear-gradient(135deg, #233863, #2f4a7d);
-  border-radius: 16px;
-  padding: 1.4rem;
-  margin: 1.5rem 0;
+  gap: 1.5rem;
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 35%, #4338ca 70%, #6366f1 100%);
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 1rem;
   color: #fff;
-  flex-wrap: wrap;
+  position: relative;
+  overflow: hidden;
+  animation: profileSlideIn 0.6s cubic-bezier(.4,0,.2,1) both;
 }
+.student-profile-card.sp-v3::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(circle at 20% 50%, rgba(167,139,250,.35), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(244,114,182,.25), transparent 35%),
+    radial-gradient(circle at 50% 80%, rgba(56,189,248,.2), transparent 30%);
+  animation: profileGlow 8s ease-in-out infinite alternate;
+}
+@keyframes profileSlideIn { from { opacity: 0; transform: translateY(-18px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes profileGlow { from { opacity: .7; } to { opacity: 1; } }
 
-.profile-avatar {
-  width: 68px;
-  height: 68px;
+.sp-v3__left { position: relative; z-index: 1; }
+.sp-v3__avatar-wrap { position: relative; width: 72px; height: 72px; }
+.profile-ring { position: absolute; inset: 0; }
+.ring-bg { stroke: rgba(255,255,255,.15); }
+.ring-fill { stroke: #facc15; }
+.ring-text { fill: #fff; font-size: 0.7rem; font-weight: 800; }
+.sp-v3__avatar {
+  position: absolute; inset: 6px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.08));
+  backdrop-filter: blur(6px);
+  display: grid; place-items: center;
+  border: 2px solid rgba(255,255,255,.25);
+}
+.sp-v3__avatar .material-icons { font-size: 1.8rem; color: #fff; }
+
+.sp-v3__center { position: relative; z-index: 1; min-width: 0; }
+.sp-v3__greeting {
+  font-size: 0.88rem; font-weight: 600; opacity: .85; margin: 0 0 0.15rem;
+  animation: greetFade 0.8s 0.3s both;
+}
+@keyframes greetFade { from { opacity: 0; transform: translateX(8px); } to { opacity: .85; transform: translateX(0); } }
+.sp-v3__name { margin: 0; font-size: 1.3rem; font-weight: 900; }
+.sp-v3__class { margin: 0.1rem 0 0; font-size: 0.82rem; opacity: .75; }
+.sp-v3__badges { display: flex; gap: 0.4rem; margin-top: 0.5rem; flex-wrap: wrap; }
+.sp-v3__badge-more {
+  background: rgba(255,255,255,.18); border-radius: 999px;
+  padding: 0.15rem 0.55rem; font-size: 0.72rem; font-weight: 700;
 }
 
-.profile-info h3 { color: #fff; font-size: 1.25rem; }
-.profile-info .sub { color: rgba(255, 255, 255, 0.8); }
+.sp-v3__stats {
+  position: relative; z-index: 1;
+  display: flex; gap: 0.6rem; flex-wrap: wrap;
+}
+.sp-v3__stat {
+  display: flex; flex-direction: column; align-items: center; gap: 0.1rem;
+  background: rgba(255,255,255,.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 12px;
+  padding: 0.5rem 0.7rem;
+  min-width: 62px;
+  transition: transform .2s, background .2s;
+}
+.sp-v3__stat:hover { transform: translateY(-3px); background: rgba(255,255,255,.18); }
+.sp-v3__stat-ico { font-size: 1.1rem; }
+.sp-v3__stat-val { font-size: 1.05rem; font-weight: 900; line-height: 1.1; }
+.sp-v3__stat-lbl { font-size: 0.62rem; opacity: .7; font-weight: 600; }
 
-.profile-xp {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin: 0.6rem 0;
+@media (max-width: 740px) {
+  .student-profile-card.sp-v3 { grid-template-columns: auto 1fr; gap: 1rem; padding: 1rem 1.2rem; }
+  .sp-v3__stats { grid-column: 1 / -1; justify-content: center; }
+  .sp-v3__name { font-size: 1.1rem; }
+}
+@media (max-width: 480px) {
+  .student-profile-card.sp-v3 { grid-template-columns: 1fr; text-align: center; }
+  .sp-v3__left { justify-self: center; }
+  .sp-v3__badges { justify-content: center; }
+  .sp-v3__stats { justify-content: center; }
 }
 
-.xp-badge {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 999px;
-  padding: 0.3rem 0.8rem;
-  font-size: 0.85rem;
-  font-weight: 800;
+/* ═══════════════════════════════════════════════════════
+   Twin v3 — Quick Actions + Challenge + Stats Cards
+   ═══════════════════════════════════════════════════════ */
+.twin-v3 { animation: twinFadeUp 0.5s cubic-bezier(.4,0,.2,1) both; }
+@keyframes twinFadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Quick Actions row */
+.twin-v3__qa {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.twin-v3__qa-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  padding: 1rem 0.5rem;
+  border: none; border-radius: 16px;
+  background: var(--qa-grad);
+  color: #fff; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,.12);
+  transition: transform .22s cubic-bezier(.4,0,.2,1), box-shadow .22s;
+  position: relative; overflow: hidden;
+}
+.twin-v3__qa-btn::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.2) 0%, transparent 60%);
+  opacity: 0; transition: opacity .2s;
+}
+.twin-v3__qa-btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 8px 24px rgba(0,0,0,.18); }
+.twin-v3__qa-btn:hover::after { opacity: 1; }
+.twin-v3__qa-btn:active { transform: scale(0.97); }
+.twin-v3__qa-ico { font-size: 1.8rem; position: relative; z-index: 1; }
+.twin-v3__qa-lbl { font-size: 0.78rem; font-weight: 700; position: relative; z-index: 1; }
+
+@media (max-width: 600px) {
+  .twin-v3__qa { grid-template-columns: repeat(2, 1fr); }
 }
 
-.profile-info .progress {
-  background: rgba(255, 255, 255, 0.2);
+/* Daily Challenge card */
+.twin-v3__challenge {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border: 2px solid #f59e0b;
+  border-radius: 16px;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1rem;
+  animation: challengePulse 3s ease-in-out infinite alternate;
+}
+@keyframes challengePulse { from { box-shadow: 0 0 0 0 rgba(245,158,11,.15); } to { box-shadow: 0 0 20px 4px rgba(245,158,11,.12); } }
+.twin-v3__challenge-head { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem; }
+.twin-v3__challenge-head h3 { margin: 0; font-size: 1.05rem; color: #92400e; }
+.twin-v3__challenge-desc { margin: 0 0 0.8rem; font-size: 0.82rem; color: #a16207; }
+.twin-v3__challenge-goals { display: flex; gap: 1rem; flex-wrap: wrap; }
+.twin-v3__goal {
+  display: flex; align-items: center; gap: 0.6rem;
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(6px);
+  border-radius: 12px;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid rgba(245,158,11,.2);
+}
+.twin-v3__goal-title { font-size: 0.75rem; font-weight: 600; color: #92400e; display: block; }
+.twin-v3__goal-val { font-size: 0.95rem; font-weight: 900; color: #78350f; }
+
+/* Stat cards row */
+.twin-v3__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+.twin-v3__stat-card {
+  border-radius: 16px;
+  padding: 1.2rem;
+  color: #fff;
+  text-align: center;
+  position: relative; overflow: hidden;
+  transition: transform .22s, box-shadow .22s;
+}
+.twin-v3__stat-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.18) 0%, transparent 50%);
+  pointer-events: none;
+}
+.twin-v3__stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,.15); }
+.twin-v3__stat-card .material-icons { font-size: 2.2rem; margin-bottom: 0.3rem; opacity: .85; position: relative; }
+.twin-v3__stat-card-val { font-size: 1.8rem; font-weight: 900; position: relative; }
+.twin-v3__stat-card-lbl { font-size: 0.82rem; font-weight: 700; opacity: .9; position: relative; }
+.twin-v3__stat-card-sub { font-size: 0.72rem; opacity: .7; margin-top: 0.2rem; position: relative; }
+
+.twin-v3__stat-card--gold { background: linear-gradient(135deg, #b45309, #f59e0b, #fbbf24); }
+.twin-v3__stat-card--blue { background: linear-gradient(135deg, #1e40af, #3b82f6, #60a5fa); }
+.twin-v3__stat-card--red  { background: linear-gradient(135deg, #b91c1c, #ef4444, #f87171); }
+
+@media (max-width: 600px) {
+  .twin-v3__stats { grid-template-columns: 1fr; }
 }
 
-.profile-info .progress-bar {
-  background: #f0a020;
+/* Sub grids */
+.twin-v3__sub-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+@media (max-width: 600px) {
+  .twin-v3__sub-grid { grid-template-columns: 1fr; }
 }
 
-/* التوأم الرقمي */
+/* Analysis cards */
+.twin-v3__analysis {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+}
+.twin-v3__analysis h4 {
+  display: flex; align-items: center; gap: 0.4rem;
+  margin: 0 0 0.5rem; font-size: 0.92rem;
+}
+.twin-v3__analysis ul { margin: 0; padding-inline-start: 1.2rem; }
+.twin-v3__analysis li { margin: 0.2rem 0; font-size: 0.85rem; }
+
+/* Empty state */
+.twin-v3__empty-state {
+  text-align: center; padding: 1.5rem 0;
+}
+.twin-v3__empty-state .material-icons {
+  font-size: 2.5rem; color: var(--muted); opacity: .5; margin-bottom: 0.5rem;
+}
+.twin-v3__empty-state p { color: var(--muted); margin: 0 0 0.8rem; }
+
+/* ═══════════════════════════════════════════════════════
+   Legacy twin-cards (kept for backward compat)
+   ═══════════════════════════════════════════════════════ */
 .twin-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -6174,13 +6347,17 @@ tr:hover td {
 
 /* ============ Student Space v2 — sidebar layout (RTL) ============ */
 .student-space--v2 .container { padding-top: 0.5rem; }
-.student-space--v2 .student-profile-card { padding: 0.9rem 1.1rem; margin-bottom: 1rem; }
+.student-space--v2 .student-profile-card.sp-v3 { margin-bottom: 1rem; }
 .student-layout {
   display: flex;
   gap: 1rem;
   align-items: flex-start;
 }
-.student-main { flex: 1 1 auto; min-width: 0; }
+.student-main {
+  flex: 1 1 auto; min-width: 0;
+  animation: mainContentFadeIn 0.4s cubic-bezier(.4,0,.2,1) both;
+}
+@keyframes mainContentFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
 /* Sidebar (right in RTL — first child in flex row) */
 .student-sidebar {
@@ -6221,7 +6398,7 @@ tr:hover td {
   color: var(--sidebar-text); text-decoration: none; font-weight: 600; font-size: 0.92rem;
   background: var(--sidebar-surface);
   border: 1px solid transparent;
-  transition: transform .15s ease, background .15s ease, box-shadow .15s ease, border-color .15s ease;
+  transition: transform .2s cubic-bezier(.4,0,.2,1), background .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
 .student-nav-item .nav-dot {
   width: 9px; height: 9px; border-radius: 50%;
@@ -6240,7 +6417,8 @@ tr:hover td {
 .student-nav-item.active {
   background: color-mix(in srgb, var(--c, #fff) 30%, rgba(255,255,255,0.08));
   border-color: color-mix(in srgb, var(--c, #fff) 70%, transparent);
-  box-shadow: 0 6px 18px color-mix(in srgb, var(--c, #fff) 35%, transparent);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--c, #fff) 35%, transparent), inset 0 0 12px color-mix(in srgb, var(--c, #fff) 8%, transparent);
+  transform: translateX(-2px);
 }
 .student-nav-item.active::before {
   content: ''; position: absolute; inset-inline-start: 0; top: 18%; bottom: 18%;
@@ -6309,16 +6487,37 @@ tr:hover td {
 .student-main .card-item li { margin: 0.15rem 0; }
 .student-main .intro-video-card { margin-bottom: 0.5rem; }
 .student-main .badges-row { gap: 0.5rem; }
-.student-main > section + section,
-.student-main > div + div { }
+
+/* Student space: staggered entrance for cards/sections */
+.student-main .ui-card {
+  animation: cardEnter 0.4s cubic-bezier(.4,0,.2,1) both;
+}
+.student-main .ui-card:nth-child(1) { animation-delay: 0.05s; }
+.student-main .ui-card:nth-child(2) { animation-delay: 0.12s; }
+.student-main .ui-card:nth-child(3) { animation-delay: 0.19s; }
+.student-main .ui-card:nth-child(4) { animation-delay: 0.26s; }
+@keyframes cardEnter { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Improved card hover in student space */
+.student-main .ui-card {
+  transition: transform 0.22s cubic-bezier(.4,0,.2,1), box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.student-main .ui-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
 
 /* Floating mobile menu button for shared SpaceShell */
 .sidebar-fab {
   display: none; position: fixed; inset-block-end: 18px; inset-inline-start: 18px;
-  width: 52px; height: 52px; border-radius: 50%; border: none; cursor: pointer; z-index: 950;
-  background: var(--primary); color: #fff; box-shadow: 0 8px 22px rgba(0,0,0,.28);
+  width: 52px; height: 52px; border-radius: 16px; border: none; cursor: pointer; z-index: 950;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
+  box-shadow: 0 6px 20px rgba(99,102,241,.4);
   align-items: center; justify-content: center;
+  transition: transform 0.2s cubic-bezier(.4,0,.2,1), box-shadow 0.2s;
 }
+.sidebar-fab:hover { transform: scale(1.08); box-shadow: 0 8px 28px rgba(99,102,241,.5); }
+.sidebar-fab:active { transform: scale(0.95); }
 .drawer-close {
   position: absolute; top: 12px; inset-inline-start: 232px; z-index: 1002;
   width: 36px; height: 36px; border-radius: 10px; cursor: pointer;

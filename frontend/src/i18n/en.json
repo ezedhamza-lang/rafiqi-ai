@@ -1370,14 +1370,17 @@
       "lessonsCompleted": "📚 {{n}} lessons completed",
       "badgesCount": "{{n}} badges",
       "levelProgressAria": "Level progress {{n}}%",
-      "levels": {
-        "1": "Grade 1",
-        "2": "Grade 2",
-        "3": "Grade 3",
-        "4": "Grade 4",
-        "5": "Grade 5",
-        "6": "Grade 6"
-      }
+      "greeting": {
+        "morning": "Good morning, {{name}}! ☀️",
+        "afternoon": "Good afternoon, {{name}}! 🌤️",
+        "evening": "Good evening, {{name}}! 🌙",
+        "night": "Good night, {{name}}! 🌙"
+      },
+      "levelShort": "Level",
+      "streakShort": "Streak",
+      "coinsShort": "Coins",
+      "lessonsShort": "Lessons",
+      "badgesShort": "Badges"
     },
     "schedule": {
       "title": "Timetable",
@@ -1713,7 +1716,17 @@
       "colActivity": "Activity",
       "colPoints": "Points",
       "colDate": "Date",
-      "quizActivity": "Quiz: {{detail}}"
+      "quizActivity": "Quiz: {{detail}}",
+      "qaBooks": "My Books",
+      "qaQuizzes": "My Quizzes",
+      "qaRefeeqi": "Ask Rafeeqi",
+      "qaPlay": "Play",
+      "dailyChallenge": "Daily Challenge",
+      "dailyChallengeDesc": "Complete 3 quizzes + 5 lessons + a 7-day streak!",
+      "goalQuizzes": "Quizzes",
+      "goalLessons": "Lessons",
+      "goalStreak": "Day streak",
+      "startEarning": "Start Now"
     },
     "bookViewer": {
       "noImages": "No page images available for this book yet.",

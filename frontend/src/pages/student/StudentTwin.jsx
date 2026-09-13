@@ -1,10 +1,34 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { api } from '../../api/client.js';
 import { Card, PointsCard, BadgeCard, Leaderboard } from '../../components/ui/index.js';
 import { useI18n } from '../../i18n/index.jsx';
 
+const QUICK_ACTIONS = [
+  { icon: 'auto_stories', label: 'studentSpace.twin.qaBooks', to: '/student-space/books', color: '#14b8a6', gradient: 'linear-gradient(135deg,#14b8a6,#06b6d4)' },
+  { icon: 'quiz', label: 'studentSpace.twin.qaQuizzes', to: '/student-space/quizzes', color: '#ef4444', gradient: 'linear-gradient(135deg,#ef4444,#f97316)' },
+  { icon: 'smart_toy', label: 'studentSpace.twin.qaRefeeqi', to: '/student-space/refeeqi', color: '#3b82f6', gradient: 'linear-gradient(135deg,#3b82f6,#8b5cf6)' },
+  { icon: 'sports_esports', label: 'studentSpace.twin.qaPlay', to: '/student-space/play', color: '#ec4899', gradient: 'linear-gradient(135deg,#ec4899,#f43f5e)' },
+];
+
+function MiniRing({ value, max, color, size = 48, stroke = 5 }) {
+  const r = (size - stroke) / 2;
+  const circ = 2 * Math.PI * r;
+  const pct = Math.min(value / max, 1);
+  const offset = circ - pct * circ;
+  return (
+    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+      <circle cx={size / 2} cy={size / 2} r={r} strokeWidth={stroke} fill="none" stroke="rgba(255,255,255,.15)" />
+      <circle cx={size / 2} cy={size / 2} r={r} strokeWidth={stroke} fill="none"
+        stroke={color} strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round"
+        style={{ transform: 'rotate(-90deg)', transformOrigin: '50% 50%', transition: 'stroke-dashoffset 1s cubic-bezier(.4,0,.2,1)' }} />
+    </svg>
+  );
+}
+
 export default function StudentTwin() {
   const { t, lang } = useI18n();
+  const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
   const [leaderboard, setLeaderboard] = useState({ rows: [] });
   const [boardAll, setBoardAll] = useState(false);
@@ -12,10 +36,7 @@ export default function StudentTwin() {
 
   useEffect(() => {
     Promise.all([api.get('/student/profile'), api.get('/student/leaderboard')])
-      .then(([p, lb]) => {
-        setProfile(p);
-        setLeaderboard(lb);
-      })
+      .then(([p, lb]) => { setProfile(p); setLeaderboard(lb); })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, []);
@@ -32,57 +53,97 @@ export default function StudentTwin() {
     : [t('studentSpace.twin.diversifyActivities')];
 
   return (
-    <>
-      <Card
-        title={t('studentSpace.twin.title')}
-        icon="insights"
-        subtitle={t('studentSpace.twin.subtitle')}
-      >
-        <div className="card-item intro-video-card">
-          <video
-            src="/media/rafiqi-intro.mp4"
-            controls
-            preload="metadata"
-            className="intro-video"
-            onError={(e) => { e.currentTarget.style.display = 'none'; }}
-          />
-        </div>
+    <div className="twin-v3">
+      {/* ── Quick Actions ── */}
+      <div className="twin-v3__qa">
+        {QUICK_ACTIONS.map((qa) => (
+          <button key={qa.to} className="twin-v3__qa-btn" style={{ '--qa-grad': qa.gradient, '--qa-color': qa.color }}
+            onClick={() => navigate(qa.to)}>
+            <span className="material-icons twin-v3__qa-ico">{qa.icon}</span>
+            <span className="twin-v3__qa-lbl">{t(qa.label)}</span>
+          </button>
+        ))}
+      </div>
 
-        <div className="twin-cards">
-          <PointsCard icon="emoji_events" label={t('studentSpace.twin.myLevel')} value={`Lv ${user.level}`} color="gold"
-            sub={t('studentSpace.twin.nextLevelAt', { xp: user.xp, next: Math.floor(user.xp / 100) * 100 + 100 })} />
-          <PointsCard icon="track_changes" label={t('studentSpace.twin.overallAccuracy')} value={`${stats.accuracy}%`} color="primary"
-            sub={t('studentSpace.twin.quizzesDone', { n: stats.quizzesDone })} />
-          <PointsCard icon="local_fire_department" label={t('studentSpace.twin.streak')} value={user.streakDays} color="accent"
-            sub={t('studentSpace.twin.streakSub')} />
+      {/* ── Daily Challenge ── */}
+      <div className="twin-v3__challenge">
+        <div className="twin-v3__challenge-head">
+          <span className="material-icons" style={{ color: '#f59e0b' }}>emoji_events</span>
+          <h3>{t('studentSpace.twin.dailyChallenge')}</h3>
         </div>
-
-        <div className="sub-grid">
-          <div className="card-item">
-            <h4>{t('studentSpace.twin.strengths')}</h4>
-            <ul>
-              {strengths.map((s, i) => <li key={i}>{s}</li>)}
-            </ul>
+        <p className="twin-v3__challenge-desc">{t('studentSpace.twin.dailyChallengeDesc')}</p>
+        <div className="twin-v3__challenge-goals">
+          <div className="twin-v3__goal">
+            <MiniRing value={stats.quizzesDone || 0} max={3} color="#ef4444" />
+            <div>
+              <span className="twin-v3__goal-title">{t('studentSpace.twin.goalQuizzes')}</span>
+              <span className="twin-v3__goal-val">{Math.min(stats.quizzesDone || 0, 3)}/3</span>
+            </div>
           </div>
-          <div className="card-item">
-            <h4>{t('studentSpace.twin.weaknesses')}</h4>
-            <ul>
-              {weaknesses.map((w, i) => <li key={i}>{w}</li>)}
-            </ul>
+          <div className="twin-v3__goal">
+            <MiniRing value={profile.stats?.lessonsCompleted || 0} max={5} color="#14b8a6" />
+            <div>
+              <span className="twin-v3__goal-title">{t('studentSpace.twin.goalLessons')}</span>
+              <span className="twin-v3__goal-val">{Math.min(profile.stats?.lessonsCompleted || 0, 5)}/5</span>
+            </div>
+          </div>
+          <div className="twin-v3__goal">
+            <MiniRing value={user.streakDays || 0} max={7} color="#f97316" />
+            <div>
+              <span className="twin-v3__goal-title">{t('studentSpace.twin.goalStreak')}</span>
+              <span className="twin-v3__goal-val">{Math.min(user.streakDays || 0, 7)}/7</span>
+            </div>
           </div>
         </div>
-      </Card>
+      </div>
 
-      <div className="sub-grid" style={{ marginTop: '1.5rem' }}>
+      {/* ── Stats Cards ── */}
+      <div className="twin-v3__stats">
+        <div className="twin-v3__stat-card twin-v3__stat-card--gold">
+          <span className="material-icons">emoji_events</span>
+          <div className="twin-v3__stat-card-val">Lv {user.level}</div>
+          <div className="twin-v3__stat-card-lbl">{t('studentSpace.twin.myLevel')}</div>
+          <div className="twin-v3__stat-card-sub">{t('studentSpace.twin.nextLevelAt', { xp: user.xp, next: Math.floor(user.xp / 100) * 100 + 100 })}</div>
+        </div>
+        <div className="twin-v3__stat-card twin-v3__stat-card--blue">
+          <span className="material-icons">track_changes</span>
+          <div className="twin-v3__stat-card-val">{stats.accuracy}%</div>
+          <div className="twin-v3__stat-card-lbl">{t('studentSpace.twin.overallAccuracy')}</div>
+          <div className="twin-v3__stat-card-sub">{t('studentSpace.twin.quizzesDone', { n: stats.quizzesDone })}</div>
+        </div>
+        <div className="twin-v3__stat-card twin-v3__stat-card--red">
+          <span className="material-icons">local_fire_department</span>
+          <div className="twin-v3__stat-card-val">{user.streakDays}</div>
+          <div className="twin-v3__stat-card-lbl">{t('studentSpace.twin.streak')}</div>
+          <div className="twin-v3__stat-card-sub">{t('studentSpace.twin.streakSub')}</div>
+        </div>
+      </div>
+
+      {/* ── Strengths & Weaknesses ── */}
+      <div className="twin-v3__sub-grid">
+        <div className="twin-v3__analysis">
+          <h4><span className="material-icons" style={{ color: '#10b981' }}>trending_up</span> {t('studentSpace.twin.strengths')}</h4>
+          <ul>{strengths.map((s, i) => <li key={i}>{s}</li>)}</ul>
+        </div>
+        <div className="twin-v3__analysis">
+          <h4><span className="material-icons" style={{ color: '#f97316' }}>trending_down</span> {t('studentSpace.twin.weaknesses')}</h4>
+          <ul>{weaknesses.map((w, i) => <li key={i}>{w}</li>)}</ul>
+        </div>
+      </div>
+
+      {/* ── Badges & Leaderboard ── */}
+      <div className="twin-v3__sub-grid" style={{ marginTop: '1.2rem' }}>
         <Card title={t('studentSpace.twin.badgesCount', { n: badges.length })} icon="military_tech">
           {badges.length === 0 ? (
-            <p className="muted">{t('studentSpace.twin.noBadgesYet')}</p>
-          ) : (
-            <div className="badges-row">
-              {badges.map((b) => (
-                <BadgeCard key={b.id} badge={b} />
-              ))}
+            <div className="twin-v3__empty-state">
+              <span className="material-icons">military_tech</span>
+              <p>{t('studentSpace.twin.noBadgesYet')}</p>
+              <button className="btn btn-sm btn-primary" onClick={() => navigate('/student-space/quizzes')}>
+                {t('studentSpace.twin.startEarning')}
+              </button>
             </div>
+          ) : (
+            <div className="badges-row">{badges.map((b) => <BadgeCard key={b.id} badge={b} />)}</div>
           )}
         </Card>
 
@@ -109,10 +170,14 @@ export default function StudentTwin() {
         )}
       </div>
 
-      <div style={{ marginTop: '1.5rem' }}>
+      {/* ── Activity Log ── */}
+      <div style={{ marginTop: '1.2rem' }}>
         <Card title={t('studentSpace.twin.activityLog')} icon="history">
           {activities.length === 0 ? (
-            <p className="muted">{t('studentSpace.twin.noActivitiesYet')}</p>
+            <div className="twin-v3__empty-state">
+              <span className="material-icons">history</span>
+              <p>{t('studentSpace.twin.noActivitiesYet')}</p>
+            </div>
           ) : (
             <div className="table-wrap">
               <table className="data-table">
@@ -137,6 +202,6 @@ export default function StudentTwin() {
           )}
         </Card>
       </div>
-    </>
+    </div>
   );
 }
