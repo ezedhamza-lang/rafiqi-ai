@@ -223,6 +223,36 @@
       "registerNow": "Register now",
       "createAccount": "Create account"
     },
+    "heroCarousel": {
+      "ariaLabel": "Main hero carousel",
+      "learnMore": "Learn more",
+      "slides": {
+        "student": {
+          "badge": "For Students",
+          "title": "Rafiqi School Life Portal",
+          "sub": "Register now easily and track your file through the various stages. Everything you need in one place.",
+          "cta": "Register now"
+        },
+        "teacher": {
+          "badge": "For Educators",
+          "title": "Your Smart Teaching Tool",
+          "sub": "Classroom management, planning, assessment and reports — all in one integrated portal.",
+          "cta": "Enter the portal"
+        },
+        "support": {
+          "badge": "Support",
+          "title": "We're here to help",
+          "sub": "Our support team is available around the clock to answer your questions and assist you.",
+          "cta": "Contact us"
+        },
+        "parent": {
+          "badge": "For Parents",
+          "title": "Follow your child's school life",
+          "sub": "Track results, attendance, and teacher feedback from anywhere, anytime.",
+          "cta": "Register as a parent"
+        }
+      }
+    },
     "faq": {
       "title": "Frequently Asked Questions (FAQ)",
       "requestHelp": "Request help",

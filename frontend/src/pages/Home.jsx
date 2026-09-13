@@ -4,6 +4,7 @@ import { api } from '../api/client.js';
 import { useI18n } from '../i18n/index.jsx';
 import { Card, Badge } from '../components/ui/index.js';
 import BooksShowcase from '../components/BooksShowcase.jsx';
+import HeroCarousel from '../components/HeroCarousel.jsx';
 
 const SERVICES = [
   { icon: 'school', key: 'studentSection', to: '/student' },
@@ -104,29 +105,7 @@ export default function Home() {
 
   return (
     <>
-      <section className="hero">
-        <div className="hero-content">
-          <h1>{t('home.hero.title')}</h1>
-          <div className="dots">
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
-          <p>
-            {t('home.hero.announcement')}
-          </p>
-          <p>{t('home.hero.subtext')}</p>
-          <div className="hero-actions">
-            <Link to="/registration" className="btn btn-primary">
-              <span className="material-icons">person_add</span> {t('home.hero.registerNow')}
-            </Link>
-            <Link to="/register" className="btn btn-outline">
-              {t('home.hero.createAccount')}
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HeroCarousel />
 
       <section
         className="section announcements-banner"
