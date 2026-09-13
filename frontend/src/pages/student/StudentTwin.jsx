@@ -55,7 +55,7 @@ export default function StudentTwin() {
   return (
     <div className="twin-v3">
       {/* ── Quick Actions ── */}
-      <div className="twin-v3__qa">
+      <div className="twin-v3__qa slide-up-stagger">
         {QUICK_ACTIONS.map((qa) => (
           <button key={qa.to} className="twin-v3__qa-btn" style={{ '--qa-grad': qa.gradient, '--qa-color': qa.color }}
             onClick={() => navigate(qa.to)}>
@@ -68,7 +68,7 @@ export default function StudentTwin() {
       {/* ── Daily Challenge ── */}
       <div className="twin-v3__challenge">
         <div className="twin-v3__challenge-head">
-          <span className="material-icons" style={{ color: '#f59e0b' }}>emoji_events</span>
+          <span className="sparkle-wrap"><span className="material-icons" style={{ color: '#f59e0b' }}>emoji_events</span></span>
           <h3>{t('studentSpace.twin.dailyChallenge')}</h3>
         </div>
         <p className="twin-v3__challenge-desc">{t('studentSpace.twin.dailyChallengeDesc')}</p>

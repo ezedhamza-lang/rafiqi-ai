@@ -4,6 +4,11 @@ import { useI18n } from '../../i18n/index.jsx';
 
 const GAME_CODES = ['QUICK_MATH', 'WORD_BUILD', 'MEMORY'];
 const GAME_ICONS = { QUICK_MATH: 'calculate', WORD_BUILD: 'abc', MEMORY: 'grid_view' };
+const GAME_COLORS = {
+  QUICK_MATH: { gradient: 'linear-gradient(135deg, #3b82f6, #06b6d4)', icon: '#0ea5e9' },
+  WORD_BUILD: { gradient: 'linear-gradient(135deg, #f97316, #f59e0b)', icon: '#f59e0b' },
+  MEMORY:     { gradient: 'linear-gradient(135deg, #ec4899, #f43f5e)', icon: '#ec4899' },
+};
 
 const WORDS_AR = ['قلم', 'كتاب', 'مدرسة', 'تفاحة', 'كرة', 'سيارة', 'شمس', 'بحر', 'منزل', 'وردة', 'طائر', 'سمكة'];
 const WORDS_EN = ['pen', 'book', 'school', 'apple', 'ball', 'car', 'sun', 'sea', 'house', 'rose', 'bird', 'fish'];
@@ -87,14 +92,14 @@ function PlayZone() {
 
       {!activeGame ? (
         <>
-          <div className="cards-grid">
-            {GAME_CODES.map((code) => (
-              <div key={code} className="card-item game-card">
-                <span className="game-icon material-icons">{GAME_ICONS[code]}</span>
+          <div className="cards-grid slide-up-stagger">
+            {GAME_CODES.map((code, idx) => (
+              <div key={code} className="card-item game-card card-glow wiggle-hover" style={{ borderTop: `4px solid ${GAME_COLORS[code].icon}` }}>
+                <span className="game-icon material-icons" style={{ color: GAME_COLORS[code].icon, fontSize: '2.8rem' }}>{GAME_ICONS[code]}</span>
                 <h4>{t(`studentSpace.play.games.${code}.title`)}</h4>
                 <p className="muted">{t(`studentSpace.play.games.${code}.desc`)}</p>
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary btn-ripple"
                   disabled={!stats || stats.remainingToday <= 0}
                   onClick={() => setActiveGame(code)}
                 >

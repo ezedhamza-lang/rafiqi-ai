@@ -62,6 +62,28 @@ export default function StudentSpace() {
     { e: '🔯', top: '48%', is: '70%', s: 16, d: '2.2s' },
     { e: '🌸', top: '86%', is: '40%', s: 22, d: '1.4s' }
   ];
+  const BUBBLES = [
+    { color: 'rgba(167,139,250,.35)', size: 18, left: '8%',  dur: '15s', delay: '0s', peak: '.45' },
+    { color: 'rgba(244,114,182,.3)',  size: 14, left: '22%', dur: '12s', delay: '2s', peak: '.4' },
+    { color: 'rgba(96,165,250,.3)',   size: 20, left: '40%', dur: '18s', delay: '4s', peak: '.5' },
+    { color: 'rgba(52,211,153,.3)',   size: 12, left: '58%', dur: '14s', delay: '1s', peak: '.35' },
+    { color: 'rgba(250,204,21,.3)',   size: 16, left: '75%', dur: '16s', delay: '3s', peak: '.4' },
+    { color: 'rgba(248,113,113,.25)', size: 10, left: '90%', dur: '13s', delay: '5s', peak: '.35' },
+    { color: 'rgba(192,132,252,.3)',  size: 22, left: '15%', dur: '20s', delay: '6s', peak: '.3' },
+    { color: 'rgba(56,189,248,.25)',  size: 15, left: '65%', dur: '17s', delay: '2.5s', peak: '.4' },
+  ];
+  const STARS = [
+    { c: '#facc15', s: 4, left: '12%', top: '15%', dur: '3s', delay: '0s' },
+    { c: '#f472b6', s: 3, left: '35%', top: '8%',  dur: '4s', delay: '1s' },
+    { c: '#60a5fa', s: 5, left: '55%', top: '20%', dur: '2.5s', delay: '0.5s' },
+    { c: '#34d399', s: 3, left: '78%', top: '12%', dur: '3.5s', delay: '1.5s' },
+    { c: '#facc15', s: 4, left: '92%', top: '25%', dur: '3s', delay: '2s' },
+    { c: '#a78bfa', s: 3, left: '5%',  top: '40%', dur: '4s', delay: '0.8s' },
+    { c: '#f472b6', s: 4, left: '45%', top: '55%', dur: '3s', delay: '1.2s' },
+    { c: '#60a5fa', s: 3, left: '85%', top: '48%', dur: '3.5s', delay: '0.3s' },
+    { c: '#34d399', s: 5, left: '25%', top: '70%', dur: '2.8s', delay: '1.8s' },
+    { c: '#facc15', s: 3, left: '68%', top: '80%', dur: '4s', delay: '0.6s' },
+  ];
   const GROUPS = [
     { label: t('studentSpace.groups.main'), items: [
       { to: '', end: true, icon: 'home', label: L('home'), color: '#ff6a00' },
@@ -94,6 +116,23 @@ export default function StudentSpace() {
 
   return (
     <div className="student-space student-space--v2">
+      <div className="kid-bubbles" aria-hidden="true">
+        {BUBBLES.map((b, i) => (
+          <span key={`b${i}`} className="kid-bubble" style={{
+            left: b.left, width: b.size, height: b.size,
+            background: b.color,
+            '--dur': b.dur, '--delay': b.delay, '--peak': b.peak,
+          }} />
+        ))}
+      </div>
+      <div className="kid-stars" aria-hidden="true">
+        {STARS.map((s, i) => (
+          <span key={`s${i}`} className="kid-star" style={{
+            left: s.left, top: s.top,
+            '--c': s.c, '--s': s.s, '--dur': s.dur, '--delay': s.delay,
+          }} />
+        ))}
+      </div>
       <div className="space-decor" aria-hidden="true">
         {DECOR.map((d, i) => (
           <span
