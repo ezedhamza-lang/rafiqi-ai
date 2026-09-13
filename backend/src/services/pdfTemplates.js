@@ -353,14 +353,16 @@ async function memoSpecHtml(memo, s) {
   };
 
   // ── Table 0: Banner ──
-  const duration = esc((s.banner && s.banner.duration) || 'التوقيت: 60 دق');
+  // Official docx: all templates use "المستوى" (not "الفtera")
+  // Banner title: "مذكرة [المادة]" (e.g. "مذكرة رياضيات" / "مذكرة انتاج كتابي")
+  const duration = esc((s.banner && s.banner.duration) || (s.mathTemplate ? 'التوقيت: 60 دق' : 'التوقيت : 30 دق'));
   const titleText = s.mathTemplate
     ? esc((s.banner && s.banner.title) || 'مذكرة رياضيات')
-    : esc(s.headerTitle || ('مذكرة بيداغوجية: ' + (memo.lessonTitle || '')));
+    : esc((s.banner && s.banner.title) || s.headerTitle || ('مذكرة ' + (s.subjectWord || '')));
   const levelText = s.mathTemplate
     ? esc((s.banner && s.banner.level) || '')
     : esc(s.period || '…');
-  const levelLabel = s.mathTemplate ? 'المستوى' : 'الفترة';
+  const levelLabel = 'المستوى'; // all official templates use المستوى
   const bannerTable =
     '<table class="mtpl"><tr>' +
     '<td class="tpl-hdr">' + duration + '</td>' +
@@ -404,15 +406,12 @@ async function memoSpecHtml(memo, s) {
       '<td class="stg">' + esc(r.stage) + '</td>' +
       '<td>' + lines(r.teacherActivity) + (await cellImgs(r.images)) + '</td>' +
       '<td>' + lines(r.learnerActivity) + '</td>' +
-      (s.mathTemplate ? '' : '<td class="skl">' + esc(r.skill || '—') + '</td>') +
       '<td class="tls">' + esc((r.tools || []).join(' + ') || '—') + '</td>' +
       '</tr>'
     );
   }
-  const actColCount = s.mathTemplate ? 4 : 5;
-  const actHeaders = s.mathTemplate
-    ? '<th>المراحل</th><th>نشاط المعلّم</th><th>نشاط المتعلّم</th><th>الوسائل</th>'
-    : '<th>المراحل</th><th>نشاط الأستاذ</th><th>نشاط المتعلّم</th><th>المهارة المستهدفة</th><th>الوسائل</th>';
+  // Official docx: all templates use 4 columns (المراحل | نشاط المعلّم | نشاط المتعلّم | الوسائل)
+  const actHeaders = '<th>المراحل</th><th>نشاط المعلّم</th><th>نشاط المتعلّم</th><th>الوسائل</th>';
   const actTable =
     '<table class="mtab"><thead><tr>' + actHeaders + '</tr></thead><tbody>' +
     trs.join('') + '</tbody></table>';

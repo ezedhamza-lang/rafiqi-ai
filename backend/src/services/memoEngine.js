@@ -425,8 +425,9 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
   return {
     specVersion: 2,
     mathTemplate: isMathTemplate,
-    banner: isMathTemplate ? { duration: 'التوقيت: 60 دق', title: 'مذكرة رياضيات', level: ctx.level || '' } : null,
+    banner: isMathTemplate ? { duration: 'التوقيت: 60 دق', title: 'مذكرة رياضيات', level: ctx.level || '' } : { duration: 'التوقيت : 30 دق', title: 'مذكرة ' + subjectWord },
     headerTitle,
+    subjectWord,
     period: lesson.period ? String(lesson.period).padStart(2, '0') : '',
     day: '',
     competencies,

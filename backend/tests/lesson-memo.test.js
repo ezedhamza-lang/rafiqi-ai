@@ -185,10 +185,10 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     const pdf = await request(app)
       .get(`/api/memos/${memo.id}/pdf`)
       .set('Authorization', `Bearer ${token}`)
-      .buffer();
+      .parse((res, cb) => { const chunks = []; res.on('data', (c) => chunks.push(c)); res.on('end', () => cb(null, Buffer.concat(chunks))); });
     expect(pdf.status).toBe(200);
-    expect(Buffer.from(pdf.body).subarray(0, 4).toString()).toBe('%PDF');
-    expect(pdf.body.length).toBeGreaterThan(20000);
+    expect(pdf.body.subarray(0, 4).toString()).toBe('PK\x03\x04');
+    expect(pdf.body.length).toBeGreaterThan(1000);
 
     const missing = await request(app)
       .get('/api/memos/999999/pdf')
@@ -224,10 +224,10 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     const pdf = await request(app)
       .get(`/api/memos/${memo.id}/pdf`)
       .set('Authorization', `Bearer ${token}`)
-      .buffer();
+      .parse((res, cb) => { const chunks = []; res.on('data', (c) => chunks.push(c)); res.on('end', () => cb(null, Buffer.concat(chunks))); });
     expect(pdf.status).toBe(200);
-    expect(Buffer.from(pdf.body).subarray(0, 4).toString()).toBe('%PDF');
-    expect(pdf.body.length).toBeGreaterThan(20000);
+    expect(pdf.body.subarray(0, 4).toString()).toBe('PK\x03\x04');
+    expect(pdf.body.length).toBeGreaterThan(1000);
   });
 
   it('كتاب رياضياتي 2 الرسمي: 63 درسًا بمحتوى المصدر وصوره بلا إجابات مكشوفة', async () => {
@@ -279,9 +279,9 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     const pdf = await request(app)
       .get(`/api/memos/${memo.id}/pdf`)
       .set('Authorization', `Bearer ${token}`)
-      .buffer();
+      .parse((res, cb) => { const chunks = []; res.on('data', (c) => chunks.push(c)); res.on('end', () => cb(null, Buffer.concat(chunks))); });
     expect(pdf.status).toBe(200);
-    expect(Buffer.from(pdf.body).subarray(0, 4).toString()).toBe('%PDF');
+    expect(pdf.body.subarray(0, 4).toString()).toBe('PK\x03\x04');
   });
 
   it('س5: مذكرة من كتاب «رفيقي في الرياضيات س5» بمراحل متمايزة بلا تكرار', async () => {
@@ -303,9 +303,9 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     const pdf = await request(app)
       .get(`/api/memos/${memo.id}/pdf`)
       .set('Authorization', `Bearer ${token}`)
-      .buffer();
+      .parse((res, cb) => { const chunks = []; res.on('data', (c) => chunks.push(c)); res.on('end', () => cb(null, Buffer.concat(chunks))); });
     expect(pdf.status).toBe(200);
-    expect(Buffer.from(pdf.body).subarray(0, 4).toString()).toBe('%PDF');
+    expect(pdf.body.subarray(0, 4).toString()).toBe('PK\x03\x04');
   });
 
   it('قالب موحّد: كل profiles الرياضيات للسنوات 1-6 تحمل المراحل الست نفسها بالترتيب', async () => {
@@ -376,8 +376,8 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     const pdf = await request(app)
       .get(`/api/memos/${res.body.memo.id}/pdf`)
       .set('Authorization', `Bearer ${token}`)
-      .buffer();
+      .parse((res, cb) => { const chunks = []; res.on('data', (c) => chunks.push(c)); res.on('end', () => cb(null, Buffer.concat(chunks))); });
     expect(pdf.status).toBe(200);
-    expect(Buffer.from(pdf.body).subarray(0, 4).toString()).toBe('%PDF');
+    expect(pdf.body.subarray(0, 4).toString()).toBe('PK\x03\x04');
   });
 });

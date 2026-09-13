@@ -2353,7 +2353,7 @@
       "preview": "Preview",
       "delete": "Delete",
       "memoLabel": "Memo: {{title}}",
-      "print": "Print",
+      "print": "Download Word",
       "rebuild": "Rebuild",
       "back": "Back",
       "cachedInfo": "Retrieved from cache (the same lesson generates the same memo).",

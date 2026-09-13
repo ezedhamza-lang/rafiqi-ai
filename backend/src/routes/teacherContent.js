@@ -1093,11 +1093,16 @@ router.get('/exams/:id/preview-docx', teacherMiddleware, validateParams(teacherC
 router.get('/memos/:id/pdf', teacherMiddleware, validateParams(teacherContentIdParamSchema), asyncHandler(async (req, res) => {
   const memo = await prisma.memo.findFirst({ where: { id: Number(req.params.id), teacherId: req.user.id } });
   if (!memo) throw new ApiError(404, 'المذكرة غير موجودة');
-  const { buildMemoPdf } = await import('../services/exportService.js');
-  const buffer = await buildMemoPdf(memo);
-  res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'attachment; filename="memo-' + memo.id + '.pdf"');
-  res.send(buffer);
+  const { buildMemoDocx } = await import('../services/memoDocxService.js');
+  const buffer = await buildMemoDocx(memo);
+  const safeTitle = (memo.lessonTitle || 'memo').replace(/[\\/:*?"<>|]/g, '').slice(0, 60);
+  const raw = buffer;
+  const buf = Buffer.from(raw.buffer || raw);
+  const filename = encodeURIComponent(safeTitle) + '.docx';
+  res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+  res.setHeader('Content-Disposition', `attachment; filename*=UTF-8''${filename}`);
+  res.setHeader('Content-Length', buf.length);
+  res.end(buf);
 }));
 
 export default router;
