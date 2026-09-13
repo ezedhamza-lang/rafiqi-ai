@@ -16,11 +16,5 @@ export default function DashboardLayout() {
     return <Navigate to="/login" replace />;
   }
 
-  return (
-    <div className="container">
-      <div className="dash-content dash-content-full">
-        <Outlet />
-      </div>
-    </div>
-  );
+  return <Outlet />;
 }
