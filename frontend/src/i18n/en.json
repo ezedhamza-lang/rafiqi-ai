@@ -176,6 +176,17 @@
   "home": {
     "servicesTitle": "Digital services",
     "helpTitle": "Help and support",
+    "books": {
+      "eyebrow": "Rafiqi publications",
+      "title": "Our Books",
+      "sub": "Written by us, proudly displayed — browse the shelf and pick your book.",
+      "discover": "Discover the book",
+      "buy": "Buy this book",
+      "close": "Close",
+      "prev": "Previous",
+      "next": "Next",
+      "priceHint": "Price on request — contact us."
+    },
     "demoTitle": "Demo accounts",
     "services": {
       "studentSection": "Student section",

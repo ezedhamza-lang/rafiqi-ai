@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { api } from '../api/client.js';
 import { useI18n } from '../i18n/index.jsx';
 import { Card, Badge } from '../components/ui/index.js';
+import BooksShowcase from '../components/BooksShowcase.jsx';
 
 const SERVICES = [
   { icon: 'school', key: 'studentSection', to: '/student' },
@@ -168,6 +169,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <BooksShowcase />
 
       <section className="section" style={{ background: 'var(--gradient-brand)', padding: '3rem 0' }}>
         <div className="container">
