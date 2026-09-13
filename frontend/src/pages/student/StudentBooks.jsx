@@ -54,7 +54,7 @@ export default function StudentBooks() {
   );
 
   return (
-    <div className="panel">
+    <div className="student-page-full">
       <div className="panel-head">
         <h3>{t('studentSpace.books.title')}</h3>
       </div>

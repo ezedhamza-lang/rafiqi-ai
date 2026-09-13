@@ -139,7 +139,7 @@ export default function StudentStories() {
   const current = activeSeries || (seriesList.length ? null : null);
 
   return (
-    <div className="panel">
+    <div className="student-page-full">
       <div className="panel-head">
         <h3>{t('studentSpace.stories.title')}</h3>
       </div>
