@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback , lazy, Suspense} from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { getHomePath } from '../../roles.js';
 import { useI18n } from '../../i18n/index.jsx';
@@ -28,7 +28,11 @@ const SchoolCalendar = lazy(() => import('../../components/SchoolCalendar.jsx'))
 export default function StudentSpace() {
   const { user } = useAuth();
   const { t } = useI18n();
+  const location = useLocation();
   const [profile, setProfile] = useState(null);
+
+  const fullPath = location.pathname.replace('/student-space/', '').replace('/student-space', '');
+  const isFullWidth = ['books', 'stories'].includes(fullPath);
 
   const load = useCallback(async () => {
     try {
@@ -147,7 +151,7 @@ export default function StudentSpace() {
       <Suspense fallback={null}>
         <StudentProfile profile={profile} />
       </Suspense>
-      <SpaceShell base="/student-space" title={t('studentSpace.sidebarTitle')} storageKey="rafiqi-student-sidebar" sections={GROUPS}>
+      <SpaceShell base="/student-space" title={t('studentSpace.sidebarTitle')} storageKey="rafiqi-student-sidebar" sections={GROUPS} fullWidth={isFullWidth}>
         <Suspense fallback={null}>
         <Routes>
           <Route index element={<StudentTwin />} />

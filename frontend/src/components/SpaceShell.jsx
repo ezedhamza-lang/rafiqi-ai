@@ -7,7 +7,7 @@ import { useI18n } from '../i18n/index.jsx';
  * إما items=[{to,end,icon,key|label,color}] مسطّح،
  * أو sections=[{label, items:[...]}] للمجموعات.
  */
-export default function SpaceShell({ base, title, storageKey = 'rafiqi-sidebar', items, sections, children }) {
+export default function SpaceShell({ base, title, storageKey = 'rafiqi-sidebar', items, sections, children, fullWidth }) {
   const { t } = useI18n();
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(() => localStorage.getItem(storageKey) === 'collapsed');
@@ -71,9 +71,9 @@ export default function SpaceShell({ base, title, storageKey = 'rafiqi-sidebar',
   );
 
   return (
-    <div className="student-layout">
-      {aside}
-      <div className="tab-content student-main">{children}</div>
+    <div className={`student-layout ${fullWidth ? 'is-fullwidth' : ''}`}>
+      {!fullWidth && aside}
+      <div className={`tab-content student-main${fullWidth ? ' fullwidth' : ''}`}>{children}</div>
 
       <button type="button" className="sidebar-fab" onClick={() => setMobileOpen(true)} aria-label={t('studentSpace.menu')}>
         <span className="material-icons">menu</span>
