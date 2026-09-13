@@ -203,5 +203,85 @@ if (genM.ok) {
 fs.writeFileSync(path.join(OUT, 'qa-report.txt'), report.join('\n'));
 console.log('\n===== VISUAL QA REPORT =====\n' + report.join('\n'));
 await browser.close();
+
+// ───────── year6 paperStyle (ورقة اختبار حقيقية) probe: promote seeded class, re-open tunsi ─────────
+{
+  const prisma = (await import('../src/db.js')).default;
+  await prisma.class.update({ where: { id: 1 }, data: { level: 'السنة السادسة أساسي' } });
+  const st6 = await login('student@test.tn', 'student123');
+  let studentPw = 'student123';
+  if (st6.status !== 200) {
+    const srow = await (await import('../src/db.js')).default.student.findFirst({ where: { account: { email: 'student@test.tn' } } });
+    if (srow && srow.tempPassword) {
+      studentPw = srow.tempPassword;
+      const retry = await login('student@test.tn', studentPw);
+      if (retry.status === 200) { st6.status = 200; st6.body = retry.body; }
+    }
+  }
+  report.push('year6 student login status: ' + st6.status + (studentPw !== 'student123' ? ' (bootstrap temp pw)' : ''));
+  const meCheck = await fetch(BASE + '/api/auth/me', { headers: { Authorization: 'Bearer ' + st6.body.token } });
+  report.push('year6 token probe: login=' + st6.status + ' me=' + meCheck.status + ' (len ' + String(st6.body.token || '').length + ')');
+  const b2 = await ppt.default.launch({ executablePath: EXE, headless: true, args: ['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'] });
+  const p6 = await b2.newPage();
+  await p6.setViewport({ width: 1180, height: 1700 });
+  await p6.evaluateOnNewDocument((t) => { localStorage.setItem('school_token', t); localStorage.setItem('school_refresh_token', t); }, st6.body.token);
+  await p6.goto(BASE + '/student-space/books', { waitUntil: 'networkidle2' });
+  await quiet(3000);
+  report.push('year6 page head: ' + (await p6.evaluate(() => document.body.innerText.slice(0, 160))).replace(/\n/g, ' | '));
+  // open math tab then the tunsi book's interactive lessons
+  const openTunsi = await p6.evaluate(() => {
+    const tabs = Array.from(document.querySelectorAll('.subject-tab')).filter((t) => /رياضيات/.test(t.textContent || ''));
+    if (tabs[0]) { tabs[0].click(); return 1; }
+    return 0;
+  });
+  await quiet(1500);
+  report.push('year6 tabs clicked: ' + openTunsi + ' | cards: ' + await p6.evaluate(() => Array.from(document.querySelectorAll('.card')).length));
+  const opened6 = await p6.evaluate(() => {
+    const cards = Array.from(document.querySelectorAll('.card'));
+    const target = cards.find((c) => /تونس/.test(c.textContent || '')) || cards[cards.length - 1];
+    if (!target) return false;
+    const btn = Array.from(target.querySelectorAll('button')).find((b) => /الدروس التفاعلية/.test(b.textContent || ''));
+    if (btn) { btn.click(); return true; }
+    return false;
+  });
+  report.push('year6 opened6=' + opened6);
+  await quiet(2500);
+  await p6.evaluate(() => { const li = document.querySelector('.toc-item, .lesson-list button, .lesson-list .card'); if (li && !document.querySelector('.lesson-page-num')) li.click(); });
+  await quiet(2000);
+  const paper = await p6.evaluate(() => {
+    const txt = document.body.innerText;
+    let noZone = 0; let total = 0;
+    document.querySelectorAll('.paper-exercise').forEach((q) => {
+      total++;
+      if (!q.querySelector('input,textarea,canvas,table,.mcq-options')) noZone++;
+    });
+    return {
+      isPaper: !!document.querySelector('.paper-header, .paper-title-bar, .paper-body'),
+      hasName: /اسم التلميذ|اسم المتعلّم|التلميذ/.test(txt),
+      hasDate: /التاريخ|القسم/.test(txt),
+      exercises: total, noZone,
+      imagesInMemo: 0
+    };
+  });
+  collect(report, 'س6: الصفحة تُعرض كورقة اختبار حقيقية (رأس+اسم+قسم+تاريخ)', paper.isPaper && paper.hasName && paper.hasDate, JSON.stringify(paper));
+  collect(report, 'س6: كل تمرين له مكان إجابة مناسب', paper.noZone === 0, `exercises=${paper.exercises} noZone=${paper.noZone}`);
+  await p6.screenshot({ path: path.join(OUT, '05-year6-tunsi-paper.png'), fullPage: true });
+  const leakedOnScreen = await p6.evaluate(() => {
+    const bad = [];
+    document.querySelectorAll('.paper-exercise .ex-text').forEach((e) => {
+      const t = e.textContent || '';
+      const qi = t.search(/[؟?]/);
+      if (qi > 0 && /[0-9]\s*[+×*:−-]\s*[0-9]+[^=\n]{0,12}=\s*[0-9]/.test(t.slice(qi))) bad.push(t.slice(0, 70));
+    });
+    return bad;
+  });
+  collect(report, 'س6: لا إجابة مكشوفة داخل سؤال معروض', leakedOnScreen.length === 0, leakedOnScreen.join(' || '));
+  await b2.close();
+  // restore seeded level for repeatability
+  await prisma.class.update({ where: { id: 1 }, data: { level: 'السنة الأولى أساسي' } });
+  await prisma.$disconnect();
+}
+fs.writeFileSync(path.join(OUT, 'qa-report.txt'), report.join('\n'));
+console.log('\n===== YEAR6 PAPER QA =====\n' + report.slice(-3).join('\n'));
 server.close();
 process.exit(0);
