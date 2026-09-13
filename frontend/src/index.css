@@ -6391,7 +6391,7 @@ tr:hover td {
   flex: 1 1 auto; min-width: 0;
   animation: mainContentFadeIn 0.4s cubic-bezier(.4,0,.2,1) both;
 }
-@keyframes mainContentFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes mainContentFadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 /* Sidebar (right in RTL — first child in flex row) */
 .student-sidebar {
@@ -7249,12 +7249,12 @@ tr:hover td {
 }
 
 /* ── Smooth page transitions ── */
-.student-main > * {
+.student-main > *:not(.modal-overlay) {
   animation: pageIn 0.35s cubic-bezier(.4,0,.2,1) both;
 }
 @keyframes pageIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 /* ── Reduced motion ── */
