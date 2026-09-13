@@ -676,14 +676,18 @@ export async function buildOfficialDocx(examData, context = {}) {
 export function prepareExamForDocx(content, context = {}) {
   if (!content) return null;
 
-  const questions = (content.questions || []).map((q, i) => ({
+  const rawQuestions = Array.isArray(content.questions) && content.questions.length
+    ? content.questions
+    : (Array.isArray(content.items) ? content.items : []);
+
+  const questions = rawQuestions.map((q, i) => ({
     id: q.id || `q${i + 1}`,
     section: q.section ?? q.criterion ?? Math.floor(i / 3) + 1,
     sectionTitle: q.sectionTitle || '',
     label: q.label || `التعليمة ${q.section ?? Math.floor(i / 3) + 1}-${((i % 3) + 1)}`,
     instruction: q.instruction || '',
     prompt: q.prompt || q.text || '',
-    type: q.type || 'OPEN',
+    type: q.type || (Array.isArray(q.options) && q.options.length ? 'MCQ' : 'OPEN'),
     options: q.options, correct: q.correct, correctAnswer: q.correctAnswer,
     orderItems: q.orderItems, points: q.points || 1,
     answerLines: q.answerLines || 4,

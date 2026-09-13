@@ -13,6 +13,10 @@ import JSZip from 'jszip';
 const FONT_TITLE = 'Traditional Arabic';
 const FONT_BODY = 'Sakkal Majalla';
 
+// ترويسة/تذييل الورقة — قابلة للتعديل يدويًا داخل ملف Word
+const SCHOOL_NAME = 'المدرسة الابتدائية الامتياز بتطاوين';
+const TEACHER_NAME = 'الأستاذ: حمزة عزالدين';
+
 const NS = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 
 function el(tag, attrs = '', children = '') {
@@ -111,6 +115,60 @@ function emptyPara() {
   return para('');
 }
 
+/* سطور مسطّرة (مسطرة كتابة): فقرة فارغة بحدّ سفلي — تُستعمل بدل المنقّط */
+function ruledPara(after = 160, color = '808080') {
+  return el('p', '',
+    el('pPr', '',
+      el('pBdr', '', el('bottom', `w:val="single" w:sz="6" w:space="1" w:color="${color}"`)) +
+      el('spacing', `w:after="${after}"`)
+    )
+  );
+}
+
+function cellNoBorder(content, widthPct, opts = {}) {
+  const none = el('tcBorders', '',
+    el('top', 'w:val="none" w:sz="0" w:space="0" w:color="auto"') +
+    el('bottom', 'w:val="none" w:sz="0" w:space="0" w:color="auto"') +
+    el('start', 'w:val="none" w:sz="0" w:space="0" w:color="auto"') +
+    el('end', 'w:val="none" w:sz="0" w:space="0" w:color="auto"')
+  );
+  const tcPr = [tcW(widthPct), none];
+  if (opts.span) tcPr.push(gridSpan(opts.span));
+  tcPr.push(vAlign('center'));
+  return el('tc', '', tcPr.join('') + content);
+}
+
+function tblPrBorderless() {
+  return el('tblPr', '',
+    el('tblW', 'w:w="5000" w:type="pct"') +
+    el('tblBorders', '',
+      el('top', 'w:val="none" w:sz="0" w:space="0" w:color="auto"') +
+      el('bottom', 'w:val="none" w:sz="0" w:space="0" w:color="auto"') +
+      el('start', 'w:val="none" w:sz="0" w:space="0" w:color="auto"') +
+      el('end', 'w:val="none" w:sz="0" w:space="0" w:color="auto"') +
+      el('insideH', 'w:val="none" w:sz="0" w:space="0" w:color="auto"') +
+      el('insideV', 'w:val="none" w:sz="0" w:space="0" w:color="auto"')
+    ) +
+    el('tblLayout', 'w:val="fixed"')
+  );
+}
+
+/* ترويسة أعلى الورقة: اسم المدرسة يمينًا والتاريخ يسارًا */
+function buildTopHeader() {
+  const r = row([
+    cellNoBorder(para([run(SCHOOL_NAME, { bold: true, sz: 28 })], { align: 'right' }), 50),
+    cellNoBorder(para([run('التاريخ:                          ', { bold: true, sz: 26 })], { align: 'left' }), 50)
+  ]);
+  return table([r], tblPrBorderless());
+}
+
+/* تذييل أسفل الورقة: اسم الأستاذ */
+function buildTeacherFooter() {
+  return emptyPara() +
+    para([run('إمضاء الأستاذ:', { bold: true, sz: 26 })], { align: 'left', before: 160 }) +
+    para([run(TEACHER_NAME, { bold: true, sz: 28 })], { align: 'left' });
+}
+
 /* ══════════════════════════════════════════════════════════════════
    BUILD TABLES
    ══════════════════════════════════════════════════════════════════ */
@@ -127,11 +185,13 @@ function buildBannerTable(duration, title, level) {
 function buildCompetencyTable(compDefs) {
   const rows = [];
   for (const [label, value] of compDefs) {
-    const valText = value || '.'.repeat(80);
+    const valContent = value
+      ? para([run(value, { sz: 24 })])
+      : ruledPara(120);
     rows.push(row([
       cell(para([run('', { sz: 24 })]), 20),
       cell(para([run(label + ' : ', { bold: true, sz: 26 })]), 22, { shading: 'E8F5E2' }),
-      cell(para([run(valText, { sz: 24 })]), 58)
+      cell(valContent, 58)
     ]));
   }
   return table(rows);
@@ -146,22 +206,34 @@ function buildActivityHeader() {
   ));
 }
 
+// سطر منقّط/شرطة من المولّد ← سطر مسطرة قابل للكتابة اليدوية
+const isFillLine = (l) => /^[.\s_–—-]{6,}$/.test(String(l).trim());
+
+function linesToContent(lines, dotToRuled = true) {
+  const out = [];
+  for (const l of lines) {
+    if (dotToRuled && isFillLine(l)) out.push(ruledPara(140));
+    else out.push(para([run(l, { sz: 22 })], { after: 20 }));
+  }
+  return out.join('');
+}
+
 function buildActivityRow(r, stageIdx) {
   const stageColors = ['F3E2B6', 'C9DEF3', 'CDEED4', 'E6D4F5', 'F8D4C8', 'D4ECEC'];
   const bgColor = stageColors[stageIdx % stageColors.length];
 
   const teacherLines = (r.teacherActivity || '').split('\n').filter(Boolean);
-  const teacherContent = teacherLines.map((l) => para([run(l, { sz: 22 })], { after: 20 })).join('');
+  const teacherContent = linesToContent(teacherLines);
 
   const learnerLines = (r.learnerActivity || '').split('\n').filter(Boolean);
-  const learnerContent = learnerLines.map((l) => para([run(l, { sz: 22 })], { after: 20 })).join('');
+  const learnerContent = linesToContent(learnerLines);
 
   const tools = (r.tools || []).join(' + ') || '—';
 
   return row([
     cell(para([run(r.stage || '', { bold: true, sz: 26 })], { align: 'center' }), 15, { shading: bgColor }),
-    cell(teacherContent || para([run('', { sz: 22 })]), 38),
-    cell(learnerContent || para([run('', { sz: 22 })]), 32),
+    cell(teacherContent || ruledPara(140), 38),
+    cell(learnerContent || ruledPara(140), 32),
     cell(para([run(tools, { sz: 22 })], { align: 'center' }), 15)
   ]);
 }
@@ -169,11 +241,11 @@ function buildActivityRow(r, stageIdx) {
 function buildBottomSection(successRate, decision) {
   const parts = [];
   parts.push(emptyPara());
-  parts.push(para([run(successRate || 'نسبة نجاح الدرس من خلال التمرين التطبيقي:', { bold: true, sz: 26 })], { after: 100 }));
-  parts.push(para([run('_'.repeat(70), { sz: 22 })], { after: 100 }));
-  parts.push(para([run(decision || 'القرار البيداغوجي:', { bold: true, sz: 26 })], { after: 100 }));
-  parts.push(para([run('_'.repeat(70), { sz: 22 })], { after: 100 }));
-  parts.push(para([run('_'.repeat(70), { sz: 22 })]));
+  parts.push(para([run(successRate || 'نسبة نجاح الدرس من خلال التمرين التطبيقي:', { bold: true, sz: 26 })], { after: 60 }));
+  parts.push(ruledPara(200));
+  parts.push(para([run(decision || 'القرار البيداغوجي:', { bold: true, sz: 26 })], { after: 60 }));
+  parts.push(ruledPara(200));
+  parts.push(ruledPara(200));
   return parts.join('');
 }
 
@@ -328,12 +400,15 @@ export async function buildMemoDocx(memo) {
 
   // ── Assemble body ──
   const bodyParts = [];
+  bodyParts.push(buildTopHeader());
+  bodyParts.push(emptyPara());
   bodyParts.push(buildBannerTable(duration, title, level));
   bodyParts.push(emptyPara());
   bodyParts.push(buildCompetencyTable(compDefs));
   bodyParts.push(emptyPara());
   bodyParts.push(table([buildActivityHeader(), ...actRows]));
   bodyParts.push(buildBottomSection(s.successRateLine, s.pedagogicalDecision));
+  bodyParts.push(buildTeacherFooter());
 
   const bodyXml = bodyParts.join('\n');
   const documentXml = buildDocumentXml(bodyXml);
