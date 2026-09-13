@@ -175,6 +175,12 @@
   },
   "home": {
     "servicesTitle": "Digital services",
+    "serviceGroups": {
+      "student": "For Students",
+      "teacher": "For Educators",
+      "parent": "For Parents",
+      "admin": "Admin & Support"
+    },
     "helpTitle": "Help and support",
     "books": {
       "eyebrow": "Rafiqi publications",

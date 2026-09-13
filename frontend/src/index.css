@@ -646,9 +646,9 @@ button {
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(12, 20, 69, 0.92) 0%,
-    rgba(26, 35, 126, 0.78) 40%,
-    rgba(74, 20, 140, 0.55) 100%
+    rgba(12, 20, 69, 0.95) 0%,
+    rgba(26, 35, 126, 0.85) 40%,
+    rgba(74, 20, 140, 0.65) 100%
   );
   pointer-events: none;
   z-index: 1;
@@ -874,6 +874,17 @@ button {
     bottom: 1.2rem;
   }
   .hero-carousel__arrow { display: none; }
+}
+
+/* ---------- Hero Pattern Overlay ---------- */
+.hero-carousel__pattern {
+  position: absolute;
+  inset: 0;
+  background: url('/pattern.webp') center/cover no-repeat;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 1;
+  mix-blend-mode: overlay;
 }
 
 /* ---------- Sections ---------- */
@@ -1114,6 +1125,72 @@ select {
   font-weight: 800;
   color: var(--primary);
   margin-bottom: 1.2rem;
+}
+
+.faq-discover {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.faq-owl {
+  width: 180px;
+  height: auto;
+  border-radius: 16px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .faq-discover {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .faq-owl {
+    width: 140px;
+  }
+}
+
+.service-group {
+  margin-bottom: 1.5rem;
+}
+
+.service-group-title {
+  font-size: 1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--border);
+}
+
+/* ---------- Scroll Animations ---------- */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-section.visible .services-grid,
+.fade-in-section.visible .faq-grid,
+.fade-in-section.visible .stats-row {
+  animation: fadeInScale 0.6s ease 0.15s both;
+}
+
+@keyframes fadeInReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-section {
+  animation: fadeInReveal 0s 1.2s forwards;
 }
 
 .faq-item {

@@ -91,7 +91,7 @@ export default function BooksShowcase() {
               aria-hidden={i >= BOOKS.length || undefined}
             >
               <span className="book-cover">
-                <img src={b.cover} alt={isAr ? b.name : b.nameEn} loading="lazy" decoding="async" />
+                <img src={b.cover} alt={isAr ? b.name : b.nameEn} loading={i < 4 ? 'eager' : 'lazy'} decoding="async" />
                 <span className="book-spine" aria-hidden="true" />
                 <span className="book-gloss" aria-hidden="true" />
                 <span className="book-discover"><span className="material-icons">auto_stories</span> {t('home.books.discover')}</span>

@@ -126,6 +126,9 @@ export default function HeroCarousel() {
       {/* Dark overlay gradient */}
       <div className="hero-carousel__overlay" aria-hidden="true" />
 
+      {/* Islamic geometric pattern texture */}
+      <div className="hero-carousel__pattern" aria-hidden="true" />
+
       {/* Content */}
       <div className="hero-carousel__inner container">
         <div

@@ -175,6 +175,12 @@
   },
   "home": {
     "servicesTitle": "الخدمات الرقمية",
+    "serviceGroups": {
+      "student": "للتلاميذ",
+      "teacher": "للهياكل التربوية",
+      "parent": "لأولياء الأمور",
+      "admin": "للإدارة والدعم"
+    },
     "helpTitle": "المساعدة والدعم",
     "books": {
       "eyebrow": "إصدارات منصة رفيقي",

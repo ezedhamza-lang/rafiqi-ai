@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../api/client.js';
 import { useI18n } from '../i18n/index.jsx';
@@ -6,31 +6,54 @@ import { Card, Badge } from '../components/ui/index.js';
 import BooksShowcase from '../components/BooksShowcase.jsx';
 import HeroCarousel from '../components/HeroCarousel.jsx';
 
-const SERVICES = [
-  { icon: 'school', key: 'studentSection', to: '/student' },
-  { icon: 'family_restroom', key: 'myChild' },
-  { icon: 'groups', key: 'myChildren' },
-  { icon: 'task_alt', key: 'requiredWork' },
-  { icon: 'bar_chart', key: 'grades' },
-  { icon: 'schedule', key: 'absences' },
-  { icon: 'warning', key: 'reports' },
-  { icon: 'explore', key: 'guidance' },
-  { icon: 'list', key: 'optionalSubjects' },
-  { icon: 'directions_bus', key: 'scholarship' },
-  { icon: 'how_to_reg', key: 'registration' },
-  { icon: 'manage_search', key: 'registrationRequests' },
-  { icon: 'person_add', key: 'newRegistration' },
-  { icon: 'assignment', key: 'procedures' },
-  { icon: 'folder_open', key: 'myRequests' },
-  { icon: 'description', key: 'schoolCertificate' },
-  { icon: 'dashboard', key: 'dashboard' },
-  { icon: 'notifications', key: 'alerts' },
-  { icon: 'summarize', key: 'shortReports' },
-  { icon: 'support_agent', key: 'support' },
-  { icon: 'help_outline', key: 'help' }
+const SERVICE_GROUPS = [
+  {
+    groupKey: 'student',
+    color: '#0ea5e9',
+    items: [
+      { icon: 'school', key: 'studentSection', to: '/student' },
+      { icon: 'task_alt', key: 'requiredWork' },
+      { icon: 'bar_chart', key: 'grades' },
+      { icon: 'schedule', key: 'absences' },
+      { icon: 'explore', key: 'guidance' },
+      { icon: 'list', key: 'optionalSubjects' },
+      { icon: 'dashboard', key: 'dashboard' }
+    ]
+  },
+  {
+    groupKey: 'teacher',
+    color: '#7c6fd9',
+    items: [
+      { icon: 'family_restroom', key: 'myChild' },
+      { icon: 'groups', key: 'myChildren' },
+      { icon: 'warning', key: 'reports' },
+      { icon: 'directions_bus', key: 'scholarship' },
+      { icon: 'summarize', key: 'shortReports' }
+    ]
+  },
+  {
+    groupKey: 'parent',
+    color: '#22a06b',
+    items: [
+      { icon: 'how_to_reg', key: 'registration' },
+      { icon: 'manage_search', key: 'registrationRequests' },
+      { icon: 'person_add', key: 'newRegistration' },
+      { icon: 'assignment', key: 'procedures' },
+      { icon: 'folder_open', key: 'myRequests' },
+      { icon: 'description', key: 'schoolCertificate' }
+    ]
+  },
+  {
+    groupKey: 'admin',
+    color: '#f59e0b',
+    items: [
+      { icon: 'notifications', key: 'alerts' },
+      { icon: 'support_agent', key: 'support' },
+      { icon: 'help_outline', key: 'help' }
+    ]
+  }
 ];
 
-const SERVICE_COLORS = ['#0ea5e9', '#7c6fd9', '#22a06b', '#9d174d', '#fbbf24'];
 
 const STATS = [
   { number: '169K', key: 'teachers' },
@@ -72,17 +95,22 @@ function FaqSection({ faqs }) {
         </div>
       </div>
       <div className="faq-card">
-        <h2>{t('home.faq.discoverApp')}</h2>
-        <p style={{ color: 'var(--muted)', lineHeight: 1.9, fontSize: '0.92rem' }}>
-          {t('home.faq.description')}
-        </p>
-        <div className="hero-actions" style={{ justifyContent: 'flex-start' }}>
-          <Link to="/register" className="btn btn-primary">
-            <span className="material-icons">person_add</span> {t('home.faq.registerNow')}
-          </Link>
-          <Link to="/help" className="btn btn-ghost">
-            <span className="material-icons">support_agent</span> {t('home.faq.support')}
-          </Link>
+        <div className="faq-discover">
+          <img src="/owl-mascot.webp" alt="رفيقي" className="faq-owl" loading="lazy" />
+          <div>
+            <h2>{t('home.faq.discoverApp')}</h2>
+            <p style={{ color: 'var(--muted)', lineHeight: 1.9, fontSize: '0.92rem' }}>
+              {t('home.faq.description')}
+            </p>
+            <div className="hero-actions" style={{ justifyContent: 'flex-start' }}>
+              <Link to="/register" className="btn btn-primary">
+                <span className="material-icons">person_add</span> {t('home.faq.registerNow')}
+              </Link>
+              <Link to="/help" className="btn btn-ghost">
+                <span className="material-icons">support_agent</span> {t('home.faq.support')}
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -93,6 +121,32 @@ export default function Home() {
   const { t } = useI18n();
   const [faqs, setFaqs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const mainRef = useRef(null);
+
+  useEffect(() => {
+    const root = mainRef.current || document;
+    const els = root.querySelectorAll('.fade-in-section');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: '60px 0px -20px 0px' }
+    );
+    els.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 60) {
+        el.classList.add('visible');
+      } else {
+        observer.observe(el);
+      }
+    });
+    return () => observer.disconnect();
+  }, [loading]);
 
   useEffect(() => {
     api.get('/public/faqs')
@@ -108,50 +162,57 @@ export default function Home() {
       <HeroCarousel />
 
       <section
-        className="section announcements-banner"
+        className="announcements-banner"
         id="announcements"
         style={{
-          backgroundImage: "url('/announcements-banner.png')",
-          backgroundSize: 'contain',
+          backgroundImage: "url('/banner-roles.webp')",
+          backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          backgroundColor: '#eef2fb',
+          backgroundColor: '#f0f4ff',
           width: '100%',
-          aspectRatio: '1536 / 1024'
+          aspectRatio: '3 / 1',
+          borderRadius: '1.2rem',
+          marginTop: '0.5rem'
         }}
       />
 
-      <section className="section" id="digital-services">
+      <section className="section fade-in-section" id="digital-services">
         <div className="container">
           <h2 className="section-title">{t('home.servicesTitle')}</h2>
           <div className="title-bar" />
-          <div className="services-grid">
-            {SERVICES.map((s, i) => {
-              const color = SERVICE_COLORS[i % SERVICE_COLORS.length];
-              return (
-                <Link
-                  to={s.to || (s.key === 'newRegistration' ? '/registration' : '/dashboard')}
-                  className="service-card"
-                  key={s.key}
-                  style={{ borderTop: `4px solid ${color}` }}
-                >
-                  <span
-                    className="material-icons"
-                    style={{ color, background: `${color}1a` }}
+          {SERVICE_GROUPS.map((grp) => (
+            <div className="service-group" key={grp.groupKey}>
+              <h3 className="service-group-title" style={{ color: grp.color }}>
+                <span className="material-icons" style={{ fontSize: 20 }}>{grp.items[0].icon}</span>
+                {t(`home.serviceGroups.${grp.groupKey}`)}
+              </h3>
+              <div className="services-grid">
+                {grp.items.map((s) => (
+                  <Link
+                    to={s.to || (s.key === 'newRegistration' ? '/registration' : '/dashboard')}
+                    className="service-card"
+                    key={s.key}
+                    style={{ borderTop: `4px solid ${grp.color}` }}
                   >
-                    {s.icon}
-                  </span>
-                  <h4>{t(`home.services.${s.key}`)}</h4>
-                </Link>
-              );
-            })}
-          </div>
+                    <span
+                      className="material-icons"
+                      style={{ color: grp.color, background: `${grp.color}1a` }}
+                    >
+                      {s.icon}
+                    </span>
+                    <h4>{t(`home.services.${s.key}`)}</h4>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
       <BooksShowcase />
 
-      <section className="section" style={{ background: 'var(--gradient-brand)', padding: '3rem 0' }}>
+      <section className="section fade-in-section" style={{ background: 'var(--gradient-brand)', padding: '3rem 0' }}>
         <div className="container">
           <div className="stats-row">
             {STATS.map((s) => (
@@ -164,7 +225,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section" style={{ background: 'var(--bg-elevated)' }}>
+      <section className="section fade-in-section" style={{ background: 'var(--bg-elevated)' }}>
         <div className="container">
           <h2 className="section-title">{t('home.helpTitle')}</h2>
           <div className="title-bar" />
