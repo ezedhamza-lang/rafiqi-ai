@@ -31,3 +31,7 @@ rafiqi-db-backup*.zip
 logs_*.zip
 *.dump.gz
 *.dump
+# Visual QA artifacts
+backend/scripts/qa-shots/
+backend/scripts/audit-student-pages-report.json
+
