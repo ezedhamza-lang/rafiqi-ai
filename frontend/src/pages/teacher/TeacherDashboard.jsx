@@ -63,21 +63,20 @@ export default function TeacherDashboard() {
 
   return (
     <div className="teacher-space">
-      <div className="container">
-        <div className="space-head">
-          <div>
-            <h2>{t('teacherSpace.title')}</h2>
-            <p className="sub">
-              {t('teacherSpace.welcome', { firstName: user.firstName, lastName: user.lastName, count: classes.length })}
-            </p>
-          </div>
-          <div className="space-stats">
-            <Badge variant="info" icon="quiz">{t('teacherSpace.quizCount', { n: quizCount })}</Badge>
-            <Badge variant="accent" icon="description">{t('teacherSpace.memoCount', { n: memoCount })}</Badge>
-          </div>
+      <div className="space-head">
+        <div>
+          <h2>{t('teacherSpace.title')}</h2>
+          <p className="sub">
+            {t('teacherSpace.welcome', { firstName: user.firstName, lastName: user.lastName, count: classes.length })}
+          </p>
         </div>
+        <div className="space-stats">
+          <Badge variant="info" icon="quiz">{t('teacherSpace.quizCount', { n: quizCount })}</Badge>
+          <Badge variant="accent" icon="description">{t('teacherSpace.memoCount', { n: memoCount })}</Badge>
+        </div>
+      </div>
 
-        <div className="tab-content">
+      <div className="tab-content">
           <Suspense fallback={null}>
           <Routes>
             <Route index element={<UnitAnalysis classes={classes} />} />
@@ -109,7 +108,6 @@ export default function TeacherDashboard() {
           </Routes>
         </Suspense>
         </div>
-      </div>
     </div>
   );
 }

@@ -49,41 +49,39 @@ export default function DirectorDashboard() {
 
   return (
     <div className="director-space">
-      <div className="container">
-        <div className="space-head">
-          <div>
-            <h2>{t('director.title')}</h2>
-            <p className="sub">{t('director.subtitle', { name: `${user.firstName} ${user.lastName}` })}</p>
-          </div>
-          {pendingCount > 0 && (
-            <div className="badge warn">🔔 {t('director.pendingBadge', { n: pendingCount })}</div>
-          )}
+      <div className="space-head">
+        <div>
+          <h2>{t('director.title')}</h2>
+          <p className="sub">{t('director.subtitle', { name: `${user.firstName} ${user.lastName}` })}</p>
         </div>
+        {pendingCount > 0 && (
+          <div className="badge warn">🔔 {t('director.pendingBadge', { n: pendingCount })}</div>
+        )}
+      </div>
 
-        <nav className="teacher-tabs">
-          {tabs.map((tb) => (
-            <NavLink key={tb.to} to={`/director/${tb.to}`} end={tb.end} className={({ isActive }) => (isActive ? 'active' : '')}>
-              <span className="material-icons">{tb.icon}</span>
-              {t(`director.tabs.${tb.key}`)}
-            </NavLink>
-          ))}
-        </nav>
+      <nav className="teacher-tabs">
+        {tabs.map((tb) => (
+          <NavLink key={tb.to} to={`/director/${tb.to}`} end={tb.end} className={({ isActive }) => (isActive ? 'active' : '')}>
+            <span className="material-icons">{tb.icon}</span>
+            {t(`director.tabs.${tb.key}`)}
+          </NavLink>
+        ))}
+      </nav>
 
-        <div className="tab-content">
-          <Suspense fallback={null}>
-          <Routes>
-            <Route index element={<DirectorHome />} />
-            <Route path="requests" element={<DirectorRequests />} />
-            <Route path="documents" element={<DirectorDocuments />} />
-            <Route path="classes" element={<DirectorClasses />} />
-            <Route path="calendar" element={<SchoolCalendar manageable />} />
-            <Route path="notifications" element={<DirectorNotifications />} />
-            {canManageFinance(user) && <Route path="subscriptions" element={<AdminSubscriptions />} />}
-            {canManageFinance(user) && <Route path="finance" element={<FinanceDashboard />} />}
-            <Route path="*" element={<Navigate to="." replace />} />
-          </Routes>
+      <div className="tab-content">
+        <Suspense fallback={null}>
+        <Routes>
+          <Route index element={<DirectorHome />} />
+          <Route path="requests" element={<DirectorRequests />} />
+          <Route path="documents" element={<DirectorDocuments />} />
+          <Route path="classes" element={<DirectorClasses />} />
+          <Route path="calendar" element={<SchoolCalendar manageable />} />
+          <Route path="notifications" element={<DirectorNotifications />} />
+          {canManageFinance(user) && <Route path="subscriptions" element={<AdminSubscriptions />} />}
+          {canManageFinance(user) && <Route path="finance" element={<FinanceDashboard />} />}
+          <Route path="*" element={<Navigate to="." replace />} />
+        </Routes>
         </Suspense>
-        </div>
       </div>
     </div>
   );

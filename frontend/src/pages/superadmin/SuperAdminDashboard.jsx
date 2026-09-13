@@ -26,31 +26,29 @@ export default function SuperAdminDashboard() {
 
   return (
     <div className="superadmin-space">
-      <div className="container">
-        <div className="space-head">
-          <div>
-            <h2>{t('superadmin.title')}</h2>
-            <p className="sub">{t('superadmin.subtitle')}</p>
-          </div>
+      <div className="space-head">
+        <div>
+          <h2>{t('superadmin.title')}</h2>
+          <p className="sub">{t('superadmin.subtitle')}</p>
         </div>
-
-        <SpaceShell
-          base="/superadmin"
-          title={t('superadmin.title')}
-          storageKey="rafiqi-super-sidebar"
-          items={TABS.map((tb) => ({ ...tb, label: t(`superadmin.tabs.${tb.key}`) }))}
-        >
-          <Suspense fallback={null}>
-          <Routes>
-            <Route index element={<Licenses />} />
-            <Route path="subscriptions" element={<Subscriptions />} />
-            <Route path="users" element={<UsersAdmin />} />
-            <Route path="schools" element={<Schools />} />
-            <Route path="*" element={<Navigate to="." replace />} />
-          </Routes>
-        </Suspense>
-        </SpaceShell>
       </div>
+
+      <SpaceShell
+        base="/superadmin"
+        title={t('superadmin.title')}
+        storageKey="rafiqi-super-sidebar"
+        items={TABS.map((tb) => ({ ...tb, label: t(`superadmin.tabs.${tb.key}`) }))}
+      >
+        <Suspense fallback={null}>
+        <Routes>
+          <Route index element={<Licenses />} />
+          <Route path="subscriptions" element={<Subscriptions />} />
+          <Route path="users" element={<UsersAdmin />} />
+          <Route path="schools" element={<Schools />} />
+          <Route path="*" element={<Navigate to="." replace />} />
+        </Routes>
+      </Suspense>
+      </SpaceShell>
     </div>
   );
 }

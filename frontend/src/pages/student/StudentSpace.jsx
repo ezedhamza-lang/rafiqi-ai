@@ -144,37 +144,35 @@ export default function StudentSpace() {
           </span>
         ))}
       </div>
-      <div className="container">
+      <Suspense fallback={null}>
+        <StudentProfile profile={profile} />
+      </Suspense>
+      <SpaceShell base="/student-space" title={t('studentSpace.sidebarTitle')} storageKey="rafiqi-student-sidebar" sections={GROUPS}>
         <Suspense fallback={null}>
-          <StudentProfile profile={profile} />
-        </Suspense>
-        <SpaceShell base="/student-space" title={t('studentSpace.sidebarTitle')} storageKey="rafiqi-student-sidebar" sections={GROUPS}>
-          <Suspense fallback={null}>
-          <Routes>
-            <Route index element={<StudentTwin />} />
-            <Route path="routine" element={<StudentDailyRoutine />} />
-            <Route path="flashcards" element={<StudentFlashcards />} />
-            <Route path="subjects" element={<StudentSubjects />} />
-            <Route path="quizzes" element={<StudentQuizzes onChanged={load} />} />
-            <Route path="official-exams" element={<StudentOfficialExams onChanged={load} />} />
-            <Route path="assignments" element={<StudentAssignments onChanged={load} />} />
-            <Route path="live" element={<StudentLiveSessions />} />
-            <Route path="paper-exam" element={<PaperExamScan />} />
-            <Route path="play" element={<PlayZone />} />
-            <Route path="books" element={<StudentBooks />} />
-            <Route path="adaptive" element={<StudentAdaptive />} />
-            <Route path="plan" element={<StudentLearningPlan />} />
-            <Route path="videos" element={<StudentVideos />} />
-            <Route path="stories" element={<StudentStories />} />
-            <Route path="calendar" element={<SchoolCalendar />} />
-            <Route path="refeeqi" element={<AskRefeeqi />} />
-            <Route path="twin" element={<StudentTwin />} />
-            <Route path="schedule" element={<StudentSchedule />} />
-            <Route path="*" element={<Navigate to="." replace />} />
-          </Routes>
-        </Suspense>
-        </SpaceShell>
-      </div>
+        <Routes>
+          <Route index element={<StudentTwin />} />
+          <Route path="routine" element={<StudentDailyRoutine />} />
+          <Route path="flashcards" element={<StudentFlashcards />} />
+          <Route path="subjects" element={<StudentSubjects />} />
+          <Route path="quizzes" element={<StudentQuizzes onChanged={load} />} />
+          <Route path="official-exams" element={<StudentOfficialExams onChanged={load} />} />
+          <Route path="assignments" element={<StudentAssignments onChanged={load} />} />
+          <Route path="live" element={<StudentLiveSessions />} />
+          <Route path="paper-exam" element={<PaperExamScan />} />
+          <Route path="play" element={<PlayZone />} />
+          <Route path="books" element={<StudentBooks />} />
+          <Route path="adaptive" element={<StudentAdaptive />} />
+          <Route path="plan" element={<StudentLearningPlan />} />
+          <Route path="videos" element={<StudentVideos />} />
+          <Route path="stories" element={<StudentStories />} />
+          <Route path="calendar" element={<SchoolCalendar />} />
+          <Route path="refeeqi" element={<AskRefeeqi />} />
+          <Route path="twin" element={<StudentTwin />} />
+          <Route path="schedule" element={<StudentSchedule />} />
+          <Route path="*" element={<Navigate to="." replace />} />
+        </Routes>
+      </Suspense>
+      </SpaceShell>
     </div>
   );
 }

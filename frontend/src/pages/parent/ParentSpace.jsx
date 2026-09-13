@@ -62,39 +62,37 @@ export default function ParentSpace() {
 
   return (
     <div className="parent-space">
-      <div className="container">
-        <div className="space-head">
-          <div>
-            <h2>{t('parentSpace.title')}</h2>
-            <p className="sub">{t('parentSpace.subtitle', { name: `${user.firstName} ${user.lastName}` })}</p>
-          </div>
-          {unread > 0 && <div className="badge warn">🔔 {t('parentSpace.unreadMsg', { n: unread })}</div>}
+      <div className="space-head">
+        <div>
+          <h2>{t('parentSpace.title')}</h2>
+          <p className="sub">{t('parentSpace.subtitle', { name: `${user.firstName} ${user.lastName}` })}</p>
         </div>
-
-        <SpaceShell
-          base="/parent"
-          title={t('parentSpace.title')}
-          storageKey="rafiqi-parent-sidebar"
-          items={TABS.map((tb) => ({ ...tb, label: t(`parentSpace.tabs.${tb.key}`) }))}
-        >
-          <Suspense fallback={null}>
-          <Routes>
-            <Route index element={<ChildProgress childrenData={children} />} />
-            <Route path="insights" element={<ParentInsights childrenData={children} />} />
-            <Route path="credentials" element={<ChildCredentials />} />
-            <Route path="assignments" element={<ChildAssignments />} />
-            <Route path="live" element={<ParentLiveSessions />} />
-            <Route path="analytics" element={<ChildAnalytics childrenData={children} />} />
-            <Route path="notes" element={<ParentNotes />} />
-            <Route path="messages" element={<Messages onChanged={loadUnread} />} />
-            <Route path="report" element={<WeeklyReport childrenData={children} />} />
-            <Route path="documents" element={<ParentDocuments />} />
-            <Route path="health" element={<ParentHealth />} />
-            <Route path="*" element={<Navigate to="." replace />} />
-          </Routes>
-        </Suspense>
-        </SpaceShell>
+        {unread > 0 && <div className="badge warn">🔔 {t('parentSpace.unreadMsg', { n: unread })}</div>}
       </div>
+
+      <SpaceShell
+        base="/parent"
+        title={t('parentSpace.title')}
+        storageKey="rafiqi-parent-sidebar"
+        items={TABS.map((tb) => ({ ...tb, label: t(`parentSpace.tabs.${tb.key}`) }))}
+      >
+        <Suspense fallback={null}>
+        <Routes>
+          <Route index element={<ChildProgress childrenData={children} />} />
+          <Route path="insights" element={<ParentInsights childrenData={children} />} />
+          <Route path="credentials" element={<ChildCredentials />} />
+          <Route path="assignments" element={<ChildAssignments />} />
+          <Route path="live" element={<ParentLiveSessions />} />
+          <Route path="analytics" element={<ChildAnalytics childrenData={children} />} />
+          <Route path="notes" element={<ParentNotes />} />
+          <Route path="messages" element={<Messages onChanged={loadUnread} />} />
+          <Route path="report" element={<WeeklyReport childrenData={children} />} />
+          <Route path="documents" element={<ParentDocuments />} />
+          <Route path="health" element={<ParentHealth />} />
+          <Route path="*" element={<Navigate to="." replace />} />
+        </Routes>
+      </Suspense>
+      </SpaceShell>
     </div>
   );
 }
