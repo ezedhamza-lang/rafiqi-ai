@@ -35,6 +35,7 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-col footer-brand-col">
             <img src="/logo-rafiqi.png" alt="Rafiqi" className="footer-logo" />
+            <p className="footer-desc">{t('footer.brandDescription')}</p>
           </div>
           <div className="footer-col">
             <h4>{t('footer.quickServices')}</h4>

@@ -198,7 +198,7 @@ export default function Header() {
     <header className="site-header">
       <div className="header-top">
         <div className="brand">
-          <img src="/logo-rafiqi-square.png" alt={t('header.brandAlt')} />
+          <img src="/logo-rafiqi.png" alt={t('header.brandAlt')} className="brand-owl" />
           <div className="brand-text">
             <h6>{t('header.brandTitle')}</h6>
           </div>

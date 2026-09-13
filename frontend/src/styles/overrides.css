@@ -317,9 +317,8 @@ a { color: inherit; }
     padding: 0.5rem 0.9rem;
   }
 
-  .brand img {
-    width: 44px;
-    height: 44px;
+  .brand-owl, .brand img {
+    height: 34px;
   }
 
   .brand-text h6 {
