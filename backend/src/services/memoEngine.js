@@ -210,17 +210,55 @@ function buildRow(stageName, blocks, ctxPages) {
   const tpl = TEACHER_TPL[role] || TEACHER_TPL.explore;
   const built = tpl(texts.slice(0, 6), ctxPages, tables);
   const meta = metaFor(stageName);
-  const images = blocks
-    .filter((b) => b.image)
-    .slice(0, 2)
-    .map((b) => ({ imageId: b.imageId || null, src: b.image, caption: b.alt || b.title || '' }));
   let learner = built.learner.replace('ي ناقش', 'يناقش');
   if (normalizeArabic(learner) === normalizeArabic(built.teacher)) learner = '• يُنجز المطلوب ويبرّر طريقته.';
-  return { stage: stageName, teacherActivity: built.teacher, learnerActivity: learner, skill: meta.skill, tools: meta.tools, images };
+  return { stage: stageName, teacherActivity: built.teacher, learnerActivity: learner, skill: meta.skill, tools: meta.tools };
 }
 
 const RANGE_RE = /الأعداد\s+من\s+([\d٠-٩]+)\s+إلى\s+([\d٠-٩]+)/;
 function toWestern(s) { return String(s || '').replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)); }
+
+// صياغة الهدف المميّز كمصدر من هدف تعلّم رسمي («أن يتعرف التلميذ على …» ← «التعرّف على …»)
+const DISTINCTIVE_MAP = [
+  ['يتعرف على', 'التعرّف على'], ['يتعرف', 'التعرّف على'], ['يفهم', 'فهم'], ['يدرك', 'إدراك'],
+  ['يميّز', 'التمييز بين'], ['يميز', 'التمييز بين'], ['يكتشف', 'اكتشاف'], ['يستنتج', 'استنتاج'],
+  ['يحسب', 'حساب'], ['يقارن', 'مقارنة'], ['يرتب', 'ترتيب'], ['يوظف', 'توظيف'], ['يوظّف', 'توظيف'],
+  ['ينتج', 'إنتاج'], ['يعبّر', 'التعبير عن'], ['يعبر', 'التعبير عن'], ['يقرأ', 'قراءة'], ['يكتب', 'كتابة'],
+  ['يصوغ', 'صياغة'], ['يصف', 'وصف'], ['يصنّف', 'تصنيف'], ['يصنف', 'تصنيف'], ['يحدّد', 'تحديد'], ['يحدد', 'تحديد'],
+  ['يمثّل', 'تمثيل'], ['يمثل', 'تمثيل'], ['يربط', 'الربط بين'], ['يستخرج', 'استخراج'], ['يحافظ', 'المحافظة على'],
+  ['يتجنّب', 'تجنّب'], ['يتجنب', 'تجنّب'], ['يطبّق', 'تطبيق'], ['يطبق', 'تطبيق'], ['ينجز', 'إنجاز'], ['يحلّ', 'حلّ']
+];
+function toDistinctive(obj) {
+  let s = String(obj || '').trim();
+  if (!s) return '';
+  s = s.replace(/^أن\s+/, '');
+  s = s.replace(/\s+(التلميذ|التلميذة|المتعلّم|المتعلم|التلاميذ|المتعلّمين|المتعلمين)\b/g, '');
+  for (const [verb, masdar] of DISTINCTIVE_MAP) {
+    if (s.startsWith(verb)) { s = masdar + s.slice(verb.length); break; }
+  }
+  s = s.replace(/^\s+/, '');
+  return s.slice(0, 120);
+}
+function stripTailDot(s) { return String(s || '').replace(/[.۔]\s*$/, ''); }
+
+// إزالة تكرار سطر المحتوى نفسه بين مراحل المذكرة الواحدة (يبقى أول ظهور فقط).
+// يُطبَّق على نشاط المعلّم وحده (محتوى الدرس) مع ضمان عدم تفريغ أي خلية.
+function dedupeMemoRowsAcross(rows) {
+  const seen = new Set();
+  for (const r of rows || []) {
+    const lines = String(r.teacherActivity || '').split('\n');
+    const keep = lines.filter((ln) => {
+      if (/^[.\s]+$/.test(ln) || !ln.trim()) return true;
+      const k = normalizeArabic(ln).replace(/•/g, '').replace(/\s+/g, ' ').trim();
+      if (k.length < 25) return true;
+      if (seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    });
+    const contentLines = keep.filter((ln) => ln.trim() && !/^[.\s]+$/.test(ln));
+    if (contentLines.length) r.teacherActivity = keep.join('\n');
+  }
+}
 
 export function buildSpecMemo({ profile, lesson, ctx }) {
   const g = groupBySection(lesson);
@@ -234,27 +272,47 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
   const rangeM = RANGE_RE.exec(toWestern(lesson.title).replace(/[\u064B-\u0652]/g, ''));
   const rangeTxt = rangeM ? ` في نطاق الأعداد من ${rangeM[1]} إلى ${rangeM[2]}` : '';
 
-  const objectives = (mapLesson && Array.isArray(mapLesson.learningObjectives) && mapLesson.learningObjectives.length)
-    ? mapLesson.learningObjectives.filter(Boolean).slice(0, 2)
-    : [
-        `ينجز المتعلّم «${concept}»${rangeTxt}.`,
-        `يحلّ المتعلّم وضعية موظّفًا «${concept}»${rangeTxt}.`
-      ];
-
   const cw = profile.competencyFramework || {};
-  const domX = domainFields(lesson);
+  const isMathSubject = normalizeArabic(ctx.subject || '').includes('رياضيات');
+  // استنتاجات الرياضيات لا تُستعمل مطلقًا لغيرها (منع تسرّب نصوص الرياضيات لبقية المواد)
+  const domX = isMathSubject ? domainFields(lesson) : { component: '', distinctive: '' };
+  const mapComps = mapLesson && Array.isArray(mapLesson.competencies) ? mapLesson.competencies.filter(Boolean) : [];
+  const sampleMatch = (!isMathSubject && Array.isArray(cw.sampleComponentCompetencies) && cw.sampleComponentCompetencies.length)
+    ? (cw.sampleComponentCompetencies.find((sc) => {
+      const n = normalizeArabic(String(sc || ''));
+      const dom = normalizeArabic(String(lesson.domain || ''));
+      const ttl = normalizeArabic(String(lesson.title || ''));
+      if (dom && n.includes(dom)) return true;
+      const words = ttl.split(/\s+/).filter((w) => w.length > 3);
+      return words.some((w) => n.includes(w));
+    }) || '') : '';
+  const mapObjs = mapLesson && Array.isArray(mapLesson.learningObjectives) ? mapLesson.learningObjectives.filter(Boolean) : [];
+  const derivedDistinctive = toDistinctive(mapObjs[0]) || (concept ? `القدرة على «${concept}»` : '');
   const competencies = {
-    domain: cw.domainCompetency || (profile.appliesTo?.subject === 'رياضيات' ? 'حلّ وضعيات مشكلة دالّة.' : ''),
-    subject: cw.subjectCompetency || (profile.appliesTo?.subject === 'رياضيات' ? 'حلّ وضعيات مشكلة دالّة إسهامًا للتفكير الرياضي.' : ''),
-    component: (mapLesson && mapLesson.competencies ? mapLesson.competencies.filter(Boolean).join(' ؛ ') : '') || cw.component || domX.component || '',
-    distinctiveObjective: (rangeTxt
+    domain: cw.domainCompetency || cw.fieldCompetency || (isMathSubject ? 'حلّ وضعيات مشكلة دالّة.' : (cw.subjectCompetency || '')),
+    subject: cw.subjectCompetency || (isMathSubject ? 'حلّ وضعيات مشكلة دالّة إسهامًا للتفكير الرياضي.' : ''),
+    component: (isMathSubject && mapComps.length ? mapComps.join(' ؛ ') : '') || cw.component
+      || (isMathSubject ? domX.component : (sampleMatch || mapComps.join(' ؛ ') || cw.subjectCompetency || cw.fieldCompetency || '')),
+    distinctiveObjective: (rangeTxt && isMathSubject
       ? `التصرّف في الأعداد بين ${rangeM[1]} و${rangeM[2]} قراءةً وكتابةً وتمثيلًا ومقارنةً وترتيبًا وتفكيكًا وتجميعًا.`
-      : '') || cw.distinctiveObjective || (mapLesson && mapLesson.competencies ? mapLesson.competencies[0] : '') || domX.distinctive || ''
+      : '') || cw.distinctiveObjective
+      || (isMathSubject ? (mapComps[0] || domX.distinctive || '') : derivedDistinctive)
   };
 
   const subjN = normalizeArabic(ctx.subject || '');
   const subjectWord = subjN.includes('رياضيات') ? 'رياضيات' : (ctx.subject || '');
   const headerTitle = `مذكرة بيداغوجية لحصة ${subjectWord} — ${ctx.level || ''}`;
+
+  const objectives = mapObjs.length ? mapObjs.slice(0, 2)
+    : isMathSubject
+      ? [
+        `ينجز المتعلّم «${concept}»${rangeTxt}.`,
+        `يحلّ المتعلّم وضعية موظّفًا «${concept}»${rangeTxt}.`
+      ]
+      : [
+        `أن يتمكّن المتعلّم من «${concept}»${lesson.domain ? ` ضمن مجال ${lesson.domain}` : ''}.`,
+        derivedDistinctive ? `${stripTailDot(derivedDistinctive)}.` : `توظيف «${concept}» في وضعيات مشابهة.`
+      ];
 
   const subjNorm = normalizeArabic(ctx.subject || '');
   const isMathTemplate = subjNorm.includes('رياضيات');
@@ -341,8 +399,7 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
       const remain = Math.max(1, st.space - bullets.length);
       const teacherActivity = bullets.join('\n') + (bullets.length ? '\n' : '') + dots(remain, st.w + si);
       const learnerActivity = st.learner.join('\n') + '\n' + dots(Math.max(1, Math.ceil(st.space / 2)), Math.max(26, st.w - 28) + si);
-      const images = items.filter((b) => b && b.image).slice(0, 2).map((b) => ({ imageId: b.imageId || null, src: b.image, caption: b.alt || b.title || '' }));
-      rows.push({ stage: st.label, teacherActivity, learnerActivity, skill: '', tools: st.tools, images });
+      rows.push({ stage: st.label, teacherActivity, learnerActivity, skill: '', tools: st.tools });
     }
   } else {
   const stages = (profile.phases || []).map((p) => p.name);
@@ -356,7 +413,8 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
     if (/تقو|تقييم/.test(n)) return [];
     return [];
   };
-  for (const name of stages) {
+  for (const phase of (profile.phases || [])) {
+    const name = phase.name;
     let items = [];
     for (const k of STAGE_KEYS(name)) items = items.concat(takeRole(k));
     if (/تقو|تقي/.test(normalizeArabic(name))) {
@@ -368,9 +426,20 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
       tail.forEach((x) => consumed.add(x.i));
       items = items.concat(tail.map((x) => x.b));
     }
-    if (!items.length) continue;
     const row = buildRow(name, items, pages);
-    if (row) rows.push(row);
+    if (row) { rows.push(row); continue; }
+    // المرحلة بلا محتوى من الدرس: لا نتركها فارغة — نستعمل بنك أنشطة البروفايل الرسمي مع إسناد للدرس
+    const bank = (phase.activityBank || []).concat(phase.steps || []).filter((x) => typeof x === 'string' && x.trim());
+    if (bank.length) {
+      const acts = bank.slice(0, 3).map((x) => '• ' + x);
+      rows.push({
+        stage: name,
+        teacherActivity: `${phase.goal || name} (مرجع: «${lesson.title}»):\n${acts.join('\n')}`,
+        learnerActivity: '• يشارك ويناقش ويدوّن الاستنتاج.',
+        skill: metaFor(name).skill,
+        tools: metaFor(name).tools
+      });
+    }
   }
   if (!rows.length) {
     const flat = (lesson.blocks || []).map(itemText).filter(Boolean).slice(0, 8);
@@ -379,8 +448,7 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
       teacherActivity: `يدعوهم إلى ما يلي:\n${flat.map((i) => '• ' + i).join('\n')}`,
       learnerActivity: '• يُنجز ويشارك ويدوّن النتيجة.',
       skill: metaFor(stages[0]).skill,
-      tools: metaFor(stages[0]).tools,
-      images: []
+      tools: metaFor(stages[0]).tools
     });
   }
   }
@@ -396,8 +464,7 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
       teacherActivity: 'يعرض النموذج ويدعوهم إلى المقارنة والتصحيح الذاتي:\n' + ansText,
       learnerActivity: '• يقارن إنتاجه بالنموذج ويصحّح بدفتره ويدوّن نسبة نجاحه.',
       skill: 'تقدير الذات',
-      tools: ['كراسات المحاولات', 'شبكة التصحيح'],
-      images: []
+      tools: ['كراسات المحاولات', 'شبكة التصحيح']
     });
   }
   if (!isMathTemplate && leftoverBlocks.length) {
@@ -406,7 +473,6 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
     if (extra && practiceRow) {
       practiceRow.teacherActivity += `\n${extra.teacherActivity}`;
       practiceRow.learnerActivity += `\n${extra.learnerActivity}`;
-      practiceRow.images = practiceRow.images.concat(extra.images).slice(0, 2);
     } else if (extra) {
       rows.push(extra);
     }
@@ -417,10 +483,7 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
     (mapLesson && mapLesson.competencies ? mapLesson.competencies.join(' ؛ ') : '') ||
     `${lesson.title}${lesson.domain ? ' — ' + lesson.domain : ''}`);
 
-  const allImages = (lesson.blocks || [])
-    .filter((b) => b && b.image)
-    .slice(0, 6)
-    .map((b) => ({ imageId: b.imageId || `img-${lesson.id}-x`, src: b.image, caption: b.alt || b.title || '' }));
+  dedupeMemoRowsAcross(rows);
 
   return {
     specVersion: 2,
@@ -434,7 +497,6 @@ export function buildSpecMemo({ profile, lesson, ctx }) {
     lessonObjectives: objectives,
     content: contentBox,
     rows,
-    images: allImages,
     assessment: assessmentItems.length ? assessmentItems : (rows[rows.length - 1] ? undefined : undefined) || '',
     successRateLine: 'نسبة نجاح الدرس من خلال التمرين التطبيقي: ',
     pedagogicalDecision: 'القرار البيداغوجي: ',

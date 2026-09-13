@@ -309,8 +309,8 @@ export async function buildMemoDocx(memo) {
   // ── Competency ──
   const compDefs = isMath
     ? [
-        ['مكون الكفاية', s.competencies?.component],
-        ['الهدف الم瑕疵', s.competencies?.distinctiveObjective],
+        ['مكوّن الكفاية', s.competencies?.component],
+        ['الهدف المميّز', s.competencies?.distinctiveObjective],
         ['المحتوى', s.content],
         ['هدف الحصة', (s.lessonObjectives || []).join('؛ ')]
       ]

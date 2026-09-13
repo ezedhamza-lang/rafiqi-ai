@@ -171,16 +171,17 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(res.body.memo.methodologyId).toBe('year1-science-awakening');
   });
 
-  it('المذكرة تحمل صور كتاب التلميذ بنفس imageId وتطبعها في PDF', async () => {
+  it('المذكرة بلا صور (حسب المعيار) وتُصدَّر Word قابل للتعديل', async () => {
     const gen = await request(app)
       .post('/api/memos/generate')
-      .set('Authorization', `Bearer ${token}`)
+      .set('Authorization', 'Bearer ' + token)
       .send({ subject: 'رياضيات', level: 'السنة الأولى أساسي', lessonTitle: 'آلة الجمع دون احتفاظ: الجمع العمودي' });
     expect(gen.status).toBe(200);
     const memo = gen.body.memo;
-    expect((memo.content.images || []).length).toBeGreaterThan(0);
-    expect(memo.content.images[0].imageId).toBeTruthy();
-    expect(memo.content.images[0].src).toMatch(/^\/curriculum\//);
+    // لا صور إطلاقًا في المذكرات
+    expect((memo.content.images || []).length).toBe(0);
+    expect((memo.content.spec && memo.content.spec.images) || []).toHaveLength(0);
+    expect((memo.content.spec.rows || []).every((r) => !r.images || !r.images.length)).toBe(true);
 
     const pdf = await request(app)
       .get(`/api/memos/${memo.id}/pdf`)
@@ -211,7 +212,7 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(allText).toContain('الطرح');
   });
 
-  it('مذكرة س2 للدرس ذي الصور تحمل صور كتاب التلميذ وتطبعها في PDF', async () => {
+  it('مذكرة س2 للدرس ذي الصور تُصدَّر Word بلا صور (المعيار: لا صور في المذكرات)', async () => {
     const res = await request(app)
       .post('/api/memos/generate')
       .set('Authorization', `Bearer ${token}`)
@@ -219,7 +220,7 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(res.status).toBe(200);
     const memo = res.body.memo;
     expect(memo.lessonId).toBe('y2m50');
-    expect((memo.content.images || []).length).toBeGreaterThan(0);
+    expect((memo.content.images || []).length).toBe(0);
 
     const pdf = await request(app)
       .get(`/api/memos/${memo.id}/pdf`)
@@ -244,14 +245,14 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(imgBlock.imageId).toMatch(/^img-y2m01-\d+$/);
   });
 
-  it('مادة واحدة بعدة كتب: «رياضيات» س2 تولّد من الكتابين وكل مذكرة بصور كتابها', async () => {
+  it('مادة واحدة بعدة كتب: «رياضيات» س2 تولّد من الكتابين وكل مذكرة بلا صور وبمرجع كتابها', async () => {
     const r1 = await request(app)
       .post('/api/memos/generate')
       .set('Authorization', `Bearer ${token}`)
       .send({ subject: 'رياضيات', level: 'السنة الثانية أساسي', lessonTitle: 'القطع النقديّة المتداولة 5، 10، 20، 50، 100، 200: التصرّف فيها' });
     expect(r1.status).toBe(200);
     expect(r1.body.memo.bookId).toBe('year2/math2');
-    expect((r1.body.memo.content.images || []).length).toBeGreaterThan(0);
+    expect((r1.body.memo.content.images || []).length).toBe(0);
     expect(r1.body.memo.content.sourceBook).toBe('رياضياتي 2');
 
     const r2 = await request(app)
@@ -261,11 +262,10 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(r2.status).toBe(200);
     expect(r2.body.memo.bookId).toBe('year2/math');
     expect(r2.body.memo.content.sourceBook).toBe('رياضيات');
-    expect((r2.body.memo.content.images || []).length).toBeGreaterThan(0);
-    expect(r2.body.memo.content.images[0].src).toMatch(/^\/story-covers\//);
+    expect((r2.body.memo.content.images || []).length).toBe(0);
   });
 
-  it('س6 الرياضيات بعد الترقيم: مذكرة حقيقية بمراحل المواصفات وصور الكتاب', async () => {
+  it('س6 الرياضيات بعد الترقيم: مذكرة حقيقية بمراحل المواصفات بلا صور', async () => {
     const res = await request(app)
       .post('/api/memos/generate')
       .set('Authorization', `Bearer ${token}`)

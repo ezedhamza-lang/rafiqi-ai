@@ -1,7 +1,6 @@
 ﻿import { useState, useEffect, useCallback, useMemo } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
-import { imgSrc, restoreOriginalImg } from '../../utils/imgSrc.js';
 
 const LEVELS = [
   'السنة الأولى أساسي',
@@ -312,8 +311,8 @@ export default function Memos({ onChanged }) {
                     </>
                   ) : (
                     <>
-                      <span style={{ background: '#c9a227', color: '#222', borderRadius: 8, padding: '2px 10px' }}>الفترة: {spec.period || '…'}</span>
-                      <span style={{ background: '#7a9e7e', color: '#fff', borderRadius: 8, padding: '2px 10px' }}>اليوم: {spec.day || '…'}</span>
+                      <span style={{ background: '#c9a227', color: '#222', borderRadius: 8, padding: '2px 10px' }}>{(spec.banner && spec.banner.duration) || 'التوقيت : 30 دق'}</span>
+                      <span style={{ background: '#7a9e7e', color: '#fff', borderRadius: 8, padding: '2px 10px' }}>المستوى: {spec.period || '…'}</span>
                     </>
                   )}
                 </span>
@@ -343,9 +342,7 @@ export default function Memos({ onChanged }) {
                 <table className="data-table" style={{ fontSize: 14.5, borderCollapse: 'collapse', width: '100%' }}>
                   <thead>
                     <tr>
-                      {(spec.mathTemplate
-                        ? ['المراحل', 'نشاط المعلّم', 'نشاط المتعلّم', 'الوسائل']
-                        : ['المراحل', 'نشاط الأستاذ', 'نشاط المتعلّم', 'المهارة المستهدفة', 'الوسائل']).map((h, i) => (
+                      {['المراحل', 'نشاط المعلّم', 'نشاط المتعلّم', 'الوسائل'].map((h, i) => (
                         <th key={h} style={{ border: '2.5px solid #222', padding: '8px 10px', fontSize: 15.5, color: '#1d2430', background: ['#d9b45b', '#a8c8e8', '#a9dcb9', '#d3bce8', '#f0c9b0'][i] }}>{h}</th>
                       ))}
                     </tr>
@@ -358,12 +355,8 @@ export default function Memos({ onChanged }) {
                         </th>
                         <td style={{ border: '2px solid #222', borderBottom: '3.5px solid #111', padding: '9px 10px', lineHeight: 1.9 }}>
                           {String(r.teacherActivity || '').split('\n').map((ln, j) => <div key={j}>{ln}</div>)}
-                          {(r.images || []).map((im, k) => (
-                            <img key={k} src={imgSrc(im.src)} alt={im.caption || ''} loading="lazy" onError={(e) => restoreOriginalImg(e, im.src)} style={{ maxWidth: 200, borderRadius: 6, border: '1px solid #ccc', display: 'block', margin: '6px 0' }} />
-                          ))}
                         </td>
                         <td style={{ border: '2px solid #222', borderBottom: '3.5px solid #111', padding: '9px 10px', lineHeight: 1.9 }}>{String(r.learnerActivity || '').split('\n').map((ln, j) => <div key={j}>{ln}</div>)}</td>
-                        {!spec.mathTemplate && <td style={{ border: '2px solid #222', borderBottom: '3.5px solid #111', padding: 8, textAlign: 'center', color: '#274d27', fontWeight: 700 }}>{r.skill}</td>}
                         <td style={{ border: '2px solid #222', borderBottom: '3.5px solid #111', padding: 8, textAlign: 'center', fontWeight: 600 }}>{(r.tools || []).join(' + ')}</td>
                       </tr>
                     ))}

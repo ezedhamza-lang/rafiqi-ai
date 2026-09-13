@@ -228,21 +228,7 @@ export async function memoHtml(memo) {
     const vals = c.header.values || {};
     secs.push('<h2>بيانات الحصة</h2><table class="kv"><tbody>' + c.header.columns.map((k) => '<tr><td>' + esc(k) + '</td><td><b>' + esc(vals[k] || '—') + '</b></td></tr>').join('') + '</tbody></table>');
   }
-  if ((c.images || []).length) {
-    const figs = [];
-    for (const im of c.images.slice(0, 6)) {
-      const dataUri = await inlineImageForPdf(im.src);
-      if (!dataUri) continue;
-      figs.push(
-        '<figure style="margin:0.6rem 0;text-align:center">' +
-        '<img src="' + dataUri + '" alt="" style="max-width:70%;max-height:260px;border:1px solid #ddd;border-radius:8px"/>' +
-        '<figcaption style="font-size:0.8rem;color:#444">' + esc(im.caption || '') +
-        (im.imageId ? ' <span style="color:#999">(' + esc(im.imageId) + ' — من كتاب التلميذ)</span>' : '') +
-        '</figcaption></figure>'
-      );
-    }
-    if (figs.length) secs.push('<h2>صور الدرس (هي نفسها في كتاب التلميذ)</h2>' + figs.join(''));
-  }
+  // ملاحظة: المذكرات بلا صور حسب معيار المستخدم (قابلة للتعديل يدويًا في Word)
   if ((c.warmup || []).length) {
     secs.push('<h2>التمهيد</h2><ul>' + c.warmup.map((w) => '<li>' + esc(w) + '</li>').join('') + '</ul>');
   }
@@ -343,17 +329,9 @@ export function certificateHtml(cert) {
 //   Table 2: Activity — header + N rows × 4 cols (المراحل | نشاط المعلّم | نشاط المتعلّم | الوسائل)
 async function memoSpecHtml(memo, s) {
   const lines = (t) => esc(String(t || '')).replace(/\n/g, '<br/>');
-  const cellImgs = async (imgs) => {
-    const out = [];
-    for (const im of imgs || []) {
-      const uri = await inlineImageForPdf(im.src);
-      if (uri) out.push('<div style="text-align:center;margin:4px 0"><img src="' + uri + '" style="max-width:92%;max-height:110px;border:1px solid #bbb;border-radius:6px"/>' + (im.caption ? '<div style="font-size:9px;color:#555">' + esc(im.caption.slice(0, 90)) + '</div>' : '') + '</div>');
-    }
-    return out.join('');
-  };
 
   // ── Table 0: Banner ──
-  // Official docx: all templates use "المستوى" (not "الفtera")
+  // Official docx: all templates use "المستوى" (not "الفترة")
   // Banner title: "مذكرة [المادة]" (e.g. "مذكرة رياضيات" / "مذكرة انتاج كتابي")
   const duration = esc((s.banner && s.banner.duration) || (s.mathTemplate ? 'التوقيت: 60 دق' : 'التوقيت : 30 دق'));
   const titleText = s.mathTemplate
@@ -374,7 +352,7 @@ async function memoSpecHtml(memo, s) {
   const compDefs = s.mathTemplate
     ? [
         ['مكون الكفاية', s.competencies?.component],
-        ['الهدف الم瑕疵', s.competencies?.distinctiveObjective],
+        ['الهدف المميّز', s.competencies?.distinctiveObjective],
         ['المحتوى', s.content],
         ['هدف الحصة', (s.lessonObjectives || []).join('؛ ')]
       ]
@@ -404,7 +382,7 @@ async function memoSpecHtml(memo, s) {
     trs.push(
       '<tr>' +
       '<td class="stg">' + esc(r.stage) + '</td>' +
-      '<td>' + lines(r.teacherActivity) + (await cellImgs(r.images)) + '</td>' +
+      '<td>' + lines(r.teacherActivity) + '</td>' +
       '<td>' + lines(r.learnerActivity) + '</td>' +
       '<td class="tls">' + esc((r.tools || []).join(' + ') || '—') + '</td>' +
       '</tr>'
@@ -415,14 +393,6 @@ async function memoSpecHtml(memo, s) {
   const actTable =
     '<table class="mtab"><thead><tr>' + actHeaders + '</tr></thead><tbody>' +
     trs.join('') + '</tbody></table>';
-
-  // ── Images ──
-  const imgsTop = [];
-  const used = new Set((s.rows || []).flatMap((r) => (r.images || []).map((i) => i.src)));
-  for (const im of (s.images || []).filter((i) => !used.has(i.src)).slice(0, 2)) {
-    const uri = await inlineImageForPdf(im.src);
-    if (uri) imgsTop.push('<div style="text-align:center;margin:6px 0"><img src="' + uri + '" style="max-width:45%;max-height:150px;border:1px solid #bbb;border-radius:8px"/></div>');
-  }
 
   // ── CSS ──
   const style = '<style>' +
@@ -464,7 +434,6 @@ async function memoSpecHtml(memo, s) {
   const body = '<div class="page">' + style +
     bannerTable +
     compTable +
-    imgsTop.join('') +
     actTable +
     (s.assessment ? '<div style="margin-top:8px;font-size:11px"><b>عناصر التقويم المطبَّقة:</b> ' + lines(s.assessment) + '</div>' : '') +
     '<div class="mend">' +

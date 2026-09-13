@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import SvgArt from './SvgArt';
 import { bidiNodes } from '../utils/bidi';
 import { imgSrc, restoreOriginalImg } from '../utils/imgSrc';
+import { guessAnswerZone, stripTashkeel } from '../utils/answerZone';
 
 function rich(text) {
   if (!text) return null;
@@ -515,16 +516,47 @@ export default function AssessmentPaper({ lesson, answers, onAnswer, submitting,
                       </div>
                     )}
 
-                    {/* Math Input / Fill blank */}
-                    {(ex.kind === 'math-input' || (ex.kind === 'question' && !ex.options)) && (
-                      <input
-                        type="text"
-                        className="text-input"
-                        placeholder={ex.placeholder || '.............'}
-                        value={savedVal || ''}
-                        onChange={(e) => handleText(blockId, e.target.value)}
-                      />
-                    )}
+                    {/* Math Input / Fill blank — نوع المكان يطابق نوع السؤال */}
+                    {(ex.kind === 'math-input' || (ex.kind === 'question' && !ex.options)) && (() => {
+                      const t = `${stripTashkeel(ex.text || '')} ${stripTashkeel(ex.title || '')}`;
+                      // math-input صُمّم لخانة عدد/كلمة قصيرة واحدة دائمًا؛ والمعادلة التي تنتهي بـ«= …» خانة واحدة
+                      const singleBox = ex.kind === 'math-input' || /=\s*(…|\.\.\.)/.test(t);
+                      const zone = singleBox ? 'number' : guessAnswerZone(ex);
+                      if (zone === 'drawing') return <PaperDrawing blockId={blockId} onAnswer={onAnswer} />;
+                      if (zone === 'table' && (ex.rows || []).length) return <PaperTable ex={ex} blockId={blockId} answers={answers} onAnswer={onAnswer} />;
+                      if (zone === 'math') {
+                        return (
+                          <div style={{ width: '100%', maxWidth: 420 }}>
+                            <textarea
+                              style={{ width: '100%', minHeight: 74, fontSize: 20, border: '2px solid #333', borderRadius: 6, padding: '6px 10px', fontFamily: 'inherit', resize: 'vertical' }}
+                              placeholder={ex.placeholder || 'اكتب عملية الإجابة ثم الناتج...'}
+                              value={typeof savedVal === 'string' ? savedVal : ''}
+                              onChange={(e) => handleText(blockId, e.target.value)}
+                            />
+                          </div>
+                        );
+                      }
+                      if (zone === 'writing' || zone === 'table') {
+                        return (
+                          <textarea
+                            placeholder={ex.placeholder || 'اُكْتُبْ إِجَابَتَكَ هُنَا...'}
+                            value={typeof savedVal === 'string' ? savedVal : ''}
+                            onChange={(e) => handleText(blockId, e.target.value)}
+                            rows={3}
+                            style={{ width: '100%', maxWidth: 420, fontSize: 20 }}
+                          />
+                        );
+                      }
+                      return (
+                        <input
+                          type="text"
+                          className="text-input"
+                          placeholder={ex.placeholder || '.............'}
+                          value={typeof savedVal === 'string' ? savedVal : ''}
+                          onChange={(e) => handleText(blockId, e.target.value)}
+                        />
+                      );
+                    })()}
 
                     {/* Textarea */}
                     {ex.kind === 'textarea' && (

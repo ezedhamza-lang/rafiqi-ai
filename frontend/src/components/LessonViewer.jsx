@@ -6,6 +6,7 @@ import SvgArt from './SvgArt.jsx';
 import AssessmentPaper from './AssessmentPaper.jsx';
 import { bidiNodes } from '../utils/bidi';
 import { imgSrc, restoreOriginalImg } from '../utils/imgSrc';
+import { guessAnswerZone } from '../utils/answerZone';
 
 const BLOCK_ICONS = {
   objective: 'track_changes',
@@ -86,7 +87,7 @@ function GateControls({ g, correctText, explanation }) {
   );
 }
 
-function QuestionBlock({ block, serverBid, gate, onCheck, onReveal }) {
+function QuestionBlock({ block, onAnswer = () => {}, blockId = '', serverBid, gate, onCheck, onReveal }) {
   const g = useServerGate({ block, serverBid, gate, onCheck, onReveal });
   const [sel, setSel] = useState(null);
   const [text, setText] = useState('');
@@ -155,7 +156,123 @@ function QuestionBlock({ block, serverBid, gate, onCheck, onReveal }) {
             )}
             <GateControls g={g} correctText={String(g.revealed?.answer ?? '')} explanation={g.revealed?.explanation} />
           </div>
-        ) : null
+        ) : (
+          <QuestionAutoZone block={block} onAnswer={onAnswer} blockId={blockId} />
+        )
+      )}
+    </div>
+  );
+}
+
+// منطقة إجابة تلقائية عندما لا توجد خيارات ولا تحقق آلي: نوعها يطابق نوع السؤال
+function QuestionAutoZone({ block, onAnswer, blockId }) {
+  const zone = guessAnswerZone(block);
+  if (zone === 'table') return <TableBlock block={block} onAnswer={onAnswer} blockId={blockId} showPrompt={false} />;
+  if (zone === 'drawing') return <DrawingBlock block={{ ...block, title: 'مساحة الرسم', text: '' }} onAnswer={onAnswer} blockId={blockId} />;
+  return <AnswerZone mode={zone} onAnswer={onAnswer} blockId={blockId} />;
+}
+
+function AnswerZone({ mode, onAnswer, blockId }) {
+  const [value, setValue] = useState('');
+  const ref = useRef(null);
+  const onAnswerRef = useRef(onAnswer);
+  onAnswerRef.current = onAnswer;
+  useEffect(() => { onAnswerRef.current(blockId, value); }, [value, blockId]);
+  const insertSym = (sym) => {
+    const el = ref.current;
+    if (el && typeof el.selectionStart === 'number') {
+      const s = el.selectionStart;
+      const e2 = el.selectionEnd;
+      setValue((v) => v.slice(0, s) + sym + v.slice(e2));
+      requestAnimationFrame(() => { try { el.focus(); el.setSelectionRange(s + sym.length, s + sym.length); } catch { /* ignore */ } });
+    } else {
+      setValue((v) => v + sym);
+    }
+  };
+  return (
+    <div className="lesson-answer-zone">
+      <span className="write-here">
+        <span className="material-icons" style={{ fontSize: 20 }}>{mode === 'math' ? 'functions' : 'edit'}</span>
+        {mode === 'math' ? 'اكتب العملية ثم الناتج هنا' : 'اكتب إجابتك هنا'}
+      </span>
+      <div className="cahier-paper">
+        <textarea
+          ref={ref}
+          className={mode === 'math' ? 'lesson-math-input kid-write' : 'lesson-textarea kid-write'}
+          rows={mode === 'math' ? 4 : 3}
+          dir="rtl"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          placeholder={mode === 'math' ? 'اكتب العملية الحسابية...' : 'اكتب إجابتك هنا...'}
+          aria-label={mode === 'math' ? 'مكان العملية' : 'مكان الإجابة'}
+        />
+      </div>
+      {mode === 'math' && (
+        <div className="math-symbols">
+          {MATH_SYMBOLS.map((sym) => (
+            <button key={sym} type="button" className="math-symbol-btn" onClick={() => insertSym(sym)}>{sym}</button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// جدول حقيقي قابل للتعبئة: الخلايا الفارغة يملؤها التلميذ وتُرسل مع الإجابات
+function TableBlock({ block, onAnswer, blockId, showPrompt = true }) {
+  const [cells, setCells] = useState({});
+  const onAnswerRef = useRef(onAnswer);
+  onAnswerRef.current = onAnswer;
+  useEffect(() => { onAnswerRef.current(blockId, JSON.stringify(cells)); }, [cells, blockId]);
+  const cols = block.columns || [];
+  const rows = block.rows || [];
+  const set = (key, v) => setCells((p) => ({ ...p, [key]: v }));
+  return (
+    <div className="lesson-block lesson-block-tablezone">
+      {showPrompt && (block.title || block.text) && (
+        <div className="lesson-block-head">
+          <span className="material-icons">grid_on</span>
+          <div>
+            {block.title && <strong>{rich(block.title)}</strong>}
+            {block.text && <p>{rich(block.text)}</p>}
+          </div>
+        </div>
+      )}
+      {rows.length > 0 ? (
+        <div style={{ overflowX: 'auto' }}>
+          <table style={{ borderCollapse: 'collapse', margin: '8px auto', minWidth: 320 }}>
+            {cols.length > 0 && (
+              <thead>
+                <tr>{cols.map((h, i) => <th key={i} style={{ border: '2px solid #333', padding: '6px 14px', background: '#f0f0f0', fontSize: 18 }}>{h}</th>)}</tr>
+              </thead>
+            )}
+            <tbody>
+              {rows.map((row, r) => (
+                <tr key={r}>
+                  {(row || []).map((cell, c) => {
+                    const key = `${r}-${c}`;
+                    if (cell === '' || cell == null) {
+                      return (
+                        <td key={c} style={{ border: '2px solid #333', padding: 0 }}>
+                          <input
+                            dir="rtl"
+                            value={cells[key] || ''}
+                            onChange={(e) => set(key, e.target.value)}
+                            style={{ width: 64, textAlign: 'center', fontSize: 20, border: 'none', outline: 'none', padding: '6px 4px' }}
+                            aria-label={`خلية ${r + 1}-${c + 1}`}
+                          />
+                        </td>
+                      );
+                    }
+                    return <td key={c} style={{ border: '2px solid #333', padding: '6px 14px', textAlign: 'center', fontSize: 18 }}>{rich(cell)}</td>;
+                  })}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <p className="lesson-hint">لا يوجد جدول لهذا السؤال بعد — أجب في كراسك.</p>
       )}
     </div>
   );
@@ -732,7 +849,7 @@ function FileUploadBlock({ block, onAnswer, blockId }) {
 
 // Dispatcher without hooks — safe to reuse across lessons with different
 // block kinds at the same list positions (React hooks rules).
-const TASK_KINDS = ['question','math-input','textarea','drawing','picture-choice','match-pairs','activity','experiment'];
+const TASK_KINDS = ['question','math-input','textarea','drawing','table','picture-choice','match-pairs','activity','experiment'];
 
 // في عرض «ورقة الاختبار»: الكتل التعليمية تصبح سندًا مقروءًا بدل أن تُهمل
 function paperReadyBlocks(blocks) {
@@ -755,7 +872,8 @@ function Block({ block, onAnswer = () => {}, blockId = '', gates = null, onCheck
   const gateProps = { serverBid, gate, onCheck, onReveal };
   const inner = () => {
     switch (kind) {
-      case 'question': return <QuestionBlock block={block} {...gateProps} />;
+      case 'question': return <QuestionBlock block={block} onAnswer={onAnswer} blockId={blockId} {...gateProps} />;
+      case 'table': return <TableBlock block={block} onAnswer={onAnswer} blockId={blockId} />;
       case 'experiment': return <ExperimentBlock block={block} />;
       case 'summary': return <SummaryBlock block={block} />;
       case 'vocabulary': return <VocabularyBlock block={block} />;
