@@ -256,9 +256,9 @@ export default function StudentStories() {
                   onError={(e) => { if (restoreOriginalImg(e, openStory.image || openStory.imageUrl)) return; e.currentTarget.style.display = 'none'; }}
                 />
               )}
-              {(openStory.text || []).length > 0 && (
+              {Array.isArray(openStory.text) && openStory.text.length > 0 && (
                 <div className="story-paragraphs">
-                  {(openStory.text || []).map((line, i) => (
+                  {openStory.text.map((line, i) => (
                     <p key={i} className="story-line">{bidiNodes(line)}</p>
                   ))}
                 </div>
