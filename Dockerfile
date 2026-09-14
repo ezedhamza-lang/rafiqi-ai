@@ -21,7 +21,11 @@ COPY backend/ .
 COPY backend/src/assets/fonts /usr/local/share/fonts/rafiqi
 RUN fc-cache -f
 
-COPY frontend/dist /app/frontend/dist
+# Build frontend
+COPY frontend/package*.json ./frontend/
+RUN cd frontend && npm install --include=dev --no-audit --no-fund
+COPY frontend/ ./frontend/
+RUN cd frontend && npm run build
 
 EXPOSE 3001
 
