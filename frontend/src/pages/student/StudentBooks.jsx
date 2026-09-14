@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api/client.js';
 import Book3DViewer from './Book3DViewer.jsx';
+import PDFBookViewer from './PDFBookViewer.jsx';
 import LessonViewer from '../../components/LessonViewer.jsx';
 import { useI18n } from '../../i18n/index.jsx';
 import { useStudentLevel } from '../../hooks/useStudentLevel.js';
@@ -36,6 +37,7 @@ export default function StudentBooks() {
   const [activeGrade, setActiveGrade] = useState('all');
   const [openBook, setOpenBook] = useState(null);
   const [openScanBook, setOpenScanBook] = useState(null);
+  const [openPdfBook, setOpenPdfBook] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -134,6 +136,15 @@ export default function StudentBooks() {
                       {t('studentSpace.books.browseBook')}
                     </button>
                   )}
+                  {book.hasPDF && (
+                    <button
+                      className="btn btn-primary btn-sm"
+                      onClick={() => setOpenPdfBook(book)}
+                    >
+                      <span className="material-icons" style={{ fontSize: '16px' }}>picture_as_pdf</span>
+                      {t('studentSpace.books.browseBook')}
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
@@ -143,6 +154,7 @@ export default function StudentBooks() {
 
       {openBook && <LessonViewer book={openBook} onClose={() => setOpenBook(null)} />}
       {openScanBook && <Book3DViewer book={openScanBook} onClose={() => setOpenScanBook(null)} />}
+      {openPdfBook && <PDFBookViewer book={openPdfBook} onClose={() => setOpenPdfBook(null)} />}
     </div>
   );
 }

@@ -1,19 +1,10 @@
 {
   "title": "Mon Cahier de Français",
-  "subtitle": "كتاب الفرنسية — السنة الثانية ابتدائي — 122 صفحة",
+  "subtitle": "كتاب الفرنسية — السنة الثانية ابتدائي",
   "color": "#E91E63",
   "icon": "🇫🇷",
-  "imageBase": "/assets/books/y2french/",
-  "imageExt": ".webp",
+  "pdfUrl": "/assets/books/y2french.pdf",
   "totalPages": 122,
-  "hasImages": true,
-  "units": [
-    { "id": "cover", "title": "الغلاف", "icon": "📕", "color": "#E91E63", "startPage": 1, "endPage": 3 },
-    { "id": "fu0", "title": "Bienvenue!", "titleAr": "مرحباً!", "icon": "👋", "color": "#FF9800", "startPage": 4, "endPage": 14, "sessions": 2 },
-    { "id": "fu1", "title": "L'école", "titleAr": "مدرستي", "icon": "🏫", "color": "#4CAF50", "startPage": 15, "endPage": 36, "sessions": 5 },
-    { "id": "fu2", "title": "Ma famille", "titleAr": "عائلتي", "icon": "👨‍👩‍👧", "color": "#2196F3", "startPage": 37, "endPage": 58, "sessions": 5 },
-    { "id": "fu3", "title": "De la tête aux pieds", "titleAr": "من الرأس إلى القدمين", "icon": "🧒", "color": "#9C27B0", "startPage": 59, "endPage": 88, "sessions": 7 },
-    { "id": "fu4", "title": "Peux-tu m'aider?", "titleAr": "هل يمكنك مساعدتي؟", "icon": "🤝", "color": "#F44336", "startPage": 89, "endPage": 116, "sessions": 7 },
-    { "id": "fba", "title": "Bilans — Mon train", "titleAr": "تقييمات — قطاري", "icon": "🚂", "color": "#795548", "startPage": 117, "endPage": 122, "sessions": 3 }
-  ]
+  "hasImages": false,
+  "hasPDF": true
 }

@@ -150,7 +150,9 @@ function listBooks(country) {
         imageExt: book.imageExt || '.jpg',
         totalPages: book.totalPages,
         units: (book.units || []).map((u) => ({ id: u.id, title: u.title, icon: u.icon, color: u.color, startPage: u.startPage, endPage: u.endPage })),
-        hasImages: !!book.scanReady || !!book.hasImages || (book.imageBase ? (fs.existsSync(path.join(UPLOADS_DIR, 'assets', 'books', book.imageBase.replace('/assets/books/', ''))) || fs.existsSync(path.join(__dirname, '../../frontend/public/assets/books', book.imageBase.replace('/assets/books/', '')))) : false)
+        hasImages: !!book.scanReady || !!book.hasImages || (book.imageBase ? (fs.existsSync(path.join(UPLOADS_DIR, 'assets', 'books', book.imageBase.replace('/assets/books/', ''))) || fs.existsSync(path.join(__dirname, '../../frontend/public/assets/books', book.imageBase.replace('/assets/books/', '')))) : false),
+        hasPDF: !!book.hasPDF,
+        pdfUrl: book.pdfUrl || null
       });
     }
   }
