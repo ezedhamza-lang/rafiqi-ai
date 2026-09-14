@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api/client.js';
-import BookViewer from './BookViewer.jsx';
+import Book3DViewer from './Book3DViewer.jsx';
 import LessonViewer from '../../components/LessonViewer.jsx';
 import { useI18n } from '../../i18n/index.jsx';
 import { useStudentLevel } from '../../hooks/useStudentLevel.js';
@@ -142,7 +142,7 @@ export default function StudentBooks() {
       )}
 
       {openBook && <LessonViewer book={openBook} onClose={() => setOpenBook(null)} />}
-      {openScanBook && <BookViewer book={openScanBook} onClose={() => setOpenScanBook(null)} />}
+      {openScanBook && <Book3DViewer book={openScanBook} onClose={() => setOpenScanBook(null)} />}
     </div>
   );
 }
