@@ -1,0 +1,58 @@
+{
+  "title": "كتاب الرياضيات — السنة الثانية",
+  "subtitle": "كتاب التلميذ الرسمي — 128 صفحة",
+  "imageBase": "/assets/books/y2math/",
+  "imageExt": ".webp",
+  "totalPages": 128,
+  "hasImages": true,
+  "units": [
+    {
+      "id": "cover",
+      "title": "الغلاف",
+      "icon": "📘",
+      "color": "#233863",
+      "startPage": 1,
+      "endPage": 3
+    },
+    {
+      "id": "p1",
+      "title": "الفترة 1",
+      "icon": "1️⃣",
+      "color": "#4CAF50",
+      "startPage": 4,
+      "endPage": 32
+    },
+    {
+      "id": "p2",
+      "title": "الفترة 2",
+      "icon": "2️⃣",
+      "color": "#2196F3",
+      "startPage": 33,
+      "endPage": 58
+    },
+    {
+      "id": "p3",
+      "title": "الفترة 3",
+      "icon": "3️⃣",
+      "color": "#FF9800",
+      "startPage": 59,
+      "endPage": 88
+    },
+    {
+      "id": "p4",
+      "title": "الفترة 4",
+      "icon": "4️⃣",
+      "color": "#F44336",
+      "startPage": 89,
+      "endPage": 112
+    },
+    {
+      "id": "p5",
+      "title": "الفترة 5",
+      "icon": "5️⃣",
+      "color": "#9C27B0",
+      "startPage": 113,
+      "endPage": 128
+    }
+  ]
+}

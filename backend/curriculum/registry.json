@@ -168,6 +168,21 @@
           "adapter": "math"
         },
         {
+          "id": "math-rasmi",
+          "subjectKey": "رياضيات",
+          "title": "كتاب الرياضيات — الكتاب الرسمي س2",
+          "aliases": [
+            "الكتاب الرسمي رياضيات",
+            "كتاب الرياضيات الرسمي",
+            "math-rasmi",
+            "rasmi"
+          ],
+          "bookFile": "math-book.json",
+          "lessonsFile": null,
+          "skillsMapFile": null,
+          "adapter": "math"
+        },
+        {
           "id": "anisi",
           "title": "قراءة",
           "aliases": [
