@@ -1,17 +1,20 @@
 {
   "title": "Mon Cahier de Français",
-  "subtitle": "كراسي في الفرنسية — السنة الثانية ابتدائي",
+  "subtitle": "كتاب الفرنسية — السنة الثانية ابتدائي — 144 صفحة",
   "color": "#E91E63",
   "icon": "🇫🇷",
-  "totalPages": 120,
+  "imageBase": "/assets/books/y2french/",
+  "imageExt": ".webp",
+  "totalPages": 144,
+  "hasImages": true,
   "units": [
-    { "id": "fu0", "title": "Bienvenue!", "titleAr": "مرحباً!", "icon": "👋", "color": "#FF9800", "startPage": 1, "endPage": 10, "sessions": 2 },
-    { "id": "fu1", "title": "L'école", "titleAr": "مدرستي", "icon": "🏫", "color": "#4CAF50", "startPage": 11, "endPage": 30, "sessions": 5 },
-    { "id": "fu2", "title": "Ma famille", "titleAr": "عائلتي", "icon": "👨‍👩‍👧", "color": "#2196F3", "startPage": 31, "endPage": 50, "sessions": 5 },
-    { "id": "fu3", "title": "De la tête aux pieds", "titleAr": "من الرأس إلى القدمين", "icon": "🧒", "color": "#9C27B0", "startPage": 51, "endPage": 80, "sessions": 7 },
-    { "id": "fu4", "title": "Peux-tu m'aider?", "titleAr": "هل يمكنك مساعدتي؟", "icon": "🤝", "color": "#F44336", "startPage": 81, "endPage": 110, "sessions": 7 },
-    { "id": "fba1", "title": "Bilan 1 — Mon train", "titleAr": "تقييم 1 — قطاري", "icon": "🚂", "color": "#795548", "startPage": 111, "endPage": 114, "sessions": 1 },
-    { "id": "fba2", "title": "Bilan 2 — Mon train", "titleAr": "تقييم 2 — قطاري", "icon": "🚂", "color": "#795548", "startPage": 115, "endPage": 117, "sessions": 1 },
-    { "id": "fba3", "title": "Bilan 3 — Mon train", "titleAr": "تقييم 3 — قطاري", "icon": "🚂", "color": "#795548", "startPage": 118, "endPage": 120, "sessions": 1 }
+    { "id": "fu0", "title": "Bienvenue!", "titleAr": "مرحباً!", "icon": "👋", "color": "#FF9800", "startPage": 1, "endPage": 12, "sessions": 2 },
+    { "id": "fu1", "title": "L'école", "titleAr": "مدرستي", "icon": "🏫", "color": "#4CAF50", "startPage": 13, "endPage": 38, "sessions": 5 },
+    { "id": "fu2", "title": "Ma famille", "titleAr": "عائلتي", "icon": "👨‍👩‍👧", "color": "#2196F3", "startPage": 39, "endPage": 62, "sessions": 5 },
+    { "id": "fu3", "title": "De la tête aux pieds", "titleAr": "من الرأس إلى القدمين", "icon": "🧒", "color": "#9C27B0", "startPage": 63, "endPage": 100, "sessions": 7 },
+    { "id": "fu4", "title": "Peux-tu m'aider?", "titleAr": "هل يمكنك مساعدتي؟", "icon": "🤝", "color": "#F44336", "startPage": 101, "endPage": 135, "sessions": 7 },
+    { "id": "fba1", "title": "Bilan 1 — Mon train", "titleAr": "تقييم 1 — قطاري", "icon": "🚂", "color": "#795548", "startPage": 136, "endPage": 139, "sessions": 1 },
+    { "id": "fba2", "title": "Bilan 2 — Mon train", "titleAr": "تقييم 2 — قطاري", "icon": "🚂", "color": "#795548", "startPage": 140, "endPage": 142, "sessions": 1 },
+    { "id": "fba3", "title": "Bilan 3 — Mon train", "titleAr": "تقييم 3 — قطاري", "icon": "🚂", "color": "#795548", "startPage": 143, "endPage": 144, "sessions": 1 }
   ]
 }
