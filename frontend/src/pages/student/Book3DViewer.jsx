@@ -4,15 +4,14 @@ import { imgSrc } from '../../utils/imgSrc';
 
 function pageUrl(base, ext, page) {
   const num = String(page).padStart(3, '0');
-  return `${base}page-${num}${ext || '.webp'}`;
+  return `${base}page-${num}${ext || '.png'}`;
 }
 
 export default function Book3DViewer({ book, onClose }) {
   const { t } = useI18n();
   const [page, setPage] = useState(1);
-  const [turning, setTurning] = useState(null); // 'next' | 'prev' | null
+  const [turning, setTurning] = useState(null);
   const [zoom, setZoom] = useState(1);
-  const [full, setFull] = useState(true);
   const total = book.totalPages || 0;
   const sceneRef = useRef(null);
 
@@ -24,7 +23,7 @@ export default function Book3DViewer({ book, onClose }) {
     setTimeout(() => {
       setPage(target);
       setTimeout(() => setTurning(null), 50);
-    }, 400);
+    }, 450);
   }, [page, total, turning]);
 
   useEffect(() => {
@@ -37,142 +36,124 @@ export default function Book3DViewer({ book, onClose }) {
     return () => window.removeEventListener('keydown', onKey);
   }, [page, go, onClose]);
 
+  // Touch / swipe support
+  const touchRef = useRef({ startX: 0, moved: false });
+  const onTouchStart = (e) => {
+    touchRef.current = { startX: e.touches[0].clientX, moved: false };
+  };
+  const onTouchEnd = (e) => {
+    const dx = e.changedTouches[0].clientX - touchRef.current.startX;
+    if (Math.abs(dx) > 50) {
+      if (dx < 0) go(page + 1);
+      else go(page - 1);
+    }
+  };
+
   const prevSrc = pageUrl(book.imageBase, book.imageExt, Math.max(1, page - 1));
   const currSrc = pageUrl(book.imageBase, book.imageExt, page);
   const nextSrc = pageUrl(book.imageBase, book.imageExt, Math.min(total, page + 1));
 
   return (
-    <div className={`modal-overlay${full ? ' viewer-full-overlay' : ''}`} onClick={onClose}>
-      <div className={`modal book3d-modal${full ? ' viewer-full' : ''}`} onClick={(e) => e.stopPropagation()}>
-        {/* Header */}
-        <div className="modal-head">
+    <div className="book3d-fullscreen" onClick={onClose}>
+      {/* Top bar */}
+      <div className="book3d-topbar">
+        <div className="book3d-topbar-left">
+          <span className="material-icons" style={{ color: book.color || '#E91E63', fontSize: 28 }}>auto_stories</span>
           <div>
-            <h3 style={{ color: book.color || '#E91E63' }}>{book.title}</h3>
-            <p className="viewer-sub">{book.subtitle}</p>
-          </div>
-          <div style={{ display: 'flex', gap: '0.4rem' }}>
-            <button className="btn btn-ghost btn-sm" onClick={() => setFull(v => !v)}>
-              <span className="material-icons" style={{ fontSize: 18 }}>{full ? 'fullscreen_exit' : 'fullscreen'}</span>
-            </button>
-            <button className="btn btn-ghost btn-sm" onClick={onClose}>{t('common.close')}</button>
+            <h3 style={{ color: '#fff', margin: 0, fontSize: '1rem' }}>{book.title}</h3>
+            <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0, fontSize: '0.75rem' }}>{book.subtitle}</p>
           </div>
         </div>
-
-        {/* 3D Book Scene */}
-        <div className="book3d-scene" ref={sceneRef}>
-          <div className="book3d-wrapper" style={{ transform: `scale(${zoom})` }}>
-            {/* Book Body */}
-            <div className="book3d-book">
-              {/* Spine */}
-              <div className="book3d-spine" style={{ background: book.color || '#E91E63' }}>
-                <span className="book3d-spine-title">{book.title}</span>
-              </div>
-
-              {/* Left Page (back of previous) */}
-              <div className="book3d-page book3d-page-left">
-                {page > 1 && (
-                  <img
-                    src={imgSrc(prevSrc)}
-                    alt=""
-                    draggable={false}
-                    decoding="async"
-                  />
-                )}
-              </div>
-
-              {/* Right Page (current) */}
-              <div className="book3d-page book3d-page-right">
-                <img
-                  key={currSrc}
-                  src={imgSrc(currSrc)}
-                  alt={`${book.title} — ${page}`}
-                  draggable={false}
-                  decoding="async"
-                />
-              </div>
-
-              {/* Turning page overlay */}
-              {turning && (
-                <div className={`book3d-turning book3d-turning-${turning}`}>
-                  <div className="book3d-turn-front">
-                    <img
-                      src={imgSrc(turning === 'next' ? currSrc : nextSrc)}
-                      alt=""
-                      draggable={false}
-                      decoding="async"
-                    />
-                  </div>
-                  <div className="book3d-turn-back">
-                    <img
-                      src={imgSrc(turning === 'next' ? nextSrc : currSrc)}
-                      alt=""
-                      draggable={false}
-                      decoding="async"
-                    />
-                  </div>
-                </div>
-              )}
-
-              {/* Book cover overlay (first page) */}
-              {page === 1 && !turning && (
-                <div className="book3d-cover-edge" style={{ borderColor: book.color || '#E91E63' }} />
-              )}
-            </div>
-          </div>
-
-          {/* Navigation arrows */}
-          <button
-            className="book3d-nav book3d-nav-right"
-            disabled={page >= total || !!turning}
-            onClick={() => go(page + 1)}
-            title={t('studentSpace.bookViewer.next')}
-          >
-            <span className="material-icons">chevron_left</span>
+        <div className="book3d-topbar-right">
+          <button className="book3d-topbtn" onClick={(e) => { e.stopPropagation(); go(1); }} disabled={page <= 1}>
+            <span className="material-icons">first_page</span>
           </button>
-          <button
-            className="book3d-nav book3d-nav-left"
-            disabled={page <= 1 || !!turning}
-            onClick={() => go(page - 1)}
-            title={t('studentSpace.bookViewer.prev')}
-          >
-            <span className="material-icons">chevron_right</span>
-          </button>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="viewer-nav">
-          <button className="btn btn-ghost btn-sm" disabled={page <= 1 || !!turning} onClick={() => go(page - 1)}>
-            <span className="material-icons" style={{ fontSize: 18 }}>chevron_right</span>
-            {t('studentSpace.bookViewer.prev')}
-          </button>
-          <div className="viewer-zoom">
-            <button className="btn btn-ghost btn-sm" onClick={() => setZoom(z => Math.max(0.5, z - 0.15))} disabled={zoom <= 0.5}>
-              <span className="material-icons" style={{ fontSize: 18 }}>remove</span>
-            </button>
-            <button className="btn btn-ghost btn-sm" onClick={() => setZoom(1)}>
-              {Math.round(zoom * 100)}%
-            </button>
-            <button className="btn btn-ghost btn-sm" onClick={() => setZoom(z => Math.min(2, z + 0.15))} disabled={zoom >= 2}>
-              <span className="material-icons" style={{ fontSize: 18 }}>add</span>
-            </button>
-          </div>
-          <div className="viewer-pages">
-            <span>{t('studentSpace.bookViewer.page')}</span>
+          <div className="book3d-pagecounter">
             <input
               type="number"
               min={1}
               max={total}
               value={page}
-              onChange={(e) => go(Number(e.target.value) || 1)}
-              className="viewer-page-input"
+              onChange={(e) => { e.stopPropagation(); go(Number(e.target.value) || 1); }}
+              onClick={(e) => e.stopPropagation()}
+              className="book3d-pageinput"
             />
             <span>/ {total}</span>
           </div>
-          <button className="btn btn-primary btn-sm" disabled={page >= total || !!turning} onClick={() => go(page + 1)}>
-            {t('studentSpace.bookViewer.next')}
-            <span className="material-icons" style={{ fontSize: 18 }}>chevron_left</span>
+          <button className="book3d-topbtn" onClick={(e) => { e.stopPropagation(); go(total); }} disabled={page >= total}>
+            <span className="material-icons">last_page</span>
+          </button>
+          <div className="book3d-sep" />
+          <button className="book3d-topbtn" onClick={(e) => { e.stopPropagation(); setZoom(z => Math.max(0.5, z - 0.15)); }} disabled={zoom <= 0.5}>
+            <span className="material-icons">zoom_out</span>
+          </button>
+          <span className="book3d-zoom-label">{Math.round(zoom * 100)}%</span>
+          <button className="book3d-topbtn" onClick={(e) => { e.stopPropagation(); setZoom(z => Math.min(2.5, z + 0.15)); }} disabled={zoom >= 2.5}>
+            <span className="material-icons">zoom_in</span>
+          </button>
+          <button className="book3d-topbtn" onClick={(e) => { e.stopPropagation(); setZoom(1); }}>
+            <span className="material-icons">restart_alt</span>
+          </button>
+          <div className="book3d-sep" />
+          <button className="book3d-topbtn book3d-close" onClick={onClose}>
+            <span className="material-icons">close</span>
           </button>
         </div>
+      </div>
+
+      {/* 3D Book Scene — fullscreen */}
+      <div
+        className="book3d-scene"
+        ref={sceneRef}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="book3d-wrapper" style={{ transform: `scale(${zoom})` }}>
+          <div className="book3d-book">
+            {/* Spine */}
+            <div className="book3d-spine" style={{ background: book.color || '#E91E63' }}>
+              <span className="book3d-spine-title">{book.title}</span>
+            </div>
+
+            {/* Left Page */}
+            <div className="book3d-page book3d-page-left">
+              {page > 1 && (
+                <img src={imgSrc(prevSrc)} alt="" draggable={false} decoding="async" />
+              )}
+            </div>
+
+            {/* Right Page */}
+            <div className="book3d-page book3d-page-right">
+              <img key={currSrc} src={imgSrc(currSrc)} alt={`${book.title} — ${page}`} draggable={false} decoding="async" />
+            </div>
+
+            {/* Turning page */}
+            {turning && (
+              <div className={`book3d-turning book3d-turning-${turning}`}>
+                <div className="book3d-turn-front">
+                  <img src={imgSrc(turning === 'next' ? currSrc : nextSrc)} alt="" draggable={false} decoding="async" />
+                </div>
+                <div className="book3d-turn-back">
+                  <img src={imgSrc(turning === 'next' ? nextSrc : currSrc)} alt="" draggable={false} decoding="async" />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Arrow buttons */}
+        <button className="book3d-arrow book3d-arrow-right" disabled={page >= total || !!turning} onClick={(e) => { e.stopPropagation(); go(page + 1); }}>
+          <span className="material-icons">chevron_left</span>
+        </button>
+        <button className="book3d-arrow book3d-arrow-left" disabled={page <= 1 || !!turning} onClick={(e) => { e.stopPropagation(); go(page - 1); }}>
+          <span className="material-icons">chevron_right</span>
+        </button>
+      </div>
+
+      {/* Progress bar */}
+      <div className="book3d-progress" onClick={(e) => e.stopPropagation()}>
+        <div className="book3d-progress-fill" style={{ width: `${(page / total) * 100}%`, background: book.color || '#E91E63' }} />
       </div>
     </div>
   );
