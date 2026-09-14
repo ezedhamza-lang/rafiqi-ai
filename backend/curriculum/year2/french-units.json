@@ -1,0 +1,1809 @@
+{
+  "f01": {
+    "id": "f01",
+    "unitId": "fu0",
+    "num": 1,
+    "title": "Sensibilisation",
+    "titleAr": "التعارف",
+    "period": 1,
+    "icon": "👋",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "2"
+    },
+    "studentBlocks": [
+      {
+        "kind": "concept",
+        "section": "intro",
+        "title": "🎉 Bienvenue!",
+        "text": "مرحباً! أنا Lina 👧\nمرحباً! أنا Yassine 👦\nمرحباً! أنا Ours Brun 🐻\nمرحباً! أنا La petite poule rousse 🐔\n\nمعاً سنستمع، نكرر، نغني، نلعب… ونتعلم الفرنسية!"
+      },
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Bonjour",
+            "meaning": "مرحباً"
+          },
+          {
+            "word": "Salut",
+            "meaning": "أهلاً"
+          },
+          {
+            "word": "Merci",
+            "meaning": "شكراً"
+          },
+          {
+            "word": "Bravo",
+            "meaning": "أحسنت"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Bonjour ! Je m'appelle Lina.\"\nYassine: \"Bonjour, Lina ! Moi, c'est Yassine.\"\nOurs Brun: \"Bonjour ! Comment tu t'appelles ?\"\nLina: \"Je m'appelle Lina. Comment ça va ?\"\nYassine: \"Ça va bien, merci !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Bonjour mes amis**\n\nBonjour mes amis, comment ça va ?\nÇa va bien, ça va mal,\nÇa va comme ci comme ça.\nBonjour mes amis, comment ça va ?\n\nSalut mes amis, comment ça va ?\nÇa va bien, ça va mal,\nSalut mes amis, comment ça va ?\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: [ɔ̃] و [u]\n\nهل تسمع [ɔ̃] في \"bonjour\"؟ هل تسمع [u] في \"bonjour\"?\n\nكرر: bon-jour 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Je m'entraîne !",
+        "text": "Entoure les mots magiques du bonjour : bonjour, salut, merci, bravo.\n\nحُط دائرة حول كلمات السحر: 🔴 bonjour 🟡 salut 🟢 merci 🔵 bravo",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f02": {
+    "id": "f02",
+    "unitId": "fu0",
+    "num": 2,
+    "title": "Fille ou garçon",
+    "titleAr": "بنت ولا ولد؟",
+    "period": 1,
+    "icon": "👧",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "4"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Fille",
+            "meaning": "بنت"
+          },
+          {
+            "word": "Garçon",
+            "meaning": "ولد"
+          },
+          {
+            "word": "Debout",
+            "meaning": "واقف"
+          },
+          {
+            "word": "Assis",
+            "meaning": "جالس"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Yassine: \"Je suis un garçon.\"\nLina: \"Et moi, je suis une fille.\"\nOurs Brun: \"Debout ! Assis ! Les mains en l'air !\"\nLina: \"Haut ! Bas ! Toi et moi, on joue !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Comment tu t'appelles?**\n\nComment tu t'appelles ?\nJe m'appelle Camille.\nEs-tu un garçon ?\nNon ! je suis une fille !\n\nComment tu t'appelles ?\nJe m'appelle Léon.\nEs-tu une fille ?\nNon ! je suis un garçon !\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: [i] و [wa]\n\nكرر: fille, fille… i-i-i!\nMoi, toi… wa-wa-wa! 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Je m'entraîne !",
+        "text": "Entoure les filles en rose et les garçons en bleu.\nPuis entoure \"debout\" et barre \"assis\".\n\n🟢 = بنت (fille) | 🔵 = ولد (garçon)",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f03": {
+    "id": "f03",
+    "unitId": "fu1",
+    "num": 1,
+    "title": "La rentrée",
+    "titleAr": "العودة للمدرسة",
+    "period": 2,
+    "icon": "🏫",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "2"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "L'école",
+            "meaning": "المدرسة"
+          },
+          {
+            "word": "La cour",
+            "meaning": "الساحة"
+          },
+          {
+            "word": "Le préau",
+            "meaning": "المظلة"
+          },
+          {
+            "word": "Le ballon",
+            "meaning": "الكرة"
+          },
+          {
+            "word": "Rouge",
+            "meaning": "أحمر"
+          },
+          {
+            "word": "Bleu",
+            "meaning": "أزرق"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"C'est la rentrée des classes !\"\nYassine: \"Vive la fête de l'école !\"\nOurs Brun: \"On chante, on dessine, on lit !\"\nLina: \"Regarde : le ballon est rouge !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**C'est la rentrée des classes**\n\nC'est la rentrée des classes,\nToute l'école est en fête,\nC'est la rentrée des classes,\nPour tous les enfants, c'est la fête !\n\nDans le préau de l'école,\nOn s'amuse et on rigole,\nOn retrouve ses copains\nEt tous ceux qu'on aime bien…\n\n— Chanson du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: [e] و [ɑ̃]\n\nكرر: école, école, é-e-e!\nEnfants, chanter… an-an-an! 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Je m'entraîne !",
+        "text": "Entoure les objets de l'école.\nourd les objets de l'école: 📚 livre ✏️ crayon 🎒 cartable",
+        "placeholder": "Écris ici / اكتب هنا"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Répète les couleurs",
+        "text": "Répète les couleurs:\nrouge 🔴 | bleu 🔵 | vert 🟢 | jaune 🟡 | orange 🟠 | rose 🩷 | violet 🟣",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f04": {
+    "id": "f04",
+    "unitId": "fu1",
+    "num": 2,
+    "title": "Mon école",
+    "titleAr": "مدرستي",
+    "period": 2,
+    "icon": "🏛️",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "4"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "La cour",
+            "meaning": "الساحة"
+          },
+          {
+            "word": "Le préau",
+            "meaning": "المظلة"
+          },
+          {
+            "word": "La salle de classe",
+            "meaning": "الفصل"
+          },
+          {
+            "word": "J'aime",
+            "meaning": "أحب"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Yassine: \"Voici mon école !\"\nLina: \"C'est la cour et le préau.\"\nOurs Brun: \"J'aime bien jouer dans la cour !\"\nYassine: \"Moi, j'aime beaucoup ma salle de classe.\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**C'est la rentrée**\n\nC'est la rentrée, c'est la rentrée,\nMais j'ai oublié\nLa moitié de mes livres,\nMes stylos, mes cahiers…\n\nC'est la rentrée, c'est la rentrée,\nMais où sont passés\nMes crayons, mon compas\nEt tout le tralala ?\n\n— Joseph Lafitte — chanson du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: [o]\n\nكرر: préau, bureau, stylo… o-o-o! 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Je m'entraîne !",
+        "text": "Aide l'élève à traverser la cour: trace le chemin jusqu'à l'école!\n\nساعد التلميذ عبور الساحة: ارسم الطريق إلى المدرسة! 🏫",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f05": {
+    "id": "f05",
+    "unitId": "fu1",
+    "num": 3,
+    "title": "Dans mon cartable",
+    "titleAr": "في حقيبتي",
+    "period": 2,
+    "icon": "🎒",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "6"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Le cartable",
+            "meaning": "الحقيبة"
+          },
+          {
+            "word": "Le livre",
+            "meaning": "الكتاب"
+          },
+          {
+            "word": "Le cahier",
+            "meaning": "الدفتر"
+          },
+          {
+            "word": "Le crayon",
+            "meaning": "القلم"
+          },
+          {
+            "word": "Le stylo",
+            "meaning": "القلم الحبر"
+          },
+          {
+            "word": "La règle",
+            "meaning": "المسطرة"
+          },
+          {
+            "word": "Les ciseaux",
+            "meaning": "المقص"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Dans mon cartable, il y a…\"\nYassine: \"Un livre, un cahier et un crayon !\"\nOurs Brun: \"Et moi, j'ai un stylo et une règle !\"\nLina: \"J'ai aussi des ciseaux !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Un, deux, trois**\n\nUn, deux, trois,\nNous irons au bois,\nQuatre, cinq, six,\nCueillir des cerises,\nSept, huit, neuf,\nDans mon panier neuf,\nDix, onze, douze,\nElles seront toutes rouges.\n\n— Comptine traditionnelle du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: [ɑ̃] و [ɔ̃]\n\nكرر: cartable… an-an-an!\nCrayon, compas… on-on-on! 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Relie chaque image",
+        "text": "Relie chaque image à son nom.\nاربط كل صورة باسمها:\n📚 livre | 📓 cahier | ✏️ crayon | 📏 règle",
+        "placeholder": "Écris ici / اكتب هنا"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Compte et entoure",
+        "text": "Compte et entoure le bon nombre.\nعد وحشر العدد الصحيح:",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f06": {
+    "id": "f06",
+    "unitId": "fu1",
+    "num": 4,
+    "title": "Dans ma trousse",
+    "titleAr": "في عُلّبتي",
+    "period": 2,
+    "icon": "✏️",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "8"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "La trousse",
+            "meaning": "العُلّبة"
+          },
+          {
+            "word": "La gomme",
+            "meaning": "الممحاة"
+          },
+          {
+            "word": "Le crayon",
+            "meaning": "القلم"
+          },
+          {
+            "word": "Le stylo",
+            "meaning": "القلم الحبر"
+          },
+          {
+            "word": "Un, deux, trois",
+            "meaning": "واحد، اثنان، ثلاثة"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Yassine: \"Dans ma trousse, il y a une gomme.\"\nLina: \"Et deux crayons et un stylo !\"\nOurs Brun: \"Un, deux, trois… j'ai trois cahiers !\"\nLina: \"C'est mon cartable. C'est ma trousse !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Les nombres**\n\nUn, deux, trois, quatre, cinq, six, sept, huit, neuf, dix !\n\nCompte avec Lina et Yassine :\nUn crayon, deux crayons, trois crayons…\n\nUne gomme, deux gommes…\n\nEt maintenant, compte avec tes doigts !\n\n— Jeu de comptage (nombres de 1 à 10 — guide officiel)"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: [a] و [ɔ]\n\nكرر: cartable, table… a-a-a!\nGomme… o-o-o! 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Compte tes doigts",
+        "text": "Compte tes doigts et répète les nombres de 1 à 10.\nعد أصابعك وكرر الأرقام من 1 إلى 10: 1️⃣2️⃣3️⃣4️⃣5️⃣6️⃣7️⃣8️⃣9️⃣🔟",
+        "placeholder": "Écris ici / اكتب هنا"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Repasse sur les mots",
+        "text": "Repasse sur les mots en pointillés: crayon, gomme, trousse. Puis écris-les!\nاعد كتابة الكلمات: ✏️ crayon | 🧽 gomme | 👝 trousse",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f07": {
+    "id": "f07",
+    "unitId": "fu1",
+    "num": 5,
+    "title": "À la récréation",
+    "titleAr": "في الاستراحة",
+    "period": 2,
+    "icon": "⚽",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "10"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Le ballon",
+            "meaning": "الكرة"
+          },
+          {
+            "word": "La corde",
+            "meaning": "الحبل"
+          },
+          {
+            "word": "Jouer",
+            "meaning": "يلعب"
+          },
+          {
+            "word": "La récréation",
+            "meaning": "الاستراحة"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Je joue au ballon !\"\nYassine: \"Moi, je joue avec la corde !\"\nOurs Brun: \"J'aime jouer à la cour ! C'est joli !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**La récréation**\n\nOn joue, on joue,\nDans la cour de l'école,\nOn joue, on joue,\nC'est la récréation !\n\nAvec le ballon,\nAvec la corde aussi,\nOn joue, on joue,\nC'est la fête ici !\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: [j] و [l]\n\nكرر: joue, joue… j-j-j!\nLina, Léon… l-l-l! 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Entoure les jeux",
+        "text": "Entoure les jeux de la récréation.\nحشر ألعاب الاستراحة: ⚽ ballon | 🪢 corde | 🎲 jeux",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f08": {
+    "id": "f08",
+    "unitId": "fu2",
+    "num": 1,
+    "title": "Ma famille",
+    "titleAr": "عائلتي",
+    "period": 3,
+    "icon": "👨‍👩‍👧",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "2"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "La famille",
+            "meaning": "العائلة"
+          },
+          {
+            "word": "Papa",
+            "meaning": "الأب"
+          },
+          {
+            "word": "Maman",
+            "meaning": "الأم"
+          },
+          {
+            "word": "Frère",
+            "meaning": "الأخ"
+          },
+          {
+            "word": "Soeur",
+            "meaning": "الأخت"
+          },
+          {
+            "word": "Grand-mère",
+            "meaning": "الجدة"
+          },
+          {
+            "word": "Grand-père",
+            "meaning": "الجد"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Voici ma famille ! C'est papa et maman.\"\nYassine: \"Et voici mon frère et ma soeur.\"\nOurs Brun: \"J'aime ma famille !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Ma famille**\n\nC'est papa, c'est maman,\nC'est mon frère, c'est ma soeur,\nC'est la famille, c'est la fête,\nJ'aime tout le monde, c'est mon coeur !\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: [f] و [m]\n\nكرر: famille, famille… f-f-f!\nMaman, maman… m-m-m! 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Relie chaque membre",
+        "text": "Relie chaque membre de la famille à son nom.\nاربط كل فرد من العائلة باسمه:\n👨 papa | 👩 maman | 👦 frère | 👧 soeur",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f09": {
+    "id": "f09",
+    "unitId": "fu2",
+    "num": 2,
+    "title": "J'aime papa, j'aime maman",
+    "titleAr": "أحب الأب، أحب الأم",
+    "period": 3,
+    "icon": "❤️",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "4"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "J'aime",
+            "meaning": "أحب"
+          },
+          {
+            "word": "Papa",
+            "meaning": "الأب"
+          },
+          {
+            "word": "Maman",
+            "meaning": "الأم"
+          },
+          {
+            "word": "Je t'aime",
+            "meaning": "أحبك"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"J'aime papa ! Il est gentil.\"\nYassine: \"J'aime maman ! Elle est douce.\"\nOurs Brun: \"J'aime papa et maman !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**J'aime papa, j'aime maman**\n\nJ'aime papa, j'aime maman,\nJ'aime mon frère et ma soeur,\nJ'aime toute ma famille,\nC'est la plus belle au monde !\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: [p] و [d]\n\nكرر: papa, papa… p-p-p!\nPapa, papa… d-d-d! 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Colorie les coeurs",
+        "text": "Colorie les coeurs pour montrer qui tu aimes.\nالون القلوب لتظهر من تحبهم: ❤️ Papa | ❤️ Maman | ❤️ Frère | ❤️ Soeur",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f10": {
+    "id": "f10",
+    "unitId": "fu2",
+    "num": 3,
+    "title": "Mes jouets",
+    "titleAr": "ألعابي",
+    "period": 3,
+    "icon": "🧸",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "6"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Le jouet",
+            "meaning": "اللعبة"
+          },
+          {
+            "word": "L'ours",
+            "meaning": "الدب"
+          },
+          {
+            "word": "La poupée",
+            "meaning": "الدمية"
+          },
+          {
+            "word": "Le ballon",
+            "meaning": "الكرة"
+          },
+          {
+            "word": "Le fou",
+            "meaning": "المهرج"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Regarde mon jouet ! C'est un ours.\"\nYassine: \"Moi, j'ai un ballon !\"\nOurs Brun: \"J'aime les jouets !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Mes jouets**\n\nJ'ai un ours, j'ai une poupée,\nJ'ai un ballon, j'ai tout !\nMes jouets, mes jouets,\nJe joue avec eux, c'est fun !\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: [ʒ] و [b]\n\nكرر: jouet, jouet… j-j-j!\nBallon, ballon… b-b-b! 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Relie le jouet",
+        "text": "Relie le jouet à son nom.\nاربط اللعبة باسمها:\n🧸 ours | 🎀 poupée | ⚽ ballon",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f11": {
+    "id": "f11",
+    "unitId": "fu2",
+    "num": 4,
+    "title": "Ma maison",
+    "titleAr": "بيتي",
+    "period": 3,
+    "icon": "🏠",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "8"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "La maison",
+            "meaning": "البيت"
+          },
+          {
+            "word": "La chambre",
+            "meaning": "غرفة النوم"
+          },
+          {
+            "word": "La cuisine",
+            "meaning": "المطبخ"
+          },
+          {
+            "word": "Le salon",
+            "meaning": "الصالون"
+          },
+          {
+            "word": "La salle de bain",
+            "meaning": "الحمام"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Voici ma maison ! Elle est grande.\"\nYassine: \"J'aime ma chambre.\"\nOurs Brun: \"Moi, j'aime la cuisine !\""
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: [m] و [z]\n\nكرر: maison, maison… m-m-m!\nMaison, maison… z-z-z! 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Relie la pièce",
+        "text": "Relie la pièce à son nom.\nاربط الغرفة باسمها:\n🏠 maison | 🛏️ chambre | 🍳 cuisine | 🛋️ salon",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f12": {
+    "id": "f12",
+    "unitId": "fu2",
+    "num": 5,
+    "title": "Ma chambre",
+    "titleAr": "غرفتي",
+    "period": 3,
+    "icon": "🛏️",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "10"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Le lit",
+            "meaning": "السرير"
+          },
+          {
+            "word": "La table",
+            "meaning": "الطاولة"
+          },
+          {
+            "word": "La chaise",
+            "meaning": "الكرسي"
+          },
+          {
+            "word": "L'armoire",
+            "meaning": "الخزانة"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Dans ma chambre, il y a un lit.\"\nYassine: \"Et une table et une chaise !\"\nOurs Brun: \"J'aime ma chambre !\""
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: [ʃ] و [l]\n\nكرر: chambre, chambre… ch-ch-ch!\nLit, lit… l-l-l! 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Colorie les objets",
+        "text": "Colorie les objets de ta chambre.\nالون أغراض غرفتك: 🛏️ lit | 🪑 chaise | 🪞 miroir",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f13": {
+    "id": "f13",
+    "unitId": "fu3",
+    "num": 1,
+    "title": "Mon visage",
+    "titleAr": "وجهي",
+    "period": 4,
+    "icon": "😊",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "2"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Les yeux",
+            "meaning": "العينان"
+          },
+          {
+            "word": "Le nez",
+            "meaning": "الأنف"
+          },
+          {
+            "word": "La bouche",
+            "meaning": "الفم"
+          },
+          {
+            "word": "Les oreilles",
+            "meaning": "الأذنان"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Regarde : les yeux !\"\nYassine: \"Oui, c'est les yeux !\"\nOurs Brun: \"C'est bien !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Mon visage**\n\nLes yeux, Le nez, La bouche, Les oreilles\n\nJe connais mon corps,\nDe la tête aux pieds !\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: Son du jour\n\nÉcoute et répète: Les yeux, Le nez, La bouche, Les oreilles 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Relie chaque partie",
+        "text": "Relie chaque partie du corps à son nom.\nاربط كل جسم باسمه: Les yeux = العينان | Le nez = الأنف | La bouche = الفم | Les oreilles = الأذنان",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f14": {
+    "id": "f14",
+    "unitId": "fu3",
+    "num": 2,
+    "title": "Mon corps (1)",
+    "titleAr": "جسمي (1)",
+    "period": 4,
+    "icon": "🧒",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "4"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "La tête",
+            "meaning": "الرأس"
+          },
+          {
+            "word": "Les bras",
+            "meaning": "الذراعان"
+          },
+          {
+            "word": "Les mains",
+            "meaning": "اليدان"
+          },
+          {
+            "word": "Les doigts",
+            "meaning": "الأصابع"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Regarde : la tête !\"\nYassine: \"Oui, c'est la tête !\"\nOurs Brun: \"C'est bien !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Mon corps (1)**\n\nLa tête, Les bras, Les mains, Les doigts\n\nJe connais mon corps,\nDe la tête aux pieds !\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: Son du jour\n\nÉcoute et répète: La tête, Les bras, Les mains, Les doigts 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Relie chaque partie",
+        "text": "Relie chaque partie du corps à son nom.\nاربط كل جسم باسمه: La tête = الرأس | Les bras = الذراعان | Les mains = اليدان | Les doigts = الأصابع",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f15": {
+    "id": "f15",
+    "unitId": "fu3",
+    "num": 3,
+    "title": "Mon corps (2)",
+    "titleAr": "جسمي (2)",
+    "period": 4,
+    "icon": "🦵",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "6"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Les jambes",
+            "meaning": "الساقان"
+          },
+          {
+            "word": "Les pieds",
+            "meaning": "القدمان"
+          },
+          {
+            "word": "Le ventre",
+            "meaning": "البطن"
+          },
+          {
+            "word": "Le dos",
+            "meaning": "الظهر"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Regarde : les jambes !\"\nYassine: \"Oui, c'est les jambes !\"\nOurs Brun: \"C'est bien !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Mon corps (2)**\n\nLes jambes, Les pieds, Le ventre, Le dos\n\nJe connais mon corps,\nDe la tête aux pieds !\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: Son du jour\n\nÉcoute et répète: Les jambes, Les pieds, Le ventre, Le dos 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Relie chaque partie",
+        "text": "Relie chaque partie du corps à son nom.\nاربط كل جسم باسمه: Les jambes = الساقان | Les pieds = القدمان | Le ventre = البطن | Le dos = الظهر",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f16": {
+    "id": "f16",
+    "unitId": "fu3",
+    "num": 4,
+    "title": "Moi je bouge (1)",
+    "titleAr": "أنا أتحرك (1)",
+    "period": 4,
+    "icon": "💃",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "8"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Je danse",
+            "meaning": "أرقص"
+          },
+          {
+            "word": "Je cours",
+            "meaning": "أركض"
+          },
+          {
+            "word": "Je saute",
+            "meaning": "أقفز"
+          },
+          {
+            "word": "Je marche",
+            "meaning": "أمشي"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Regarde : je danse !\"\nYassine: \"Oui, c'est je danse !\"\nOurs Brun: \"C'est bien !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Moi je bouge (1)**\n\nJe danse, Je cours, Je saute, Je marche\n\nJe connais mon corps,\nDe la tête aux pieds !\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: Son du jour\n\nÉcoute et répète: Je danse, Je cours, Je saute, Je marche 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Relie chaque partie",
+        "text": "Relie chaque partie du corps à son nom.\nاربط كل جسم باسمه: Je danse = أرقص | Je cours = أركض | Je saute = أقفز | Je marche = أمشي",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f17": {
+    "id": "f17",
+    "unitId": "fu3",
+    "num": 5,
+    "title": "Moi je bouge (2)",
+    "titleAr": "أنا أتحرك (2)",
+    "period": 4,
+    "icon": "🏃",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "10"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Je suis fatigué",
+            "meaning": "أنا متعب"
+          },
+          {
+            "word": "Je suis content",
+            "meaning": "أنا سعيد"
+          },
+          {
+            "word": "Je suis triste",
+            "meaning": "أنا حزين"
+          },
+          {
+            "word": "J'ai faim",
+            "meaning": "أنا جائع"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Regarde : je suis fatigué !\"\nYassine: \"Oui, c'est je suis fatigué !\"\nOurs Brun: \"C'est bien !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Moi je bouge (2)**\n\nJe suis fatigué, Je suis content, Je suis triste, J'ai faim\n\nJe connais mon corps,\nDe la tête aux pieds !\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: Son du jour\n\nÉcoute et répète: Je suis fatigué, Je suis content, Je suis triste, J'ai faim 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Relie chaque partie",
+        "text": "Relie chaque partie du corps à son nom.\nاربط كل جسم باسمه: Je suis fatigué = أنا متعب | Je suis content = أنا سعيد | Je suis triste = أنا حزين | J'ai faim = أنا جائع",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f18": {
+    "id": "f18",
+    "unitId": "fu3",
+    "num": 6,
+    "title": "Mon goûter (1)",
+    "titleAr": "وجبتي (1)",
+    "period": 4,
+    "icon": "🍎",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "12"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Le goûter",
+            "meaning": "الوجبة الخفيفة"
+          },
+          {
+            "word": "La pomme",
+            "meaning": "التفاحة"
+          },
+          {
+            "word": "Le pain",
+            "meaning": "الخبز"
+          },
+          {
+            "word": "L'eau",
+            "meaning": "الماء"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Regarde : le goûter !\"\nYassine: \"Oui, c'est le goûter !\"\nOurs Brun: \"C'est bien !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Mon goûter (1)**\n\nLe goûter, La pomme, Le pain, L'eau\n\nJe connais mon corps,\nDe la tête aux pieds !\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: Son du jour\n\nÉcoute et répète: Le goûter, La pomme, Le pain, L'eau 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Relie chaque partie",
+        "text": "Relie chaque partie du corps à son nom.\nاربط كل جسم باسمه: Le goûter = الوجبة الخفيفة | La pomme = التفاحة | Le pain = الخبز | L'eau = الماء",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f19": {
+    "id": "f19",
+    "unitId": "fu3",
+    "num": 7,
+    "title": "Mon goûter (2)",
+    "titleAr": "وجبتي (2)",
+    "period": 4,
+    "icon": "🥪",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "14"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "J'ai soif",
+            "meaning": "أنا عطشان"
+          },
+          {
+            "word": "J'aime",
+            "meaning": "أحب"
+          },
+          {
+            "word": "Je n'aime pas",
+            "meaning": "لا أحب"
+          },
+          {
+            "word": "C'est bon",
+            "meaning": "إنه لذيذ"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Regarde : j'ai soif !\"\nYassine: \"Oui, c'est j'ai soif !\"\nOurs Brun: \"C'est bien !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Mon goûter (2)**\n\nJ'ai soif, J'aime, Je n'aime pas, C'est bon\n\nJe connais mon corps,\nDe la tête aux pieds !\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: Son du jour\n\nÉcoute et répète: J'ai soif, J'aime, Je n'aime pas, C'est bon 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Relie chaque partie",
+        "text": "Relie chaque partie du corps à son nom.\nاربط كل جسم باسمه: J'ai soif = أنا عطشان | J'aime = أحب | Je n'aime pas = لا أحب | C'est bon = إنه لذيذ",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f20": {
+    "id": "f20",
+    "unitId": "fu4",
+    "num": 1,
+    "title": "Mes amis les animaux",
+    "titleAr": "أصدقائي الحيوانات",
+    "period": 5,
+    "icon": "🐾",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "2"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Le chat",
+            "meaning": "القط"
+          },
+          {
+            "word": "Le chien",
+            "meaning": "الكلب"
+          },
+          {
+            "word": "L'oiseau",
+            "meaning": "الطير"
+          },
+          {
+            "word": "Le poisson",
+            "meaning": "السمكة"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Le chat !\"\nYassine: \"Le chien !\"\nOurs Brun: \"C'est bien !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Mes amis les animaux**\n\nLe chat, Le chien, L'oiseau, Le poisson\n\nMes amis les animaux\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: Son du jour\n\nÉcoute et répète: Le chat, Le chien, L'oiseau, Le poisson 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Pratique",
+        "text": "Pratique: Mes amis les animaux.\n Le chat = القط | Le chien = الكلب | L'oiseau = الطير | Le poisson = السمكة",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f21": {
+    "id": "f21",
+    "unitId": "fu4",
+    "num": 2,
+    "title": "Qui veut m'aider ?",
+    "titleAr": "من يريد مساعدتي؟",
+    "period": 5,
+    "icon": "🙋",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "4"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Aider",
+            "meaning": "يساعد"
+          },
+          {
+            "word": "Oui",
+            "meaning": "نعم"
+          },
+          {
+            "word": "Non",
+            "meaning": "لا"
+          },
+          {
+            "word": "S'il te plaît",
+            "meaning": "من فضلك"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Aider !\"\nYassine: \"Oui !\"\nOurs Brun: \"C'est bien !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Qui veut m'aider ?**\n\nAider, Oui, Non, S'il te plaît\n\nQui veut m'aider ?\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: Son du jour\n\nÉcoute et répète: Aider, Oui, Non, S'il te plaît 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Pratique",
+        "text": "Pratique: Qui veut m'aider ?.\n Aider = يساعد | Oui = نعم | Non = لا | S'il te plaît = من فضلك",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f22": {
+    "id": "f22",
+    "unitId": "fu4",
+    "num": 3,
+    "title": "Pas moi ! Pas moi !",
+    "titleAr": "أنا لا! أنا لا!",
+    "period": 5,
+    "icon": "🙅",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "6"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Pas moi",
+            "meaning": "أنا لا"
+          },
+          {
+            "word": "Peux-tu ?",
+            "meaning": "هل يمكنك؟"
+          },
+          {
+            "word": "Je peux",
+            "meaning": "أستطيع"
+          },
+          {
+            "word": "Je ne peux pas",
+            "meaning": "لا أستطيع"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Pas moi !\"\nYassine: \"Peux-tu ? !\"\nOurs Brun: \"C'est bien !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Pas moi ! Pas moi !**\n\nPas moi, Peux-tu ?, Je peux, Je ne peux pas\n\nPas moi ! Pas moi !\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: Son du jour\n\nÉcoute et répète: Pas moi, Peux-tu ?, Je peux, Je ne peux pas 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Pratique",
+        "text": "Pratique: Pas moi ! Pas moi !.\n Pas moi = أنا لا | Peux-tu ? = هل يمكنك؟ | Je peux = أستطيع | Je ne peux pas = لا أستطيع",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f23": {
+    "id": "f23",
+    "unitId": "fu4",
+    "num": 4,
+    "title": "Je n'aime pas",
+    "titleAr": "لا أحب",
+    "period": 5,
+    "icon": "👎",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "8"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Je n'aime pas",
+            "meaning": "لا أحب"
+          },
+          {
+            "word": "J'aime",
+            "meaning": "أحب"
+          },
+          {
+            "word": "C'est dégueulasse",
+            "meaning": "إنه قذر"
+          },
+          {
+            "word": "C'est bon",
+            "meaning": "إنه لذيذ"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Je n'aime pas !\"\nYassine: \"J'aime !\"\nOurs Brun: \"C'est bien !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Je n'aime pas**\n\nJe n'aime pas, J'aime, C'est dégueulasse, C'est bon\n\nJe n'aime pas\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: Son du jour\n\nÉcoute et répète: Je n'aime pas, J'aime, C'est dégueulasse, C'est bon 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Pratique",
+        "text": "Pratique: Je n'aime pas.\n Je n'aime pas = لا أحب | J'aime = أحب | C'est dégueulasse = إنه قذر | C'est bon = إنه لذيذ",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f24": {
+    "id": "f24",
+    "unitId": "fu4",
+    "num": 5,
+    "title": "Bien sûr ! Bien sûr !",
+    "titleAr": "بالطبع! بالطبع!",
+    "period": 5,
+    "icon": "👍",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "10"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Bien sûr",
+            "meaning": "بالطبع"
+          },
+          {
+            "word": "Merci",
+            "meaning": "شكراً"
+          },
+          {
+            "word": "De rien",
+            "meaning": "عفواً"
+          },
+          {
+            "word": "Avec plaisir",
+            "meaning": "بكل سرور"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Bien sûr !\"\nYassine: \"Merci !\"\nOurs Brun: \"C'est bien !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Bien sûr ! Bien sûr !**\n\nBien sûr, Merci, De rien, Avec plaisir\n\nBien sûr ! Bien sûr !\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: Son du jour\n\nÉcoute et répète: Bien sûr, Merci, De rien, Avec plaisir 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Pratique",
+        "text": "Pratique: Bien sûr ! Bien sûr !.\n Bien sûr = بالطبع | Merci = شكراً | De rien = عفواً | Avec plaisir = بكل سرور",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f25": {
+    "id": "f25",
+    "unitId": "fu4",
+    "num": 6,
+    "title": "On partage",
+    "titleAr": "نتشارك",
+    "period": 5,
+    "icon": "🤝",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "12"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "Partager",
+            "meaning": "يتشارك"
+          },
+          {
+            "word": "Voici",
+            "meaning": "ها هو"
+          },
+          {
+            "word": "Tiens",
+            "meaning": "خُذ"
+          },
+          {
+            "word": "C'est pour toi",
+            "meaning": "إنه لك"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"Partager !\"\nYassine: \"Voici !\"\nOurs Brun: \"C'est bien !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**On partage**\n\nPartager, Voici, Tiens, C'est pour toi\n\nOn partage\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: Son du jour\n\nÉcoute et répète: Partager, Voici, Tiens, C'est pour toi 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Pratique",
+        "text": "Pratique: On partage.\n Partager = يتشارك | Voici = ها هو | Tiens = خُذ | C'est pour toi = إنه لك",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "f26": {
+    "id": "f26",
+    "unitId": "fu4",
+    "num": 7,
+    "title": "Mon album",
+    "titleAr": "ألبومي",
+    "period": 5,
+    "icon": "📸",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "14"
+    },
+    "studentBlocks": [
+      {
+        "kind": "vocabulary",
+        "section": "vocab",
+        "title": "📖 Les mots en images — الكلمات بالصور",
+        "words": [
+          {
+            "word": "L'album",
+            "meaning": "الألبوم"
+          },
+          {
+            "word": "La photo",
+            "meaning": "الصورة"
+          },
+          {
+            "word": "C'est moi",
+            "meaning": "أنا"
+          },
+          {
+            "word": "Je suis",
+            "meaning": "أنا"
+          }
+        ]
+      },
+      {
+        "kind": "concept",
+        "section": "dialogue",
+        "title": "🗣️ Je répète ! — أعيدها!",
+        "text": "Lina: \"L'album !\"\nYassine: \"La photo !\"\nOurs Brun: \"C'est bien !\""
+      },
+      {
+        "kind": "concept",
+        "section": "song",
+        "title": "🎵 La comptine — الأغنية",
+        "text": "**Mon album**\n\nL'album, La photo, C'est moi, Je suis\n\nMon album\n\n— Comptine du guide officiel"
+      },
+      {
+        "kind": "concept",
+        "section": "sound",
+        "title": "🔊 Le son du jour — صوت اليوم",
+        "text": "الصوت: Son du jour\n\nÉcoute et répète: L'album, La photo, C'est moi, Je suis 🗣️"
+      },
+      {
+        "kind": "question",
+        "section": "exercise",
+        "title": "✏️ Pratique",
+        "text": "Pratique: Mon album.\n L'album = الألبوم | La photo = الصورة | C'est moi = أنا | Je suis = أنا",
+        "placeholder": "Écris ici / اكتب هنا"
+      }
+    ]
+  },
+  "fb1": {
+    "id": "fb1",
+    "unitId": "fba1",
+    "num": 1,
+    "title": "Bilan 1 — Mon train",
+    "titleAr": "تقييم 1 — قطاري",
+    "period": 6,
+    "icon": "🚂",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "2"
+    },
+    "studentBlocks": [
+      {
+        "kind": "concept",
+        "section": "project",
+        "title": "🚂 Mon train — قطاري",
+        "text": "في كل تقييم، تبني عربة قطار جديدة!\n\nBilan 1: أضف عربة 1 إلى قطارك.\n\n⭐ - المستوى: أساسي"
+      },
+      {
+        "kind": "concept",
+        "section": "project",
+        "title": "📋 ما يجب أن أعرف",
+        "text": "بعد هذا التقييم، يجب أن أستطيع:\n• أن أعرف كلمات الوحدة\n• أن أتحدث بسيط\n• أن أغني أغنية الوحدة\n• أن أكتب بعض الكلمات"
+      }
+    ]
+  },
+  "fb2": {
+    "id": "fb2",
+    "unitId": "fba2",
+    "num": 1,
+    "title": "Bilan 2 — Mon train",
+    "titleAr": "تقييم 2 — قطاري",
+    "period": 7,
+    "icon": "🚂",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "2"
+    },
+    "studentBlocks": [
+      {
+        "kind": "concept",
+        "section": "project",
+        "title": "🚂 Mon train — قطاري",
+        "text": "في كل تقييم، تبني عربة قطار جديدة!\n\nBilan 2: أضف عربة 2 إلى قطارك.\n\n⭐⭐ - المستوى: أساسي + تطبيقي"
+      },
+      {
+        "kind": "concept",
+        "section": "project",
+        "title": "📋 ما يجب أن أعرف",
+        "text": "بعد هذا التقييم، يجب أن أستطيع:\n• أن أعرف كلمات الوحدة\n• أن أتحدث بسيط\n• أن أغني أغنية الوحدة\n• أن أكتب بعض الكلمات"
+      }
+    ]
+  },
+  "fb3": {
+    "id": "fb3",
+    "unitId": "fba3",
+    "num": 1,
+    "title": "Bilan 3 — Mon train",
+    "titleAr": "تقييم 3 — قطاري",
+    "period": 8,
+    "icon": "🚂",
+    "ready": true,
+    "officialRef": {
+      "source": "كتاب الفرنسية س2",
+      "pages": "2"
+    },
+    "studentBlocks": [
+      {
+        "kind": "concept",
+        "section": "project",
+        "title": "🚂 Mon train — قطاري",
+        "text": "في كل تقييم، تبني عربة قطار جديدة!\n\nBilan 3: أضف عربة 3 إلى قطارك.\n\n⭐⭐⭐ - المستوى: أساسي + تطبيقي + إتقاني"
+      },
+      {
+        "kind": "concept",
+        "section": "project",
+        "title": "📋 ما يجب أن أعرف",
+        "text": "بعد هذا التقييم، يجب أن أستطيع:\n• أن أعرف كلمات الوحدة\n• أن أتحدث بسيط\n• أن أغني أغنية الوحدة\n• أن أكتب بعض الكلمات"
+      }
+    ]
+  }
+}

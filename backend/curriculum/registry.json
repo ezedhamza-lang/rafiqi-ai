@@ -209,6 +209,21 @@
           "lessonsFile": "production-units.json",
           "skillsMapFile": "skills-map-production.json",
           "adapter": "production"
+        },
+        {
+          "id": "french",
+          "title": "Français — الفرنسية",
+          "aliases": [
+            "فرنسية",
+            "الفرنسية",
+            "french",
+            "français",
+            "french2"
+          ],
+          "bookFile": "french-book.json",
+          "lessonsFile": "french-units.json",
+          "skillsMapFile": null,
+          "adapter": "math"
         }
       ]
     },
