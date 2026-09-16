@@ -119,7 +119,7 @@ const PARENT_SPACE_CHILDREN = [
 const ROLE_NAV = {
   TEACHER: [
     { to: '/', icon: 'home', key: 'home' },
-    { to: '/teacher', icon: 'co_present', key: 'teacherSpace', children: TEACHER_SPACE_CHILDREN },
+    { to: '/teacher', icon: 'co_present', key: 'teacherSpace' },
     NOTIF_NAV,
     MESSAGES_NAV
   ],
