@@ -1,10 +1,12 @@
-import { useState, useEffect, useCallback , lazy, Suspense} from 'react';
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useI18n } from '../../i18n/index.jsx';
 import { api } from '../../api/client.js';
 import { Badge } from '../../components/ui/index.js';
 import { getHomePath } from '../../roles.js';
+import SpaceShell from '../../components/SpaceShell.jsx';
+
 const UnitAnalysis = lazy(() => import('./UnitAnalysis.jsx'));
 const Quizzes = lazy(() => import('./Quizzes.jsx'));
 const OfficialExams = lazy(() => import('./OfficialExams.jsx'));
@@ -30,6 +32,48 @@ const TeacherLessonProgress = lazy(() => import('./TeacherLessonProgress.jsx'));
 const TeacherNotes = lazy(() => import('./TeacherNotes.jsx'));
 const TeacherWorksheets = lazy(() => import('./TeacherWorksheets.jsx'));
 const ClassGrades = lazy(() => import('./ClassGrades.jsx'));
+
+const TEACHER_GROUPS = [
+  { label: 'الرئيسية', items: [
+    { to: '', end: true, icon: 'analytics', key: 'unitAnalysis', color: '#3b82f6' },
+  ] },
+  { label: 'التخطيط والإعداد', items: [
+    { to: 'lesson-plan', icon: 'calendar_month', key: 'lessonPlan', color: '#06b6d4' },
+    { to: 'plans', icon: 'event_note', key: 'annualPlans', color: '#0891b2' },
+    { to: 'memos', icon: 'description', key: 'memos', color: '#f59e0b' },
+    { to: 'schedules', icon: 'calendar_view_week', key: 'schedules', color: '#8b5cf6' },
+  ] },
+  { label: 'المواد والمحتوى', items: [
+    { to: 'class-subjects', icon: 'category', key: 'classSubjects', color: '#8b5cf6' },
+    { to: 'worksheets', icon: 'article', key: 'teacherWorksheets', color: '#a855f7' },
+    { to: 'resources', icon: 'folder_special', key: 'resources', color: '#ec4899' },
+    { to: 'library', icon: 'local_library', key: 'library', color: '#d946ef' },
+  ] },
+  { label: 'التقييم والاختبارات', items: [
+    { to: 'quizzes', icon: 'quiz', key: 'quizzes', color: '#ef4444' },
+    { to: 'assignments', icon: 'assignment', key: 'assignments', color: '#f97316' },
+    { to: 'exams', icon: 'fact_check', key: 'officialExams', color: '#dc2626' },
+    { to: 'correction', icon: 'grading', key: 'correction', color: '#f59e0b' },
+  ] },
+  { label: 'النتائج والتقارير', items: [
+    { to: 'results', icon: 'scoreboard', key: 'results', color: '#10b981' },
+    { to: 'averages', icon: 'percent', key: 'averages', color: '#14b8a6' },
+    { to: 'gradebook', icon: 'menu_book', key: 'gradebook', color: '#059669' },
+    { to: 'grades', icon: 'workspace_premium', key: 'classGrades', color: '#047857' },
+    { to: 'analytics', icon: 'monitoring', key: 'analyticsExport', color: '#3b82f6' },
+  ] },
+  { label: 'المتابعة والتقدم', items: [
+    { to: 'lesson-progress', icon: 'trending_up', key: 'lessonProgress', color: '#f59e0b' },
+    { to: 'notes', icon: 'rate_review', key: 'teacherNotes', color: '#8b5cf6' },
+    { to: 'attendance', icon: 'fact_check', key: 'attendance', color: '#10b981' },
+    { to: 'health', icon: 'favorite', key: 'health', color: '#ef4444' },
+  ] },
+  { label: 'الأدوات الذكية', items: [
+    { to: 'ai', icon: 'smart_toy', key: 'teacherAI', color: '#3b82f6' },
+    { to: 'live', icon: 'live_tv', key: 'live', color: '#22c55e' },
+    { to: 'suggestions', icon: 'lightbulb', key: 'suggestions', color: '#eab308' },
+  ] },
+];
 
 export default function TeacherDashboard() {
   const { user } = useAuth();
@@ -63,51 +107,53 @@ export default function TeacherDashboard() {
 
   return (
     <div className="teacher-space">
-      <div className="space-head">
-        <div>
-          <h2>{t('teacherSpace.title')}</h2>
-          <p className="sub">
-            {t('teacherSpace.welcome', { firstName: user.firstName, lastName: user.lastName, count: classes.length })}
-          </p>
+      <SpaceShell base="/teacher" title={t('teacherSpace.sidebarTitle') || 'فضاء الأستاذ'} storageKey="rafiqi-teacher-sidebar" sections={TEACHER_GROUPS}>
+        <div className="space-head">
+          <div>
+            <h2>{t('teacherSpace.title')}</h2>
+            <p className="sub">
+              {t('teacherSpace.welcome', { firstName: user.firstName, lastName: user.lastName, count: classes.length })}
+            </p>
+          </div>
+          <div className="space-stats">
+            <Badge variant="info" icon="quiz">{t('teacherSpace.quizCount', { n: quizCount })}</Badge>
+            <Badge variant="accent" icon="description">{t('teacherSpace.memoCount', { n: memoCount })}</Badge>
+          </div>
         </div>
-        <div className="space-stats">
-          <Badge variant="info" icon="quiz">{t('teacherSpace.quizCount', { n: quizCount })}</Badge>
-          <Badge variant="accent" icon="description">{t('teacherSpace.memoCount', { n: memoCount })}</Badge>
-        </div>
-      </div>
 
-      <div className="tab-content">
+        <div className="tab-content">
           <Suspense fallback={null}>
-          <Routes>
-            <Route index element={<UnitAnalysis classes={classes} />} />
-            <Route path="quizzes" element={<Quizzes classes={classes} onChanged={load} />} />
-            <Route path="assignments" element={<Assignments classes={classes} onChanged={load} />} />
-            <Route path="analytics" element={<Analytics classes={classes} onChanged={load} />} />
-            <Route path="exams" element={<OfficialExams classes={classes} />} />
-            <Route path="correction" element={<Correction />} />
-            <Route path="class-subjects" element={<ClassSubjects classes={classes} />} />
-            <Route path="results" element={<Results />} />
-            <Route path="averages" element={<Averages />} />
-            <Route path="gradebook" element={<TeacherGradebook />} />
-            <Route path="lesson-progress" element={<TeacherLessonProgress />} />
-            <Route path="notes" element={<TeacherNotes />} />
-            <Route path="memos" element={<Memos onChanged={load} />} />
-            <Route path="resources" element={<Resources />} />
-            <Route path="library" element={<Library />} />
-            <Route path="lesson-plan" element={<LessonPlan />} />
-            <Route path="plans" element={<AnnualPlans />} />
-            <Route path="attendance" element={<Attendance />} />
-            <Route path="health" element={<HealthRecords />} />
-            <Route path="ai" element={<TeacherAI />} />
-            <Route path="schedules" element={<Schedules classes={classes} />} />
-            <Route path="live" element={<LiveSessions />} />
-            <Route path="worksheets" element={<TeacherWorksheets />} />
-            <Route path="suggestions" element={<Suggestions />} />
-            <Route path="grades" element={<ClassGrades />} />
-            <Route path="*" element={<Navigate to="." replace />} />
-          </Routes>
-        </Suspense>
+            <Routes>
+              <Route index element={<UnitAnalysis classes={classes} />} />
+              <Route path="quizzes" element={<Quizzes classes={classes} onChanged={load} />} />
+              <Route path="assignments" element={<Assignments classes={classes} onChanged={load} />} />
+              <Route path="analytics" element={<Analytics classes={classes} onChanged={load} />} />
+              <Route path="exams" element={<OfficialExams classes={classes} />} />
+              <Route path="correction" element={<Correction />} />
+              <Route path="class-subjects" element={<ClassSubjects classes={classes} />} />
+              <Route path="results" element={<Results />} />
+              <Route path="averages" element={<Averages />} />
+              <Route path="gradebook" element={<TeacherGradebook />} />
+              <Route path="lesson-progress" element={<TeacherLessonProgress />} />
+              <Route path="notes" element={<TeacherNotes />} />
+              <Route path="memos" element={<Memos onChanged={load} />} />
+              <Route path="resources" element={<Resources />} />
+              <Route path="library" element={<Library />} />
+              <Route path="lesson-plan" element={<LessonPlan />} />
+              <Route path="plans" element={<AnnualPlans />} />
+              <Route path="attendance" element={<Attendance />} />
+              <Route path="health" element={<HealthRecords />} />
+              <Route path="ai" element={<TeacherAI />} />
+              <Route path="schedules" element={<Schedules classes={classes} />} />
+              <Route path="live" element={<LiveSessions />} />
+              <Route path="worksheets" element={<TeacherWorksheets />} />
+              <Route path="suggestions" element={<Suggestions />} />
+              <Route path="grades" element={<ClassGrades />} />
+              <Route path="*" element={<Navigate to="." replace />} />
+            </Routes>
+          </Suspense>
         </div>
+      </SpaceShell>
     </div>
   );
 }
