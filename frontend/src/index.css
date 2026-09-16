@@ -6410,11 +6410,11 @@ tr:hover td {
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sidebar);
-  padding: 0.5rem;
-  color: var(--sidebar-text);
-  transition: width .22s ease, flex-basis .22s ease;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,.25) transparent;
+   padding: 0.4rem;
+   color: var(--sidebar-text);
+   transition: width .22s ease, flex-basis .22s ease;
+   scrollbar-width: thin;
+   scrollbar-color: rgba(255,255,255,.25) transparent;
 }
 .student-sidebar.is-collapsed { flex-basis: 66px; width: 66px; }
 .student-sidebar-head {
@@ -6432,19 +6432,19 @@ tr:hover td {
 
 .student-nav-item {
   position: relative;
-  display: flex; align-items: center; gap: 0.65rem;
-  padding: 0.62rem 0.7rem; border-radius: 11px;
-  color: var(--sidebar-text); text-decoration: none; font-weight: 600; font-size: 0.92rem;
+  display: flex; align-items: center; gap: 0.55rem;
+  padding: 0.42rem 0.6rem; border-radius: 9px;
+  color: var(--sidebar-text); text-decoration: none; font-weight: 600; font-size: 0.84rem;
   background: var(--sidebar-surface);
   border: 1px solid transparent;
   transition: transform .2s cubic-bezier(.4,0,.2,1), background .2s ease, box-shadow .2s ease, border-color .2s ease;
 }
 .student-nav-item .nav-dot {
-  width: 9px; height: 9px; border-radius: 50%;
+  width: 8px; height: 8px; border-radius: 50%;
   background: var(--c, #fff); flex: none;
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c, #fff) 28%, transparent);
+  box-shadow: 0 0 0 2.5px color-mix(in srgb, var(--c, #fff) 28%, transparent);
 }
-.student-nav-item .nav-ico { font-size: 1.3rem; color: var(--c, #fff); flex: none; filter: drop-shadow(0 0 6px color-mix(in srgb, var(--c,#fff) 45%, transparent)); }
+.student-nav-item .nav-ico { font-size: 1.15rem; color: var(--c, #fff); flex: none; filter: drop-shadow(0 0 6px color-mix(in srgb, var(--c,#fff) 45%, transparent)); }
 .student-nav-item .nav-label { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--sidebar-text); }
 .student-nav-item:hover {
   transform: translateY(-2px);
@@ -6498,15 +6498,23 @@ tr:hover td {
 .lb-modal .ui-leaderboard { max-height: 60vh; overflow-y: auto; }
 
 /* --- Sidebar groups + lighter sidebar --- */
-.sidebar-group { display: flex; flex-direction: column; gap: 0.22rem; }
-.sidebar-group + .sidebar-group { margin-top: 0.7rem; }
+.sidebar-group { display: flex; flex-direction: column; gap: 0.18rem; }
+.sidebar-group + .sidebar-group { margin-top: 0.5rem; }
 .sidebar-group-label {
   font-size: 0.68rem; font-weight: 800; letter-spacing: .04em;
   color: var(--sidebar-muted); padding: 0.15rem 0.7rem 0.3rem; text-transform: none;
+  position: sticky; top: 0; z-index: 2;
+  background: var(--sidebar-bg);
 }
-.sidebar-group-sep { height: 1px; background: rgba(255,255,255,.14); margin: 0.35rem 8px; }
-.student-sidebar.is-light { box-shadow: 0 6px 18px rgba(2,6,23,.18); border-radius: 14px; }
+.sidebar-group-sep { height: 1px; background: rgba(255,255,255,.14); margin: 0.25rem 8px; }
+.student-sidebar.is-light { box-shadow: 0 6px 18px rgba(2,6,23,.18); border-radius: 14px; position: relative; }
 .student-sidebar.is-light .student-sidebar-head { padding-bottom: 0.45rem; }
+.student-sidebar.is-light::after {
+  content: ''; position: sticky; bottom: 0; left: 0; right: 0; display: block;
+  height: 2rem; flex: none; pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--sidebar-bg));
+  border-radius: 0 0 14px 14px;
+}
 
 /* --- Tighter, denser main content (student/parent/super spaces) --- */
 

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { margin: 0; padding: 0; background: white; }
+  canvas { display: block; margin: 0 auto; }
+  #status { text-align: center; padding: 20px; font: 16px sans-serif; }
+</style>
+</head>
+<body>
+<div id="status">Loading PDF.js...</div>
+<script>
+  window._pages = [];
+  window._done = false;
+  window._error = null;
+  window._progress = '';
+</script>
+<script src="./node_modules/pdfjs-dist/build/pdf.min.mjs" type="module"></script>
+<script type="module">
+  import * as pdfjsLib from './node_modules/pdfjs-dist/build/pdf.min.mjs';
+  pdfjsLib.GlobalWorkerOptions.workerSrc = './node_modules/pdfjs-dist/build/pdf.worker.min.mjs';
+  
+  window._progress = 'Loading PDF file...';
+  document.getElementById('status').textContent = window._progress;
+  
+  try {
+    const pdf = await pdfjsLib.getDocument('file:///D:/livres eleves/French_Book_Grade2_Tunisia.pdf').promise;
+    window._progress = 'PDF loaded: ' + pdf.numPages + ' pages';
+    document.getElementById('status').textContent = window._progress;
+    
+    for (let i = 1; i <= pdf.numPages; i++) {
+      window._progress = 'Rendering page ' + i + '/' + pdf.numPages;
+      document.getElementById('status').textContent = window._progress;
+      
+      const pdfPage = await pdf.getPage(i);
+      const viewport = pdfPage.getViewport({ scale: 2.0 });
+      const canvas = document.createElement('canvas');
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+      const ctx = canvas.getContext('2d');
+      
+      await pdfPage.render({ canvasContext: ctx, viewport }).promise;
+      
+      const dataUrl = canvas.toDataURL('image/png');
+      window._pages.push({ num: i, data: dataUrl });
+    }
+    
+    window._done = true;
+    window._progress = 'Done! ' + window._pages.length + ' pages';
+    document.getElementById('status').textContent = window._progress;
+  } catch(e) {
+    window._error = e.message;
+    document.getElementById('status').textContent = 'Error: ' + e.message;
+  }
+</script>
+</body>
+</html>
