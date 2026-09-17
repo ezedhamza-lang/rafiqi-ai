@@ -2273,6 +2273,11 @@ tr:hover td {
   padding: 1.4rem;
   margin-bottom: 1.5rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.25s ease;
+}
+
+.panel:hover {
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
 }
 
 .panel-head {
@@ -2368,6 +2373,7 @@ tr:hover td {
 .search-input:focus {
   outline: none;
   border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255, 106, 0, 0.12);
 }
 
 .form-group textarea {
@@ -2415,6 +2421,7 @@ tr:hover td {
 .data-table td {
   padding: 0.7rem 1rem;
   border-bottom: 1px solid var(--border);
+  transition: background 0.15s ease;
 }
 
 .data-table tr:last-child td {
@@ -2422,7 +2429,7 @@ tr:hover td {
 }
 
 .data-table tr:hover td {
-  background: #fafcff;
+  background: #f8faff;
 }
 
 .badge {
@@ -2435,6 +2442,7 @@ tr:hover td {
   background: var(--bg);
   color: var(--muted);
   border: 1px solid var(--border);
+  transition: all 0.15s ease;
 }
 
 .badge.good {
@@ -2488,6 +2496,7 @@ tr:hover td {
 .card-item:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--primary);
 }
 
 .card-item h4 {
