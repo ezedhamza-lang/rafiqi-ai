@@ -33,12 +33,15 @@ export default function Memos({ onChanged }) {
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState('');
   const [info, setInfo] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const load = useCallback(() => {
+    setLoading(true);
     api
       .get('/memos')
       .then(setMemos)
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -146,6 +149,7 @@ export default function Memos({ onChanged }) {
   };
 
   const remove = async (id) => {
+    if (!window.confirm(t('common.confirmDelete'))) return;
     try {
       await api.del(`/memos/${id}`);
       setView(null);
@@ -249,7 +253,9 @@ export default function Memos({ onChanged }) {
           </form>
 
           <h4 style={{ margin: '24px 0 12px' }}>{t('teacherSpace.memos.generatedListTitle')}</h4>
-          {memos.length === 0 ? (
+          {loading ? (
+            <p className="muted">{t('common.loading')}</p>
+          ) : memos.length === 0 ? (
             <div className="empty">{t('teacherSpace.memos.empty')}</div>
           ) : (
             <div className="table-wrap">

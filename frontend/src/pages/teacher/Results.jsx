@@ -5,12 +5,15 @@ import { useI18n } from '../../i18n/index.jsx';
 export default function Results() {
   const { t } = useI18n();
   const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const load = useCallback(() => {
+    setLoading(true);
     api
       .get('/teacher/results')
       .then(setResults)
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -22,9 +25,10 @@ export default function Results() {
       <div className="panel-head">
         <h3>{t('teacherSpace.results.title')}</h3>
       </div>
-      {results.length === 0 ? (
+      {loading && <p className="muted">{t('common.loading')}</p>}
+      {!loading && results.length === 0 ? (
         <div className="empty">{t('teacherSpace.results.empty')}</div>
-      ) : (
+      ) : !loading ? (
         <div className="table-wrap">
           <table className="data-table">
             <thead>
@@ -51,7 +55,7 @@ export default function Results() {
             </tbody>
           </table>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }

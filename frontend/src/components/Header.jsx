@@ -19,49 +19,6 @@ const PUBLIC_NAV = [
 const MESSAGES_NAV = { to: '/messages', icon: 'mail', key: 'messages', unread: true };
 const NOTIF_NAV = { to: '/message-center', icon: 'notifications_active', key: 'notifications', notif: true };
 
-const TEACHER_SPACE_CHILDREN = [
-  { group: 'analysis', groupLabel: 'التحليل والتقييم', groupIcon: 'analytics', groupColor: '#3b82f6' },
-  { to: '/teacher', end: true, icon: 'analytics', key: 'unitAnalysis' },
-  { to: '/teacher/quizzes', icon: 'quiz', key: 'quizzes' },
-  { to: '/teacher/assignments', icon: 'assignment', key: 'assignments' },
-  { to: '/teacher/analytics', icon: 'monitoring', key: 'analyticsExport' },
-
-  { group: 'exams', groupLabel: 'الامتحانات', groupIcon: 'fact_check', groupColor: '#ef4444' },
-  { to: '/teacher/exams', icon: 'fact_check', key: 'officialExams' },
-
-  { group: 'subjects', groupLabel: 'المواد والمحتوى', groupIcon: 'category', groupColor: '#8b5cf6' },
-  { to: '/teacher/class-subjects', icon: 'category', key: 'classSubjects' },
-  { to: '/teacher/worksheets', icon: 'article', key: 'teacherWorksheets' },
-  { to: '/teacher/correction', icon: 'grading', key: 'correction' },
-
-  { group: 'results', groupLabel: 'النتائج والتقارير', groupIcon: 'scoreboard', groupColor: '#10b981' },
-  { to: '/teacher/results', icon: 'scoreboard', key: 'results' },
-  { to: '/teacher/averages', icon: 'percent', key: 'averages' },
-  { to: '/teacher/gradebook', icon: 'menu_book', key: 'gradebook' },
-  { to: '/teacher/grades', icon: 'workspace_premium', key: 'classGrades' },
-
-  { group: 'progress', groupLabel: 'التقدم والمتابعة', groupIcon: 'trending_up', groupColor: '#f59e0b' },
-  { to: '/teacher/lesson-progress', icon: 'fact_check', key: 'lessonProgress' },
-  { to: '/teacher/notes', icon: 'rate_review', key: 'teacherNotes' },
-  { to: '/teacher/attendance', icon: 'fact_check', key: 'attendance' },
-
-  { group: 'planning', groupLabel: 'التخطيط والتنظيم', groupIcon: 'calendar_month', groupColor: '#06b6d4' },
-  { to: '/teacher/lesson-plan', icon: 'calendar_month', key: 'lessonPlan' },
-  { to: '/teacher/plans', icon: 'event_note', key: 'annualPlans' },
-  { to: '/teacher/memos', icon: 'description', key: 'memos' },
-  { to: '/teacher/schedules', icon: 'calendar_view_week', key: 'schedules' },
-
-  { group: 'tools', groupLabel: 'الأدوات والموارد', groupIcon: 'build', groupColor: '#ec4899' },
-  { to: '/teacher/resources', icon: 'folder_special', key: 'resources' },
-  { to: '/teacher/library', icon: 'local_library', key: 'library' },
-  { to: '/teacher/health', icon: 'favorite', key: 'health' },
-  { to: '/teacher/ai', icon: 'smart_toy', key: 'teacherAI' },
-  { to: '/teacher/live', icon: 'live_tv', key: 'live' },
-  { to: '/teacher/suggestions', icon: 'lightbulb', key: 'suggestions' },
-  { to: '/payment', icon: 'payments', key: 'payment' },
-  { to: '/help', icon: 'support_agent', key: 'help', divider: true }
-];
-
 const SUPERADMIN_SPACE_CHILDREN = [
   { to: '/superadmin', end: true, icon: 'admin_panel_settings', key: 'systemSpace' },
   { to: '/help', icon: 'support_agent', key: 'help', divider: true }

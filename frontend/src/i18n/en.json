@@ -11,7 +11,8 @@
     "close": "Close",
     "noData": "No data yet",
     "error": "Something went wrong. Please try again.",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "confirmDelete": "Are you sure you want to delete?"
   },
   "account": {
     "changePassword": "Change password",
@@ -1413,8 +1414,11 @@
       "submit": "Submit Answers",
       "resultTitle": "Result",
       "resultScore": "You scored {{score}} out of {{total}} points",
+      "timeSpent": "Time spent: {{time}}",
       "newBadges": "New badges!",
-      "back": "Back"
+      "back": "Back",
+      "prev": "Previous",
+      "next": "Next"
     },
     "officialExams": {
       "title": "Official Exams",

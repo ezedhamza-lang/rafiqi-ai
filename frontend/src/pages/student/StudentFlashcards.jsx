@@ -7,7 +7,8 @@ const SUBJECTS = [
   { code: 'math', key: 'math', icon: 'calculate', color: '#233863' },
   { code: 'anisi', key: 'anisi', icon: 'menu_book', color: '#b06b00' },
   { code: 'science', key: 'science', icon: 'science', color: '#0e6b4f' },
-  { code: 'production', key: 'production', icon: 'edit', color: '#6b3fa0' }
+  { code: 'production', key: 'production', icon: 'edit', color: '#6b3fa0' },
+  { code: 'french', key: 'french', icon: 'translate', color: '#1e40af' }
 ];
 
 const GRADES = ['year1', 'year2', 'year3', 'year4', 'year5', 'year6'];
@@ -48,7 +49,16 @@ export default function StudentFlashcards() {
       setIndex(index + 1);
       setFlipped(false);
     } else {
-      setIndex(cards.length); 
+      setIndex(cards.length);
+      const results = [...known, ok];
+      const knownIds = cards.filter((_, i) => results[i]).map((c) => c.id);
+      const reviewIds = cards.filter((_, i) => !results[i]).map((c) => c.id);
+      api.post('/student/flashcards/progress', {
+        subjectId: subject,
+        gradeId: ownLevel || grade,
+        knownIds,
+        reviewIds
+      }).catch(() => {});
     }
   };
 

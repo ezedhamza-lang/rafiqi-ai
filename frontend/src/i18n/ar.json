@@ -11,7 +11,8 @@
     "close": "إغلاق",
     "noData": "لا توجد بيانات بعد",
     "error": "حدث خطأ ما. حاول مرة أخرى.",
-    "cancel": "إلغاء"
+    "cancel": "إلغاء",
+    "confirmDelete": "هل أنت متأكد من الحذف؟"
   },
   "account": {
     "changePassword": "تغيير كلمة السر",
@@ -1413,8 +1414,11 @@
       "submit": "إرسال الإجابات",
       "resultTitle": "النتيجة",
       "resultScore": "حصلت على {{score}} من {{total}} نقطة",
+      "timeSpent": "الوقت المستغرق: {{time}}",
       "newBadges": "شارات جديدة!",
-      "back": "عودة"
+      "back": "عودة",
+      "prev": "السابق",
+      "next": "التالي"
     },
     "officialExams": {
       "title": "الاختبارات الرسمية",

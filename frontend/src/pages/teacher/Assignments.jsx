@@ -117,6 +117,7 @@ export default function Assignments({ classes, onChanged }) {
   };
 
   const remove = async (id) => {
+    if (!window.confirm(t('common.confirmDelete'))) return;
     try {
       await api.del(`/teacher/assignments/${id}`);
       load();

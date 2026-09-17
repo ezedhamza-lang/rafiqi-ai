@@ -2,6 +2,29 @@ import { useState, useEffect, useRef } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 
+function renderMarkdown(text) {
+  if (!text) return null;
+  const lines = text.split('\n');
+  return lines.map((line, i) => {
+    if (/^#{1,3}\s/.test(line)) {
+      const level = line.match(/^(#{1,3})/)[1].length;
+      const Tag = `h${level + 2}`;
+      return <Tag key={i} style={{ margin: '0.5rem 0 0.25rem' }}>{line.replace(/^#{1,3}\s+/, '')}</Tag>;
+    }
+    if (/^[-*]\s/.test(line)) {
+      return <li key={i} style={{ marginInlineStart: '1.5rem' }}>{line.replace(/^[-*]\s+/, '')}</li>;
+    }
+    if (/^\d+\.\s/.test(line)) {
+      return <li key={i} style={{ marginInlineStart: '1.5rem', listStyleType: 'decimal' }}>{line.replace(/^\d+\.\s+/, '')}</li>;
+    }
+    if (line.startsWith('```')) return null;
+    const formatted = line
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+    return <p key={i} style={{ margin: '0.25rem 0' }} dangerouslySetInnerHTML={{ __html: formatted }} />;
+  });
+}
+
 export default function AskRefeeqi() {
   const { t, lang } = useI18n();
   const [messages, setMessages] = useState([]);
@@ -104,7 +127,7 @@ export default function AskRefeeqi() {
         {messages.map((m) => (
           <div key={m.id} className={`chat-msg ${m.role}`}>
             <div className="chat-bubble">
-              {m.content}
+              {m.role === 'assistant' ? renderMarkdown(m.content) : m.content}
               {m.role === 'assistant' && (
                 <button className="btn-ghost speak-btn" onClick={() => speak(m.content)} title={t('studentSpace.askRefeeqi.speakTitle')}>
                   🔊

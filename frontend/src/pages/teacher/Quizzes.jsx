@@ -21,12 +21,15 @@ export default function Quizzes({ classes, onChanged }) {
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ title: '', subject: 'MATH', classId: '', questions: [blankQuestion(1)] });
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const load = useCallback(() => {
+    setLoading(true);
     api
       .get('/teacher/quizzes')
       .then(setQuizzes)
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
@@ -70,6 +73,7 @@ export default function Quizzes({ classes, onChanged }) {
   };
 
   const remove = async (id) => {
+    if (!window.confirm(t('common.confirmDelete'))) return;
     try {
       await api.del(`/teacher/quizzes/${id}`);
       load();
@@ -203,8 +207,10 @@ export default function Quizzes({ classes, onChanged }) {
         </form>
       )}
 
-      {quizzes.length === 0 ? (
+      {quizzes.length === 0 && !loading ? (
         <div className="empty">{t('teacherSpace.quizzes.empty')}</div>
+      ) : loading ? (
+        <p className="muted">{t('common.loading')}</p>
       ) : (
         <div className="table-wrap">
           <table className="data-table">
