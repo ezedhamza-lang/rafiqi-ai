@@ -117,9 +117,13 @@ export default function Assignments({ classes, onChanged }) {
   };
 
   const remove = async (id) => {
-    await api.del(`/teacher/assignments/${id}`);
-    load();
-    onChanged && onChanged();
+    try {
+      await api.del(`/teacher/assignments/${id}`);
+      load();
+      onChanged && onChanged();
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   const openTracking = async (a) => {

@@ -40,8 +40,12 @@ export default function StudentAssignments({ onChanged }) {
 
   const submit = async (e) => {
     e.preventDefault();
+    const processedAnswers = {};
+    for (const [qId, val] of Object.entries(answers)) {
+      processedAnswers[qId] = typeof val === 'string' ? val.split(',').map((s) => s.trim()).filter(Boolean) : val;
+    }
     try {
-      await api.post(`/teacher/student/assignments/${active.id}/submit`, { answers });
+      await api.post(`/teacher/student/assignments/${active.id}/submit`, { answers: processedAnswers });
       setActive(null);
       load();
       onChanged && onChanged();
@@ -142,7 +146,7 @@ export default function StudentAssignments({ onChanged }) {
             )}
             {q.type === 'ORDER' && (
               <div className="form-group">
-                <input value={answers[q.id] || ''} onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value.split(',') })} placeholder={t('studentSpace.assignments.orderPlaceholder')} />
+                <input value={typeof answers[q.id] === 'string' ? answers[q.id] : (answers[q.id] || []).join(', ')} onChange={(e) => setAnswers({ ...answers, [q.id]: e.target.value })} placeholder={t('studentSpace.assignments.orderPlaceholder')} />
               </div>
             )}
             {(q.type === 'EXTRACT' || q.type === 'FILL_BLANK') && (

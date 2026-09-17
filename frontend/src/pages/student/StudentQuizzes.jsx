@@ -9,6 +9,7 @@ export default function StudentQuizzes({ onChanged }) {
   const [answers, setAnswers] = useState({});
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
+  const [startedAt, setStartedAt] = useState(null);
 
   useEffect(() => {
     api
@@ -22,12 +23,14 @@ export default function StudentQuizzes({ onChanged }) {
     setActive(quiz);
     setAnswers({});
     setResult(null);
+    setStartedAt(Date.now());
   };
 
   const submit = async (e) => {
     e.preventDefault();
+    const durationSec = startedAt ? Math.round((Date.now() - startedAt) / 1000) : 0;
     try {
-      const res = await api.post(`/teacher/student/quizzes/${active.id}/submit`, { answers, durationSec: 60 });
+      const res = await api.post(`/teacher/student/quizzes/${active.id}/submit`, { answers, durationSec });
       setResult(res);
       setActive(null);
       setQuizzes((qs) => qs.map((q) => (q.id === active.id ? { ...q, done: true } : q)));

@@ -70,9 +70,13 @@ export default function Quizzes({ classes, onChanged }) {
   };
 
   const remove = async (id) => {
-    await api.del(`/teacher/quizzes/${id}`);
-    load();
-    onChanged && onChanged();
+    try {
+      await api.del(`/teacher/quizzes/${id}`);
+      load();
+      onChanged && onChanged();
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (

@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { lazy, Suspense, Component } from 'react';
+import { Routes, Route, Navigate, Link } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { ChatProvider } from './context/ChatContext.jsx';
 import { NotificationProvider } from './context/NotificationContext.jsx';
@@ -12,6 +12,28 @@ import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import DashboardLayout from './pages/DashboardLayout.jsx';
 import { getHomePath } from './roles.js';
+
+class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{ textAlign: 'center', padding: '4rem 1rem' }}>
+          <div style={{ fontSize: '3rem', fontWeight: 900 }}>!</div>
+          <p style={{ margin: '0.5rem 0 1.25rem', color: 'var(--muted)' }}>حدث خطأ غير متوقع</p>
+          <Link className="btn btn-primary" to="/">العودة للرئيسية</Link>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
 
 // Route-level code splitting: heavy dashboards load on demand (smaller initial bundle).
 const Dashboard = lazy(() => import('./pages/Dashboard.jsx'));
@@ -51,7 +73,7 @@ function NotFound() {
     <div className="container" style={{ textAlign: 'center', padding: '4rem 1rem' }}>
       <div style={{ fontSize: '3rem', fontWeight: 900 }}>404</div>
       <p className="sub" style={{ margin: '0.5rem 0 1.25rem' }}>{t('common.notFound')}</p>
-      <a className="btn btn-primary" href="/">{t('common.backHome')}</a>
+      <Link className="btn btn-primary" to="/">{t('common.backHome')}</Link>
     </div>
   );
 }
@@ -67,32 +89,34 @@ export default function App() {
           </a>
           <Header />
           <main id="main-content" style={{ minHeight: '70vh' }} tabIndex={-1}>
-            <Suspense fallback={<RouteFallback />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<GuestOnly><Login /></GuestOnly>} />
-                <Route path="/register" element={<GuestOnly><Register /></GuestOnly>} />
-                <Route path="/account" element={<RequireRole><AccountSettings /></RequireRole>} />
-                <Route element={<DashboardLayout />}>
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/students" element={<Students />} />
-                  <Route path="/registration" element={<Registration />} />
-                  <Route path="/student" element={<StudentSection />} />
-                  <Route path="/my-requests" element={<MyRequests />} />
-                  <Route path="/payment" element={<PaymentCenter />} />
-                  <Route path="/messages" element={<Messages />} />
-                  <Route path="/message-center" element={<MessageCenter />} />
-                  <Route path="/help" element={<HelpRequest />} />
-                  <Route path="/admin" element={<RequireRole roles={['ADMIN', 'SUPER_ADMIN', 'SCHOOL_DIRECTOR']}><Admin /></RequireRole>} />
-                  <Route path="/teacher/*" element={<RequireRole roles={['TEACHER']}><TeacherDashboard /></RequireRole>} />
-                  <Route path="/student-space/*" element={<RequireRole roles={['STUDENT']}><StudentSpace /></RequireRole>} />
-                  <Route path="/parent/*" element={<RequireRole roles={['PARENT']}><ParentSpace /></RequireRole>} />
-                  <Route path="/director/*" element={<RequireRole roles={['SCHOOL_DIRECTOR', 'ADMIN']}><DirectorDashboard /></RequireRole>} />
-                  <Route path="/superadmin/*" element={<RequireRole roles={['SUPER_ADMIN']}><SuperAdminDashboard /></RequireRole>} />
-                </Route>
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
+            <ErrorBoundary>
+              <Suspense fallback={<RouteFallback />}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/login" element={<GuestOnly><Login /></GuestOnly>} />
+                  <Route path="/register" element={<GuestOnly><Register /></GuestOnly>} />
+                  <Route path="/account" element={<RequireRole><AccountSettings /></RequireRole>} />
+                  <Route element={<DashboardLayout />}>
+                    <Route path="/dashboard" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR', 'TEACHER']}><Dashboard /></RequireRole>} />
+                    <Route path="/students" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR']}><Students /></RequireRole>} />
+                    <Route path="/registration" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR']}><Registration /></RequireRole>} />
+                    <Route path="/student" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR']}><StudentSection /></RequireRole>} />
+                    <Route path="/my-requests" element={<RequireRole><MyRequests /></RequireRole>} />
+                    <Route path="/payment" element={<RequireRole><PaymentCenter /></RequireRole>} />
+                    <Route path="/messages" element={<RequireRole><Messages /></RequireRole>} />
+                    <Route path="/message-center" element={<RequireRole><MessageCenter /></RequireRole>} />
+                    <Route path="/help" element={<RequireRole><HelpRequest /></RequireRole>} />
+                    <Route path="/admin" element={<RequireRole roles={['ADMIN', 'SUPER_ADMIN', 'SCHOOL_DIRECTOR']}><Admin /></RequireRole>} />
+                    <Route path="/teacher/*" element={<RequireRole roles={['TEACHER']}><TeacherDashboard /></RequireRole>} />
+                    <Route path="/student-space/*" element={<RequireRole roles={['STUDENT']}><StudentSpace /></RequireRole>} />
+                    <Route path="/parent/*" element={<RequireRole roles={['PARENT']}><ParentSpace /></RequireRole>} />
+                    <Route path="/director/*" element={<RequireRole roles={['SCHOOL_DIRECTOR', 'ADMIN']}><DirectorDashboard /></RequireRole>} />
+                    <Route path="/superadmin/*" element={<RequireRole roles={['SUPER_ADMIN']}><SuperAdminDashboard /></RequireRole>} />
+                  </Route>
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
           </main>
           <Footer />
         </NotificationProvider>

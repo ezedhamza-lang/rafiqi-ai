@@ -144,16 +144,16 @@ export default function Book3DViewer({ book, onClose }) {
 
         {/* Arrow buttons */}
         <button className="book3d-arrow book3d-arrow-right" disabled={page >= total || !!turning} onClick={(e) => { e.stopPropagation(); go(page + 1); }}>
-          <span className="material-icons">chevron_left</span>
+          <span className="material-icons">chevron_right</span>
         </button>
         <button className="book3d-arrow book3d-arrow-left" disabled={page <= 1 || !!turning} onClick={(e) => { e.stopPropagation(); go(page - 1); }}>
-          <span className="material-icons">chevron_right</span>
+          <span className="material-icons">chevron_left</span>
         </button>
       </div>
 
       {/* Progress bar */}
       <div className="book3d-progress" onClick={(e) => e.stopPropagation()}>
-        <div className="book3d-progress-fill" style={{ width: `${(page / total) * 100}%`, background: book.color || '#E91E63' }} />
+        <div className="book3d-progress-fill" style={{ width: total > 0 ? `${(page / total) * 100}%` : '0%', background: book.color || '#E91E63' }} />
       </div>
     </div>
   );

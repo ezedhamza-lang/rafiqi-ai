@@ -155,7 +155,7 @@ export default function StudentLiveSessions() {
                         className="btn btn-sm btn-outline"
                         onClick={() =>
                           api
-                            .download(`/student/live/${r.sessionId}/recording`, `${r.title}.wav`)
+                            .download(`/student/live/${r.sessionId}/recording`, `${r.title}.${r.format || 'webm'}`)
                             .catch((e) => setError(e.message))
                         }
                       >

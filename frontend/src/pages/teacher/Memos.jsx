@@ -146,10 +146,14 @@ export default function Memos({ onChanged }) {
   };
 
   const remove = async (id) => {
-    await api.del(`/memos/${id}`);
-    setView(null);
-    load();
-    onChanged && onChanged();
+    try {
+      await api.del(`/memos/${id}`);
+      setView(null);
+      load();
+      onChanged && onChanged();
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   const printPdf = async () => {

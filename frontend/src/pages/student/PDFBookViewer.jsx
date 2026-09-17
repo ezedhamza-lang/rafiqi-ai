@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useI18n } from '../../i18n/index.jsx';
 
 export default function PDFBookViewer({ book, onClose }) {
@@ -57,8 +57,6 @@ export default function PDFBookViewer({ book, onClose }) {
             width: '100%',
             height: '100%',
             border: 'none',
-            transform: `scale(${zoom / 100})`,
-            transformOrigin: 'top center',
           }}
           title={book.title}
         />

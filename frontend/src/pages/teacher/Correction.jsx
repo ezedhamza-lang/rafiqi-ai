@@ -27,6 +27,7 @@ export default function Correction() {
   const [grading, setGrading] = useState({});
   const [lessonGrading, setLessonGrading] = useState({});
   const [batchGrading, setBatchGrading] = useState(false);
+  const [error, setError] = useState('');
 
   const load = useCallback(() => {
     api
@@ -80,18 +81,26 @@ export default function Correction() {
       loadPaperExams();
       setGrading((prev) => ({ ...prev, [id]: {} }));
     } catch (err) {
-      alert(err.message);
+      setError(err.message);
     }
   };
 
   const startReview = async (id) => {
-    await api.put(`/teacher/submitted-exams/${id}`, { status: 'IN_REVIEW' });
-    loadPaperExams();
+    try {
+      await api.put(`/teacher/submitted-exams/${id}`, { status: 'IN_REVIEW' });
+      loadPaperExams();
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   const startLessonReview = async (id) => {
-    await api.put(`/teacher/lesson-submissions/${id}`, { status: 'IN_REVIEW' });
-    loadLessonSubs();
+    try {
+      await api.put(`/teacher/lesson-submissions/${id}`, { status: 'IN_REVIEW' });
+      loadLessonSubs();
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   const saveLessonGrade = async (id) => {
@@ -105,7 +114,7 @@ export default function Correction() {
       loadLessonSubs();
       setLessonGrading((prev) => ({ ...prev, [id]: {} }));
     } catch (err) {
-      alert(err.message);
+      setError(err.message);
     }
   };
 
@@ -113,7 +122,7 @@ export default function Correction() {
     const pendingSubs = lessonSubs.filter(s => s.status === 'SUBMITTED');
     const lessonIds = [...new Set(pendingSubs.map(s => s.lessonId))];
     if (lessonIds.length === 0) {
-      alert(t('teacherSpace.correction.noPendingSubs'));
+      setError(t('teacherSpace.correction.noPendingSubs'));
       return;
     }
     setBatchGrading(true);
@@ -124,9 +133,8 @@ export default function Correction() {
         totalGraded += res.results?.length || 0;
       }
       loadLessonSubs();
-      alert(t('teacherSpace.correction.batchGraded', { count: totalGraded }));
     } catch (err) {
-      alert(err.message || t('teacherSpace.correction.batchError'));
+      setError(err.message || t('teacherSpace.correction.batchError'));
     } finally {
       setBatchGrading(false);
     }
@@ -137,7 +145,7 @@ export default function Correction() {
       await api.post('/ai/publish-grades', { lessonId });
       loadLessonSubs();
     } catch (err) {
-      alert(err.message);
+      setError(err.message);
     }
   };
 
@@ -152,6 +160,8 @@ export default function Correction() {
       <div className="panel-head">
         <h3>{t('teacherSpace.correction.title')}</h3>
       </div>
+
+      {error && <div className="form-error" style={{ marginBottom: '0.8rem' }}>{error}</div>}
 
       <div className="sub-grid">
         <div className="card-item">
