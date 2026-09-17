@@ -12,7 +12,7 @@ export default function Results() {
     api
       .get('/teacher/results')
       .then(setResults)
-      .catch(() => {})
+      .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
   }, []);
 

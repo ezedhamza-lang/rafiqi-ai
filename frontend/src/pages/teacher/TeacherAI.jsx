@@ -30,7 +30,7 @@ export default function TeacherAI() {
     api
       .get('/ai/key')
       .then((d) => setConfigured(d.configured))
-      .catch(() => {});
+      .catch((e) => setError(e.message));
   }, []);
 
   useEffect(() => {

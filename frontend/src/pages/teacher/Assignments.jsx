@@ -2,19 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 import { formatDate as fmtDate } from '../../utils/formatUtils.js';
-
-const SUBJECT_CODES = ['MATH', 'READING', 'SCIENCE', 'STORIES'];
-const QUESTION_TYPE_CODES = ['MCQ', 'TRUE_FALSE', 'ORDER', 'EXTRACT', 'FILL_BLANK'];
-
-const blankQuestion = (id) => ({
-  id: `q${id}`,
-  type: 'MCQ',
-  prompt: '',
-  points: 1,
-  options: ['', '', '', ''],
-  correctOption: '',
-  correctAnswer: ''
-});
+import QuestionEditor, { SUBJECT_CODES, blankQuestion } from '../../components/QuestionEditor.jsx';
 
 const emptyForm = () => ({
   title: '',
@@ -42,7 +30,7 @@ export default function Assignments({ classes, onChanged }) {
     api
       .get('/teacher/assignments')
       .then(setAssignments)
-      .catch(() => {});
+      .catch((err) => setError(err.message));
   }, []);
 
   useEffect(() => {
@@ -71,17 +59,6 @@ export default function Assignments({ classes, onChanged }) {
     });
     setEditing(a);
     setView('form');
-  };
-
-  const addQuestion = () => {
-    setForm((f) => ({ ...f, questions: [...f.questions, blankQuestion(f.questions.length + 1)] }));
-  };
-
-  const updateQuestion = (idx, patch) => {
-    setForm((f) => ({
-      ...f,
-      questions: f.questions.map((q, i) => (i === idx ? { ...q, ...patch } : q))
-    }));
   };
 
   const submit = async (e) => {
@@ -202,78 +179,9 @@ export default function Assignments({ classes, onChanged }) {
             </div>
           </div>
 
-          <div className="questions-editor">
-            {form.questions.map((q, qi) => (
-              <div key={q.id} className="question-editor">
-                <div className="form-row">
-                  <div className="form-group">
-                    <label>{t('teacherSpace.assignments.questionTypeLabel', { n: qi + 1 })}</label>
-                    <select value={q.type} onChange={(e) => updateQuestion(qi, { type: e.target.value, correctOption: '', correctAnswer: '' })}>
-                      {QUESTION_TYPE_CODES.map((code) => (
-                        <option key={code} value={code}>{t(`teacherSpace.common.questionTypes.${code}`)}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="form-group grow">
-                    <label>{t('teacherSpace.assignments.questionTextLabel')}</label>
-                    <input required value={q.prompt} onChange={(e) => updateQuestion(qi, { prompt: e.target.value })} placeholder={t('teacherSpace.assignments.questionTextPlaceholder')} />
-                  </div>
-                  <div className="form-group small">
-                    <label>{t('teacherSpace.assignments.pointsLabel')}</label>
-                    <input type="number" min="1" value={q.points} onChange={(e) => updateQuestion(qi, { points: Number(e.target.value) })} />
-                  </div>
-                </div>
-
-                {q.type === 'MCQ' && (
-                  <div className="options-row">
-                    {q.options.map((opt, oi) => (
-                      <div key={oi} className="option-field">
-                        <input value={opt} onChange={(e) => updateQuestion(qi, { options: q.options.map((o, i) => (i === oi ? e.target.value : o)) })} placeholder={t('teacherSpace.assignments.optionPlaceholder', { n: oi + 1 })} />
-                        <label className="radio">
-                          <input type="radio" name={`correct-${q.id}`} checked={q.correctOption === String(oi)} onChange={() => updateQuestion(qi, { correctOption: String(oi) })} />
-                          {t('teacherSpace.common.correctLabel')}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {q.type === 'TRUE_FALSE' && (
-                  <div className="form-row">
-                    <label className="radio">
-                      <input type="radio" name={`tf-${q.id}`} checked={q.correctAnswer === 'TRUE'} onChange={() => updateQuestion(qi, { correctAnswer: 'TRUE' })} />
-                      {t('teacherSpace.common.correctLabel')}
-                    </label>
-                    <label className="radio">
-                      <input type="radio" name={`tf-${q.id}`} checked={q.correctAnswer === 'FALSE'} onChange={() => updateQuestion(qi, { correctAnswer: 'FALSE' })} />
-                      {t('time.falseLabel')}
-                    </label>
-                  </div>
-                )}
-
-                {q.type === 'ORDER' && (
-                  <div className="form-group">
-                    <label>{t('teacherSpace.assignments.orderLabel')}</label>
-                    <textarea
-                      value={(q.orderItems || []).join('\n')}
-                      onChange={(e) => updateQuestion(qi, { orderItems: e.target.value.split('\n').map((s) => s.trim()).filter(Boolean) })}
-                      placeholder={t('teacherSpace.common.orderPlaceholder')}
-                    />
-                  </div>
-                )}
-
-                {(q.type === 'EXTRACT' || q.type === 'FILL_BLANK') && (
-                  <div className="form-group">
-                    <label>{t('teacherSpace.assignments.correctAnswerLabel')}</label>
-                    <input value={q.correctAnswer} onChange={(e) => updateQuestion(qi, { correctAnswer: e.target.value })} placeholder={t('teacherSpace.assignments.correctAnswerPlaceholder')} />
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+          <QuestionEditor questions={form.questions} onChange={(qs) => setForm({ ...form, questions: qs })} t={t} prefix="teacherSpace.assignments" />
 
           <div className="form-actions">
-            <button type="button" className="btn" onClick={addQuestion}>{t('teacherSpace.assignments.addQuestion')}</button>
             <button type="submit" className="btn btn-primary">{t('teacherSpace.assignments.saveAssignment')}</button>
           </div>
         </form>

@@ -43,7 +43,7 @@ export default function OfficialExams({ classes }) {
     api
       .get('/teacher/exams')
       .then(setExams)
-      .catch(() => {});
+      .catch((e) => setError(e.message));
   }, []);
 
   const loadBank = useCallback(async () => {

@@ -40,7 +40,7 @@ export default function Memos({ onChanged }) {
     api
       .get('/memos')
       .then(setMemos)
-      .catch(() => {})
+      .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
   }, []);
 
@@ -49,11 +49,11 @@ export default function Memos({ onChanged }) {
     api
       .get('/memos/methodologies')
       .then(setMethodologies)
-      .catch(() => {});
+      .catch((e) => setError(e.message));
     api
       .get('/public/curriculum/books')
       .then(setBooks)
-      .catch(() => {});
+      .catch((e) => setError(e.message));
   }, [load]);
 
   const subjects = useMemo(() => {

@@ -33,21 +33,21 @@ export default function Correction() {
     api
       .get('/teacher/submissions')
       .then(setSubmissions)
-      .catch(() => {});
+      .catch((e) => setError(e.message));
   }, []);
 
   const loadLessonSubs = useCallback(() => {
     api
       .get('/teacher/lesson-submissions')
       .then(setLessonSubs)
-      .catch(() => {});
+      .catch((e) => setError(e.message));
   }, []);
 
   const loadPaperExams = useCallback(() => {
     api
       .get('/teacher/submitted-exams')
       .then(setPaperExams)
-      .catch(() => {});
+      .catch((e) => setError(e.message));
   }, []);
 
   useEffect(() => {

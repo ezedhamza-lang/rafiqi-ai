@@ -42,7 +42,7 @@ export default function LiveSessions() {
     api
       .get('/teacher/live/recordings')
       .then(setRecordings)
-      .catch(() => {});
+      .catch((e) => setError(e.message));
   }, []);
 
   useEffect(() => {
@@ -50,7 +50,7 @@ export default function LiveSessions() {
     api
       .get('/teacher/classes')
       .then(setClasses)
-      .catch(() => {});
+      .catch((e) => setError(e.message));
   }, [load]);
 
   const setField = (key, value) => setForm((f) => ({ ...f, [key]: value }));

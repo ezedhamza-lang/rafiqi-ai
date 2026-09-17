@@ -12,7 +12,7 @@ export default function ClassSubjects({ classes }) {
     api
       .get('/teacher/class-subjects')
       .then(setData)
-      .catch(() => {});
+      .catch((e) => setError(e.message));
   }, []);
 
   useEffect(() => {

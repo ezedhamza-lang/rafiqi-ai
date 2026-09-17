@@ -30,7 +30,7 @@ export default function Resources() {
     api
       .get(`/teacher/resources${k ? `?kind=${k}` : ''}`)
       .then(setResources)
-      .catch(() => {});
+      .catch((e) => setError(e.message));
   }, []);
 
   useEffect(() => {

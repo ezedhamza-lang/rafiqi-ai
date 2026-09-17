@@ -19,7 +19,7 @@ export default function ClassGrades() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    api.get('/teacher/grades/classes').then(setClasses).catch(() => {});
+    api.get('/teacher/grades/classes').then(setClasses).catch(() => setError(t('common.error')));
   }, []);
 
   const load = useCallback(() => {
