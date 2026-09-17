@@ -205,7 +205,7 @@ function PlayZone() {
 
           <div className="cards-grid slide-up-stagger">
             {filteredGames.map((code) => (
-              <div key={code} className="card-item game-card card-glow wiggle-hover" style={{ borderTop: `4px solid ${GAME_COLORS[code].icon}` }}>
+              <div key={code} className="card-item game-card card-glow wiggle-hover" style={{ borderTop: `4px solid ${GAME_COLORS[code].icon}`, background: `linear-gradient(180deg, ${GAME_COLORS[code].icon}08 0%, #fff 100%)` }}>
                 <span className="game-icon material-icons" style={{ color: GAME_COLORS[code].icon, fontSize: '2.8rem' }}>{GAME_ICONS[code]}</span>
                 <h4>{t(`studentSpace.play.games.${code}.title`)}</h4>
                 <p className="muted">{t(`studentSpace.play.games.${code}.desc`)}</p>
