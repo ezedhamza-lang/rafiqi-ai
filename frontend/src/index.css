@@ -6600,14 +6600,24 @@ tr:hover td {
 .student-main .ui-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  border-color: var(--primary);
+}
+
+.student-main .card-item {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.student-main .card-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  border-color: var(--primary);
 }
 
 /* Floating mobile menu button for shared SpaceShell */
 .sidebar-fab {
   display: none; position: fixed; inset-block-end: 18px; inset-inline-start: 18px;
   width: 52px; height: 52px; border-radius: 16px; border: none; cursor: pointer; z-index: 950;
-  background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff;
-  box-shadow: 0 6px 20px rgba(99,102,241,.4);
+  background: var(--primary-gradient); color: #fff;
+  box-shadow: 0 6px 20px rgba(255,106,0,.4);
   align-items: center; justify-content: center;
   transition: transform 0.2s cubic-bezier(.4,0,.2,1), box-shadow 0.2s;
 }
