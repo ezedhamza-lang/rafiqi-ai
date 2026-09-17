@@ -6518,6 +6518,11 @@ tr:hover td {
 .sidebar-group-sep { height: 1px; background: rgba(255,255,255,.14); margin: 0.25rem 8px; }
 .student-sidebar.is-light { box-shadow: 0 6px 18px rgba(2,6,23,.18); border-radius: 14px; position: relative; }
 .student-sidebar.is-light .student-sidebar-head { padding-bottom: 0.45rem; }
+.student-sidebar input,
+.student-sidebar textarea {
+  caret-color: #fff;
+  color: var(--sidebar-text);
+}
 .student-sidebar.is-light::after {
   content: ''; position: sticky; bottom: 0; left: 0; right: 0; display: block;
   height: 2rem; flex: none; pointer-events: none;
