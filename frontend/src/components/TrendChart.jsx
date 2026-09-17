@@ -30,8 +30,8 @@ export default function TrendChart({ points = [], height = 180 }) {
       <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="منحنى الأداء عبر الزمن" className="trend-chart">
         <defs>
           <linearGradient id="trendFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#0ea5e9" stopOpacity="0.35" />
-            <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.02" />
+            <stop offset="0%" stopColor="#ff6a00" stopOpacity="0.35" />
+            <stop offset="100%" stopColor="#ff6a00" stopOpacity="0.02" />
           </linearGradient>
         </defs>
 
@@ -45,11 +45,11 @@ export default function TrendChart({ points = [], height = 180 }) {
         ))}
 
         <path d={areaPath} fill="url(#trendFill)" />
-        <path d={linePath} fill="none" stroke="#0ea5e9" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d={linePath} fill="none" stroke="#ff6a00" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
 
         {points.map((p, i) => (
           <g key={i}>
-            <circle cx={x(i)} cy={y(p.percent)} r="4" fill="#fff" stroke="#0ea5e9" strokeWidth="2">
+            <circle cx={x(i)} cy={y(p.percent)} r="4" fill="#fff" stroke="#ff6a00" strokeWidth="2">
               <title>{`${p.subjectLabel || p.title || ''}: ${p.percent}%`}</title>
             </circle>
             <text x={x(i)} y={H - 8} textAnchor="middle" fontSize="10" fill="#6c757d">

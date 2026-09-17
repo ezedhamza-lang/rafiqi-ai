@@ -5,7 +5,7 @@ import { useI18n } from '../../i18n/index.jsx';
 const GAME_CODES = ['QUICK_MATH', 'WORD_BUILD', 'MEMORY'];
 const GAME_ICONS = { QUICK_MATH: 'calculate', WORD_BUILD: 'abc', MEMORY: 'grid_view' };
 const GAME_COLORS = {
-  QUICK_MATH: { gradient: 'linear-gradient(135deg, #3b82f6, #06b6d4)', icon: '#0ea5e9' },
+  QUICK_MATH: { gradient: 'linear-gradient(135deg, #ff6a00, #f59e0b)', icon: '#ff6a00' },
   WORD_BUILD: { gradient: 'linear-gradient(135deg, #f97316, #f59e0b)', icon: '#f59e0b' },
   MEMORY:     { gradient: 'linear-gradient(135deg, #ec4899, #f43f5e)', icon: '#ec4899' },
 };

@@ -35,17 +35,17 @@ const ClassGrades = lazy(() => import('./ClassGrades.jsx'));
 
 const TEACHER_GROUPS = [
   { label: 'الرئيسية', items: [
-    { to: '', end: true, icon: 'analytics', label: 'تحليل الأداء', color: '#3b82f6' },
+    { to: '', end: true, icon: 'analytics', label: 'تحليل الأداء', color: '#ff6a00' },
   ] },
   { label: 'التخطيط والإعداد', items: [
     { to: 'lesson-plan', icon: 'calendar_month', label: 'خطة الدرس', color: '#06b6d4' },
     { to: 'plans', icon: 'event_note', label: 'الخطط السنوية', color: '#0891b2' },
     { to: 'memos', icon: 'description', label: 'المذكرات', color: '#f59e0b' },
-    { to: 'schedules', icon: 'calendar_view_week', label: 'الجداول', color: '#8b5cf6' },
+    { to: 'schedules', icon: 'calendar_view_week', label: 'الجداول', color: '#f97316' },
   ] },
   { label: 'المواد والمحتوى', items: [
-    { to: 'class-subjects', icon: 'category', label: 'مواد الفصول', color: '#8b5cf6' },
-    { to: 'worksheets', icon: 'article', label: 'تمارين', color: '#a855f7' },
+    { to: 'class-subjects', icon: 'category', label: 'مواد الفصول', color: '#ff6a00' },
+    { to: 'worksheets', icon: 'article', label: 'تمارين', color: '#f59e0b' },
     { to: 'resources', icon: 'folder_special', label: 'الموارد', color: '#ec4899' },
     { to: 'library', icon: 'local_library', label: 'المكتبة', color: '#d946ef' },
   ] },
@@ -60,16 +60,16 @@ const TEACHER_GROUPS = [
     { to: 'averages', icon: 'percent', label: 'المعدلات', color: '#14b8a6' },
     { to: 'gradebook', icon: 'menu_book', label: 'سجل الدرجات', color: '#059669' },
     { to: 'grades', icon: 'workspace_premium', label: 'درجات الفصول', color: '#047857' },
-    { to: 'analytics', icon: 'monitoring', label: 'التحليل والتصدير', color: '#3b82f6' },
+    { to: 'analytics', icon: 'monitoring', label: 'التحليل والتصدير', color: '#ff6a00' },
   ] },
   { label: 'المتابعة والتقدم', items: [
     { to: 'lesson-progress', icon: 'trending_up', label: 'تقدم الدروس', color: '#f59e0b' },
-    { to: 'notes', icon: 'rate_review', label: 'الملاحظات', color: '#8b5cf6' },
+    { to: 'notes', icon: 'rate_review', label: 'الملاحظات', color: '#f97316' },
     { to: 'attendance', icon: 'fact_check', label: 'الحضور والغياب', color: '#10b981' },
     { to: 'health', icon: 'favorite', label: 'الحالة الصحية', color: '#ef4444' },
   ] },
   { label: 'الأدوات الذكية', items: [
-    { to: 'ai', icon: 'smart_toy', label: 'رفيقي AI', color: '#3b82f6' },
+    { to: 'ai', icon: 'smart_toy', label: 'رفيقي AI', color: '#ff6a00' },
     { to: 'live', icon: 'live_tv', label: 'الحصص المباشرة', color: '#22c55e' },
     { to: 'suggestions', icon: 'lightbulb', label: 'اقتراحات ذكية', color: '#eab308' },
   ] },

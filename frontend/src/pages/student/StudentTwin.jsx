@@ -7,7 +7,7 @@ import { useI18n } from '../../i18n/index.jsx';
 const QUICK_ACTIONS = [
   { icon: 'auto_stories', label: 'studentSpace.twin.qaBooks', to: '/student-space/books', color: '#14b8a6', gradient: 'linear-gradient(135deg,#14b8a6,#06b6d4)' },
   { icon: 'quiz', label: 'studentSpace.twin.qaQuizzes', to: '/student-space/quizzes', color: '#ef4444', gradient: 'linear-gradient(135deg,#ef4444,#f97316)' },
-  { icon: 'smart_toy', label: 'studentSpace.twin.qaRefeeqi', to: '/student-space/refeeqi', color: '#3b82f6', gradient: 'linear-gradient(135deg,#3b82f6,#8b5cf6)' },
+  { icon: 'smart_toy', label: 'studentSpace.twin.qaRefeeqi', to: '/student-space/refeeqi', color: '#ff6a00', gradient: 'linear-gradient(135deg,#ff6a00,#f59e0b)' },
   { icon: 'sports_esports', label: 'studentSpace.twin.qaPlay', to: '/student-space/play', color: '#ec4899', gradient: 'linear-gradient(135deg,#ec4899,#f43f5e)' },
 ];
 

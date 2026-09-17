@@ -70,7 +70,7 @@ export default function StudentProfile({ profile, onMenu }) {
           <span className="sp-v3__stat-lbl">{t('studentSpace.profile.levelShort')}</span>
         </div>
         <div className="sp-v3__stat">
-          <span className="material-icons sp-v3__stat-ico" style={{ color: '#8b5cf6' }}>bolt</span>
+          <span className="material-icons sp-v3__stat-ico" style={{ color: '#fbbf24' }}>bolt</span>
           <span className="sp-v3__stat-val">{user.xp}</span>
           <span className="sp-v3__stat-lbl">XP</span>
         </div>
@@ -85,7 +85,7 @@ export default function StudentProfile({ profile, onMenu }) {
           <span className="sp-v3__stat-lbl">{t('studentSpace.profile.coinsShort')}</span>
         </div>
         <div className="sp-v3__stat">
-          <span className="material-icons sp-v3__stat-ico" style={{ color: '#3b82f6' }}>auto_stories</span>
+          <span className="material-icons sp-v3__stat-ico" style={{ color: '#ff6a00' }}>auto_stories</span>
           <span className="sp-v3__stat-val">{profile.stats?.lessonsCompleted || 0}</span>
           <span className="sp-v3__stat-lbl">{t('studentSpace.profile.lessonsShort')}</span>
         </div>
