@@ -35,6 +35,7 @@ export default function StudentBooks() {
   const [books, setBooks] = useState([]);
   const [activeSubject, setActiveSubject] = useState('math');
   const [activeGrade, setActiveGrade] = useState('all');
+  const [query, setQuery] = useState('');
   const [openBook, setOpenBook] = useState(null);
   const [openScanBook, setOpenScanBook] = useState(null);
   const [openPdfBook, setOpenPdfBook] = useState(null);
@@ -54,7 +55,8 @@ export default function StudentBooks() {
   const filtered = books.filter(
     (b) =>
       bookTab(b) === activeSubject &&
-      (ownLevel ? b.gradeId === ownLevel : activeGrade === 'all' || b.gradeId === activeGrade)
+      (ownLevel ? b.gradeId === ownLevel : activeGrade === 'all' || b.gradeId === activeGrade) &&
+      (!query.trim() || (b.title && b.title.toLowerCase().includes(query.toLowerCase())) || (b.subtitle && b.subtitle.toLowerCase().includes(query.toLowerCase())))
   );
 
   return (
@@ -99,6 +101,21 @@ export default function StudentBooks() {
           ))}
         </div>
       )}
+
+      <div className="search-bar-wrap">
+        <span className="material-icons search-bar-icon">search</span>
+        <input
+          className="search-bar-input"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={t('studentSpace.books.searchPlaceholder')}
+        />
+        {query && (
+          <button className="search-bar-clear" onClick={() => setQuery('')}>
+            <span className="material-icons">close</span>
+          </button>
+        )}
+      </div>
 
       {loading ? (
         <div className="loading-wrap"><span className="spinner" /></div>

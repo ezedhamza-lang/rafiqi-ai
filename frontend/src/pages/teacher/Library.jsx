@@ -17,6 +17,7 @@ export default function Library() {
   const { t } = useI18n();
   const [resources, setResources] = useState([]);
   const [filters, setFilters] = useState({ subject: '', level: '', kind: '' });
+  const [query, setQuery] = useState('');
   const [view, setView] = useState(null);
   const [error, setError] = useState('');
 
@@ -34,6 +35,18 @@ export default function Library() {
   }, [load]);
 
 
+  const filtered = query.trim()
+    ? resources.filter((r) => {
+        const q = query.toLowerCase();
+        return (
+          (r.title && r.title.toLowerCase().includes(q)) ||
+          (r.level && r.level.toLowerCase().includes(q)) ||
+          (r.kind && r.kind.toLowerCase().includes(q)) ||
+          (r.teacher && `${r.teacher.firstName} ${r.teacher.lastName}`.toLowerCase().includes(q))
+        );
+      })
+    : resources;
+
   return (
     <div className="panel">
       <div className="panel-head">
@@ -42,6 +55,21 @@ export default function Library() {
       </div>
 
       {error && <div className="form-error" style={{ marginBottom: '0.8rem' }}>{error}</div>}
+
+      <div className="search-bar-wrap">
+        <span className="material-icons search-bar-icon">search</span>
+        <input
+          className="search-bar-input"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={t('teacherSpace.library.searchPlaceholder')}
+        />
+        {query && (
+          <button className="search-bar-clear" onClick={() => setQuery('')}>
+            <span className="material-icons">close</span>
+          </button>
+        )}
+      </div>
 
       <div className="form-row" style={{ marginBottom: '0.8rem' }}>
         <div className="form-group">
@@ -90,7 +118,7 @@ export default function Library() {
                 </tr>
               </thead>
               <tbody>
-                {resources.map((r) => (
+                {filtered.map((r) => (
                   <tr key={r.id}>
                     <td>{r.title}</td>
                     <td>{subjectLabel(t, r.subject)}</td>
