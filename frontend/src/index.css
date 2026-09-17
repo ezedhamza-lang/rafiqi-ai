@@ -1149,6 +1149,9 @@ select {
 }
 
 @media (max-width: 768px) {
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
   .faq-discover {
     flex-direction: column;
     align-items: center;
@@ -1156,6 +1159,25 @@ select {
   }
   .faq-owl {
     width: 140px;
+  }
+  .service-card {
+    padding: 1rem 0.9rem;
+  }
+  .service-card .material-icons {
+    font-size: 1.8rem;
+    width: 48px;
+    height: 48px;
+  }
+  .service-card h4 {
+    font-size: 0.88rem;
+  }
+  .auth-card {
+    padding: 1.8rem 1.4rem;
+    border-radius: 16px;
+  }
+  .services-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 0.7rem;
   }
 }
 
