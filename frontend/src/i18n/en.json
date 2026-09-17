@@ -1571,6 +1571,11 @@
       "wordPlaceholder": "Type the word",
       "check": "Check",
       "finish": "Finish",
+      "sortOrder": "Sort {{cur}} / {{total}}",
+      "classify": "Classify items",
+      "matchPairs": "Match pairs",
+      "correctFeedback": "Correct! ✓",
+      "wrongFeedback": "Try again ✗",
       "games": {
         "QUICK_MATH": {
           "title": "Quick Math",
@@ -1583,6 +1588,30 @@
         "MEMORY": {
           "title": "Memory Test",
           "desc": "Match similar pairs in as few tries as possible"
+        },
+        "SCIENCE_QUIZ": {
+          "title": "Science Quiz",
+          "desc": "Test your knowledge of science and nature"
+        },
+        "SCIENCE_CLASSIFY": {
+          "title": "Science Classify",
+          "desc": "Sort items into their correct groups"
+        },
+        "EXPERIMENT_STEPS": {
+          "title": "Experiment Steps",
+          "desc": "Order the steps of a science experiment correctly"
+        },
+        "ARABIC_SCRAMBLE": {
+          "title": "Arabic Scramble",
+          "desc": "Arrange Arabic letters to form the word"
+        },
+        "SENTENCE_BUILDER": {
+          "title": "Sentence Builder",
+          "desc": "Arrange words to form a meaningful sentence"
+        },
+        "FRENCH_MATCH": {
+          "title": "French Match",
+          "desc": "Match French words with their Arabic meaning"
         }
       }
     },
