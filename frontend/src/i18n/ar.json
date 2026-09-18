@@ -1333,6 +1333,7 @@
     "menu": "القائمة",
     "tabs": {
       "dashboard": "لوحة التحكم",
+      "rewards": "مكافآتي",
       "home": "ملخصي",
       "subjects": "موادي",
       "quizzes": "اختباراتي",
@@ -1364,6 +1365,13 @@
       "overallProgress": "التقدم العام",
       "accuracy": "الدقة",
       "welcomeBack": "مرحباً بعودتك!"
+    },
+    "rewards": {
+      "title": "مكافآتي وشاراتي",
+      "earnedOf": "{{earned}} من {{total}} شارة مكتسبة",
+      "earned": "الشارات المكتسبة",
+      "locked": "شارات مقفلة",
+      "nextBadge": "الشارة التالية"
     },
     "subjects": {
       "title": "موادي",

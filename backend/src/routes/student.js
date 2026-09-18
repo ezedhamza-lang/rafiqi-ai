@@ -113,4 +113,39 @@ router.get('/leaderboard', studentMiddleware, asyncHandler(async (req, res) => {
   res.json({ classId: me?.classId ?? null, rows, total: rows.length, me: rows.find((r) => r.current)?.rank || null });
 }));
 
+router.get('/rewards', studentMiddleware, asyncHandler(async (req, res) => {
+  const userId = req.user.id;
+  const [user, allBadges, earnedBadges] = await Promise.all([
+    prisma.user.findUnique({ where: { id: userId }, select: { xp: true, coins: true, level: true, streakDays: true } }),
+    prisma.badge.findMany(),
+    prisma.studentBadge.findMany({ where: { studentId: userId }, include: { badge: true } })
+  ]);
+
+  const earnedMap = new Map(earnedBadges.map(eb => [eb.badgeId, { earnedAt: eb.earnedAt }]));
+  const LEVEL_XP = 100;
+
+  const badges = allBadges.map(b => ({
+    id: b.id,
+    key: b.key,
+    name: b.name,
+    icon: b.icon,
+    description: b.description,
+    condition: b.condition,
+    earned: earnedMap.has(b.id),
+    earnedAt: earnedMap.get(b.id)?.earnedAt || null
+  }));
+
+  res.json({
+    xp: user.xp,
+    coins: user.coins,
+    level: user.level,
+    streakDays: user.streakDays,
+    levelProgress: user.xp % LEVEL_XP,
+    levelXp: LEVEL_XP,
+    badges,
+    totalEarned: earnedBadges.length,
+    totalBadges: allBadges.length
+  });
+}));
+
 export default router;

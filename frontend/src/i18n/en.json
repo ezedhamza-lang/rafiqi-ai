@@ -1333,6 +1333,7 @@
     "menu": "Menu",
     "tabs": {
       "dashboard": "Dashboard",
+      "rewards": "My Rewards",
       "home": "My Summary",
       "subjects": "My Subjects",
       "quizzes": "My Quizzes",
@@ -1364,6 +1365,13 @@
       "overallProgress": "Overall Progress",
       "accuracy": "Accuracy",
       "welcomeBack": "Welcome back!"
+    },
+    "rewards": {
+      "title": "My Rewards & Badges",
+      "earnedOf": "{{earned}} of {{total}} badges earned",
+      "earned": "Earned Badges",
+      "locked": "Locked Badges",
+      "nextBadge": "Next Badge"
     },
     "subjects": {
       "title": "My Subjects",
