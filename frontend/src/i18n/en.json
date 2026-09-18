@@ -1346,6 +1346,7 @@
       "portfolio": "My Portfolio",
       "dailyChallenge": "Daily Challenge",
       "progress": "My Progress",
+      "virtualFriend": "My Virtual Friend",
       "books": "My Interactive Books",
       "adaptive": "Smart Review",
       "plan": "My Learning Plan",
@@ -1422,6 +1423,12 @@
       "milestones": "Learning Milestones",
       "remaining": "remaining",
       "noData": "No lessons started yet. Begin by reviewing your subjects!"
+    },
+    "virtualFriend": {
+      "title": "My Learning Buddy",
+      "subtitle": "Your friend who helps you learn!",
+      "placeholder": "Ask your friend...",
+      "quickActions": "Quick Ask:"
     },
     "subjects": {
       "title": "My Subjects",

@@ -1346,6 +1346,7 @@
       "portfolio": "ملفي الإبداعي",
       "dailyChallenge": "تحدي اليوم",
       "progress": "تقدمي",
+      "virtualFriend": "صديقي الافتراضي",
       "books": "كتبي التفاعلية",
       "adaptive": "مراجعة ذكية",
       "plan": "خطة تعلّمي",
@@ -1422,6 +1423,12 @@
       "milestones": "المحطات التعليمية",
       "remaining": "متبقي",
       "noData": "لم تبدأ أي درس بعد. ابدأ بمراجعة موادك!"
+    },
+    "virtualFriend": {
+      "title": "صديقي التعليمي",
+      "subtitle": "رفيقك الذي يساعدك في التعلم!",
+      "placeholder": "اسأل صديقك...",
+      "quickActions": "اسأل سريعاً:"
     },
     "subjects": {
       "title": "موادي",
