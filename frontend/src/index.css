@@ -8595,3 +8595,91 @@ html:not([data-theme="dark"]) .student-layout .sidebar-fab {
   background: linear-gradient(135deg, #2563EB, #1E40AF);
   box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
 }
+
+/* ============================================================
+   STUDENT PALETTE 70/20/10 — DARK MODE (same system, dark values)
+   ============================================================ */
+
+/* Unified nav: muted icons/dots, Blue active, Gold marker */
+[data-theme="dark"] .student-sidebar .student-nav-item .nav-dot {
+  background: #9FB6D9;
+  box-shadow: 0 0 0 2.5px rgba(159, 182, 217, 0.25);
+}
+[data-theme="dark"] .student-sidebar .student-nav-item .nav-ico {
+  color: #9FB6D9;
+  filter: none;
+}
+[data-theme="dark"] .student-sidebar .student-nav-item:hover {
+  background: rgba(96, 165, 250, 0.15);
+  border-color: rgba(96, 165, 250, 0.5);
+}
+[data-theme="dark"] .student-sidebar .student-nav-item:hover .nav-dot { background: #F5B942; box-shadow: 0 0 0 2.5px rgba(245, 185, 66, 0.3); }
+[data-theme="dark"] .student-sidebar .student-nav-item:hover .nav-ico { color: #fff; }
+[data-theme="dark"] .student-sidebar .student-nav-item.active {
+  background: rgba(96, 165, 250, 0.2);
+  border-color: #60A5FA;
+}
+[data-theme="dark"] .student-sidebar .student-nav-item.active::before { background: #F5B942; }
+[data-theme="dark"] .student-sidebar .student-nav-item.active .nav-dot { background: #F5B942; box-shadow: 0 0 0 2.5px rgba(245, 185, 66, 0.3); }
+[data-theme="dark"] .student-sidebar .student-nav-item.active .nav-ico { color: #fff; }
+
+/* Unified deep-Navy page heroes (beats inline per-page gradients) + Gold accent line */
+[data-theme="dark"] .student-main .dc-header,
+[data-theme="dark"] .student-main .exp-header,
+[data-theme="dark"] .student-main .cp-header,
+[data-theme="dark"] .student-main .pg-header,
+[data-theme="dark"] .student-main .vf-header,
+[data-theme="dark"] .student-main .cert-hero,
+[data-theme="dark"] .student-main .lb-hero,
+[data-theme="dark"] .student-main .wc-hero,
+[data-theme="dark"] .student-main .fr-hero {
+  background: linear-gradient(135deg, #0F2A52, #1E3A6E) !important;
+  color: #fff;
+  border-bottom: 3px solid #F5B942;
+}
+
+/* Twin stat cards: slate + Blue icon (was gold/blue/red gradients) */
+[data-theme="dark"] .student-main .twin-v3__stat-card--gold,
+[data-theme="dark"] .student-main .twin-v3__stat-card--blue,
+[data-theme="dark"] .student-main .twin-v3__stat-card--red {
+  background: linear-gradient(135deg, #1E293B, #0F2A52);
+  color: #E2E8F0;
+  border: 1px solid #334155;
+}
+[data-theme="dark"] .student-main .twin-v3__stat-card .material-icons { color: #60A5FA; opacity: 1; }
+[data-theme="dark"] .student-main .twin-v3__stat-card-val { color: #fff; }
+[data-theme="dark"] .student-main .twin-v3__stat-card-lbl { color: #9FB6D9; }
+[data-theme="dark"] .student-main .twin-v3__stat-card-sub { color: #64748B; }
+
+/* Quick actions: slate buttons + accent icon (was 4 different gradients) */
+[data-theme="dark"] .student-main .twin-v3__qa-btn {
+  background: #1E293B;
+  color: #E2E8F0;
+  border: 1px solid #334155;
+}
+[data-theme="dark"] .student-main .twin-v3__qa-ico { color: var(--qa-color); }
+[data-theme="dark"] .student-main .twin-v3__qa-btn:hover { border-color: #60A5FA; }
+
+/* Daily Challenge card: deep gold-tinted slate */
+[data-theme="dark"] .student-main .twin-v3__challenge {
+  background: linear-gradient(135deg, #451A03, #78350F);
+  border-color: #F5B942;
+}
+[data-theme="dark"] .student-main .twin-v3__challenge-head h3 { color: #FDE68A; }
+[data-theme="dark"] .student-main .twin-v3__challenge-desc { color: #D6A94C; }
+[data-theme="dark"] .student-main .twin-v3__goal {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(245, 185, 66, 0.3);
+}
+[data-theme="dark"] .student-main .twin-v3__goal-title { color: #FDE68A; }
+
+/* Gold 10% — rank + "me" markers */
+[data-theme="dark"] .student-main .lb-my-rank__badge,
+[data-theme="dark"] .student-main .lb-row__me {
+  background: #F5B942;
+  color: #102A56;
+}
+[data-theme="dark"] .student-main .lb-row--me {
+  border-color: #F5B942;
+  background: rgba(245, 185, 66, 0.08);
+}

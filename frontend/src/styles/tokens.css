@@ -56,6 +56,18 @@
   --blue-bg: #dbeafe;
   --blue-border: #bfdbfe;
 
+  /* Palette 70/20/10 — student spaces */
+  --palette-bg: #F7F9FC;
+  --palette-navy: #102A56;
+  --palette-navy-2: #1E3A6E;
+  --palette-blue: #2563EB;
+  --palette-sky: #EAF4FF;
+  --palette-sky-border: #BFDBFE;
+  --palette-gold: #F5B942;
+  --palette-green: #10B981;
+  --palette-orange: #F59E0B;
+  --palette-danger: #EF4444;
+
   /* Typography — Geist للّاتيني/الأرقام، Noto Sans Arabic للعربية */
   --font-family: 'Geist', 'Noto Sans Arabic', 'Tajawal', 'Nunito', sans-serif;
   --font-arabic: 'Noto Sans Arabic', 'Tajawal', sans-serif;
@@ -146,6 +158,18 @@
   --blue: #60a5fa;
   --blue-bg: #172554;
   --blue-border: #1d4ed8;
+
+  /* Palette 70/20/10 — dark variants */
+  --palette-bg: #0F172A;
+  --palette-navy: #0F2A52;
+  --palette-navy-2: #1E3A6E;
+  --palette-blue: #60A5FA;
+  --palette-sky: #172554;
+  --palette-sky-border: #1D4ED8;
+  --palette-gold: #F5B942;
+  --palette-green: #34D399;
+  --palette-orange: #FB923C;
+  --palette-danger: #F87171;
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
   --shadow: 0 4px 30px rgba(0, 0, 0, 0.45);
