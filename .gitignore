@@ -35,3 +35,6 @@ logs_*.zip
 backend/scripts/qa-shots/
 backend/scripts/audit-student-pages-report.json
 
+
+# Google OAuth secrets (never commit)
+client_secret*.json
