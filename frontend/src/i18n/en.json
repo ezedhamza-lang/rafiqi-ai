@@ -1343,6 +1343,7 @@
       "paperExam": "Paper Exam",
       "play": "Play Zone",
       "experiments": "Science Experiments",
+      "portfolio": "My Portfolio",
       "books": "My Interactive Books",
       "adaptive": "Smart Review",
       "plan": "My Learning Plan",
@@ -1384,6 +1385,24 @@
       "steps": "Experiment Steps",
       "question": "Experiment Question",
       "funFact": "Fun Fact"
+    },
+    "portfolio": {
+      "title": "My Creative Portfolio",
+      "subtitle": "Draw, write, and record your voice!",
+      "draw": "Draw",
+      "writeStory": "Write Story",
+      "recordAudio": "Record Audio",
+      "myWorks": "My Works",
+      "save": "Save",
+      "untitled": "Untitled",
+      "untitledAudio": "Untitled Recording",
+      "storyTitle": "Story Title",
+      "storyContent": "Write your story here...",
+      "saveStory": "Save Story",
+      "audioTitle": "Recording Title",
+      "startRec": "Start Recording",
+      "saveAudio": "Save Recording",
+      "empty": "No works yet. Start drawing, writing, or recording!"
     },
     "subjects": {
       "title": "My Subjects",

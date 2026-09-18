@@ -1343,6 +1343,7 @@
       "paperExam": "اختبار ورقي",
       "play": "قسم اللعب",
       "experiments": "تجارب علمية",
+      "portfolio": "ملفي الإبداعي",
       "books": "كتبي التفاعلية",
       "adaptive": "مراجعة ذكية",
       "plan": "خطة تعلّمي",
@@ -1384,6 +1385,24 @@
       "steps": "خطوات التجربة",
       "question": "سؤال التجربة",
       "funFact": "معلومة ممتعة"
+    },
+    "portfolio": {
+      "title": "ملفي الإبداعي",
+      "subtitle": "ارسم واكتب وسجل صوتك!",
+      "draw": "رسم",
+      "writeStory": "كتابة قصة",
+      "recordAudio": "تسجيل صوتي",
+      "myWorks": "أعمالي",
+      "save": "حفظ",
+      "untitled": "بدون عنوان",
+      "untitledAudio": "تسجيل بدون عنوان",
+      "storyTitle": "عنوان القصة",
+      "storyContent": "اكتب قصتك هنا...",
+      "saveStory": "حفظ القصة",
+      "audioTitle": "عنوان التسجيل",
+      "startRec": "بدء التسجيل",
+      "saveAudio": "حفظ التسجيل",
+      "empty": "لم تُضف أعمالاً بعد. ابدأ بالرسم أو الكتابة!"
     },
     "subjects": {
       "title": "موادي",

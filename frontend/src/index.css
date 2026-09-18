@@ -7028,6 +7028,58 @@ tr:hover td {
 .exp-fun-fact__text { margin: 0; font-size: 0.8rem; line-height: 1.5; }
 @media (max-width: 600px) { .exp-grid { grid-template-columns: 1fr; } }
 
+/* --- Student Portfolio --- */
+.student-portfolio { padding: 0; max-width: 900px; margin: 0 auto; }
+.cp-header { border-radius: 0 0 16px 16px; padding: 1.2rem 1rem; color: #fff; display: flex; align-items: center; gap: 0.8rem; }
+.cp-header__icon { font-size: 2rem; }
+.cp-header__title { margin: 0; font-size: 1.2rem; font-weight: 800; }
+.cp-header__sub { margin: 0.2rem 0 0; opacity: 0.9; font-size: 0.85rem; }
+.cp-tabs { display: flex; gap: 0.4rem; padding: 0.8rem 1rem; overflow-x: auto; }
+.cp-tab { display: flex; align-items: center; gap: 0.3rem; padding: 0.4rem 0.8rem; border-radius: 20px; border: 1px solid var(--border); background: var(--surface, #fff); font-size: 0.8rem; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+.cp-tab:hover { border-color: var(--primary); }
+.cp-tab--active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.cp-content { padding: 0 1rem; }
+.cp-draw { background: var(--surface, #fff); border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem; }
+.cp-draw__canvas { width: 100%; max-width: 600px; border: 1px solid var(--border); border-radius: 8px; cursor: crosshair; touch-action: none; display: block; margin: 0 auto; }
+.cp-draw__tools { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.6rem; flex-wrap: wrap; justify-content: center; }
+.cp-draw__colors { display: flex; gap: 0.3rem; }
+.cp-color-btn { width: 24px; height: 24px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; transition: all 0.15s; }
+.cp-color-btn--active { border-color: var(--text); transform: scale(1.2); }
+.cp-draw__sizes { display: flex; gap: 0.3rem; align-items: center; }
+.cp-size-btn { width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface, #fff); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.cp-size-btn--active { border-color: var(--primary); background: var(--primary); color: #fff; }
+.cp-draw__clear, .cp-draw__save { width: 32px; height: 32px; border-radius: 8px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.cp-draw__clear { background: #fee2e2; color: #ef4444; }
+.cp-draw__save { background: #d1fae5; color: #10b981; }
+.cp-story { background: var(--surface, #fff); border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem; }
+.cp-story__title { width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem; }
+.cp-story__content { width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem; resize: vertical; font-family: inherit; }
+.cp-story__save { display: flex; align-items: center; gap: 0.3rem; margin-top: 0.5rem; padding: 0.5rem 1rem; border: none; border-radius: 8px; background: var(--primary); color: #fff; font-weight: 600; cursor: pointer; }
+.cp-audio { background: var(--surface, #fff); border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem; }
+.cp-audio__title { width: 100%; padding: 0.5rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; margin-bottom: 0.5rem; }
+.cp-audio__controls { display: flex; justify-content: center; margin: 0.5rem 0; }
+.cp-audio__start, .cp-audio__stop { display: flex; align-items: center; gap: 0.3rem; padding: 0.6rem 1.2rem; border: none; border-radius: 20px; font-weight: 600; cursor: pointer; }
+.cp-audio__start { background: #ef4444; color: #fff; }
+.cp-audio__stop { background: #374151; color: #fff; animation: pulse 1.5s infinite; }
+.cp-audio__preview { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.cp-audio__player { width: 100%; max-width: 400px; }
+.cp-audio__save { display: flex; align-items: center; gap: 0.3rem; padding: 0.4rem 1rem; border: none; border-radius: 8px; background: var(--primary); color: #fff; font-weight: 600; cursor: pointer; }
+.cp-gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 0.6rem; }
+.cp-gallery__empty { text-align: center; padding: 2rem; color: var(--muted); }
+.cp-gallery__item { background: var(--surface, #fff); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.cp-gallery__item-header { display: flex; align-items: center; gap: 0.3rem; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--border); }
+.cp-gallery__item-type { font-size: 1.1rem; }
+.cp-gallery__item-date { font-size: 0.65rem; color: var(--muted); flex: 1; }
+.cp-gallery__delete { background: none; border: none; cursor: pointer; color: var(--muted); padding: 2px; }
+.cp-gallery__delete .material-icons { font-size: 0.9rem; }
+.cp-gallery__img { width: 100%; height: auto; display: block; }
+.cp-gallery__story { padding: 0.6rem; }
+.cp-gallery__story strong { font-size: 0.85rem; display: block; margin-bottom: 0.3rem; }
+.cp-gallery__story p { margin: 0; font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
+.cp-gallery__audio { padding: 0.6rem; display: flex; flex-direction: column; gap: 0.3rem; }
+.cp-gallery__audio span { font-size: 0.8rem; font-weight: 600; }
+@media (max-width: 600px) { .cp-gallery { grid-template-columns: 1fr; } }
+
 
 /* --- ResourcePaper: ورقة رسمية للموارد المولّدة --- */
 .rp-section-title { font-weight: 800; margin: 0.9rem 0 0.4rem; }

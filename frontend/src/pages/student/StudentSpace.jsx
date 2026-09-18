@@ -26,6 +26,7 @@ const StudentFlashcards = lazy(() => import('./StudentFlashcards.jsx'));
 const StudentDashboard = lazy(() => import('./StudentDashboard.jsx'));
 const StudentRewards = lazy(() => import('./StudentRewards.jsx'));
 const StudentExperiments = lazy(() => import('./StudentExperiments.jsx'));
+const StudentPortfolio = lazy(() => import('./StudentPortfolio.jsx'));
 const SchoolCalendar = lazy(() => import('../../components/SchoolCalendar.jsx'));
 
 export default function StudentSpace() {
@@ -121,6 +122,7 @@ export default function StudentSpace() {
     { label: t('studentSpace.groups.activities'), items: [
       { to: 'play', icon: 'sports_esports', label: L('play'), color: '#ff6a00' },
       { to: 'experiments', icon: 'science', label: L('experiments'), color: '#10b981' },
+      { to: 'portfolio', icon: 'palette', label: L('portfolio'), color: '#8b5cf6' },
     ] },
   ];
 
@@ -173,6 +175,7 @@ export default function StudentSpace() {
           <Route path="paper-exam" element={<PaperExamScan />} />
           <Route path="play" element={<PlayZone />} />
           <Route path="experiments" element={<StudentExperiments />} />
+          <Route path="portfolio" element={<StudentPortfolio />} />
           <Route path="books" element={<StudentBooks />} />
           <Route path="adaptive" element={<StudentAdaptive />} />
           <Route path="plan" element={<StudentLearningPlan />} />
