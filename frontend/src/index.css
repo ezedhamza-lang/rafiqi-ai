@@ -2578,7 +2578,7 @@ tr:hover td {
   border-radius: 12px;
   padding: 1.2rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 .card-item:hover {
@@ -4559,13 +4559,10 @@ tr:hover td {
 .sentence-word.placed { background: var(--primary); color: #fff; border-color: var(--primary); }
 
 /* Game card glow animation */
-.game-card {
-  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
-}
 .game-card:hover {
-  transform: translateY(-4px) !important;
-  box-shadow: 0 8px 24px rgba(0,0,0,.12) !important;
-  border-color: var(--primary) !important;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  border-color: var(--primary);
 }
 
 .game-icon { margin-bottom: 0.5rem; }
