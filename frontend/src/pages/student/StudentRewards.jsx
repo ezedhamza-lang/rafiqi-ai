@@ -21,7 +21,7 @@ function LevelProgressBar({ progress, level }) {
         <div className="rw-level-bar__fill" style={{ width: `${progress}%` }} />
       </div>
       <div className="rw-level-bar__sub">
-        <span>{progress} / 100 XP</span>
+        <span dir="ltr">{progress} / 100 XP</span>
       </div>
     </div>
   );
@@ -71,32 +71,6 @@ export default function StudentRewards() {
 
   return (
     <div className="student-rewards">
-      <div className="rw-header" style={{ background: 'linear-gradient(135deg, #f59e0b, #ff6a00)' }}>
-        <div className="rw-header__stats">
-          <div className="rw-header__stat">
-            <span className="material-icons">bolt</span>
-            <div>
-              <span className="rw-header__stat-val">{data.xp}</span>
-              <span className="rw-header__stat-lbl">XP</span>
-            </div>
-          </div>
-          <div className="rw-header__stat">
-            <span className="material-icons">payments</span>
-            <div>
-              <span className="rw-header__stat-val">{data.coins}</span>
-              <span className="rw-header__stat-lbl">{t('studentSpace.profile.coinsShort')}</span>
-            </div>
-          </div>
-          <div className="rw-header__stat">
-            <span className="material-icons">local_fire_department</span>
-            <div>
-              <span className="rw-header__stat-val">{data.streakDays}</span>
-              <span className="rw-header__stat-lbl">{t('studentSpace.profile.streakShort')}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="rw-body">
         <LevelProgressBar progress={data.levelProgress} level={data.level} />
 

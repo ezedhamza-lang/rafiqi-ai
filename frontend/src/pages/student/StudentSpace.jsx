@@ -104,7 +104,6 @@ export default function StudentSpace() {
       { to: '', end: true, icon: 'home', label: L('home'), color: '#ff6a00' },
       { to: 'dashboard', icon: 'dashboard', label: L('dashboard'), color: '#10b981' },
       { to: 'rewards', icon: 'emoji_events', label: L('rewards'), color: '#f59e0b' },
-      { to: 'twin', icon: 'insights', label: L('twin'), color: '#10b981' },
     ] },
     { label: t('studentSpace.groups.learning'), items: [
       { to: 'books', icon: 'auto_stories', label: L('books'), color: '#ff6a00' },
@@ -206,7 +205,6 @@ export default function StudentSpace() {
           <Route path="stories" element={<StudentStories />} />
           <Route path="calendar" element={<SchoolCalendar />} />
           <Route path="refeeqi" element={<AskRefeeqi />} />
-          <Route path="twin" element={<StudentTwin />} />
           <Route path="schedule" element={<StudentSchedule />} />
           <Route path="*" element={<Navigate to="." replace />} />
         </Routes>

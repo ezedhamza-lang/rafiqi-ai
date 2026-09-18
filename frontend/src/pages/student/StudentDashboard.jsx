@@ -99,19 +99,6 @@ export default function StudentDashboard() {
 
   return (
     <div className="student-dashboard">
-      <div className="ds-hero" style={{ background: 'linear-gradient(135deg, #ff6a00, #f59e0b)' }}>
-        <div className="ds-hero__left">
-          <h2 className="ds-hero__greeting">{greeting.emoji} {t(greetingKey, { name: user.firstName })}</h2>
-          <p className="ds-hero__sub">
-            {t('studentSpace.dashboard.level', { n: user.level })}
-          </p>
-        </div>
-        <div className="ds-hero__ring">
-          <ProgressRing percent={levelProgress} color="#fff" />
-          <span className="ds-hero__ring-label">{t('studentSpace.dashboard.nextLevel')}</span>
-        </div>
-      </div>
-
       <div className="ds-stats-grid">
         <MiniStatCard icon="bolt" value={user.xp} label="XP" color="#f59e0b" />
         <MiniStatCard icon="payments" value={user.coins} label={t('studentSpace.profile.coinsShort')} color="#10b981" />
