@@ -6995,7 +6995,7 @@ tr:hover td {
   width: 30px; height: 30px; border-radius: 8px; cursor: pointer; display: grid; place-items: center; flex: none;
 }
 .sidebar-toggle:hover { color: #fff; border-color: var(--primary); background: var(--primary); }
-.student-sidebar-nav { display: flex; flex-direction: column; gap: 0.28rem; }
+.student-sidebar-nav { display: flex; flex-direction: column; gap: 0.28rem; overflow-y: auto; flex: 1; }
 
 .student-nav-item {
   position: relative;
