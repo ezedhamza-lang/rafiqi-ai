@@ -1344,6 +1344,7 @@
       "play": "Play Zone",
       "experiments": "Science Experiments",
       "portfolio": "My Portfolio",
+      "dailyChallenge": "Daily Challenge",
       "books": "My Interactive Books",
       "adaptive": "Smart Review",
       "plan": "My Learning Plan",
@@ -1403,6 +1404,14 @@
       "startRec": "Start Recording",
       "saveAudio": "Save Recording",
       "empty": "No works yet. Start drawing, writing, or recording!"
+    },
+    "dailyChallenge": {
+      "title": "Daily Challenge",
+      "subtitle": "One question every day from a different subject!",
+      "streakDays": "day streak",
+      "correct": "Well done! Correct answer!",
+      "wrong": "No worries! Try again tomorrow",
+      "nextQuestion": "Next Question"
     },
     "subjects": {
       "title": "My Subjects",
