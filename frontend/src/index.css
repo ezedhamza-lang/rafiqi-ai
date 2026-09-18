@@ -6967,8 +6967,8 @@ tr:hover td {
 
 /* Sidebar (right in RTL — first child in flex row) */
 .student-sidebar {
-  flex: 0 0 250px;
-  width: 250px;
+  flex: 0 0 220px;
+  width: 220px;
   position: sticky;
   top: 0.75rem;
   max-height: calc(100vh - 1.5rem);
@@ -7035,6 +7035,25 @@ tr:hover td {
 .student-nav-item.active .nav-label { color: #fff; font-weight: 800; }
 .student-sidebar.is-collapsed .student-nav-item { justify-content: center; padding-inline: 0; }
 .student-sidebar.is-collapsed .nav-label { display: none; }
+/* Collapsed rail: stack head + big obvious reopen button */
+.student-sidebar.is-collapsed .student-sidebar-head { flex-direction: column; align-items: stretch; }
+.student-sidebar.is-collapsed .sidebar-toggle {
+  width: 100%; height: 40px; border-radius: 10px; font-size: 1.3rem;
+  background: var(--primary); border-color: transparent; color: #fff;
+  box-shadow: 0 4px 14px rgba(0,0,0,.35);
+}
+/* Desktop: hover the collapsed rail to preview-expand it (effortless reopen) */
+@media (hover: hover) {
+  .student-sidebar.is-collapsed:hover { flex-basis: 220px; width: 220px; }
+  .student-sidebar.is-collapsed:hover .student-sidebar-title { display: inline; }
+  .student-sidebar.is-collapsed:hover .nav-label { display: inline; }
+  .student-sidebar.is-collapsed:hover .student-nav-item { justify-content: flex-start; padding-inline: 0.6rem; }
+  .student-sidebar.is-collapsed:hover .student-sidebar-head { flex-direction: row; align-items: center; }
+  .student-sidebar.is-collapsed:hover .sidebar-toggle {
+    width: 30px; height: 30px; font-size: 1rem; border-radius: 8px;
+    background: var(--sidebar-surface); border-color: rgba(255,255,255,.25); box-shadow: none;
+  }
+}
 
 /* Mobile: hide inline sidebar, use drawer */
 .student-sidebar-drawer { display: none; }

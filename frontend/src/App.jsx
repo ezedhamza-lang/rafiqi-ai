@@ -1,5 +1,5 @@
 import { lazy, Suspense, Component } from 'react';
-import { Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, Link } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { ChatProvider } from './context/ChatContext.jsx';
 import { NotificationProvider } from './context/NotificationContext.jsx';
@@ -80,9 +80,6 @@ function NotFound() {
 
 export default function App() {
   const { t } = useI18n();
-  const { pathname } = useLocation();
-  const isStudentSpace = pathname.startsWith('/student-space');
-  const isParentSpace = pathname.startsWith('/parent');
   return (
     <AuthProvider>
       <ChatProvider>
@@ -121,7 +118,7 @@ export default function App() {
               </Suspense>
             </ErrorBoundary>
           </main>
-          {!isStudentSpace && !isParentSpace && <Footer />}
+          <Footer />
         </NotificationProvider>
       </ChatProvider>
     </AuthProvider>
