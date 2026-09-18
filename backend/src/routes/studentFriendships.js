@@ -1,12 +1,12 @@
 import { Router } from 'express';
 import { PrismaClient } from '@prisma/client';
-import { requireAuth } from '../middleware/auth.js';
+import { authMiddleware } from '../auth.js';
 
 const prisma = new PrismaClient();
 const router = Router();
 
 // GET /api/student/friends — list friends + pending requests
-router.get('/friends', requireAuth, async (req, res) => {
+router.get('/friends', authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
 
@@ -56,7 +56,7 @@ router.get('/friends', requireAuth, async (req, res) => {
 });
 
 // GET /api/student/friends/search?q=name — search students
-router.get('/friends/search', requireAuth, async (req, res) => {
+router.get('/friends/search', authMiddleware, async (req, res) => {
   try {
     const { q } = req.query;
     if (!q || q.length < 2) return res.json({ users: [] });
@@ -99,7 +99,7 @@ router.get('/friends/search', requireAuth, async (req, res) => {
 });
 
 // POST /api/student/friends/request — send friend request
-router.post('/friends/request', requireAuth, async (req, res) => {
+router.post('/friends/request', authMiddleware, async (req, res) => {
   try {
     const { userId: addresseeId } = req.body;
     const requesterId = req.user.id;
@@ -131,7 +131,7 @@ router.post('/friends/request', requireAuth, async (req, res) => {
 });
 
 // POST /api/student/friends/accept/:id — accept friend request
-router.post('/friends/accept/:id', requireAuth, async (req, res) => {
+router.post('/friends/accept/:id', authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
     const friendship = await prisma.friendship.findUnique({ where: { id } });
@@ -153,7 +153,7 @@ router.post('/friends/accept/:id', requireAuth, async (req, res) => {
 });
 
 // POST /api/student/friends/decline/:id — decline friend request
-router.post('/friends/decline/:id', requireAuth, async (req, res) => {
+router.post('/friends/decline/:id', authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
     await prisma.friendship.delete({ where: { id } });
@@ -165,7 +165,7 @@ router.post('/friends/decline/:id', requireAuth, async (req, res) => {
 });
 
 // DELETE /api/student/friends/:id — remove friend
-router.delete('/friends/:id', requireAuth, async (req, res) => {
+router.delete('/friends/:id', authMiddleware, async (req, res) => {
   try {
     const { id } = req.params;
     await prisma.friendship.delete({ where: { id } });

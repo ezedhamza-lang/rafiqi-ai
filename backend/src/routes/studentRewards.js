@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { PrismaClient } from '@prisma/client';
-import { requireAuth } from '../middleware/auth.js';
+import { authMiddleware } from '../auth.js';
 import {
   generateCertificate,
   generateLevelCertificate,
@@ -11,7 +11,7 @@ const prisma = new PrismaClient();
 const router = Router();
 
 // GET /api/student/certificates — list earned certificates
-router.get('/certificates', requireAuth, async (req, res) => {
+router.get('/certificates', authMiddleware, async (req, res) => {
   try {
     const userId = req.user.id;
     const user = await prisma.user.findUnique({
@@ -82,7 +82,7 @@ router.get('/certificates', requireAuth, async (req, res) => {
 });
 
 // GET /api/student/certificates/:type/:id/pdf — download certificate PDF
-router.get('/certificates/:type/:id/pdf', requireAuth, async (req, res) => {
+router.get('/certificates/:type/:id/pdf', authMiddleware, async (req, res) => {
   try {
     const { type, id } = req.params;
     const user = await prisma.user.findUnique({
@@ -122,7 +122,7 @@ router.get('/certificates/:type/:id/pdf', requireAuth, async (req, res) => {
 });
 
 // GET /api/student/leaderboard — honor board / weekly leaderboard
-router.get('/leaderboard', requireAuth, async (req, res) => {
+router.get('/leaderboard', authMiddleware, async (req, res) => {
   try {
     const students = await prisma.user.findMany({
       where: { role: 'STUDENT' },
