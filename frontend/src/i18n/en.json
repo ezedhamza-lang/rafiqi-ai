@@ -1335,7 +1335,8 @@
       "main": "Home",
       "learning": "Learning",
       "exams": "Assessments",
-      "activities": "Activities"
+      "activities": "Activities",
+      "rewards": "Rewards & Prizes"
     },
     "collapse": "Collapse menu",
     "expand": "Expand menu",
@@ -1356,6 +1357,9 @@
       "dailyChallenge": "Daily Challenge",
       "progress": "My Progress",
       "virtualFriend": "My Virtual Friend",
+      "leaderboard": "Honor Board",
+      "weeklyChallenge": "Weekly Challenge",
+      "certificates": "My Certificates",
       "books": "My Interactive Books",
       "adaptive": "Smart Review",
       "plan": "My Learning Plan",
@@ -1438,6 +1442,27 @@
       "subtitle": "Your friend who helps you learn!",
       "placeholder": "Ask your friend...",
       "quickActions": "Quick Ask:"
+    },
+    "leaderboard": {
+      "title": "Honor Board",
+      "subtitle": "Top students this week",
+      "yourRank": "Your rank",
+      "level": "Level",
+      "me": "Me"
+    },
+    "weeklyChallenge": {
+      "title": "Weekly Challenge",
+      "submit": "Submit Answers",
+      "excellent": "Excellent! You're a star!",
+      "good": "Good! Keep going!",
+      "tryAgain": "Try again next week!"
+    },
+    "certificates": {
+      "title": "My Certificates",
+      "subtitle": "Your downloadable and printable certificates",
+      "empty": "No certificates yet. Keep learning to earn certificates!",
+      "download": "Download PDF",
+      "generating": "Generating..."
     },
     "subjects": {
       "title": "My Subjects",

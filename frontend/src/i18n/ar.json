@@ -1335,7 +1335,8 @@
       "main": "الرئيسية",
       "learning": "التعلّم",
       "exams": "الاختبارات",
-      "activities": "الأنشطة"
+      "activities": "الأنشطة",
+      "rewards": "المكافآت والجوائز"
     },
     "collapse": "طيّ القائمة",
     "expand": "توسيع القائمة",
@@ -1356,6 +1357,9 @@
       "dailyChallenge": "تحدي اليوم",
       "progress": "تقدمي",
       "virtualFriend": "صديقي الافتراضي",
+      "leaderboard": "لوحة الشرف",
+      "weeklyChallenge": "التحدي الأسبوعي",
+      "certificates": "شهاداتي",
       "books": "كتبي التفاعلية",
       "adaptive": "مراجعة ذكية",
       "plan": "خطة تعلّمي",
@@ -1438,6 +1442,27 @@
       "subtitle": "رفيقك الذي يساعدك في التعلم!",
       "placeholder": "اسأل صديقك...",
       "quickActions": "اسأل سريعاً:"
+    },
+    "leaderboard": {
+      "title": "لوحة الشرف",
+      "subtitle": "أفضل التلاميذ هذا الأسبوع",
+      "yourRank": "ترتيبك",
+      "level": "المستوى",
+      "me": "أنا"
+    },
+    "weeklyChallenge": {
+      "title": "التحدي الأسبوعي",
+      "submit": "إرسال الإجابات",
+      "excellent": "ممتاز! أنت نجم!",
+      "good": "جيد! واصل التقدم!",
+      "tryAgain": "حاول مرة أخرى الأسبوع القادم!"
+    },
+    "certificates": {
+      "title": "شهاداتي",
+      "subtitle": "شهاداتك القابلة للتحميل والطباعة",
+      "empty": "لم تحصل على شهادة بعد. واصل التعلم لكسب شهادات!",
+      "download": "تحميل PDF",
+      "generating": "جاري التوليد..."
     },
     "subjects": {
       "title": "موادي",
