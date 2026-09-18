@@ -679,7 +679,7 @@ button {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  right: 0;
+  inset-inline-end: 0;
   z-index: 50;
   list-style: none;
   min-width: 250px;
@@ -722,6 +722,11 @@ button {
 .dropdown-menu li a:hover {
   background: var(--primary-soft);
   color: var(--primary);
+  transform: translateX(4px);
+  box-shadow: inset -3px 0 0 var(--primary);
+}
+
+[dir="ltr"] .dropdown-menu li a:hover {
   transform: translateX(-4px);
   box-shadow: inset 3px 0 0 var(--primary);
 }
@@ -807,7 +812,8 @@ button {
     position: static;
     box-shadow: none;
     background: rgba(255, 255, 255, 0.06);
-    margin: 0.3rem 0 0.3rem 1.2rem;
+    margin: 0.3rem 0;
+    margin-inline-start: 1.2rem;
   }
 
   .dropdown-menu li a {
@@ -1945,7 +1951,7 @@ table {
 
 th,
 td {
-  text-align: right;
+  text-align: start;
   padding: 0.8rem 1rem;
   border-bottom: 1px solid var(--border);
 }
@@ -7113,7 +7119,15 @@ tr:hover td {
     max-height: 100vh; height: 100vh; width: 280px; flex-basis: 280px; border-radius: 0; z-index: 1001;
     animation: slideInRtl .22s ease;
   }
-  @keyframes slideInRtl { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+  /* Drawer always expanded even if desktop sidebar state is persisted collapsed */
+  .student-sidebar-drawer .student-sidebar.is-collapsed { width: 280px; flex-basis: 280px; }
+  .student-sidebar-drawer .student-sidebar.is-collapsed .nav-label { display: inline; }
+  .student-sidebar-drawer .student-sidebar.is-collapsed .student-sidebar-title { display: inline; }
+  .student-sidebar-drawer .student-sidebar.is-collapsed .student-nav-item { justify-content: flex-start; padding-inline: 0.6rem; }
+  .student-sidebar-drawer .student-sidebar.is-collapsed .sidebar-group-sep { display: none; }
+  @keyframes slideInRtl { from { transform: translateX(100%); } to { transform: translateX(0); } }
+  [dir="ltr"] .student-sidebar-drawer .student-sidebar { animation-name: slideInLtr; }
+  @keyframes slideInLtr { from { transform: translateX(-100%); } to { transform: translateX(0); } }
 }
 
 /* Leaderboard modal (top10 + view-all) */
@@ -7191,7 +7205,7 @@ tr:hover td {
 
 /* Floating mobile menu button for shared SpaceShell */
 .sidebar-fab {
-  display: none; position: fixed; inset-block-end: 18px; inset-inline-start: 18px;
+  display: none; position: fixed; inset-block-end: 18px; inset-inline-end: 18px;
   width: 52px; height: 52px; border-radius: 16px; border: none; cursor: pointer; z-index: 950;
   background: var(--primary-gradient); color: #fff;
   box-shadow: 0 6px 20px rgba(255,106,0,.4);
