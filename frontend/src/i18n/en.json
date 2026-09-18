@@ -1345,6 +1345,7 @@
       "experiments": "Science Experiments",
       "portfolio": "My Portfolio",
       "dailyChallenge": "Daily Challenge",
+      "progress": "My Progress",
       "books": "My Interactive Books",
       "adaptive": "Smart Review",
       "plan": "My Learning Plan",
@@ -1412,6 +1413,15 @@
       "correct": "Well done! Correct answer!",
       "wrong": "No worries! Try again tomorrow",
       "nextQuestion": "Next Question"
+    },
+    "progress": {
+      "title": "My Course Progress",
+      "subtitle": "Track your progress in each subject",
+      "subjectProgress": "Progress by Subject",
+      "lessonsDone": "lessons done",
+      "milestones": "Learning Milestones",
+      "remaining": "remaining",
+      "noData": "No lessons started yet. Begin by reviewing your subjects!"
     },
     "subjects": {
       "title": "My Subjects",

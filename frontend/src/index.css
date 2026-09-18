@@ -7108,6 +7108,49 @@ tr:hover td {
 .dc-result--wrong { background: #fef2f2; color: #991b1b; }
 .dc-result__explanation { margin: 0.3rem 0 0; font-weight: 400; font-size: 0.8rem; opacity: 0.8; }
 
+/* --- Student Progress --- */
+.student-progress { padding: 0; max-width: 900px; margin: 0 auto; }
+.pg-header { border-radius: 0 0 16px 16px; padding: 1.2rem 1rem; color: #fff; display: flex; align-items: center; gap: 0.8rem; }
+.pg-header__icon { font-size: 2rem; }
+.pg-header__title { margin: 0; font-size: 1.2rem; font-weight: 800; }
+.pg-header__sub { margin: 0.2rem 0 0; opacity: 0.9; font-size: 0.85rem; }
+.pg-body { padding: 1rem; }
+.pg-milestone { background: var(--surface, #fff); border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem; margin-bottom: 0.8rem; }
+.pg-milestone__current { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.5rem; }
+.pg-milestone__emoji { font-size: 2rem; }
+.pg-milestone__label { font-weight: 700; font-size: 1rem; display: block; }
+.pg-milestone__xp { font-size: 0.8rem; color: var(--primary); font-weight: 600; }
+.pg-milestone__bar-wrap { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.pg-milestone__bar { height: 100%; background: linear-gradient(90deg, #3b82f6, #8b5cf6); border-radius: 4px; transition: width 1s cubic-bezier(.4,0,.2,1); }
+.pg-milestone__next { margin-top: 0.4rem; }
+.pg-milestone__next-label { font-size: 0.7rem; color: var(--muted); display: block; margin-top: 0.2rem; }
+.pg-summary-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin-bottom: 0.8rem; }
+.pg-summary-card { background: var(--surface, #fff); border: 1px solid var(--border); border-radius: 10px; padding: 0.6rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
+.pg-summary-card .material-icons { font-size: 1.3rem; }
+.pg-summary-card__val { font-weight: 800; font-size: 1.2rem; line-height: 1; }
+.pg-summary-card__lbl { font-size: 0.65rem; color: var(--muted); }
+.pg-section { background: var(--surface, #fff); border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem; margin-bottom: 0.8rem; }
+.pg-section__title { display: flex; align-items: center; gap: 0.4rem; font-size: 0.95rem; font-weight: 700; margin: 0 0 0.6rem; }
+.pg-section__title .material-icons { font-size: 1.1rem; color: var(--primary); }
+.pg-empty { text-align: center; color: var(--muted); font-size: 0.85rem; padding: 1rem; }
+.pg-subjects { display: flex; flex-direction: column; gap: 0.5rem; }
+.pg-subject-card { display: flex; flex-direction: column; gap: 0.25rem; padding: 0.5rem; background: var(--bg, #f8fafc); border-radius: 8px; }
+.pg-subject-card__head { display: flex; align-items: center; gap: 0.4rem; }
+.pg-subject-card__emoji { font-size: 1.1rem; }
+.pg-subject-card__name { font-weight: 600; font-size: 0.85rem; flex: 1; }
+.pg-subject-card__count { font-size: 0.7rem; color: var(--muted); }
+.pg-subject-card__bar-wrap { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.pg-subject-card__bar { height: 100%; border-radius: 3px; transition: width 0.8s cubic-bezier(.4,0,.2,1); }
+.pg-subject-card__pct { font-size: 0.7rem; font-weight: 600; color: var(--primary); text-align: end; }
+.pg-milestones-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 0.4rem; }
+.pg-milestone-chip { display: flex; flex-direction: column; align-items: center; gap: 0.15rem; padding: 0.5rem; border-radius: 10px; border: 1px solid var(--border); background: var(--bg, #f8fafc); opacity: 0.5; position: relative; }
+.pg-milestone-chip--reached { opacity: 1; border-color: #10b981; background: #ecfdf5; }
+.pg-milestone-chip__emoji { font-size: 1.5rem; }
+.pg-milestone-chip__label { font-size: 0.7rem; font-weight: 600; }
+.pg-milestone-chip__xp { font-size: 0.6rem; color: var(--muted); }
+.pg-milestone-chip__check { position: absolute; top: 4px; right: 4px; width: 16px; height: 16px; border-radius: 50%; background: #10b981; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.5rem; }
+@media (max-width: 600px) { .pg-summary-row { grid-template-columns: repeat(2, 1fr); } .pg-milestones-grid { grid-template-columns: repeat(2, 1fr); } }
+
 
 /* --- ResourcePaper: ورقة رسمية للموارد المولّدة --- */
 .rp-section-title { font-weight: 800; margin: 0.9rem 0 0.4rem; }
