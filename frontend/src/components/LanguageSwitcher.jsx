@@ -169,15 +169,14 @@ export default function LanguageSwitcher({
  */
 export function MiniLanguageSwitcher({ className = '', onLanguageChange }) {
   const { lang, setLang, t } = useI18n();
-  
+
   const nextLang = lang === 'ar' ? 'en' : 'ar';
-  const nextFlag = lang === 'ar' ? '🇬🇧' : '🇹🇳';
-  
+
   const handleClick = () => {
     setLang(nextLang);
     if (onLanguageChange) onLanguageChange(nextLang, nextLang === 'ar' ? 'rtl' : 'ltr');
   };
-  
+
   return (
     <button
       onClick={handleClick}
@@ -186,9 +185,7 @@ export function MiniLanguageSwitcher({ className = '', onLanguageChange }) {
       aria-label={t(`header.switchTo${lang === 'ar' ? 'En' : 'Ar'}`)}
       type="button"
     >
-      <span role="img" aria-label={nextLang === 'ar' ? 'العربية' : 'English'}>
-        {nextFlag}
-      </span>
+      <span className="lang-switcher-text">{nextLang === 'ar' ? 'عربي' : 'EN'}</span>
     </button>
   );
 }

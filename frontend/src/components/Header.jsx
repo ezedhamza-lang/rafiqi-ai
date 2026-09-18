@@ -5,7 +5,7 @@ import { useChat } from '../context/ChatContext.jsx';
 import { useNotifications } from '../context/NotificationContext.jsx';
 import { useTheme } from '../context/ThemeContext.jsx';
 import { useI18n } from '../i18n/index.jsx';
-import MiniLanguageSwitcher from './LanguageSwitcher.jsx';
+import { MiniLanguageSwitcher } from './LanguageSwitcher.jsx';
 import { roleLabel, getHomePath } from '../roles.js';
 import { timeAgo as timeAgoUtil } from '../utils/formatUtils.js';
 
@@ -17,7 +17,6 @@ const PUBLIC_NAV = [
 ];
 
 const MESSAGES_NAV = { to: '/messages', icon: 'mail', key: 'messages', unread: true };
-const NOTIF_NAV = { to: '/message-center', icon: 'notifications_active', key: 'notifications', notif: true };
 
 const SUPERADMIN_SPACE_CHILDREN = [
   { to: '/superadmin', end: true, icon: 'admin_panel_settings', key: 'systemSpace' },
@@ -58,36 +57,30 @@ const ROLE_NAV = {
   TEACHER: [
     { to: '/', icon: 'home', key: 'home' },
     { to: '/teacher', icon: 'co_present', key: 'teacherSpace' },
-    NOTIF_NAV,
     MESSAGES_NAV
   ],
   STUDENT: [
     { to: '/', icon: 'home', key: 'home' },
-    { to: '/student-space', icon: 'school', key: 'studentSpace' },
-    NOTIF_NAV
+    { to: '/student-space', icon: 'school', key: 'studentSpace' }
   ],
   PARENT: [
     { to: '/', icon: 'home', key: 'home' },
     { to: '/parent', icon: 'family_restroom', key: 'parentSpace', children: PARENT_SPACE_CHILDREN },
-    NOTIF_NAV,
     MESSAGES_NAV
   ],
   SCHOOL_DIRECTOR: [
     { to: '/', icon: 'home', key: 'home' },
     { to: '/director', icon: 'admin_panel_settings', key: 'adminBoard', children: [...DIRECTOR_SPACE_CHILDREN, DIRECTOR_HELP_CHILD] },
-    NOTIF_NAV,
     MESSAGES_NAV
   ],
   ADMIN: [
     { to: '/', icon: 'home', key: 'home' },
     { to: '/director', icon: 'admin_panel_settings', key: 'adminBoard', children: [...DIRECTOR_SPACE_CHILDREN, ...DIRECTOR_FINANCE_CHILDREN, DIRECTOR_HELP_CHILD] },
-    NOTIF_NAV,
     MESSAGES_NAV
   ],
   SUPER_ADMIN: [
     { to: '/', icon: 'home', key: 'home' },
     { to: '/superadmin', icon: 'admin_panel_settings', key: 'systemSpace', children: SUPERADMIN_SPACE_CHILDREN },
-    NOTIF_NAV,
     MESSAGES_NAV
   ]
 };
@@ -135,12 +128,12 @@ export default function Header() {
   return (
     <header className="site-header">
       <div className="header-top">
-        <div className="brand">
+        <Link to={user ? getHomePath(user) : '/'} className="brand" aria-label={t('header.brandTitle')}>
           <img src="/logo-rafiqi.png" alt={t('header.brandAlt')} className="brand-owl" />
           <div className="brand-text">
             <h6>{t('header.brandTitle')}</h6>
           </div>
-        </div>
+        </Link>
         <div className="header-actions">
           {/* Batch 6: Enhanced Language Switcher */}
           <MiniLanguageSwitcher />
@@ -223,7 +216,7 @@ export default function Header() {
               <button className="btn btn-outline btn-sm" onClick={handleLogout}>
                 {t('header.logout')}
               </button>
-              <span style={{ fontWeight: 800, fontSize: '0.85rem' }}>
+              <span className="header-username" style={{ fontWeight: 800, fontSize: '0.85rem' }}>
                 {user.firstName} {user.lastName}
                 <span className="role-chip">({roleLabel(t, user.role) || t('header.userFallback')})</span>
               </span>
