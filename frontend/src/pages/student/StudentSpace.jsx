@@ -101,7 +101,7 @@ export default function StudentSpace() {
   ];
   const GROUPS = [
     { label: t('studentSpace.groups.main'), items: [
-      { to: '', end: true, icon: 'home', label: L('home'), color: '#ff6a00' },
+      { to: '', end: true, icon: 'insights', label: L('twin'), color: '#10b981' },
       { to: 'dashboard', icon: 'dashboard', label: L('dashboard'), color: '#10b981' },
       { to: 'rewards', icon: 'emoji_events', label: L('rewards'), color: '#f59e0b' },
     ] },
