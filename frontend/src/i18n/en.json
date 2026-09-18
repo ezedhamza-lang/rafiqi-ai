@@ -1332,6 +1332,7 @@
     "expand": "Expand menu",
     "menu": "Menu",
     "tabs": {
+      "dashboard": "Dashboard",
       "home": "My Summary",
       "subjects": "My Subjects",
       "quizzes": "My Quizzes",
@@ -1351,6 +1352,18 @@
       "schedule": "My Schedule",
       "routine": "Daily routine",
       "flashcards": "Flashcards"
+    },
+    "dashboard": {
+      "title": "Dashboard",
+      "nextLevel": "Next Level",
+      "todayActivity": "Today's Activity",
+      "subjectProgress": "Subject Progress",
+      "recentActivity": "Recent Activity",
+      "myBadges": "My Badges",
+      "lessonsDone": "lessons done",
+      "overallProgress": "Overall Progress",
+      "accuracy": "Accuracy",
+      "welcomeBack": "Welcome back!"
     },
     "subjects": {
       "title": "My Subjects",

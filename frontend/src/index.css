@@ -6898,6 +6898,56 @@ tr:hover td {
   .space-decor .decor { animation: none; }
 }
 
+/* --- Student Dashboard --- */
+.student-dashboard { padding: 1rem; max-width: 900px; margin: 0 auto; }
+.ds-loading { text-align: center; padding: 3rem; color: var(--muted); }
+.ds-spinner { width: 40px; height: 40px; border: 3px solid var(--border); border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 0.8rem; }
+.ds-empty { text-align: center; padding: 3rem; color: var(--muted); }
+.ds-hero { border-radius: 16px; padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; color: #fff; margin-bottom: 1rem; }
+.ds-hero__left { flex: 1; }
+.ds-hero__greeting { font-size: 1.3rem; font-weight: 800; margin: 0 0 0.3rem; }
+.ds-hero__sub { margin: 0; opacity: 0.9; font-size: 0.95rem; }
+.ds-hero__ring { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
+.ds-hero__ring-label { font-size: 0.7rem; opacity: 0.8; }
+.ds-stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 1rem; }
+.ds-mini-stat { background: var(--surface, #fff); border: 1px solid var(--border); border-radius: 10px; padding: 0.7rem; display: flex; align-items: center; gap: 0.5rem; border-left: 3px solid; }
+.ds-mini-stat__icon { font-size: 1.3rem; }
+.ds-mini-stat__text { display: flex; flex-direction: column; }
+.ds-mini-stat__value { font-weight: 800; font-size: 1.1rem; line-height: 1; }
+.ds-mini-stat__label { font-size: 0.7rem; color: var(--muted); }
+.ds-section { background: var(--surface, #fff); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; margin-bottom: 0.8rem; }
+.ds-section__title { display: flex; align-items: center; gap: 0.4rem; font-size: 0.95rem; font-weight: 700; margin: 0 0 0.8rem; color: var(--text); }
+.ds-section__title .material-icons { font-size: 1.1rem; color: var(--primary); }
+.ds-today-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+.ds-today-card { background: var(--bg, #f8fafc); border-radius: 10px; padding: 0.8rem; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+.ds-today-card__num { font-size: 1.6rem; font-weight: 800; line-height: 1; }
+.ds-today-card__lbl { font-size: 0.7rem; color: var(--muted); }
+.ds-subjects { display: flex; flex-direction: column; gap: 0.5rem; }
+.ds-subject-row { display: flex; flex-direction: column; gap: 0.25rem; }
+.ds-subject-row__info { display: flex; align-items: center; gap: 0.4rem; }
+.ds-subject-row__dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.ds-subject-row__name { font-size: 0.85rem; font-weight: 600; }
+.ds-subject-row__count { font-size: 0.7rem; color: var(--muted); margin-inline-start: auto; }
+.ds-subject-row__bar-wrap { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.ds-subject-row__bar { height: 100%; border-radius: 3px; transition: width 0.8s cubic-bezier(.4,0,.2,1); }
+.ds-activity-list { display: flex; flex-direction: column; gap: 0.4rem; }
+.ds-activity-row { display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0; border-bottom: 1px solid var(--border); }
+.ds-activity-row:last-child { border-bottom: none; }
+.ds-activity-row__icon { width: 28px; height: 28px; border-radius: 8px; background: var(--bg, #f8fafc); display: flex; align-items: center; justify-content: center; }
+.ds-activity-row__icon .material-icons { font-size: 0.9rem; color: var(--primary); }
+.ds-activity-row__text { flex: 1; display: flex; flex-direction: column; }
+.ds-activity-row__detail { font-size: 0.8rem; font-weight: 500; }
+.ds-activity-row__time { font-size: 0.65rem; color: var(--muted); }
+.ds-activity-row__points { font-weight: 700; font-size: 0.8rem; }
+.ds-badges-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.ds-badge-chip { background: var(--bg, #f8fafc); border: 1px solid var(--border); border-radius: 20px; padding: 0.3rem 0.7rem; display: flex; align-items: center; gap: 0.3rem; font-size: 0.75rem; }
+.ds-badge-chip__icon { font-size: 1rem; }
+.ds-badge-chip__name { font-weight: 600; }
+@media (max-width: 600px) {
+  .ds-stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .ds-hero { flex-direction: column; text-align: center; gap: 0.8rem; }
+}
+
 
 /* --- ResourcePaper: ورقة رسمية للموارد المولّدة --- */
 .rp-section-title { font-weight: 800; margin: 0.9rem 0 0.4rem; }

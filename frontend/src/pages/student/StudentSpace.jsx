@@ -23,6 +23,7 @@ const StudentAssignments = lazy(() => import('./StudentAssignments.jsx'));
 const StudentLiveSessions = lazy(() => import('./StudentLiveSessions.jsx'));
 const StudentDailyRoutine = lazy(() => import('./StudentDailyRoutine.jsx'));
 const StudentFlashcards = lazy(() => import('./StudentFlashcards.jsx'));
+const StudentDashboard = lazy(() => import('./StudentDashboard.jsx'));
 const SchoolCalendar = lazy(() => import('../../components/SchoolCalendar.jsx'));
 
 export default function StudentSpace() {
@@ -91,6 +92,7 @@ export default function StudentSpace() {
   const GROUPS = [
     { label: t('studentSpace.groups.main'), items: [
       { to: '', end: true, icon: 'home', label: L('home'), color: '#ff6a00' },
+      { to: 'dashboard', icon: 'dashboard', label: L('dashboard'), color: '#10b981' },
       { to: 'twin', icon: 'insights', label: L('twin'), color: '#10b981' },
     ] },
     { label: t('studentSpace.groups.learning'), items: [
@@ -155,6 +157,7 @@ export default function StudentSpace() {
         <Suspense fallback={null}>
         <Routes>
           <Route index element={<StudentTwin />} />
+          <Route path="dashboard" element={<StudentDashboard />} />
           <Route path="routine" element={<StudentDailyRoutine />} />
           <Route path="flashcards" element={<StudentFlashcards />} />
           <Route path="subjects" element={<StudentSubjects />} />

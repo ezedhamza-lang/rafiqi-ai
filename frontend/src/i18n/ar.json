@@ -1332,6 +1332,7 @@
     "expand": "توسيع القائمة",
     "menu": "القائمة",
     "tabs": {
+      "dashboard": "لوحة التحكم",
       "home": "ملخصي",
       "subjects": "موادي",
       "quizzes": "اختباراتي",
@@ -1351,6 +1352,18 @@
       "schedule": "جدول أوقاتي",
       "routine": "روتين اليوم",
       "flashcards": "بطاقات المراجعة"
+    },
+    "dashboard": {
+      "title": "لوحة التحكم",
+      "nextLevel": "المستوى التالي",
+      "todayActivity": "نشاط اليوم",
+      "subjectProgress": "التقدم في المواد",
+      "recentActivity": "النشاط الأخير",
+      "myBadges": "شاراتي",
+      "lessonsDone": "درس مكتمل",
+      "overallProgress": "التقدم العام",
+      "accuracy": "الدقة",
+      "welcomeBack": "مرحباً بعودتك!"
     },
     "subjects": {
       "title": "موادي",

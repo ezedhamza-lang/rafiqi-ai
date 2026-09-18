@@ -262,4 +262,58 @@ router.post('/lesson/submit', studentMiddleware, validateBody(submitLessonSchema
   res.status(201).json({ ok: true, submissionId: submission.id, message: 'تم إرسال إجاباتك للمعلم بنجاح' });
 }));
 
+router.get('/dashboard', studentMiddleware, asyncHandler(async (req, res) => {
+  const userId = req.user.id;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const [user, lessonProgress, quizSubmissions, assignmentSubmissions, gameResults, activities, badges] = await Promise.all([
+    prisma.user.findUnique({ where: { id: userId }, select: { xp: true, coins: true, level: true, streakDays: true, firstName: true, lastName: true } }),
+    prisma.lessonProgress.findMany({ where: { userId }, select: { subjectId: true, gradeId: true, lessonId: true, lessonTitle: true, completedAt: true } }),
+    prisma.submission.findMany({ where: { studentId: userId }, select: { score: true, totalPoints: true, createdAt: true, quiz: { select: { subject: true } } } }),
+    prisma.assignmentSubmission.findMany({ where: { studentId: userId }, select: { score: true, totalPoints: true, createdAt: true } }),
+    prisma.gameResult.findMany({ where: { studentId: userId }, select: { game: true, score: true, correct: true, total: true, playedAt: true } }),
+    prisma.activityLog.findMany({ where: { studentId: userId }, orderBy: { createdAt: 'desc' }, take: 20, select: { type: true, points: true, detail: true, createdAt: true } }),
+    prisma.studentBadge.findMany({ where: { studentId: userId }, include: { badge: { select: { name: true, icon: true } } } })
+  ]);
+
+  const lessonsBySubject = {};
+  for (const lp of lessonProgress) {
+    const key = lp.subjectId;
+    if (!lessonsBySubject[key]) lessonsBySubject[key] = { subjectId: lp.subjectId, count: 0 };
+    lessonsBySubject[key].count++;
+  }
+
+  const todayLessons = lessonProgress.filter(lp => lp.completedAt >= today && lp.completedAt < tomorrow).length;
+  const todayQuizzes = quizSubmissions.filter(s => s.createdAt >= today && s.createdAt < tomorrow).length;
+  const todayGames = gameResults.filter(g => g.playedAt >= today && g.playedAt < tomorrow).length;
+
+  const totalQuizPoints = quizSubmissions.reduce((a, s) => a + (s.totalPoints || 0), 0);
+  const earnedQuizPoints = quizSubmissions.reduce((a, s) => a + s.score, 0);
+  const totalAssignmentPoints = assignmentSubmissions.reduce((a, s) => a + (s.totalPoints || 0), 0);
+  const earnedAssignmentPoints = assignmentSubmissions.reduce((a, s) => a + (s.score || 0), 0);
+
+  const xpPerLevel = 100;
+  const levelProgress = user.xp % xpPerLevel;
+
+  res.json({
+    user: { firstName: user.firstName, lastName: user.lastName, xp: user.xp, coins: user.coins, level: user.level, streakDays: user.streakDays },
+    subjectProgress: Object.values(lessonsBySubject),
+    stats: {
+      totalLessons: lessonProgress.length,
+      totalQuizzes: quizSubmissions.length,
+      totalAssignments: assignmentSubmissions.length,
+      totalGames: gameResults.length,
+      quizAccuracy: totalQuizPoints ? Math.round((earnedQuizPoints / totalQuizPoints) * 100) : 0,
+      assignmentAccuracy: totalAssignmentPoints ? Math.round((earnedAssignmentPoints / totalAssignmentPoints) * 100) : 0,
+      today: { lessons: todayLessons, quizzes: todayQuizzes, games: todayGames }
+    },
+    levelProgress,
+    badges: badges.map(b => b.badge),
+    recentActivity: activities
+  });
+}));
+
 export default router;
