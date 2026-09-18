@@ -136,6 +136,7 @@ model User {
   email         String        @unique
   phone         String?
   passwordHash  String
+  googleId      String?   @unique
   role          Role          @default(PARENT)
   accountStatus AccountStatus @default(ACTIVE)
   schoolId      Int?

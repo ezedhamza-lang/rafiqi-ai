@@ -56,5 +56,8 @@ export const config = {
     livekitApiKey: process.env.LIVEKIT_API_KEY || '',
     livekitApiSecret: process.env.LIVEKIT_API_SECRET || '',
     recordingDir: process.env.RECORDING_DIR || 'uploads/recordings'
-  }
+  },
+  // Google OAuth sign-in (bouton « Continuer avec Google »).
+  // Vide = désactivé (le frontend masque le bouton, l'API répond 501).
+  googleClientId: process.env.GOOGLE_CLIENT_ID || ''
 };

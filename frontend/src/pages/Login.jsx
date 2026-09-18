@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext.jsx';
 import { useI18n } from '../i18n/index.jsx';
 import { getHomePath } from '../roles.js';
 import { Button, Input } from '../components/ui/index.js';
+import GoogleSignIn from '../components/GoogleSignIn.jsx';
 
 export default function Login() {
   const { login } = useAuth();
@@ -71,6 +72,7 @@ export default function Login() {
             {loading ? t('login.signingIn') : t('login.submit')}
           </Button>
         </form>
+        <GoogleSignIn />
         <div className="auth-switch">
           {t('login.noAccount')} <Link to="/register">{t('login.createAccount')}</Link>
         </div>

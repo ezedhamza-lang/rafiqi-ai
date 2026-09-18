@@ -5,6 +5,7 @@ import { useI18n } from '../i18n/index.jsx';
 import { getHomePath } from '../roles.js';
 import { api } from '../api/client.js';
 import { Button, Input } from '../components/ui/index.js';
+import GoogleSignIn from '../components/GoogleSignIn.jsx';
 
 export default function Register() {
   const { register } = useAuth();
@@ -141,6 +142,7 @@ export default function Register() {
             {loading ? t('register.creating') : t('register.submit')}
           </Button>
         </form>
+        <GoogleSignIn />
         <div className="auth-switch">
           {t('register.haveAccount')} <Link to="/login">{t('register.login')}</Link>
         </div>

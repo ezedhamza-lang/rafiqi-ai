@@ -389,6 +389,7 @@ async function start() {
       await runSqlFileOnce(prisma, path.join(migDir, '20260911090000_grades_coefficients/migration.sql'));
       await runSqlFileOnce(prisma, path.join(migDir, '20260911180000_lesson_attempts/migration.sql'));
       await runSqlFileOnce(prisma, path.join(migDir, '20260912120000_mental_math_attempts/migration.sql'));
+      await runSqlFileOnce(prisma, path.join(migDir, '20260918120000_google_oauth/migration.sql'));
       await runTenancyBootstrap(prisma);
     }).catch((err) => {
       console.error('startup migrations skipped:', err.message);

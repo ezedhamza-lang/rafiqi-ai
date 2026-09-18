@@ -1,6 +1,9 @@
 import { Router } from 'express';
 import bcrypt from 'bcryptjs';
+import { randomBytes } from 'crypto';
+import { OAuth2Client } from 'google-auth-library';
 import prisma from '../db.js';
+import { config } from '../config.js';
 import {
   signToken,
   authMiddleware,
@@ -159,6 +162,91 @@ router.post(
 
     const valid = await bcrypt.compare(password, user.passwordHash);
     if (!valid) throw new ApiError(401, AR.INVALID_CREDENTIALS);
+
+    if (['STUDENT', 'TEACHER'].includes(user.role) && user.accountStatus !== 'ACTIVE') {
+      return res.status(403).json({ error: accountStatusMessage(user.accountStatus), status: user.accountStatus });
+    }
+
+    const pair = await issuePair(user);
+    res.json({
+      ...pair,
+      user: await withMustChange(toPublicUser(user))
+    });
+  })
+);
+
+/**
+ * @swagger
+ * /api/auth/google:
+ *   post:
+ *     summary: تسجيل الدخول/التسجيل بحساب Google (OAuth 2.0)
+ *     tags: [auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [idToken]
+ *             properties:
+ *               idToken: { type: string, description: 'Google ID token (GIS)' }
+ *     responses:
+ *       200:
+ *         description: نجاح الدخول (حساب موجود يُربط، وجديد يُنشأ بدور ولي)
+ *       400:
+ *         description: رمز Google غير صالح
+ *       501:
+ *         description: تسجيل Google غير مفعّل (GOOGLE_CLIENT_ID غائب)
+ */
+router.post(
+  '/google',
+  asyncHandler(async (req, res) => {
+    if (!config.googleClientId) {
+      throw new ApiError(501, 'تسجيل الدخول عبر Google غير مفعّل بعد');
+    }
+    const { idToken } = req.body || {};
+    if (!idToken || typeof idToken !== 'string') {
+      throw new ApiError(400, AR.INVALID_CREDENTIALS);
+    }
+
+    let payload;
+    try {
+      const client = new OAuth2Client(config.googleClientId);
+      const ticket = await client.verifyIdToken({ idToken, audience: config.googleClientId });
+      payload = ticket.getPayload();
+    } catch {
+      throw new ApiError(401, AR.INVALID_CREDENTIALS);
+    }
+    if (!payload?.sub || !payload?.email || payload.email_verified === false) {
+      throw new ApiError(401, AR.INVALID_CREDENTIALS);
+    }
+
+    const emailNorm = String(payload.email).toLowerCase();
+    let user = await prisma.user.findFirst({
+      where: { OR: [{ googleId: payload.sub }, { email: emailNorm }] }
+    });
+
+    if (user) {
+      // ربط الحساب الموجود بـ Google عند أول دخول بها (مالك البريد موثّق من Google)
+      if (!user.googleId) {
+        user = await prisma.user.update({
+          where: { id: user.id },
+          data: { googleId: payload.sub }
+        });
+      }
+    } else {
+      // حساب جديد بدور ولي (نفس دور التسجيل الكلاسيكي) + كلمة سر عشوائية غير مستعملة
+      const passwordHash = await bcrypt.hash(randomBytes(32).toString('hex'), 10);
+      user = await prisma.user.create({
+        data: {
+          firstName: String(payload.given_name || 'مستخدم').slice(0, 60),
+          lastName: String(payload.family_name || 'Google').slice(0, 60),
+          email: emailNorm,
+          passwordHash,
+          googleId: payload.sub
+        }
+      });
+    }
 
     if (['STUDENT', 'TEACHER'].includes(user.role) && user.accountStatus !== 'ACTIVE') {
       return res.status(403).json({ error: accountStatusMessage(user.accountStatus), status: user.accountStatus });

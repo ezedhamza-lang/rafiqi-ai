@@ -2707,5 +2707,8 @@
     "rightsBody": "You have the right to view, correct and delete your data. Simply contact your school administration or the platform team via the help page.",
     "contactTitle": "6. Contact us",
     "contactBody": "For any privacy question: phone +216 96 035 997 — email ensp75882@education.tn."
+  },
+  "auth": {
+    "or": "or"
   }
 }

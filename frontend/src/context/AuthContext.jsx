@@ -40,6 +40,15 @@ export function AuthProvider({ children }) {
     return data.user;
   }, []);
 
+  const loginWithGoogle = useCallback(async (idToken) => {
+    const data = await api.post('/auth/google', { idToken });
+    setToken(data.token);
+    if (data.refreshToken) setRefreshToken(data.refreshToken);
+    setStoredUser(data.user);
+    setUser(data.user);
+    return data.user;
+  }, []);
+
   const changePassword = useCallback(async (currentPassword, newPassword) => {
     const data = await api.put('/auth/change-password', { currentPassword, newPassword });
     setToken(data.token);
@@ -59,7 +68,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, changePassword }}>
+    <AuthContext.Provider value={{ user, loading, login, register, loginWithGoogle, logout, changePassword }}>
       {children}
     </AuthContext.Provider>
   );

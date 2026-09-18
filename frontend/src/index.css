@@ -1889,6 +1889,31 @@ select {
   opacity: 0.8;
 }
 
+/* ---------- Google sign-in ---------- */
+.google-signin { margin-top: 1rem; }
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0.2rem 0 0.9rem;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+.google-btn-wrap {
+  display: flex;
+  justify-content: center;
+  min-height: 44px;
+}
+.google-signin .form-error { margin-top: 0.7rem; }
+
 /* ---------- Dashboard ---------- */
 .dashboard {
   display: grid;
