@@ -7,12 +7,14 @@ import { getHomePath } from '../roles.js';
 const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
 
 let gisPromise = null;
-function loadGis() {
+let gisHl = '';
+function loadGis(hl) {
   if (window.google?.accounts?.id) return Promise.resolve();
-  if (!gisPromise) {
+  if (!gisPromise || gisHl !== hl) {
+    gisHl = hl;
     gisPromise = new Promise((resolve, reject) => {
       const s = document.createElement('script');
-      s.src = 'https://accounts.google.com/gsi/client';
+      s.src = `https://accounts.google.com/gsi/client?hl=${hl}`;
       s.async = true;
       s.defer = true;
       s.onload = resolve;
@@ -40,7 +42,8 @@ export default function GoogleSignIn() {
   useEffect(() => {
     if (!CLIENT_ID) return undefined;
     let cancelled = false;
-    loadGis()
+    const hl = lang === 'ar' ? 'ar' : 'en';
+    loadGis(hl)
       .then(() => {
         if (cancelled || !btnRef.current) return;
         window.google.accounts.id.initialize({
