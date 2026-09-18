@@ -163,7 +163,8 @@
     "youtube": "YouTube",
     "linkedin": "LinkedIn",
     "rightsReserved": "All rights reserved © 2026 Mr. Hamza Ben Amor Ezzedine",
-    "brandDescription": "A comprehensive Tunisian educational platform for students, teachers, and parents"
+    "brandDescription": "A comprehensive Tunisian educational platform for students, teachers, and parents",
+    "privacy": "Privacy Policy"
   },
   "login": {
     "title": "Sign in",
@@ -2690,5 +2691,21 @@
     "font_xlarge": "Extra large",
     "contrast": "High contrast",
     "hint": "Your choices are saved on this device. Motion reduction follows your system settings."
+  },
+  "privacy": {
+    "title": "Privacy and Data Protection Policy",
+    "intro": "This page explains how the Rafiqi platform collects and protects its users’ data, strictly for educational use.",
+    "dataTitle": "1. Data we collect",
+    "dataBody": "We collect only what teaching requires: first and last name, email, phone, school and class, plus learning data (lesson progress, quiz results, XP and badges) and messages exchanged inside the platform.",
+    "purposeTitle": "2. Why we collect it",
+    "purposeBody": "Data is used exclusively for education: tracking student progress, assessing learning, communication between teachers, parents and administration, and improving content quality. Data is never sold nor used for advertising.",
+    "securityTitle": "3. How we protect it",
+    "securityBody": "Passwords are stored hashed (bcrypt) and cannot be viewed. Access uses short-lived session tokens (JWT) with secure refresh tokens. Data access is role-based: students see only their own data, teachers see their classes, parents see only their children. Connections are encrypted (HTTPS).",
+    "childrenTitle": "4. Protecting children’s data",
+    "childrenBody": "Student accounts are created by parents or the school. No advertising, no external messages, no geolocation collection. Parents may request to view or delete their child’s data at any time through the administration.",
+    "rightsTitle": "5. Your rights",
+    "rightsBody": "You have the right to view, correct and delete your data. Simply contact your school administration or the platform team via the help page.",
+    "contactTitle": "6. Contact us",
+    "contactBody": "For any privacy question: phone +216 96 035 997 — email ensp75882@education.tn."
   }
 }

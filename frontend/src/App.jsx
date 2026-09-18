@@ -52,6 +52,7 @@ const StudentSpace = lazy(() => import('./pages/student/StudentSpace.jsx'));
 const ParentSpace = lazy(() => import('./pages/parent/ParentSpace.jsx'));
 const DirectorDashboard = lazy(() => import('./pages/director/DirectorDashboard.jsx'));
 const SuperAdminDashboard = lazy(() => import('./pages/superadmin/SuperAdminDashboard.jsx'));
+const Privacy = lazy(() => import('./pages/Privacy.jsx'));
 
 function RouteFallback() {
   return (
@@ -93,6 +94,7 @@ export default function App() {
               <Suspense fallback={<RouteFallback />}>
                 <Routes>
                   <Route path="/" element={<Home />} />
+                  <Route path="/privacy" element={<Privacy />} />
                   <Route path="/login" element={<GuestOnly><Login /></GuestOnly>} />
                   <Route path="/register" element={<GuestOnly><Register /></GuestOnly>} />
                   <Route path="/account" element={<RequireRole><AccountSettings /></RequireRole>} />

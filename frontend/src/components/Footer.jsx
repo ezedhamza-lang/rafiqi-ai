@@ -55,6 +55,7 @@ export default function Footer() {
             <h4>{t('footer.usefulInfo')}</h4>
             <ul>
               <li><Link to="/help">{t('footer.userGuide')}</Link></li>
+              <li><Link to="/privacy">{t('footer.privacy')}</Link></li>
               <li><Link to="/#faq">{t('footer.faqs')}</Link></li>
               <li><Link to="/help">{t('footer.contactAdmin')}</Link></li>
               <li><Link to="/#announcements">{t('footer.announcements')}</Link></li>
