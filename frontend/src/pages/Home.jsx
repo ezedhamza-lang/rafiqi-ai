@@ -21,7 +21,7 @@ const SERVICE_GROUPS = [
     ]
   },
   {
-    groupKey: 'teacher',
+    groupKey: 'parent',
     color: '#7c6fd9',
     items: [
       { icon: 'family_restroom', key: 'myChild' },
@@ -32,7 +32,7 @@ const SERVICE_GROUPS = [
     ]
   },
   {
-    groupKey: 'parent',
+    groupKey: 'admin',
     color: '#22a06b',
     items: [
       { icon: 'how_to_reg', key: 'registration' },
@@ -44,7 +44,7 @@ const SERVICE_GROUPS = [
     ]
   },
   {
-    groupKey: 'admin',
+    groupKey: 'teacher',
     color: '#f59e0b',
     items: [
       { icon: 'notifications', key: 'alerts' },
@@ -57,7 +57,7 @@ const SERVICE_GROUPS = [
 
 const STATS = [
   { number: '169K', key: 'teachers' },
-  { number: '2433K', key: 'students' },
+  { number: '2.4M', key: 'students' },
   { number: '7201', key: 'institutions' }
 ];
 

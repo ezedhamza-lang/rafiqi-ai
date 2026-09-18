@@ -12,6 +12,7 @@ export default function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showPw, setShowPw] = useState(false);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -50,10 +51,11 @@ export default function Login() {
             placeholder="exemple@mail.tn"
             icon="mail"
             autoComplete="email"
+            dir="ltr"
           />
           <Input
             label={t('login.passwordLabel')}
-            type="password"
+            type={showPw ? 'text' : 'password'}
             required
             value={form.password}
             onChange={(e) => setForm({ ...form, password: e.target.value })}
@@ -61,6 +63,10 @@ export default function Login() {
             icon="lock"
             autoComplete="current-password"
           />
+          <button type="button" className="pw-toggle" onClick={() => setShowPw((v) => !v)} aria-pressed={showPw}>
+            <span className="material-icons">{showPw ? 'visibility_off' : 'visibility'}</span>
+            {showPw ? t('login.hidePw') : t('login.showPw')}
+          </button>
           <Button type="submit" disabled={loading} block size="lg">
             {loading ? t('login.signingIn') : t('login.submit')}
           </Button>

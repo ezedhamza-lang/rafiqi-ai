@@ -173,7 +173,9 @@
     "signingIn": "جاري الدخول...",
     "submit": "تسجيل الدخول",
     "noAccount": "ليس لديك حساب؟",
-    "createAccount": "إنشاء حساب"
+    "createAccount": "إنشاء حساب",
+    "showPw": "إظهار كلمة السر",
+    "hidePw": "إخفاء كلمة السر"
   },
   "home": {
     "servicesTitle": "الخدمات الرقمية",

@@ -173,7 +173,9 @@
     "signingIn": "Signing in...",
     "submit": "Sign in",
     "noAccount": "Don't have an account?",
-    "createAccount": "Create account"
+    "createAccount": "Create account",
+    "showPw": "Show password",
+    "hidePw": "Hide password"
   },
   "home": {
     "servicesTitle": "Digital services",

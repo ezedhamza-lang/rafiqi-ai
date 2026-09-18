@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useI18n } from '../i18n/index.jsx';
+import { getHomePath } from '../roles.js';
 import { api } from '../api/client.js';
 import { Button, Input } from '../components/ui/index.js';
 
@@ -35,7 +36,7 @@ export default function Register() {
     }
     setLoading(true);
     try {
-      await register({
+      const user = await register({
         firstName: form.firstName,
         lastName: form.lastName,
         email: form.email,
@@ -43,7 +44,7 @@ export default function Register() {
         password: form.password,
         schoolId: form.schoolId ? Number(form.schoolId) : undefined
       });
-      navigate('/dashboard');
+      navigate(getHomePath(user));
     } catch (err) {
       setError(err.message);
     } finally {
@@ -53,11 +54,11 @@ export default function Register() {
 
   return (
     <div className="auth-wrapper">
-      <div className="auth-card">
+      <div className="auth-card auth-card--wide">
         <div style={{ textAlign: 'center', marginBottom: '1.2rem' }}>
-          <img src="/logo-rafiqi-square.png" alt="رفيقي" style={{ width: 80, height: 80, borderRadius: '50%', border: '3px solid #ff6a00', padding: 4, background: '#fff', boxShadow: '0 4px 20px rgba(255,106,0,0.15)' }} />
+          <img src="/logo-rafiqi-square.png" alt="رفيقي" style={{ width: 80, height: 80, borderRadius: '50%', border: '3px solid var(--primary)', padding: 4, background: '#fff', boxShadow: '0 4px 20px rgba(255,106,0,0.15)' }} />
         </div>
-        <h1 style={{ color: '#ff6a00' }}>{t('register.title')}</h1>
+        <h1 style={{ color: 'var(--primary)' }}>{t('register.title')}</h1>
         <p className="sub">{t('register.subtitle')}</p>
         {error && <div className="form-error" role="alert">{error}</div>}
         <form onSubmit={submit}>
@@ -86,6 +87,7 @@ export default function Register() {
             placeholder="exemple@mail.tn"
             icon="mail"
             autoComplete="email"
+            dir="ltr"
           />
           <Input
             label={t('register.phoneLabel')}
@@ -95,6 +97,7 @@ export default function Register() {
             placeholder="5X XXX XXX"
             icon="phone"
             autoComplete="tel"
+            dir="ltr"
           />
           <div className="form-row">
             <Input
@@ -125,7 +128,7 @@ export default function Register() {
                 required
                 value={form.schoolId}
                 onChange={(e) => setForm({ ...form, schoolId: e.target.value })}
-                style={{ width: '100%', padding: '0.6rem 0.8rem', borderRadius: 10, border: '1px solid #d1d5db', fontSize: '1rem' }}
+                className="auth-select"
               >
                 <option value="" disabled>{t('register.schoolPlaceholder', 'اختر مدرستك')}</option>
                 {schools.map((s) => (

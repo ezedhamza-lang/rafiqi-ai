@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useI18n } from '../i18n/index.jsx';
 
@@ -42,21 +43,21 @@ export default function Footer() {
             <ul>
               {isParent && (
                 <>
-                  <li><a href="/registration">{t('footer.remoteRegistration')}</a></li>
-                  <li><a href="/students">{t('footer.myChildren')}</a></li>
+                  <li><Link to="/registration">{t('footer.remoteRegistration')}</Link></li>
+                  <li><Link to="/students">{t('footer.myChildren')}</Link></li>
                 </>
               )}
-              <li><a href="/help">{t('footer.requestHelp')}</a></li>
-              <li><a href="/dashboard">{t('footer.dashboard')}</a></li>
+              <li><Link to="/help">{t('footer.requestHelp')}</Link></li>
+              <li><Link to="/dashboard">{t('footer.dashboard')}</Link></li>
             </ul>
           </div>
           <div className="footer-col">
             <h4>{t('footer.usefulInfo')}</h4>
             <ul>
-              <li><a href="/">{t('footer.userGuide')}</a></li>
-              <li><a href="/#faq">{t('footer.faqs')}</a></li>
-              <li><a href="/help">{t('footer.contactAdmin')}</a></li>
-              <li><a href="/#announcements">{t('footer.announcements')}</a></li>
+              <li><Link to="/help">{t('footer.userGuide')}</Link></li>
+              <li><Link to="/#faq">{t('footer.faqs')}</Link></li>
+              <li><Link to="/help">{t('footer.contactAdmin')}</Link></li>
+              <li><Link to="/#announcements">{t('footer.announcements')}</Link></li>
             </ul>
           </div>
           <div className="footer-col">
@@ -89,7 +90,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>جميع الحقوق محفوظة &copy; 2026 الأستاذ حمزة بن عمر عزالدين</p>
+          <p>{t('footer.rightsReserved')}</p>
         </div>
       </div>
     </footer>
