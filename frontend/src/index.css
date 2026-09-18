@@ -7436,6 +7436,7 @@ tr:hover td {
 /* ── Wiggle (fun hover for kids) ── */
 .wiggle-hover {
   transition: transform 0.2s;
+  opacity: 1 !important;
 }
 .wiggle-hover:hover {
   animation: wiggle 0.4s ease;
