@@ -1342,6 +1342,7 @@
       "live": "My Live Sessions",
       "paperExam": "Paper Exam",
       "play": "Play Zone",
+      "experiments": "Science Experiments",
       "books": "My Interactive Books",
       "adaptive": "Smart Review",
       "plan": "My Learning Plan",
@@ -1372,6 +1373,17 @@
       "earned": "Earned Badges",
       "locked": "Locked Badges",
       "nextBadge": "Next Badge"
+    },
+    "experiments": {
+      "title": "Science Experiments",
+      "subtitle": "Discover the world of science with simple and safe experiments",
+      "physics": "Physics",
+      "biology": "Biology",
+      "chemistry": "Chemistry",
+      "materials": "Materials Needed",
+      "steps": "Experiment Steps",
+      "question": "Experiment Question",
+      "funFact": "Fun Fact"
     },
     "subjects": {
       "title": "My Subjects",

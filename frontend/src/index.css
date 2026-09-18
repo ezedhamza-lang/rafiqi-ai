@@ -6983,6 +6983,51 @@ tr:hover td {
 .rw-badge__check { width: 22px; height: 22px; border-radius: 50%; background: #10b981; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 800; flex-shrink: 0; }
 @media (max-width: 600px) { .rw-badges-grid { grid-template-columns: 1fr; } }
 
+/* --- Student Experiments --- */
+.student-experiments { padding: 0; max-width: 900px; margin: 0 auto; }
+.exp-header { border-radius: 0 0 16px 16px; padding: 1.2rem 1rem; color: #fff; display: flex; align-items: center; gap: 0.8rem; }
+.exp-header__icon { font-size: 2rem; }
+.exp-header__title { margin: 0; font-size: 1.2rem; font-weight: 800; }
+.exp-header__sub { margin: 0.2rem 0 0; opacity: 0.9; font-size: 0.85rem; }
+.exp-categories { display: flex; gap: 0.4rem; padding: 0.8rem 1rem; overflow-x: auto; }
+.exp-cat-btn { display: flex; align-items: center; gap: 0.3rem; padding: 0.4rem 0.8rem; border-radius: 20px; border: 1px solid var(--border); background: var(--surface, #fff); font-size: 0.8rem; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+.exp-cat-btn:hover { border-color: var(--primary); }
+.exp-cat-btn--active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.exp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.6rem; padding: 0 1rem; }
+.exp-card { background: var(--surface, #fff); border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem; cursor: pointer; transition: all 0.2s; }
+.exp-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.exp-card__emoji { font-size: 2rem; margin-bottom: 0.3rem; }
+.exp-card__body { display: flex; flex-direction: column; gap: 0.2rem; }
+.exp-card__title { margin: 0; font-size: 0.9rem; font-weight: 700; }
+.exp-card__desc { margin: 0; font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+.exp-card__cat { font-size: 0.65rem; font-weight: 600; margin-top: 0.3rem; }
+.exp-detail { max-width: 700px; margin: 0 auto; }
+.exp-back { display: flex; align-items: center; gap: 0.3rem; background: none; border: none; cursor: pointer; color: var(--primary); font-size: 0.85rem; padding: 0.6rem 1rem; }
+.exp-detail__hero { border-radius: 0 0 16px 16px; padding: 1.5rem 1rem; color: #fff; text-align: center; }
+.exp-detail__emoji { font-size: 3rem; display: block; margin-bottom: 0.4rem; }
+.exp-detail__title { margin: 0; font-size: 1.3rem; font-weight: 800; }
+.exp-detail__body { padding: 1rem; }
+.exp-step-section { background: var(--surface, #fff); border: 1px solid var(--border); border-radius: 12px; padding: 0.8rem; margin-bottom: 0.6rem; }
+.exp-step-section__title { display: flex; align-items: center; gap: 0.4rem; font-size: 0.9rem; font-weight: 700; margin: 0 0 0.6rem; }
+.exp-step-section__title .material-icons { font-size: 1rem; }
+.exp-materials { margin: 0; padding-inline-start: 1.2rem; }
+.exp-materials li { font-size: 0.8rem; padding: 0.15rem 0; }
+.exp-steps { margin: 0; padding-inline-start: 0; list-style: none; }
+.exp-step { display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.4rem 0; }
+.exp-step__num { width: 22px; height: 22px; border-radius: 50%; background: var(--primary); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 800; flex-shrink: 0; }
+.exp-step__text { font-size: 0.8rem; padding-top: 0.15rem; }
+.exp-question-box { background: linear-gradient(135deg, #eff6ff, #f0fdf4); border: 1px solid #bfdbfe; border-radius: 12px; padding: 0.8rem; margin-bottom: 0.6rem; }
+.exp-question-box__title { display: flex; align-items: center; gap: 0.3rem; font-size: 0.85rem; font-weight: 700; margin: 0 0 0.4rem; color: #3b82f6; }
+.exp-question-box__title .material-icons { font-size: 1rem; }
+.exp-question-box__q { font-size: 0.9rem; font-weight: 600; margin: 0 0 0.5rem; }
+.exp-question-box__btn { background: #3b82f6; color: #fff; border: none; border-radius: 8px; padding: 0.4rem 1rem; font-size: 0.8rem; font-weight: 600; cursor: pointer; }
+.exp-question-box__btn:hover { background: #2563eb; }
+.exp-question-box__answer { display: flex; align-items: flex-start; gap: 0.4rem; padding: 0.5rem; background: #f0fdf4; border-radius: 8px; font-size: 0.8rem; }
+.exp-fun-fact { display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.8rem; background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px; }
+.exp-fun-fact__icon { font-size: 1.3rem; }
+.exp-fun-fact__text { margin: 0; font-size: 0.8rem; line-height: 1.5; }
+@media (max-width: 600px) { .exp-grid { grid-template-columns: 1fr; } }
+
 
 /* --- ResourcePaper: ورقة رسمية للموارد المولّدة --- */
 .rp-section-title { font-weight: 800; margin: 0.9rem 0 0.4rem; }
