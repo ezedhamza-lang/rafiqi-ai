@@ -703,6 +703,7 @@
     "unreadMsg": "{{n}} unread messages",
     "tabs": {
       "progress": "Children's progress",
+      "overview": "Overview",
       "insights": "Smart insights",
       "assignments": "Assignments",
       "live": "Live sessions",
@@ -733,6 +734,14 @@
       "required": "Select child and teacher and write a note (3+ chars)",
       "sent": "Note sent",
       "failed": "Failed to send note"
+    },
+    "dashboard": {
+      "title": "Children Overview",
+      "noChildren": "No children linked to your account",
+      "badges": "Badges",
+      "progress": "Academic progress",
+      "recent": "Recent activity",
+      "tips": "Parenting tips"
     }
   },
   "weeklyReport": {

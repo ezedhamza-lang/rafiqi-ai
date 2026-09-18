@@ -197,6 +197,47 @@ body {
 [data-theme="dark"] .student-home__welcome { color: var(--text-primary); }
 [data-theme="dark"] .student-home__subtitle { color: var(--text-secondary); }
 
+/* --- Parent Dashboard --- */
+.pd-page { padding: 0 0 2rem; }
+.pd-title { display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem; font-weight: 800; color: var(--ink); margin: 0 0 1rem; }
+.pd-title .material-icons { color: var(--primary); }
+.pd-empty { text-align: center; padding: 3rem; }
+.pd-loading { display: flex; justify-content: center; padding: 2rem; }
+.pd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+.pd-card { background: var(--surface-card, #fff); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+.pd-card__header { display: flex; align-items: center; gap: 0.7rem; padding: 1rem 1rem 0.5rem; }
+.pd-card__avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--primary-gradient); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem; flex-shrink: 0; }
+.pd-card__name { margin: 0; font-size: 0.95rem; font-weight: 700; color: var(--ink); }
+.pd-card__level { font-size: 0.7rem; color: var(--muted); }
+.pd-card__stats { display: flex; gap: 0.5rem; padding: 0.5rem 1rem; }
+.pd-stat { display: flex; align-items: center; gap: 0.25rem; flex: 1; text-align: center; flex-direction: column; padding: 0.3rem; background: var(--light, #f8fafc); border-radius: 8px; }
+.pd-stat__icon { font-size: 1rem; }
+.pd-stat__value { font-size: 0.85rem; font-weight: 800; color: var(--ink); }
+.pd-stat__label { font-size: 0.6rem; color: var(--muted); }
+.pd-card__section { padding: 0.5rem 1rem 0.8rem; }
+.pd-card__section-title { font-size: 0.75rem; color: var(--muted); margin: 0 0 0.3rem; font-weight: 600; }
+.pd-badges { display: flex; gap: 0.3rem; flex-wrap: wrap; }
+.pd-badge { width: 28px; height: 28px; border-radius: 50%; background: var(--primary-soft, #fff7ed); display: flex; align-items: center; justify-content: center; font-size: 0.85rem; }
+.pd-subjects { display: flex; flex-direction: column; gap: 0.3rem; }
+.pd-subject { display: flex; align-items: center; gap: 0.3rem; font-size: 0.7rem; }
+.pd-subject__name { width: 60px; color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pd-subject__bar { flex: 1; height: 5px; border-radius: 3px; background: var(--light, #f1f5f9); overflow: hidden; }
+.pd-subject__fill { height: 100%; border-radius: 3px; background: var(--primary); transition: width 0.6s ease; }
+.pd-subject__pct { width: 28px; text-align: end; font-weight: 600; color: var(--ink); font-size: 0.65rem; }
+.pd-activity { list-style: none; padding: 0; margin: 0; }
+.pd-activity__item { display: flex; align-items: center; gap: 0.3rem; padding: 0.2rem 0; font-size: 0.7rem; color: var(--text-secondary, #64748b); }
+.pd-activity__icon { color: var(--primary); }
+.pd-activity__text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pd-tips { margin-top: 1.5rem; }
+.pd-tips__title { display: flex; align-items: center; gap: 0.4rem; font-size: 1rem; font-weight: 700; color: var(--ink); margin: 0 0 0.8rem; }
+.pd-tips__title .material-icons { color: var(--accent); font-size: 1.2rem; }
+.pd-tips__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 0.6rem; }
+.pd-tip { display: flex; gap: 0.5rem; padding: 0.6rem 0.8rem; background: var(--surface-card, #fff); border-radius: var(--radius-sm); border: 1px solid var(--border); align-items: flex-start; }
+.pd-tip__icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem; }
+.pd-tip__title { font-size: 0.78rem; font-weight: 700; color: var(--ink); display: block; margin-bottom: 0.1rem; }
+.pd-tip__desc { font-size: 0.7rem; color: var(--muted); margin: 0; line-height: 1.4; }
+@media (max-width: 600px) { .pd-grid { grid-template-columns: 1fr; } .pd-tips__grid { grid-template-columns: 1fr; } }
+
 a {
   text-decoration: none;
   color: inherit;

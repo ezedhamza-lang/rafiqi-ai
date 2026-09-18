@@ -15,10 +15,12 @@ const ParentLiveSessions = lazy(() => import('./ParentLiveSessions.jsx'));
 const ParentInsights = lazy(() => import('./ParentInsights.jsx'));
 const ParentNotes = lazy(() => import('./ParentNotes.jsx'));
 const ChildCredentials = lazy(() => import('./ChildCredentials.jsx'));
+const ParentDashboard = lazy(() => import('./ParentDashboard.jsx'));
 import SpaceShell from '../../components/SpaceShell.jsx';
 
 const TABS = [
   { to: '', end: true, icon: 'monitor_heart', key: 'progress', color: '#10b981' },
+  { to: 'overview', icon: 'dashboard', key: 'overview', color: '#ff6a00' },
   { to: 'insights', icon: 'auto_awesome', key: 'insights', color: '#8b5cf6' },
   { to: 'credentials', icon: 'vpn_key', key: 'credentials', color: '#f59e0b' },
   { to: 'assignments', icon: 'assignment', key: 'assignments', color: '#f97316' },
@@ -79,6 +81,7 @@ export default function ParentSpace() {
         <Suspense fallback={null}>
         <Routes>
           <Route index element={<ChildProgress childrenData={children} />} />
+          <Route path="overview" element={<ParentDashboard childrenData={children} />} />
           <Route path="insights" element={<ParentInsights childrenData={children} />} />
           <Route path="credentials" element={<ChildCredentials />} />
           <Route path="assignments" element={<ChildAssignments />} />
