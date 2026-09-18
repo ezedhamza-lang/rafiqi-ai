@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useI18n } from '../i18n/index.jsx';
+import DarkModeToggle from './DarkModeToggle.jsx';
 
 /**
  * SpaceShell — Sidebar موحّدة (يمين RTL / يسار LTR)، أخفّ بصريًا، بمجموعات منطقية.
@@ -48,6 +49,7 @@ export default function SpaceShell({ base, title, storageKey = 'rafiqi-sidebar',
     <aside className={`student-sidebar is-light ${collapsed ? 'is-collapsed' : ''}`}>
       <div className="student-sidebar-head">
         <span className="student-sidebar-title">{title}</span>
+        <DarkModeToggle />
         <button
           type="button"
           className="sidebar-toggle"
