@@ -91,13 +91,15 @@ router.get('/certificates/:type/:id/pdf', requireAuth, async (req, res) => {
     });
 
     const studentName = `${user.firstName} ${user.lastName}`;
+    const date = new Date().toLocaleDateString('ar-TN');
+    const today = new Date().toLocaleDateString('ar-TN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     let pdfBytes;
 
     if (type === 'level') {
       const level = parseInt(id) || 2;
       pdfBytes = await generateLevelCertificate(studentName, level);
     } else if (type === 'subject') {
-      pdfBytes = await generateSubjectCertificate(studentName, id);
+      pdfBytes = await generateSubjectCertificate(studentName, decodeURIComponent(id));
     } else if (type === 'xp') {
       const xp = parseInt(id) || 100;
       pdfBytes = await generateCertificate({

@@ -6,25 +6,23 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const FONT_DIR = join(__dirname, '..', '..', 'fonts');
 
-/**
- * Generate a beautiful PDF certificate for a student.
- * @param {Object} opts
- * @param {string} opts.studentName - Full name of the student
- * @param {string} opts.title - Certificate title (e.g. "شهادة إتمام")
- * @param {string} opts.description - What the certificate is for
- * @param {string} opts.subject - Subject name (optional)
- * @param {number} opts.level - Student level (optional)
- * @param {number} opts.xp - XP earned (optional)
- * @param {string} opts.date - Date string (optional)
- * @param {string} opts.teacherName - Teacher/admin name (optional)
- * @returns {Buffer} PDF buffer
- */
+// Rafiqi brand colors
+const BLUE = rgb(0.13, 0.37, 0.65);       // #2154A3
+const BLUE_DARK = rgb(0.08, 0.25, 0.50);  // darker blue
+const GOLD = rgb(0.85, 0.65, 0.13);       // #D9A621
+const GOLD_LIGHT = rgb(0.95, 0.85, 0.55);
+const CREAM = rgb(0.99, 0.97, 0.93);      // warm white
+const WHITE = rgb(1, 1, 1);
+const GRAY = rgb(0.5, 0.5, 0.5);
+const LIGHT_GRAY = rgb(0.85, 0.85, 0.85);
+
 export async function generateCertificate(opts) {
   const {
     studentName = 'تلميذ',
-    title = 'شهادة إتمام',
-    description = 'تم إتمام المادة بنجاح',
+    title = 'شهادة إتمام الدروس',
+    description = 'ت见证 منصة رفيقي للحياة المدرسية بأن التلميذ/التلميذة قد أتم بنجاح الدروس والأنشطة التعليمية المقررة.',
     subject = '',
+    className = '',
     level = 1,
     xp = 0,
     date = new Date().toLocaleDateString('ar-TN'),
@@ -32,230 +30,206 @@ export async function generateCertificate(opts) {
   } = opts;
 
   const pdfDoc = await PDFDocument.create();
-
-  // Try to embed an Arabic-compatible font, fallback to Helvetica
   let font, boldFont;
   try {
     const fontPath = join(FONT_DIR, 'NotoSansArabic-Regular.ttf');
     const boldPath = join(FONT_DIR, 'NotoSansArabic-Bold.ttf');
-    const fontBytes = readFileSync(fontPath);
-    const boldBytes = readFileSync(boldPath);
-    font = await pdfDoc.embedFont(fontBytes);
-    boldFont = await pdfDoc.embedFont(boldBytes);
+    font = await pdfDoc.embedFont(readFileSync(fontPath));
+    boldFont = await pdfDoc.embedFont(readFileSync(boldPath));
   } catch {
     font = await pdfDoc.embedFont(StandardFonts.Helvetica);
     boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
   }
 
-  const page = pdfDoc.addPage([595, 842]); // A4
+  const page = pdfDoc.addPage([842, 595]); // A4 Landscape
   const w = page.getWidth();
   const h = page.getHeight();
 
   // === BACKGROUND ===
-  // Light cream background
-  page.drawRectangle({
-    x: 0, y: 0, width: w, height: h,
-    color: rgb(0.99, 0.98, 0.95),
+  page.drawRectangle({ x: 0, y: 0, width: w, height: h, color: CREAM });
+
+  // === TOP BLUE BAND ===
+  page.drawRectangle({ x: 0, y: h - 80, width: w, height: 80, color: BLUE });
+  // Gold accent line under blue band
+  page.drawRectangle({ x: 0, y: h - 84, width: w, height: 4, color: GOLD });
+
+  // === BOTTOM BLUE BAND ===
+  page.drawRectangle({ x: 0, y: 0, width: w, height: 50, color: BLUE });
+  // Gold accent line above bottom band
+  page.drawRectangle({ x: 0, y: 50, width: w, height: 3, color: GOLD });
+
+  // === DECORATIVE CORNERS (gold triangles) ===
+  // Top-left
+  page.drawRectangle({ x: 0, y: h - 84, width: 60, height: 4, color: GOLD });
+  page.drawRectangle({ x: 0, y: h - 84, width: 4, height: 60, color: GOLD });
+  // Top-right
+  page.drawRectangle({ x: w - 60, y: h - 84, width: 60, height: 4, color: GOLD });
+  page.drawRectangle({ x: w - 4, y: h - 84, width: 4, height: 60, color: GOLD });
+  // Bottom-left
+  page.drawRectangle({ x: 0, y: 50, width: 60, height: 3, color: GOLD });
+  page.drawRectangle({ x: 0, y: 0, width: 4, height: 53, color: GOLD });
+  // Bottom-right
+  page.drawRectangle({ x: w - 60, y: 50, width: 60, height: 3, color: GOLD });
+  page.drawRectangle({ x: w - 4, y: 0, width: 4, height: 53, color: GOLD });
+
+  // === HEADER: Logo area (owl placeholder) ===
+  // Owl circle
+  page.drawCircle({
+    x: w / 2, y: h - 45, size: 30,
+    color: WHITE,
+    borderColor: GOLD,
+    borderWidth: 2,
+  });
+  page.drawText('\u{1F989}', {
+    x: w / 2 - 12, y: h - 52, size: 24, color: BLUE,
   });
 
-  // === DECORATIVE BORDER ===
-  // Outer gold border
-  page.drawRectangle({
-    x: 25, y: 25, width: w - 50, height: h - 50,
-    borderColor: rgb(0.85, 0.65, 0.13),
-    borderWidth: 3,
+  // Platform name
+  page.drawText('رفيقي', {
+    x: w / 2 - 25, y: h - 18, size: 14, font: boldFont, color: WHITE,
   });
 
-  // Inner decorative border
-  page.drawRectangle({
-    x: 35, y: 35, width: w - 70, height: h - 70,
-    borderColor: rgb(0.85, 0.65, 0.13),
-    borderWidth: 1,
-  });
-
-  // Corner stars
-  const starPositions = [
-    [55, h - 55], [w - 55, h - 55],
-    [55, 55], [w - 55, 55],
-  ];
-  starPositions.forEach(([x, y]) => {
-    page.drawText('★', {
-      x: x - 8, y: y - 8, size: 16,
-      font: boldFont,
-      color: rgb(0.85, 0.65, 0.13),
-    });
-  });
-
-  // === HEADER AREA ===
-  // School logo area
-  page.drawText('🏫', {
-    x: w / 2 - 20, y: h - 100, size: 40,
-    color: rgb(0.85, 0.65, 0.13),
-  });
-
-  // School name
-  page.drawText('منصة رفيقي التعليمية', {
-    x: w / 2 - 80, y: h - 140, size: 16,
-    font: boldFont,
-    color: rgb(0.2, 0.2, 0.2),
+  // Website
+  page.drawText('https://rafiqi-platform.onrender.com', {
+    x: w / 2 - 80, y: 18, size: 8, font, color: GOLD_LIGHT,
   });
 
   // === MAIN TITLE ===
-  page.drawText('✦ ' + title + ' ✦', {
-    x: w / 2 - 100, y: h - 200, size: 28,
-    font: boldFont,
-    color: rgb(0.85, 0.65, 0.13),
+  page.drawText(title, {
+    x: w / 2 - 120, y: h - 130, size: 36, font: boldFont, color: BLUE_DARK,
   });
 
-  // Decorative line under title
-  page.drawLine({
-    start: { x: 100, y: h - 215 },
-    end: { x: w - 100, y: h - 215 },
-    thickness: 2,
-    color: rgb(0.85, 0.65, 0.13),
+  // Gold underline for title
+  page.drawRectangle({
+    x: w / 2 - 130, y: h - 140, width: 260, height: 3, color: GOLD,
   });
 
-  // === STUDENT NAME ===
-  page.drawText('تُمنح هذه الشهادة إلى', {
-    x: w / 2 - 70, y: h - 260, size: 12,
-    font,
-    color: rgb(0.4, 0.4, 0.4),
+  // === SUBTITLE RIBBON ===
+  const subText = 'منفوها منصة رفيقي للحياة المدرسية';
+  const subW = font.widthOfTextAtSize(subText, 12);
+  // Ribbon background
+  page.drawRectangle({
+    x: (w - subW - 40) / 2, y: h - 165, width: subW + 40, height: 22,
+    color: GOLD, borderColor: GOLD, borderWidth: 1,
+  });
+  page.drawText(subText, {
+    x: (w - subW) / 2, y: h - 160, size: 12, font, color: BLUE_DARK,
   });
 
-  // Student name (large)
-  const nameWidth = boldFont.widthOfTextAtSize(studentName, 26);
+  // === STUDENT NAME SECTION ===
+  page.drawText('تشهد منصة رفيقي للحياة المدرسية بأن التلميذ/التلميذة', {
+    x: w / 2 - 160, y: h - 200, size: 11, font, color: GRAY,
+  });
+
+  // Student name box
+  page.drawRectangle({
+    x: w / 2 - 180, y: h - 245, width: 360, height: 35,
+    borderColor: BLUE, borderWidth: 1.5,
+  });
+  // Dotted line inside
+  const nameW = boldFont.widthOfTextAtSize(studentName, 22);
   page.drawText(studentName, {
-    x: (w - nameWidth) / 2, y: h - 300, size: 26,
-    font: boldFont,
-    color: rgb(0.1, 0.1, 0.1),
+    x: (w - nameW) / 2, y: h - 237, size: 22, font: boldFont, color: BLUE_DARK,
   });
 
-  // Underline for name
-  page.drawLine({
-    start: { x: 100, y: h - 305 },
-    end: { x: w - 100, y: h - 305 },
-    thickness: 1,
-    color: rgb(0.8, 0.8, 0.8),
+  // === DESCRIPTION TEXT ===
+  const descText = 'قد أتم بنجاح الدروس والأنشطة التعليمية المقررة.';
+  const descW = font.widthOfTextAtSize(descText, 11);
+  page.drawText(descText, {
+    x: (w - descW) / 2, y: h - 270, size: 11, font, color: GRAY,
   });
 
-  // === DESCRIPTION ===
-  const descWidth = font.widthOfTextAtSize(description, 14);
-  page.drawText(description, {
-    x: (w - descWidth) / 2, y: h - 350, size: 14,
-    font,
-    color: rgb(0.3, 0.3, 0.3),
+  // === DETAILS GRID ===
+  const detailsY = h - 310;
+  const leftCol = w / 2 - 180;
+  const rightCol = w / 2 + 30;
+
+  // Row 1: Class | Subject
+  page.drawText('القسم:', { x: rightCol, y: detailsY, size: 12, font: boldFont, color: BLUE });
+  page.drawText(className || '...', { x: rightCol - 80, y: detailsY, size: 12, font, color: GRAY });
+  page.drawRectangle({ x: rightCol - 120, y: detailsY - 2, width: 35, height: 1, color: LIGHT_GRAY });
+
+  page.drawText('المادة:', { x: leftCol + 130, y: detailsY, size: 12, font: boldFont, color: BLUE });
+  page.drawText(subject || '...', { x: leftCol + 50, y: detailsY, size: 12, font, color: GRAY });
+  page.drawRectangle({ x: leftCol + 20, y: detailsY - 2, width: 25, height: 1, color: LIGHT_GRAY });
+
+  // Row 2: Date | Teacher
+  const row2Y = detailsY - 35;
+  page.drawText('التاريخ:', { x: rightCol, y: row2Y, size: 12, font: boldFont, color: BLUE });
+  page.drawText(date, { x: rightCol - 80, y: row2Y, size: 12, font, color: GRAY });
+  page.drawRectangle({ x: rightCol - 120, y: row2Y - 2, width: 35, height: 1, color: LIGHT_GRAY });
+
+  page.drawText('الأستاذ(ة):', { x: leftCol + 130, y: row2Y, size: 12, font: boldFont, color: BLUE });
+  page.drawText(teacherName, { x: leftCol + 50, y: row2Y, size: 12, font, color: GRAY });
+  page.drawRectangle({ x: leftCol + 20, y: row2Y - 2, width: 25, height: 1, color: LIGHT_GRAY });
+
+  // === DECORATIVE ELEMENTS ===
+  // Stars (gold)
+  const stars = [
+    [80, h - 130], [w - 80, h - 130],
+    [60, h - 250], [w - 60, h - 250],
+    [100, 100], [w - 100, 100],
+  ];
+  stars.forEach(([x, y]) => {
+    page.drawText('\u2605', { x: x - 6, y: y - 6, size: 14, font: boldFont, color: GOLD });
   });
 
-  // === SUBJECT (if provided) ===
-  if (subject) {
-    const subjectText = 'المادة: ' + subject;
-    const subWidth = font.widthOfTextAtSize(subjectText, 13);
-    page.drawText(subjectText, {
-      x: (w - subWidth) / 2, y: h - 380, size: 13,
-      font,
-      color: rgb(0.2, 0.5, 0.2),
-    });
-  }
+  // Book icons (left side)
+  page.drawText('\u{1F4DA}', { x: 50, y: h / 2 - 20, size: 30, color: BLUE });
+  page.drawText('\u{1F4D6}', { x: 55, y: h / 2 - 60, size: 25, color: GOLD });
 
-  // === LEVEL & XP ===
-  if (level > 1 || xp > 0) {
-    const infoY = h - 410;
-    const parts = [];
-    if (level > 1) parts.push('المستوى: ' + level);
-    if (xp > 0) parts.push('XP: ' + xp);
-    const infoText = parts.join('  |  ');
-    const infoWidth = font.widthOfTextAtSize(infoText, 12);
-    page.drawText(infoText, {
-      x: (w - infoWidth) / 2, y: infoY, size: 12,
-      font,
-      color: rgb(0.5, 0.4, 0.2),
-    });
-  }
+  // Pencils (right side)
+  page.drawText('\u270F\uFE0F', { x: w - 80, y: h / 2 - 20, size: 30, color: BLUE });
+  page.drawText('\u{1F4DD}', { x: w - 75, y: h / 2 - 60, size: 25, color: GOLD });
 
-  // === DECORATIVE MEDAL ===
-  page.drawText('🏅', {
-    x: w / 2 - 25, y: h - 480, size: 50,
-    color: rgb(0.85, 0.65, 0.13),
+  // Paper plane (top right)
+  page.drawText('\u2708\uFE0F', { x: w - 100, y: h - 110, size: 20, color: BLUE });
+
+  // Leaves (bottom corners)
+  page.drawText('\u{1F33F}', { x: 30, y: 60, size: 18, color: rgb(0.2, 0.6, 0.3) });
+  page.drawText('\u{1F33F}', { x: w - 50, y: 60, size: 18, color: rgb(0.2, 0.6, 0.3) });
+
+  // === BOTTOM SEAL ===
+  page.drawCircle({
+    x: w / 2, y: 100, size: 28,
+    color: WHITE, borderColor: GOLD, borderWidth: 3,
+  });
+  page.drawText('\u{1F393}', { x: w / 2 - 10, y: 93, size: 18, color: BLUE });
+
+  // === FOOTER TEXT ===
+  page.drawText('رفيقي ... رفيقك في التعلم والحياة المدرسية', {
+    x: w / 2 - 100, y: 20, size: 9, font, color: GOLD_LIGHT,
   });
 
-  // === SIGNATURES ===
-  // Left signature
-  page.drawLine({
-    start: { x: 70, y: 150 },
-    end: { x: 220, y: 150 },
-    thickness: 1,
-    color: rgb(0.6, 0.6, 0.6),
-  });
-  page.drawText(teacherName, {
-    x: 80, y: 130, size: 10,
-    font,
-    color: rgb(0.3, 0.3, 0.3),
-  });
-  page.drawText('المدير / الأستاذ', {
-    x: 100, y: 115, size: 9,
-    font,
-    color: rgb(0.5, 0.5, 0.5),
-  });
+  // Decorative hearts in footer
+  page.drawText('\u2665', { x: w / 2 - 5, y: 8, size: 10, font, color: GOLD });
 
-  // Right signature
-  page.drawLine({
-    start: { x: w - 220, y: 150 },
-    end: { x: w - 70, y: 150 },
-    thickness: 1,
-    color: rgb(0.6, 0.6, 0.6),
-  });
-  page.drawText('توقيع ولي الأمر', {
-    x: w - 170, y: 130, size: 10,
-    font,
-    color: rgb(0.3, 0.3, 0.3),
-  });
-
-  // === DATE ===
-  const dateText = 'التاريخ: ' + date;
-  const dateWidth = font.widthOfTextAtSize(dateText, 10);
-  page.drawText(dateText, {
-    x: (w - dateWidth) / 2, y: 90, size: 10,
-    font,
-    color: rgb(0.5, 0.5, 0.5),
-  });
-
-  // === FOOTER ===
-  page.drawText('منصة رفيقي — م designed by Ezeddine Hamza', {
-    x: w / 2 - 100, y: 60, size: 8,
-    font,
-    color: rgb(0.7, 0.7, 0.7),
-  });
+  // === SIDES: Decorative gold lines ===
+  // Left side vertical gold line
+  page.drawRectangle({ x: 20, y: 60, width: 2, height: h - 150, color: GOLD_LIGHT });
+  // Right side vertical gold line
+  page.drawRectangle({ x: w - 22, y: 60, width: 2, height: h - 150, color: GOLD_LIGHT });
 
   return pdfDoc.save();
 }
 
-/**
- * Generate a level-up certificate
- */
 export async function generateLevelCertificate(studentName, level) {
   return generateCertificate({
     studentName,
     title: 'شهادة المستوى ' + level,
-    description: 'تهانينا! لقد وصلت إلى المستوى ' + level,
+    description: 'تهانينا! لقد وصلت إلى المستوى ' + level + ' بنجاح.',
     level,
   });
 }
 
-/**
- * Generate a subject completion certificate
- */
 export async function generateSubjectCertificate(studentName, subject) {
   return generateCertificate({
     studentName,
-    title: 'شهادة إتمام المادة',
-    description: 'تم إتمام مادة ' + subject + ' بنجاح',
+    title: 'شهادة إتمام الدروس',
     subject,
   });
 }
 
-/**
- * Generate a weekly challenge winner certificate
- */
 export async function generateChallengeCertificate(studentName, week) {
   return generateCertificate({
     studentName,
