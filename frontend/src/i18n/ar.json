@@ -1360,6 +1360,7 @@
       "leaderboard": "لوحة الشرف",
       "weeklyChallenge": "التحدي الأسبوعي",
       "certificates": "شهاداتي",
+      "friendships": "أصدقائي",
       "books": "كتبي التفاعلية",
       "adaptive": "مراجعة ذكية",
       "plan": "خطة تعلّمي",
@@ -1463,6 +1464,24 @@
       "empty": "لم تحصل على شهادة بعد. واصل التعلم لكسب شهادات!",
       "download": "تحميل PDF",
       "generating": "جاري التوليد..."
+    },
+    "friendships": {
+      "title": "أصدقائي",
+      "subtitle": "تواصل مع أصدقائك وتنافس معهم!",
+      "friendsTab": "الأصدقاء",
+      "requestsTab": "الطلبات",
+      "searchTab": "بحث",
+      "noFriends": "ليس لديك أصدقاء بعد. ابحث عن أصدقاء جدد!",
+      "noRequests": "لا توجد طلبات صداقة جديدة",
+      "searchPlaceholder": "ابحث عن تلميذ بالاسم...",
+      "noResults": "لم يتم العثور على نتائج",
+      "add": "إضافة",
+      "level": "المستوى",
+      "requestSent": "تم إرسال طلب الصداقة!",
+      "accepted": "تم قبول طلب الصداقة!",
+      "removed": "تم حذف الصديق",
+      "challengeSent": "تم إرسال التحدي!",
+      "error": "خطأ"
     },
     "subjects": {
       "title": "موادي",

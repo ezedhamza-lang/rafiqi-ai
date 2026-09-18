@@ -189,6 +189,8 @@ model User {
   paymentIntents       PaymentIntent[]
   auditLogs            AuditLog[]
   discountsCreated     DiscountCode[]        @relation("DiscountCreatedBy")
+  friendRequests       Friendship[]          @relation("FriendRequester")
+  friendReceived       Friendship[]          @relation("FriendAddressee")
   refundsMade          Refund[]              @relation("RefundBy")
   anomaliesResolved    FinancialAnomaly[]    @relation("AnomalyResolvedBy")
   liveSessions         LiveSession[]         @relation("LiveSessionTeacher")
@@ -1352,4 +1354,19 @@ model MentalMathAttempt {
 
   @@index([userId, skill])
   @@index([userId, createdAt])
+}
+
+model Friendship {
+  id            String   @id @default(cuid())
+  requesterId   Int
+  addresseeId   Int
+  status        String   @default("PENDING")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  requester User @relation("FriendRequester", fields: [requesterId], references: [id], onDelete: Cascade)
+  addressee User @relation("FriendAddressee", fields: [addresseeId], references: [id], onDelete: Cascade)
+
+  @@unique([requesterId, addresseeId])
+  @@index([addresseeId])
 }

@@ -1360,6 +1360,7 @@
       "leaderboard": "Honor Board",
       "weeklyChallenge": "Weekly Challenge",
       "certificates": "My Certificates",
+      "friendships": "My Friends",
       "books": "My Interactive Books",
       "adaptive": "Smart Review",
       "plan": "My Learning Plan",
@@ -1463,6 +1464,24 @@
       "empty": "No certificates yet. Keep learning to earn certificates!",
       "download": "Download PDF",
       "generating": "Generating..."
+    },
+    "friendships": {
+      "title": "My Friends",
+      "subtitle": "Connect with friends and compete!",
+      "friendsTab": "Friends",
+      "requestsTab": "Requests",
+      "searchTab": "Search",
+      "noFriends": "No friends yet. Search for new friends!",
+      "noRequests": "No friend requests",
+      "searchPlaceholder": "Search by name...",
+      "noResults": "No results found",
+      "add": "Add",
+      "level": "Level",
+      "requestSent": "Friend request sent!",
+      "accepted": "Friend request accepted!",
+      "removed": "Friend removed",
+      "challengeSent": "Challenge sent!",
+      "error": "Error"
     },
     "subjects": {
       "title": "My Subjects",

@@ -33,6 +33,7 @@ const StudentVirtualFriend = lazy(() => import('./StudentVirtualFriend.jsx'));
 const StudentCertificates = lazy(() => import('./StudentCertificates.jsx'));
 const StudentLeaderboard = lazy(() => import('./StudentLeaderboard.jsx'));
 const StudentWeeklyChallenge = lazy(() => import('./StudentWeeklyChallenge.jsx'));
+const StudentFriendships = lazy(() => import('./StudentFriendships.jsx'));
 const SchoolCalendar = lazy(() => import('../../components/SchoolCalendar.jsx'));
 
 export default function StudentSpace() {
@@ -137,6 +138,7 @@ export default function StudentSpace() {
       { to: 'leaderboard', icon: 'leaderboard', label: L('leaderboard'), color: '#f59e0b' },
       { to: 'weekly-challenge', icon: 'date_range', label: L('weeklyChallenge'), color: '#ef4444' },
       { to: 'certificates', icon: 'school', label: L('certificates'), color: '#8b5cf6' },
+      { to: 'friendships', icon: 'group', label: L('friendships'), color: '#06b6d4' },
     ] },
   ];
 
@@ -196,6 +198,7 @@ export default function StudentSpace() {
           <Route path="leaderboard" element={<StudentLeaderboard />} />
           <Route path="weekly-challenge" element={<StudentWeeklyChallenge />} />
           <Route path="certificates" element={<StudentCertificates />} />
+          <Route path="friendships" element={<StudentFriendships />} />
           <Route path="books" element={<StudentBooks />} />
           <Route path="adaptive" element={<StudentAdaptive />} />
           <Route path="plan" element={<StudentLearningPlan />} />
