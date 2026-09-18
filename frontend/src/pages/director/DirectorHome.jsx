@@ -26,14 +26,14 @@ export default function DirectorHome() {
   if (!dashboard) return <div className="loading-wrap"><span className="spinner" /></div>;
 
   const cards = [
-    { key: 'classes', value: dashboard.totals.classes, icon: 'school' },
-    { key: 'students', value: dashboard.totals.students, icon: 'groups' },
-    { key: 'teachers', value: dashboard.totals.teachers, icon: 'co_present' },
-    { key: 'parents', value: dashboard.totals.parents, icon: 'family_restroom' },
-    { key: 'quizzes', value: dashboard.totals.quizzes, icon: 'quiz' },
-    { key: 'submissions', value: dashboard.totals.submissions, icon: 'task_alt' },
-    { key: 'memos', value: dashboard.totals.memos, icon: 'description' },
-    { key: 'unread', value: dashboard.totals.unreadMessages, icon: 'mark_email_unread' }
+    { key: 'classes', value: dashboard.totals.classes, icon: 'school', color: '#2563EB' },
+    { key: 'students', value: dashboard.totals.students, icon: 'groups', color: '#10B981' },
+    { key: 'teachers', value: dashboard.totals.teachers, icon: 'co_present', color: '#A855F7' },
+    { key: 'parents', value: dashboard.totals.parents, icon: 'family_restroom', color: '#F5B942' },
+    { key: 'quizzes', value: dashboard.totals.quizzes, icon: 'quiz', color: '#F59E0B' },
+    { key: 'submissions', value: dashboard.totals.submissions, icon: 'task_alt', color: '#06B6D4' },
+    { key: 'memos', value: dashboard.totals.memos, icon: 'description', color: '#64748B' },
+    { key: 'unread', value: dashboard.totals.unreadMessages, icon: 'mark_email_unread', color: '#EF4444' }
   ];
 
   const maxTrend = Math.max(1, ...(stats?.trend || []).map((tr) => tr.count));
@@ -47,7 +47,7 @@ export default function DirectorHome() {
       <div className="stat-grid">
         {cards.map((c) => (
           <div key={c.key} className="card-item stat-card">
-            <span className="material-icons">{c.icon}</span>
+            <span className="material-icons" style={{ color: c.color }}>{c.icon}</span>
             <div className="stat-value">{c.value}</div>
             <div className="stat-label">{t(`directorHome.cards.${c.key}`)}</div>
           </div>

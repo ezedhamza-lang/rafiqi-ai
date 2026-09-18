@@ -25,11 +25,7 @@ const SUPERADMIN_SPACE_CHILDREN = [
 
 const DIRECTOR_SPACE_CHILDREN = [
   { to: '/director', end: true, icon: 'dashboard', key: 'dashboard' },
-  { to: '/director/requests', icon: 'how_to_reg', key: 'registrationRequests' },
-  { to: '/director/documents', icon: 'folder_shared', key: 'adminDocuments' },
-  { to: '/director/classes', icon: 'school', key: 'classesPerf' },
-  { to: '/director/calendar', icon: 'calendar_month', key: 'directorCalendar' },
-  { to: '/director/notifications', icon: 'notifications', key: 'directorNotifications' }
+  { to: '/director/requests', icon: 'how_to_reg', key: 'registrationRequests' }
 ];
 
 const DIRECTOR_FINANCE_CHILDREN = [
@@ -41,10 +37,6 @@ const DIRECTOR_HELP_CHILD = { to: '/help', icon: 'support_agent', key: 'help', d
 
 const PARENT_SPACE_CHILDREN = [
   { to: '/parent', end: true, icon: 'family_restroom', key: 'parentSpace' },
-  { to: '/parent/assignments', icon: 'assignment', key: 'parentAssignments' },
-  { to: '/parent/live', icon: 'live_tv', key: 'parentLive' },
-  { to: '/parent/analytics', icon: 'monitoring', key: 'analytics' },
-  { to: '/parent/notes', icon: 'rate_review', key: 'parentNotes' },
   { to: '/dashboard', icon: 'dashboard', key: 'indicatorsSummary' },
   { to: '/students', icon: 'groups', key: 'myChildren' },
   { to: '/registration', icon: 'person_add', key: 'newRegistration' },

@@ -35,43 +35,37 @@ const ClassGrades = lazy(() => import('./ClassGrades.jsx'));
 
 const TEACHER_GROUPS = [
   { label: 'الرئيسية', items: [
-    { to: '', end: true, icon: 'analytics', label: 'تحليل الأداء', color: '#ff6a00' },
+    { to: '', end: true, icon: 'analytics', label: 'تحليل الأداء', color: '#2563EB' },
   ] },
-  { label: 'التخطيط والإعداد', items: [
-    { to: 'lesson-plan', icon: 'calendar_month', label: 'خطة الدرس', color: '#06b6d4' },
-    { to: 'plans', icon: 'event_note', label: 'الخطط السنوية', color: '#0891b2' },
-    { to: 'memos', icon: 'description', label: 'المذكرات', color: '#f59e0b' },
-    { to: 'schedules', icon: 'calendar_view_week', label: 'الجداول', color: '#f97316' },
+  { label: 'التخطيط والمحتوى', items: [
+    { to: 'lesson-plan', icon: 'calendar_month', label: 'خطة الدرس', color: '#10B981' },
+    { to: 'plans', icon: 'event_note', label: 'الخطط السنوية', color: '#10B981' },
+    { to: 'memos', icon: 'description', label: 'المذكرات', color: '#10B981' },
+    { to: 'schedules', icon: 'calendar_view_week', label: 'الجداول', color: '#10B981' },
+    { to: 'class-subjects', icon: 'category', label: 'مواد الفصول', color: '#10B981' },
+    { to: 'worksheets', icon: 'article', label: 'تمارين', color: '#10B981' },
+    { to: 'resources', icon: 'folder_special', label: 'الموارد', color: '#10B981' },
+    { to: 'library', icon: 'local_library', label: 'المكتبة', color: '#10B981' },
   ] },
-  { label: 'المواد والمحتوى', items: [
-    { to: 'class-subjects', icon: 'category', label: 'مواد الفصول', color: '#ff6a00' },
-    { to: 'worksheets', icon: 'article', label: 'تمارين', color: '#f59e0b' },
-    { to: 'resources', icon: 'folder_special', label: 'الموارد', color: '#ec4899' },
-    { to: 'library', icon: 'local_library', label: 'المكتبة', color: '#d946ef' },
+  { label: 'التقييم والنتائج', items: [
+    { to: 'quizzes', icon: 'quiz', label: 'الاختبارات', color: '#F59E0B' },
+    { to: 'assignments', icon: 'assignment', label: 'الواجبات', color: '#F59E0B' },
+    { to: 'exams', icon: 'fact_check', label: 'الامتحانات الرسمية', color: '#F59E0B' },
+    { to: 'correction', icon: 'grading', label: 'التصحيح', color: '#F59E0B' },
+    { to: 'results', icon: 'scoreboard', label: 'النتائج', color: '#F59E0B' },
+    { to: 'averages', icon: 'percent', label: 'المعدلات', color: '#F59E0B' },
+    { to: 'gradebook', icon: 'menu_book', label: 'سجل الدرجات', color: '#F59E0B' },
+    { to: 'grades', icon: 'workspace_premium', label: 'درجات الفصول', color: '#F59E0B' },
+    { to: 'analytics', icon: 'monitoring', label: 'التحليل والتصدير', color: '#F59E0B' },
   ] },
-  { label: 'التقييم والاختبارات', items: [
-    { to: 'quizzes', icon: 'quiz', label: 'الاختبارات', color: '#ef4444' },
-    { to: 'assignments', icon: 'assignment', label: 'الواجبات', color: '#f97316' },
-    { to: 'exams', icon: 'fact_check', label: 'الامتحانات الرسمية', color: '#dc2626' },
-    { to: 'correction', icon: 'grading', label: 'التصحيح', color: '#f59e0b' },
-  ] },
-  { label: 'النتائج والتقارير', items: [
-    { to: 'results', icon: 'scoreboard', label: 'النتائج', color: '#10b981' },
-    { to: 'averages', icon: 'percent', label: 'المعدلات', color: '#14b8a6' },
-    { to: 'gradebook', icon: 'menu_book', label: 'سجل الدرجات', color: '#059669' },
-    { to: 'grades', icon: 'workspace_premium', label: 'درجات الفصول', color: '#047857' },
-    { to: 'analytics', icon: 'monitoring', label: 'التحليل والتصدير', color: '#ff6a00' },
-  ] },
-  { label: 'المتابعة والتقدم', items: [
-    { to: 'lesson-progress', icon: 'trending_up', label: 'تقدم الدروس', color: '#f59e0b' },
-    { to: 'notes', icon: 'rate_review', label: 'الملاحظات', color: '#f97316' },
-    { to: 'attendance', icon: 'fact_check', label: 'الحضور والغياب', color: '#10b981' },
-    { to: 'health', icon: 'favorite', label: 'الحالة الصحية', color: '#ef4444' },
-  ] },
-  { label: 'الأدوات الذكية', items: [
-    { to: 'ai', icon: 'smart_toy', label: 'رفيقي AI', color: '#ff6a00' },
-    { to: 'live', icon: 'live_tv', label: 'الحصص المباشرة', color: '#22c55e' },
-    { to: 'suggestions', icon: 'lightbulb', label: 'اقتراحات ذكية', color: '#eab308' },
+  { label: 'المتابعة والأدوات', items: [
+    { to: 'lesson-progress', icon: 'trending_up', label: 'تقدم الدروس', color: '#06B6D4' },
+    { to: 'notes', icon: 'rate_review', label: 'الملاحظات', color: '#06B6D4' },
+    { to: 'attendance', icon: 'event_available', label: 'الحضور والغياب', color: '#06B6D4' },
+    { to: 'health', icon: 'favorite', label: 'الحالة الصحية', color: '#06B6D4' },
+    { to: 'ai', icon: 'smart_toy', label: 'رفيقي AI', color: '#06B6D4' },
+    { to: 'live', icon: 'live_tv', label: 'الحصص المباشرة', color: '#06B6D4' },
+    { to: 'suggestions', icon: 'lightbulb', label: 'اقتراحات ذكية', color: '#06B6D4' },
   ] },
 ];
 
@@ -107,7 +101,7 @@ export default function TeacherDashboard() {
 
   return (
     <div className="teacher-space">
-      <SpaceShell base="/teacher" title={t('teacherSpace.sidebarTitle') || 'فضاء الأستاذ'} storageKey="rafiqi-teacher-sidebar" sections={TEACHER_GROUPS}>
+      <SpaceShell base="/teacher" title={t('teacherSpace.sidebarTitle') || 'فضاء الأستاذ'} storageKey="rafiqi-teacher-sidebar" sections={TEACHER_GROUPS} hideThemeToggle>
         <div className="space-head">
           <div>
             <h2>{t('teacherSpace.title')}</h2>

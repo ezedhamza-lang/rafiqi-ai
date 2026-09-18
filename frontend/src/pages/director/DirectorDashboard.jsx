@@ -54,9 +54,6 @@ export default function DirectorDashboard() {
           <h2>{t('director.title')}</h2>
           <p className="sub">{t('director.subtitle', { name: `${user.firstName} ${user.lastName}` })}</p>
         </div>
-        {pendingCount > 0 && (
-          <div className="badge warn">🔔 {t('director.pendingBadge', { n: pendingCount })}</div>
-        )}
       </div>
 
       <nav className="teacher-tabs">
@@ -64,6 +61,7 @@ export default function DirectorDashboard() {
           <NavLink key={tb.to} to={`/director/${tb.to}`} end={tb.end} className={({ isActive }) => (isActive ? 'active' : '')}>
             <span className="material-icons">{tb.icon}</span>
             {t(`director.tabs.${tb.key}`)}
+            {tb.key === 'requests' && pendingCount > 0 && <span className="nav-badge">{pendingCount}</span>}
           </NavLink>
         ))}
       </nav>

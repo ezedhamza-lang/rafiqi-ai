@@ -8,7 +8,7 @@ import DarkModeToggle from './DarkModeToggle.jsx';
  * إما items=[{to,end,icon,key|label,color}] مسطّح،
  * أو sections=[{label, items:[...]}] للمجموعات.
  */
-export default function SpaceShell({ base, title, storageKey = 'rafiqi-sidebar', items, sections, children, fullWidth }) {
+export default function SpaceShell({ base, title, storageKey = 'rafiqi-sidebar', items, sections, children, fullWidth, hideThemeToggle = false }) {
   const { t } = useI18n();
   const location = useLocation();
   const [collapsed, setCollapsed] = useState(() => localStorage.getItem(storageKey) === 'collapsed');
@@ -49,7 +49,7 @@ export default function SpaceShell({ base, title, storageKey = 'rafiqi-sidebar',
     <aside className={`student-sidebar is-light ${collapsed ? 'is-collapsed' : ''}`}>
       <div className="student-sidebar-head">
         <span className="student-sidebar-title">{title}</span>
-        <DarkModeToggle />
+        {!hideThemeToggle && <DarkModeToggle />}
         <button
           type="button"
           className="sidebar-toggle"

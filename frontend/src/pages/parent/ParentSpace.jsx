@@ -33,6 +33,17 @@ const TABS = [
   { to: 'health', icon: 'favorite', key: 'health', color: '#ec4899' }
 ];
 
+const TAB_GROUPS = (t) => [
+  { label: 'المتابعة', items: ['progress', 'overview', 'insights', 'analytics', 'report'].map((key) => tabByKey(t, key)) },
+  { label: 'الحياة المدرسية', items: ['assignments', 'live', 'notes', 'documents', 'health'].map((key) => tabByKey(t, key)) },
+  { label: 'الإدارة', items: ['credentials', 'messages'].map((key) => tabByKey(t, key)) },
+];
+
+function tabByKey(t, key) {
+  const tb = TABS.find((x) => x.key === key);
+  return { ...tb, label: t(`parentSpace.tabs.${tb.key}`) };
+}
+
 export default function ParentSpace() {
   const { user } = useAuth();
   const { t } = useI18n();
@@ -69,14 +80,14 @@ export default function ParentSpace() {
           <h2>{t('parentSpace.title')}</h2>
           <p className="sub">{t('parentSpace.subtitle', { name: `${user.firstName} ${user.lastName}` })}</p>
         </div>
-        {unread > 0 && <div className="badge warn">🔔 {t('parentSpace.unreadMsg', { n: unread })}</div>}
+        {unread > 0 && <div className="badge warn"><span className="material-icons" style={{ fontSize: '1rem' }}>mark_chat_unread</span> {t('parentSpace.unreadMsg', { n: unread })}</div>}
       </div>
 
       <SpaceShell
         base="/parent"
         title={t('parentSpace.title')}
         storageKey="rafiqi-parent-sidebar"
-        items={TABS.map((tb) => ({ ...tb, label: t(`parentSpace.tabs.${tb.key}`) }))}
+        sections={TAB_GROUPS(t)}
       >
         <Suspense fallback={null}>
         <Routes>

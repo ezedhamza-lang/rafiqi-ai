@@ -55,12 +55,12 @@ export default function ParentDashboard({ childrenData }) {
           {t('parentSpace.dashboard.tips', 'نصائح للأهل')}
         </h3>
         <div className="pd-tips__grid">
-          {TIPS.map((tip, i) => (
+          {[1, 2, 3, 4].map((i) => (
             <div key={i} className="pd-tip">
-              <span className="pd-tip__icon">{tip.icon}</span>
+              <span className="material-icons pd-tip__icon">{['menu_book', 'track_changes', 'emoji_events', 'bedtime'][i - 1]}</span>
               <div>
-                <strong className="pd-tip__title">{tip.title}</strong>
-                <p className="pd-tip__desc">{tip.desc}</p>
+                <strong className="pd-tip__title">{t(`parentSpace.dashboard.tip${i}t`)}</strong>
+                <p className="pd-tip__desc">{t(`parentSpace.dashboard.tip${i}d`)}</p>
               </div>
             </div>
           ))}
@@ -95,19 +95,19 @@ function ChildCard({ child, dash, t }) {
 
       <div className="pd-card__stats">
         <div className="pd-stat">
-          <span className="pd-stat__icon">⭐</span>
+          <span className="material-icons pd-stat__icon" style={{ color: '#F59E0B' }}>star</span>
           <span className="pd-stat__value">{xp}</span>
           <span className="pd-stat__label">XP</span>
         </div>
         <div className="pd-stat">
-          <span className="pd-stat__icon">🪙</span>
+          <span className="material-icons pd-stat__icon" style={{ color: '#10B981' }}>payments</span>
           <span className="pd-stat__value">{coins}</span>
-          <span className="pd-stat__label">{t('studentSpace.dashboard.coins', 'عملات')}</span>
+          <span className="pd-stat__label">{t('studentSpace.profile.coinsShort')}</span>
         </div>
         <div className="pd-stat">
-          <span className="pd-stat__icon">🔥</span>
+          <span className="material-icons pd-stat__icon" style={{ color: '#F97316' }}>local_fire_department</span>
           <span className="pd-stat__value">{streak}</span>
-          <span className="pd-stat__label">{t('studentSpace.dashboard.streak', 'أيام متتالية')}</span>
+          <span className="pd-stat__label">{t('studentSpace.profile.streakShort')}</span>
         </div>
       </div>
 
@@ -160,9 +160,3 @@ function ChildCard({ child, dash, t }) {
   );
 }
 
-const TIPS = [
-  { icon: '📖', title: 'القراءة اليومية', desc: 'شجع طفلك على قراءة 20 دقيقة يومياً لتحسين مهاراته' },
-  { icon: '🎯', title: 'المتابعة المستمرة', desc: 'راجع تقدم طفلك أسبوعياً للاحتفال بتقدمه' },
-  { icon: '💪', title: 'الدعم والتشجيع', desc: 'أشجع طفلك عند تحقيقه لإنجازات جديدة' },
-  { icon: '🌙', title: 'النوم الصحي', desc: 'تأكد من أن طفلك يحصل على قسط كافٍ من النوم' },
-];

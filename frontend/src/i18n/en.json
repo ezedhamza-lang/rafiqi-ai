@@ -741,7 +741,15 @@
       "badges": "Badges",
       "progress": "Academic progress",
       "recent": "Recent activity",
-      "tips": "Parenting tips"
+      "tips": "Parenting tips",
+      "tip1t": "Daily reading",
+      "tip1d": "Encourage your child to read 20 minutes daily",
+      "tip2t": "Steady follow-up",
+      "tip2d": "Review your child's progress weekly to celebrate it",
+      "tip3t": "Support and encouragement",
+      "tip3d": "Cheer your child on when they earn new achievements",
+      "tip4t": "Healthy sleep",
+      "tip4d": "Make sure your child gets enough sleep"
     }
   },
   "weeklyReport": {
