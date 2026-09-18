@@ -6,6 +6,7 @@ import { useNotifications } from '../context/NotificationContext.jsx';
 import { useTheme } from '../context/ThemeContext.jsx';
 import { useI18n } from '../i18n/index.jsx';
 import { MiniLanguageSwitcher } from './LanguageSwitcher.jsx';
+import AccessibilityMenu from './AccessibilityMenu.jsx';
 import { roleLabel, getHomePath } from '../roles.js';
 import { timeAgo as timeAgoUtil } from '../utils/formatUtils.js';
 
@@ -129,6 +130,7 @@ export default function Header() {
         <div className="header-actions">
           {/* Batch 6: Enhanced Language Switcher */}
           <MiniLanguageSwitcher />
+          <AccessibilityMenu />
           <button
             className="icon-btn"
             onClick={toggle}

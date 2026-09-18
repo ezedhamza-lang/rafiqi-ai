@@ -2681,5 +2681,14 @@
         "annual": "Annual"
       }
     }
+  },
+  "accessibility": {
+    "title": "Accessibility options",
+    "fontSize": "Text size",
+    "font_normal": "Normal",
+    "font_large": "Large",
+    "font_xlarge": "Extra large",
+    "contrast": "High contrast",
+    "hint": "Your choices are saved on this device. Motion reduction follows your system settings."
   }
 }

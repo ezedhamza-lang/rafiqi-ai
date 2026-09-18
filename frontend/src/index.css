@@ -75,6 +75,67 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Accessibility: text scaling (élèves malvoyants) */
+html[data-font="large"] { font-size: 112.5%; }
+html[data-font="xlarge"] { font-size: 125%; }
+
+/* Accessibility: high contrast */
+html[data-contrast="high"] {
+  --muted: #334155;
+  --text-secondary: #1e293b;
+  --border: #94a3b8;
+  --border-strong: #475569;
+}
+html[data-contrast="high"] body { color: #0f172a; }
+html[data-contrast="high"] .student-nav-item .nav-label,
+html[data-contrast="high"] .sidebar-group-label { color: #fff; }
+html[data-contrast="high"] :focus-visible { outline-width: 4px; }
+
+/* Accessibility menu (header) */
+.a11y-wrap { position: relative; }
+.a11y-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  inset-inline-end: 0;
+  z-index: 1000;
+  min-width: 240px;
+  padding: 0.8rem;
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+}
+.a11y-dropdown__label { font-size: 0.8rem; font-weight: 800; margin: 0 0 0.4rem; }
+.a11y-font-row { display: flex; gap: 0.4rem; margin-bottom: 0.6rem; }
+.a11y-font-btn {
+  flex: 1;
+  padding: 0.4rem 0.2rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+.a11y-font-btn.active { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+.a11y-contrast {
+  display: flex; align-items: center; gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  font-family: inherit;
+}
+.a11y-contrast.active { border-color: var(--primary); background: #102A56; color: #fff; }
+.a11y-dropdown__hint { font-size: 0.72rem; color: var(--muted); margin: 0.6rem 0 0; line-height: 1.6; }
+
 body {
   font-family: 'Tajawal', 'Nunito', 'Segoe UI', sans-serif;
   background: #f6f8fb;
@@ -7275,6 +7336,16 @@ tr:hover td {
   .student-space--v2::before,
   .student-space--v2::after,
   .space-decor .decor { animation: none; }
+}
+
+/* Accessibility: global motion kill-switch */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* --- Student Dashboard --- */
