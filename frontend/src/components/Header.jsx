@@ -24,25 +24,6 @@ const SUPERADMIN_SPACE_CHILDREN = [
   { to: '/help', icon: 'support_agent', key: 'help', divider: true }
 ];
 
-const STUDENT_SPACE_CHILDREN = [
-  { to: '/student-space', end: true, icon: 'home', key: 'mySummary' },
-  { to: '/student-space/subjects', icon: 'menu_book', key: 'mySubjects' },
-  { to: '/student-space/quizzes', icon: 'quiz', key: 'myQuizzes' },
-  { to: '/student-space/assignments', icon: 'assignment', key: 'myAssignments' },
-  { to: '/student-space/routine', icon: 'today', key: 'myRoutine' },
-  { to: '/student-space/flashcards', icon: 'style', key: 'myFlashcards' },
-  { to: '/student-space/live', icon: 'live_tv', key: 'myLive' },
-  { to: '/student-space/paper-exam', icon: 'document_scanner', key: 'paperExam' },
-  { to: '/student-space/play', icon: 'sports_esports', key: 'playZone' },
-  { to: '/student-space/books', icon: 'auto_stories', key: 'myBooks' },
-  { to: '/student-space/stories', icon: 'library_books', key: 'storyLibrary' },
-  { to: '/student-space/calendar', icon: 'calendar_month', key: 'schoolCalendar' },
-  { to: '/student-space/refeeqi', icon: 'smart_toy', key: 'askRefeeqi' },
-  { to: '/student-space/twin', icon: 'insights', key: 'digitalTwin' },
-  { to: '/student-space/schedule', icon: 'calendar_view_week', key: 'mySchedule' },
-  { to: '/help', icon: 'support_agent', key: 'help', divider: true }
-];
-
 const DIRECTOR_SPACE_CHILDREN = [
   { to: '/director', end: true, icon: 'dashboard', key: 'dashboard' },
   { to: '/director/requests', icon: 'how_to_reg', key: 'registrationRequests' },
@@ -82,7 +63,7 @@ const ROLE_NAV = {
   ],
   STUDENT: [
     { to: '/', icon: 'home', key: 'home' },
-    { to: '/student-space', icon: 'school', key: 'studentSpace', children: STUDENT_SPACE_CHILDREN },
+    { to: '/student-space', icon: 'school', key: 'studentSpace' },
     NOTIF_NAV
   ],
   PARENT: [

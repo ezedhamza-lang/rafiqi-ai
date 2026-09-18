@@ -42,7 +42,7 @@ export default function StudentProfile({ profile, onMenu }) {
 
       <div className="sp-v3__left">
         <div className="sp-v3__avatar-wrap">
-          <ProgressRing percent={levelProgress} />
+          <ProgressRing percent={levelProgress} size={48} stroke={5} />
           <div className="sp-v3__avatar">
             <span className="material-icons">person</span>
           </div>
