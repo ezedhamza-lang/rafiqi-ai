@@ -76,7 +76,7 @@ const EXPERIMENTS = [
   {
     id: 'exp-5',
     category: 'physics',
-    emoji: 'âš¡',
+    emoji: '⚡',
     title: 'الكهرباء من ال balloons',
     description: 'اصنع شحنة كهربائية بسيطة!',
     materials: ['balloon', 'شعر جاف أو صوف', 'قطع ورق صغيرة'],
@@ -118,7 +118,7 @@ const EXPERIMENTS = [
       'ضع المسامير على الورقة فوق الزجاج',
       'أحضر المغناطيس من تحت الزجاج',
       'اسحب المسامير ببطء',
-      'Ø¬Ø±Ù‘Ø¨ Ø±ÙØ¹ Ø§Ù„Ù…ØºÙ†Ø§Ø·ÙŠØ³ — Ø³ØªØ±Ù‰ Ø§Ù„Ù…Ø³Ø§Ù…ÙŠØ± ØªØªØ¨Ø¹Ù‡!'
+      'جرّب رفع المغناطيس — سترى المسامير تتبعه!'
     ],
     question: 'لماذا تتبع المسامير المغناطيس؟',
     answer: 'المغناطيس يُصدر حقل مغناطيسي يجذب المعادن الحديدية!',
@@ -146,7 +146,7 @@ const EXPERIMENTS = [
 
 const CATEGORIES = [
   { id: 'all', emoji: '🔬', label: 'الكل' },
-  { id: 'physics', emoji: 'âš¡', label: 'الفيزياء' },
+  { id: 'physics', emoji: '⚡', label: 'الفيزياء' },
   { id: 'biology', emoji: '🧬', label: 'الأحياء' },
   { id: 'chemistry', emoji: '🧪', label: 'الكيمياء' }
 ];

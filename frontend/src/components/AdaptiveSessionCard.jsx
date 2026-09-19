@@ -12,9 +12,9 @@ export const LEVEL_COLORS = {
 export function normalizeText(s) {
   return String(s ?? '')
     .trim()
-    .replace(/[Ø£Ø¥Ø¢]/g, 'Ø§')
-    .replace(/Ø©/g, 'Ù‡')
-    .replace(/Ù‰/g, 'ÙŠ')
+    .replace(/[أإآ]/g, 'ا')
+    .replace(/ة/g, 'ه')
+    .replace(/ى/g, 'ي')
     .replace(/[\u064B-\u0652]/g, '')
     .replace(/\s+/g, ' ')
     .toLowerCase();
@@ -35,10 +35,10 @@ export function Stars({ level }) {
 
 export function dueInLabel(days) {
   const d = Number(days) || 0;
-  if (d <= 0) return 'Ø§Ù„ÙŠÙˆÙ…';
-  if (d === 1) return 'ØºØ¯Ø§Ù‹';
-  if (d < 30) return `Ø¨Ø¹Ø¯ ${d} Ø£ÙŠØ§Ù…`;
-  return `Ø¨Ø¹Ø¯ ${Math.round(d / 30)} Ø´Ù‡Ø±Ø§Ù‹`;
+  if (d <= 0) return 'اليوم';
+  if (d === 1) return 'غداً';
+  if (d < 30) return `بعد ${d} أيام`;
+  return `بعد ${Math.round(d / 30)} شهراً`;
 }
 
 export default function AdaptiveSessionCard({ item, onReviewed, gradeId, subjectId }) {
@@ -82,12 +82,12 @@ export default function AdaptiveSessionCard({ item, onReviewed, gradeId, subject
     <div className="adaptive-card">
       <div className="adaptive-card-head">
         <span className="adaptive-level-badge" style={{ background: LEVEL_COLORS[item.state.difficulty] }}>
-          Ù…Ø³ØªÙˆÙ‰ {item.state.difficulty}
+          مستوى {item.state.difficulty}
         </span>
         <Stars level={item.state.difficulty} />
         <span className="adaptive-level-label-text">{item.state.difficultyLabel}</span>
         {item.state.repetitions > 0 && (
-          <span className="badge">Ù…Ø±Ø§Ø¬Ø¹Ø© {item.state.repetitions}</span>
+          <span className="badge">مراجعة {item.state.repetitions}</span>
         )}
       </div>
 
@@ -112,7 +112,7 @@ export default function AdaptiveSessionCard({ item, onReviewed, gradeId, subject
           <input
             value={text}
             onChange={(e) => { setText(e.target.value); setChecked(false); }}
-            placeholder="Ø§ÙƒØªØ¨ Ø¥Ø¬Ø§Ø¨ØªÙƒ Ù‡Ù†Ø§"
+            placeholder="اكتب إجابتك هنا"
             disabled={checked}
           />
         </div>
@@ -122,7 +122,7 @@ export default function AdaptiveSessionCard({ item, onReviewed, gradeId, subject
 
       {!checked && (
         <button type="button" className="btn btn-primary" onClick={submit} disabled={reviewing || (isMCQ ? sel == null : !text.trim())}>
-          {reviewing ? 'Ø¬Ø§Ø±Ù Ø§Ù„ØªÙ‚ÙŠÙŠÙ…...' : 'ØªØ­Ù‚Ù‘Ù‚ ÙˆØ£Ø±Ø³Ù„'}
+          {reviewing ? 'جارٍ التقييم...' : 'تحقّق وأرسل'}
         </button>
       )}
 
@@ -130,13 +130,13 @@ export default function AdaptiveSessionCard({ item, onReviewed, gradeId, subject
         <div className={`adaptive-feedback ${result.correct ? 'ok' : 'no'}`}>
           <span className="material-icons">{result.correct ? 'check_circle' : 'cancel'}</span>
           <div>
-            <strong>{result.correct ? 'Ø¥Ø¬Ø§Ø¨Ø© ØµØ­ÙŠØ­Ø©' : 'Ø¥Ø¬Ø§Ø¨Ø© Ø®Ø§Ø·Ø¦Ø©'}</strong>
+            <strong>{result.correct ? 'إجابة صحيحة' : 'إجابة خاطئة'}</strong>
             {!result.correct && q.answer !== undefined && q.answer !== null && (
-              <p>Ø§Ù„Ø¥Ø¬Ø§Ø¨Ø© Ø§Ù„ØµØ­ÙŠØ­Ø©: {isMCQ ? q.options[answerIndex] : q.answer}</p>
+              <p>الإجابة الصحيحة: {isMCQ ? q.options[answerIndex] : q.answer}</p>
             )}
             <p className="adaptive-feedback-meta">
-              <Stars level={result.state.difficulty} /> Ø§Ù„Ù…Ø³ØªÙˆÙ‰ Ø§Ù„Ø¬Ø¯ÙŠØ¯: {result.state.difficultyLabel}
-              <span className="adaptive-due"> â€” Ù…Ø±Ø§Ø¬Ø¹Ø© {dueInLabel(result.next.dueInDays)}</span>
+              <Stars level={result.state.difficulty} /> المستوى الجديد: {result.state.difficultyLabel}
+              <span className="adaptive-due"> — مراجعة {dueInLabel(result.next.dueInDays)}</span>
             </p>
           </div>
         </div>

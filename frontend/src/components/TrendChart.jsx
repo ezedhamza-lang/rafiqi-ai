@@ -2,7 +2,7 @@ export default function TrendChart({ points = [], height = 180 }) {
   if (!points || points.length < 2) {
     return (
       <div className="muted" style={{ textAlign: 'center', padding: '1.2rem 0' }}>
-        Ù„Ø§ ØªÙˆØ¬Ø¯ Ù†Ù‚Ø§Ø· ÙƒØ§ÙÙŠØ© Ù„Ø±Ø³Ù… Ø§Ù„Ù…Ù†Ø­Ù†Ù‰ Ø¨Ø¹Ø¯.
+        لا توجد نقاط كافية لرسم المنحنى بعد.
       </div>
     );
   }
@@ -27,7 +27,7 @@ export default function TrendChart({ points = [], height = 180 }) {
 
   return (
     <div className="trend-chart-wrap">
-      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="Ù…Ù†Ø­Ù†Ù‰ Ø§Ù„Ø£Ø¯Ø§Ø¡ Ø¹Ø¨Ø± Ø§Ù„Ø²Ù…Ù†" className="trend-chart">
+      <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label="منحنى الأداء عبر الزمن" className="trend-chart">
         <defs>
           <linearGradient id="trendFill" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#155EEF" stopOpacity="0.35" />

@@ -50,9 +50,9 @@ function WorksheetHeader({ data, onChange }) {
             <div style={{ fontSize: '0.72rem', color: '#666' }}>المندوبية الجهوية للتربية</div>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
-            <input placeholder="Ø§Ù„Ù…Ø¯Ø±Ø³Ø©..." value={data.schoolName} onChange={(e) => onChange({ schoolName: e.target.value })}
+            <input placeholder="المدرسة..." value={data.schoolName} onChange={(e) => onChange({ schoolName: e.target.value })}
               style={{ padding: '0.4rem 0.6rem', border: '1px solid #c5cae9', borderRadius: '6px', fontSize: '0.82rem', background: '#fff' }} />
-            <input placeholder="Ø§Ù„Ù…Ø¹Ù„Ù…(Ø©)..." value={data.teacherName} onChange={(e) => onChange({ teacherName: e.target.value })}
+            <input placeholder="المعلم(ة)..." value={data.teacherName} onChange={(e) => onChange({ teacherName: e.target.value })}
               style={{ padding: '0.4rem 0.6rem', border: '1px solid #c5cae9', borderRadius: '6px', fontSize: '0.82rem', background: '#fff' }} />
           </div>
         </div>
@@ -62,7 +62,7 @@ function WorksheetHeader({ data, onChange }) {
           style={{ padding: '0.4rem', border: '1px solid #c5cae9', borderRadius: '6px', fontSize: '0.82rem', background: '#fff' }}>
           {SUBJECTS.map((s) => <option key={s} value={s}>{s}</option>)}
         </select>
-        <input placeholder="Ø§Ù„Ù‚Ø³Ù…..." value={data.className} onChange={(e) => onChange({ className: e.target.value })}
+        <input placeholder="القسم..." value={data.className} onChange={(e) => onChange({ className: e.target.value })}
           style={{ padding: '0.4rem 0.6rem', border: '1px solid #c5cae9', borderRadius: '6px', fontSize: '0.82rem', background: '#fff' }} />
         <input type="date" value={data.date} onChange={(e) => onChange({ date: e.target.value })}
           style={{ padding: '0.4rem', border: '1px solid #c5cae9', borderRadius: '6px', fontSize: '0.82rem', background: '#fff' }} />
@@ -88,7 +88,7 @@ function EditableList({ items, onChange, placeholder, color }) {
           <input value={item} onChange={(e) => update(i, e.target.value)} placeholder={placeholder}
             style={{ flex: 1, padding: '0.4rem 0.6rem', border: '1px solid #e0e0e0', borderRadius: '6px', fontSize: '0.82rem' }} />
           {items.length > 1 && (
-            <button onClick={() => remove(i)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '1rem', padding: '0.2rem' }}>âœ•</button>
+            <button onClick={() => remove(i)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '1rem', padding: '0.2rem' }}>✕</button>
           )}
         </div>
       ))}
@@ -108,15 +108,15 @@ function ActivityEditor({ activities, onChange }) {
       {activities.map((act, i) => (
         <div key={i} style={{ background: (colors[i] || '#666') + '08', border: `1px solid ${colors[i] || '#666'}25`, borderRadius: '8px', padding: '0.7rem', marginBottom: '0.5rem' }}>
           <div style={{ display: 'flex', gap: '0.4rem', marginBottom: '0.4rem' }}>
-            <input value={act.title} onChange={(e) => update(i, { title: e.target.value })} placeholder="Ø¹Ù†ÙˆØ§Ù† Ø§Ù„Ù†Ø´Ø§Ø·"
+            <input value={act.title} onChange={(e) => update(i, { title: e.target.value })} placeholder="عنوان النشاط"
               style={{ flex: 1, padding: '0.35rem 0.5rem', border: `1px solid ${colors[i] || '#666'}40`, borderRadius: '6px', fontSize: '0.82rem', fontWeight: 700, color: colors[i] || '#666' }} />
-            <input value={act.duration} onChange={(e) => update(i, { duration: e.target.value })} placeholder="Ø§Ù„Ù…Ø¯Ø©"
+            <input value={act.duration} onChange={(e) => update(i, { duration: e.target.value })} placeholder="المدة"
               style={{ width: '100px', padding: '0.35rem 0.5rem', border: `1px solid ${colors[i] || '#666'}40`, borderRadius: '6px', fontSize: '0.78rem', textAlign: 'center' }} />
             {activities.length > 1 && (
-              <button onClick={() => remove(i)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '0.9rem' }}>âœ•</button>
+              <button onClick={() => remove(i)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: '0.9rem' }}>✕</button>
             )}
           </div>
-          <textarea value={act.description} onChange={(e) => update(i, { description: e.target.value })} placeholder="ÙˆØµÙ Ø§Ù„Ù†Ø´Ø§Ø· ÙˆØ§Ù„ØªØ¹Ù„ÙŠÙ…Ø§Øª..."
+          <textarea value={act.description} onChange={(e) => update(i, { description: e.target.value })} placeholder="وصف النشاط والتعليمات..."
             rows={2} style={{ width: '100%', padding: '0.4rem 0.5rem', border: `1px solid ${colors[i] || '#666'}30`, borderRadius: '6px', fontSize: '0.82rem', resize: 'vertical', fontFamily: 'inherit' }} />
         </div>
       ))}
@@ -229,7 +229,7 @@ export default function TeacherWorksheets() {
   const printWorksheet = () => {
     const w = window.open('', '_blank');
     w.document.write(`
-      <html dir="rtl"><head><title>Ù…Ø¹Ù„Ù‚Ø© Ø±Ø³Ù…ÙŠØ© - ${data.subject}</title>
+      <html dir="rtl"><head><title>معلقة رسمية - ${data.subject}</title>
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap');
         body { font-family: 'Tajawal', Arial, sans-serif; padding: 25px; margin: 0; }
@@ -264,19 +264,19 @@ export default function TeacherWorksheets() {
 
           <div style={{ background: '#fff', borderRadius: '10px', border: '1px solid #e2e8f0', padding: '1rem', marginBottom: '1rem' }}>
             <input value={data.lessonTitle} onChange={(e) => onChange({ lessonTitle: e.target.value })}
-              placeholder="Ø¹Ù†ÙˆØ§Ù† Ø§Ù„Ø¯Ø±Ø³ / Ø§Ù„Ø¯Ø±Ø³ Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠØ©..."
+              placeholder="عنوان الدرس / الدرس التعليمية..."
               style={{ width: '100%', padding: '0.6rem 0.8rem', border: '2px solid #c5cae9', borderRadius: '8px', fontSize: '1rem', fontWeight: 700, textAlign: 'center', color: '#1a237e' }} />
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div style={{ background: '#f0fdf4', borderRadius: '10px', border: '1px solid #bbf7d0', padding: '1rem' }}>
               <div style={{ fontWeight: 800, color: '#166534', marginBottom: '0.6rem', fontSize: '0.9rem' }}>🎯 الأهداف التعليمية</div>
-              <EditableList items={data.objectives} onChange={(v) => onChange({ objectives: v })} placeholder="Ø£Ø¶Ù Ù‡Ø¯ÙØ§Ù‹ ØªØ¹Ù„ÙŠÙ…ÙŠØ§Ù‹..." color="#166534" />
+              <EditableList items={data.objectives} onChange={(v) => onChange({ objectives: v })} placeholder="أضف هدفاً تعليمياً..." color="#166534" />
             </div>
 
             <div style={{ background: '#fef3c7', borderRadius: '10px', border: '1px solid #fde68a', padding: '1rem' }}>
               <div style={{ fontWeight: 800, color: '#92400e', marginBottom: '0.6rem', fontSize: '0.9rem' }}>✅ معايير التقويم</div>
-              <EditableList items={data.evaluation} onChange={(v) => onChange({ evaluation: v })} placeholder="Ø£Ø¶Ù Ù…Ø¹ÙŠØ§Ø± ØªÙ‚ÙˆÙŠÙ…..." color="#92400e" />
+              <EditableList items={data.evaluation} onChange={(v) => onChange({ evaluation: v })} placeholder="أضف معيار تقويم..." color="#92400e" />
             </div>
           </div>
 
@@ -289,13 +289,13 @@ export default function TeacherWorksheets() {
             <div>
               <label style={{ fontWeight: 700, fontSize: '0.82rem', color: '#555', display: 'block', marginBottom: '0.3rem' }}>📦 المواد المستعملة</label>
               <textarea value={data.materials} onChange={(e) => onChange({ materials: e.target.value })}
-                placeholder="Ø§Ù„Ø³Ø¨ÙˆØ±Ø©ØŒ Ø§Ù„Ø·Ø¨Ø§Ø´ÙŠØ±ØŒ Ø§Ù„ÙƒØªØ¨..." rows={2}
+                placeholder="السبورة، الطباشير، الكتب..." rows={2}
                 style={{ width: '100%', padding: '0.5rem', border: '1px solid #e0e0e0', borderRadius: '8px', fontSize: '0.82rem', resize: 'vertical', fontFamily: 'inherit' }} />
             </div>
             <div>
               <label style={{ fontWeight: 700, fontSize: '0.82rem', color: '#555', display: 'block', marginBottom: '0.3rem' }}>📝 ملاحظات</label>
               <textarea value={data.notes} onChange={(e) => onChange({ notes: e.target.value })}
-                placeholder="Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ø¥Ø¶Ø§ÙÙŠØ©..." rows={2}
+                placeholder="ملاحظات إضافية..." rows={2}
                 style={{ width: '100%', padding: '0.5rem', border: '1px solid #e0e0e0', borderRadius: '8px', fontSize: '0.82rem', resize: 'vertical', fontFamily: 'inherit' }} />
             </div>
           </div>

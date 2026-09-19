@@ -57,7 +57,7 @@ export default function Register() {
     <div className="auth-wrapper">
       <div className="auth-card auth-card--wide">
         <div style={{ textAlign: 'center', marginBottom: '1.2rem' }}>
-          <img src="/logo-rafiqi-square.png" alt="Ø±ÙÙŠÙ‚ÙŠ" style={{ width: 80, height: 80, borderRadius: '50%', border: '3px solid var(--primary)', padding: 4, background: '#fff', boxShadow: '0 4px 20px rgba(21, 94, 239, 0.15)' }} />
+          <img src="/logo-rafiqi-square.png" alt="رفيقي" style={{ width: 80, height: 80, borderRadius: '50%', border: '3px solid var(--primary)', padding: 4, background: '#fff', boxShadow: '0 4px 20px rgba(21, 94, 239, 0.15)' }} />
         </div>
         <h1 style={{ color: 'var(--primary)' }}>{t('register.title')}</h1>
         <p className="sub">{t('register.subtitle')}</p>
@@ -124,14 +124,14 @@ export default function Register() {
           </div>
           {schools.length > 1 && (
             <div className="form-group" style={{ marginBottom: '0.8rem' }}>
-              <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.3rem' }}>{t('register.schoolLabel', 'Ø§Ù„Ù…Ø¯Ø±Ø³Ø©')}</label>
+              <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.3rem' }}>{t('register.schoolLabel', 'المدرسة')}</label>
               <select
                 required
                 value={form.schoolId}
                 onChange={(e) => setForm({ ...form, schoolId: e.target.value })}
                 className="auth-select"
               >
-                <option value="" disabled>{t('register.schoolPlaceholder', 'Ø§Ø®ØªØ± Ù…Ø¯Ø±Ø³ØªÙƒ')}</option>
+                <option value="" disabled>{t('register.schoolPlaceholder', 'اختر مدرستك')}</option>
                 {schools.map((s) => (
                   <option key={s.id} value={s.id}>{s.name}</option>
                 ))}

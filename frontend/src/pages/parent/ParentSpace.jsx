@@ -35,9 +35,9 @@ const TABS = [
 ];
 
 const TAB_GROUPS = (t) => [
-  { label: 'Ø§Ù„Ù…ØªØ§Ø¨Ø¹Ø©', items: ['progress', 'overview', 'insights', 'analytics', 'report'].map((key) => tabByKey(t, key)) },
-  { label: 'Ø§Ù„Ø­ÙŠØ§Ø© Ø§Ù„Ù…Ø¯Ø±Ø³ÙŠØ©', items: ['assignments', 'live', 'notes', 'documents', 'health'].map((key) => tabByKey(t, key)) },
-  { label: 'Ø§Ù„Ø¥Ø¯Ø§Ø±Ø©', items: ['credentials', 'messages'].map((key) => tabByKey(t, key)) },
+  { label: 'المتابعة', items: ['progress', 'overview', 'insights', 'analytics', 'report'].map((key) => tabByKey(t, key)) },
+  { label: 'الحياة المدرسية', items: ['assignments', 'live', 'notes', 'documents', 'health'].map((key) => tabByKey(t, key)) },
+  { label: 'الإدارة', items: ['credentials', 'messages'].map((key) => tabByKey(t, key)) },
 ];
 
 function tabByKey(t, key) {

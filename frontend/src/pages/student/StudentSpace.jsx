@@ -133,7 +133,7 @@ export default function StudentSpace() {
       { to: 'progress', icon: 'trending_up', label: L('progress'), color: '#3b82f6' },
       { to: 'virtual-friend', icon: 'pets', label: L('virtualFriend'), color: '#06b6d4' },
     ] },
-    { label: t('studentSpace.groups.rewards', 'Ø§Ù„Ù…ÙƒØ§ÙØ¢Øª'), items: [
+    { label: t('studentSpace.groups.rewards', 'المكافآت'), items: [
       { to: 'leaderboard', icon: 'leaderboard', label: L('leaderboard'), color: '#E8A317' },
       { to: 'weekly-challenge', icon: 'date_range', label: L('weeklyChallenge'), color: '#ef4444' },
       { to: 'certificates', icon: 'school', label: L('certificates'), color: '#8b5cf6' },
