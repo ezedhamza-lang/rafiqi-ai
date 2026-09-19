@@ -89,7 +89,17 @@ app.use(helmet({
   // كبيرة هنا. باقي رؤوس Helmet (XSS، nosniff، HSTS، إلخ) مفعّلة بإعداداتها
   // الافتراضية الآمنة.
   crossOriginEmbedderPolicy: false,
-  crossOriginResourcePolicy: { policy: 'cross-origin' }
+  crossOriginResourcePolicy: { policy: 'cross-origin' },
+  // تسجيل الدخول عبر Google (GIS) يحتاج نطاق accounts.google.com
+  // سكربتاً وإطاراً واتصالاً — باقي التوجيهات الافتراضية كما هي.
+  contentSecurityPolicy: {
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      'script-src': ["'self'", 'https://accounts.google.com', 'https://apis.google.com'],
+      'frame-src': ["'self'", 'https://accounts.google.com'],
+      'connect-src': ["'self'", 'https://accounts.google.com']
+    }
+  }
 }));
 
 // إصلاح أمني: كان `cors()` بلا معامل يسمح لأي موقع في العالم بقراءة

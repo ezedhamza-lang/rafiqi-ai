@@ -12,12 +12,20 @@ function loadGis(hl) {
   if (!gisPromise || gisHl !== hl) {
     gisHl = hl;
     gisPromise = new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        gisPromise = null;
+        reject(new Error('gis-load-timeout'));
+      }, 10000);
       const s = document.createElement('script');
       s.src = `https://accounts.google.com/gsi/client?hl=${hl}`;
       s.async = true;
       s.defer = true;
-      s.onload = resolve;
+      s.onload = () => {
+        clearTimeout(timer);
+        resolve();
+      };
       s.onerror = () => {
+        clearTimeout(timer);
         gisPromise = null;
         reject(new Error('gis-load-failed'));
       };
