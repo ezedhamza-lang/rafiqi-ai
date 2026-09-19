@@ -120,8 +120,11 @@ app.use(cors({
 }));
 
 // رفض صريح لمصادر CORS غير المرخّصة (طلبات المتصفح الحاملة لرأس Origin).
+// استثناء: عودة Google OAuth (POST من accounts.google.com) — محمية أصلاً
+// بفحص g_csrf_token (cookie مقابل body) داخل المسار نفسه.
 app.use((req, res, next) => {
   const origin = req.headers.origin;
+  if (req.path === '/api/auth/google-redirect') return next();
   if (origin && !config.allowedOrigins.includes(origin)) {
     return res.status(403).json({ error: `المصدر غير مسموح به عبر CORS: ${origin}` });
   }
