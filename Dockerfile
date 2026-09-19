@@ -21,13 +21,11 @@ COPY backend/ .
 COPY backend/src/assets/fonts /usr/local/share/fonts/rafiqi
 RUN fc-cache -f
 
-# Build frontend — Vite bakes VITE_* vars at build time.
-# Render passes dashboard env vars as build args; declared here so the build can see them.
-ARG VITE_GOOGLE_CLIENT_ID=""
+# Build frontend
 COPY frontend/package*.json ./frontend/
 RUN cd frontend && npm install --include=dev --no-audit --no-fund
 COPY frontend/ ./frontend/
-RUN cd frontend && VITE_GOOGLE_CLIENT_ID="$VITE_GOOGLE_CLIENT_ID" npm run build
+RUN cd frontend && npm run build
 
 EXPOSE 3001
 

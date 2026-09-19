@@ -177,29 +177,22 @@ router.post(
 
 /**
  * @swagger
- * /api/auth/google:
- *   post:
- *     summary: تسجيل الدخول/التسجيل بحساب Google (OAuth 2.0)
+ * /api/auth/config:
+ *   get:
+ *     summary: إعدادات المصادقة العامة (معرّف Google إن كان مفعّلاً)
  *     tags: [auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required: [idToken]
- *             properties:
- *               idToken: { type: string, description: 'Google ID token (GIS)' }
  *     responses:
  *       200:
- *         description: نجاح الدخول (حساب موجود يُربط، وجديد يُنشأ بدور ولي)
- *       400:
- *         description: رمز Google غير صالح
- *       501:
- *         description: تسجيل Google غير مفعّل (GOOGLE_CLIENT_ID غائب)
+ *         description: الإعدادات العامة
  */
+router.get(
+  '/config',
+  asyncHandler(async (req, res) => {
+    res.json({ googleClientId: config.googleClientId || null });
+  })
+);
 router.post(
-  '/google',
+  '/google', // تسجيل الدخول/التسجيل بحساب Google (idToken موثّق عبر google-auth-library)
   asyncHandler(async (req, res) => {
     if (!config.googleClientId) {
       throw new ApiError(501, 'تسجيل الدخول عبر Google غير مفعّل بعد');

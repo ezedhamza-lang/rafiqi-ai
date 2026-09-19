@@ -2,9 +2,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useI18n } from '../i18n/index.jsx';
+import { api } from '../api/client.js';
 import { getHomePath } from '../roles.js';
-
-const CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
 
 let gisPromise = null;
 let gisHl = '';
@@ -30,24 +29,38 @@ function loadGis(hl) {
 
 /**
  * GoogleSignIn — bouton « Continuer avec Google » (GIS).
- * Masqué si VITE_GOOGLE_CLIENT_ID est absent (fonction désactivée).
+ * Le client_id est lu à l'exécution depuis /api/auth/config (pas de build requis).
+ * Masqué si Google n'est pas configuré côté backend.
  */
 export default function GoogleSignIn() {
   const { loginWithGoogle } = useAuth();
   const { t, lang } = useI18n();
   const navigate = useNavigate();
   const btnRef = useRef(null);
+  const [clientId, setClientId] = useState(null);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    if (!CLIENT_ID) return undefined;
+    let cancelled = false;
+    api.get('/auth/config')
+      .then((cfg) => {
+        if (!cancelled && cfg?.googleClientId) setClientId(cfg.googleClientId);
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!clientId) return undefined;
     let cancelled = false;
     const hl = lang === 'ar' ? 'ar' : 'en';
     loadGis(hl)
       .then(() => {
         if (cancelled || !btnRef.current) return;
         window.google.accounts.id.initialize({
-          client_id: CLIENT_ID,
+          client_id: clientId,
           callback: async (resp) => {
             try {
               const user = await loginWithGoogle(resp.credential);
@@ -62,7 +75,7 @@ export default function GoogleSignIn() {
           size: 'large',
           text: 'continue_with',
           shape: 'pill',
-          locale: lang === 'ar' ? 'ar' : 'en',
+          locale: hl,
           width: 300
         });
       })
@@ -73,9 +86,9 @@ export default function GoogleSignIn() {
       cancelled = true;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [clientId]);
 
-  if (!CLIENT_ID) return null;
+  if (!clientId) return null;
 
   return (
     <div className="google-signin">
