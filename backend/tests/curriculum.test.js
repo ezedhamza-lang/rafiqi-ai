@@ -270,11 +270,12 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
     }
   });
 
-  it('المرحلة 6.2: لا مواد مزيّفة — لا فرنسية ولا تربية إسلامية/تشكيلية بلا مصادر', async () => {
+  it('لا مواد مزيّفة — الفرنسية س2 فقط بمصدر حقيقي وس1 بلا فرنسية', async () => {
     const res = await request(app).get('/api/public/curriculum/books').send();
     for (const book of res.body) {
-      const title = `${book.subject}`;
-      expect(title.includes('فرنسية'), 'لا نختلق محتوى فرنسية').toBe(false);
+      if (book.subject.includes('فرنسية')) {
+        expect(book.gradeId, 'الفرنسية محتواها الحالي س2 فقط').toBe('year2');
+      }
     }
     const subjects = await request(app).get('/api/public/curriculum/subjects?level=السنة الأولى').send();
     const ids = subjects.body.map((s) => s.id);
