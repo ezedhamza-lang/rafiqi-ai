@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, urlencoded } from 'express';
 import bcrypt from 'bcryptjs';
 import { randomBytes } from 'crypto';
 import { OAuth2Client } from 'google-auth-library';
@@ -191,6 +191,61 @@ router.get(
     res.json({ googleClientId: config.googleClientId || null });
   })
 );
+function readCookie(req, name) {
+  const header = req.headers?.cookie || '';
+  const found = header.split(';').map((p) => p.trim()).find((p) => p.startsWith(`${name}=`));
+  return found ? decodeURIComponent(found.slice(name.length + 1)) : null;
+}
+
+// تحقّق من رمز Google ثم إيجاد/إنشاء المستخدم (مشترك بين وضعي popup وredirect)
+async function resolveGoogleUser(idToken) {
+  let payload;
+  try {
+    const client = new OAuth2Client(config.googleClientId);
+    const ticket = await client.verifyIdToken({ idToken, audience: config.googleClientId });
+    payload = ticket.getPayload();
+  } catch {
+    throw new ApiError(401, AR.INVALID_CREDENTIALS);
+  }
+  if (!payload?.sub || !payload?.email || payload.email_verified === false) {
+    throw new ApiError(401, AR.INVALID_CREDENTIALS);
+  }
+
+  const emailNorm = String(payload.email).toLowerCase();
+  let user = await prisma.user.findFirst({
+    where: { OR: [{ googleId: payload.sub }, { email: emailNorm }] }
+  });
+
+  if (user) {
+    // ربط الحساب الموجود بـ Google عند أول دخول بها (مالك البريد موثّق من Google)
+    if (!user.googleId) {
+      user = await prisma.user.update({
+        where: { id: user.id },
+        data: { googleId: payload.sub }
+      });
+    }
+  } else {
+    // حساب جديد بدور ولي (نفس دور التسجيل الكلاسيكي) + كلمة سر عشوائية غير مستعملة
+    const passwordHash = await bcrypt.hash(randomBytes(32).toString('hex'), 10);
+    user = await prisma.user.create({
+      data: {
+        firstName: String(payload.given_name || 'مستخدم').slice(0, 60),
+        lastName: String(payload.family_name || 'Google').slice(0, 60),
+        email: emailNorm,
+        passwordHash,
+        googleId: payload.sub
+      }
+    });
+  }
+  return user;
+}
+
+function ensureActiveRole(user) {
+  if (['STUDENT', 'TEACHER'].includes(user.role) && user.accountStatus !== 'ACTIVE') {
+    throw new ApiError(403, accountStatusMessage(user.accountStatus));
+  }
+}
+
 router.post(
   '/google', // تسجيل الدخول/التسجيل بحساب Google (idToken موثّق عبر google-auth-library)
   asyncHandler(async (req, res) => {
@@ -202,54 +257,44 @@ router.post(
       throw new ApiError(400, AR.INVALID_CREDENTIALS);
     }
 
-    let payload;
-    try {
-      const client = new OAuth2Client(config.googleClientId);
-      const ticket = await client.verifyIdToken({ idToken, audience: config.googleClientId });
-      payload = ticket.getPayload();
-    } catch {
-      throw new ApiError(401, AR.INVALID_CREDENTIALS);
-    }
-    if (!payload?.sub || !payload?.email || payload.email_verified === false) {
-      throw new ApiError(401, AR.INVALID_CREDENTIALS);
-    }
-
-    const emailNorm = String(payload.email).toLowerCase();
-    let user = await prisma.user.findFirst({
-      where: { OR: [{ googleId: payload.sub }, { email: emailNorm }] }
-    });
-
-    if (user) {
-      // ربط الحساب الموجود بـ Google عند أول دخول بها (مالك البريد موثّق من Google)
-      if (!user.googleId) {
-        user = await prisma.user.update({
-          where: { id: user.id },
-          data: { googleId: payload.sub }
-        });
-      }
-    } else {
-      // حساب جديد بدور ولي (نفس دور التسجيل الكلاسيكي) + كلمة سر عشوائية غير مستعملة
-      const passwordHash = await bcrypt.hash(randomBytes(32).toString('hex'), 10);
-      user = await prisma.user.create({
-        data: {
-          firstName: String(payload.given_name || 'مستخدم').slice(0, 60),
-          lastName: String(payload.family_name || 'Google').slice(0, 60),
-          email: emailNorm,
-          passwordHash,
-          googleId: payload.sub
-        }
-      });
-    }
-
-    if (['STUDENT', 'TEACHER'].includes(user.role) && user.accountStatus !== 'ACTIVE') {
-      return res.status(403).json({ error: accountStatusMessage(user.accountStatus), status: user.accountStatus });
-    }
+    const user = await resolveGoogleUser(idToken);
+    ensureActiveRole(user);
 
     const pair = await issuePair(user);
     res.json({
       ...pair,
       user: await withMustChange(toPublicUser(user))
     });
+  })
+);
+
+// وضع redirect (GIS ux_mode:'redirect') : Google تنقل المتصفح كاملاً ثم
+// POST (formulaire) الرمز إلى هنا. نتحقق من g_csrf_token (cookie مقابل body
+// حسب توثيق Google) ثم نعيد التوجيه للواجهة مع الرموز في الـ fragment
+// (لا تصل للخوادم ولا تُسجَّل).
+router.post(
+  '/google-redirect',
+  urlencoded({ extended: false }),
+  asyncHandler(async (req, res) => {
+    const base = config.nodeEnv === 'production' ? '' : config.appUrl;
+    const fail = (code) => res.redirect(302, `${base}/login#google=error&code=${code}`);
+    if (!config.googleClientId) return fail('disabled');
+    const { credential, g_csrf_token: bodyToken } = req.body || {};
+    const cookieToken = readCookie(req, 'g_csrf_token');
+    if (!credential || !bodyToken || !cookieToken || bodyToken !== cookieToken) {
+      return fail('csrf');
+    }
+    try {
+      const user = await resolveGoogleUser(credential);
+      ensureActiveRole(user);
+      const pair = await issuePair(user);
+      const params = new URLSearchParams({
+        google: '1', token: pair.token, refresh: pair.refreshToken || ''
+      });
+      return res.redirect(302, `${base}/login#${params.toString()}`);
+    } catch {
+      return fail('invalid');
+    }
   })
 );
 

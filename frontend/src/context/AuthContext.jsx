@@ -49,6 +49,16 @@ export function AuthProvider({ children }) {
     return data.user;
   }, []);
 
+  // جلسة قادمة من عودة redirect (الرموز في الـ fragment) : تخزين + جلب المستخدم
+  const applySession = useCallback(async (token, refreshToken) => {
+    setToken(token);
+    if (refreshToken) setRefreshToken(refreshToken);
+    const me = await api.get('/auth/me');
+    setStoredUser(me);
+    setUser(me);
+    return me;
+  }, []);
+
   const changePassword = useCallback(async (currentPassword, newPassword) => {
     const data = await api.put('/auth/change-password', { currentPassword, newPassword });
     setToken(data.token);
@@ -68,7 +78,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, loginWithGoogle, logout, changePassword }}>
+    <AuthContext.Provider value={{ user, loading, login, register, loginWithGoogle, applySession, logout, changePassword }}>
       {children}
     </AuthContext.Provider>
   );

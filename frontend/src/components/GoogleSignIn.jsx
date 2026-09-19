@@ -36,17 +36,45 @@ function loadGis(hl) {
 }
 
 /**
- * GoogleSignIn — bouton « Continuer avec Google » (GIS).
+ * GoogleSignIn — bouton « Continuer avec Google » (GIS) en mode redirect :
+ * pas de popup (le clic navigue vers Google puis revient sur /login#...).
  * Le client_id est lu à l'exécution depuis /api/auth/config (pas de build requis).
  * Masqué si Google n'est pas configuré côté backend.
  */
 export default function GoogleSignIn() {
-  const { loginWithGoogle } = useAuth();
+  const { loginWithGoogle, applySession } = useAuth();
   const { t, lang } = useI18n();
   const navigate = useNavigate();
   const btnRef = useRef(null);
   const [clientId, setClientId] = useState(null);
   const [error, setError] = useState('');
+  const [returning, setReturning] = useState(false);
+
+  // Retour de Google (redirect) : /login#google=1&token=...&refresh=...
+  // ou /login#google=error&code=...
+  useEffect(() => {
+    const hash = window.location.hash || '';
+    if (!hash.includes('google=')) return;
+    const params = new URLSearchParams(hash.slice(1));
+    window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    if (params.get('google') === 'error') {
+      setError(t('auth.googleFailed', 'فشل الدخول عبر Google، حاول مجدداً'));
+      return;
+    }
+    const token = params.get('token');
+    if (!token) {
+      setError(t('auth.googleFailed', 'فشل الدخول عبر Google، حاول مجدداً'));
+      return;
+    }
+    setReturning(true);
+    applySession(token, params.get('refresh') || '')
+      .then((me) => navigate(getHomePath(me)))
+      .catch(() => {
+        setReturning(false);
+        setError(t('auth.googleFailed', 'فشل الدخول عبر Google، حاول مجدداً'));
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -69,6 +97,9 @@ export default function GoogleSignIn() {
         if (cancelled || !btnRef.current) return;
         window.google.accounts.id.initialize({
           client_id: clientId,
+          // redirect : plus de popup — Google navigue puis POST vers le backend
+          ux_mode: 'redirect',
+          login_uri: `${window.location.origin}/api/auth/google-redirect`,
           callback: async (resp) => {
             try {
               const user = await loginWithGoogle(resp.credential);
@@ -97,6 +128,15 @@ export default function GoogleSignIn() {
   }, [clientId]);
 
   if (!clientId) return null;
+
+  if (returning) {
+    return (
+      <div className="google-signin">
+        <div className="auth-divider" aria-hidden="true"><span>{t('auth.or')}</span></div>
+        <div className="loading-wrap"><span className="spinner" /></div>
+      </div>
+    );
+  }
 
   return (
     <div className="google-signin">

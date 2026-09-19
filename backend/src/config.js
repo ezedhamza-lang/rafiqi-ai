@@ -24,6 +24,10 @@ export const config = {
     .map((o) => o.trim())
     .filter(Boolean),
   bodyLimit: process.env.BODY_LIMIT || '5mb',
+  // Base URL publique du frontend (dev : http://localhost:5173).
+  // En production le frontend est servi par le backend (même origine) :
+  // on utilise alors une redirection relative, pas cette valeur.
+  appUrl: (process.env.APP_URL || '').replace(/\/$/, ''),
   // حسابات تجريبية ترى محتوى كل السنوات (لا تُتتبّع بها المنصة).
   exploreAllGradesEmails: (process.env.EXPLORE_ALL_GRADES_EMAILS || 'student@test.tn')
     .split(',')
