@@ -56,10 +56,18 @@ const SERVICE_GROUPS = [
 
 
 const STATS = [
-  { number: '169K', key: 'teachers' },
-  { number: '2.4M', key: 'students' },
-  { number: '7201', key: 'institutions' }
+  { key: 'teachers', field: 'teachers' },
+  { key: 'students', field: 'students' },
+  { key: 'institutions', field: 'schools' }
 ];
+
+function formatStat(n) {
+  if (n == null || Number.isNaN(Number(n))) return '…';
+  const v = Number(n);
+  if (v >= 1000000) return `${(v / 1000000).toFixed(1)}M`;
+  if (v >= 1000) return `${(v / 1000).toFixed(1)}K`;
+  return String(v);
+}
 
 function FaqSection({ faqs }) {
   const { t } = useI18n();
@@ -121,6 +129,7 @@ export default function Home() {
   const { t } = useI18n();
   const [faqs, setFaqs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [liveStats, setLiveStats] = useState(null);
   const mainRef = useRef(null);
 
   useEffect(() => {
@@ -155,6 +164,9 @@ export default function Home() {
       })
       .catch(console.error)
       .finally(() => setLoading(false));
+    api.get('/public/stats')
+      .then(setLiveStats)
+      .catch(() => setLiveStats(null));
   }, []);
 
   return (
@@ -217,7 +229,7 @@ export default function Home() {
           <div className="stats-row">
             {STATS.map((s) => (
               <div className="stat-home" key={s.key}>
-                <div className="stat-number">{s.number}</div>
+                <div className="stat-number">{formatStat(liveStats?.[s.field])}</div>
                 <div className="stat-label">{t(`home.stats.${s.key}`)}</div>
               </div>
             ))}

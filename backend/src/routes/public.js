@@ -232,4 +232,32 @@ router.get('/locale', asyncHandler(async (req, res) => {
   });
 }));
 
+let statsCache = null;
+let statsCacheAt = 0;
+const STATS_TTL_MS = 5 * 60 * 1000;
+
+/**
+ * @swagger
+ * /api/public/stats:
+ *   get:
+ *     summary: عدّادات المنصة الحقيقية (معلمون/تلاميذ/مؤسسات) للعرض العام
+ *     tags: [public]
+ *     responses:
+ *       200:
+ *         description: أعداد حقيقية من قاعدة البيانات (مخزنة 5 دقائق)
+ */
+router.get('/stats', asyncHandler(async (_req, res) => {
+  const now = Date.now();
+  if (!statsCache || now - statsCacheAt > STATS_TTL_MS) {
+    const [teachers, students, schools] = await Promise.all([
+      prisma.user.count({ where: { role: 'TEACHER' } }),
+      prisma.student.count(),
+      prisma.school.count({ where: { status: 'ACTIVE' } })
+    ]);
+    statsCache = { teachers, students, schools };
+    statsCacheAt = now;
+  }
+  res.json(statsCache);
+}));
+
 export default router;
