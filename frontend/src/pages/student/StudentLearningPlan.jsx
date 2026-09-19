@@ -5,7 +5,7 @@ import { useI18n } from '../../i18n/index.jsx';
 
 const SUBJECT_META = {
   math: { icon: 'calculate', bg: 'linear-gradient(135deg, #233863, #2f4a7d)' },
-  anisi: { icon: 'menu_book', bg: 'linear-gradient(135deg, #f4ab2c, #E8A317)' },
+  anisi: { icon: 'menu_book', bg: 'linear-gradient(135deg, #F5B942, #E8A317)' },
   science: { icon: 'science', bg: 'linear-gradient(135deg, #0e6b4f, #17a076)' }
 };
 
@@ -89,7 +89,7 @@ export default function StudentLearningPlan() {
                 </span>
                 <div className="plan-item-body">
                   <strong>{item.title}</strong>
-                  <span className="plan-item-meta">{sm.label} Â· {typeLabel}</span>
+                  <span className="plan-item-meta">{sm.label} Ã‚Â· {typeLabel}</span>
                   {item.detail && <span className="muted" style={{ fontSize: '0.82rem' }}>{item.detail}</span>}
                 </div>
                 {item.link && (
@@ -177,7 +177,7 @@ export default function StudentLearningPlan() {
 
       {noStudent ? (
         <div className="empty">
-          <img src="/owl-mascot.webp" alt="رفيقي" className="owl-img" style={{ width: 56, height: 56 }} />
+          <img src="/owl-mascot.webp" alt="Ø±ÙÙŠÙ‚ÙŠ" className="owl-img" style={{ width: 56, height: 56 }} />
           <strong>{t('studentSpace.learningPlan.noStudentTitle')}</strong>
           <p className="muted">{t('studentSpace.learningPlan.noStudentBody')}</p>
         </div>
@@ -193,7 +193,7 @@ export default function StudentLearningPlan() {
                 })}
               </strong>
               <span>
-                {t('studentSpace.learningPlan.overallMastery', { n: plan.overall?.avgPercent ?? '—' })}
+                {t('studentSpace.learningPlan.overallMastery', { n: plan.overall?.avgPercent ?? 'â€”' })}
                 {!plan.overall?.hasData && t('studentSpace.learningPlan.noDataHint')}
               </span>
             </div>
@@ -229,7 +229,7 @@ export default function StudentLearningPlan() {
                 {plan.adjustments.map((a, i) => (
                   <li key={i}>
                     {t('studentSpace.learningPlan.adjustmentLine', { label: a.label, from: a.fromLabel || a.from, to: a.toLabel || a.to })}
-                    <span className="muted"> — {a.reason}</span>
+                    <span className="muted"> â€” {a.reason}</span>
                   </li>
                 ))}
               </ul>

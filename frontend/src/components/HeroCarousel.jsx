@@ -10,7 +10,7 @@ const SLIDES = [
     ctaKey:  'home.heroCarousel.slides.student.cta',
     to:      '/register',
     ctaIcon: 'person_add',
-    accent:  '#f4ab2c'
+    accent:  '#F5B942'
   },
   {
     img: '/hero/teacher.webp',

@@ -7,7 +7,7 @@ import { useStudentLevel } from '../../hooks/useStudentLevel.js';
 const SUBJECT_CODES = ['math', 'anisi', 'science'];
 const SUBJECT_META = {
   math: { icon: 'calculate', bg: 'linear-gradient(135deg, #233863, #2f4a7d)' },
-  anisi: { icon: 'menu_book', bg: 'linear-gradient(135deg, #f4ab2c, #E8A317)' },
+  anisi: { icon: 'menu_book', bg: 'linear-gradient(135deg, #F5B942, #E8A317)' },
   science: { icon: 'science', bg: 'linear-gradient(135deg, #0e6b4f, #17a076)' }
 };
 
@@ -29,7 +29,7 @@ function SummaryCards({ summary, t }) {
             <div className="adaptive-level-bar">
               <div
                 className="adaptive-level-fill"
-                style={{ width: `${Math.round((l.count / maxLevel) * 100)}%`, background: '#f4ab2c' }}
+                style={{ width: `${Math.round((l.count / maxLevel) * 100)}%`, background: '#F5B942' }}
               />
             </div>
             <span className="adaptive-level-count">{l.count}</span>

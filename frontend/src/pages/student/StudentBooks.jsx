@@ -8,24 +8,24 @@ import { useStudentLevel } from '../../hooks/useStudentLevel.js';
 
 const SUBJECTS = [
   { code: 'math', key: 'math', icon: 'calculate', color: '#233863', bg: 'linear-gradient(135deg, #233863, #2f4a7d)' },
-  { code: 'anisi', key: 'anisi', icon: 'menu_book', color: '#b06b00', bg: 'linear-gradient(135deg, #f4ab2c, #fd8b15)' },
+  { code: 'anisi', key: 'anisi', icon: 'menu_book', color: '#b06b00', bg: 'linear-gradient(135deg, #F5B942, #fd8b15)' },
   { code: 'science', key: 'science', icon: 'science', color: '#0e6b4f', bg: 'linear-gradient(135deg, #0e6b4f, #17a076)' },
   { code: 'production', key: 'production', icon: 'edit', color: '#6b3fa0', bg: 'linear-gradient(135deg, #6b3fa0, #9d6bdc)' },
   { code: 'french', key: 'french', icon: 'translate', color: '#E91E63', bg: 'linear-gradient(135deg, #E91E63, #F06292)' }
 ];
 
-// كل كتب المادة الواحدة (كثيرًا ما للسنة كتب متعددة لنفس المادة) تُجمّع تحت تبويب واحد
+// ÙƒÙ„ ÙƒØªØ¨ Ø§Ù„Ù…Ø§Ø¯Ø© Ø§Ù„ÙˆØ§Ø­Ø¯Ø© (ÙƒØ«ÙŠØ±Ù‹Ø§ Ù…Ø§ Ù„Ù„Ø³Ù†Ø© ÙƒØªØ¨ Ù…ØªØ¹Ø¯Ø¯Ø© Ù„Ù†ÙØ³ Ø§Ù„Ù…Ø§Ø¯Ø©) ØªÙØ¬Ù…Ù‘Ø¹ ØªØ­Øª ØªØ¨ÙˆÙŠØ¨ ÙˆØ§Ø­Ø¯
 function bookTab(b) {
   const k = String(b.subjectKey || b.subject || '')
-    .replace(/[إأآٱ]/g, 'ا')
-    .replace(/ة/g, 'ه')
+    .replace(/[Ø¥Ø£Ø¢Ù±]/g, 'Ø§')
+    .replace(/Ø©/g, 'Ù‡')
     .replace(/[\u064B-\u0652]/g, '')
     .trim();
-  if (k.startsWith('رياضيات')) return 'math';
-  if (k.includes('قراء') || k.includes('انيس')) return 'anisi';
-  if (k.includes('ايقاظ') || k.includes('علوم')) return 'science';
-  if (k.includes('انتاج')) return 'production';
-  if (k.includes('فرنس') || k.includes('french') || k.includes('francais')) return 'french';
+  if (k.startsWith('Ø±ÙŠØ§Ø¶ÙŠØ§Øª')) return 'math';
+  if (k.includes('Ù‚Ø±Ø§Ø¡') || k.includes('Ø§Ù†ÙŠØ³')) return 'anisi';
+  if (k.includes('Ø§ÙŠÙ‚Ø§Ø¸') || k.includes('Ø¹Ù„ÙˆÙ…')) return 'science';
+  if (k.includes('Ø§Ù†ØªØ§Ø¬')) return 'production';
+  if (k.includes('ÙØ±Ù†Ø³') || k.includes('french') || k.includes('francais')) return 'french';
   return b.subjectId || 'math';
 }
 
