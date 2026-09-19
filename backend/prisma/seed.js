@@ -150,9 +150,12 @@ async function main() {
     const existing = await prisma.user.findUnique({ where: { email: u.email } });
     let user;
     if (existing) {
+      const update = { role: u.role, passwordHash: await bcrypt.hash(u.password, 10) };
+      if (String(existing.firstName || '').includes('?')) update.firstName = u.firstName;
+      if (String(existing.lastName || '').includes('?')) update.lastName = u.lastName;
       user = await prisma.user.update({
         where: { email: u.email },
-        data: { role: u.role, passwordHash: await bcrypt.hash(u.password, 10) }
+        data: update
       });
     } else {
       user = await prisma.user.create({
