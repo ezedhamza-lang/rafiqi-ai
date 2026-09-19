@@ -2127,6 +2127,7 @@ tr:hover td {
 
 /* ---------- Footer ---------- */
 .site-footer {
+  background-color: #102A56;
   background: linear-gradient(120deg, #102A56 0%, #1E3A6E 55%, #155EEF 100%);
   color: rgba(255, 255, 255, 0.88);
   padding: 2rem 0 0;
@@ -2171,6 +2172,7 @@ tr:hover td {
 }
 
 .footer-col li a {
+  color: rgba(255, 255, 255, 0.88);
   transition: all 0.25s ease;
   padding: 0.2rem 0;
   display: inline-block;
