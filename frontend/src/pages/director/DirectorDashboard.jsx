@@ -3,6 +3,7 @@ import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import PromoCarousel from '../../components/PromoCarousel.jsx';
 const DirectorHome = lazy(() => import('./DirectorHome.jsx'));
 const DirectorClasses = lazy(() => import('./DirectorClasses.jsx'));
 const DirectorNotifications = lazy(() => import('./DirectorNotifications.jsx'));
@@ -55,6 +56,12 @@ export default function DirectorDashboard() {
           <p className="sub">{t('director.subtitle', { name: `${user.firstName} ${user.lastName}` })}</p>
         </div>
       </div>
+
+      <PromoCarousel slides={[
+        { key: 's1', image: '/dir-overview.webp', tone: 'navy', title: t('director.promo.s1t'), subtitle: t('director.promo.s1s') },
+        { key: 's2', image: '/dir-stats.webp', tone: 'blue', title: t('director.promo.s2t'), subtitle: t('director.promo.s2s') },
+        { key: 's3', image: '/dir-finance.webp', tone: 'gold', title: t('director.promo.s3t'), subtitle: t('director.promo.s3s') }
+      ]} />
 
       <nav className="teacher-tabs">
         {tabs.map((tb) => (

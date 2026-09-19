@@ -6,6 +6,7 @@ import { api } from '../../api/client.js';
 import { Badge } from '../../components/ui/index.js';
 import { getHomePath } from '../../roles.js';
 import SpaceShell from '../../components/SpaceShell.jsx';
+import PromoCarousel from '../../components/PromoCarousel.jsx';
 
 const UnitAnalysis = lazy(() => import('./UnitAnalysis.jsx'));
 const Quizzes = lazy(() => import('./Quizzes.jsx'));
@@ -114,6 +115,12 @@ export default function TeacherDashboard() {
             <Badge variant="accent" icon="description">{t('teacherSpace.memoCount', { n: memoCount })}</Badge>
           </div>
         </div>
+
+        <PromoCarousel slides={[
+          { key: 's1', image: '/tea-classroom.webp', tone: 'navy', title: t('teacherSpace.promo.s1t'), subtitle: t('teacherSpace.promo.s1s') },
+          { key: 's2', image: '/tea-analytics.webp', tone: 'blue', title: t('teacherSpace.promo.s2t'), subtitle: t('teacherSpace.promo.s2s') },
+          { key: 's3', image: '/tea-memo.webp', tone: 'gold', title: t('teacherSpace.promo.s3t'), subtitle: t('teacherSpace.promo.s3s') }
+        ]} />
 
         <div className="tab-content">
           <Suspense fallback={null}>

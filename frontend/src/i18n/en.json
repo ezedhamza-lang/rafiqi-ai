@@ -753,6 +753,14 @@
       "tip3d": "Cheer your child on when they earn new achievements",
       "tip4t": "Healthy sleep",
       "tip4d": "Make sure your child gets enough sleep"
+    },
+    "promo": {
+      "s1t": "Your child progress before your eyes",
+      "s1s": "Follow lessons and results live",
+      "s2t": "Clear results every term",
+      "s2s": "Simple reports with no complexity",
+      "s3t": "School reaches you",
+      "s3s": "Direct messages from the classroom"
     }
   },
   "weeklyReport": {
@@ -942,6 +950,14 @@
       "notifications": "Notifications",
       "subscriptions": "Subscriptions & revenue",
       "finance": "Finance dashboard"
+    },
+    "promo": {
+      "s1t": "Your school at a glance",
+      "s1s": "Classes, pupils, teachers — one board",
+      "s2t": "Numbers drive decisions",
+      "s2s": "Accurate attendance and performance stats",
+      "s3t": "Management with no surprises",
+      "s3s": "Subscriptions and finance in full transparency"
     }
   },
   "directorHome": {
@@ -1973,6 +1989,20 @@
       "knownCount": "cards known",
       "reviewCount": "cards to review",
       "restart": "New round"
+    },
+    "promo": {
+      "s1t": "Challenge yourself today!",
+      "s1s": "Finish lessons and collect stars",
+      "s2t": "Keep your streak!",
+      "s2s": "A new day means new points",
+      "s3t": "Refeeqi is with you",
+      "s3s": "Ask me about any lesson",
+      "wMathT": "Number City",
+      "wMathS": "A maths adventure awaits",
+      "wReadT": "Story Forest",
+      "wReadS": "Sail with letters and words",
+      "wSciT": "Wonder Lab",
+      "wSciS": "Discover nature secrets"
     }
   },
   "teacherSpace": {
@@ -2683,6 +2713,14 @@
         "t3": "Trimester 3",
         "annual": "Annual"
       }
+    },
+    "promo": {
+      "s1t": "Plan your lesson in minutes",
+      "s1s": "Ready memos with official methodology",
+      "s2t": "Your class pulse live",
+      "s2s": "Spot who needs support early",
+      "s3t": "Assess smartly",
+      "s3s": "Quizzes and auto-grading save time"
     }
   },
   "accessibility": {

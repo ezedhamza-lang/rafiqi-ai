@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { api } from '../../api/client.js';
 import { Card, PointsCard, BadgeCard, Leaderboard } from '../../components/ui/index.js';
 import { useI18n } from '../../i18n/index.jsx';
+import PromoCarousel from '../../components/PromoCarousel.jsx';
 
 const QUICK_ACTIONS = [
   { icon: 'auto_stories', label: 'studentSpace.twin.qaBooks', to: '/student-space/books', color: '#14b8a6', gradient: 'linear-gradient(135deg,#14b8a6,#06b6d4)' },
@@ -52,9 +53,13 @@ export default function StudentTwin() {
     ? [t('studentSpace.twin.improveAccuracy')]
     : [t('studentSpace.twin.diversifyActivities')];
 
+  const heroSlides = [
+    { key: 's1', image: '/stu-hero-celebration.webp', tone: 'navy', title: t('studentSpace.promo.s1t'), subtitle: t('studentSpace.promo.s1s') }
+  ];
+
   return (
     <div className="twin-v3">
-      {/* â”€â”€ Quick Actions â”€â”€ */}
+      <PromoCarousel slides={heroSlides} />
       <div className="twin-v3__qa slide-up-stagger">
         {QUICK_ACTIONS.map((qa) => (
           <button key={qa.to} className="twin-v3__qa-btn" style={{ '--qa-grad': qa.gradient, '--qa-color': qa.color }}

@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext.jsx';
 import { getHomePath } from '../../roles.js';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import PromoCarousel from '../../components/PromoCarousel.jsx';
 const ChildProgress = lazy(() => import('./ChildProgress.jsx'));
 const Messages = lazy(() => import('../Messages.jsx'));
 const WeeklyReport = lazy(() => import('./WeeklyReport.jsx'));
@@ -82,6 +83,12 @@ export default function ParentSpace() {
         </div>
         {unread > 0 && <div className="badge warn"><span className="material-icons" style={{ fontSize: '1rem' }}>mark_chat_unread</span> {t('parentSpace.unreadMsg', { n: unread })}</div>}
       </div>
+
+      <PromoCarousel slides={[
+        { key: 's1', image: '/par-family.webp', tone: 'navy', title: t('parentSpace.promo.s1t'), subtitle: t('parentSpace.promo.s1s') },
+        { key: 's2', image: '/par-report.webp', tone: 'gold', title: t('parentSpace.promo.s2t'), subtitle: t('parentSpace.promo.s2s') },
+        { key: 's3', image: '/par-comms.webp', tone: 'blue', title: t('parentSpace.promo.s3t'), subtitle: t('parentSpace.promo.s3s') }
+      ]} />
 
       <SpaceShell
         base="/parent"

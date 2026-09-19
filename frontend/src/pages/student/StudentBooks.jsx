@@ -5,6 +5,7 @@ import PDFBookViewer from './PDFBookViewer.jsx';
 import LessonViewer from '../../components/LessonViewer.jsx';
 import { useI18n } from '../../i18n/index.jsx';
 import { useStudentLevel } from '../../hooks/useStudentLevel.js';
+import PromoCarousel from '../../components/PromoCarousel.jsx';
 
 const SUBJECTS = [
   { code: 'math', key: 'math', icon: 'calculate', color: '#233863', bg: 'linear-gradient(135deg, #233863, #2f4a7d)' },
@@ -17,7 +18,7 @@ const SUBJECTS = [
 // ÙƒÙ„ ÙƒØªØ¨ Ø§Ù„Ù…Ø§Ø¯Ø© Ø§Ù„ÙˆØ§Ø­Ø¯Ø© (ÙƒØ«ÙŠØ±Ù‹Ø§ Ù…Ø§ Ù„Ù„Ø³Ù†Ø© ÙƒØªØ¨ Ù…ØªØ¹Ø¯Ø¯Ø© Ù„Ù†ÙØ³ Ø§Ù„Ù…Ø§Ø¯Ø©) ØªÙØ¬Ù…Ù‘Ø¹ ØªØ­Øª ØªØ¨ÙˆÙŠØ¨ ÙˆØ§Ø­Ø¯
 function bookTab(b) {
   const k = String(b.subjectKey || b.subject || '')
-    .replace(/[Ø¥Ø£Ø¢Ù±]/g, 'Ø§')
+    .replace(/[إأآٱ]/g, 'ا')
     .replace(/Ø©/g, 'Ù‡')
     .replace(/[\u064B-\u0652]/g, '')
     .trim();
@@ -59,11 +60,19 @@ export default function StudentBooks() {
       (!query.trim() || (b.title && b.title.toLowerCase().includes(query.toLowerCase())) || (b.subtitle && b.subtitle.toLowerCase().includes(query.toLowerCase())))
   );
 
+  const worldSlides = [
+    { key: 'wMath', image: '/stu-world-math.webp', tone: 'gold', title: t('studentSpace.promo.wMathT'), subtitle: t('studentSpace.promo.wMathS') },
+    { key: 'wRead', image: '/stu-world-reading.webp', tone: 'blue', title: t('studentSpace.promo.wReadT'), subtitle: t('studentSpace.promo.wReadS') },
+    { key: 'wSci', image: '/stu-world-science.webp', tone: 'navy', title: t('studentSpace.promo.wSciT'), subtitle: t('studentSpace.promo.wSciS') }
+  ];
+
   return (
     <div className="student-page-full">
       <div className="panel-head">
         <h3>{t('studentSpace.books.title')}</h3>
       </div>
+
+      <PromoCarousel slides={worldSlides} />
 
       <div className="subject-tabs">
         {SUBJECTS.map((s) => (
