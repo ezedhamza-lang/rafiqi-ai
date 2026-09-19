@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useI18n } from '../../i18n/index.jsx';
 import { api } from '../../api/client.js';
 
-const BADGE_EMOJIS = ['â­','ðŸ†','ðŸŒŸ','ðŸŽ¯','ðŸ“š','ðŸ”¥','ðŸ’ª','ðŸ¦','ðŸŽ“','ðŸ‘‘'];
+const BADGE_EMOJIS = ['â­','🏆','🌟','🎯','📚','🔥','💪','🦁','🎓','👑'];
 
 export default function ParentDashboard({ childrenData }) {
   const { t } = useI18n();
@@ -26,7 +26,7 @@ export default function ParentDashboard({ childrenData }) {
       <div className="pd-page">
         <div className="pd-empty">
           <span className="material-icons" style={{ fontSize: '3rem', color: 'var(--muted)' }}>family_restroom</span>
-          <p>{t('parentSpace.dashboard.noChildren', 'Ù„Ø§ ÙŠÙˆØ¬Ø¯ Ø£Ø·ÙØ§Ù„ Ù…Ø±ØªØ¨Ø·ÙŠÙ† Ø¨Ø­Ø³Ø§Ø¨Ùƒ')}</p>
+          <p>{t('parentSpace.dashboard.noChildren', 'لا يوجد أطفال مرتبطين بحسابك')}</p>
         </div>
       </div>
     );
@@ -36,7 +36,7 @@ export default function ParentDashboard({ childrenData }) {
     <div className="pd-page">
       <h2 className="pd-title">
         <span className="material-icons">dashboard</span>
-        {t('parentSpace.dashboard.title', 'Ù†Ø¸Ø±Ø© Ø¹Ø§Ù…Ø© Ø¹Ù„Ù‰ Ø§Ù„Ø£Ø¨Ù†Ø§Ø¡')}
+        {t('parentSpace.dashboard.title', 'نظرة عامة على الأبناء')}
       </h2>
 
       {loading ? (
@@ -52,7 +52,7 @@ export default function ParentDashboard({ childrenData }) {
       <div className="pd-tips">
         <h3 className="pd-tips__title">
           <span className="material-icons">tips_and_updates</span>
-          {t('parentSpace.dashboard.tips', 'Ù†ØµØ§Ø¦Ø­ Ù„Ù„Ø£Ù‡Ù„')}
+          {t('parentSpace.dashboard.tips', 'نصائح للأهل')}
         </h3>
         <div className="pd-tips__grid">
           {[1, 2, 3, 4].map((i) => (
@@ -88,7 +88,7 @@ function ChildCard({ child, dash, t }) {
         <div>
           <h3 className="pd-card__name">{child.firstName} {child.lastName}</h3>
           <span className="pd-card__level">
-            {t('studentSpace.dashboard.level', 'Ø§Ù„Ù…Ø³ØªÙˆÙ‰')} {level}
+            {t('studentSpace.dashboard.level', 'المستوى')} {level}
           </span>
         </div>
       </div>
@@ -113,7 +113,7 @@ function ChildCard({ child, dash, t }) {
 
       {badges.length > 0 && (
         <div className="pd-card__section">
-          <h4 className="pd-card__section-title">{t('parentSpace.dashboard.badges', 'Ø§Ù„Ø´Ø§Ø±Ø§Øª')}</h4>
+          <h4 className="pd-card__section-title">{t('parentSpace.dashboard.badges', 'الشارات')}</h4>
           <div className="pd-badges">
             {badges.slice(0, 5).map((b, i) => (
               <span key={i} className="pd-badge" title={b.name}>
@@ -126,7 +126,7 @@ function ChildCard({ child, dash, t }) {
 
       {subjectProgress.length > 0 && (
         <div className="pd-card__section">
-          <h4 className="pd-card__section-title">{t('parentSpace.dashboard.progress', 'Ø§Ù„ØªÙ‚Ø¯Ù… Ø§Ù„Ø¯Ø±Ø§Ø³ÙŠ')}</h4>
+          <h4 className="pd-card__section-title">{t('parentSpace.dashboard.progress', 'التقدم الدراسي')}</h4>
           <div className="pd-subjects">
             {subjectProgress.slice(0, 4).map((sp, i) => (
               <div key={i} className="pd-subject">
@@ -143,14 +143,14 @@ function ChildCard({ child, dash, t }) {
 
       {recentActivity.length > 0 && (
         <div className="pd-card__section">
-          <h4 className="pd-card__section-title">{t('parentSpace.dashboard.recent', 'Ø§Ù„Ù†Ø´Ø§Ø· Ø§Ù„Ø£Ø®ÙŠØ±')}</h4>
+          <h4 className="pd-card__section-title">{t('parentSpace.dashboard.recent', 'النشاط الأخير')}</h4>
           <ul className="pd-activity">
             {recentActivity.slice(0, 3).map((a, i) => (
               <li key={i} className="pd-activity__item">
                 <span className="material-icons pd-activity__icon" style={{ fontSize: '0.9rem' }}>
                   {a.type === 'lesson' ? 'menu_book' : a.type === 'quiz' ? 'quiz' : 'star'}
                 </span>
-                <span className="pd-activity__text">{a.description || a.title || 'Ù†Ø´Ø§Ø·'}</span>
+                <span className="pd-activity__text">{a.description || a.title || 'نشاط'}</span>
               </li>
             ))}
           </ul>

@@ -3,42 +3,42 @@ import { useI18n } from '../../i18n/index.jsx';
 import { api } from '../../api/client.js';
 
 const SUBJECT_META = {
-  ar: { label: 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©', color: '#E8A317', emoji: 'ðŸ“–' },
-  arabic: { label: 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©', color: '#E8A317', emoji: 'ðŸ“–' },
-  fr: { label: 'Ø§Ù„ÙØ±Ù†Ø³ÙŠØ©', color: '#3b82f6', emoji: 'ðŸ‡«ðŸ‡·' },
-  french: { label: 'Ø§Ù„ÙØ±Ù†Ø³ÙŠØ©', color: '#3b82f6', emoji: 'ðŸ‡«ðŸ‡·' },
-  en: { label: 'Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ©', color: '#10b981', emoji: 'ðŸ‡¬ðŸ‡§' },
-  english: { label: 'Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ©', color: '#10b981', emoji: 'ðŸ‡¬ðŸ‡§' },
-  math: { label: 'Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª', color: '#E8A317', emoji: 'ðŸ”¢' },
-  maths: { label: 'Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª', color: '#E8A317', emoji: 'ðŸ”¢' },
-  science: { label: 'Ø§Ù„Ø¹Ù„ÙˆÙ…', color: '#8b5cf6', emoji: 'ðŸ”¬' },
-  ev: { label: 'Ø§Ù„ØªØ±Ø¨ÙŠØ© Ø§Ù„Ù…Ø¯Ù†ÙŠØ©', color: '#ec4899', emoji: 'ðŸ›ï¸' },
-  pe: { label: 'Ø§Ù„ØªØ±Ø¨ÙŠØ© Ø§Ù„Ø¨Ø¯Ù†ÙŠØ©', color: '#ef4444', emoji: 'âš½' },
-  history: { label: 'Ø§Ù„ØªØ§Ø±ÙŠØ®', color: '#92400e', emoji: 'ðŸ“œ' },
-  geography: { label: 'Ø§Ù„Ø¬ØºØ±Ø§ÙÙŠØ§', color: '#06b6d4', emoji: 'ðŸŒ' },
-  tajweed: { label: 'Ø§Ù„ØªÙ„Ø§ÙˆØ©', color: '#059669', emoji: 'ðŸ•Œ' },
-  islamic: { label: 'Ø§Ù„ØªØ±Ø¨ÙŠØ© Ø§Ù„Ø¥Ø³Ù„Ø§Ù…ÙŠØ©', color: '#047857', emoji: 'â˜ªï¸' },
-  art: { label: 'Ø§Ù„ØªØ±Ø¨ÙŠØ© Ø§Ù„ØªØ´ÙƒÙŠÙ„ÙŠØ©', color: '#d946ef', emoji: 'ðŸŽ¨' },
-  music: { label: 'Ø§Ù„ØªØ±Ø¨ÙŠØ© Ø§Ù„Ù…ÙˆØ³ÙŠÙ‚ÙŠØ©', color: '#f472b6', emoji: 'ðŸŽµ' },
-  computer: { label: 'Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§ØªÙŠØ©', color: '#6366f1', emoji: 'ðŸ’»' },
-  tech: { label: 'Ø§Ù„ØªÙƒÙ†ÙˆÙ„ÙˆØ¬ÙŠØ§', color: '#4f46e5', emoji: 'âš™ï¸' },
+  ar: { label: 'العربية', color: '#E8A317', emoji: '📖' },
+  arabic: { label: 'العربية', color: '#E8A317', emoji: '📖' },
+  fr: { label: 'الفرنسية', color: '#3b82f6', emoji: '🇫🇷' },
+  french: { label: 'الفرنسية', color: '#3b82f6', emoji: '🇫🇷' },
+  en: { label: 'الإنجليزية', color: '#10b981', emoji: '🇬🇧' },
+  english: { label: 'الإنجليزية', color: '#10b981', emoji: '🇬🇧' },
+  math: { label: 'الرياضيات', color: '#E8A317', emoji: '🔢' },
+  maths: { label: 'الرياضيات', color: '#E8A317', emoji: '🔢' },
+  science: { label: 'العلوم', color: '#8b5cf6', emoji: '🔬' },
+  ev: { label: 'التربية المدنية', color: '#ec4899', emoji: '🏛️' },
+  pe: { label: 'التربية البدنية', color: '#ef4444', emoji: 'âš½' },
+  history: { label: 'التاريخ', color: '#92400e', emoji: '📜' },
+  geography: { label: 'الجغرافيا', color: '#06b6d4', emoji: '🌍' },
+  tajweed: { label: 'التلاوة', color: '#059669', emoji: '🕌' },
+  islamic: { label: 'التربية الإسلامية', color: '#047857', emoji: 'â˜ªï¸' },
+  art: { label: 'التربية التشكيلية', color: '#d946ef', emoji: '🎨' },
+  music: { label: 'التربية الموسيقية', color: '#f472b6', emoji: '🎵' },
+  computer: { label: 'المعلوماتية', color: '#6366f1', emoji: '💻' },
+  tech: { label: 'التكنولوجيا', color: '#4f46e5', emoji: 'âš™ï¸' },
 };
 
 function getSubjectMeta(id) {
-  if (!id) return { label: 'â€”', color: '#94a3b8', emoji: 'ðŸ“š' };
+  if (!id) return { label: '—', color: '#94a3b8', emoji: '📚' };
   const lower = id.toLowerCase().replace('subject_', '');
-  return SUBJECT_META[lower] || SUBJECT_META[lower.split('_')[0]] || { label: id, color: '#94a3b8', emoji: 'ðŸ“š' };
+  return SUBJECT_META[lower] || SUBJECT_META[lower.split('_')[0]] || { label: id, color: '#94a3b8', emoji: '📚' };
 }
 
 const MILESTONES = [
-  { xp: 10, label: 'Ø¨Ø¯Ø§ÙŠØ©', emoji: 'ðŸŒ±' },
-  { xp: 50, label: 'Ù…Ø³Ø§Ø± Ø¬ÙŠØ¯', emoji: 'ðŸŒ¿' },
-  { xp: 100, label: 'Ø§Ù„Ù…Ø³ØªÙˆÙ‰ 2', emoji: 'â­' },
-  { xp: 250, label: 'Ø·Ø§Ù„Ø¨ Ù…Ø¬ØªÙ‡Ø¯', emoji: 'ðŸ“š' },
-  { xp: 500, label: 'Ù†Ø¬Ù…', emoji: 'ðŸŒŸ' },
-  { xp: 1000, label: 'Ù…ØªÙÙˆÙ‚', emoji: 'ðŸ†' },
-  { xp: 2000, label: 'Ø¹Ø¨Ù‚Ø±ÙŠ', emoji: 'ðŸ’Ž' },
-  { xp: 5000, label: 'Ø£Ø³Ø·ÙˆØ±ÙŠ', emoji: 'ðŸ‘‘' },
+  { xp: 10, label: 'بداية', emoji: '🌱' },
+  { xp: 50, label: 'مسار جيد', emoji: '🌿' },
+  { xp: 100, label: 'المستوى 2', emoji: 'â­' },
+  { xp: 250, label: 'طالب مجتهد', emoji: '📚' },
+  { xp: 500, label: 'نجم', emoji: '🌟' },
+  { xp: 1000, label: 'متفوق', emoji: '🏆' },
+  { xp: 2000, label: 'عبقري', emoji: '💎' },
+  { xp: 5000, label: 'أسطوري', emoji: '👑' },
 ];
 
 export default function StudentProgress() {

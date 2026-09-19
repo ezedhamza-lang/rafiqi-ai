@@ -1,5 +1,5 @@
 /* ============================================================
-   UI Components — Design System styles
+   UI Components â€” Design System styles
    ============================================================ */
 
 /* ---------- Button ---------- */
@@ -47,7 +47,7 @@
 .ui-btn-accent:hover:not(:disabled) {
   filter: brightness(1.06);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(251, 191, 36, 0.35);
+  box-shadow: 0 6px 18px rgba(232, 163, 23, 0.35);
 }
 
 .ui-btn-outline {
@@ -996,7 +996,7 @@
   color: var(--text-secondary);
 }
 
-/* ---------- Live room (الحصص المباشرة — 5.1) ---------- */
+/* ---------- Live room (Ø§Ù„Ø­ØµØµ Ø§Ù„Ù…Ø¨Ø§Ø´Ø±Ø© â€” 5.1) ---------- */
 .live-room-grid {
   display: grid;
   grid-template-columns: 1fr 280px;
@@ -1246,7 +1246,7 @@
   color: var(--accent-dark);
 }
 
-/* ===== بطاقات المراجعة (Flashcards) ===== */
+/* ===== Ø¨Ø·Ø§Ù‚Ø§Øª Ø§Ù„Ù…Ø±Ø§Ø¬Ø¹Ø© (Flashcards) ===== */
 .flash-filters { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.2rem; }
 .flash-grades { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .flash-subjects { display: flex; flex-wrap: wrap; gap: 0.4rem; }
@@ -1264,7 +1264,7 @@
 .flash-summary { text-align: center; padding: 1.5rem; }
 .flash-summary h3 { margin-bottom: 0.5rem; }
 
-/* ===== روتين اليوم ===== */
+/* ===== Ø±ÙˆØªÙŠÙ† Ø§Ù„ÙŠÙˆÙ… ===== */
 .routine-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
 .routine-card { display: flex; flex-direction: column; }
 .routine-card .card-body { display: flex; flex-direction: column; gap: 0.6rem; }
@@ -1274,19 +1274,19 @@
 .routine-xp { display: flex; align-items: center; gap: 0.4rem; font-size: 0.95rem; }
 .routine-page .greeting { margin-top: 1rem; }
 
-/* ===== دفتر الدرجات ===== */
+/* ===== Ø¯ÙØªØ± Ø§Ù„Ø¯Ø±Ø¬Ø§Øª ===== */
 .gradebook-table th, .gradebook-table td { text-align: center; padding: 0.5rem 0.6rem; }
 .gradebook-table th:first-child, .gradebook-table td:first-child { text-align: right; }
 .gradebook-table td:last-child { color: var(--accent-dark); }
 
-/* ===== تقدم الدروس ===== */
+/* ===== ØªÙ‚Ø¯Ù… Ø§Ù„Ø¯Ø±ÙˆØ³ ===== */
 .lesson-progress-row { display: flex; align-items: center; gap: 0.7rem; padding: 0.35rem 0; }
 .lesson-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.92rem; }
 .progress-track { flex: 2; height: 10px; border-radius: 999px; background: rgba(0,0,0,0.08); overflow: hidden; }
 .progress-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #17a076, #2fd0a4); }
 .progress-count { min-width: 3.5rem; text-align: center; font-size: 0.85rem; color: var(--muted, #666); }
 
-/* ===== الملاحظات ===== */
+/* ===== Ø§Ù„Ù…Ù„Ø§Ø­Ø¸Ø§Øª ===== */
 .note-card { margin-bottom: 0.8rem; }
 .note-card.unread { box-shadow: 0 0 0 2px rgba(109, 63, 160, 0.25); }
 .note-card .lesson-head { display: flex; align-items: center; gap: 0.5rem; }

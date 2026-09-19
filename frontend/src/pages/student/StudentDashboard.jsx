@@ -3,16 +3,16 @@ import { useI18n } from '../../i18n/index.jsx';
 import { api } from '../../api/client.js';
 
 const SUBJECT_LABELS = {
-  'ar': 'Ã˜Â§Ã™â€žÃ˜Â¹Ã˜Â±Ã˜Â¨Ã™Å Ã˜Â©', 'fr': 'Ã˜Â§Ã™â€žÃ™ÂÃ˜Â±Ã™â€ Ã˜Â³Ã™Å Ã˜Â©', 'en': 'Ã˜Â§Ã™â€žÃ˜Â¥Ã™â€ Ã˜Â¬Ã™â€žÃ™Å Ã˜Â²Ã™Å Ã˜Â©', 'math': 'Ã˜Â§Ã™â€žÃ˜Â±Ã™Å Ã˜Â§Ã˜Â¶Ã™Å Ã˜Â§Ã˜Âª',
-  'science': 'Ã˜Â§Ã™â€žÃ˜Â¹Ã™â€žÃ™Ë†Ã™â€¦', 'ev': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ˜Â±Ã˜Â¨Ã™Å Ã˜Â© Ã˜Â§Ã™â€žÃ™â€¦Ã˜Â¯Ã™â€ Ã™Å Ã˜Â©', 'pe': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ˜Â±Ã˜Â¨Ã™Å Ã˜Â© Ã˜Â§Ã™â€žÃ˜Â¨Ã˜Â¯Ã™â€ Ã™Å Ã˜Â©',
-  'history': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ˜Â§Ã˜Â±Ã™Å Ã˜Â®', 'geography': 'Ã˜Â§Ã™â€žÃ˜Â¬Ã˜ÂºÃ˜Â±Ã˜Â§Ã™ÂÃ™Å Ã˜Â§', 'tajweed': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ™â€žÃ˜Â§Ã™Ë†Ã˜Â©',
-  'islamic': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ˜Â±Ã˜Â¨Ã™Å Ã˜Â© Ã˜Â§Ã™â€žÃ˜Â¥Ã˜Â³Ã™â€žÃ˜Â§Ã™â€¦Ã™Å Ã˜Â©', 'art': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ˜Â±Ã˜Â¨Ã™Å Ã˜Â© Ã˜Â§Ã™â€žÃ˜ÂªÃ˜Â´Ã™Æ’Ã™Å Ã™â€žÃ™Å Ã˜Â©', 'music': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ˜Â±Ã˜Â¨Ã™Å Ã˜Â© Ã˜Â§Ã™â€žÃ™â€¦Ã™Ë†Ã˜Â³Ã™Å Ã™â€šÃ™Å Ã˜Â©',
-  'computer': 'Ã˜Â§Ã™â€žÃ™â€¦Ã˜Â¹Ã™â€žÃ™Ë†Ã™â€¦Ã˜Â§Ã˜ÂªÃ™Å Ã˜Â©', 'tech': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ™Æ’Ã™â€ Ã™Ë†Ã™â€žÃ™Ë†Ã˜Â¬Ã™Å Ã˜Â§', 'french': 'Ã˜Â§Ã™â€žÃ™ÂÃ˜Â±Ã™â€ Ã˜Â³Ã™Å Ã˜Â©',
-  'english': 'Ã˜Â§Ã™â€žÃ˜Â¥Ã™â€ Ã˜Â¬Ã™â€žÃ™Å Ã˜Â²Ã™Å Ã˜Â©', 'arabic': 'Ã˜Â§Ã™â€žÃ˜Â¹Ã˜Â±Ã˜Â¨Ã™Å Ã˜Â©', 'maths': 'Ã˜Â§Ã™â€žÃ˜Â±Ã™Å Ã˜Â§Ã˜Â¶Ã™Å Ã˜Â§Ã˜Âª'
+  'ar': 'العربية', 'fr': 'الفرنسية', 'en': 'الإنجليزية', 'math': 'الرياضيات',
+  'science': 'العلوم', 'ev': 'التربية المدنية', 'pe': 'التربية البدنية',
+  'history': 'التاريخ', 'geography': 'الجغرافيا', 'tajweed': 'التجويد',
+  'islamic': 'التربية الإسلامية', 'art': 'التربية التشكيلية', 'music': 'التربية الموسيقية',
+  'computer': 'المعلوماتية', 'tech': 'التكنولوجيا', 'french': 'الفرنسية',
+  'english': 'الإنجليزية', 'arabic': 'العربية', 'maths': 'الرياضيات'
 };
 
 function getSubjectLabel(id) {
-  if (!id) return 'Ã¢â‚¬â€';
+  if (!id) return '—';
   const lower = id.toLowerCase();
   return SUBJECT_LABELS[lower] || SUBJECT_LABELS[lower.replace('subject_', '')] || id;
 }
@@ -21,10 +21,10 @@ const SUBJECT_COLORS = ['#E8A317', '#10b981', '#3b82f6', '#ef4444', '#8b5cf6', '
 
 function getGreetingTime() {
   const h = new Date().getHours();
-  if (h < 6) return { emoji: 'Ã°Å¸Å’â„¢', key: 'night' };
-  if (h < 12) return { emoji: 'Ã¢Ëœâ‚¬Ã¯Â¸Â', key: 'morning' };
-  if (h < 17) return { emoji: 'Ã°Å¸Å’Â¤Ã¯Â¸Â', key: 'afternoon' };
-  return { emoji: 'Ã°Å¸Å’â„¢', key: 'evening' };
+  if (h < 6) return { emoji: '🌙', key: 'night' };
+  if (h < 12) return { emoji: '☀️', key: 'morning' };
+  if (h < 17) return { emoji: '🌤️', key: 'afternoon' };
+  return { emoji: '🌙', key: 'evening' };
 }
 
 function ProgressRing({ percent = 0, size = 120, stroke = 10, color = '#E8A317' }) {
@@ -192,7 +192,7 @@ export default function StudentDashboard() {
           <div className="ds-badges-row">
             {badges.map((b, i) => (
               <div key={i} className="ds-badge-chip">
-                <span className="ds-badge-chip__icon">{b.icon || 'Ã¢Â­Â'}</span>
+                <span className="ds-badge-chip__icon">{b.icon || '⭐'}</span>
                 <span className="ds-badge-chip__name">{b.name}</span>
               </div>
             ))}

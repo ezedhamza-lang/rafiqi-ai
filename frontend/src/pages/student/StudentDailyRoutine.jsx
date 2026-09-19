@@ -58,7 +58,7 @@ export default function StudentDailyRoutine() {
                 <span className="material-icons">event</span>
                 <span>{a.title}</span>
                 <span className="muted small">
-                  {a.questionsCount} {t('studentSpace.routine.questions')} â€” {new Date(a.dueDate).toLocaleDateString('ar-TN')}
+                  {a.questionsCount} {t('studentSpace.routine.questions')} — {new Date(a.dueDate).toLocaleDateString('ar-TN')}
                 </span>
               </div>
             ))}
@@ -80,7 +80,7 @@ export default function StudentDailyRoutine() {
             {recommended ? (
               <>
                 <p className="routine-xp">
-                  <strong>{recommended.subjectTitle}</strong> â€” {recommended.lessonTitle}
+                  <strong>{recommended.subjectTitle}</strong> — {recommended.lessonTitle}
                 </p>
                 <p className="muted small">
                   {t('studentSpace.routine.exerciseCount', { n: recommended.exerciseCount })}
@@ -108,7 +108,7 @@ export default function StudentDailyRoutine() {
           </div>
         </section>
       </div>
-      <p className="muted small greeting">ðŸ‘‹ {t('studentSpace.routine.greeting', { name: user?.firstName || '' })}</p>
+      <p className="muted small greeting">👋 {t('studentSpace.routine.greeting', { name: user?.firstName || '' })}</p>
     </div>
   );
 }

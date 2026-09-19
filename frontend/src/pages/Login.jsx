@@ -37,7 +37,7 @@ export default function Login() {
     <div className="auth-wrapper">
       <div className="auth-card">
         <div style={{ textAlign: 'center', marginBottom: '1.2rem' }}>
-          <img src="/logo-rafiqi-square.png" alt="رفيقي" style={{ width: 80, height: 80, borderRadius: '50%', border: '3px solid var(--primary)', padding: 4, background: '#fff', boxShadow: '0 4px 20px rgba(255,106,0,0.15)' }} />
+          <img src="/logo-rafiqi-square.png" alt="Ø±ÙÙŠÙ‚ÙŠ" style={{ width: 80, height: 80, borderRadius: '50%', border: '3px solid var(--primary)', padding: 4, background: '#fff', boxShadow: '0 4px 20px rgba(21, 94, 239, 0.15)' }} />
         </div>
         <h1 style={{ color: 'var(--primary)' }}>{t('login.title')}</h1>
         <p className="sub">{t('login.subtitle')}</p>

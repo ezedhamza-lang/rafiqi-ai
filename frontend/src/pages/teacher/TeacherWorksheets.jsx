@@ -3,25 +3,25 @@ import { useState, useRef } from 'react';
 const EMPTY_WORKSHEET = {
   schoolName: '',
   teacherName: '',
-  subject: 'Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª',
+  subject: 'الرياضيات',
   className: '',
   date: '',
-  period: 'Ø§Ù„ÙØªØ±Ø© Ø§Ù„Ø£ÙˆÙ„Ù‰',
+  period: 'الفترة الأولى',
   lessonTitle: '',
   objectives: [''],
   activities: [
-    { title: 'Ù†Ø´Ø§Ø· Ø§Ù„Ø§Ø³ØªÙƒØ´Ø§Ù', duration: '15 Ø¯Ù‚ÙŠÙ‚Ø©', description: '' },
-    { title: 'Ù†Ø´Ø§Ø· Ø§Ù„ØªØ¹Ù„Ù‘Ù…', duration: '20 Ø¯Ù‚ÙŠÙ‚Ø©', description: '' },
-    { title: 'Ù†Ø´Ø§Ø· Ø§Ù„ØªØ«Ø¨ÙŠØª', duration: '10 Ø¯Ù‚Ø§Ø¦Ù‚', description: '' }
+    { title: 'نشاط الاستكشاف', duration: '15 دقيقة', description: '' },
+    { title: 'نشاط التعلّم', duration: '20 دقيقة', description: '' },
+    { title: 'نشاط التثبيت', duration: '10 دقائق', description: '' }
   ],
   evaluation: [''],
   notes: '',
   materials: ''
 };
 
-const SUBJECTS = ['Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª', 'Ø§Ù„Ù‚Ø±Ø§Ø¡Ø©', 'Ø§Ù„Ø¥Ù†ØªØ§Ø¬ Ø§Ù„ÙƒØªØ§Ø¨ÙŠ', 'Ø§Ù„Ø®Ø· ÙˆØ§Ù„Ø¥Ù…Ù„Ø§Ø¡', 'Ø§Ù„Ù„ØºØ© Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©', 'Ø§Ù„Ù„ØºØ© Ø§Ù„ÙØ±Ù†Ø³ÙŠØ©', 'Ø§Ù„ØªØ±Ø¨ÙŠØ© Ø§Ù„Ø¥Ø³Ù„Ø§Ù…ÙŠØ©', 'Ø§Ù„ØªØ±Ø¨ÙŠØ© Ø§Ù„Ù…Ø¯Ù†ÙŠØ©', 'Ø§Ù„Ø¥ÙŠÙ‚Ø§Ø¸ Ø§Ù„Ø¹Ù„Ù…ÙŠ', 'Ø§Ù„ØªÙ†Ø´ÙŠØ·'];
+const SUBJECTS = ['الرياضيات', 'القراءة', 'الإنتاج الكتابي', 'الخط والإملاء', 'اللغة العربية', 'اللغة الفرنسية', 'التربية الإسلامية', 'التربية المدنية', 'الإيقاظ العلمي', 'التنشيط'];
 
-const PERIODS = ['Ø§Ù„ÙØªØ±Ø© Ø§Ù„Ø£ÙˆÙ„Ù‰', 'Ø§Ù„ÙØªØ±Ø© Ø§Ù„Ø«Ø§Ù†ÙŠØ©', 'Ø§Ù„ÙØªØ±Ø© Ø§Ù„Ø«Ø§Ù„Ø«Ø©', 'Ø§Ù„ÙØªØ±Ø© Ø§Ù„Ø±Ø§Ø¨Ø¹Ø©', 'Ø§Ù„ÙØªØ±Ø© Ø§Ù„Ø®Ø§Ù…Ø³Ø©', 'Ø§Ù„ÙØªØ±Ø© Ø§Ù„Ø³Ø§Ø¯Ø³Ø©'];
+const PERIODS = ['الفترة الأولى', 'الفترة الثانية', 'الفترة الثالثة', 'الفترة الرابعة', 'الفترة الخامسة', 'الفترة السادسة'];
 
 function MinistryLogo() {
   return (
@@ -31,9 +31,9 @@ function MinistryLogo() {
       <path d="M35 12 L50 22 L50 33 L35 41 L20 33 L20 22 Z" fill="none" stroke="#c62828" strokeWidth="1.5"/>
       <circle cx="35" cy="28" r="6" fill="none" stroke="#1a237e" strokeWidth="1.5"/>
       <path d="M32 26 L35 22 L38 26 L35 30 Z" fill="#c62828"/>
-      <text x="35" y="55" textAnchor="middle" fill="#1a237e" fontSize="7" fontWeight="bold" fontFamily="Arial">Ø¬Ù…Ù‡ÙˆØ±ÙŠØ©</text>
-      <text x="35" y="63" textAnchor="middle" fill="#1a237e" fontSize="7" fontWeight="bold" fontFamily="Arial">ØªÙˆÙ†Ø³</text>
-      <text x="35" y="72" textAnchor="middle" fill="#666" fontSize="5.5" fontFamily="Arial">Ø§Ù„ÙˆØ²Ø§Ø±Ø©</text>
+      <text x="35" y="55" textAnchor="middle" fill="#1a237e" fontSize="7" fontWeight="bold" fontFamily="Arial">جمهورية</text>
+      <text x="35" y="63" textAnchor="middle" fill="#1a237e" fontSize="7" fontWeight="bold" fontFamily="Arial">تونس</text>
+      <text x="35" y="72" textAnchor="middle" fill="#666" fontSize="5.5" fontFamily="Arial">الوزارة</text>
     </svg>
   );
 }
@@ -45,9 +45,9 @@ function WorksheetHeader({ data, onChange }) {
         <MinistryLogo />
         <div style={{ flex: 1 }}>
           <div style={{ textAlign: 'center', marginBottom: '0.8rem' }}>
-            <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#1a237e' }}>Ø¬Ù…Ù‡ÙˆØ±ÙŠØ© ØªÙˆÙ†Ø³</div>
-            <div style={{ fontSize: '0.78rem', color: '#333' }}>ÙˆØ²Ø§Ø±Ø© Ø§Ù„ØªØ±Ø¨ÙŠØ©</div>
-            <div style={{ fontSize: '0.72rem', color: '#666' }}>Ø§Ù„Ù…Ù†Ø¯ÙˆØ¨ÙŠØ© Ø§Ù„Ø¬Ù‡ÙˆÙŠØ© Ù„Ù„ØªØ±Ø¨ÙŠØ©</div>
+            <div style={{ fontSize: '0.85rem', fontWeight: 800, color: '#1a237e' }}>جمهورية تونس</div>
+            <div style={{ fontSize: '0.78rem', color: '#333' }}>وزارة التربية</div>
+            <div style={{ fontSize: '0.72rem', color: '#666' }}>المندوبية الجهوية للتربية</div>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
             <input placeholder="Ø§Ù„Ù…Ø¯Ø±Ø³Ø©..." value={data.schoolName} onChange={(e) => onChange({ schoolName: e.target.value })}
@@ -92,7 +92,7 @@ function EditableList({ items, onChange, placeholder, color }) {
           )}
         </div>
       ))}
-      <button onClick={add} style={{ background: 'none', border: `1px dashed ${color || '#1a237e'}`, color: color || '#1a237e', padding: '0.3rem 0.8rem', borderRadius: '6px', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 700, marginTop: '0.3rem' }}>+ Ø¥Ø¶Ø§ÙØ©</button>
+      <button onClick={add} style={{ background: 'none', border: `1px dashed ${color || '#1a237e'}`, color: color || '#1a237e', padding: '0.3rem 0.8rem', borderRadius: '6px', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 700, marginTop: '0.3rem' }}>+ إضافة</button>
     </div>
   );
 }
@@ -120,7 +120,7 @@ function ActivityEditor({ activities, onChange }) {
             rows={2} style={{ width: '100%', padding: '0.4rem 0.5rem', border: `1px solid ${colors[i] || '#666'}30`, borderRadius: '6px', fontSize: '0.82rem', resize: 'vertical', fontFamily: 'inherit' }} />
         </div>
       ))}
-      <button onClick={add} style={{ background: 'none', border: '1px dashed #1a237e', color: '#1a237e', padding: '0.3rem 0.8rem', borderRadius: '6px', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 700 }}>+ Ø¥Ø¶Ø§ÙØ© Ù†Ø´Ø§Ø·</button>
+      <button onClick={add} style={{ background: 'none', border: '1px dashed #1a237e', color: '#1a237e', padding: '0.3rem 0.8rem', borderRadius: '6px', cursor: 'pointer', fontSize: '0.78rem', fontWeight: 700 }}>+ إضافة نشاط</button>
     </div>
   );
 }
@@ -132,33 +132,33 @@ function PrintWorksheet({ data }) {
   return (
     <div style={{ direction: 'rtl', fontFamily: "'Tajawal', 'Cairo', Arial, sans-serif" }}>
       <div style={{ textAlign: 'center', marginBottom: '15px', borderBottom: '3px double #1a237e', paddingBottom: '10px' }}>
-        <div style={{ fontSize: '14px', fontWeight: 800, color: '#1a237e' }}>Ø¬Ù…Ù‡ÙˆØ±ÙŠØ© ØªÙˆÙ†Ø³</div>
-        <div style={{ fontSize: '12px', color: '#333' }}>ÙˆØ²Ø§Ø±Ø© Ø§Ù„ØªØ±Ø¨ÙŠØ©</div>
-        <div style={{ fontSize: '11px', color: '#666', marginTop: '5px' }}>Ø§Ù„Ù…Ø¹Ù„Ù‚Ø© Ø§Ù„Ø±Ø³Ù…ÙŠØ© Ù„Ù„Ù…Ø¹Ù„Ù…(Ø©)</div>
+        <div style={{ fontSize: '14px', fontWeight: 800, color: '#1a237e' }}>جمهورية تونس</div>
+        <div style={{ fontSize: '12px', color: '#333' }}>وزارة التربية</div>
+        <div style={{ fontSize: '11px', color: '#666', marginTop: '5px' }}>المعلقة الرسمية للمعلم(ة)</div>
       </div>
       <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '15px', fontSize: '12px' }}>
         <tbody>
           <tr>
-            <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6', width: '25%' }}>Ø§Ù„Ù…Ø¯Ø±Ø³Ø©</td>
+            <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6', width: '25%' }}>المدرسة</td>
             <td style={{ border: '1px solid #333', padding: '6px', width: '25%' }}>{data.schoolName || '...'}</td>
-            <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6', width: '25%' }}>Ø§Ù„Ù…Ø¹Ù„Ù…(Ø©)</td>
+            <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6', width: '25%' }}>المعلم(ة)</td>
             <td style={{ border: '1px solid #333', padding: '6px', width: '25%' }}>{data.teacherName || '...'}</td>
           </tr>
           <tr>
-            <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6' }}>Ø§Ù„Ù…Ø§Ø¯Ø©</td>
+            <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6' }}>المادة</td>
             <td style={{ border: '1px solid #333', padding: '6px' }}>{data.subject}</td>
-            <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6' }}>Ø§Ù„Ù‚Ø³Ù…</td>
+            <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6' }}>القسم</td>
             <td style={{ border: '1px solid #333', padding: '6px' }}>{data.className || '...'}</td>
           </tr>
           <tr>
-            <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6' }}>Ø§Ù„ØªØ§Ø±ÙŠØ®</td>
+            <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6' }}>التاريخ</td>
             <td style={{ border: '1px solid #333', padding: '6px' }}>{data.date || '...'}</td>
-            <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6' }}>Ø§Ù„ÙØªØ±Ø©</td>
+            <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6' }}>الفترة</td>
             <td style={{ border: '1px solid #333', padding: '6px' }}>{data.period}</td>
           </tr>
           {data.lessonTitle && (
             <tr>
-              <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6' }}>Ø¹Ù†ÙˆØ§Ù† Ø§Ù„Ø¯Ø±Ø³</td>
+              <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6' }}>عنوان الدرس</td>
               <td colSpan={3} style={{ border: '1px solid #333', padding: '6px' }}>{data.lessonTitle}</td>
             </tr>
           )}
@@ -166,21 +166,21 @@ function PrintWorksheet({ data }) {
       </table>
       {objectives.length > 0 && (
         <div style={{ marginBottom: '12px' }}>
-          <div style={{ fontSize: '13px', fontWeight: 800, color: '#1a237e', marginBottom: '5px', borderBottom: '2px solid #c5cae9', paddingBottom: '3px' }}>ðŸŽ¯ Ø§Ù„Ø£Ù‡Ø¯Ø§Ù Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠØ©</div>
+          <div style={{ fontSize: '13px', fontWeight: 800, color: '#1a237e', marginBottom: '5px', borderBottom: '2px solid #c5cae9', paddingBottom: '3px' }}>🎯 الأهداف التعليمية</div>
           {objectives.map((obj, i) => (
-            <div key={i} style={{ fontSize: '12px', marginBottom: '3px', paddingRight: '15px' }}>â€¢ {obj}</div>
+            <div key={i} style={{ fontSize: '12px', marginBottom: '3px', paddingRight: '15px' }}>• {obj}</div>
           ))}
         </div>
       )}
       {data.activities.filter(a => a.title || a.description).length > 0 && (
         <div style={{ marginBottom: '12px' }}>
-          <div style={{ fontSize: '13px', fontWeight: 800, color: '#1a237e', marginBottom: '5px', borderBottom: '2px solid #c5cae9', paddingBottom: '3px' }}>ðŸ“‹ Ø§Ù„Ø£Ù†Ø´Ø·Ø© Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠØ©</div>
+          <div style={{ fontSize: '13px', fontWeight: 800, color: '#1a237e', marginBottom: '5px', borderBottom: '2px solid #c5cae9', paddingBottom: '3px' }}>📋 الأنشطة التعليمية</div>
           <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '11px' }}>
             <thead>
               <tr>
-                <th style={{ border: '1px solid #333', padding: '5px', background: '#1a237e', color: '#fff', width: '30%' }}>Ø§Ù„Ù†Ø´Ø§Ø·</th>
-                <th style={{ border: '1px solid #333', padding: '5px', background: '#1a237e', color: '#fff', width: '15%' }}>Ø§Ù„Ù…Ø¯Ø©</th>
-                <th style={{ border: '1px solid #333', padding: '5px', background: '#1a237e', color: '#fff' }}>Ø§Ù„ÙˆØµÙ ÙˆØ§Ù„ØªØ¹Ù„ÙŠÙ…Ø§Øª</th>
+                <th style={{ border: '1px solid #333', padding: '5px', background: '#1a237e', color: '#fff', width: '30%' }}>النشاط</th>
+                <th style={{ border: '1px solid #333', padding: '5px', background: '#1a237e', color: '#fff', width: '15%' }}>المدة</th>
+                <th style={{ border: '1px solid #333', padding: '5px', background: '#1a237e', color: '#fff' }}>الوصف والتعليمات</th>
               </tr>
             </thead>
             <tbody>
@@ -197,21 +197,21 @@ function PrintWorksheet({ data }) {
       )}
       {evalItems.length > 0 && (
         <div style={{ marginBottom: '12px' }}>
-          <div style={{ fontSize: '13px', fontWeight: 800, color: '#1a237e', marginBottom: '5px', borderBottom: '2px solid #c5cae9', paddingBottom: '3px' }}>âœ… Ù…Ø¹Ø§ÙŠÙŠØ± Ø§Ù„ØªÙ‚ÙˆÙŠÙ…</div>
+          <div style={{ fontSize: '13px', fontWeight: 800, color: '#1a237e', marginBottom: '5px', borderBottom: '2px solid #c5cae9', paddingBottom: '3px' }}>✅ معايير التقويم</div>
           {evalItems.map((ev, i) => (
-            <div key={i} style={{ fontSize: '12px', marginBottom: '3px', paddingRight: '15px' }}>â€¢ {ev}</div>
+            <div key={i} style={{ fontSize: '12px', marginBottom: '3px', paddingRight: '15px' }}>• {ev}</div>
           ))}
         </div>
       )}
       {data.materials && (
         <div style={{ marginBottom: '12px' }}>
-          <div style={{ fontSize: '13px', fontWeight: 800, color: '#1a237e', marginBottom: '5px', borderBottom: '2px solid #c5cae9', paddingBottom: '3px' }}>ðŸ“¦ Ø§Ù„Ù…ÙˆØ§Ø¯ Ø§Ù„Ù…Ø³ØªØ¹Ù…Ù„Ø©</div>
+          <div style={{ fontSize: '13px', fontWeight: 800, color: '#1a237e', marginBottom: '5px', borderBottom: '2px solid #c5cae9', paddingBottom: '3px' }}>📦 المواد المستعملة</div>
           <div style={{ fontSize: '12px' }}>{data.materials}</div>
         </div>
       )}
       {data.notes && (
         <div>
-          <div style={{ fontSize: '13px', fontWeight: 800, color: '#1a237e', marginBottom: '5px', borderBottom: '2px solid #c5cae9', paddingBottom: '3px' }}>ðŸ“ Ù…Ù„Ø§Ø­Ø¸Ø§Øª</div>
+          <div style={{ fontSize: '13px', fontWeight: 800, color: '#1a237e', marginBottom: '5px', borderBottom: '2px solid #c5cae9', paddingBottom: '3px' }}>📝 ملاحظات</div>
           <div style={{ fontSize: '12px' }}>{data.notes}</div>
         </div>
       )}
@@ -245,12 +245,12 @@ export default function TeacherWorksheets() {
   return (
     <div className="panel">
       <div className="panel-head">
-        <h3>ðŸ“ Ø§Ù„Ù…Ø¹Ù„Ù‚Ø§Øª Ø§Ù„Ø±Ø³Ù…ÙŠØ©</h3>
+        <h3>📝 المعلقات الرسمية</h3>
         <div className="btn-group">
           <button className="btn" onClick={() => setShowPreview(!showPreview)}>
-            {showPreview ? 'âœï¸ ØªØ¹Ø¯ÙŠÙ„' : 'ðŸ‘ï¸ Ù…Ø¹Ø§ÙŠÙ†Ø©'}
+            {showPreview ? '✏️ تعديل' : '👁️ معاينة'}
           </button>
-          <button className="btn btn-primary" onClick={printWorksheet}>ðŸ–¨ï¸ Ø·Ø¨Ø§Ø¹Ø© PDF</button>
+          <button className="btn btn-primary" onClick={printWorksheet}>🖨️ طباعة PDF</button>
         </div>
       </div>
 
@@ -270,30 +270,30 @@ export default function TeacherWorksheets() {
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
             <div style={{ background: '#f0fdf4', borderRadius: '10px', border: '1px solid #bbf7d0', padding: '1rem' }}>
-              <div style={{ fontWeight: 800, color: '#166534', marginBottom: '0.6rem', fontSize: '0.9rem' }}>ðŸŽ¯ Ø§Ù„Ø£Ù‡Ø¯Ø§Ù Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠØ©</div>
+              <div style={{ fontWeight: 800, color: '#166534', marginBottom: '0.6rem', fontSize: '0.9rem' }}>🎯 الأهداف التعليمية</div>
               <EditableList items={data.objectives} onChange={(v) => onChange({ objectives: v })} placeholder="Ø£Ø¶Ù Ù‡Ø¯ÙØ§Ù‹ ØªØ¹Ù„ÙŠÙ…ÙŠØ§Ù‹..." color="#166534" />
             </div>
 
             <div style={{ background: '#fef3c7', borderRadius: '10px', border: '1px solid #fde68a', padding: '1rem' }}>
-              <div style={{ fontWeight: 800, color: '#92400e', marginBottom: '0.6rem', fontSize: '0.9rem' }}>âœ… Ù…Ø¹Ø§ÙŠÙŠØ± Ø§Ù„ØªÙ‚ÙˆÙŠÙ…</div>
+              <div style={{ fontWeight: 800, color: '#92400e', marginBottom: '0.6rem', fontSize: '0.9rem' }}>✅ معايير التقويم</div>
               <EditableList items={data.evaluation} onChange={(v) => onChange({ evaluation: v })} placeholder="Ø£Ø¶Ù Ù…Ø¹ÙŠØ§Ø± ØªÙ‚ÙˆÙŠÙ…..." color="#92400e" />
             </div>
           </div>
 
           <div style={{ background: '#eff6ff', borderRadius: '10px', border: '1px solid #bfdbfe', padding: '1rem', marginTop: '1rem' }}>
-            <div style={{ fontWeight: 800, color: '#1e40af', marginBottom: '0.6rem', fontSize: '0.9rem' }}>ðŸ“‹ Ø§Ù„Ø£Ù†Ø´Ø·Ø© Ø§Ù„ØªØ¹Ù„ÙŠÙ…ÙŠØ©</div>
+            <div style={{ fontWeight: 800, color: '#1e40af', marginBottom: '0.6rem', fontSize: '0.9rem' }}>📋 الأنشطة التعليمية</div>
             <ActivityEditor activities={data.activities} onChange={(v) => onChange({ activities: v })} />
           </div>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginTop: '1rem' }}>
             <div>
-              <label style={{ fontWeight: 700, fontSize: '0.82rem', color: '#555', display: 'block', marginBottom: '0.3rem' }}>ðŸ“¦ Ø§Ù„Ù…ÙˆØ§Ø¯ Ø§Ù„Ù…Ø³ØªØ¹Ù…Ù„Ø©</label>
+              <label style={{ fontWeight: 700, fontSize: '0.82rem', color: '#555', display: 'block', marginBottom: '0.3rem' }}>📦 المواد المستعملة</label>
               <textarea value={data.materials} onChange={(e) => onChange({ materials: e.target.value })}
                 placeholder="Ø§Ù„Ø³Ø¨ÙˆØ±Ø©ØŒ Ø§Ù„Ø·Ø¨Ø§Ø´ÙŠØ±ØŒ Ø§Ù„ÙƒØªØ¨..." rows={2}
                 style={{ width: '100%', padding: '0.5rem', border: '1px solid #e0e0e0', borderRadius: '8px', fontSize: '0.82rem', resize: 'vertical', fontFamily: 'inherit' }} />
             </div>
             <div>
-              <label style={{ fontWeight: 700, fontSize: '0.82rem', color: '#555', display: 'block', marginBottom: '0.3rem' }}>ðŸ“ Ù…Ù„Ø§Ø­Ø¸Ø§Øª</label>
+              <label style={{ fontWeight: 700, fontSize: '0.82rem', color: '#555', display: 'block', marginBottom: '0.3rem' }}>📝 ملاحظات</label>
               <textarea value={data.notes} onChange={(e) => onChange({ notes: e.target.value })}
                 placeholder="Ù…Ù„Ø§Ø­Ø¸Ø§Øª Ø¥Ø¶Ø§ÙÙŠØ©..." rows={2}
                 style={{ width: '100%', padding: '0.5rem', border: '1px solid #e0e0e0', borderRadius: '8px', fontSize: '0.82rem', resize: 'vertical', fontFamily: 'inherit' }} />

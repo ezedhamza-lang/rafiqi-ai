@@ -205,7 +205,7 @@ function PortfolioGallery({ items, onDelete }) {
         <div key={i} className="cp-gallery__item">
           <div className="cp-gallery__item-header">
             <span className="cp-gallery__item-type">
-              {item.type === 'drawing' ? 'Ã°Å¸Å½Â¨' : item.type === 'story' ? 'Ã°Å¸â€œÂ' : 'Ã°Å¸Å½Âµ'}
+              {item.type === 'drawing' ? '🎨' : item.type === 'story' ? '📝' : '🎵'}
             </span>
             <span className="cp-gallery__item-date">
               {new Date(item.timestamp).toLocaleDateString('ar-TN', { month: 'short', day: 'numeric' })}

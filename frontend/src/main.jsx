@@ -57,6 +57,18 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>
 );
 
+// Reveal Material Icons only when the icon font is ready (prevents icon-name
+// flash as text on slow networks). Falls back to visible after 3s.
+try {
+  const markIconsReady = () => document.documentElement.classList.add('mi-ready');
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(markIconsReady).catch(markIconsReady);
+    setTimeout(markIconsReady, 3000);
+  } else {
+    markIconsReady();
+  }
+} catch {}
+
 // Remove the static loading splash as soon as React has mounted,
 // without waiting for window 'load' (external fonts may hang it).
 try {

@@ -72,7 +72,7 @@ export default function DirectorHome() {
           <ul className="alert-list">
             <li>{t('directorHome.alertsNoClass')} <strong>{alerts?.studentsNoClass || 0}</strong></li>
             <li>{t('directorHome.alertsNoParent')} <strong>{alerts?.studentsNoParent || 0}</strong></li>
-            <li>{t('directorHome.alertsNoActivity')} <strong>{(alerts?.noActivity || []).length}</strong> {alerts?.noActivity?.join(lang === 'ar' ? 'ØŒ ' : ', ')}</li>
+            <li>{t('directorHome.alertsNoActivity')} <strong>{(alerts?.noActivity || []).length}</strong> {alerts?.noActivity?.join(lang === 'ar' ? '، ' : ', ')}</li>
           </ul>
         </div>
       </div>
@@ -93,14 +93,14 @@ export default function DirectorHome() {
                 {activity.submissions.map((s) => (
                   <tr key={`s${s.id}`}>
                     <td>{t('directorHome.activitySubmission')}</td>
-                    <td>{s.student.firstName} {s.student.lastName} â€” {s.quiz.title}</td>
+                    <td>{s.student.firstName} {s.student.lastName} — {s.quiz.title}</td>
                     <td>{new Date(s.createdAt).toLocaleDateString(lang === 'ar' ? 'ar-TN' : 'en-GB')}</td>
                   </tr>
                 ))}
                 {activity.memos.map((m) => (
                   <tr key={`m${m.id}`}>
                     <td>{t('directorHome.activityMemo')}</td>
-                    <td>{m.teacher.firstName} {m.teacher.lastName} â€” {m.lessonTitle}</td>
+                    <td>{m.teacher.firstName} {m.teacher.lastName} — {m.lessonTitle}</td>
                     <td>{new Date(m.createdAt).toLocaleDateString(lang === 'ar' ? 'ar-TN' : 'en-GB')}</td>
                   </tr>
                 ))}

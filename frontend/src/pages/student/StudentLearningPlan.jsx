@@ -19,6 +19,7 @@ export default function StudentLearningPlan() {
   const [plan, setPlan] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [noStudent, setNoStudent] = useState(false);
   const [session, setSession] = useState(null);
   const [sessIdx, setSessIdx] = useState(0);
   const [sessLoading, setSessLoading] = useState(false);
@@ -28,7 +29,8 @@ export default function StudentLearningPlan() {
       const data = await api.get('/student/adaptive/plan');
       setPlan(data);
     } catch (e) {
-      setError(e.message);
+      if (e.status === 404) setNoStudent(true);
+      else setError(e.message);
     } finally {
       setLoading(false);
     }
@@ -173,7 +175,13 @@ export default function StudentLearningPlan() {
 
       {error && <div className="form-error">{error}</div>}
 
-      {!plan ? (
+      {noStudent ? (
+        <div className="empty">
+          <div style={{ fontSize: '2.2rem' }}>🦉</div>
+          <strong>{t('studentSpace.learningPlan.noStudentTitle')}</strong>
+          <p className="muted">{t('studentSpace.learningPlan.noStudentBody')}</p>
+        </div>
+      ) : !plan ? (
         <div className="empty">{t('studentSpace.learningPlan.loadFailed')}</div>
       ) : (
         <>
@@ -185,7 +193,7 @@ export default function StudentLearningPlan() {
                 })}
               </strong>
               <span>
-                {t('studentSpace.learningPlan.overallMastery', { n: plan.overall?.avgPercent ?? 'â€”' })}
+                {t('studentSpace.learningPlan.overallMastery', { n: plan.overall?.avgPercent ?? '—' })}
                 {!plan.overall?.hasData && t('studentSpace.learningPlan.noDataHint')}
               </span>
             </div>
@@ -221,7 +229,7 @@ export default function StudentLearningPlan() {
                 {plan.adjustments.map((a, i) => (
                   <li key={i}>
                     {t('studentSpace.learningPlan.adjustmentLine', { label: a.label, from: a.fromLabel || a.from, to: a.toLabel || a.to })}
-                    <span className="muted"> â€” {a.reason}</span>
+                    <span className="muted"> — {a.reason}</span>
                   </li>
                 ))}
               </ul>

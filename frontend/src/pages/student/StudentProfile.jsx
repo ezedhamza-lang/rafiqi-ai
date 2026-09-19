@@ -3,10 +3,10 @@ import { useI18n } from '../../i18n/index.jsx';
 
 function getGreeting() {
   const h = new Date().getHours();
-  if (h < 6)  return { emoji: 'ðŸŒ™', key: 'night' };
-  if (h < 12) return { emoji: 'â˜€ï¸', key: 'morning' };
-  if (h < 17) return { emoji: 'ðŸŒ¤ï¸', key: 'afternoon' };
-  return { emoji: 'ðŸŒ™', key: 'evening' };
+  if (h < 6)  return { emoji: '🌙', key: 'night' };
+  if (h < 12) return { emoji: '☀️', key: 'morning' };
+  if (h < 17) return { emoji: '🌤️', key: 'afternoon' };
+  return { emoji: '🌙', key: 'evening' };
 }
 
 function ProgressRing({ percent = 0, size = 72, stroke = 6 }) {
@@ -53,7 +53,7 @@ export default function StudentProfile({ profile, onMenu }) {
         <p className="sp-v3__greeting">{greeting.emoji} {t(greetingKey, { name: user.firstName })}</p>
         <h3 className="sp-v3__name">{user.firstName} {user.lastName}</h3>
         <p className="sp-v3__class">
-          {cls ? `${cls.name}${cls.level ? ` â€” ${cls.level}` : ''}` : t('studentSpace.profile.noClass')}
+          {cls ? `${cls.name}${cls.level ? ` — ${cls.level}` : ''}` : t('studentSpace.profile.noClass')}
         </p>
         <div className="sp-v3__badges">
           {badges && badges.slice(0, 4).map((b) => (
@@ -70,7 +70,7 @@ export default function StudentProfile({ profile, onMenu }) {
           <span className="sp-v3__stat-lbl">{t('studentSpace.profile.levelShort')}</span>
         </div>
         <div className="sp-v3__stat">
-          <span className="material-icons sp-v3__stat-ico" style={{ color: '#fbbf24' }}>bolt</span>
+          <span className="material-icons sp-v3__stat-ico" style={{ color: '#E8A317' }}>bolt</span>
           <span className="sp-v3__stat-val">{user.xp}</span>
           <span className="sp-v3__stat-lbl">XP</span>
         </div>
@@ -90,7 +90,7 @@ export default function StudentProfile({ profile, onMenu }) {
           <span className="sp-v3__stat-lbl">{t('studentSpace.profile.lessonsShort')}</span>
         </div>
         <div className="sp-v3__stat">
-          <span className="material-icons sp-v3__stat-ico" style={{ color: '#ef4444' }}>emoji_events</span>
+          <span className="material-icons sp-v3__stat-ico" style={{ color: '#E8A317' }}>emoji_events</span>
           <span className="sp-v3__stat-val">{badges?.length || 0}</span>
           <span className="sp-v3__stat-lbl">{t('studentSpace.profile.badgesShort')}</span>
         </div>

@@ -119,7 +119,9 @@ async function request(path, options = {}, retried = false) {
   }
 
   if (!res.ok) {
-    throw new Error(data.error || 'حدث خطأ ما');
+    const err = new Error(data.error || 'حدث خطأ ما');
+    err.status = res.status;
+    throw err;
   }
   return data;
 }

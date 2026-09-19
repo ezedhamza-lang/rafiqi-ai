@@ -1792,6 +1792,8 @@
       "title": "My Personal Learning Plan",
       "intro": "A dynamic plan built from your actual records: assignments, quizzes, smart reviews and completed lessons. The level adapts automatically to your performance with each review.",
       "loadFailed": "Could not load the plan — please try again.",
+      "noStudentTitle": "Learning plans are for students linked to a class",
+      "noStudentBody": "Your current account is for free exploration — browse books, lessons and quizzes from the side menu. A personal learning plan is built automatically for student accounts linked to a class.",
       "status": {
         "WEAK": "Weak",
         "MEDIUM": "Medium",
