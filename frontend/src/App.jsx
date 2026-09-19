@@ -1,5 +1,5 @@
 import { lazy, Suspense, Component } from 'react';
-import { Routes, Route, Navigate, Link } from 'react-router-dom';
+import { Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext.jsx';
 import { ChatProvider } from './context/ChatContext.jsx';
 import { NotificationProvider } from './context/NotificationContext.jsx';
@@ -68,6 +68,12 @@ function GuestOnly({ children }) {
   return children;
 }
 
+function ConditionalFooter() {
+  const { pathname } = useLocation();
+  if (pathname !== '/') return null;
+  return <Footer />;
+}
+
 function NotFound() {
   const { t } = useI18n();
   return (
@@ -120,7 +126,7 @@ export default function App() {
               </Suspense>
             </ErrorBoundary>
           </main>
-          <Footer />
+          <ConditionalFooter />
         </NotificationProvider>
       </ChatProvider>
     </AuthProvider>
