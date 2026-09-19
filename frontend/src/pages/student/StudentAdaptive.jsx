@@ -7,7 +7,7 @@ import { useStudentLevel } from '../../hooks/useStudentLevel.js';
 const SUBJECT_CODES = ['math', 'anisi', 'science'];
 const SUBJECT_META = {
   math: { icon: 'calculate', bg: 'linear-gradient(135deg, #233863, #2f4a7d)' },
-  anisi: { icon: 'menu_book', bg: 'linear-gradient(135deg, #f4ab2c, #fd8b15)' },
+  anisi: { icon: 'menu_book', bg: 'linear-gradient(135deg, #f4ab2c, #E8A317)' },
   science: { icon: 'science', bg: 'linear-gradient(135deg, #0e6b4f, #17a076)' }
 };
 

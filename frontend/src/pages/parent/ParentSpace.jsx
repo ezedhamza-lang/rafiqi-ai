@@ -20,10 +20,10 @@ import SpaceShell from '../../components/SpaceShell.jsx';
 
 const TABS = [
   { to: '', end: true, icon: 'monitor_heart', key: 'progress', color: '#10b981' },
-  { to: 'overview', icon: 'dashboard', key: 'overview', color: '#ff6a00' },
+  { to: 'overview', icon: 'dashboard', key: 'overview', color: '#E8A317' },
   { to: 'insights', icon: 'auto_awesome', key: 'insights', color: '#8b5cf6' },
-  { to: 'credentials', icon: 'vpn_key', key: 'credentials', color: '#f59e0b' },
-  { to: 'assignments', icon: 'assignment', key: 'assignments', color: '#f97316' },
+  { to: 'credentials', icon: 'vpn_key', key: 'credentials', color: '#E8A317' },
+  { to: 'assignments', icon: 'assignment', key: 'assignments', color: '#E8A317' },
   { to: 'live', icon: 'live_tv', key: 'live', color: '#22c55e' },
   { to: 'analytics', icon: 'monitoring', key: 'analytics', color: '#0ea5e9' },
   { to: 'notes', icon: 'rate_review', key: 'notes', color: '#3b82f6' },
@@ -34,9 +34,9 @@ const TABS = [
 ];
 
 const TAB_GROUPS = (t) => [
-  { label: 'المتابعة', items: ['progress', 'overview', 'insights', 'analytics', 'report'].map((key) => tabByKey(t, key)) },
-  { label: 'الحياة المدرسية', items: ['assignments', 'live', 'notes', 'documents', 'health'].map((key) => tabByKey(t, key)) },
-  { label: 'الإدارة', items: ['credentials', 'messages'].map((key) => tabByKey(t, key)) },
+  { label: 'Ø§Ù„Ù…ØªØ§Ø¨Ø¹Ø©', items: ['progress', 'overview', 'insights', 'analytics', 'report'].map((key) => tabByKey(t, key)) },
+  { label: 'Ø§Ù„Ø­ÙŠØ§Ø© Ø§Ù„Ù…Ø¯Ø±Ø³ÙŠØ©', items: ['assignments', 'live', 'notes', 'documents', 'health'].map((key) => tabByKey(t, key)) },
+  { label: 'Ø§Ù„Ø¥Ø¯Ø§Ø±Ø©', items: ['credentials', 'messages'].map((key) => tabByKey(t, key)) },
 ];
 
 function tabByKey(t, key) {

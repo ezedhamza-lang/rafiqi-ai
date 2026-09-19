@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useI18n } from '../../i18n/index.jsx';
 
-const COLORS = ['#ff6a00', '#ef4444', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899', '#000000'];
+const COLORS = ['#E8A317', '#ef4444', '#D97706', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899', '#000000'];
 const SIZES = [3, 6, 10, 16];
 
 function DrawingCanvas({ onSave }) {
   const canvasRef = useRef(null);
-  const [color, setColor] = useState('#ff6a00');
+  const [color, setColor] = useState('#E8A317');
   const [size, setSize] = useState(6);
   const [drawing, setDrawing] = useState(false);
   const lastPos = useRef(null);
@@ -205,7 +205,7 @@ function PortfolioGallery({ items, onDelete }) {
         <div key={i} className="cp-gallery__item">
           <div className="cp-gallery__item-header">
             <span className="cp-gallery__item-type">
-              {item.type === 'drawing' ? '🎨' : item.type === 'story' ? '📝' : '🎵'}
+              {item.type === 'drawing' ? 'Ã°Å¸Å½Â¨' : item.type === 'story' ? 'Ã°Å¸â€œÂ' : 'Ã°Å¸Å½Âµ'}
             </span>
             <span className="cp-gallery__item-date">
               {new Date(item.timestamp).toLocaleDateString('ar-TN', { month: 'short', day: 'numeric' })}

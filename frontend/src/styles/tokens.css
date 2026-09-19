@@ -1,74 +1,90 @@
 /* ============================================================
-   Design Tokens — بوابة رفيقي للحياة المدرسية
-   Unified theme: colors, fonts, spacing, radius, shadows, z-index
+   Design Tokens — نظام تصميم رفيقي الموحد
+   الهوية: كحلي (Deep Navy) + أزرق ملكي (Royal Blue) + ذهبي (Gold)
+   البومة الزرقاء "رفيقي" هي مرجع الهوية.
    Dark mode via [data-theme="dark"] on <html>
    ============================================================ */
 
 :root {
   color-scheme: light;
 
-  /* Brand colors — Orange primary (العلامة) */
-  --primary: #ff6a00;
-  --primary-dark: #e85d00;
-  --primary-darker: #c2410c;
-  --primary-light: #fff0e6;
-  --accent: #fbbf24;
-  --accent-dark: #d97706;
-  --accent-light: #fef3c7;
-  --brand-pink: #9d174d;
+  /* ===== Brand — هوية رفيقي: كحلي + أزرق ملكي + ذهبي ===== */
+  --primary: #155EEF;            /* أزرق ملكي — الأفعال الأساسية */
+  --primary-dark: #0E4FCE;       /* hover */
+  --primary-darker: #0A3FA8;     /* active */
+  --primary-light: #EAF1FF;      /* صبغة سماوية ناعمة */
+  --accent: #E8A317;             /* ذهبي — لمسات decorative (خلفياتها بنص داكن) */
+  --accent-dark: #B45309;        /* ذهبي للنص على أبيض (تباين AA) + hover */
+  --accent-light: #FFF8E8;       /* صبغة ذهبية ناعمة */
+  --accent-ink: #4A3205;         /* نص داكن فوق الذهبي */
+  --brand-red: #D32F2F;          /* لمسة تونسية حمراء (علم/تنبيهات وطنية) */
 
-  /* Sidebar blue theme */
+  /* ===== Navy — هيكل المنصة (هيدر/سايدبار/فوتر) ===== */
+  --navy: #102A56;
+  --navy-2: #1E3A6E;
+  --navy-3: #2E4A86;
+
+  /* Sidebar navy theme — يبقى كما هو (هوية الهيكل) */
   --sidebar-bg: linear-gradient(180deg, #0b2a52, #123a6b);
   --sidebar-surface: rgba(255,255,255,0.06);
   --sidebar-text: #e6eefc;
   --sidebar-muted: #9fb6d9;
 
-  /* Calm, harmonious section-dot tone (موحّد لكل الأقسام) */
-  --dot: #ff6a00;
-  --dot-soft: rgba(255, 106, 0, 0.14);
+  /* Section-dot tone — ذهبي */
+  --dot: #E8A317;
+  --dot-soft: rgba(232, 163, 23, 0.16);
 
-  /* Semantic surface colors */
-  --bg: #f6f8fb;
-  --bg-elevated: #ffffff;
-  --bg-subtle: #f1f5f9;
-  --surface: #ffffff;
-  --surface-hover: #f8fafc;
-  --border: #e2e8f0;
-  --border-strong: #cbd5e1;
+  /* ===== Semantic surface colors ===== */
+  --bg: #F7F9FC;                 /* خلفية عامة: أزرق-رمادي فاتح جداً */
+  --bg-elevated: #FFFFFF;
+  --bg-subtle: #F1F5FA;
+  --surface: #FFFFFF;
+  --surface-hover: #F5F8FD;
+  --border: #E2E8F2;
+  --border-strong: #C9D4E8;
 
-  /* Text colors */
-  --text: #1e293b;
-  --text-secondary: #475569;
-  --muted: #64748b;
-  --text-inverse: #ffffff;
+  /* ===== Text colors ===== */
+  --text: #12233F;               /* كحلي داكن عميق بدل الأسود المحايد */
+  --text-secondary: #3D5070;
+  --muted: #6B7C99;
+  --text-inverse: #FFFFFF;
 
-  /* Status colors */
-  --green: #16a34a;
-  --green-bg: #dcfce7;
-  --green-border: #86efac;
-  --red: #dc2626;
-  --red-bg: #fee2e2;
-  --red-border: #fecaca;
-  --yellow: #f59e0b;
-  --yellow-bg: #fef3c7;
-  --yellow-border: #fde68a;
-  --blue: #2563eb;
-  --blue-bg: #dbeafe;
-  --blue-border: #bfdbfe;
+  /* ===== Status colors ===== */
+  --green: #10B981;              /* أخضر رفيقي — نجاح/تقدم */
+  --green-bg: #D8F5EC;
+  --green-border: #7FE3C4;
+  --red: #DC2626;                /* أخطاء/تنبيهات فقط */
+  --red-bg: #FDECEC;
+  --red-border: #FAC5C5;
+  --yellow: #F59E0B;             /* تحذير */
+  --yellow-bg: #FEF3DC;
+  --yellow-border: #FDE2A8;
+  --blue: #2563EB;               /* معلومات */
+  --blue-bg: #E3ECFE;
+  --blue-border: #C2D6FB;
 
-  /* Palette 70/20/10 — student spaces */
-  --palette-bg: #F7F9FC;
-  --palette-navy: #102A56;
+  /* ===== Semantic aliases (واجهة موحدة للاستعمال) ===== */
+  --success: var(--green);
+  --success-bg: var(--green-bg);
+  --warning: var(--yellow);
+  --warning-bg: var(--yellow-bg);
+  --error: var(--red);
+  --error-bg: var(--red-bg);
+  --info: var(--blue);
+  --info-bg: var(--blue-bg);
+
+  /* ===== Palette 70/20/10 — مرجع الموازنة البصرية ===== */
+  --palette-bg: #F7F9FC;         /* 70% مساحات فاتحة */
+  --palette-navy: #102A56;       /* 20% هيكل/عمق */
   --palette-navy-2: #1E3A6E;
-  --palette-blue: #2563EB;
-  --palette-sky: #EAF4FF;
-  --palette-sky-border: #BFDBFE;
-  --palette-gold: #F5B942;
+  --palette-blue: #155EEF;       /* أفعال */
+  --palette-sky: #EAF1FF;
+  --palette-sky-border: #C7D9FB;
+  --palette-gold: #E8A317;       /* 10% لمسات */
   --palette-green: #10B981;
-  --palette-orange: #F59E0B;
-  --palette-danger: #EF4444;
+  --palette-danger: #DC2626;
 
-  /* Typography — Geist للّاتيني/الأرقام، Noto Sans Arabic للعربية */
+  /* ===== Typography — Geist لللاتيني + Noto Sans Arabic / Tajawal للعربية ===== */
   --font-family: 'Geist', 'Noto Sans Arabic', 'Tajawal', 'Nunito', sans-serif;
   --font-arabic: 'Noto Sans Arabic', 'Tajawal', sans-serif;
   --font-latin: 'Geist', 'Nunito', 'Segoe UI', sans-serif;
@@ -81,7 +97,7 @@
   --font-size-xxl: 1.8rem;
   --line-height: 1.7;
 
-  /* Spacing scale */
+  /* ===== Spacing scale ===== */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -90,94 +106,90 @@
   --space-6: 2rem;
   --space-7: 3rem;
 
-  /* Radius */
+  /* ===== Radius ===== */
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
   --radius-xl: 18px;
   --radius-full: 9999px;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
-  --shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
-  --shadow-md: 0 8px 30px rgba(15, 23, 42, 0.12);
-  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.22);
+  /* ===== Shadows — عمق ناعم احترافي ===== */
+  --shadow-sm: 0 1px 3px rgba(16, 42, 86, 0.08);
+  --shadow: 0 4px 24px rgba(16, 42, 86, 0.10);
+  --shadow-md: 0 8px 30px rgba(16, 42, 86, 0.14);
+  --shadow-lg: 0 20px 60px rgba(10, 25, 50, 0.25);
   --shadow-sidebar: 0 10px 30px rgba(2, 6, 23, 0.10);
   --shadow-header: 0 4px 16px rgba(2, 6, 23, 0.06);
 
-  /* Gradients — هويّة برتقالية متناسقة */
-  --gradient-brand: linear-gradient(135deg, #ff6a00, #c2410c);
-  --gradient-accent: linear-gradient(90deg, #ff6a00, #fbbf24);
+  /* ===== Gradients — كحلي→أزرق ملكي + ذهبي ===== */
+  --gradient-brand: linear-gradient(135deg, #102A56 0%, #1E3A6E 55%, #155EEF 100%);
+  --gradient-accent: linear-gradient(90deg, #E8A317, #F7CE5E);
+  --gradient-soft: linear-gradient(180deg, #F7F9FC, #EDF3FB);
 
-  /* Z-index scale */
+  /* ===== Z-index scale ===== */
   --z-dropdown: 1000;
   --z-sticky: 900;
   --z-modal: 1000;
   --z-toast: 1200;
 
-  /* Layout */
+  /* ===== Layout ===== */
   --container-max: 1240px;
 }
 
 [data-theme='dark'] {
   color-scheme: dark;
 
-  --primary: #ff8a3d;
-  --primary-dark: #ffb073;
-  --primary-darker: #ff6a00;
-  --primary-light: #431407;
-  --dot: #ff6a00;
-  --dot-soft: rgba(255, 106, 0, 0.20);
-  --accent: #fbbf24;
-  --accent-dark: #f59e0b;
-  --accent-light: #451a03;
-  --brand-pink: #f472b6;
+  --primary: #5B8CFF;
+  --primary-dark: #7CA3FF;
+  --primary-darker: #3B6FE0;
+  --primary-light: #172554;
+  --accent: #F5B942;
+  --accent-dark: #FBBF24;
+  --accent-light: #3A2A05;
+  --accent-ink: #F5D98A;
+  --brand-red: #F87171;
 
-  --bg: #0f172a;
-  --bg-elevated: #1e293b;
-  --bg-subtle: #1e293b;
-  --surface: #1e293b;
-  --surface-hover: #273449;
-  --border: #334155;
-  --border-strong: #475569;
+  --navy: #0F2A52;
+  --navy-2: #1E3A6E;
+  --navy-3: #2E4A86;
 
-  --text: #e2e8f0;
-  --text-secondary: #cbd5e1;
-  --muted: #94a3b8;
-  --text-inverse: #0f172a;
+  --dot: #F5B942;
+  --dot-soft: rgba(245, 185, 66, 0.20);
 
-  --green: #4ade80;
-  --green-bg: #14532d;
-  --green-border: #16a34a;
-  --red: #f87171;
-  --red-bg: #450a0a;
-  --red-border: #dc2626;
-  --yellow: #fbbf24;
-  --yellow-bg: #451a03;
-  --yellow-border: #d97706;
-  --blue: #60a5fa;
+  --bg: #0B1526;
+  --bg-elevated: #16223B;
+  --bg-subtle: #16223B;
+  --surface: #16223B;
+  --surface-hover: #1E2E4D;
+  --border: #2A3D5F;
+  --border-strong: #3D5378;
+
+  --text: #E6EDF9;
+  --text-secondary: #C3D0E6;
+  --muted: #93A5C2;
+  --text-inverse: #0B1526;
+
+  --green: #34D399;
+  --green-bg: #0D3B2C;
+  --green-border: #10B981;
+  --red: #F87171;
+  --red-bg: #4A1212;
+  --red-border: #DC2626;
+  --yellow: #FBBF24;
+  --yellow-bg: #3A2A05;
+  --yellow-border: #D97706;
+  --blue: #60A5FA;
   --blue-bg: #172554;
-  --blue-border: #1d4ed8;
-
-  /* Palette 70/20/10 — dark variants */
-  --palette-bg: #0F172A;
-  --palette-navy: #0F2A52;
-  --palette-navy-2: #1E3A6E;
-  --palette-blue: #60A5FA;
-  --palette-sky: #172554;
-  --palette-sky-border: #1D4ED8;
-  --palette-gold: #F5B942;
-  --palette-green: #34D399;
-  --palette-orange: #FB923C;
-  --palette-danger: #F87171;
+  --blue-border: #1D4ED8;
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
   --shadow: 0 4px 30px rgba(0, 0, 0, 0.45);
   --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.55);
   --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.65);
 
-  --gradient-brand: linear-gradient(135deg, #ea580c, #9d174d);
-  --gradient-accent: linear-gradient(90deg, #f97316, #f59e0b);
+  --gradient-brand: linear-gradient(135deg, #0F2A52, #1E3A6E, #2E5FE0);
+  --gradient-accent: linear-gradient(90deg, #F5B942, #FDE68A);
+  --gradient-soft: linear-gradient(180deg, #0B1526, #101D33);
 }
 
 /* Focus-visible ring for keyboard accessibility */

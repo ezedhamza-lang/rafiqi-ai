@@ -6,8 +6,8 @@ import { useI18n } from '../../i18n/index.jsx';
 
 const QUICK_ACTIONS = [
   { icon: 'auto_stories', label: 'studentSpace.twin.qaBooks', to: '/student-space/books', color: '#14b8a6', gradient: 'linear-gradient(135deg,#14b8a6,#06b6d4)' },
-  { icon: 'quiz', label: 'studentSpace.twin.qaQuizzes', to: '/student-space/quizzes', color: '#ef4444', gradient: 'linear-gradient(135deg,#ef4444,#f97316)' },
-  { icon: 'smart_toy', label: 'studentSpace.twin.qaRefeeqi', to: '/student-space/refeeqi', color: '#ff6a00', gradient: 'linear-gradient(135deg,#ff6a00,#f59e0b)' },
+  { icon: 'quiz', label: 'studentSpace.twin.qaQuizzes', to: '/student-space/quizzes', color: '#DC2626', gradient: 'linear-gradient(135deg,#DC2626,#F87171)' },
+  { icon: 'smart_toy', label: 'studentSpace.twin.qaRefeeqi', to: '/student-space/refeeqi', color: '#155EEF', gradient: 'linear-gradient(135deg,#102A56,#155EEF)' },
   { icon: 'sports_esports', label: 'studentSpace.twin.qaPlay', to: '/student-space/play', color: '#ec4899', gradient: 'linear-gradient(135deg,#ec4899,#f43f5e)' },
 ];
 
@@ -54,7 +54,7 @@ export default function StudentTwin() {
 
   return (
     <div className="twin-v3">
-      {/* ── Quick Actions ── */}
+      {/* â”€â”€ Quick Actions â”€â”€ */}
       <div className="twin-v3__qa slide-up-stagger">
         {QUICK_ACTIONS.map((qa) => (
           <button key={qa.to} className="twin-v3__qa-btn" style={{ '--qa-grad': qa.gradient, '--qa-color': qa.color }}
@@ -65,16 +65,16 @@ export default function StudentTwin() {
         ))}
       </div>
 
-      {/* ── Daily Challenge ── */}
+      {/* â”€â”€ Daily Challenge â”€â”€ */}
       <div className="twin-v3__challenge">
         <div className="twin-v3__challenge-head">
-          <span className="sparkle-wrap"><span className="material-icons" style={{ color: '#f59e0b' }}>emoji_events</span></span>
+          <span className="sparkle-wrap"><span className="material-icons" style={{ color: '#E8A317' }}>emoji_events</span></span>
           <h3>{t('studentSpace.twin.dailyChallenge')}</h3>
         </div>
         <p className="twin-v3__challenge-desc">{t('studentSpace.twin.dailyChallengeDesc')}</p>
         <div className="twin-v3__challenge-goals">
           <div className="twin-v3__goal">
-            <MiniRing value={stats.quizzesDone || 0} max={3} color="#ef4444" />
+            <MiniRing value={stats.quizzesDone || 0} max={3} color="#DC2626" />
             <div>
               <span className="twin-v3__goal-title">{t('studentSpace.twin.goalQuizzes')}</span>
               <span className="twin-v3__goal-val">{Math.min(stats.quizzesDone || 0, 3)}/3</span>
@@ -88,7 +88,7 @@ export default function StudentTwin() {
             </div>
           </div>
           <div className="twin-v3__goal">
-            <MiniRing value={user.streakDays || 0} max={7} color="#f97316" />
+            <MiniRing value={user.streakDays || 0} max={7} color="#E8A317" />
             <div>
               <span className="twin-v3__goal-title">{t('studentSpace.twin.goalStreak')}</span>
               <span className="twin-v3__goal-val">{Math.min(user.streakDays || 0, 7)}/7</span>
@@ -97,7 +97,7 @@ export default function StudentTwin() {
         </div>
       </div>
 
-      {/* ── Stats Cards ── */}
+      {/* â”€â”€ Stats Cards â”€â”€ */}
       <div className="twin-v3__stats">
         <div className="twin-v3__stat-card twin-v3__stat-card--gold">
           <span className="material-icons">emoji_events</span>
@@ -119,19 +119,19 @@ export default function StudentTwin() {
         </div>
       </div>
 
-      {/* ── Strengths & Weaknesses ── */}
+      {/* â”€â”€ Strengths & Weaknesses â”€â”€ */}
       <div className="twin-v3__sub-grid">
         <div className="twin-v3__analysis">
           <h4><span className="material-icons" style={{ color: '#10b981' }}>trending_up</span> {t('studentSpace.twin.strengths')}</h4>
           <ul>{strengths.map((s, i) => <li key={i}>{s}</li>)}</ul>
         </div>
         <div className="twin-v3__analysis">
-          <h4><span className="material-icons" style={{ color: '#f97316' }}>trending_down</span> {t('studentSpace.twin.weaknesses')}</h4>
+          <h4><span className="material-icons" style={{ color: '#D97706' }}>trending_down</span> {t('studentSpace.twin.weaknesses')}</h4>
           <ul>{weaknesses.map((w, i) => <li key={i}>{w}</li>)}</ul>
         </div>
       </div>
 
-      {/* ── Badges & Leaderboard ── */}
+      {/* â”€â”€ Badges & Leaderboard â”€â”€ */}
       <div className="twin-v3__sub-grid" style={{ marginTop: '1.2rem' }}>
         <Card title={t('studentSpace.twin.badgesCount', { n: badges.length })} icon="military_tech">
           {badges.length === 0 ? (
@@ -170,7 +170,7 @@ export default function StudentTwin() {
         )}
       </div>
 
-      {/* ── Activity Log ── */}
+      {/* â”€â”€ Activity Log â”€â”€ */}
       <div style={{ marginTop: '1.2rem' }}>
         <Card title={t('studentSpace.twin.activityLog')} icon="history">
           {activities.length === 0 ? (

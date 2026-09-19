@@ -5,7 +5,7 @@ import { useI18n } from '../../i18n/index.jsx';
 
 const SUBJECT_META = {
   math: { icon: 'calculate', bg: 'linear-gradient(135deg, #233863, #2f4a7d)' },
-  anisi: { icon: 'menu_book', bg: 'linear-gradient(135deg, #f4ab2c, #fd8b15)' },
+  anisi: { icon: 'menu_book', bg: 'linear-gradient(135deg, #f4ab2c, #E8A317)' },
   science: { icon: 'science', bg: 'linear-gradient(135deg, #0e6b4f, #17a076)' }
 };
 
@@ -87,7 +87,7 @@ export default function StudentLearningPlan() {
                 </span>
                 <div className="plan-item-body">
                   <strong>{item.title}</strong>
-                  <span className="plan-item-meta">{sm.label} · {typeLabel}</span>
+                  <span className="plan-item-meta">{sm.label} Â· {typeLabel}</span>
                   {item.detail && <span className="muted" style={{ fontSize: '0.82rem' }}>{item.detail}</span>}
                 </div>
                 {item.link && (
@@ -185,7 +185,7 @@ export default function StudentLearningPlan() {
                 })}
               </strong>
               <span>
-                {t('studentSpace.learningPlan.overallMastery', { n: plan.overall?.avgPercent ?? '—' })}
+                {t('studentSpace.learningPlan.overallMastery', { n: plan.overall?.avgPercent ?? 'â€”' })}
                 {!plan.overall?.hasData && t('studentSpace.learningPlan.noDataHint')}
               </span>
             </div>
@@ -221,7 +221,7 @@ export default function StudentLearningPlan() {
                 {plan.adjustments.map((a, i) => (
                   <li key={i}>
                     {t('studentSpace.learningPlan.adjustmentLine', { label: a.label, from: a.fromLabel || a.from, to: a.toLabel || a.to })}
-                    <span className="muted"> — {a.reason}</span>
+                    <span className="muted"> â€” {a.reason}</span>
                   </li>
                 ))}
               </ul>

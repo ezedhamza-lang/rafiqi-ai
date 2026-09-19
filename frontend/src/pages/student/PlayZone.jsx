@@ -18,14 +18,14 @@ const GAME_SUBJECTS = {
   ARABIC_SCRAMBLE: 'arabic', SENTENCE_BUILDER: 'arabic', FRENCH_MATCH: 'french'
 };
 const GAME_COLORS = {
-  QUICK_MATH: { gradient: 'linear-gradient(135deg, #ff6a00, #f59e0b)', icon: '#ff6a00' },
-  WORD_BUILD: { gradient: 'linear-gradient(135deg, #f97316, #fbbf24)', icon: '#f97316' },
+  QUICK_MATH: { gradient: 'linear-gradient(135deg, #E8A317, #F5B942)', icon: '#E8A317' },
+  WORD_BUILD: { gradient: 'linear-gradient(135deg, #047857, #10B981)', icon: '#047857' },
   MEMORY: { gradient: 'linear-gradient(135deg, #ec4899, #f43f5e)', icon: '#ec4899' },
   SCIENCE_QUIZ: { gradient: 'linear-gradient(135deg, #10b981, #06b6d4)', icon: '#10b981' },
   SCIENCE_CLASSIFY: { gradient: 'linear-gradient(135deg, #14b8a6, #22d3ee)', icon: '#14b8a6' },
   EXPERIMENT_STEPS: { gradient: 'linear-gradient(135deg, #0ea5e9, #38bdf8)', icon: '#0ea5e9' },
-  ARABIC_SCRAMBLE: { gradient: 'linear-gradient(135deg, #ff6a00, #ef4444)', icon: '#ef4444' },
-  SENTENCE_BUILDER: { gradient: 'linear-gradient(135deg, #f59e0b, #f97316)', icon: '#f59e0b' },
+  ARABIC_SCRAMBLE: { gradient: 'linear-gradient(135deg, #DC2626, #F87171)', icon: '#DC2626' },
+  SENTENCE_BUILDER: { gradient: 'linear-gradient(135deg, #155EEF, #60A5FA)', icon: '#155EEF' },
   FRENCH_MATCH: { gradient: 'linear-gradient(135deg, #3b82f6, #6366f1)', icon: '#3b82f6' }
 };
 

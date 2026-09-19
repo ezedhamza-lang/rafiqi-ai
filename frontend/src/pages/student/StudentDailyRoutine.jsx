@@ -41,13 +41,13 @@ export default function StudentDailyRoutine() {
               </div>
             ))}
             <p className="routine-xp">
-              {t('studentSpace.routine.challengeDone')}: {challenge?.completed ? '✅' : '⏳'} ({t('studentSpace.routine.xpReward', { n: challenge?.xpReward || 0 })})
+              {t('studentSpace.routine.challengeDone')}: {challenge?.completed ? 'âœ…' : 'â³'} ({t('studentSpace.routine.xpReward', { n: challenge?.xpReward || 0 })})
             </p>
           </div>
         </section>
 
         <section className="card routine-card">
-          <div className="lesson-head" style={{ background: 'linear-gradient(135deg, #b06b00, #fd8b15)' }}>
+          <div className="lesson-head" style={{ background: 'linear-gradient(135deg, #b06b00, #E8A317)' }}>
             <span className="material-icons">assignment</span>
             <h3>{t('studentSpace.routine.assignmentsTitle')}</h3>
           </div>
@@ -58,7 +58,7 @@ export default function StudentDailyRoutine() {
                 <span className="material-icons">event</span>
                 <span>{a.title}</span>
                 <span className="muted small">
-                  {a.questionsCount} {t('studentSpace.routine.questions')} — {new Date(a.dueDate).toLocaleDateString('ar-TN')}
+                  {a.questionsCount} {t('studentSpace.routine.questions')} â€” {new Date(a.dueDate).toLocaleDateString('ar-TN')}
                 </span>
               </div>
             ))}
@@ -80,7 +80,7 @@ export default function StudentDailyRoutine() {
             {recommended ? (
               <>
                 <p className="routine-xp">
-                  <strong>{recommended.subjectTitle}</strong> — {recommended.lessonTitle}
+                  <strong>{recommended.subjectTitle}</strong> â€” {recommended.lessonTitle}
                 </p>
                 <p className="muted small">
                   {t('studentSpace.routine.exerciseCount', { n: recommended.exerciseCount })}
@@ -108,7 +108,7 @@ export default function StudentDailyRoutine() {
           </div>
         </section>
       </div>
-      <p className="muted small greeting">👋 {t('studentSpace.routine.greeting', { name: user?.firstName || '' })}</p>
+      <p className="muted small greeting">ðŸ‘‹ {t('studentSpace.routine.greeting', { name: user?.firstName || '' })}</p>
     </div>
   );
 }

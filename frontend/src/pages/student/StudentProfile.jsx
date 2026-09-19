@@ -3,10 +3,10 @@ import { useI18n } from '../../i18n/index.jsx';
 
 function getGreeting() {
   const h = new Date().getHours();
-  if (h < 6)  return { emoji: '🌙', key: 'night' };
-  if (h < 12) return { emoji: '☀️', key: 'morning' };
-  if (h < 17) return { emoji: '🌤️', key: 'afternoon' };
-  return { emoji: '🌙', key: 'evening' };
+  if (h < 6)  return { emoji: 'ðŸŒ™', key: 'night' };
+  if (h < 12) return { emoji: 'â˜€ï¸', key: 'morning' };
+  if (h < 17) return { emoji: 'ðŸŒ¤ï¸', key: 'afternoon' };
+  return { emoji: 'ðŸŒ™', key: 'evening' };
 }
 
 function ProgressRing({ percent = 0, size = 72, stroke = 6 }) {
@@ -53,7 +53,7 @@ export default function StudentProfile({ profile, onMenu }) {
         <p className="sp-v3__greeting">{greeting.emoji} {t(greetingKey, { name: user.firstName })}</p>
         <h3 className="sp-v3__name">{user.firstName} {user.lastName}</h3>
         <p className="sp-v3__class">
-          {cls ? `${cls.name}${cls.level ? ` — ${cls.level}` : ''}` : t('studentSpace.profile.noClass')}
+          {cls ? `${cls.name}${cls.level ? ` â€” ${cls.level}` : ''}` : t('studentSpace.profile.noClass')}
         </p>
         <div className="sp-v3__badges">
           {badges && badges.slice(0, 4).map((b) => (
@@ -65,7 +65,7 @@ export default function StudentProfile({ profile, onMenu }) {
 
       <div className="sp-v3__stats">
         <div className="sp-v3__stat">
-          <span className="material-icons sp-v3__stat-ico" style={{ color: '#f59e0b' }}>star</span>
+          <span className="material-icons sp-v3__stat-ico" style={{ color: '#E8A317' }}>star</span>
           <span className="sp-v3__stat-val">{user.level}</span>
           <span className="sp-v3__stat-lbl">{t('studentSpace.profile.levelShort')}</span>
         </div>
@@ -75,7 +75,7 @@ export default function StudentProfile({ profile, onMenu }) {
           <span className="sp-v3__stat-lbl">XP</span>
         </div>
         <div className="sp-v3__stat">
-          <span className="material-icons sp-v3__stat-ico" style={{ color: '#f97316' }}>local_fire_department</span>
+          <span className="material-icons sp-v3__stat-ico" style={{ color: '#E8A317' }}>local_fire_department</span>
           <span className="sp-v3__stat-val">{user.streakDays}</span>
           <span className="sp-v3__stat-lbl">{t('studentSpace.profile.streakShort')}</span>
         </div>
@@ -85,7 +85,7 @@ export default function StudentProfile({ profile, onMenu }) {
           <span className="sp-v3__stat-lbl">{t('studentSpace.profile.coinsShort')}</span>
         </div>
         <div className="sp-v3__stat">
-          <span className="material-icons sp-v3__stat-ico" style={{ color: '#ff6a00' }}>auto_stories</span>
+          <span className="material-icons sp-v3__stat-ico" style={{ color: '#E8A317' }}>auto_stories</span>
           <span className="sp-v3__stat-val">{profile.stats?.lessonsCompleted || 0}</span>
           <span className="sp-v3__stat-lbl">{t('studentSpace.profile.lessonsShort')}</span>
         </div>

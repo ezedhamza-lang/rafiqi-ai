@@ -3,31 +3,31 @@ import { useI18n } from '../../i18n/index.jsx';
 import { api } from '../../api/client.js';
 
 const SUBJECT_LABELS = {
-  'ar': 'العربية', 'fr': 'الفرنسية', 'en': 'الإنجليزية', 'math': 'الرياضيات',
-  'science': 'العلوم', 'ev': 'التربية المدنية', 'pe': 'التربية البدنية',
-  'history': 'التاريخ', 'geography': 'الجغرافيا', 'tajweed': 'التلاوة',
-  'islamic': 'التربية الإسلامية', 'art': 'التربية التشكيلية', 'music': 'التربية الموسيقية',
-  'computer': 'المعلوماتية', 'tech': 'التكنولوجيا', 'french': 'الفرنسية',
-  'english': 'الإنجليزية', 'arabic': 'العربية', 'maths': 'الرياضيات'
+  'ar': 'Ã˜Â§Ã™â€žÃ˜Â¹Ã˜Â±Ã˜Â¨Ã™Å Ã˜Â©', 'fr': 'Ã˜Â§Ã™â€žÃ™ÂÃ˜Â±Ã™â€ Ã˜Â³Ã™Å Ã˜Â©', 'en': 'Ã˜Â§Ã™â€žÃ˜Â¥Ã™â€ Ã˜Â¬Ã™â€žÃ™Å Ã˜Â²Ã™Å Ã˜Â©', 'math': 'Ã˜Â§Ã™â€žÃ˜Â±Ã™Å Ã˜Â§Ã˜Â¶Ã™Å Ã˜Â§Ã˜Âª',
+  'science': 'Ã˜Â§Ã™â€žÃ˜Â¹Ã™â€žÃ™Ë†Ã™â€¦', 'ev': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ˜Â±Ã˜Â¨Ã™Å Ã˜Â© Ã˜Â§Ã™â€žÃ™â€¦Ã˜Â¯Ã™â€ Ã™Å Ã˜Â©', 'pe': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ˜Â±Ã˜Â¨Ã™Å Ã˜Â© Ã˜Â§Ã™â€žÃ˜Â¨Ã˜Â¯Ã™â€ Ã™Å Ã˜Â©',
+  'history': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ˜Â§Ã˜Â±Ã™Å Ã˜Â®', 'geography': 'Ã˜Â§Ã™â€žÃ˜Â¬Ã˜ÂºÃ˜Â±Ã˜Â§Ã™ÂÃ™Å Ã˜Â§', 'tajweed': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ™â€žÃ˜Â§Ã™Ë†Ã˜Â©',
+  'islamic': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ˜Â±Ã˜Â¨Ã™Å Ã˜Â© Ã˜Â§Ã™â€žÃ˜Â¥Ã˜Â³Ã™â€žÃ˜Â§Ã™â€¦Ã™Å Ã˜Â©', 'art': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ˜Â±Ã˜Â¨Ã™Å Ã˜Â© Ã˜Â§Ã™â€žÃ˜ÂªÃ˜Â´Ã™Æ’Ã™Å Ã™â€žÃ™Å Ã˜Â©', 'music': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ˜Â±Ã˜Â¨Ã™Å Ã˜Â© Ã˜Â§Ã™â€žÃ™â€¦Ã™Ë†Ã˜Â³Ã™Å Ã™â€šÃ™Å Ã˜Â©',
+  'computer': 'Ã˜Â§Ã™â€žÃ™â€¦Ã˜Â¹Ã™â€žÃ™Ë†Ã™â€¦Ã˜Â§Ã˜ÂªÃ™Å Ã˜Â©', 'tech': 'Ã˜Â§Ã™â€žÃ˜ÂªÃ™Æ’Ã™â€ Ã™Ë†Ã™â€žÃ™Ë†Ã˜Â¬Ã™Å Ã˜Â§', 'french': 'Ã˜Â§Ã™â€žÃ™ÂÃ˜Â±Ã™â€ Ã˜Â³Ã™Å Ã˜Â©',
+  'english': 'Ã˜Â§Ã™â€žÃ˜Â¥Ã™â€ Ã˜Â¬Ã™â€žÃ™Å Ã˜Â²Ã™Å Ã˜Â©', 'arabic': 'Ã˜Â§Ã™â€žÃ˜Â¹Ã˜Â±Ã˜Â¨Ã™Å Ã˜Â©', 'maths': 'Ã˜Â§Ã™â€žÃ˜Â±Ã™Å Ã˜Â§Ã˜Â¶Ã™Å Ã˜Â§Ã˜Âª'
 };
 
 function getSubjectLabel(id) {
-  if (!id) return '—';
+  if (!id) return 'Ã¢â‚¬â€';
   const lower = id.toLowerCase();
   return SUBJECT_LABELS[lower] || SUBJECT_LABELS[lower.replace('subject_', '')] || id;
 }
 
-const SUBJECT_COLORS = ['#ff6a00', '#10b981', '#3b82f6', '#ef4444', '#8b5cf6', '#f59e0b', '#ec4899', '#06b6d4', '#84cc16'];
+const SUBJECT_COLORS = ['#E8A317', '#10b981', '#3b82f6', '#ef4444', '#8b5cf6', '#D97706', '#ec4899', '#06b6d4', '#84cc16'];
 
 function getGreetingTime() {
   const h = new Date().getHours();
-  if (h < 6) return { emoji: '🌙', key: 'night' };
-  if (h < 12) return { emoji: '☀️', key: 'morning' };
-  if (h < 17) return { emoji: '🌤️', key: 'afternoon' };
-  return { emoji: '🌙', key: 'evening' };
+  if (h < 6) return { emoji: 'Ã°Å¸Å’â„¢', key: 'night' };
+  if (h < 12) return { emoji: 'Ã¢Ëœâ‚¬Ã¯Â¸Â', key: 'morning' };
+  if (h < 17) return { emoji: 'Ã°Å¸Å’Â¤Ã¯Â¸Â', key: 'afternoon' };
+  return { emoji: 'Ã°Å¸Å’â„¢', key: 'evening' };
 }
 
-function ProgressRing({ percent = 0, size = 120, stroke = 10, color = '#ff6a00' }) {
+function ProgressRing({ percent = 0, size = 120, stroke = 10, color = '#E8A317' }) {
   const r = (size - stroke) / 2;
   const circ = 2 * Math.PI * r;
   const offset = circ - (percent / 100) * circ;
@@ -100,11 +100,11 @@ export default function StudentDashboard() {
   return (
     <div className="student-dashboard">
       <div className="ds-stats-grid">
-        <MiniStatCard icon="bolt" value={user.xp} label="XP" color="#f59e0b" />
+        <MiniStatCard icon="bolt" value={user.xp} label="XP" color="#E8A317" />
         <MiniStatCard icon="payments" value={user.coins} label={t('studentSpace.profile.coinsShort')} color="#10b981" />
         <MiniStatCard icon="local_fire_department" value={user.streakDays} label={t('studentSpace.profile.streakShort')} color="#ef4444" />
         <MiniStatCard icon="emoji_events" value={badges?.length || 0} label={t('studentSpace.profile.badgesShort')} color="#8b5cf6" />
-        <MiniStatCard icon="auto_stories" value={stats.totalLessons} label={t('studentSpace.profile.lessonsShort')} color="#ff6a00" />
+        <MiniStatCard icon="auto_stories" value={stats.totalLessons} label={t('studentSpace.profile.lessonsShort')} color="#E8A317" />
         <MiniStatCard icon="quiz" value={stats.totalQuizzes} label={t('studentSpace.tabs.quizzes')} color="#3b82f6" />
       </div>
 
@@ -115,7 +115,7 @@ export default function StudentDashboard() {
         </h3>
         <div className="ds-today-grid">
           <div className="ds-today-card">
-            <span className="material-icons" style={{ color: '#ff6a00' }}>auto_stories</span>
+            <span className="material-icons" style={{ color: '#E8A317' }}>auto_stories</span>
             <span className="ds-today-card__num">{stats.today.lessons}</span>
             <span className="ds-today-card__lbl">{t('studentSpace.profile.lessonsShort')}</span>
           </div>
@@ -192,7 +192,7 @@ export default function StudentDashboard() {
           <div className="ds-badges-row">
             {badges.map((b, i) => (
               <div key={i} className="ds-badge-chip">
-                <span className="ds-badge-chip__icon">{b.icon || '⭐'}</span>
+                <span className="ds-badge-chip__icon">{b.icon || 'Ã¢Â­Â'}</span>
                 <span className="ds-badge-chip__name">{b.name}</span>
               </div>
             ))}

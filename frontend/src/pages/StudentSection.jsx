@@ -13,7 +13,7 @@ const SUBJECTS = {
     key: 'subjectReading',
     icon: 'menu_book',
     color: '#b06b00',
-    bg: 'linear-gradient(135deg, #f4ab2c, #fd8b15)'
+    bg: 'linear-gradient(135deg, #f4ab2c, #E8A317)'
   }
 };
 

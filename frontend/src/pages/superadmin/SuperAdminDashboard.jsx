@@ -10,7 +10,7 @@ const Schools = lazy(() => import('./Schools.jsx'));
 import SpaceShell from '../../components/SpaceShell.jsx';
 
 const TABS = [
-  { to: '', end: true, icon: 'vpn_key', key: 'licenses', color: '#f59e0b' },
+  { to: '', end: true, icon: 'vpn_key', key: 'licenses', color: '#E8A317' },
   { to: 'subscriptions', icon: 'subscriptions', key: 'subscriptions', color: '#0ea5e9' },
   { to: 'users', icon: 'manage_accounts', key: 'users', color: '#10b981' },
   { to: 'schools', icon: 'school', key: 'schools', color: '#8b5cf6' }

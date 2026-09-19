@@ -45,7 +45,7 @@ const SERVICE_GROUPS = [
   },
   {
     groupKey: 'teacher',
-    color: '#f59e0b',
+    color: '#E8A317',
     items: [
       { icon: 'notifications', key: 'alerts' },
       { icon: 'support_agent', key: 'support' },
@@ -96,7 +96,7 @@ function FaqSection({ faqs }) {
       </div>
       <div className="faq-card">
         <div className="faq-discover">
-          <img src="/owl-mascot.webp" alt="رفيقي" className="faq-owl" loading="lazy" />
+          <img src="/owl-mascot.webp" alt="Ø±ÙÙŠÙ‚ÙŠ" className="faq-owl" loading="lazy" />
           <div>
             <h2>{t('home.faq.discoverApp')}</h2>
             <p style={{ color: 'var(--muted)', lineHeight: 1.9, fontSize: '0.92rem' }}>

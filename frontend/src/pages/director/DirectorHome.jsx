@@ -30,7 +30,7 @@ export default function DirectorHome() {
     { key: 'students', value: dashboard.totals.students, icon: 'groups', color: '#10B981' },
     { key: 'teachers', value: dashboard.totals.teachers, icon: 'co_present', color: '#A855F7' },
     { key: 'parents', value: dashboard.totals.parents, icon: 'family_restroom', color: '#F5B942' },
-    { key: 'quizzes', value: dashboard.totals.quizzes, icon: 'quiz', color: '#F59E0B' },
+    { key: 'quizzes', value: dashboard.totals.quizzes, icon: 'quiz', color: '#E8A317' },
     { key: 'submissions', value: dashboard.totals.submissions, icon: 'task_alt', color: '#06B6D4' },
     { key: 'memos', value: dashboard.totals.memos, icon: 'description', color: '#64748B' },
     { key: 'unread', value: dashboard.totals.unreadMessages, icon: 'mark_email_unread', color: '#EF4444' }
@@ -72,7 +72,7 @@ export default function DirectorHome() {
           <ul className="alert-list">
             <li>{t('directorHome.alertsNoClass')} <strong>{alerts?.studentsNoClass || 0}</strong></li>
             <li>{t('directorHome.alertsNoParent')} <strong>{alerts?.studentsNoParent || 0}</strong></li>
-            <li>{t('directorHome.alertsNoActivity')} <strong>{(alerts?.noActivity || []).length}</strong> {alerts?.noActivity?.join(lang === 'ar' ? '، ' : ', ')}</li>
+            <li>{t('directorHome.alertsNoActivity')} <strong>{(alerts?.noActivity || []).length}</strong> {alerts?.noActivity?.join(lang === 'ar' ? 'ØŒ ' : ', ')}</li>
           </ul>
         </div>
       </div>
@@ -93,14 +93,14 @@ export default function DirectorHome() {
                 {activity.submissions.map((s) => (
                   <tr key={`s${s.id}`}>
                     <td>{t('directorHome.activitySubmission')}</td>
-                    <td>{s.student.firstName} {s.student.lastName} — {s.quiz.title}</td>
+                    <td>{s.student.firstName} {s.student.lastName} â€” {s.quiz.title}</td>
                     <td>{new Date(s.createdAt).toLocaleDateString(lang === 'ar' ? 'ar-TN' : 'en-GB')}</td>
                   </tr>
                 ))}
                 {activity.memos.map((m) => (
                   <tr key={`m${m.id}`}>
                     <td>{t('directorHome.activityMemo')}</td>
-                    <td>{m.teacher.firstName} {m.teacher.lastName} — {m.lessonTitle}</td>
+                    <td>{m.teacher.firstName} {m.teacher.lastName} â€” {m.lessonTitle}</td>
                     <td>{new Date(m.createdAt).toLocaleDateString(lang === 'ar' ? 'ar-TN' : 'en-GB')}</td>
                   </tr>
                 ))}

@@ -3,35 +3,35 @@ import { useI18n } from '../../i18n/index.jsx';
 import { api } from '../../api/client.js';
 
 const DAILY_QUESTIONS = [
-  { subject: 'math', emoji: '🔢', subjectLabel: 'الرياضيات', q: 'ما ناتج 7 × 8؟', options: ['54', '56', '63', '48'], answer: 1, explanation: '7 × 8 = 56' },
-  { subject: 'math', emoji: '🔢', subjectLabel: 'الرياضيات', q: 'ما هو نصف 45؟', options: ['20', '22.5', '25', '23'], answer: 1, explanation: '45 ÷ 2 = 22.5' },
-  { subject: 'arabic', emoji: '📖', subjectLabel: 'العربية', q: 'ما هو جمع كلمة "كتاب"؟', options: ['كتب', 'كتابات', 'كتبة', 'كتبون'], answer: 0, explanation: 'جمع كلمة "كتاب" هو "كتب"' },
-  { subject: 'arabic', emoji: '📖', subjectLabel: 'العربية', q: 'كم عدد أحرف اللغة العربية؟', options: ['26', '28', '30', '36'], answer: 1, explanation: 'اللغة العربية تحتوي على 28 حرف' },
-  { subject: 'science', emoji: '🔬', subjectLabel: 'العلوم', q: 'أي الكواكب التالية أقرب إلى الشمس؟', options: ['المريخ', 'الأرض', 'عطارد', 'الزحل'], answer: 2, explanation: 'عطارد هو الكوكب الأقرب إلى الشمس' },
-  { subject: 'science', emoji: '🔬', subjectLabel: 'العلوم', q: 'كم عدد قلوب الإنسان؟', options: ['1', '2', '3', '4'], answer: 1, explanation: 'الإنسان لديه قلبان: الأيمن والأيسر' },
-  { subject: 'french', emoji: '🇫🇷', subjectLabel: 'الفرنسية', q: 'Comment dit-on "كتاب" en français?', options: ['cahier', 'livre', 'stylo', 'table'], answer: 1, explanation: 'كتاب = livre بالفرنسية' },
-  { subject: 'french', emoji: '🇫🇷', subjectLabel: 'الفرنسية', q: 'Quel est le contraire de "grand"?', options: ['long', 'petit', 'gros', 'fort'], answer: 1, explanation: 'grand (كبير) ↔ petit (صغير)' },
-  { subject: 'english', emoji: '🇬🇧', subjectLabel: 'الإنجليزية', q: 'What is the opposite of "hot"?', options: ['warm', 'cold', 'cool', 'mild'], answer: 1, explanation: 'hot (ساخن) opposite is cold (بارد)' },
-  { subject: 'english', emoji: '🇬🇧', subjectLabel: 'الإنجليزية', q: 'Which is a color?', options: ['run', 'blue', 'happy', 'fast'], answer: 1, explanation: 'blue is the only color in the list' },
-  { subject: 'math', emoji: '🔢', subjectLabel: 'الرياضيات', q: 'ما هو العدد الذي إذا ضربناه في 5 ناتجه 35؟', options: ['6', '7', '8', '9'], answer: 1, explanation: '35 ÷ 5 = 7' },
-  { subject: 'science', emoji: '🔬', subjectLabel: 'العلوم', q: 'ما هي الحيوانات التي تبيض؟', options: ['الأسماك', 'الطيور', 'الحمار', 'القط'], answer: 1, explanation: 'الطيور تضع البيض' },
-  { subject: 'arabic', emoji: '📖', subjectLabel: 'العربية', q: 'ما هو فاعل الجملة: " cursus المطر الأرض؟', options: ['المطر', 'الأرض', ' cursus', 'الشمس'], answer: 0, explanation: 'المطر هو الفاعل' },
-  { subject: 'math', emoji: '🔢', subjectLabel: 'الرياضيات', q: 'كم عدد أضلاع المثلث؟', options: ['2', '3', '4', '5'], answer: 1, explanation: 'المثلث لديه 3 أضلاع' },
-  { subject: 'science', emoji: '🔬', subjectLabel: 'العلوم', q: 'أين نعيش على كوكب الأرض؟', options: ['القمر', 'المجموعة الشمسية', 'نجم آخر', 'مجرة أخرى'], answer: 1, explanation: 'نعيش في المجموعة الشمسية' },
-  { subject: 'french', emoji: '🇫🇷', subjectLabel: 'الفرنسية', q: 'Quelle heure est-il quand il est midi?', options: ['11h', '12h', '13h', '14h'], answer: 1, explanation: 'Midi = 12:00' },
-  { subject: 'english', emoji: '🇬🇧', subjectLabel: 'الإنجليزية', q: 'How do you say "مرحبا" in English?', options: ['Goodbye', 'Hello', 'Thank you', 'Sorry'], answer: 1, explanation: 'مرحبا = Hello' },
-  { subject: 'math', emoji: '🔢', subjectLabel: 'الرياضيات', q: 'ما هو 25% من 80؟', options: ['15', '20', '25', '30'], answer: 1, explanation: '25% من 80 = 80 ÷ 4 = 20' },
-  { subject: 'science', emoji: '🔬', subjectLabel: 'العلوم', q: 'أي المجسمات التالية ليس لها أضلاع؟', options: ['المكعب', 'الأسطوانة', 'الكرة', 'المخروط'], answer: 2, explanation: 'الكرة ليس لها أضلاع' },
-  { subject: 'arabic', emoji: '📖', subjectLabel: 'العربية', q: 'ما هي كلمة "开学" في الجملة: "فتح الباب"؟', options: ['المبتدأ', 'الخبر', 'الفعل', 'المفعول'], answer: 0, explanation: 'البداية هي المبتدأ' },
-  { subject: 'english', emoji: '🇬🇧', subjectLabel: 'الإنجليزية', q: 'Which word means "سعيد" in English?', options: ['sad', 'angry', 'happy', 'tired'], answer: 2, explanation: 'سعيد = happy' },
-  { subject: 'math', emoji: '🔢', subjectLabel: 'الرياضيات', q: 'ما ناتج 144 ÷ 12؟', options: ['11', '12', '13', '14'], answer: 1, explanation: '144 ÷ 12 = 12' },
-  { subject: 'science', emoji: '🔬', subjectLabel: 'العلوم', q: 'ما الفرق بين الشمس والقمر؟', options: ['لا يوجد فرق', 'الشمس نجم والقمر كوكب', 'الشمس كوكب والقمر نجم', 'كلاهما نجمان'], answer: 1, explanation: 'الشمس نجم مضيء والقمر يدور حول الأرض' },
-  { subject: 'french', emoji: '🇫🇷', subjectLabel: 'الفرنسية', q: 'Comment dit-on "مدرسة" en français?', options: ['maison', 'école', 'bureau', 'magasin'], answer: 1, explanation: 'مدرسة = école' },
-  { subject: 'arabic', emoji: '📖', subjectLabel: 'العربية', q: 'ما هو rodzaj هذه الكلمة: "بالنسبة"؟', options: ['اسم', 'فعل', 'حرف', 'ظرف'], answer: 2, explanation: 'بالنسبة حرف جر' },
-  { subject: 'math', emoji: '🔢', subjectLabel: 'الرياضيات', q: 'ما محيط المربع الذي ضلعه 5 سم؟', options: ['10', '15', '20', '25'], answer: 2, explanation: 'المحيط = 4 × الضلع = 4 × 5 = 20 سم' },
-  { subject: 'science', emoji: '🔬', subjectLabel: 'العلوم', q: 'أي الألوان التالية يمتص جميع الألوان؟', options: ['الأبيض', 'الأسود', 'الأحمر', 'الأزرق'], answer: 1, explanation: 'الأسود يمتص جميع الألوان' },
-  { subject: 'english', emoji: '🇬🇧', subjectLabel: 'الإنجليزية', q: 'What color is the sky?', options: ['red', 'blue', 'green', 'yellow'], answer: 1, explanation: 'The sky is blue' },
-  { subject: 'french', emoji: '🇫🇷', subjectLabel: 'الفرنسية', q: 'Quel est le contraire de "chaud"?', options: ['brûlant', 'froid', 'tiède', 'glacial'], answer: 1, explanation: 'chaud (ساخن) ↔ froid (بارد)' },
+  { subject: 'math', emoji: 'ðŸ”¢', subjectLabel: 'Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª', q: 'Ù…Ø§ Ù†Ø§ØªØ¬ 7 Ã— 8ØŸ', options: ['54', '56', '63', '48'], answer: 1, explanation: '7 Ã— 8 = 56' },
+  { subject: 'math', emoji: 'ðŸ”¢', subjectLabel: 'Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª', q: 'Ù…Ø§ Ù‡Ùˆ Ù†ØµÙ 45ØŸ', options: ['20', '22.5', '25', '23'], answer: 1, explanation: '45 Ã· 2 = 22.5' },
+  { subject: 'arabic', emoji: 'ðŸ“–', subjectLabel: 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©', q: 'Ù…Ø§ Ù‡Ùˆ Ø¬Ù…Ø¹ ÙƒÙ„Ù…Ø© "ÙƒØªØ§Ø¨"ØŸ', options: ['ÙƒØªØ¨', 'ÙƒØªØ§Ø¨Ø§Øª', 'ÙƒØªØ¨Ø©', 'ÙƒØªØ¨ÙˆÙ†'], answer: 0, explanation: 'Ø¬Ù…Ø¹ ÙƒÙ„Ù…Ø© "ÙƒØªØ§Ø¨" Ù‡Ùˆ "ÙƒØªØ¨"' },
+  { subject: 'arabic', emoji: 'ðŸ“–', subjectLabel: 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©', q: 'ÙƒÙ… Ø¹Ø¯Ø¯ Ø£Ø­Ø±Ù Ø§Ù„Ù„ØºØ© Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©ØŸ', options: ['26', '28', '30', '36'], answer: 1, explanation: 'Ø§Ù„Ù„ØºØ© Ø§Ù„Ø¹Ø±Ø¨ÙŠØ© ØªØ­ØªÙˆÙŠ Ø¹Ù„Ù‰ 28 Ø­Ø±Ù' },
+  { subject: 'science', emoji: 'ðŸ”¬', subjectLabel: 'Ø§Ù„Ø¹Ù„ÙˆÙ…', q: 'Ø£ÙŠ Ø§Ù„ÙƒÙˆØ§ÙƒØ¨ Ø§Ù„ØªØ§Ù„ÙŠØ© Ø£Ù‚Ø±Ø¨ Ø¥Ù„Ù‰ Ø§Ù„Ø´Ù…Ø³ØŸ', options: ['Ø§Ù„Ù…Ø±ÙŠØ®', 'Ø§Ù„Ø£Ø±Ø¶', 'Ø¹Ø·Ø§Ø±Ø¯', 'Ø§Ù„Ø²Ø­Ù„'], answer: 2, explanation: 'Ø¹Ø·Ø§Ø±Ø¯ Ù‡Ùˆ Ø§Ù„ÙƒÙˆÙƒØ¨ Ø§Ù„Ø£Ù‚Ø±Ø¨ Ø¥Ù„Ù‰ Ø§Ù„Ø´Ù…Ø³' },
+  { subject: 'science', emoji: 'ðŸ”¬', subjectLabel: 'Ø§Ù„Ø¹Ù„ÙˆÙ…', q: 'ÙƒÙ… Ø¹Ø¯Ø¯ Ù‚Ù„ÙˆØ¨ Ø§Ù„Ø¥Ù†Ø³Ø§Ù†ØŸ', options: ['1', '2', '3', '4'], answer: 1, explanation: 'Ø§Ù„Ø¥Ù†Ø³Ø§Ù† Ù„Ø¯ÙŠÙ‡ Ù‚Ù„Ø¨Ø§Ù†: Ø§Ù„Ø£ÙŠÙ…Ù† ÙˆØ§Ù„Ø£ÙŠØ³Ø±' },
+  { subject: 'french', emoji: 'ðŸ‡«ðŸ‡·', subjectLabel: 'Ø§Ù„ÙØ±Ù†Ø³ÙŠØ©', q: 'Comment dit-on "ÙƒØªØ§Ø¨" en franÃ§ais?', options: ['cahier', 'livre', 'stylo', 'table'], answer: 1, explanation: 'ÙƒØªØ§Ø¨ = livre Ø¨Ø§Ù„ÙØ±Ù†Ø³ÙŠØ©' },
+  { subject: 'french', emoji: 'ðŸ‡«ðŸ‡·', subjectLabel: 'Ø§Ù„ÙØ±Ù†Ø³ÙŠØ©', q: 'Quel est le contraire de "grand"?', options: ['long', 'petit', 'gros', 'fort'], answer: 1, explanation: 'grand (ÙƒØ¨ÙŠØ±) â†” petit (ØµØºÙŠØ±)' },
+  { subject: 'english', emoji: 'ðŸ‡¬ðŸ‡§', subjectLabel: 'Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ©', q: 'What is the opposite of "hot"?', options: ['warm', 'cold', 'cool', 'mild'], answer: 1, explanation: 'hot (Ø³Ø§Ø®Ù†) opposite is cold (Ø¨Ø§Ø±Ø¯)' },
+  { subject: 'english', emoji: 'ðŸ‡¬ðŸ‡§', subjectLabel: 'Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ©', q: 'Which is a color?', options: ['run', 'blue', 'happy', 'fast'], answer: 1, explanation: 'blue is the only color in the list' },
+  { subject: 'math', emoji: 'ðŸ”¢', subjectLabel: 'Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª', q: 'Ù…Ø§ Ù‡Ùˆ Ø§Ù„Ø¹Ø¯Ø¯ Ø§Ù„Ø°ÙŠ Ø¥Ø°Ø§ Ø¶Ø±Ø¨Ù†Ø§Ù‡ ÙÙŠ 5 Ù†Ø§ØªØ¬Ù‡ 35ØŸ', options: ['6', '7', '8', '9'], answer: 1, explanation: '35 Ã· 5 = 7' },
+  { subject: 'science', emoji: 'ðŸ”¬', subjectLabel: 'Ø§Ù„Ø¹Ù„ÙˆÙ…', q: 'Ù…Ø§ Ù‡ÙŠ Ø§Ù„Ø­ÙŠÙˆØ§Ù†Ø§Øª Ø§Ù„ØªÙŠ ØªØ¨ÙŠØ¶ØŸ', options: ['Ø§Ù„Ø£Ø³Ù…Ø§Ùƒ', 'Ø§Ù„Ø·ÙŠÙˆØ±', 'Ø§Ù„Ø­Ù…Ø§Ø±', 'Ø§Ù„Ù‚Ø·'], answer: 1, explanation: 'Ø§Ù„Ø·ÙŠÙˆØ± ØªØ¶Ø¹ Ø§Ù„Ø¨ÙŠØ¶' },
+  { subject: 'arabic', emoji: 'ðŸ“–', subjectLabel: 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©', q: 'Ù…Ø§ Ù‡Ùˆ ÙØ§Ø¹Ù„ Ø§Ù„Ø¬Ù…Ù„Ø©: " cursus Ø§Ù„Ù…Ø·Ø± Ø§Ù„Ø£Ø±Ø¶ØŸ', options: ['Ø§Ù„Ù…Ø·Ø±', 'Ø§Ù„Ø£Ø±Ø¶', ' cursus', 'Ø§Ù„Ø´Ù…Ø³'], answer: 0, explanation: 'Ø§Ù„Ù…Ø·Ø± Ù‡Ùˆ Ø§Ù„ÙØ§Ø¹Ù„' },
+  { subject: 'math', emoji: 'ðŸ”¢', subjectLabel: 'Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª', q: 'ÙƒÙ… Ø¹Ø¯Ø¯ Ø£Ø¶Ù„Ø§Ø¹ Ø§Ù„Ù…Ø«Ù„Ø«ØŸ', options: ['2', '3', '4', '5'], answer: 1, explanation: 'Ø§Ù„Ù…Ø«Ù„Ø« Ù„Ø¯ÙŠÙ‡ 3 Ø£Ø¶Ù„Ø§Ø¹' },
+  { subject: 'science', emoji: 'ðŸ”¬', subjectLabel: 'Ø§Ù„Ø¹Ù„ÙˆÙ…', q: 'Ø£ÙŠÙ† Ù†Ø¹ÙŠØ´ Ø¹Ù„Ù‰ ÙƒÙˆÙƒØ¨ Ø§Ù„Ø£Ø±Ø¶ØŸ', options: ['Ø§Ù„Ù‚Ù…Ø±', 'Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹Ø© Ø§Ù„Ø´Ù…Ø³ÙŠØ©', 'Ù†Ø¬Ù… Ø¢Ø®Ø±', 'Ù…Ø¬Ø±Ø© Ø£Ø®Ø±Ù‰'], answer: 1, explanation: 'Ù†Ø¹ÙŠØ´ ÙÙŠ Ø§Ù„Ù…Ø¬Ù…ÙˆØ¹Ø© Ø§Ù„Ø´Ù…Ø³ÙŠØ©' },
+  { subject: 'french', emoji: 'ðŸ‡«ðŸ‡·', subjectLabel: 'Ø§Ù„ÙØ±Ù†Ø³ÙŠØ©', q: 'Quelle heure est-il quand il est midi?', options: ['11h', '12h', '13h', '14h'], answer: 1, explanation: 'Midi = 12:00' },
+  { subject: 'english', emoji: 'ðŸ‡¬ðŸ‡§', subjectLabel: 'Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ©', q: 'How do you say "Ù…Ø±Ø­Ø¨Ø§" in English?', options: ['Goodbye', 'Hello', 'Thank you', 'Sorry'], answer: 1, explanation: 'Ù…Ø±Ø­Ø¨Ø§ = Hello' },
+  { subject: 'math', emoji: 'ðŸ”¢', subjectLabel: 'Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª', q: 'Ù…Ø§ Ù‡Ùˆ 25% Ù…Ù† 80ØŸ', options: ['15', '20', '25', '30'], answer: 1, explanation: '25% Ù…Ù† 80 = 80 Ã· 4 = 20' },
+  { subject: 'science', emoji: 'ðŸ”¬', subjectLabel: 'Ø§Ù„Ø¹Ù„ÙˆÙ…', q: 'Ø£ÙŠ Ø§Ù„Ù…Ø¬Ø³Ù…Ø§Øª Ø§Ù„ØªØ§Ù„ÙŠØ© Ù„ÙŠØ³ Ù„Ù‡Ø§ Ø£Ø¶Ù„Ø§Ø¹ØŸ', options: ['Ø§Ù„Ù…ÙƒØ¹Ø¨', 'Ø§Ù„Ø£Ø³Ø·ÙˆØ§Ù†Ø©', 'Ø§Ù„ÙƒØ±Ø©', 'Ø§Ù„Ù…Ø®Ø±ÙˆØ·'], answer: 2, explanation: 'Ø§Ù„ÙƒØ±Ø© Ù„ÙŠØ³ Ù„Ù‡Ø§ Ø£Ø¶Ù„Ø§Ø¹' },
+  { subject: 'arabic', emoji: 'ðŸ“–', subjectLabel: 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©', q: 'Ù…Ø§ Ù‡ÙŠ ÙƒÙ„Ù…Ø© "å¼€å­¦" ÙÙŠ Ø§Ù„Ø¬Ù…Ù„Ø©: "ÙØªØ­ Ø§Ù„Ø¨Ø§Ø¨"ØŸ', options: ['Ø§Ù„Ù…Ø¨ØªØ¯Ø£', 'Ø§Ù„Ø®Ø¨Ø±', 'Ø§Ù„ÙØ¹Ù„', 'Ø§Ù„Ù…ÙØ¹ÙˆÙ„'], answer: 0, explanation: 'Ø§Ù„Ø¨Ø¯Ø§ÙŠØ© Ù‡ÙŠ Ø§Ù„Ù…Ø¨ØªØ¯Ø£' },
+  { subject: 'english', emoji: 'ðŸ‡¬ðŸ‡§', subjectLabel: 'Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ©', q: 'Which word means "Ø³Ø¹ÙŠØ¯" in English?', options: ['sad', 'angry', 'happy', 'tired'], answer: 2, explanation: 'Ø³Ø¹ÙŠØ¯ = happy' },
+  { subject: 'math', emoji: 'ðŸ”¢', subjectLabel: 'Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª', q: 'Ù…Ø§ Ù†Ø§ØªØ¬ 144 Ã· 12ØŸ', options: ['11', '12', '13', '14'], answer: 1, explanation: '144 Ã· 12 = 12' },
+  { subject: 'science', emoji: 'ðŸ”¬', subjectLabel: 'Ø§Ù„Ø¹Ù„ÙˆÙ…', q: 'Ù…Ø§ Ø§Ù„ÙØ±Ù‚ Ø¨ÙŠÙ† Ø§Ù„Ø´Ù…Ø³ ÙˆØ§Ù„Ù‚Ù…Ø±ØŸ', options: ['Ù„Ø§ ÙŠÙˆØ¬Ø¯ ÙØ±Ù‚', 'Ø§Ù„Ø´Ù…Ø³ Ù†Ø¬Ù… ÙˆØ§Ù„Ù‚Ù…Ø± ÙƒÙˆÙƒØ¨', 'Ø§Ù„Ø´Ù…Ø³ ÙƒÙˆÙƒØ¨ ÙˆØ§Ù„Ù‚Ù…Ø± Ù†Ø¬Ù…', 'ÙƒÙ„Ø§Ù‡Ù…Ø§ Ù†Ø¬Ù…Ø§Ù†'], answer: 1, explanation: 'Ø§Ù„Ø´Ù…Ø³ Ù†Ø¬Ù… Ù…Ø¶ÙŠØ¡ ÙˆØ§Ù„Ù‚Ù…Ø± ÙŠØ¯ÙˆØ± Ø­ÙˆÙ„ Ø§Ù„Ø£Ø±Ø¶' },
+  { subject: 'french', emoji: 'ðŸ‡«ðŸ‡·', subjectLabel: 'Ø§Ù„ÙØ±Ù†Ø³ÙŠØ©', q: 'Comment dit-on "Ù…Ø¯Ø±Ø³Ø©" en franÃ§ais?', options: ['maison', 'Ã©cole', 'bureau', 'magasin'], answer: 1, explanation: 'Ù…Ø¯Ø±Ø³Ø© = Ã©cole' },
+  { subject: 'arabic', emoji: 'ðŸ“–', subjectLabel: 'Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©', q: 'Ù…Ø§ Ù‡Ùˆ rodzaj Ù‡Ø°Ù‡ Ø§Ù„ÙƒÙ„Ù…Ø©: "Ø¨Ø§Ù„Ù†Ø³Ø¨Ø©"ØŸ', options: ['Ø§Ø³Ù…', 'ÙØ¹Ù„', 'Ø­Ø±Ù', 'Ø¸Ø±Ù'], answer: 2, explanation: 'Ø¨Ø§Ù„Ù†Ø³Ø¨Ø© Ø­Ø±Ù Ø¬Ø±' },
+  { subject: 'math', emoji: 'ðŸ”¢', subjectLabel: 'Ø§Ù„Ø±ÙŠØ§Ø¶ÙŠØ§Øª', q: 'Ù…Ø§ Ù…Ø­ÙŠØ· Ø§Ù„Ù…Ø±Ø¨Ø¹ Ø§Ù„Ø°ÙŠ Ø¶Ù„Ø¹Ù‡ 5 Ø³Ù…ØŸ', options: ['10', '15', '20', '25'], answer: 2, explanation: 'Ø§Ù„Ù…Ø­ÙŠØ· = 4 Ã— Ø§Ù„Ø¶Ù„Ø¹ = 4 Ã— 5 = 20 Ø³Ù…' },
+  { subject: 'science', emoji: 'ðŸ”¬', subjectLabel: 'Ø§Ù„Ø¹Ù„ÙˆÙ…', q: 'Ø£ÙŠ Ø§Ù„Ø£Ù„ÙˆØ§Ù† Ø§Ù„ØªØ§Ù„ÙŠØ© ÙŠÙ…ØªØµ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø£Ù„ÙˆØ§Ù†ØŸ', options: ['Ø§Ù„Ø£Ø¨ÙŠØ¶', 'Ø§Ù„Ø£Ø³ÙˆØ¯', 'Ø§Ù„Ø£Ø­Ù…Ø±', 'Ø§Ù„Ø£Ø²Ø±Ù‚'], answer: 1, explanation: 'Ø§Ù„Ø£Ø³ÙˆØ¯ ÙŠÙ…ØªØµ Ø¬Ù…ÙŠØ¹ Ø§Ù„Ø£Ù„ÙˆØ§Ù†' },
+  { subject: 'english', emoji: 'ðŸ‡¬ðŸ‡§', subjectLabel: 'Ø§Ù„Ø¥Ù†Ø¬Ù„ÙŠØ²ÙŠØ©', q: 'What color is the sky?', options: ['red', 'blue', 'green', 'yellow'], answer: 1, explanation: 'The sky is blue' },
+  { subject: 'french', emoji: 'ðŸ‡«ðŸ‡·', subjectLabel: 'Ø§Ù„ÙØ±Ù†Ø³ÙŠØ©', q: 'Quel est le contraire de "chaud"?', options: ['brÃ»lant', 'froid', 'tiÃ¨de', 'glacial'], answer: 1, explanation: 'chaud (Ø³Ø§Ø®Ù†) â†” froid (Ø¨Ø§Ø±Ø¯)' },
 ];
 
 function getDayOfYear() {
@@ -86,13 +86,13 @@ export default function StudentDailyChallenge() {
     }));
 
     if (correct) {
-      api.post('/student/progress/lessons', { gradeId: 'daily', subjectId: 'daily', lessonId: `daily-${today}`, lessonTitle: 'تحدي اليوم' }).catch(() => {});
+      api.post('/student/progress/lessons', { gradeId: 'daily', subjectId: 'daily', lessonId: `daily-${today}`, lessonTitle: 'ØªØ­Ø¯ÙŠ Ø§Ù„ÙŠÙˆÙ…' }).catch(() => {});
     }
   };
 
   return (
     <div className="student-daily-challenge">
-      <div className="dc-header" style={{ background: 'linear-gradient(135deg, #f59e0b, #ef4444)' }}>
+      <div className="dc-header" style={{ background: 'linear-gradient(135deg, #E8A317, #ef4444)' }}>
         <span className="material-icons dc-header__icon">emoji_events</span>
         <div>
           <h2 className="dc-header__title">{t('studentSpace.dailyChallenge.title')}</h2>
@@ -102,7 +102,7 @@ export default function StudentDailyChallenge() {
 
       <div className="dc-body">
         <div className="dc-streak">
-          <span className="dc-streak__fire">🔥</span>
+          <span className="dc-streak__fire">ðŸ”¥</span>
           <span className="dc-streak__count">{streak.count}</span>
           <span className="dc-streak__label">{t('studentSpace.dailyChallenge.streakDays')}</span>
         </div>
