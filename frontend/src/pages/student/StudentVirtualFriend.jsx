@@ -4,7 +4,7 @@ import { api } from '../../api/client.js';
 
 const FRIEND_MOODS = [
   { emoji: '🦊', name: 'ثعلبي', greeting: 'مرحباً يا صديقي! أنا ثعلبي، رفيقك التعليمي!' },
-  { emoji: '🦉', name: 'بومة', greeting: 'أهلاً! أنا بومة الحكمة، سأساعدك في تعلمك!' },
+  { emoji: '🦉', img: '/owl-mascot.webp', name: 'بومة', greeting: 'أهلاً! أنا بومة الحكمة، سأساعدك في تعلمك!' },
   { emoji: '🐱', name: 'قطوتي', greeting: 'ميـاو! أنا قطوتي، أنا هنا لمساعدتك!' },
   { emoji: '🐰', name: 'أرنبون', greeting: 'مرحباً! أنا أرنبون، صديقك المفضل!' },
 ];
@@ -19,7 +19,7 @@ const ENCOURAGEMENTS = [
 ];
 
 const FUN_FACTS = [
-  'هل تعلم أن الس.preferencesSqPreferencesPreferences تعلم شيئاً جديداً كل يوم?',
+  'هل تعلم أن الدماغ يتعلم شيئاً جديداً كل يوم؟',
   'هل تعلم أن القراءة لمدة 20 دقيقة كل يوم تجعلك أكثر ذكاءً؟',
   'هل تعلم أن الحلوى لا تسبب تسوس الأسنان إذا أسنانك نظيفة؟',
   'هل تعلم أن اللعب بالخارج يساعدك على التعلم بشكل أفضل؟',
@@ -28,7 +28,7 @@ const FUN_FACTS = [
 ];
 
 const QUICK_ACTIONS = [
-  { label: '琐碎 معلومة', prompt: '给我一句 معلومات مفيدة', emoji: '💡' },
+  { label: 'معلومة مفيدة', prompt: 'أعطني معلومة مفيدة', emoji: '💡' },
   { label: 'نكتة', prompt: 'احكِ لي نكتة مناسبة للأطفال', emoji: '😄' },
   { label: 'معلومة عن الحيوانات', prompt: 'أعطني معلومة مثيرة عن الحيوانات', emoji: '🐾' },
   { label: 'نصيحة للدراسة', prompt: ' أعطني نصيحة مفيدة للدراسة', emoji: '📝' },
@@ -55,10 +55,11 @@ export default function StudentVirtualFriend() {
   const [showQuick, setShowQuick] = useState(true);
   const endRef = useRef(null);
 
+  const friendMark = friend.img ? '' : `${friend.emoji} `;
   useEffect(() => {
     setMessages([{
       role: 'assistant',
-      content: `${friend.emoji} ${friend.greeting}\n\n${ENCOURAGEMENTS[Math.floor(Math.random() * ENCOURAGEMENTS.length)]}`
+      content: `${friendMark}${friend.greeting}\n\n${ENCOURAGEMENTS[Math.floor(Math.random() * ENCOURAGEMENTS.length)]}`
     }]);
   }, []);
 
@@ -75,7 +76,7 @@ export default function StudentVirtualFriend() {
     setShowQuick(false);
 
     try {
-      const systemPrompt = `أنت رفيق تعليمي ودود اسمك "${friend.name}" (${friend.emoji}). أنت تتحدث مع تلميذ فيPrimary school. كن ودوداً ومشجعاً ومفيداً. استخدم لغة بسيطة و盟friendly.`;
+      const systemPrompt = `أنت رفيق تعليمي ودود اسمك "${friend.name}". أنت تتحدث مع تلميذ في المدرسة الابتدائية. كن ودوداً ومشجعاً ومفيداً. استخدم لغة عربية بسيطة مناسبة للأطفال.`;
       const res = await api.post('/ai/chat', {
         messages: [...messages, userMsg].map(m => ({ role: m.role, content: m.content })),
         systemPrompt
@@ -85,7 +86,7 @@ export default function StudentVirtualFriend() {
     } catch {
       setMessages(prev => [...prev, {
         role: 'assistant',
-        content: `${friend.emoji} أعتذر، حدث خطأ بسيط. حاول مرة أخرى!`
+        content: `${friendMark}أعتذر، حدث خطأ بسيط. حاول مرة أخرى!`
       }]);
     } finally {
       setLoading(false);
@@ -95,7 +96,7 @@ export default function StudentVirtualFriend() {
   return (
     <div className="student-vfriend">
       <div className="vf-header" style={{ background: 'linear-gradient(135deg, #10b981, #06b6d4)' }}>
-        <span className="vf-header__emoji">{friend.emoji}</span>
+        <span className="vf-header__emoji">{friend.img ? <img src={friend.img} alt={friend.name} className="owl-img" style={{ width: 40, height: 40 }} /> : friend.emoji}</span>
         <div>
           <h2 className="vf-header__title">{friend.name}</h2>
           <p className="vf-header__sub">{t('studentSpace.virtualFriend.subtitle')}</p>
@@ -105,7 +106,7 @@ export default function StudentVirtualFriend() {
       <div className="vf-chat">
         {messages.map((m, i) => (
           <div key={i} className={`vf-msg ${m.role === 'user' ? 'vf-msg--user' : 'vf-msg--bot'}`}>
-            {m.role === 'assistant' && <span className="vf-msg__avatar">{friend.emoji}</span>}
+            {m.role === 'assistant' && <span className="vf-msg__avatar">{friend.img ? <img src={friend.img} alt={friend.name} className="owl-img" style={{ width: 24, height: 24 }} /> : friend.emoji}</span>}
             <div className={`vf-msg__bubble ${m.role === 'user' ? 'vf-msg__bubble--user' : 'vf-msg__bubble--bot'}`}>
               {renderMarkdown(m.content)}
             </div>
@@ -113,7 +114,7 @@ export default function StudentVirtualFriend() {
         ))}
         {loading && (
           <div className="vf-msg vf-msg--bot">
-            <span className="vf-msg__avatar">{friend.emoji}</span>
+            <span className="vf-msg__avatar">{friend.img ? <img src={friend.img} alt={friend.name} className="owl-img" style={{ width: 24, height: 24 }} /> : friend.emoji}</span>
             <div className="vf-msg__bubble vf-msg__bubble--bot vf-typing">
               <span /><span /><span />
             </div>

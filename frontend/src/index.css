@@ -8828,3 +8828,5 @@ html:not([data-theme="dark"]) .student-layout .sidebar-fab {
 /* Material Icons: hide ligature text until the icon font arrives (no layout shift) */
 .material-icons{font-family:"Material Icons",sans-serif}
 html:not(.mi-ready) .material-icons{color:transparent !important}
+
+.owl-img{object-fit:contain;display:inline-block;vertical-align:middle}

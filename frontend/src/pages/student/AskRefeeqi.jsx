@@ -97,7 +97,7 @@ export default function AskRefeeqi() {
   return (
     <div className="panel chat-panel">
       <div className="panel-head">
-        <h3>{t('studentSpace.askRefeeqi.title')}</h3>
+        <h3><img src="/owl-mascot.webp" alt="رفيقي" className="owl-img" style={{ width: 30, height: 30 }} /> {t('studentSpace.askRefeeqi.title')}</h3>
         <p className="muted">{t('studentSpace.askRefeeqi.subtitle')}</p>
       </div>
 
@@ -120,7 +120,7 @@ export default function AskRefeeqi() {
       <div className="chat-box">
         {messages.length === 0 && (
           <div className="chat-welcome">
-            <span className="owl-emoji">🦉</span>
+            <img src="/owl-mascot.webp" alt="رفيقي" className="owl-img" style={{ width: 48, height: 48 }} />
             <p>{t('studentSpace.askRefeeqi.welcome')}</p>
           </div>
         )}
