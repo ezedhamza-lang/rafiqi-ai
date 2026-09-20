@@ -240,7 +240,11 @@ export default function Memos({ onChanged }) {
               <div className="form-row">
                 <div className="form-group grow">
                   <label>{t('teacherSpace.memos.officialLabel')}</label>
-                  <select value={form.officialRef} onChange={(e) => setForm({ ...form, officialRef: e.target.value })}>
+                  <select value={form.officialRef} onChange={(e) => {
+                    const id = e.target.value;
+                    const picked = officialList.find((o) => o.id === id);
+                    setForm((f) => ({ ...f, officialRef: id, lessonTitle: f.lessonTitle || (picked ? picked.topic : '') }));
+                  }}>
                     <option value="">{t('teacherSpace.memos.officialAuto')}</option>
                     {officialList.map((o) => (
                       <option key={o.id} value={o.id}>{o.topic} ({o.timingMinutes} دق)</option>
