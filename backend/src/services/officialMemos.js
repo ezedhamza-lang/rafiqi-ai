@@ -70,11 +70,18 @@ export function listOfficialMemos({ subject, level } = {}) {
     if (!isYear2(level)) return [];
     all = all.filter((e) => e.level === 'year2');
   }
+  const counts = {};
+  all.forEach((e) => {
+    const k = `${e.subject}::${e.topic}`;
+    counts[k] = (counts[k] || 0) + 1;
+  });
   return all.map((e) => ({
     id: e.id,
     level: e.level,
     subject: e.subject,
     subjectSeq: e.subjectSeq,
+    variant: e.variant || 1,
+    variantCount: counts[`${e.subject}::${e.topic}`] || 1,
     topic: e.topic,
     timingMinutes: e.timingMinutes,
     source: e.source

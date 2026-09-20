@@ -247,7 +247,7 @@ export default function Memos({ onChanged }) {
                   }}>
                     <option value="">{t('teacherSpace.memos.officialAuto')}</option>
                     {officialList.map((o) => (
-                      <option key={o.id} value={o.id}>{o.topic} ({o.timingMinutes} دق)</option>
+                      <option key={o.id} value={o.id}>{o.topic} ({o.timingMinutes} دق){o.variantCount > 1 ? ` — ${t('teacherSpace.memos.sessionLabel')} ${o.variant}` : ''}</option>
                     ))}
                   </select>
                 </div>
