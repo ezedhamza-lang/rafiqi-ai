@@ -28,7 +28,19 @@ export default function Memos({ onChanged }) {
   const [memos, setMemos] = useState([]);
   const [books, setBooks] = useState([]);
   const [lessonOptions, setLessonOptions] = useState([]);
-  const [form, setForm] = useState({ subject: '', level: LEVELS[0], lessonTitle: '', lessonType: '', unit: '' });
+  const [form, setForm] = useState({ subject: '', level: LEVELS[0], lessonTitle: '', lessonType: '', unit: '', officialRef: '' });
+  const [officialList, setOfficialList] = useState([]);
+
+  useEffect(() => {
+    setOfficialList([]);
+    setForm((f) => ({ ...f, officialRef: '' }));
+    if (!form.subject) return;
+    let alive = true;
+    api.get(`/memos/official?subject=${encodeURIComponent(form.subject)}`)
+      .then((list) => { if (alive && Array.isArray(list)) setOfficialList(list); })
+      .catch(() => {});
+    return () => { alive = false; };
+  }, [form.subject]);
   const [view, setView] = useState(null);
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState('');
@@ -121,6 +133,7 @@ export default function Memos({ onChanged }) {
     try {
       const body = { subject: form.subject, level: form.level, lessonTitle: form.lessonTitle, unit: form.unit };
       if (form.lessonType) body.lessonType = form.lessonType;
+      if (form.officialRef) body.officialRef = form.officialRef;
       const res = await api.post('/memos/generate', body);
       setView(res.memo);
       setInfo(res.cached ? t('teacherSpace.memos.cachedInfo') : t('teacherSpace.memos.builtInfo'));
@@ -139,6 +152,7 @@ export default function Memos({ onChanged }) {
     try {
       const body = { subject: form.subject, level: form.level, lessonTitle: form.lessonTitle, unit: form.unit };
       if (form.lessonType) body.lessonType = form.lessonType;
+      if (form.officialRef) body.officialRef = form.officialRef;
       const res = await api.post('/memos/rebuild', body);
       setView(res.memo);
       setInfo(t('teacherSpace.memos.rebuiltInfo'));
@@ -222,6 +236,19 @@ export default function Memos({ onChanged }) {
                 </datalist>
               </div>
             </div>
+            {officialList.length > 0 && (
+              <div className="form-row">
+                <div className="form-group grow">
+                  <label>{t('teacherSpace.memos.officialLabel')}</label>
+                  <select value={form.officialRef} onChange={(e) => setForm({ ...form, officialRef: e.target.value })}>
+                    <option value="">{t('teacherSpace.memos.officialAuto')}</option>
+                    {officialList.map((o) => (
+                      <option key={o.id} value={o.id}>{o.topic} ({o.timingMinutes} دق)</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            )}
             {lessonTypes.length > 0 && (
               <div className="form-row">
                 <div className="form-group">

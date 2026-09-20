@@ -2604,6 +2604,8 @@
       "chooseSubject": "— اختر —",
       "lessonTitleLabel": "عنوان الدرس *",
       "lessonTitlePlaceholder": "اختر درسًا من محتوى المنهج",
+      "officialLabel": "مذكرة رسمية (س2 — اختيار مباشر)",
+      "officialAuto": "— تلقائي حسب الدرس —",
       "lessonTypeLabel": "نوع الدرس (عند الغموض)",
       "autoOption": "— تلقائي —",
       "unitLabel": "الوحدة (اختياري)",

@@ -2604,6 +2604,8 @@
       "chooseSubject": "— Choose —",
       "lessonTitleLabel": "Lesson Title *",
       "lessonTitlePlaceholder": "Choose a lesson from the curriculum content",
+      "officialLabel": "Official memo (Y2 — direct pick)",
+      "officialAuto": "— Automatic by lesson —",
       "lessonTypeLabel": "Lesson Type (if ambiguous)",
       "autoOption": "— Automatic —",
       "unitLabel": "Unit (optional)",
