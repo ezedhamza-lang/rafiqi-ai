@@ -108,7 +108,7 @@ export function buildOfficialMemoContent(entry, ctx, lesson) {
     banner: {
       duration: `التوقيت: ${entry.timingMinutes} دق`,
       title: isMath ? 'مذكرة رياضيات' : 'مذكرة إيقاظ علمي',
-      level: `المستوى: ${ctx.level}`
+      level: ctx.level || ''
     },
     headerTitle: `مذكرة بيداغوجية لحصة ${isMath ? 'رياضيات' : 'إيقاظ علمي'} — ${ctx.level || ''}`,
     period: lesson.period ? String(lesson.period).padStart(2, '0') : ctx.level,
