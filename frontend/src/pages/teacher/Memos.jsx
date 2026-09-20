@@ -223,7 +223,7 @@ export default function Memos({ onChanged }) {
               <div className="form-group grow">
                 <label>{t('teacherSpace.memos.lessonTitleLabel')}</label>
                 <input
-                  required
+                  required={!form.officialRef}
                   list="memo-lessons"
                   value={form.lessonTitle}
                   onChange={(e) => setForm({ ...form, lessonTitle: e.target.value })}

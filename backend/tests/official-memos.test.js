@@ -95,6 +95,16 @@ describe('بنك المذكرات الرسمية (س2 رياضيات + إيقا�
     expect(res.body.memo.content.officialTopic).toContain('المجموعات');
   });
 
+  it('اختيار مباشر بلا عنوان درس يعيد الرسمية (يتجاوز حل الدرس)', async () => {
+    const res = await request(app)
+      .post('/api/memos/generate')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ subject: 'رياضيات', level: 'السنة الثانية أساسي', lessonTitle: '', officialRef: 'y2-math-04' });
+    expect(res.status).toBe(200);
+    expect(res.body.memo.content.officialRef).toBe('y2-math-04');
+    expect(res.body.memo.content.source).toBe('official');
+  });
+
   it('معرف رسمي خاطئ يعيد 404', async () => {
     const res = await request(app)
       .post('/api/memos/generate')

@@ -11,13 +11,17 @@ export const memoGenerateSchema = z.object({
   lessonTitle: z
     .string({ error: 'عنوان الدرس مطلوب' })
     .trim()
-    .min(1, { error: 'عنوان الدرس مطلوب' })
-    .max(300, { error: 'عنوان الدرس طويل جدا' }),
+    .max(300, { error: 'عنوان الدرس طويل جدا' })
+    .optional()
+    .nullable(),
   lessonType: z.string().trim().max(100, { error: 'نوع الدرس طويل جدا' }).optional().nullable(),
   unit: z.string().trim().max(300, { error: 'الوحدة طويلة جدا' }).optional().nullable(),
   useOfficial: z.boolean().optional().nullable(),
   officialRef: z.string().trim().max(50, { error: 'مرجع المذكرة طويل جدا' }).optional().nullable()
-});
+}).refine(
+  (d) => (d.lessonTitle && d.lessonTitle.trim()) || (d.officialRef && d.officialRef.trim()),
+  { error: 'عنوان الدرس مطلوب (أو اختر مذكرة رسمية مباشرة)', path: ['lessonTitle'] }
+);
 
 export const memosListQuerySchema = z.object({
   limit: z.coerce.number().int().min(1).max(200).optional().nullable()

@@ -339,6 +339,37 @@ export function buildMemoContent(methodology, lesson, ctx) {
 export async function generateMemo({ teacherId, subject, level, lessonTitle, lessonType, unit, useOfficial, officialRef }) {
   const levelValue = level || 'السنة الأولى أساسي';
 
+  // اختيار مباشر بالمعرف: بلا حل درس، بلا تخمين — المذكرة الرسمية حرفياً تحت مفتاحها الخاص
+  if (officialRef) {
+    const direct = getOfficialMemoById(officialRef);
+    if (!direct) throw new MemoBuildError('OFFICIAL_NOT_FOUND', 'المذكرة الرسمية المطلوبة غير موجودة');
+    const directMethodId = `official-y2-${direct.subject}`;
+    const directHash = contentHash(['official', direct.id, direct.topic, direct.lessonGoal, direct.stages.map((s) => s.name).join('|')]);
+    const directCached = await lessonMemos.findByLesson('official/year2', direct.id);
+    if (directCached && directCached.methodologyId === directMethodId && directCached.hash === directHash) {
+      return { memo: directCached, cached: true };
+    }
+    const subjectLabel = subject && String(subject).trim() ? String(subject).trim() : (direct.subject === 'math' ? 'رياضيات' : 'إيقاظ علمي');
+    const stubLesson = { id: direct.id, title: direct.topic, domain: '', chapter: '', period: null };
+    const directCtx = { subject: subjectLabel, level: levelValue, lessonTitle: direct.topic, lessonType, unit, sourceBook: subjectLabel, gradeId: 'year2', subjectId: direct.subject };
+    const directContent = buildOfficialMemoContent(direct, directCtx, stubLesson);
+    const directMemo = await lessonMemos.upsert({
+      teacherId,
+      bookId: 'official/year2',
+      lessonId: direct.id,
+      subject: subjectLabel,
+      level: levelValue,
+      lessonTitle: direct.topic,
+      lessonType: lessonType || null,
+      unit: unit || null,
+      methodologyId: directMethodId,
+      methodologyTitle: directContent.methodologyTitle,
+      hash: directHash,
+      content: directContent
+    });
+    return { memo: directMemo, cached: false };
+  }
+
   const candidates = resolveBookCandidates(subject, levelValue);
   if (!candidates.length) {
     throw new MemoBuildError(
@@ -374,15 +405,11 @@ export async function generateMemo({ teacherId, subject, level, lessonTitle, les
     );
   }
 
-  // المذكرات الرسمية أولاً: اختيار صريح بالمعرف أو ربط صريح مدقق (بلا تخمين).
-  // useOfficial === false يعني توليداً بديلاً يتجاوز البنك عمداً.
-  let official = null;
-  if (officialRef) {
-    official = getOfficialMemoById(officialRef);
-    if (!official) throw new MemoBuildError('OFFICIAL_NOT_FOUND', 'المذكرة الرسمية المطلوبة غير موجودة');
-  } else if (useOfficial !== false) {
-    official = matchOfficialMemo({ subject, level: levelValue, lessonTitle: lesson.title });
-  }
+  // الربط الصريح المدقق (بلا تخمين). useOfficial === false يعني توليداً بديلاً يتجاوز البنك عمداً.
+  // (الاختيار المباشر بالمعرف عولج أعلاه قبل حل الدرس)
+  const official = useOfficial !== false
+    ? matchOfficialMemo({ subject, level: levelValue, lessonTitle: lesson.title })
+    : null;
   if (official) {
     const officialMethodId = `official-y2-${official.subject}`;
     const officialHash = contentHash([book.bookId, lesson.id, officialMethodId, official.id, official.topic, official.lessonGoal, official.stages.map((s) => s.name).join('|')]);
@@ -447,6 +474,12 @@ export async function generateMemo({ teacherId, subject, level, lessonTitle, les
 }
 
 export async function rebuildMemo({ teacherId, subject, level, lessonTitle, lessonType, unit, useOfficial, officialRef }) {
+  if (officialRef) {
+    const direct = getOfficialMemoById(officialRef);
+    if (!direct) throw new MemoBuildError('OFFICIAL_NOT_FOUND', 'المذكرة الرسمية المطلوبة غير موجودة');
+    await lessonMemos.deleteByLesson('official/year2', direct.id);
+    return generateMemo({ teacherId, subject, level, lessonTitle, lessonType, unit, useOfficial, officialRef });
+  }
   const levelValue = level || 'السنة الأولى أساسي';
   for (const cand of resolveBookCandidates(subject, levelValue)) {
     const lesson = findLesson(cand.subjectId, levelValue, lessonTitle, cand.gradeId);
