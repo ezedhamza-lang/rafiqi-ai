@@ -146,7 +146,8 @@ router.delete('/plans/:id', teacherMiddleware, validateParams(annualPlanIdParamS
  *     security:
  *       - bearerAuth: []
  *     responses:
- *       200: { description: { slots, classes:[{class, grid, subjects}] } }
+ *       200:
+ *         description: قائمة الحصص والأقسام مع الشبكات والمواد
  */
 router.get('/schedules', teacherMiddleware, asyncHandler(async (req, res) => {
   const sid = actorSchoolId(req);
