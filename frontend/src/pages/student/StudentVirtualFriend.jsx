@@ -18,15 +18,6 @@ const ENCOURAGEMENTS = [
   'أنت نجم! واصل التقدم! 🌟',
 ];
 
-const FUN_FACTS = [
-  'هل تعلم أن الدماغ يتعلم شيئاً جديداً كل يوم؟',
-  'هل تعلم أن القراءة لمدة 20 دقيقة كل يوم تجعلك أكثر ذكاءً؟',
-  'هل تعلم أن الحلوى لا تسبب تسوس الأسنان إذا أسنانك نظيفة؟',
-  'هل تعلم أن اللعب بالخارج يساعدك على التعلم بشكل أفضل؟',
-  'هل تعلم أن النوم الكافي يجعل ذاكرتك أقوى؟',
-  'هل تعلم أن الفاكهة والخضروات تعطيك طاقة للتعلم؟',
-];
-
 const QUICK_ACTIONS = [
   { label: 'معلومة مفيدة', prompt: 'أعطني معلومة مفيدة', emoji: '💡' },
   { label: 'نكتة', prompt: 'احكِ لي نكتة مناسبة للأطفال', emoji: '😄' },
@@ -61,7 +52,7 @@ export default function StudentVirtualFriend() {
       role: 'assistant',
       content: `${friendMark}${friend.greeting}\n\n${ENCOURAGEMENTS[Math.floor(Math.random() * ENCOURAGEMENTS.length)]}`
     }]);
-  }, []);
+  }, [friendMark, friend.greeting]);
 
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });

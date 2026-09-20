@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { useI18n } from '../../i18n/index.jsx';
 import { api } from '../../api/client.js';
 
-const WEEKLY_SUBJECTS = ['العربية', 'الرياضيات', 'العلوم', 'الفرنسية', 'التربية الإسلامية'];
-
 const WEEKLY_CHALLENGES = [
   { week: 1, subject: 'الرياضيات', title: 'تحدي الجمع والطرح', questions: [
     { q: '15 + 27 = ?', opts: ['42', '32', '52', '22'], a: 0 },

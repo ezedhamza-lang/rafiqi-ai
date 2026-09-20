@@ -1,4 +1,4 @@
-import { Badge, BadgeItem } from '../../components/ui/index.js';
+import { BadgeItem } from '../../components/ui/index.js';
 import { useI18n } from '../../i18n/index.jsx';
 
 function getGreeting() {

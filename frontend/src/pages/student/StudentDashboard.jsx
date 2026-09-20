@@ -19,32 +19,6 @@ function getSubjectLabel(id) {
 
 const SUBJECT_COLORS = ['#E8A317', '#10b981', '#3b82f6', '#ef4444', '#8b5cf6', '#D97706', '#ec4899', '#06b6d4', '#84cc16'];
 
-function getGreetingTime() {
-  const h = new Date().getHours();
-  if (h < 6) return { emoji: '🌙', key: 'night' };
-  if (h < 12) return { emoji: '☀️', key: 'morning' };
-  if (h < 17) return { emoji: '🌤️', key: 'afternoon' };
-  return { emoji: '🌙', key: 'evening' };
-}
-
-function ProgressRing({ percent = 0, size = 120, stroke = 10, color = '#E8A317' }) {
-  const r = (size - stroke) / 2;
-  const circ = 2 * Math.PI * r;
-  const offset = circ - (percent / 100) * circ;
-  return (
-    <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} style={{ transform: 'rotate(-90deg)' }}>
-      <circle cx={size / 2} cy={size / 2} r={r} strokeWidth={stroke} fill="none" stroke="rgba(255,255,255,0.15)" />
-      <circle cx={size / 2} cy={size / 2} r={r} strokeWidth={stroke} fill="none"
-        stroke={color} strokeDasharray={circ} strokeDashoffset={offset} strokeLinecap="round"
-        style={{ transition: 'stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)' }} />
-      <text x="50%" y="50%" textAnchor="middle" dominantBaseline="central"
-        fill="white" fontSize={size * 0.2} fontWeight="bold" style={{ transform: 'rotate(90deg)', transformOrigin: '50% 50%' }}>
-        {percent}%
-      </text>
-    </svg>
-  );
-}
-
 function MiniStatCard({ icon, value, label, color }) {
   return (
     <div className="ds-mini-stat" style={{ borderLeftColor: color }}>
@@ -90,12 +64,9 @@ export default function StudentDashboard() {
     return <div className="ds-empty">{t('common.noData')}</div>;
   }
 
-  const greeting = getGreetingTime();
-  const greetingKey = `studentSpace.profile.greeting.${greeting.key}`;
-  const { user, subjectProgress, stats, levelProgress, badges, recentActivity } = data;
+  const { user, subjectProgress, stats, badges, recentActivity } = data;
 
   const totalLessonsAll = subjectProgress.reduce((a, s) => a + s.count, 0) || 1;
-  const overallPercent = Math.min(100, Math.round((stats.totalLessons / Math.max(totalLessonsAll * 3, 1)) * 100));
 
   return (
     <div className="student-dashboard">

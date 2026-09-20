@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { useI18n } from '../../i18n/index.jsx';
 import { api } from '../../api/client.js';
 

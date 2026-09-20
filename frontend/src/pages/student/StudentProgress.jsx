@@ -59,7 +59,7 @@ export default function StudentProgress() {
   if (loading) return <div className="ds-loading"><div className="ds-spinner" /><p>{t('common.loading')}</p></div>;
   if (!data) return <div className="ds-empty">{t('common.noData')}</div>;
 
-  const { user, subjectProgress, stats, levelProgress, badges } = data;
+  const { user, subjectProgress, stats, badges } = data;
   const totalAllLessons = subjectProgress.reduce((a, s) => a + s.count, 0) || 1;
 
   const currentMilestone = MILESTONES.filter(m => user.xp >= m.xp).pop() || MILESTONES[0];

@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useI18n } from '../../i18n/index.jsx';
 
 export default function PDFBookViewer({ book, onClose }) {
-  const { t } = useI18n();
   const [zoom, setZoom] = useState(100);
 
   useEffect(() => {

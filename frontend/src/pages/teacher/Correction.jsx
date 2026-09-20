@@ -127,10 +127,8 @@ export default function Correction() {
     }
     setBatchGrading(true);
     try {
-      let totalGraded = 0;
       for (const lid of lessonIds) {
-        const res = await api.post('/ai/batch-grade', { lessonId: lid });
-        totalGraded += res.results?.length || 0;
+        await api.post('/ai/batch-grade', { lessonId: lid });
       }
       loadLessonSubs();
     } catch (err) {

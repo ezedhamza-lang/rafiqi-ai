@@ -498,7 +498,6 @@ function ScienceClassify({ onExit, onFinish, phase, result, t }) {
 
   if (phase === 'done') return <GameResultView result={result} onExit={onExit} t={t} />;
   const item = items[idx];
-  const uniqueGroups = [...new Set(items.map((i) => i.group))];
   return (
     <div className="game-play">
       <div className="game-progress">{t('studentSpace.play.sortOrder', { cur: idx + 1, total: items.length })}</div>
@@ -521,7 +520,6 @@ function ScienceClassify({ onExit, onFinish, phase, result, t }) {
 function ExperimentSteps({ onExit, onFinish, phase, result, t }) {
   const [experiment] = useState(() => EXPERIMENT_STEPS_DATA[Math.floor(Math.random() * EXPERIMENT_STEPS_DATA.length)]);
   const [steps, setSteps] = useState(() => shuffle(experiment.steps.map((s, i) => ({ id: i, text: s }))));
-  const [correct, setCorrect] = useState(0);
 
   const move = (from, dir) => {
     const to = from + dir;

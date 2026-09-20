@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { useI18n } from '../../i18n/index.jsx';
 import { imgSrc } from '../../utils/imgSrc';
 
 function pageUrl(base, ext, page) {
@@ -8,7 +7,6 @@ function pageUrl(base, ext, page) {
 }
 
 export default function Book3DViewer({ book, onClose }) {
-  const { t } = useI18n();
   const [page, setPage] = useState(1);
   const [turning, setTurning] = useState(null);
   const [zoom, setZoom] = useState(1);

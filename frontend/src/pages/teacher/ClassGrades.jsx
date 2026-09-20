@@ -20,7 +20,7 @@ export default function ClassGrades() {
 
   useEffect(() => {
     api.get('/teacher/grades/classes').then(setClasses).catch(() => setError(t('common.error')));
-  }, []);
+  }, [t]);
 
   const load = useCallback(() => {
     if (!classId) { setTable(null); return; }

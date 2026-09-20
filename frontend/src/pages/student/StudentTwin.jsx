@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { api } from '../../api/client.js';
-import { Card, PointsCard, BadgeCard, Leaderboard } from '../../components/ui/index.js';
+import { Card, BadgeCard, Leaderboard } from '../../components/ui/index.js';
 import { useI18n } from '../../i18n/index.jsx';
 import PromoCarousel from '../../components/PromoCarousel.jsx';
 
