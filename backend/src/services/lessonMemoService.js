@@ -1,7 +1,7 @@
 ﻿import { contentHash } from './memoService.js';
 import { buildSpecMemo } from './memoEngine.js';
 import { resolveMethodology, normalizeSubject } from './methodologyResolver.js';
-import { matchOfficialMemo, buildOfficialMemoContent } from './officialMemos.js';
+import { matchOfficialMemo, buildOfficialMemoContent, getOfficialMemoById } from './officialMemos.js';
 import {
   normalizeArabic,
   loadRegistry,
@@ -336,7 +336,7 @@ export function buildMemoContent(methodology, lesson, ctx) {
 
 // ===== واجهة التوليد العامة =====
 
-export async function generateMemo({ teacherId, subject, level, lessonTitle, lessonType, unit, useOfficial }) {
+export async function generateMemo({ teacherId, subject, level, lessonTitle, lessonType, unit, useOfficial, officialRef }) {
   const levelValue = level || 'السنة الأولى أساسي';
 
   const candidates = resolveBookCandidates(subject, levelValue);
@@ -374,8 +374,15 @@ export async function generateMemo({ teacherId, subject, level, lessonTitle, les
     );
   }
 
-  // المذكرات الرسمية أولاً (ما لم يطلب المعلّم توليداً بديلاً): مطابقة حرفية من بنك مذكرات السنة الثانية
-  const official = useOfficial === false ? null : matchOfficialMemo({ subject, level: levelValue, lessonTitle: lesson.title });
+  // المذكرات الرسمية أولاً: اختيار صريح بالمعرف أو ربط صريح مدقق (بلا تخمين).
+  // useOfficial === false يعني توليداً بديلاً يتجاوز البنك عمداً.
+  let official = null;
+  if (officialRef) {
+    official = getOfficialMemoById(officialRef);
+    if (!official) throw new MemoBuildError('OFFICIAL_NOT_FOUND', 'المذكرة الرسمية المطلوبة غير موجودة');
+  } else if (useOfficial !== false) {
+    official = matchOfficialMemo({ subject, level: levelValue, lessonTitle: lesson.title });
+  }
   if (official) {
     const officialMethodId = `official-y2-${official.subject}`;
     const officialHash = contentHash([book.bookId, lesson.id, officialMethodId, official.id, official.topic, official.lessonGoal, official.stages.map((s) => s.name).join('|')]);
@@ -439,13 +446,13 @@ export async function generateMemo({ teacherId, subject, level, lessonTitle, les
   return { memo, cached: false };
 }
 
-export async function rebuildMemo({ teacherId, subject, level, lessonTitle, lessonType, unit, useOfficial }) {
+export async function rebuildMemo({ teacherId, subject, level, lessonTitle, lessonType, unit, useOfficial, officialRef }) {
   const levelValue = level || 'السنة الأولى أساسي';
   for (const cand of resolveBookCandidates(subject, levelValue)) {
     const lesson = findLesson(cand.subjectId, levelValue, lessonTitle, cand.gradeId);
     if (lesson) await lessonMemos.deleteByLesson(cand.bookId, lesson.id);
   }
-  return generateMemo({ teacherId, subject, level, lessonTitle, lessonType, unit, useOfficial });
+  return generateMemo({ teacherId, subject, level, lessonTitle, lessonType, unit, useOfficial, officialRef });
 }
 
 export { resolveBook, resolveBookCandidates, findLesson };

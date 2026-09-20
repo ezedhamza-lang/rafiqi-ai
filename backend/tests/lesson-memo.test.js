@@ -357,7 +357,7 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(spec.headerTitle).toContain('مذكرة بيداغوجية لحصة رياضيات');
     expect(spec.period).toBe('05');
     expect(spec.competencies.domain).toContain('وضعيات');
-    expect(spec.competencies.distinctiveObjective).toMatch(/الطرح|الجمع/);
+    expect(spec.competencies.distinctiveObjective).toMatch(/طرح|جمع/);
     expect(spec.lessonObjectives.length).toBeGreaterThanOrEqual(1);
     expect(spec.lessonObjectives[0]).toMatch(/ينجز|يحل|يتعرّف|يتعرف|يوظّف|يوظف|يطبّق|يطبق/);
     expect(spec.rows.length).toBeGreaterThanOrEqual(4);

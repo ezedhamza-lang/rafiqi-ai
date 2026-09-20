@@ -5,6 +5,8 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 let bank = null;
+let links = null;
+
 export function loadOfficialMemos() {
   if (!bank) {
     const raw = fs.readFileSync(
@@ -16,6 +18,17 @@ export function loadOfficialMemos() {
   return bank;
 }
 
+export function loadOfficialLinks() {
+  if (!links) {
+    const raw = fs.readFileSync(
+      path.join(__dirname, '../../content/banks/official-memo-links.json'),
+      'utf8'
+    );
+    links = JSON.parse(raw).links || {};
+  }
+  return links;
+}
+
 export function normalizeMemoText(s) {
   return String(s || '')
     .replace(/[ً-ٰٟ]/g, '')
@@ -25,23 +38,6 @@ export function normalizeMemoText(s) {
     .replace(/[^ء-غف-ي0-9a-z\s]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim();
-}
-
-function memoTokens(s) {
-  return normalizeMemoText(s)
-    .split(' ')
-    .filter(Boolean)
-    .map((t) => t.replace(/^[وفبكل]+(.{2,})$/, '$1'))
-    .filter((t) => t.length > 1);
-}
-
-function matchScore(requestTitle, topic) {
-  const A = new Set(memoTokens(requestTitle));
-  const B = new Set(memoTokens(topic));
-  if (!A.size || !B.size) return { inter: 0, cont: 0 };
-  let inter = 0;
-  for (const t of B) if (A.has(t)) inter++;
-  return { inter, cont: inter / Math.min(A.size, B.size) };
 }
 
 function subjectOf(subject) {
@@ -56,31 +52,43 @@ function isYear2(level) {
   return /السنة الثانية|سنة 2|year\s*2|2eme|2ème/.test(n) || /ثانية/.test(n);
 }
 
+export function getOfficialMemoById(id) {
+  if (!id || typeof id !== 'string') return null;
+  const clean = id.trim();
+  if (!/^y2-(math|science)-\d+(-\d+)?$/.test(clean)) return null;
+  return loadOfficialMemos().find((e) => e.id === clean) || null;
+}
+
+export function listOfficialMemos({ subject, level } = {}) {
+  let all = loadOfficialMemos();
+  if (subject) {
+    const subj = subjectOf(subject);
+    if (!subj) return [];
+    all = all.filter((e) => e.subject === subj);
+  }
+  if (level) {
+    if (!isYear2(level)) return [];
+    all = all.filter((e) => e.level === 'year2');
+  }
+  return all.map((e) => ({
+    id: e.id,
+    level: e.level,
+    subject: e.subject,
+    subjectSeq: e.subjectSeq,
+    topic: e.topic,
+    timingMinutes: e.timingMinutes,
+    source: e.source
+  }));
+}
+
 export function matchOfficialMemo({ subject, level, lessonTitle }) {
   const subj = subjectOf(subject);
   if (!subj || !isYear2(level)) return null;
-  let best = null;
-  let bestKey = null;
-  for (const entry of loadOfficialMemos()) {
-    if (entry.subject !== subj || entry.level !== 'year2') continue;
-    const sc = matchScore(lessonTitle, entry.topic);
-    if (sc.cont >= 0.6 && sc.inter >= 2) {
-      const contentScore = matchScore(lessonTitle, `${entry.objective} ${entry.content} ${entry.lessonGoal}`);
-      const key = [sc.cont, sc.inter, contentScore.cont, contentScore.inter];
-      if (!bestKey || compareKeys(key, bestKey) > 0) {
-        best = entry;
-        bestKey = key;
-      }
-    }
-  }
-  return best;
-}
-
-function compareKeys(a, b) {
-  for (let i = 0; i < a.length; i++) {
-    if (a[i] !== b[i]) return a[i] - b[i];
-  }
-  return 0;
+  const hit = loadOfficialLinks()[normalizeMemoText(lessonTitle)];
+  if (!hit) return null;
+  const entry = loadOfficialMemos().find((e) => e.id === hit);
+  if (!entry || entry.subject !== subj) return null;
+  return entry;
 }
 
 export function buildOfficialMemoContent(entry, ctx, lesson) {

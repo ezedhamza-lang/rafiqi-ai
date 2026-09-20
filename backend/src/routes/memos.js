@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { authMiddleware, teacherMiddleware } from '../auth.js';
 import { generateMemo, rebuildMemo, MemoBuildError } from '../services/lessonMemoService.js';
 import { listMethodologies } from '../services/methodologyResolver.js';
+import { listOfficialMemos } from '../services/officialMemos.js';
 import * as lessonMemos from '../repositories/lessonMemos.js';
 import { validateBody, validateQuery, validateParams } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
@@ -16,11 +17,32 @@ router.use(authMiddleware);
 
 function toApiError(e) {
   if (e instanceof MemoBuildError) {
-    const status = e.code === 'LESSON_NOT_FOUND' ? 404 : 400;
+    const status = (e.code === 'LESSON_NOT_FOUND' || e.code === 'OFFICIAL_NOT_FOUND') ? 404 : 400;
     return new ApiError(status, e.message);
   }
   return e;
 }
+
+/**
+ * @swagger
+ * /api/memos/official:
+ *   get:
+ *     summary: قائمة المذكرات الرسمية (س2 رياضيات + إيقاظ) للاختيار المباشر بالمعرف
+ *     tags: [memos]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: subject
+ *         schema: { type: string }
+ *         description: 'تصفية بالمادة (رياضيات/إيقاظ)'
+ *     responses:
+ *       200:
+ *         description: المذكرات الرسمية (معرف/موضوع/توقيت)
+ */
+router.get('/official', teacherMiddleware, asyncHandler(async (req, res) => {
+  res.json(listOfficialMemos({ subject: req.query.subject, level: 'السنة الثانية أساسي' }));
+}));
 
 /**
  * @swagger
@@ -59,6 +81,8 @@ router.get('/methodologies', asyncHandler(async (req, res) => {
  *               lessonTitle: { type: string }
  *               lessonType: { type: string, description: 'نوع الدرس عند الغموض (اختياري)' }
  *               unit: { type: string }
+ *               useOfficial: { type: boolean, description: 'false لتجاوز البنك الرسمي وتوليد بديل' }
+ *               officialRef: { type: string, description: 'معرف مذكرة رسمية مباشر (مثلا y2-math-01) — يلغي المطابقة' }
  *     responses:
  *       200:
  *         description: المذكرة (cached=false عند البناء، true عند الاسترجاع من الذاكرة)
@@ -66,7 +90,7 @@ router.get('/methodologies', asyncHandler(async (req, res) => {
  *         description: لا منهجية/لا كتاب/درس غير موجود
  */
 router.post('/generate', teacherMiddleware, validateBody(memoGenerateSchema), asyncHandler(async (req, res) => {
-  const { subject, level, lessonTitle, lessonType, unit, useOfficial } = req.body;
+  const { subject, level, lessonTitle, lessonType, unit, useOfficial, officialRef } = req.body;
   try {
     const result = await generateMemo({
       teacherId: req.user.id,
@@ -75,7 +99,8 @@ router.post('/generate', teacherMiddleware, validateBody(memoGenerateSchema), as
       lessonTitle,
       lessonType,
       unit,
-      useOfficial
+      useOfficial,
+      officialRef
     });
     res.json(result);
   } catch (e) {
@@ -111,7 +136,7 @@ router.post('/generate', teacherMiddleware, validateBody(memoGenerateSchema), as
  *         description: فشل إعادة البناء
  */
 router.post('/rebuild', teacherMiddleware, validateBody(memoGenerateSchema), asyncHandler(async (req, res) => {
-  const { subject, level, lessonTitle, lessonType, unit, useOfficial } = req.body;
+  const { subject, level, lessonTitle, lessonType, unit, useOfficial, officialRef } = req.body;
   try {
     const result = await rebuildMemo({
       teacherId: req.user.id,
@@ -120,7 +145,8 @@ router.post('/rebuild', teacherMiddleware, validateBody(memoGenerateSchema), asy
       lessonTitle,
       lessonType,
       unit,
-      useOfficial
+      useOfficial,
+      officialRef
     });
     res.json(result);
   } catch (e) {
