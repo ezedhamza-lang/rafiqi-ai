@@ -126,7 +126,6 @@ export function buildItem(rng, gradeId, idx) {
   const strategies = plan.strategies;
   const kind = pick(rng, plan.kinds);
   const id = `${gradeId}-${idx}`;
-  const dec = () => { const da = ri(rng, 1, 9) / 10 * 5; const db = 10 / 10 - (da % 1); return [Number(da.toFixed(1)), Number((1 - (da - Math.floor(da))).toFixed(1))]; };
 
   if (kind === 'money' && strategies.includes('money_change')) {
     const price = ri(rng, Math.max(5, Math.floor(max * 0.3)), max);
@@ -261,7 +260,6 @@ export function buildPrereqItem(rng, gradeId, idx) {
     const t = ri(rng, 2, 9);
     const o = ri(rng, 1, 9);
     const n = t * 10 + o;
-    const askTens = rng() < 0.5;
     return {
       id, type: 'place', skill: 'place_value',
       prompt: `في العدد ${n}: كم عدد العشرات؟`,

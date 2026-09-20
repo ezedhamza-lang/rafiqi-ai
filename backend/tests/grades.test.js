@@ -13,7 +13,7 @@ describe('الجدول الصحيح + المعدلات والشهادات الر
   beforeAll(async () => {
     ({ app } = await import('../src/index.js'));
     await resetDatabase();
-    const { users, klass, student } = await seedTestData();
+    const { klass, student } = await seedTestData();
     classId = klass.id;
     studentUserId = student.accountUserId;
     teacherTok = (await login('teacher@test.tn', 'teacher123')).body.token;

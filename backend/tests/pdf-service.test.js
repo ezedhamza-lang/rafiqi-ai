@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { esc, AUTHOR_CREDIT, invoiceHtml, gradesHtml, financialReportHtml, childReportHtml } from '../src/services/pdfTemplates.js';
 import { browserPdfStatus } from '../src/services/browserPdf.js';
 import { buildInvoicePdf } from '../src/services/invoiceService.js';
-import { buildGradesPdf, buildChildReportPdf } from '../src/services/exportService.js';
+import { buildChildReportPdf } from '../src/services/exportService.js';
 
 describe('خدمة PDF الموحّدة (محرك المتصفح + النسخ القديم كبديل)', () => {
   it('esc يهرّب كل شيء ضد الحقن', () => {

@@ -6,7 +6,7 @@ import prisma from '../src/db.js';
 
 const PW = 'scope123';
 let app;
-let dirA, dirB, parentA, schoolA, schoolB;
+let parentA, schoolA, schoolB;
 
 async function mkUser(email, role, schoolId) {
   return prisma.user.create({
@@ -25,8 +25,8 @@ describe('عزل مدارس P1-A (وثائق/تقويم/إعلانات)', () => 
     await resetDatabase();
     schoolA = await prisma.school.create({ data: { code: 'A', name: 'مدرسة أ' } });
     schoolB = await prisma.school.create({ data: { code: 'B', name: 'مدرسة ب' } });
-    dirA = await mkUser('dira@p1.tn', 'SCHOOL_DIRECTOR', schoolA.id);
-    dirB = await mkUser('dirb@p1.tn', 'SCHOOL_DIRECTOR', schoolB.id);
+    await mkUser('dira@p1.tn', 'SCHOOL_DIRECTOR', schoolA.id);
+    await mkUser('dirb@p1.tn', 'SCHOOL_DIRECTOR', schoolB.id);
     parentA = await mkUser('parenta@p1.tn', 'PARENT', schoolA.id);
     await mkUser('parentb@p1.tn', 'PARENT', schoolB.id);
   }, 90000);

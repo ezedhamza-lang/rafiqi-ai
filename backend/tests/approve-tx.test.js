@@ -35,7 +35,7 @@ describe('ذرّية الموافقة على طلب التسجيل', () => {
     ({ app } = await import('../src/index.js'));
     await resetDatabase();
     const school = await prisma.school.create({ data: { code: 'S1', name: 'مدرسة 1' } });
-    const dir = await prisma.user.create({
+    await prisma.user.create({
       data: { firstName: 'مدير', lastName: 'اختبار', email: 'dir@t.tn', passwordHash: await bcrypt.hash(PW, 4), role: 'SCHOOL_DIRECTOR', accountStatus: 'ACTIVE', schoolId: school.id }
     });
     parentId = (await prisma.user.create({

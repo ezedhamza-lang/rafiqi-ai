@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import { resetDatabase, seedTestData, login } from './helpers.js';
 import request from 'supertest';
-import { loadOfficialMemos, loadOfficialLinks, matchOfficialMemo, getOfficialMemoById, listOfficialMemos, normalizeMemoText } from '../src/services/officialMemos.js';
+import { loadOfficialMemos, loadOfficialLinks, matchOfficialMemo, getOfficialMemoById, normalizeMemoText } from '../src/services/officialMemos.js';
 
 let app;
 let token;

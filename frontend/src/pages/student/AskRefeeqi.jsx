@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import DOMPurify from 'dompurify';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 
@@ -18,9 +19,10 @@ function renderMarkdown(text) {
       return <li key={i} style={{ marginInlineStart: '1.5rem', listStyleType: 'decimal' }}>{line.replace(/^\d+\.\s+/, '')}</li>;
     }
     if (line.startsWith('```')) return null;
-    const formatted = line
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+    const formatted = DOMPurify.sanitize(
+      line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    );
     return <p key={i} style={{ margin: '0.25rem 0' }} dangerouslySetInnerHTML={{ __html: formatted }} />;
   });
 }

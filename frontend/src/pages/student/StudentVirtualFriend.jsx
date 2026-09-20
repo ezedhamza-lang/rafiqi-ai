@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import { useI18n } from '../../i18n/index.jsx';
+import DOMPurify from 'dompurify';
 import { api } from '../../api/client.js';
+import { useI18n } from '../../i18n/index.jsx';
 
 const FRIEND_MOODS = [
   { emoji: '🦊', name: 'ثعلبي', greeting: 'مرحباً يا صديقي! أنا ثعلبي، رفيقك التعليمي!' },
@@ -30,9 +31,10 @@ function renderMarkdown(text) {
   if (!text) return null;
   const lines = text.split('\n');
   return lines.map((line, i) => {
-    const formatted = line
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.+?)\*/g, '<em>$1</em>');
+    const formatted = DOMPurify.sanitize(
+      line.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    );
     return <p key={i} style={{ margin: '0.25rem 0' }} dangerouslySetInnerHTML={{ __html: formatted }} />;
   });
 }

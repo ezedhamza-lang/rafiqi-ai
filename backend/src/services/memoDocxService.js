@@ -58,8 +58,6 @@ function tcW(widthPct) {
   return el('tcW', `w:w="${Math.round(widthPct * 50)}" w:type="pct"`);
 }
 
-function tcBorders() { return cellBorder(); }
-
 function gridSpan(n) {
   return n > 1 ? el('gridSpan', `w:val="${n}"`) : '';
 }
@@ -77,38 +75,12 @@ function cell(content, widthPct, opts = {}) {
   return tc;
 }
 
-function cellEmpty(widthPct) {
-  return cell(para([run('')]), widthPct);
-}
-
-function cellLabel(text, widthPct, opts = {}) {
-  return cell(para([run(text, { bold: true, sz: 24, ...opts })]), widthPct, { shading: 'E8F5E2' });
-}
-
-function cellDots(widthPct, count = 4) {
-  const dots = '.'.repeat(60);
-  const lines = [];
-  for (let i = 0; i < count; i++) {
-    lines.push(para([run(dots, { sz: 22 })], { after: 20 }));
-  }
-  return cell(lines.join(''), widthPct);
-}
-
 function row(cells) {
   return el('tr', '', cells.join(''));
 }
 
 function table(rows, tblPr = '') {
   return el('tbl', '', tblPr + rows.join(''));
-}
-
-function tblPrDefault() {
-  return el('tblPr', '',
-    el('tblStyle', 'w:val="TableGrid"') +
-    el('tblW', 'w:w="5000" w:type="pct"') +
-    el('tblLayout', 'w:val="fixed"') +
-    el('tblLook', 'w:val="04A0"')
-  );
 }
 
 function emptyPara() {

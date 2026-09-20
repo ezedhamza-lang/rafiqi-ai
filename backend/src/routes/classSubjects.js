@@ -5,7 +5,7 @@ import { validateBody, validateParams } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 import { classSubjectCreateSchema, classSubjectUpdateSchema, classSubjectIdParamSchema } from '../validators/classSubject.js';
 import { actorSchoolId } from '../tenant.js';
-import { DEFAULT_COEFFICIENTS, SUBJECT_LABELS as OFFICIAL_LABELS } from '../services/gradeService.js';
+import { DEFAULT_COEFFICIENTS } from '../services/gradeService.js';
 
 const router = Router();
 router.use(authMiddleware);

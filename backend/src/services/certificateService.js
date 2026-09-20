@@ -13,17 +13,14 @@ const GOLD_LIGHT = rgb(0.95, 0.85, 0.55);
 const CREAM = rgb(0.99, 0.97, 0.93);
 const WHITE = rgb(1, 1, 1);
 const GRAY = rgb(0.5, 0.5, 0.5);
-const LIGHT_GRAY = rgb(0.85, 0.85, 0.85);
 
 export async function generateCertificate(opts) {
   const {
     studentName = 'تلميذ',
     title = 'شهادة إتمام الدروس',
-    description = 'ت见证 منصة رفيقي للحياة المدرسية بأن التلميذ/التلميذة قد أتم بنجاح الدروس والأنشطة التعليمية المقررة.',
+    description = 'قد أتم بنجاح الدروس والأنشطة التعليمية المقررة.',
     subject = '',
     className = '',
-    level = 1,
-    xp = 0,
     date = new Date().toLocaleDateString('ar-TN'),
     teacherName = 'Ezeddine Hamza',
   } = opts;
@@ -103,9 +100,8 @@ export async function generateCertificate(opts) {
     x: (w - nameW) / 2, y: h - 237, size: 22, font: boldFont, color: BLUE_DARK,
   });
 
-  const descText = 'قد أتم بنجاح الدروس والأنشطة التعليمية المقررة.';
-  const descW = font.widthOfTextAtSize(descText, 11);
-  page.drawText(descText, {
+  const descW = font.widthOfTextAtSize(description, 11);
+  page.drawText(description, {
     x: (w - descW) / 2, y: h - 270, size: 11, font, color: GRAY,
   });
 
