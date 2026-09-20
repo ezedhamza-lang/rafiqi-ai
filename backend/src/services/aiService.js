@@ -91,6 +91,7 @@ function detectProvider(apiKey) {
   if (apiKey.startsWith('sk-')) return 'openai';
   if (apiKey.startsWith('AIza')) return 'gemini';
   if (apiKey.startsWith('gsk_')) return 'groq';
+  if (apiKey.startsWith('nvapi-')) return 'nvidia';
   return 'openai'; // افتراضي: OpenAI-compatible
 }
 
@@ -170,12 +171,34 @@ async function callGroq(prompt, apiKey) {
   return data?.choices?.[0]?.message?.content || '';
 }
 
+async function callNvidia(prompt, apiKey, maxTokens = 2000) {
+  const res = await fetch('https://integrate.api.nvidia.com/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+    body: JSON.stringify({
+      model: 'meta/llama-3.1-8b-instruct',
+      messages: [{ role: 'user', content: prompt }],
+      temperature: 0.7,
+      max_tokens: maxTokens
+    })
+  });
+  if (!res.ok) {
+    const err = new Error(`AI service error: ${res.status}`);
+    err.providerStatus = res.status;
+    try { err.providerBody = (await res.text()).slice(0, 300); } catch { err.providerBody = ''; }
+    throw err;
+  }
+  const data = await res.json();
+  return data?.choices?.[0]?.message?.content || '';
+}
+
 async function callProviderByType(prompt, apiKey, provider, opts) {
   const maxTokens = opts && Number(opts.maxTokens) > 0 ? Number(opts.maxTokens) : 800;
   switch (provider) {
     case 'claude': return callClaude(prompt, apiKey);
     case 'gemini': return callGemini(prompt, apiKey, maxTokens);
     case 'groq': return callGroq(prompt, apiKey);
+    case 'nvidia': return callNvidia(prompt, apiKey, Math.max(maxTokens, 2000));
     case 'openai':
     default: return callOpenAI(prompt, apiKey);
   }

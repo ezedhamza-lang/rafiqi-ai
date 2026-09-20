@@ -249,6 +249,23 @@ describe('المرحلة 7.2 — مساعد الأستاذ (خطة/ملخص/شر
     __setCallProvider(fakeProvider);
   });
 
+  it('كشف المزوّد من صيغة المفتاح (gemini/groq/nvidia/openai)', async () => {
+    const teacher = await prisma.user.findFirst({ where: { email: 'teacher@test.tn' } });
+    await saveAiKey(teacher.id, 'AIza-test-key');
+    let row = await prisma.aiKey.findUnique({ where: { teacherId: teacher.id } });
+    expect(row.provider).toBe('gemini');
+    await saveAiKey(teacher.id, 'gsk_test-key');
+    row = await prisma.aiKey.findUnique({ where: { teacherId: teacher.id } });
+    expect(row.provider).toBe('groq');
+    await saveAiKey(teacher.id, 'nvapi-test-key');
+    row = await prisma.aiKey.findUnique({ where: { teacherId: teacher.id } });
+    expect(row.provider).toBe('nvidia');
+    await saveAiKey(teacher.id, 'sk-test-key');
+    row = await prisma.aiKey.findUnique({ where: { teacherId: teacher.id } });
+    expect(row.provider).toBe('openai');
+    await saveAiKey(teacher.id, 'fake-gemini-key');
+  });
+
   it('توليد بلا مفتاح يعيد 400 برسالة واضحة', async () => {
     await prisma.aiKey.deleteMany({});
     const res = await request(app)

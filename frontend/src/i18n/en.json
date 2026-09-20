@@ -502,8 +502,8 @@
     "notConfigured": "Not configured",
     "description": "This key is used to generate \"Smart parent insights\", \"Personalised learning plan\" and other AI features when the teacher does not have their own key. The key is encrypted in the database and never displayed again.",
     "currentStatus": "Current status:",
-    "newGeminiKey": "New Gemini key",
-    "geminiPlaceholder": "Enter a new Gemini key or change the current one",
+    "newGeminiKey": "New AI key",
+    "geminiPlaceholder": "Gemini (AIza...) or Groq (gsk_...) or NVIDIA (nvapi-...) or OpenAI (sk-...)",
     "saving": "Saving...",
     "saveKey": "Save key",
     "deleteKey": "Delete platform key"
