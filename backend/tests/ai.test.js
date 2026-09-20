@@ -206,6 +206,49 @@ describe('المرحلة 7.2 — مساعد الأستاذ (خطة/ملخص/شر
     __setCallProvider(fakeProvider);
   });
 
+  it('خطة الدرس تطلب ميزانية رموز كافية للمذكرة الكاملة', async () => {
+    let seenOpts = null;
+    __setCallProvider(async (prompt, key, provider, opts) => {
+      seenOpts = opts;
+      return fakeProvider(prompt);
+    });
+    const res = await request(app)
+      .post('/api/ai/generate-lesson-plan')
+      .set('Authorization', `Bearer ${teacherToken}`)
+      .send({ subject: 'الرياضيات', level: 'السنة الأولى', lessonTitle: 'الجمع' });
+    expect(res.status).toBe(200);
+    expect(Number(seenOpts && seenOpts.maxTokens)).toBeGreaterThanOrEqual(3000);
+    __setCallProvider(fakeProvider);
+  });
+
+  it('خطأ المزوّد يُترجم لرسالة عربية محددة (مفتاح مرفوض/حصة)', async () => {
+    const badKey = async () => {
+      const err = new Error('AI service error: 401');
+      err.providerStatus = 401;
+      throw err;
+    };
+    __setCallProvider(badKey);
+    const r1 = await request(app)
+      .post('/api/ai/generate-lesson-plan')
+      .set('Authorization', `Bearer ${teacherToken}`)
+      .send({ subject: 'الرياضيات', level: 'السنة الأولى', lessonTitle: 'الجمع' });
+    expect(r1.status).toBe(401);
+    expect(r1.body.error).toContain('مرفوض');
+    const quota = async () => {
+      const err = new Error('AI service error: 429');
+      err.providerStatus = 429;
+      throw err;
+    };
+    __setCallProvider(quota);
+    const r2 = await request(app)
+      .post('/api/ai/generate-lesson-plan')
+      .set('Authorization', `Bearer ${teacherToken}`)
+      .send({ subject: 'الرياضيات', level: 'السنة الأولى', lessonTitle: 'الجمع' });
+    expect(r2.status).toBe(429);
+    expect(r2.body.error).toContain('حصة');
+    __setCallProvider(fakeProvider);
+  });
+
   it('توليد بلا مفتاح يعيد 400 برسالة واضحة', async () => {
     await prisma.aiKey.deleteMany({});
     const res = await request(app)

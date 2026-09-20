@@ -94,19 +94,21 @@ function detectProvider(apiKey) {
   return 'openai'; // افتراضي: OpenAI-compatible
 }
 
-async function callGemini(prompt, apiKey) {
+async function callGemini(prompt, apiKey, maxTokens = 800) {
   const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
   const res = await fetch(`${url}?key=${apiKey}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: { temperature: 0.7, maxOutputTokens: 800 }
+      generationConfig: { temperature: 0.7, maxOutputTokens: maxTokens }
     })
   });
   if (!res.ok) {
-    await res.text();
-    throw new Error(`AI service error: ${res.status}`);
+    const err = new Error(`AI service error: ${res.status}`);
+    err.providerStatus = res.status;
+    try { err.providerBody = (await res.text()).slice(0, 300); } catch { err.providerBody = ''; }
+    throw err;
   }
   const data = await res.json();
   return data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
@@ -168,10 +170,11 @@ async function callGroq(prompt, apiKey) {
   return data?.choices?.[0]?.message?.content || '';
 }
 
-async function callProviderByType(prompt, apiKey, provider) {
+async function callProviderByType(prompt, apiKey, provider, opts) {
+  const maxTokens = opts && Number(opts.maxTokens) > 0 ? Number(opts.maxTokens) : 800;
   switch (provider) {
     case 'claude': return callClaude(prompt, apiKey);
-    case 'gemini': return callGemini(prompt, apiKey);
+    case 'gemini': return callGemini(prompt, apiKey, maxTokens);
     case 'groq': return callGroq(prompt, apiKey);
     case 'openai':
     default: return callOpenAI(prompt, apiKey);
@@ -192,18 +195,18 @@ function buildPrompt(system, user) {
   return `${system}\n\nالمستخدم:\n${user}\n\nيرجى الرد مباشرة بدون مقدمات.`;
 }
 
-function invokeProvider(prompt, apiKey, provider) {
-  if (callProvider) return callProvider(prompt, apiKey, provider);
-  return callProviderByType(prompt, apiKey, provider);
+function invokeProvider(prompt, apiKey, provider, opts) {
+  if (callProvider) return callProvider(prompt, apiKey, provider, opts);
+  return callProviderByType(prompt, apiKey, provider, opts);
 }
 
-export async function generateText(teacherId, system, user) {
+export async function generateText(teacherId, system, user, opts) {
   const resolved = await resolveApiKey(teacherId);
   if (!resolved) {
     throw new Error('NO_AI_KEY');
   }
   const { key, provider } = resolved;
-  return invokeProvider(buildPrompt(system, user), key, provider);
+  return invokeProvider(buildPrompt(system, user), key, provider, opts);
 }
 
 export async function generateQuizQuestions(teacherId, { subject, level, lessonTitle, count = 5 }) {
@@ -392,7 +395,7 @@ export async function generateLessonPlan(teacherId, { subject, level, lessonTitl
   const baseUser = `المادة: ${subject}\nالمستوى: ${level}\nالدرس: ${lessonTitle}\n${context ? `محتوى الدرس المرجعي (المصدر الوحيد للأنشطة):\n${context}\n` : ''}${example}\nالمخطط الإلزامي:\n${schema}\nالقواعد:\n- ${rules}`;
   const system = 'أنت خبير بيداغوجي تونسي في التعليم الابتدائي. تولّد مذكرات دروس مطابقة حرفياً لهيكل المذكرة الرسمية. تلتزم بالمخطط والأسماء والقواعد بدقة صارمة.';
   const attempt = async (extra) => {
-    const text = await generateText(teacherId, system, baseUser + (extra || ''));
+    const text = await generateText(teacherId, system, baseUser + (extra || ''), { maxTokens: 3500 });
     return extractJson(text);
   };
   let plan = await attempt('');
