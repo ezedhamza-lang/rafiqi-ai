@@ -67,7 +67,7 @@ export async function deletePlatformAiKey() {
 }
 
 // ترتيب التفعيل: مفتاح المعلّم → مفتاح المنصة → متغير البيئة
-async function resolveApiKey(teacherId) {
+export async function resolveApiKey(teacherId) {
   if (teacherId) {
     const row = await prisma.aiKey.findUnique({ where: { teacherId } });
     if (row) {
@@ -392,11 +392,16 @@ function validateMemoPlan(obj, template) {
   for (let i = 0; i < 5; i++) {
     const s = obj.stages[i];
     if (!s || typeof s !== 'object') return `المرحلة ${i + 1} ناقصة`;
-    if (normalizeArabic(String(s.name || '')) !== normalizeArabic(template.stages[i])) {
-      return `اسم المرحلة ${i + 1} يجب أن يكون «${template.stages[i]}»`;
-    }
-    for (const f of ['teacherActivity', 'learnerActivity', 'tools']) {
+    const got = normalizeArabic(String(s.name || ''));
+    const want = normalizeArabic(template.stages[i]);
+    const close = got === want || got.replace(/^[0-9٠-٩.\-()\s]+/, '').trim() === want || want.includes(got) || got.includes(want);
+    if (!close) return `اسم المرحلة ${i + 1} يجب أن يكون «${template.stages[i]}»`;
+    s.name = template.stages[i];
+    for (const f of ['teacherActivity', 'learnerActivity']) {
       if (!s[f] || typeof s[f] !== 'string' || !s[f].trim()) return `المرحلة ${i + 1}: ${f} ناقص`;
+    }
+    if (!s.tools || typeof s.tools !== 'string' || !s.tools.trim()) {
+      s.tools = 'كتاب التلميذ، السبورة';
     }
   }
   return null;
@@ -428,7 +433,10 @@ export async function generateLessonPlan(teacherId, { subject, level, lessonTitl
     err = validateMemoPlan(plan, template);
   }
   if (err) {
-    const invalid = new Error(`تعذّر توليد خطة مطابقة للقالب الرسمي (${err}) — أعد المحاولة بصياغة أوضح للدرس.`);
+    try {
+      console.error(`[AI-PLAN-REJECTED] ${err} :: ${JSON.stringify(plan)?.slice(0, 400)}`);
+    } catch { /* logging only */ }
+    const invalid = new Error(`تعذّر توليد خطة مطابقة للقالب الرسمي (${err}) — أعد المحاولة.`);
     invalid.code = 'AI_PLAN_INVALID';
     throw invalid;
   }
