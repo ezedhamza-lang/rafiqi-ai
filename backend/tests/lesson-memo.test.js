@@ -205,9 +205,11 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
       .send({ subject: 'رياضياتي 2', level: 'السنة الثانية أساسي', lessonTitle: 'الأعداد من 0 إلى 499: الطرح دون زيادة ولا تفكيك' });
     expect(res.status).toBe(200);
     const memo = res.body.memo;
-    expect(memo.methodologyId).toBe('year2-math-standard');
+    expect(memo.methodologyId).toBe('official-y2-math');
     expect(memo.lessonId).toBe('y2m49');
-    expect(memo.content.phases.length).toBe(6);
+    expect(memo.content.phases.length).toBe(5);
+    expect(memo.content.source).toBe('official');
+    expect(memo.content.table.columns).toEqual(['المراحل', 'نشاط المعلّم', 'نشاط المتعلّم', 'الوسائل']);
     const allText = JSON.stringify(memo.content);
     expect(allText).toContain('الطرح');
   });
@@ -308,14 +310,16 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(pdf.body.subarray(0, 4).toString()).toBe('PK\x03\x04');
   });
 
-  it('قالب موحّد: كل profiles الرياضيات للسنوات 1-6 تحمل المراحل الست نفسها بالترتيب', async () => {
+  it('قالب موحّد: profiles الرياضيات (س2 رسمية بخمس مراحل مثل كتاب المذكرات)', async () => {
     const { resolveMethodology } = await import('../src/services/methodologyResolver.js');
     const canonical = ['الحساب الذهني', 'الاستحضار الوظيفي', 'الاستكشاف', 'التعلّم المنهجي', 'الإدماج', 'التقييم'];
-    const levels = ['الأولى', 'الثانية', 'الثالثة', 'الرابعة', 'الخامسة', 'السادسة'];
-    for (const y of levels) {
+    const officialY2 = ['حساب ذهني', 'تعهد المكتسبات', 'الوضعية الاستكشافية + التعلم المنهجي الآلي', 'تعلم ادماجي', 'تقييم'];
+    for (const y of ['الأولى', 'الثالثة', 'الرابعة', 'الخامسة', 'السادسة']) {
       const p = resolveMethodology({ subject: 'رياضيات', level: `السنة ${y} أساسي` });
       expect(p.phases.map((x) => x.name), `س${y}`).toEqual(canonical);
     }
+    const p2 = resolveMethodology({ subject: 'رياضيات', level: 'السنة الثانية أساسي' });
+    expect(p2.phases.map((x) => x.name)).toEqual(officialY2);
     const gen = await request(app)
       .post('/api/memos/generate')
       .set('Authorization', `Bearer ${token}`)
@@ -353,9 +357,9 @@ describe('نظام المذكرات حسب بروفايل المنهجية (Less
     expect(spec.headerTitle).toContain('مذكرة بيداغوجية لحصة رياضيات');
     expect(spec.period).toBe('05');
     expect(spec.competencies.domain).toContain('وضعيات');
-    expect(spec.competencies.distinctiveObjective).toContain('499');
+    expect(spec.competencies.distinctiveObjective).toMatch(/الطرح|الجمع/);
     expect(spec.lessonObjectives.length).toBeGreaterThanOrEqual(1);
-    expect(spec.lessonObjectives[0]).toMatch(/ينجز|يحل|يتعرّف|يوظّف/);
+    expect(spec.lessonObjectives[0]).toMatch(/ينجز|يحل|يتعرّف|يتعرف|يوظّف|يوظف|يطبّق|يطبق/);
     expect(spec.rows.length).toBeGreaterThanOrEqual(4);
     expect(spec.rows.length).toBeLessThanOrEqual(7);
     const stages = spec.rows.map((r) => r.stage);

@@ -14,7 +14,8 @@ export const memoGenerateSchema = z.object({
     .min(1, { error: 'عنوان الدرس مطلوب' })
     .max(300, { error: 'عنوان الدرس طويل جدا' }),
   lessonType: z.string().trim().max(100, { error: 'نوع الدرس طويل جدا' }).optional().nullable(),
-  unit: z.string().trim().max(300, { error: 'الوحدة طويلة جدا' }).optional().nullable()
+  unit: z.string().trim().max(300, { error: 'الوحدة طويلة جدا' }).optional().nullable(),
+  useOfficial: z.boolean().optional().nullable()
 });
 
 export const memosListQuerySchema = z.object({

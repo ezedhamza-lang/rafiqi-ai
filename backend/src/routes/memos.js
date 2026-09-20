@@ -66,7 +66,7 @@ router.get('/methodologies', asyncHandler(async (req, res) => {
  *         description: لا منهجية/لا كتاب/درس غير موجود
  */
 router.post('/generate', teacherMiddleware, validateBody(memoGenerateSchema), asyncHandler(async (req, res) => {
-  const { subject, level, lessonTitle, lessonType, unit } = req.body;
+  const { subject, level, lessonTitle, lessonType, unit, useOfficial } = req.body;
   try {
     const result = await generateMemo({
       teacherId: req.user.id,
@@ -74,7 +74,8 @@ router.post('/generate', teacherMiddleware, validateBody(memoGenerateSchema), as
       level,
       lessonTitle,
       lessonType,
-      unit
+      unit,
+      useOfficial
     });
     res.json(result);
   } catch (e) {
@@ -110,7 +111,7 @@ router.post('/generate', teacherMiddleware, validateBody(memoGenerateSchema), as
  *         description: فشل إعادة البناء
  */
 router.post('/rebuild', teacherMiddleware, validateBody(memoGenerateSchema), asyncHandler(async (req, res) => {
-  const { subject, level, lessonTitle, lessonType, unit } = req.body;
+  const { subject, level, lessonTitle, lessonType, unit, useOfficial } = req.body;
   try {
     const result = await rebuildMemo({
       teacherId: req.user.id,
@@ -118,7 +119,8 @@ router.post('/rebuild', teacherMiddleware, validateBody(memoGenerateSchema), asy
       level,
       lessonTitle,
       lessonType,
-      unit
+      unit,
+      useOfficial
     });
     res.json(result);
   } catch (e) {

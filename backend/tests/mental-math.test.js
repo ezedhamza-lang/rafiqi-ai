@@ -101,7 +101,7 @@ describe('وحدة الحساب الذهني — أنشطة واستراتيجي
     const gen = await request(app)
       .post('/api/memos/generate')
       .set('Authorization', `Bearer ${t}`)
-      .send({ subject: 'رياضيات', level: 'السنة الثانية أساسي', lessonTitle: 'الأعداد من 0 إلى 499: الطرح دون زيادة ولا تفكيك' });
+      .send({ subject: 'رياضيات', level: 'السنة الثانية أساسي', lessonTitle: 'الأعداد من 0 إلى 499: الطرح دون زيادة ولا تفكيك', useOfficial: false });
     expect(gen.status).toBe(200);
     const rows = gen.body.memo.content.spec.rows;
     const mental = rows.find((r) => r.stage.startsWith('حساب ذهني'));
