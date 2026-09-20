@@ -47,6 +47,7 @@ function levelToCurriculumTitle(level) {
 
 function aiError(e) {
   if (e.message === 'NO_AI_KEY') return new ApiError(400, 'لم يتم ضبط مفتاح الذكاء الاصطناعي بعد. أضف مفتاحك من إعدادات AI');
+  if (e.code === 'AI_PLAN_INVALID') return new ApiError(422, e.message);
   return new ApiError(502, 'تعذر الاتصال بخدمة الذكاء الاصطناعي');
 }
 

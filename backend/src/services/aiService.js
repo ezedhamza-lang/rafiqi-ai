@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import prisma from '../db.js';
 import { getLessonPages, normalizeArabic } from './curriculumService.js';
+import { loadOfficialMemos } from './officialMemos.js';
 
 const ENC_KEY =
   process.env.AI_ENC_KEY ||
@@ -309,12 +310,109 @@ function extractJson(text) {
   return null;
 }
 
-export async function generateLessonPlan(teacherId, { subject, level, lessonTitle, gradeId, subjectId, lessonId, duration = 45 }) {
+const MEMO_PLAN_TEMPLATES = {
+  math: {
+    timingMinutes: 60,
+    memoTitle: 'مذكرة رياضيات',
+    stages: ['حساب ذهني', 'تعهد المكتسبات', 'الوضعية الاستكشافية + التعلم المنهجي الآلي', 'تعلم ادماجي', 'تقييم']
+  },
+  science: {
+    timingMinutes: 30,
+    memoTitle: 'مذكرة إيقاظ علمي',
+    stages: ['تعهد المكتسبات', 'الوضعية الاشكالية', 'التجريب والتثبت + الاستنتاجات', 'التعلم المنهجي + التطبيق', 'التعلم الادماجي + التقييم']
+  },
+  generic: {
+    timingMinutes: 45,
+    memoTitle: 'مذكرة درس',
+    stages: ['التمهيد والتهيئة', 'العرض والاستكشاف', 'التطبيق الموجه', 'الإدماج', 'التقويم']
+  }
+};
+
+function memoTemplateFor(subject) {
+  const n = normalizeArabic(String(subject || ''));
+  if (/رياض/.test(n)) return { ...MEMO_PLAN_TEMPLATES.math, kind: 'math' };
+  if (/ايقاظ|علوم|موقظ/.test(n)) return { ...MEMO_PLAN_TEMPLATES.science, kind: 'science' };
+  return { ...MEMO_PLAN_TEMPLATES.generic, kind: 'generic' };
+}
+
+function officialExampleFor(kind) {
+  try {
+    const bank = loadOfficialMemos();
+    const entry = bank.find((e) => (kind === 'math' ? e.subject === 'math' : e.subject === 'science')) || bank[0];
+    if (!entry) return '';
+    return `\nمثال رسمي كامل للشكل المطلوب (مذكرة ${entry.topic}):\n${JSON.stringify({
+      competency: (entry.competency || '').slice(0, 300),
+      objective: (entry.objective || '').slice(0, 300),
+      content: (entry.content || '').slice(0, 300),
+      lessonGoal: (entry.lessonGoal || '').slice(0, 300),
+      stages: (entry.stages || []).map((s) => ({
+        name: s.name,
+        teacherActivity: String(s.teacher || '').slice(0, 500),
+        learnerActivity: String(s.learner || '').slice(0, 300),
+        tools: (s.tools || []).join(' + ')
+      }))
+    })}\n`;
+  } catch {
+    return '';
+  }
+}
+
+function validateMemoPlan(obj, template) {
+  if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return 'بنية فارغة';
+  for (const f of ['competency', 'objective', 'content', 'lessonGoal']) {
+    if (!obj[f] || typeof obj[f] !== 'string' || !obj[f].trim()) return `الحقل ${f} ناقص`;
+  }
+  if (!Array.isArray(obj.stages) || obj.stages.length !== 5) return 'المراحل ليست خمساً';
+  for (let i = 0; i < 5; i++) {
+    const s = obj.stages[i];
+    if (!s || typeof s !== 'object') return `المرحلة ${i + 1} ناقصة`;
+    if (normalizeArabic(String(s.name || '')) !== normalizeArabic(template.stages[i])) {
+      return `اسم المرحلة ${i + 1} يجب أن يكون «${template.stages[i]}»`;
+    }
+    for (const f of ['teacherActivity', 'learnerActivity', 'tools']) {
+      if (!s[f] || typeof s[f] !== 'string' || !s[f].trim()) return `المرحلة ${i + 1}: ${f} ناقص`;
+    }
+  }
+  return null;
+}
+
+export async function generateLessonPlan(teacherId, { subject, level, lessonTitle, gradeId, subjectId, lessonId, duration }) {
+  const template = memoTemplateFor(subject);
+  const timing = Number(duration) > 0 ? Number(duration) : template.timingMinutes;
   const context = resolveLessonContext({ gradeId, subjectId, lessonId, level, subject, lessonTitle });
-  const system = 'أنت خبير بيداغوجي تونسي في التعليم الابتدائي. أنشئ خطة درس كاملة وفق البيداغوجيا التونسية.';
-  const user = `المادة: ${subject}\nالمستوى: ${level}\nالدرس: ${lessonTitle}\nالمدة: ${duration} دقيقة\n${context ? `محتوى الدرس المرجعي:\n${context}\n` : ''}\nأنجز خطة درس بصيغة JSON على الشكل:\n{"title":"...","objectives":["..."],"materials":["..."],"stages":[{"time":"5 د","name":"تمهيد","goal":"...","activity":"..."}],"evaluation":"...","homework":"..."}\nأعد JSON فقط.`;
-  const text = await generateText(teacherId, system, user);
-  return extractJson(text);
+  const example = officialExampleFor(template.kind);
+  const schema = `{"competency":"مكون الكفاية","objective":"الهدف المميز","content":"المحتوى","lessonGoal":"هدف الحصة","stages":[{"name":"${template.stages[0]}","teacherActivity":"...","learnerActivity":"...","tools":"..."} × 5 بنفس الترتيب: ${template.stages.join(' / ')}]}`;
+  const rules = [
+    'أخرج JSON فقط بالمخطط المحدد دون أي نص إضافي.',
+    `أسماء المراحل الخمس حرفياً وبالترتيب: ${template.stages.join(' / ')}.`,
+    'كل الأنشطة والأمثلة والأعداد مشتقة حصراً من محتوى الدرس المرجعي أدناه — ممنوع اختراع تمارين أو أعداد أو أسماء.',
+    'أنشطة المعلّم مفصّلة خطوة بخطوة، وأنشطة المتعلّم بصيغة المتكلم الجمع، والوسائل واقعية من القسم.',
+    `التوقيت الإجمالي: ${timing} دقيقة.`
+  ].join('\n- ');
+  const baseUser = `المادة: ${subject}\nالمستوى: ${level}\nالدرس: ${lessonTitle}\n${context ? `محتوى الدرس المرجعي (المصدر الوحيد للأنشطة):\n${context}\n` : ''}${example}\nالمخطط الإلزامي:\n${schema}\nالقواعد:\n- ${rules}`;
+  const system = 'أنت خبير بيداغوجي تونسي في التعليم الابتدائي. تولّد مذكرات دروس مطابقة حرفياً لهيكل المذكرة الرسمية. تلتزم بالمخطط والأسماء والقواعد بدقة صارمة.';
+  const attempt = async (extra) => {
+    const text = await generateText(teacherId, system, baseUser + (extra || ''));
+    return extractJson(text);
+  };
+  let plan = await attempt('');
+  let err = validateMemoPlan(plan, template);
+  if (err) {
+    plan = await attempt(`\nتنبيه: إخراجك السابق مرفوض (${err}). أعد الإخراج كاملاً مصححاً ملتزماً بالمخطط والأسماء الحرفية.`);
+    err = validateMemoPlan(plan, template);
+  }
+  if (err) {
+    const invalid = new Error(`تعذّر توليد خطة مطابقة للقالب الرسمي (${err}) — أعد المحاولة بصياغة أوضح للدرس.`);
+    invalid.code = 'AI_PLAN_INVALID';
+    throw invalid;
+  }
+  return {
+    subject, level, lessonTitle,
+    timingMinutes: timing,
+    memoTitle: template.memoTitle,
+    source: 'ai',
+    ...plan
+  };
 }
 
 export async function generateSummary(teacherId, { subject, level, lessonTitle, gradeId, subjectId, lessonId, maxWords = 150 }) {

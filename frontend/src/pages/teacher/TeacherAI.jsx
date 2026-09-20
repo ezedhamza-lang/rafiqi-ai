@@ -278,28 +278,37 @@ export default function TeacherAI() {
 
           {output.type === 'plan' && (
             <div className="stage-item">
-              {output.data?.objectives?.length > 0 && (
-                <div>
-                  <p><strong>{t('teacherSpace.teacherAI.objectives')}</strong></p>
-                  <ul>{output.data.objectives.map((o, i) => <li key={i}>{o}</li>)}</ul>
+              {output.data?.memoTitle && <p><strong>{output.data.memoTitle}</strong>{output.data?.timingMinutes ? ` — ${t('teacherSpace.teacherAI.memoTiming', { n: output.data.timingMinutes })}` : ''}</p>}
+              {output.data?.competency && <p><strong>{t('teacherSpace.teacherAI.memoCompetency')}</strong> {output.data.competency}</p>}
+              {output.data?.objective && <p><strong>{t('teacherSpace.teacherAI.memoObjective')}</strong> {output.data.objective}</p>}
+              {output.data?.content && <p><strong>{t('teacherSpace.teacherAI.memoContent')}</strong> {output.data.content}</p>}
+              {output.data?.lessonGoal && <p><strong>{t('teacherSpace.teacherAI.memoLessonGoal')}</strong> {output.data.lessonGoal}</p>}
+              {Array.isArray(output.data?.stages) && output.data.stages.length > 0 && (
+                <div className="table-wrap">
+                  <p><strong>{t('teacherSpace.teacherAI.memoStages')}</strong></p>
+                  <table className="data-table">
+                    <thead>
+                      <tr>
+                        <th>{t('teacherSpace.teacherAI.memoStage')}</th>
+                        <th>{t('teacherSpace.teacherAI.memoTeacher')}</th>
+                        <th>{t('teacherSpace.teacherAI.memoLearner')}</th>
+                        <th>{t('teacherSpace.teacherAI.memoTools')}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {output.data.stages.map((s, i) => (
+                        <tr key={i}>
+                          <th>{s.name}</th>
+                          <td style={{ whiteSpace: 'pre-line' }}>{s.teacherActivity}</td>
+                          <td style={{ whiteSpace: 'pre-line' }}>{s.learnerActivity}</td>
+                          <td>{s.tools}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               )}
-              {output.data?.materials?.length > 0 && (
-                <div>
-                  <p><strong>{t('teacherSpace.teacherAI.materials')}</strong></p>
-                  <p className="muted">{output.data.materials.join(' — ')}</p>
-                </div>
-              )}
-              {Array.isArray(output.data?.stages) && output.data.stages.map((s, i) => (
-                <div key={i} className="stage-item">
-                  <p><strong>{s.time} — {s.name}</strong></p>
-                  <p className="muted">{s.goal}</p>
-                  <p>{s.activity}</p>
-                </div>
-              ))}
-              {output.data?.evaluation && <p><strong>{t('teacherSpace.teacherAI.evaluation')}</strong> {output.data.evaluation}</p>}
-              {output.data?.homework && <p><strong>{t('teacherSpace.teacherAI.homework')}</strong> {output.data.homework}</p>}
-              {!output.data?.stages && <pre>{JSON.stringify(output.data, null, 2)}</pre>}
+              {!Array.isArray(output.data?.stages) && <pre>{JSON.stringify(output.data, null, 2)}</pre>}
             </div>
           )}
 

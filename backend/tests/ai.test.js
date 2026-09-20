@@ -14,18 +14,19 @@ let studentToken;
 let teacherToken;
 
 const fakeProvider = async (prompt) => {
-  if (prompt.includes('خطة درس بصيغة JSON') || prompt.includes('أنشئ خطة درس')) {
+  if (prompt.includes('المخطط الإلزامي') || prompt.includes('هيكل المذكرة الرسمية')) {
     return JSON.stringify({
-      title: 'خطة درس الرياضيات',
-      objectives: ['التعرف على المفهوم', 'تطبيق المفهوم في تمارين'],
-      materials: ['كتاب التلميذ', 'سبورة'],
+      competency: 'مكوّن تجريبي',
+      objective: 'هدف تجريبي',
+      content: 'محتوى تجريبي',
+      lessonGoal: 'هدف حصة تجريبي',
       stages: [
-        { time: '5 د', name: 'تمهيد', goal: 'تهيئة التلميذ', activity: 'سؤال تمهيدي' },
-        { time: '25 د', name: 'شرح', goal: 'تقديم المحتوى', activity: 'شرح المفهوم' },
-        { time: '15 د', name: 'تقويم', goal: 'قياس التعلم', activity: 'تمارين قصيرة' }
-      ],
-      evaluation: 'ملاحظة إنجاز التمارين',
-      homework: 'حل تمرين من الكتاب'
+        { name: 'حساب ذهني', teacherActivity: 'نشاط معلم 1', learnerActivity: 'نشاط متعلم 1', tools: 'سبورة' },
+        { name: 'تعهد المكتسبات', teacherActivity: 'نشاط معلم 2', learnerActivity: 'نشاط متعلم 2', tools: 'بطاقات' },
+        { name: 'الوضعية الاستكشافية + التعلم المنهجي الآلي', teacherActivity: 'نشاط معلم 3', learnerActivity: 'نشاط متعلم 3', tools: 'كتاب' },
+        { name: 'تعلم ادماجي', teacherActivity: 'نشاط معلم 4', learnerActivity: 'نشاط متعلم 4', tools: 'كراس' },
+        { name: 'تقييم', teacherActivity: 'نشاط معلم 5', learnerActivity: 'نشاط متعلم 5', tools: 'ورقة' }
+      ]
     });
   }
   if (prompt.includes('شرائح عرض تقديمي') || prompt.includes('أنشئ شرائح')) {
@@ -130,17 +131,23 @@ describe('المرحلة 7.1 — رفيقي مربوط بمحتوى المنهج
 });
 
 describe('المرحلة 7.2 — مساعد الأستاذ (خطة/ملخص/شرائح/أسئلة)', () => {
-  it('توليد خطة درس كاملة يعيد بنية JSON صحيحة', async () => {
+  it('توليد خطة درس كاملة يعيد هيكل المذكرة الرسمية (5 مراحل مسماة)', async () => {
     const res = await request(app)
       .post('/api/ai/generate-lesson-plan')
       .set('Authorization', `Bearer ${teacherToken}`)
       .send({ subject: 'الرياضيات', level: 'السنة الأولى', lessonTitle: 'الجمع' });
     expect(res.status).toBe(200);
     expect(res.body.lessonPlan).toBeTruthy();
-    expect(res.body.lessonPlan.objectives.length).toBeGreaterThan(0);
+    expect(res.body.lessonPlan.competency).toBeTruthy();
+    expect(res.body.lessonPlan.lessonGoal).toBeTruthy();
     expect(Array.isArray(res.body.lessonPlan.stages)).toBe(true);
-    expect(res.body.lessonPlan.stages.length).toBeGreaterThan(0);
-    expect(res.body.lessonPlan.stages[0].time).toBeTruthy();
+    expect(res.body.lessonPlan.stages.length).toBe(5);
+    for (const s of res.body.lessonPlan.stages) {
+      expect(s.name).toBeTruthy();
+      expect(s.teacherActivity).toBeTruthy();
+      expect(s.learnerActivity).toBeTruthy();
+      expect(s.tools).toBeTruthy();
+    }
   });
 
   it('توليد ملخص درس يعيد نصا', async () => {
@@ -186,6 +193,17 @@ describe('المرحلة 7.2 — مساعد الأستاذ (خطة/ملخص/شر
       .set('Authorization', `Bearer ${teacherToken}`)
       .send({ subject: 'الرياضيات' });
     expect(res.status).toBe(400);
+  });
+
+  it('مخرجات ذكاء مشوهة تُرفض بخطأ واضح بدل حفظ قمامة', async () => {
+    __setCallProvider(async () => JSON.stringify({ wrong: 'schema', stages: [{ name: 'x' }] }));
+    const res = await request(app)
+      .post('/api/ai/generate-lesson-plan')
+      .set('Authorization', `Bearer ${teacherToken}`)
+      .send({ subject: 'الرياضيات', level: 'السنة الأولى', lessonTitle: 'الجمع' });
+    expect(res.status).toBe(422);
+    expect(res.body.error).toContain('للقالب الرسمي');
+    __setCallProvider(fakeProvider);
   });
 
   it('توليد بلا مفتاح يعيد 400 برسالة واضحة', async () => {
