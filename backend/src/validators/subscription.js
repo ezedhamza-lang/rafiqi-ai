@@ -5,7 +5,7 @@ export const subscriptionRequestSchema = z.object({
   lastName: z.string().trim().min(2, { error: 'اللقب مطلوب' }),
   birthDate: z
     .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, { error: 'تاريخ الازدياد غير صحيح (YYYY-MM-DD)' }),
+    .regex(/^\d{4}-\d{2}-\d{2}$/, { error: 'تاريخ الميلاد غير صحيح (YYYY-MM-DD)' }),
   cin: z.string().trim().optional().nullable(),
   gender: z.string().trim().optional().nullable(),
   level: z.string().trim().min(1, { error: 'المستوى مطلوب' }),
