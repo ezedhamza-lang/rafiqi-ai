@@ -105,9 +105,9 @@ export default function App() {
                   <Route path="/register" element={<GuestOnly><Register /></GuestOnly>} />
                   <Route path="/account" element={<RequireRole><AccountSettings /></RequireRole>} />
                   <Route element={<DashboardLayout />}>
-                    <Route path="/dashboard" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR', 'TEACHER']}><Dashboard /></RequireRole>} />
-                    <Route path="/students" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR']}><Students /></RequireRole>} />
-                    <Route path="/registration" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR']}><Registration /></RequireRole>} />
+                    <Route path="/dashboard" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR', 'TEACHER', 'PARENT']}><Dashboard /></RequireRole>} />
+                    <Route path="/students" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR', 'PARENT']}><Students /></RequireRole>} />
+                    <Route path="/registration" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR', 'PARENT']}><Registration /></RequireRole>} />
                     <Route path="/student" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR']}><StudentSection /></RequireRole>} />
                     <Route path="/my-requests" element={<RequireRole><MyRequests /></RequireRole>} />
                     <Route path="/payment" element={<RequireRole><PaymentCenter /></RequireRole>} />
