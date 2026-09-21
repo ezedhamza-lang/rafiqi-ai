@@ -47,13 +47,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          LATEST=$(ls -1t rafiqi-backup-*.dump.gz | head -1)
+          LATEST=$(ls -1t rafiqi-backup-*.dump.gz | grep -v rafiqi-backup-latest | head -1)
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git checkout --orphan db-backups
           git rm -rf --cached . >/dev/null 2>&1 || true
           cp "$LATEST" rafiqi-backup-latest.dump.gz
-          rm -f rafiqi-backup-*.dump.gz
+          rm -f "$LATEST"
           git add rafiqi-backup-latest.dump.gz
           git commit -m "Nightly DB backup $(date -u +%F)"
           git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" db-backups
