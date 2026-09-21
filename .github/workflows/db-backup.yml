@@ -54,6 +54,6 @@ jobs:
           git rm -rf --cached . >/dev/null 2>&1 || true
           cp "$LATEST" rafiqi-backup-latest.dump.gz
           rm -f "$LATEST"
-          git add rafiqi-backup-latest.dump.gz
+          git add -f rafiqi-backup-latest.dump.gz
           git commit -m "Nightly DB backup $(date -u +%F)"
           git push -f "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" db-backups
