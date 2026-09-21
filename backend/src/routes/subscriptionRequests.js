@@ -115,10 +115,11 @@ router.post(
       }
     });
 
-    // توجيه التنبيه لمدرسة الولي فقط (مديرو مدرسته + الإدارة/المشرف)، لا كل مديري المنصة.
+    // توجيه التنبيه: إذا كان للولي مدرسة → مديرو مدرسته + الإدارة؛ 
+    // وإلا (ولي بلا مدرسة بعد) → كل مديري المدارس + الإدارة ليُسنَد لهم
     const parentSchoolId = req.user?.schoolId ?? null;
     const directors = await prisma.user.findMany({
-      where: { role: 'SCHOOL_DIRECTOR', ...(parentSchoolId != null ? { schoolId: parentSchoolId } : { schoolId: -1 }) },
+      where: { role: 'SCHOOL_DIRECTOR', ...(parentSchoolId != null ? { schoolId: parentSchoolId } : {}) },
       select: { id: true }
     });
     const managers = await prisma.user.findMany({ where: { role: { in: ['ADMIN', 'SUPER_ADMIN'] } }, select: { id: true } });
