@@ -341,7 +341,8 @@
     "reason": "Reason",
     "date": "Date",
     "cancel": "Cancel",
-    "classLabel": "Class: {{class}}"
+    "classLabel": "Class: {{class}}",
+    "parentsOnly": "This form is available to parents only. Sign in with a parent account to submit a new registration request."
   },
   "studentSection": {
     "title": "Student section",
@@ -1446,7 +1447,11 @@
       "audioTitle": "Recording Title",
       "startRec": "Start Recording",
       "saveAudio": "Save Recording",
-      "empty": "No works yet. Start drawing, writing, or recording!"
+      "empty": "No works yet. Start drawing, writing, or recording!",
+      "colorAria": "Color {{color}}",
+      "sizeAria": "Size {{size}}",
+      "clear": "Clear canvas",
+      "deleteWork": "Delete work"
     },
     "dailyChallenge": {
       "title": "Daily Challenge",
@@ -1782,6 +1787,7 @@
       "lessonContent": "Lesson content",
       "interactiveLessons": "Interactive Lessons",
       "browseBook": "Browse Book",
+      "allLevels": "All levels",
       "subjects": {
         "math": "Math",
         "anisi": "Anisi — Reading",
@@ -1858,6 +1864,7 @@
     "videos": {
       "title": "Short Videos",
       "allSubjects": "All Subjects",
+      "allLevels": "All levels",
       "empty": "No videos available yet — short videos for each lesson from approved official sources will be added soon."
     },
     "stories": {

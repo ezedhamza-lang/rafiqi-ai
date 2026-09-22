@@ -90,6 +90,15 @@ describe('subscription-requests (طلبات الولي)', () => {
     expect(res.status).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
   });
+
+  it('يرجع مصفوفة فارغة لغير الولي (403 سابق، الآن 200)', async () => {
+    const token = await getToken('teacher@test.tn', 'teacher123');
+    const res = await request(app)
+      .get('/api/subscription-requests/mine')
+      .set('Authorization', `Bearer ${token}`);
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual([]);
+  });
 });
 
 describe('admin/subscriptions (اللوحة المالية)', () => {

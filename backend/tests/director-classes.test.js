@@ -86,4 +86,14 @@ describe('إدارة الأقسام من المدير (إنشاء + إسناد �
     expect(Array.isArray(res.body)).toBe(true);
     expect(res.body.length).toBeGreaterThan(0);
   });
+
+  it('يسمح للمدير العام (ADMIN) بقائمة الأساتذة', async () => {
+    const admin = await login('admin@education.tn', 'admin123');
+    expect(admin.body.token).toBeTruthy();
+    const res = await request(app)
+      .get('/api/director/teachers')
+      .set('Authorization', `Bearer ${admin.body.token}`);
+    expect(res.status).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+  });
 });

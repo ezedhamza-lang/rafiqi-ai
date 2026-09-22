@@ -13,35 +13,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="رفيقي" />
-    
-    <!-- Batch 6: Pre-load theme & language settings to prevent flash -->
-    <script>
-      (function () {
-        try {
-          // Theme initialization (existing)
-          var stored = localStorage.getItem('rafiqi-theme');
-          var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-          var theme = stored === 'light' || stored === 'dark' ? stored : prefersDark ? 'dark' : 'light';
-          document.documentElement.setAttribute('data-theme', theme);
-          
-          // Batch 6: Language/Direction initialization (NEW)
-          // This prevents FOUC (Flash of Unstyled Content) on page load
-          var langStorage = localStorage.getItem('rafiqi-lang');
-          var validLangs = ['ar', 'en'];
-          var lang = validLangs.includes(langStorage) ? langStorage : 'ar';
-          var dir = lang === 'ar' ? 'rtl' : 'ltr';
-          
-          document.documentElement.setAttribute('lang', lang);
-          document.documentElement.setAttribute('dir', dir);
-          
-          // Add direction class for CSS targeting
-          document.documentElement.className = document.documentElement.className.replace(/\b(dir-\w+)\b/g, '') + ' dir-' + dir;
-        } catch (e) {
-          // Silently fail - defaults in HTML will be used
-        }
-      })();
-    </script>
-    
     <!-- Preconnect to external resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -119,40 +90,9 @@
     <!-- React root -->
     <div id="root"></div>
     
-    <!-- Batch 6: Remove loading fallback after React mounts -->
-    <script>
-      function hideFallback() {
-        var fallback = document.getElementById('loading-fallback');
-        if (fallback) {
-          fallback.style.opacity = '0';
-          fallback.style.transition = 'opacity 0.3s ease';
-          setTimeout(function() {
-            var el = document.getElementById('loading-fallback');
-            if (el) el.remove();
-          }, 300);
-        }
-      }
-      // Hide loading screen once React is ready
-      window.addEventListener('load', function() {
-        setTimeout(hideFallback, 100);
-      });
-      // Absolute fallback: never trap the user on the splash.
-      // If React mounted, its own removal already ran; otherwise reveal the page anyway.
-      setTimeout(function() {
-        var root = document.getElementById('root');
-        if (!root || !root.hasChildNodes()) {
-          var fallback = document.getElementById('loading-fallback');
-          if (fallback) {
-            fallback.innerHTML = '<div style="text-align:center;padding:2rem;font-family:Tajawal,sans-serif;color:#0369a1;">'
-              + '<p>تعذر تحميل التطبيق. يرجى تحديث الصفحة (Ctrl+F5).</p>'
-              + '<p>Impossible de charger. Veuillez actualiser (Ctrl+F5).</p></div>';
-          }
-        } else {
-          hideFallback();
-        }
-      }, 15000);
-    </script>
-    
+    <!-- Boot: theme/lang pre-init + splash hide (external to satisfy CSP script-src 'self') -->
+    <script src="/boot.js"></script>
+
     <!-- Main app entry point -->
     <script type="module" src="/src/main.jsx"></script>
   </body>

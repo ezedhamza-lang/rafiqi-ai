@@ -101,6 +101,14 @@ export default function App() {
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/privacy" element={<Privacy />} />
+                  <Route
+                    path="/help"
+                    element={
+                      <div className="container" style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
+                        <HelpRequest />
+                      </div>
+                    }
+                  />
                   <Route path="/login" element={<GuestOnly><Login /></GuestOnly>} />
                   <Route path="/register" element={<GuestOnly><Register /></GuestOnly>} />
                   <Route path="/account" element={<RequireRole><AccountSettings /></RequireRole>} />
@@ -113,7 +121,6 @@ export default function App() {
                     <Route path="/payment" element={<RequireRole><PaymentCenter /></RequireRole>} />
                     <Route path="/messages" element={<RequireRole><Messages /></RequireRole>} />
                     <Route path="/message-center" element={<RequireRole><MessageCenter /></RequireRole>} />
-                    <Route path="/help" element={<RequireRole><HelpRequest /></RequireRole>} />
                     <Route path="/admin" element={<RequireRole roles={['ADMIN', 'SUPER_ADMIN', 'SCHOOL_DIRECTOR']}><Admin /></RequireRole>} />
                     <Route path="/teacher/*" element={<RequireRole roles={['TEACHER']}><TeacherDashboard /></RequireRole>} />
                     <Route path="/student-space/*" element={<RequireRole roles={['STUDENT']}><StudentSpace /></RequireRole>} />

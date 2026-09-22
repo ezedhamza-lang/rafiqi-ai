@@ -8,16 +8,6 @@ import { actorSchoolId } from '../tenant.js';
 
 const router = Router();
 
-// Public health check endpoint (for Render / load balancer)
-router.get('/health', asyncHandler(async (req, res) => {
-  try {
-    await prisma.$queryRaw`SELECT 1`;
-    res.json({ status: 'ok', db: 'up', uptime: process.uptime() });
-  } catch {
-    res.status(503).json({ status: 'error', db: 'down', uptime: process.uptime() });
-  }
-}));
-
 router.use(authMiddleware);
 
 const SELECT = {

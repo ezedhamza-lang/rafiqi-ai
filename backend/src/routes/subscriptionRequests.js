@@ -25,7 +25,6 @@ router.use(authMiddleware);
  */
 router.get(
   '/mine',
-  requireRole('PARENT'),
   asyncHandler(async (req, res) => {
     const requests = await prisma.subscriptionRequest.findMany({
       where: { parentId: req.user.id },

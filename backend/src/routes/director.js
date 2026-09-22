@@ -193,7 +193,7 @@ router.get('/classes', asyncHandler(async (req, res) => {
  *       200:
  *         description: قائمة الأساتذة
  */
-router.get('/teachers', requireRole('SCHOOL_DIRECTOR'), asyncHandler(async (req, res) => {
+router.get('/teachers', requireRole('SCHOOL_DIRECTOR', 'ADMIN', 'SUPER_ADMIN'), asyncHandler(async (req, res) => {
   const sid = actorSchoolId(req);
   const teachers = await prisma.user.findMany({
     where: { role: 'TEACHER', ...(sid != null ? { schoolId: sid } : {}) },

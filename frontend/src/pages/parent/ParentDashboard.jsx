@@ -1,25 +1,13 @@
-import { useState, useEffect } from 'react';
 import { useI18n } from '../../i18n/index.jsx';
-import { api } from '../../api/client.js';
 
-const BADGE_EMOJIS = ['â­','🏆','🌟','🎯','📚','🔥','💪','🦁','🎓','👑'];
+const BADGE_EMOJIS = ['⭐','🏆','🌟','🎯','📚','🔥','💪','🦁','🎓','👑'];
 
 export default function ParentDashboard({ childrenData }) {
   const { t } = useI18n();
-  const [summaries, setSummaries] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!childrenData?.length) { setLoading(false); return; }
-    Promise.all(
-      childrenData.map(c =>
-        api.get(`/student/dashboard/${c.id}`).catch(() => null)
-      )
-    ).then(results => {
-      setSummaries(childrenData.map((c, i) => ({ child: c, dash: results[i] })));
-      setLoading(false);
-    });
-  }, [childrenData]);
+  const summaries = (childrenData || []).map(({ student, progress }) => ({
+    child: student,
+    dash: progress
+  }));
 
   if (!childrenData?.length) {
     return (
@@ -39,15 +27,11 @@ export default function ParentDashboard({ childrenData }) {
         {t('parentSpace.dashboard.title', 'نظرة عامة على الأبناء')}
       </h2>
 
-      {loading ? (
-        <div className="pd-loading"><div className="spinner" /></div>
-      ) : (
-        <div className="pd-grid">
-          {summaries.map(({ child, dash }) => (
-            <ChildCard key={child.id} child={child} dash={dash} t={t} />
-          ))}
-        </div>
-      )}
+      <div className="pd-grid">
+        {summaries.map(({ child, dash }) => (
+          <ChildCard key={child.id} child={child} dash={dash} t={t} />
+        ))}
+      </div>
 
       <div className="pd-tips">
         <h3 className="pd-tips__title">
@@ -71,12 +55,12 @@ export default function ParentDashboard({ childrenData }) {
 }
 
 function ChildCard({ child, dash, t }) {
-  const xp = dash?.xp || child.xp || 0;
-  const coins = dash?.coins || child.coins || 0;
+  const xp = dash?.xp || 0;
+  const coins = dash?.coins || 0;
   const level = dash?.level || child.level || 1;
   const streak = dash?.streakDays || 0;
   const badges = dash?.badges || [];
-  const recentActivity = dash?.recentActivity || [];
+  const recentActivity = dash?.activities || [];
   const subjectProgress = dash?.subjectProgress || [];
 
   return (
@@ -150,7 +134,7 @@ function ChildCard({ child, dash, t }) {
                 <span className="material-icons pd-activity__icon" style={{ fontSize: '0.9rem' }}>
                   {a.type === 'lesson' ? 'menu_book' : a.type === 'quiz' ? 'quiz' : 'star'}
                 </span>
-                <span className="pd-activity__text">{a.description || a.title || 'نشاط'}</span>
+                <span className="pd-activity__text">{a.description || a.detail || a.title || 'نشاط'}</span>
               </li>
             ))}
           </ul>

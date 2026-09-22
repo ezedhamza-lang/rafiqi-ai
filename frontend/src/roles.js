@@ -130,7 +130,7 @@ export function calendarAudienceLabel(t, audience) {
 }
 
 export function canManage(user) {
-  return user && ['ADMIN', 'SCHOOL_DIRECTOR'].includes(user.role);
+  return user && ['ADMIN', 'SCHOOL_DIRECTOR', 'SUPER_ADMIN'].includes(user.role);
 }
 
 export function canApproveRequests(user) {

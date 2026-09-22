@@ -10,6 +10,7 @@ function DrawingCanvas({ onSave }) {
   const [size, setSize] = useState(6);
   const [drawing, setDrawing] = useState(false);
   const lastPos = useRef(null);
+  const { t } = useI18n();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -68,21 +69,22 @@ function DrawingCanvas({ onSave }) {
         <div className="cp-draw__colors">
           {COLORS.map(c => (
             <button key={c} className={`cp-color-btn ${color === c ? 'cp-color-btn--active' : ''}`}
-              style={{ background: c }} onClick={() => setColor(c)} />
+              style={{ background: c }} onClick={() => setColor(c)}
+              aria-label={t('studentSpace.portfolio.colorAria', { color: c })} />
           ))}
         </div>
         <div className="cp-draw__sizes">
           {SIZES.map(s => (
             <button key={s} className={`cp-size-btn ${size === s ? 'cp-size-btn--active' : ''}`}
-              onClick={() => setSize(s)}>
+              onClick={() => setSize(s)} aria-label={t('studentSpace.portfolio.sizeAria', { size: s })}>
               <span style={{ width: s, height: s, background: 'currentColor', borderRadius: '50%', display: 'block' }} />
             </button>
           ))}
         </div>
-        <button className="cp-draw__clear" onClick={clear}>
+        <button className="cp-draw__clear" onClick={clear} aria-label={t('studentSpace.portfolio.clear')}>
           <span className="material-icons">delete</span>
         </button>
-        <button className="cp-draw__save" onClick={save}>
+        <button className="cp-draw__save" onClick={save} aria-label={t('studentSpace.portfolio.save')}>
           <span className="material-icons">save</span>
         </button>
       </div>
@@ -210,7 +212,7 @@ function PortfolioGallery({ items, onDelete }) {
             <span className="cp-gallery__item-date">
               {new Date(item.timestamp).toLocaleDateString('ar-TN', { month: 'short', day: 'numeric' })}
             </span>
-            <button className="cp-gallery__delete" onClick={() => onDelete(i)}>
+            <button className="cp-gallery__delete" onClick={() => onDelete(i)} aria-label={t('studentSpace.portfolio.deleteWork')}>
               <span className="material-icons">close</span>
             </button>
           </div>

@@ -120,15 +120,27 @@ app.use(cors({
 }));
 
 // رفض صريح لمصادر CORS غير المرخّصة (طلبات المتصفح الحاملة لرأس Origin).
-// استثناء: عودة Google OAuth (POST من accounts.google.com) — محمية أصلاً
+// استثناء 1: same-origin — عندما تُقدَّم الواجهة من هذا الخادم نفسه
+// (Render / localhost:3001) يرسل المتصفح Origin = host الخاص به في كل POST،
+// ورفضه يعطّل تسجيل الدخول والنماذج كلها. المقارنة على مستوى المضيف
+// (مع تجاهل المنفذ الافتراضي) ودون إمكانية التلاعب ببادئة النطاق.
+// استثناء 2: عودة Google OAuth (POST من accounts.google.com) — محمية أصلاً
 // بفحص g_csrf_token (cookie مقابل body) داخل المسار نفسه.
 app.use((req, res, next) => {
   const origin = req.headers.origin;
   if (req.path === '/api/auth/google-redirect') return next();
-  if (origin && !config.allowedOrigins.includes(origin)) {
+  if (!origin) return next();
+  if (config.allowedOrigins.includes(origin)) return next();
+  const host = (req.headers.host || '').toLowerCase().replace(/:\d+$/, '');
+  let originHost = '';
+  try {
+    originHost = new URL(origin).hostname.toLowerCase();
+  } catch {
     return res.status(403).json({ error: `المصدر غير مسموح به عبر CORS: ${origin}` });
   }
-  next();
+  const stripWww = (h) => h.replace(/^www\./, '');
+  if (originHost && stripWww(originHost) === stripWww(host)) return next();
+  return res.status(403).json({ error: `المصدر غير مسموح به عبر CORS: ${origin}` });
 });
 
 // ===== روابط محمية موقّعة للملفات الحساسة (أوراق الامتحانات + وثائق الأولياء + تسجيلات الحصص) =====
