@@ -171,7 +171,7 @@ export default function PaymentCenter() {
   const currency = (n) => t('paymentCenter.currency', { n });
 
   return (
-    <>
+    <div className="container" style={{ maxWidth: 1000, paddingTop: '2rem', paddingBottom: '2rem' }}>
       <h2>{t('paymentCenter.title')}</h2>
       <p style={{ color: 'var(--muted)', marginBottom: '1.4rem', lineHeight: 1.8 }}>
         {t('paymentCenter.subtitle')}
@@ -479,6 +479,6 @@ export default function PaymentCenter() {
           </form>
         </div>
       )}
-    </>
+    </div>
   );
 }

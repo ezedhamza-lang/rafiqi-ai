@@ -69,7 +69,7 @@ export default function Registration() {
   };
 
   return (
-    <>
+    <div className="container" style={{ maxWidth: 960, paddingTop: '2rem', paddingBottom: '2rem' }}>
       <h2>{t('registration.title')}</h2>
       <p style={{ color: 'var(--muted)', marginBottom: '1.4rem', lineHeight: 1.8 }}>
         {t('registration.subtitle')}
@@ -203,6 +203,6 @@ export default function Registration() {
           )}
         </>
       )}
-    </>
+    </div>
   );
 }
