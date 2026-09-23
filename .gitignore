@@ -38,3 +38,9 @@ backend/scripts/audit-student-pages-report.json
 
 # Google OAuth secrets (never commit)
 client_secret*.json
+
+# CNTE dossier: never commit videos (heavy + personal data) - they go straight to the final zip
+dossier-cnte2026/05-medias/*.mp4
+dossier-cnte2026/05-medias/*.mov
+dossier-cnte2026/05-medias/*.avi
+dossier-cnte2026/05-medias/*.mkv
