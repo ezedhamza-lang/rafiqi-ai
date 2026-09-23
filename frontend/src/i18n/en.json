@@ -742,6 +742,7 @@
     "dashboard": {
       "title": "Children Overview",
       "noChildren": "No children linked to your account",
+      "goToChildren": "Go to My children",
       "badges": "Badges",
       "progress": "Academic progress",
       "recent": "Recent activity",
@@ -812,6 +813,7 @@
   },
   "childProgress": {
     "empty": "No children registered yet. Add your child from the \"My children\" page.",
+    "goToChildren": "Go to My children",
     "title": "Children's progress tracking",
     "noAccount": "No student account",
     "noData": "No data",

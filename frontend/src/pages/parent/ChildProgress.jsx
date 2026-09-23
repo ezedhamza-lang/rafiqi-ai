@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useI18n } from '../../i18n/index.jsx';
 
 export default function ChildProgress({ childrenData }) {
@@ -6,6 +7,11 @@ export default function ChildProgress({ childrenData }) {
     return (
       <div className="panel">
         <div className="empty">{t('childProgress.empty')}</div>
+        <div style={{ textAlign: 'center', marginTop: '1rem' }}>
+          <Link to="/students" className="btn btn-primary btn-sm">
+            <span className="material-icons">groups</span> {t('childProgress.goToChildren')}
+          </Link>
+        </div>
       </div>
     );
   }

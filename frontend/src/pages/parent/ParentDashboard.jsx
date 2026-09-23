@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useI18n } from '../../i18n/index.jsx';
 
 const BADGE_EMOJIS = ['⭐','🏆','🌟','🎯','📚','🔥','💪','🦁','🎓','👑'];
@@ -15,6 +16,9 @@ export default function ParentDashboard({ childrenData }) {
         <div className="pd-empty">
           <span className="material-icons" style={{ fontSize: '3rem', color: 'var(--muted)' }}>family_restroom</span>
           <p>{t('parentSpace.dashboard.noChildren', 'لا يوجد أطفال مرتبطين بحسابك')}</p>
+          <Link to="/students" className="btn btn-primary btn-sm" style={{ marginTop: '1rem' }}>
+            <span className="material-icons">groups</span> {t('parentSpace.dashboard.goToChildren', 'الذهاب إلى أطفالي')}
+          </Link>
         </div>
       </div>
     );
