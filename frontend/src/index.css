@@ -8871,3 +8871,15 @@ html:not(.mi-ready) .material-icons{color:transparent !important}
 .reg-actions{display:flex;gap:.7rem}
 .reg-actions .btn{flex:1}
 @media (max-width:640px){.reg-card{padding:1rem}.reg-shimmer-banner .gold-shimmer{font-size:1.15rem}.reg-actions{flex-direction:column}}
+/* Registration journey header: centered title, tagline, numbered steps */
+.reg-wizard h2{text-align:center;margin-bottom:.2rem}
+.reg-tagline{text-align:center;font-weight:800;font-size:.98rem;color:var(--primary);margin:.35rem 0 .3rem}
+.reg-desc{text-align:center;color:var(--muted);line-height:1.8;margin:0 0 .9rem;font-size:.9rem}
+.reg-steps2{list-style:none;display:flex;align-items:center;justify-content:center;gap:.6rem;margin:0 0 1rem;padding:0}
+.reg-steps2 li{display:flex;align-items:center;gap:.45rem;font-size:.85rem;font-weight:700;color:var(--muted)}
+.reg-steps2 li .n{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;border:2px solid var(--border);font-size:.8rem;font-weight:800;color:var(--muted);background:#fff}
+.reg-steps2 li.on{color:var(--primary)}
+.reg-steps2 li.on .n{background:var(--primary);border-color:var(--primary);color:#fff}
+.reg-steps2 li.reg-steps2__sep{flex:0 0 34px;height:2px;background:var(--border);border-radius:99px;padding:0}
+.reg-card{padding:1rem}
+.reg-card__title{margin:0 0 .9rem}

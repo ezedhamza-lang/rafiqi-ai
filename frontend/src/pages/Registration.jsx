@@ -78,23 +78,20 @@ export default function Registration() {
   };
 
   return (
-    <div className="container reg-wizard" style={{ maxWidth: 960, paddingTop: '1rem', paddingBottom: '2rem' }}>
+    <div className="container reg-wizard" style={{ maxWidth: 960, paddingTop: '.75rem', paddingBottom: '2rem' }}>
       {error && <div className="form-error">{error}</div>}
       {success && <div className="form-success">{success}</div>}
 
       {canSubmit && (
         <>
-          <div className="reg-shimmer-banner">
-            <p className="gold-shimmer">{t('registration.welcomeTag')}</p>
-          </div>
           <h2>{t('registration.title')}</h2>
-          <p style={{ color: 'var(--muted)', marginBottom: '1.2rem', lineHeight: 1.8 }}>
-            {t('registration.welcomeDesc')}
-          </p>
-          <div className="reg-steps">
-            <span className="reg-steps__label">{t('registration.stepOf', { cur: step, total: 2 })}</span>
-            <div className="reg-steps__bar"><div className="reg-steps__fill" style={{ width: step === 1 ? '50%' : '100%' }} /></div>
-          </div>
+          <p className="reg-tagline">{t('registration.welcomeTag')}</p>
+          <p className="reg-desc">{t('registration.welcomeDesc')}</p>
+          <ol className="reg-steps2">
+            <li className={step === 1 ? 'on' : ''}><span className="n">1</span> {t('registration.step1Short')}</li>
+            <li className="reg-steps2__sep" aria-hidden="true" />
+            <li className={step === 2 ? 'on' : ''}><span className="n">2</span> {t('registration.step2Title')}</li>
+          </ol>
           <form ref={formRef} onSubmit={submit} style={{ marginBottom: '2rem' }}>
             {step === 1 && (
               <div className="reg-card">
@@ -125,6 +122,17 @@ export default function Registration() {
                 </div>
                 <div className="form-row">
                   <div className="form-group">
+                    <label>{t('registration.requestedLevel')}</label>
+                    <select required value={form.level} onChange={(e) => setForm({ ...form, level: e.target.value })}>
+                      <option value="">{t('registration.choose')}</option>
+                      {levels.map((l) => (
+                        <option key={l} value={l}>{l}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group">
                     <label>{t('registration.idCard')}</label>
                     <input value={form.cin} onChange={(e) => setForm({ ...form, cin: e.target.value })} />
                   </div>
@@ -139,23 +147,12 @@ export default function Registration() {
                 <h3 className="reg-card__title"><span className="material-icons">school</span> {t('registration.step2Title')}</h3>
                 <div className="form-row">
                   <div className="form-group">
-                    <label>{t('registration.requestedLevel')}</label>
-                    <select required value={form.level} onChange={(e) => setForm({ ...form, level: e.target.value })}>
-                      <option value="">{t('registration.choose')}</option>
-                      {levels.map((l) => (
-                        <option key={l} value={l}>{l}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="form-group">
                     <label>{t('registration.schoolYear')}</label>
                     <select value={form.schoolYear} onChange={(e) => setForm({ ...form, schoolYear: e.target.value })}>
                       <option>2026-2027</option>
                       <option>2025-2026</option>
                     </select>
                   </div>
-                </div>
-                <div className="form-row">
                   <div className="form-group">
                     <label>{t('registration.currentSchool')}</label>
                     <input value={form.schoolName} onChange={(e) => setForm({ ...form, schoolName: e.target.value })} />
@@ -166,7 +163,7 @@ export default function Registration() {
                   <textarea value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} placeholder={t('registration.notesPlaceholder')} />
                 </div>
                 <div className="reg-note">
-                  <span className="material-icons">info</span>
+                  <span className="material-icons">lock</span>
                   <span>{t('registration.reviewNote')}</span>
                 </div>
                 <div className="reg-actions">
