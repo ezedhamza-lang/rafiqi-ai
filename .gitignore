@@ -44,3 +44,5 @@ dossier-cnte2026/05-medias/*.mp4
 dossier-cnte2026/05-medias/*.mov
 dossier-cnte2026/05-medias/*.avi
 dossier-cnte2026/05-medias/*.mkv
+# Classroom credential printouts (trial passwords - never ship)
+dossier-cnte2026/02-scenarios/cartes-eleves.html.pdf
