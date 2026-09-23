@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { NavLink, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { useChat } from '../context/ChatContext.jsx';
 import { useNotifications } from '../context/NotificationContext.jsx';
@@ -85,11 +85,23 @@ export default function Header() {
   const { unread: msgUnread, connected } = useChat();
   const { unreadCount, recent, markAllRead } = useNotifications();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [notifOpen, setNotifOpen] = useState(false);
   const notifRef = useRef(null);
 
   const navItems = user ? ROLE_NAV[user.role] || PUBLIC_NAV : PUBLIC_NAV;
+
+  // تغلق قائمة الهيدر المنسدلة عند التنقل: الهيدر لا يُعاد بناؤه بين الصفحات،
+  // فيبقى التركيز على الرابط المضغوط وتظل :focus-within مفعّلة والقائمة معلقة.
+  const dismissMenus = () => {
+    setMenuOpen(false);
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+  };
+
+  useEffect(() => {
+    dismissMenus();
+  }, [pathname]);
 
   useEffect(() => {
     function onDocClick(e) {
@@ -245,7 +257,7 @@ export default function Header() {
                   to={item.to}
                   end
                   className={({ isActive }) => (isActive ? 'active' : '')}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={dismissMenus}
                 >
                   <span className="material-icons" aria-hidden="true">{item.icon}</span>
                   {t(`nav.${item.key}`)}
@@ -265,7 +277,7 @@ export default function Header() {
                           to={child.to}
                           end={child.end}
                           className={({ isActive }) => (isActive ? 'active' : '')}
-                          onClick={() => setMenuOpen(false)}
+                          onClick={dismissMenus}
                         >
                           <span className="material-icons" aria-hidden="true">{child.icon}</span>
                           {t(`nav.${child.key}`)}
@@ -280,7 +292,7 @@ export default function Header() {
                 <NavLink
                   to={item.to}
                   className={({ isActive }) => (isActive ? 'active' : '')}
-                  onClick={() => setMenuOpen(false)}
+                  onClick={dismissMenus}
                 >
                   <span className="material-icons" aria-hidden="true">{item.icon}</span>
                   {t(`nav.${item.key}`)}
