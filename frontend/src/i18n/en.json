@@ -315,6 +315,7 @@
   "registration": {
     "title": "Student registration request",
     "subtitle": "The parent registers their child's details, then the request is submitted to the school director for approval, and after approval it is handed to the general director to complete the subscription (147 TND / school year) and activate the account.",
+    "welcomeShimmer": "A step from you today makes a big difference in your child's future. Register now with Rafiqi.",
     "studentFirstName": "Student first name",
     "studentLastName": "Student last name",
     "birthDate": "Birth date",
