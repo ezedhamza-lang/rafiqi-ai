@@ -8854,3 +8854,20 @@ html:not(.mi-ready) .material-icons{color:transparent !important}
 .gold-shimmer{display:block;text-align:center;font-weight:800;font-size:1.35rem;line-height:1.9;margin:0 0 1rem;background-image:linear-gradient(100deg,#8a6a1f 0%,#d4af37 25%,#fff3c4 50%,#d4af37 75%,#8a6a1f 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:rafiqi-gold-shimmer 4s linear infinite}
 @keyframes rafiqi-gold-shimmer{to{background-position:-200% center}}
 @media (prefers-reduced-motion:reduce){.gold-shimmer{animation:none}}
+/* Registration wizard: scoped under .reg-wizard, no side effects on other pages */
+.reg-shimmer-banner{background:linear-gradient(135deg,#0b2545 0%,#16345f 55%,#0b2545 100%);border-radius:16px;padding:1rem 1.2rem;margin-bottom:1rem;text-align:center;box-shadow:var(--shadow)}
+.reg-shimmer-banner .gold-shimmer{font-size:1.25rem;margin:0}
+.reg-steps{display:flex;align-items:center;gap:.6rem;margin-bottom:1rem}
+.reg-steps__label{font-size:.85rem;font-weight:800;color:var(--primary);white-space:nowrap}
+.reg-steps__bar{flex:1;height:8px;border-radius:99px;background:var(--border);overflow:hidden}
+.reg-steps__fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),#F5B942);transition:width .3s ease}
+.reg-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:1.2rem;margin-bottom:1rem}
+.reg-card__title{display:flex;align-items:center;gap:.5rem;font-size:1rem;font-weight:800;color:var(--primary);margin:0 0 1rem}
+.reg-card__title .material-icons{color:var(--accent)}
+.reg-wizard .form-group input,.reg-wizard .form-group select,.reg-wizard .form-group textarea{border-radius:13px;padding:.8rem 1rem;min-height:48px}
+.reg-wizard .form-group input:focus,.reg-wizard .form-group select:focus,.reg-wizard .form-group textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(21,94,239,.12);background:#fff}
+.reg-note{display:flex;gap:.6rem;align-items:flex-start;background:rgba(232,163,23,.1);border:1px solid rgba(232,163,23,.4);border-radius:13px;padding:.8rem 1rem;font-size:.86rem;line-height:1.7;margin-bottom:1rem}
+.reg-note .material-icons{color:var(--accent);flex-shrink:0}
+.reg-actions{display:flex;gap:.7rem}
+.reg-actions .btn{flex:1}
+@media (max-width:640px){.reg-card{padding:1rem}.reg-shimmer-banner .gold-shimmer{font-size:1.05rem}.reg-actions{flex-direction:column}}
