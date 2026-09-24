@@ -34,6 +34,9 @@ logs_*.zip
 # Visual QA artifacts
 backend/scripts/qa-shots/
 backend/scripts/audit-student-pages-report.json
+backend/screenshots/
+backend/scripts/*.png
+backend/scripts/*.pdf
 
 
 # Google OAuth secrets (never commit)
