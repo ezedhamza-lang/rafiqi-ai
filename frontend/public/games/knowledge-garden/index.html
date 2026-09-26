@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#102A56" />
+  <title>مغامرة رفيقي – حديقة المعرفة</title>
+  <!-- Inline SVG favicon: the mascot, no extra request. -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23155EEF'/%3E%3Cellipse cx='32' cy='36' rx='19' ry='21' fill='%233f8ee0'/%3E%3Ccircle cx='24' cy='33' r='7' fill='%23fff'/%3E%3Ccircle cx='40' cy='33' r='7' fill='%23fff'/%3E%3Ccircle cx='24' cy='33' r='3.4' fill='%2312233f'/%3E%3Ccircle cx='40' cy='33' r='3.4' fill='%2312233f'/%3E%3Cpath d='M32 40l-4 5h8z' fill='%23f0a91c'/%3E%3Crect x='14' y='12' width='36' height='7' rx='3' fill='%231a3a75'/%3E%3Ccircle cx='47' cy='22' r='4' fill='%23f0a91c'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <!-- ======================= 3D canvas ======================= -->
+  <canvas id="kg-canvas"></canvas>
+
+  <!-- ======================= top HUD ======================= -->
+  <div id="kg-hud" class="kg-hud hidden" aria-live="polite">
+    <div class="kg-hud__left">
+      <button id="kg-pause-btn" class="kg-icon-btn" aria-label="إيقاف مؤقت" title="إيقاف مؤقت (Esc)">
+        <span aria-hidden="true">⏸</span>
+      </button>
+      <div class="kg-pill kg-pill--level">
+        <span id="kg-level-name">المرحلة 1</span>
+      </div>
+    </div>
+
+    <div class="kg-hud__center">
+      <div class="kg-progress" role="progressbar" aria-label="تقدّم المرحلة">
+        <div id="kg-progress-bar" class="kg-progress__bar"></div>
+      </div>
+      <div id="kg-progress-text" class="kg-progress__text">0 / 4</div>
+    </div>
+
+    <div class="kg-hud__right">
+      <div class="kg-stat" title="النجوم"><span aria-hidden="true">⭐</span><span id="kg-stars">0</span></div>
+      <div class="kg-stat" title="الأحجار الكريمة"><span aria-hidden="true">💎</span><span id="kg-gems">0</span></div>
+      <div class="kg-streak" id="kg-streak" title="سلسلة النجاح">🔥 <span id="kg-streak-count">0</span></div>
+    </div>
+  </div>
+
+  <!-- ======================= objective banner ======================= -->
+  <div id="kg-objective" class="kg-objective hidden">
+    <div class="kg-objective__beat" id="kg-beat-label">التحدي</div>
+    <div class="kg-objective__prompt" id="kg-prompt">…</div>
+    <div class="kg-objective__target" id="kg-target"></div>
+    <div class="kg-objective__slots" id="kg-slots"></div>
+  </div>
+
+  <button id="kg-hint-btn" class="kg-hint-btn hidden" title="تلميح">
+    <span aria-hidden="true">💡</span> تلميح
+  </button>
+  <div id="kg-feedback" class="kg-feedback" role="status" aria-live="assertive"></div>
+
+  <!-- ======================= title screen ======================= -->
+  <div id="kg-title" class="kg-screen kg-screen--title">
+    <div class="kg-title__card">
+      <div class="kg-title__logo" aria-hidden="true">🦉</div>
+      <h1 class="kg-title__name">مغامرة رفيقي</h1>
+      <p class="kg-title__sub">حديقة المعرفة</p>
+      <p class="kg-title__story">
+        البومة <strong>رفيقي</strong> يريد أن يعيد إحياء حديقة المعرفة!
+        اجمع الحروف، ابنِ الكلمات، ورتّب الجمل لتفتح العوالم السبعة.
+      </p>
+      <div class="kg-title__actions">
+        <button id="kg-start" class="kg-btn kg-btn--primary">ابدأ المغامرة</button>
+        <button id="kg-continue" class="kg-btn kg-btn--ghost hidden">متابعة من حيث توقفت</button>
+      </div>
+      <div class="kg-title__stats" id="kg-title-stats"></div>
+    </div>
+    <button id="kg-sound-toggle" class="kg-sound-toggle" aria-label="الصوت" title="الصوت">
+      <span aria-hidden="true">🔊</span>
+    </button>
+  </div>
+
+  <!-- ======================= world map ======================= -->
+  <div id="kg-map" class="kg-screen kg-screen--map hidden">
+    <div class="kg-map__head">
+      <button id="kg-map-back" class="kg-btn kg-btn--ghost kg-btn--sm">رجوع</button>
+      <h2>خريطة المعرفة</h2>
+      <div class="kg-map__wallet">
+        <span title="النجوم">⭐ <b id="kg-map-stars">0</b></span>
+        <span title="الأحجار الكريمة">💎 <b id="kg-map-gems">0</b></span>
+        <span title="المفاتيح">🔑 <b id="kg-map-keys">0</b></span>
+      </div>
+    </div>
+    <div id="kg-worlds" class="kg-worlds"></div>
+    <div class="kg-map__footer">
+      <button id="kg-daily-btn" class="kg-btn kg-btn--accent">تحدي اليوم 🗓️</button>
+      <button id="kg-skills-btn" class="kg-btn kg-btn--ghost">مهاراتي 📊</button>
+      <button id="kg-wardrobe-btn" class="kg-btn kg-btn--ghost">خزانة البومة 🎽</button>
+      <button id="kg-badges-btn" class="kg-btn kg-btn--ghost">الشارات 🏆</button>
+    </div>
+  </div>
+
+  <!-- ======================= level intro ======================= -->
+  <div id="kg-intro" class="kg-screen kg-screen--intro hidden">
+    <div class="kg-intro__card">
+      <div class="kg-intro__emoji" id="kg-intro-emoji">🌱</div>
+      <h2 id="kg-intro-title">حديقة الحروف</h2>
+      <p id="kg-intro-text">…</p>
+      <ul id="kg-intro-beats" class="kg-intro__beats"></ul>
+      <button id="kg-intro-go" class="kg-btn kg-btn--primary">هيا نبدأ!</button>
+    </div>
+  </div>
+
+  <!-- ======================= results ======================= -->
+  <div id="kg-results" class="kg-screen kg-screen--results hidden">
+    <div class="kg-results__card">
+      <div class="kg-results__title" id="kg-results-title">🎉 أحسنت!</div>
+      <div class="kg-results__stars" id="kg-results-stars">⭐ ⭐ ⭐</div>
+      <div class="kg-results__grid" id="kg-results-grid"></div>
+      <div class="kg-results__mastery">
+        <h3>المهارات المتقنة</h3>
+        <ul id="kg-results-skills" class="kg-results__skills"></ul>
+      </div>
+      <div class="kg-results__rewards" id="kg-results-rewards"></div>
+      <div class="kg-results__actions">
+        <button id="kg-next" class="kg-btn kg-btn--primary">المرحلة التالية</button>
+        <button id="kg-retry" class="kg-btn kg-btn--ghost">إعادة اللعب</button>
+        <button id="kg-to-map" class="kg-btn kg-btn--ghost">العودة إلى الخريطة</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================= pause ======================= -->
+  <div id="kg-pause" class="kg-screen kg-screen--pause hidden">
+    <div class="kg-pause__card">
+      <h2>⏸️ إيقاف مؤقت</h2>
+      <div class="kg-pause__keys">
+        <p><kbd>W A S D</kbd> أو <kbd>الأسهم</kbd> — الحركة</p>
+        <p><kbd>مسافة</kbd> — القفز</p>
+        <p><kbd>Shift</kbd> — الانطلاقة</p>
+      </div>
+      <div class="kg-pause__actions">
+        <button id="kg-resume" class="kg-btn kg-btn--primary">متابعة</button>
+        <button id="kg-quit" class="kg-btn kg-btn--ghost">الخروج إلى الخريطة</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================= daily challenge ======================= -->
+  <div id="kg-daily" class="kg-screen kg-screen--daily hidden">
+    <div class="kg-daily__card">
+      <h2>تحدي اليوم 🗓️</h2>
+      <p class="kg-daily__date" id="kg-daily-date"></p>
+      <p>خمسة تحديات قصيرة. أكملها لتحصل على <strong>نجمة إضافية ⭐</strong> و<strong>أحجار كريمة 💎</strong>.</p>
+      <div id="kg-daily-progress" class="kg-daily__progress"></div>
+      <div class="kg-daily__actions">
+        <button id="kg-daily-start" class="kg-btn kg-btn--primary">ابدأ التحدي</button>
+        <button id="kg-daily-close" class="kg-btn kg-btn--ghost">إغلاق</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================= skills report ======================= -->
+  <div id="kg-skills" class="kg-screen kg-screen--panel hidden">
+    <div class="kg-panel__card">
+      <h2>📊 مهاراتي</h2>
+      <p class="kg-panel__hint">هذه اللوحة توضّح ما أتقنته وما يحتاج إلى مراجعة.</p>
+      <div id="kg-skills-list" class="kg-skills-list"></div>
+      <button id="kg-skills-close" class="kg-btn kg-btn--ghost">إغلاق</button>
+    </div>
+  </div>
+
+  <!-- ======================= wardrobe ======================= -->
+  <div id="kg-wardrobe" class="kg-screen kg-screen--panel hidden">
+    <div class="kg-panel__card">
+      <h2>🎽 خزانة البومة</h2>
+      <p class="kg-panel__hint">تُفتح العناصر بالإنجاز التعليمي — لا تُشترى.</p>
+      <div id="kg-wardrobe-list" class="kg-wardrobe"></div>
+      <button id="kg-wardrobe-close" class="kg-btn kg-btn--ghost">إغلاق</button>
+    </div>
+  </div>
+
+  <!-- ======================= badges ======================= -->
+  <div id="kg-badges" class="kg-screen kg-screen--panel hidden">
+    <div class="kg-panel__card">
+      <h2>🏆 شاراتي</h2>
+      <div id="kg-badges-list" class="kg-badges"></div>
+      <button id="kg-badges-close" class="kg-btn kg-btn--ghost">إغلاق</button>
+    </div>
+  </div>
+
+  <!-- ======================= mobile controls ======================= -->
+  <div id="kg-touch" class="kg-touch hidden">
+    <div id="kg-stick" class="kg-stick" aria-label="عصا التحكم">
+      <div id="kg-knob" class="kg-knob"></div>
+    </div>
+    <div class="kg-touch__buttons">
+      <button id="kg-dash" class="kg-touch__btn kg-touch__btn--dash" aria-label="انطلاقة">⚡</button>
+      <button id="kg-jump" class="kg-touch__btn kg-touch__btn--jump" aria-label="قفز">⤴️</button>
+    </div>
+  </div>
+
+  <!-- ======================= loading ======================= -->
+  <div id="kg-loading" class="kg-loading">
+    <div class="kg-loading__owl" aria-hidden="true">🦉</div>
+    <p>جارٍ تجهيز حديقة المعرفة…</p>
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

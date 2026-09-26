@@ -1,0 +1,68 @@
+/* ============================================================
+   Knowledge Garden — the page that hosts the 3D game.
+   The game fills the viewport below the platform header; all
+   in-game styling lives in the game's own stylesheet.
+   ============================================================ */
+
+.kg-page {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  /* Fill the space under the header, with the standard page gutters. */
+  height: calc(100vh - 74px);
+  min-height: 460px;
+  padding: 0.6rem clamp(0.5rem, 2vw, 1.25rem) 0;
+  box-sizing: border-box;
+}
+
+.kg-page__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.kg-page__title {
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--navy);
+  margin-inline-start: auto;
+}
+
+[data-theme='dark'] .kg-page__title { color: var(--text); }
+
+.kg-page__frame {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #071a38;
+  box-shadow: var(--shadow-md);
+}
+
+.kg-page__loading {
+  position: absolute;
+  inset-inline: 0;
+  display: grid;
+  place-items: center;
+  gap: 0.5rem;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+.kg-page__owl {
+  font-size: 3rem;
+  animation: kg-page-float 2.2s ease-in-out infinite;
+}
+
+@keyframes kg-page-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 640px) {
+  .kg-page { height: calc(100vh - 62px); padding-top: 0.4rem; }
+  .kg-page__title { font-size: 0.9rem; }
+}

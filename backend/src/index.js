@@ -56,6 +56,7 @@ import adminAiKeyRoutes from './routes/adminAiKey.js';
 import adminInsightsRoutes from './routes/adminInsights.js';
 import memoRoutes from './routes/memos.js';
 import mentalMathRoutes from './routes/mentalMath.js';
+import knowledgeGardenRoutes from './routes/knowledgeGarden.js';
 import lessonGatingRoutes from './routes/lessonGating.js';
 import { setupWs } from './ws.js';
 import { browserPdfStatus } from './services/browserPdf.js';
@@ -315,6 +316,7 @@ app.use('/api/admin/ai', adminAiKeyRoutes);
 app.use('/api/admin/insights', adminInsightsRoutes);
 app.use('/api/memos', memoRoutes);
 app.use('/api/student', mentalMathRoutes);
+app.use('/api/games/knowledge-garden', knowledgeGardenRoutes);
 
 // الملفات الثابتة — مع تخزين مؤقت طويل للأصول المجزأة (hashed)
 const staticOpts = { maxAge: '7d', etag: true };
@@ -416,6 +418,7 @@ async function start() {
       await runSqlFileOnce(prisma, path.join(migDir, '20260912120000_mental_math_attempts/migration.sql'));
       await runSqlFileOnce(prisma, path.join(migDir, '20260918120000_google_oauth/migration.sql'));
       await runSqlFileOnce(prisma, path.join(migDir, '20260919120000_explorer_name_fix/migration.sql'));
+      await runSqlFileOnce(prisma, path.join(migDir, '20260926120000_knowledge_garden/migration.sql'));
       await runTenancyBootstrap(prisma);
     }).catch((err) => {
       console.error('startup migrations skipped:', err.message);

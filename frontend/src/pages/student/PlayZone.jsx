@@ -29,6 +29,16 @@ const GAME_COLORS = {
   FRENCH_MATCH: { gradient: 'linear-gradient(135deg, #3b82f6, #6366f1)', icon: '#3b82f6' }
 };
 
+/**
+ * «حديقة المعرفة» — the 3D Rafiqi adventure.
+ * It is NOT one of the inline React runners below: the route renders
+ * KnowledgeGarden.jsx, which embeds the Three.js game (public/games +
+ * vanilla JS, no build step) in an iframe with the platform header, RTL
+ * layout and account intact. Same-tab navigation keeps the session, so the
+ * game picks up the learner's save without a login prompt.
+ */
+const KNOWLEDGE_GARDEN_URL = '/games/letters-garden';
+
 const WORDS_AR = ['قلم', 'كتاب', 'مدرسة', 'تفاحة', 'كرة', 'سيارة', 'شمس', 'بحر', 'منزل', 'وردة', 'طائر', 'سمكة'];
 const WORDS_EN = ['pen', 'book', 'school', 'apple', 'ball', 'car', 'sun', 'sea', 'house', 'rose', 'bird', 'fish'];
 const MEMORY_ICONS = ['🍎', '🚀', '⭐', '🌈', '🐱', '🎈', '🌺', '🔥'];
@@ -201,6 +211,46 @@ function PlayZone() {
                 {s.label}
               </button>
             ))}
+          </div>
+
+          {/* ---- featured: the 3D Rafiqi adventure ---- */}
+          <div
+            className="card-item game-card card-glow"
+            style={{
+              marginBottom: '1.25rem',
+              borderTop: '4px solid #1f4e9c',
+              background: 'linear-gradient(135deg, #1f4e9c0d 0%, #2f7fe014 45%, #fff 100%)',
+              textAlign: 'start',
+            }}
+          >
+            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
+              <span
+                className="material-icons"
+                style={{ fontSize: '3.2rem', color: '#1f4e9c' }}
+                aria-hidden="true"
+              >
+                forest
+              </span>
+              <div style={{ flex: '1 1 240px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '.5rem', flexWrap: 'wrap' }}>
+                  <h4 style={{ margin: 0 }}>{t('studentSpace.play.games.KNOWLEDGE_GARDEN.title')}</h4>
+                  <span className="badge" style={{ background: '#f0a91c', color: '#5a3d00' }}>
+                    {t('studentSpace.play.games.KNOWLEDGE_GARDEN.badge')}
+                  </span>
+                </div>
+                <p className="muted" style={{ margin: '.25rem 0' }}>
+                  {t('studentSpace.play.games.KNOWLEDGE_GARDEN.desc')}
+                </p>
+                <small className="muted">{t('studentSpace.play.games.KNOWLEDGE_GARDEN.tagline')}</small>
+              </div>
+              <a
+                className="btn btn-primary btn-ripple"
+                href={KNOWLEDGE_GARDEN_URL}
+                onClick={() => setToast(t('studentSpace.play.games.KNOWLEDGE_GARDEN.open'))}
+              >
+                {t('studentSpace.play.games.KNOWLEDGE_GARDEN.open')} ↗
+              </a>
+            </div>
           </div>
 
           <div className="cards-grid slide-up-stagger">

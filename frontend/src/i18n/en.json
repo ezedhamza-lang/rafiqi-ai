@@ -7,6 +7,7 @@
     "loading": "Loading...",
     "skipToContent": "Skip to main content",
     "notFound": "Page not found",
+    "back": "Back",
     "backHome": "Back to home",
     "close": "Close",
     "noData": "No data yet",
@@ -95,6 +96,8 @@
     "myRequests": "My requests",
     "teacherSpace": "Teacher space",
     "studentSpace": "Student space",
+    "games": "Games",
+    "lettersGarden": "Knowledge Garden",
     "adminBoard": "Admin board",
     "myRoutine": "Daily routine",
     "myFlashcards": "Flashcards",
@@ -1787,6 +1790,13 @@
         "FRENCH_MATCH": {
           "title": "French Match",
           "desc": "Match French words with their Arabic meaning"
+        },
+        "KNOWLEDGE_GARDEN": {
+          "title": "Knowledge Garden 3D",
+          "desc": "A 3D adventure with Rafiqi: 7 worlds, 35 levels and a boss at the end of each world",
+          "open": "Enter the garden",
+          "badge": "New",
+          "tagline": "7 worlds · mastery · stars · rewards"
         }
       }
     },

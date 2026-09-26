@@ -54,7 +54,8 @@ const ROLE_NAV = {
   ],
   STUDENT: [
     { to: '/', icon: 'home', key: 'home' },
-    { to: '/student-space', icon: 'school', key: 'studentSpace' }
+    { to: '/student-space', icon: 'school', key: 'studentSpace' },
+    { to: '/games/letters-garden', icon: 'sports_esports', key: 'games' }
   ],
   PARENT: [
     { to: '/', icon: 'home', key: 'home' },

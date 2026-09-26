@@ -1,0 +1,549 @@
+/* ============================================================
+   مغامرة رفيقي – حديقة المعرفة
+   Styles follow the Rafiqi design tokens: navy + royal blue + gold.
+   RTL-first, mobile-first, large touch targets for children.
+   ============================================================ */
+
+:root {
+  --navy: #102a56;
+  --navy-2: #1e3a6e;
+  --primary: #155eef;
+  --primary-light: #eaf1ff;
+  --gold: #e8a317;
+  --gold-light: #f7ce5e;
+  --green: #10b981;
+  --red: #dc2626;
+  --text: #ffffff;
+  --text-dim: #c7d7f5;
+  --panel: rgba(16, 42, 86, 0.94);
+  --panel-2: rgba(30, 58, 110, 0.92);
+  --radius: 16px;
+  --shadow: 0 10px 34px rgba(6, 20, 45, 0.35);
+  --font: 'Noto Sans Arabic', 'Tajawal', 'Segoe UI', Tahoma, sans-serif;
+  /* Safe-area padding so the HUD clears notches on phones. */
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0; height: 100%;
+  overflow: hidden;
+  font-family: var(--font);
+  background: #0b1a35;
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+#kg-canvas {
+  position: fixed; inset: 0;
+  width: 100%; height: 100%;
+  display: block;
+  touch-action: none;
+}
+
+.hidden { display: none !important; }
+
+/* ============================================================ buttons */
+
+.kg-btn {
+  font-family: var(--font);
+  font-size: 1.05rem; font-weight: 800;
+  border: none; border-radius: 999px;
+  padding: 0.85rem 2rem;
+  cursor: pointer;
+  min-height: 52px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+.kg-btn:active { transform: translateY(2px) scale(0.98); }
+.kg-btn:focus-visible { outline: 3px solid var(--gold-light); outline-offset: 3px; }
+
+.kg-btn--primary {
+  background: linear-gradient(135deg, var(--primary), #0a3fa8);
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(21, 94, 239, 0.45);
+}
+.kg-btn--accent {
+  background: linear-gradient(135deg, var(--gold), #b45309);
+  color: #4a3205;
+  box-shadow: 0 6px 18px rgba(232, 163, 23, 0.4);
+}
+.kg-btn--ghost {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+.kg-btn--sm { padding: 0.5rem 1.1rem; font-size: 0.9rem; min-height: 42px; }
+
+.kg-icon-btn {
+  width: 46px; height: 46px;
+  border-radius: 50%; border: none;
+  background: rgba(16, 42, 86, 0.7);
+  color: #fff; cursor: pointer;
+  display: grid; place-items: center;
+  font-size: 1.4rem;
+}
+
+/* ============================================================ HUD */
+
+.kg-hud {
+  position: fixed; top: 0; left: 0; right: 0;
+  padding: calc(0.6rem + var(--safe-t)) 0.9rem 0.6rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center; gap: 0.6rem;
+  z-index: 40;
+  pointer-events: none;
+}
+.kg-hud > * { pointer-events: auto; min-width: 0; }
+
+.kg-hud__left { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+.kg-hud__center { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; }
+.kg-hud__right { display: flex; align-items: center; gap: 0.4rem; min-width: 0; }
+
+.kg-pill {
+  background: var(--panel);
+  border-radius: 999px;
+  padding: 0.45rem 0.95rem;
+  font-weight: 800; font-size: 0.85rem;
+  white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.kg-progress {
+  width: min(46vw, 260px); height: 12px;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 999px; overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+.kg-progress__bar {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 999px;
+  transition: width 0.35s ease;
+}
+/* Numerals and separators must keep left-to-right order inside an RTL page,
+   otherwise "2 / 5" renders as "5 / 2" and reads as the wrong progress. */
+.kg-progress__text {
+  font-size: 0.78rem; font-weight: 700; color: var(--text-dim);
+  direction: ltr; unicode-bidi: isolate;
+}
+
+.kg-stat, .kg-streak {
+  background: var(--panel);
+  border-radius: 999px;
+  padding: 0.4rem 0.75rem;
+  font-weight: 800; font-size: 0.9rem;
+  display: flex; align-items: center; gap: 0.25rem;
+  min-width: 56px; justify-content: center;
+  /* A stat is an icon followed by a number: force left-to-right so it does not
+     render as "0 ⭐" mirrored inside the RTL page. */
+  direction: ltr; unicode-bidi: isolate;
+}
+.kg-streak {
+  background: linear-gradient(135deg, #ff7043, #e8544f);
+  opacity: 0.55;
+  transition: opacity 0.25s, transform 0.25s;
+}
+.kg-streak.is-hot { opacity: 1; transform: scale(1.08); }
+
+/* ============================================================ objective */
+
+.kg-objective {
+  position: fixed;
+  top: calc(4.4rem + var(--safe-t));
+  /* Centred with auto margins, NOT translateX(-50%): the entrance animation
+     animates `transform`, which would override a translate-based centring. */
+  left: 0; right: 0;
+  margin-inline: auto;
+  width: fit-content;
+  background: var(--panel);
+  border: 2px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius);
+  padding: 0.5rem 1.1rem;
+  text-align: center;
+  z-index: 35;
+  max-width: min(88vw, 460px);
+  box-shadow: var(--shadow);
+  animation: kg-pop-y 0.35s ease;
+}
+.kg-objective__beat {
+  font-size: 0.68rem; font-weight: 800; color: var(--gold);
+  display: block; line-height: 1.3;
+}
+.kg-objective__prompt { font-size: 0.92rem; font-weight: 800; line-height: 1.35; }
+.kg-objective__target {
+  font-size: 1.7rem; font-weight: 900; color: var(--gold-light);
+  line-height: 1.2; word-break: break-word;
+}
+.kg-objective__slots {
+  display: flex; gap: 0.4rem; justify-content: center; flex-wrap: wrap;
+  margin-top: 0.35rem; min-height: 1.6rem;
+}
+.kg-slot {
+  min-width: 2rem; padding: 0.2rem 0.5rem;
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 8px; font-weight: 900; font-size: 1.15rem;
+}
+.kg-slot--filled { background: var(--green); color: #fff; }
+
+.kg-hint-btn {
+  position: fixed;
+  /* Bottom-left on desktop, where there are no touch controls. */
+  bottom: calc(1.4rem + var(--safe-b));
+  left: 1rem;
+  z-index: 38;
+  background: linear-gradient(135deg, var(--gold), #b45309);
+  color: #4a3205;
+  border: none; border-radius: 999px;
+  padding: 0.6rem 1.1rem;
+  font-family: var(--font); font-weight: 800; font-size: 0.9rem;
+  cursor: pointer; min-height: 46px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.kg-feedback {
+  position: fixed;
+  top: 42%;
+  /* Centred with auto margins so the `is-shown` transform cannot break it. */
+  left: 0; right: 0;
+  margin-inline: auto;
+  width: fit-content;
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.6rem;
+  font-size: 1.25rem; font-weight: 900;
+  text-align: center;
+  z-index: 45;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  max-width: 88vw;
+  box-shadow: var(--shadow);
+}
+.kg-feedback.is-shown { opacity: 1; transform: scale(1.04); }
+.kg-feedback--good { border: 3px solid var(--green); color: #d1fae5; }
+.kg-feedback--bad { border: 3px solid var(--gold); color: #fef3c7; }
+
+/* ============================================================ screens */
+
+.kg-screen {
+  position: fixed; inset: 0;
+  z-index: 50;
+  display: grid; place-items: center;
+  padding: calc(1rem + var(--safe-t)) 1rem calc(1rem + var(--safe-b));
+  background: radial-gradient(circle at 50% 30%, rgba(21, 94, 239, 0.35), rgba(8, 22, 48, 0.96));
+  backdrop-filter: blur(3px);
+  overflow-y: auto;
+}
+.kg-screen__card, .kg-title__card, .kg-intro__card, .kg-results__card,
+.kg-pause__card, .kg-daily__card, .kg-panel__card {
+  background: var(--panel);
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  padding: 1.6rem;
+  width: min(94vw, 560px);
+  box-shadow: var(--shadow);
+  text-align: center;
+  animation: kg-pop 0.35s ease;
+}
+
+/* ---------------- title ---------------- */
+
+.kg-screen--title { background: radial-gradient(circle at 50% 25%, #1e4fa8, #071a38 70%); }
+.kg-title__logo { font-size: 4.5rem; animation: kg-float 3s ease-in-out infinite; }
+.kg-title__name {
+  font-size: clamp(1.9rem, 6vw, 3rem);
+  margin: 0.3rem 0 0;
+  background: linear-gradient(90deg, var(--gold-light), var(--gold));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.kg-title__sub { font-size: 1.25rem; font-weight: 800; color: var(--text-dim); margin: 0 0 1rem; }
+.kg-title__story { line-height: 1.9; color: var(--text-dim); margin-bottom: 1.4rem; }
+.kg-title__actions { display: flex; flex-direction: column; gap: 0.7rem; align-items: center; }
+.kg-title__stats {
+  margin-top: 1.2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  font-size: 0.95rem; font-weight: 800; color: var(--text-dim);
+}
+.kg-sound-toggle {
+  position: fixed; top: 1rem; left: 1rem;
+  width: 46px; height: 46px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15); border: none; color: #fff;
+  font-size: 1.3rem; cursor: pointer;
+}
+
+/* ---------------- world map ---------------- */
+
+.kg-screen--map { display: block; }
+.kg-map__head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.8rem; max-width: 1100px; margin: 0 auto 1rem;
+  flex-wrap: wrap;
+}
+.kg-map__head h2 { margin: 0; font-size: 1.5rem; }
+.kg-map__wallet {
+  display: flex; gap: 0.9rem; font-weight: 800; font-size: 1rem;
+  background: var(--panel); padding: 0.6rem 1.1rem; border-radius: 999px;
+}
+.kg-worlds {
+  display: grid; gap: 0.9rem;
+  max-width: 1100px; margin: 0 auto;
+}
+.kg-world {
+  background: var(--panel);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.1rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center; gap: 1rem;
+  cursor: pointer;
+  transition: transform 0.15s, border-color 0.15s;
+  text-align: right;
+}
+.kg-world:hover:not(.kg-world--locked) { transform: translateX(-4px); border-color: var(--gold); }
+.kg-world--locked { opacity: 0.55; cursor: not-allowed; }
+.kg-world--cleared { border-color: var(--green); }
+.kg-world__emoji { font-size: 2.4rem; }
+.kg-world__name { font-size: 1.15rem; font-weight: 900; }
+.kg-world__blurb { font-size: 0.82rem; color: var(--text-dim); }
+.kg-world__levels { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.4rem; }
+.kg-lvl {
+  width: 44px; height: 44px; border-radius: 12px;
+  display: grid; place-items: center;
+  font-weight: 900; font-size: 0.9rem;
+  border: 2px solid rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff; cursor: pointer;
+}
+.kg-lvl--done { background: var(--green); border-color: var(--green); }
+.kg-lvl--boss { border-color: var(--gold); background: rgba(232, 163, 23, 0.25); }
+.kg-lvl--locked { opacity: 0.4; cursor: not-allowed; }
+.kg-world__bar {
+  height: 10px; border-radius: 999px; background: rgba(0, 0, 0, 0.4);
+  overflow: hidden; margin-top: 0.5rem; min-width: 120px;
+}
+.kg-world__bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--green), var(--gold)); }
+.kg-map__footer {
+  display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap;
+  margin: 1.2rem auto 0; max-width: 1100px;
+}
+
+/* ---------------- intro ---------------- */
+
+.kg-intro__emoji { font-size: 3.6rem; animation: kg-float 3s ease-in-out infinite; }
+.kg-intro__card h2 { margin: 0.4rem 0; font-size: 1.6rem; }
+.kg-intro__card p { color: var(--text-dim); line-height: 1.9; }
+.kg-intro__beats { list-style: none; padding: 0; margin: 1rem 0 1.4rem; text-align: right; }
+.kg-intro__beats li {
+  display: flex; align-items: center; gap: 0.6rem;
+  padding: 0.55rem 0.8rem; margin-bottom: 0.4rem;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px; font-size: 0.95rem; font-weight: 700;
+}
+.kg-intro__beats li b { color: var(--gold); }
+
+/* ---------------- results ---------------- */
+
+.kg-results__title { font-size: 1.8rem; font-weight: 900; margin-bottom: 0.5rem; }
+.kg-results__stars { font-size: 2.6rem; letter-spacing: 0.3rem; margin-bottom: 0.8rem; }
+.kg-results__stars .is-off { opacity: 0.25; filter: grayscale(1); }
+.kg-results__grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+.kg-result-cell {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 12px; padding: 0.6rem;
+}
+.kg-result-cell b {
+  display: block; font-size: 1.3rem;
+  /* Keep numbers reading left-to-right inside the RTL results grid. */
+  direction: ltr; unicode-bidi: isolate;
+}
+.kg-result-cell span { font-size: 0.78rem; color: var(--text-dim); }
+.kg-results__mastery h3 { font-size: 1rem; margin: 0.4rem 0 0.5rem; }
+.kg-results__skills { list-style: none; padding: 0; margin: 0 0 1rem; max-height: 180px; overflow-y: auto; }
+.kg-results__skills li {
+  display: flex; justify-content: space-between; gap: 0.5rem;
+  padding: 0.4rem 0.6rem; margin-bottom: 0.3rem;
+  background: rgba(255, 255, 255, 0.07); border-radius: 10px; font-size: 0.88rem;
+}
+.kg-results__rewards { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.2rem; }
+.kg-reward-chip {
+  background: rgba(232, 163, 23, 0.18); border: 1px solid var(--gold);
+  border-radius: 999px; padding: 0.35rem 0.85rem; font-weight: 800; font-size: 0.85rem;
+}
+.kg-results__actions { display: flex; flex-direction: column; gap: 0.6rem; }
+
+/* ---------------- pause / daily / panels ---------------- */
+
+.kg-pause__keys { color: var(--text-dim); line-height: 2; margin-bottom: 1.2rem; }
+.kg-pause__keys kbd {
+  background: rgba(255, 255, 255, 0.16); padding: 0.15rem 0.5rem;
+  border-radius: 6px; font-family: var(--font); font-weight: 800;
+}
+.kg-pause__actions, .kg-daily__actions { display: flex; flex-direction: column; gap: 0.6rem; }
+.kg-daily__date { color: var(--gold); font-weight: 800; }
+.kg-daily__progress { display: flex; gap: 0.4rem; justify-content: center; margin: 1rem 0; }
+.kg-daily__dot {
+  width: 34px; height: 34px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12); display: grid; place-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.25); font-size: 1rem;
+}
+.kg-daily__dot--done { background: var(--green); border-color: var(--green); }
+
+.kg-panel__hint { color: var(--text-dim); font-size: 0.88rem; margin-bottom: 1rem; }
+.kg-skills-list, .kg-badges, .kg-wardrobe { text-align: right; margin-bottom: 1rem; }
+.kg-skill-row {
+  background: rgba(255, 255, 255, 0.07); border-radius: 12px;
+  padding: 0.6rem 0.8rem; margin-bottom: 0.5rem;
+}
+.kg-skill-row__top { display: flex; justify-content: space-between; font-weight: 800; font-size: 0.9rem; }
+.kg-skill-row__meter { height: 8px; border-radius: 999px; background: rgba(0, 0, 0, 0.4); margin-top: 0.4rem; overflow: hidden; }
+.kg-skill-row__meter i { display: block; height: 100%; border-radius: 999px; }
+.kg-skill-row__meta { font-size: 0.75rem; color: var(--text-dim); margin-top: 0.3rem; }
+
+.kg-badges { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 0.7rem; }
+.kg-badge {
+  background: rgba(255, 255, 255, 0.08); border-radius: 14px;
+  padding: 0.8rem 0.4rem; text-align: center;
+}
+.kg-badge--locked { opacity: 0.4; }
+.kg-badge__icon { font-size: 2rem; }
+.kg-badge__name { font-size: 0.78rem; font-weight: 800; margin-top: 0.2rem; }
+
+.kg-wardrobe__group { margin-bottom: 0.9rem; }
+.kg-wardrobe__group h3 { font-size: 0.9rem; margin: 0 0 0.4rem; color: var(--gold); }
+.kg-wardrobe__items { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.kg-cosmetic {
+  background: rgba(255, 255, 255, 0.08); border: 2px solid transparent;
+  border-radius: 12px; padding: 0.5rem 0.8rem; cursor: pointer;
+  font-family: var(--font); color: #fff; font-weight: 700; font-size: 0.82rem;
+}
+.kg-cosmetic--active { border-color: var(--gold); background: rgba(232, 163, 23, 0.2); }
+.kg-cosmetic--locked { opacity: 0.4; cursor: not-allowed; }
+
+/* ============================================================ touch controls */
+
+.kg-touch {
+  position: fixed; inset: 0;
+  z-index: 38;
+  pointer-events: none;
+}
+.kg-touch > * { pointer-events: auto; }
+
+.kg-stick {
+  position: absolute;
+  bottom: calc(1.4rem + var(--safe-b));
+  right: 1.2rem;
+  width: 132px; height: 132px;
+  border-radius: 50%;
+  background: rgba(16, 42, 86, 0.42);
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  display: grid; place-items: center;
+  touch-action: none;
+}
+.kg-knob {
+  width: 58px; height: 58px; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.75);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.06s linear;
+  pointer-events: none;
+}
+.kg-touch__buttons {
+  position: absolute;
+  bottom: calc(1.4rem + var(--safe-b));
+  left: 1.2rem;
+  display: flex; gap: 0.8rem; align-items: flex-end;
+}
+.kg-touch__btn {
+  width: 82px; height: 82px;      /* comfortably above the 64px minimum */
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  font-size: 2rem;
+  cursor: pointer;
+  display: grid; place-items: center;
+  color: #fff;
+  font-family: var(--font);
+}
+.kg-touch__btn--jump {
+  width: 96px; height: 96px;
+  background: linear-gradient(135deg, var(--primary), #0a3fa8);
+}
+.kg-touch__btn--dash {
+  background: linear-gradient(135deg, var(--gold), #b45309);
+  color: #4a3205;
+}
+.kg-touch__btn:active { transform: scale(0.92); }
+
+/* ============================================================ loading */
+
+.kg-loading {
+  position: fixed; inset: 0; z-index: 90;
+  display: grid; place-items: center; gap: 0.5rem;
+  background: #071a38;
+  text-align: center;
+}
+.kg-loading__owl { font-size: 3.5rem; animation: kg-float 2s ease-in-out infinite; }
+.kg-loading.is-gone { display: none; }
+
+/* ============================================================ animations */
+
+@keyframes kg-pop {
+  from { opacity: 0; transform: scale(0.94) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+/* Vertical-only variant for elements that are centred with auto margins,
+   so the animation cannot clobber their horizontal positioning. */
+@keyframes kg-pop-y {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes kg-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+/* ============================================================ responsive */
+
+@media (max-width: 640px) {
+  .kg-hud { grid-template-columns: auto 1fr auto; padding: calc(0.5rem + var(--safe-t)) 0.6rem; }
+  .kg-pill--level { display: none; }
+  .kg-progress { width: 40vw; }
+  /* The hint button moves to the right edge, above the joystick: the bottom-left
+     corner belongs to the jump/dash buttons on touch devices. */
+  .kg-hint-btn { left: auto; right: 1rem; bottom: calc(9.5rem + var(--safe-b)); }
+  .kg-objective { top: calc(4rem + var(--safe-t)); padding: 0.45rem 0.9rem; }
+  .kg-objective__target { font-size: 1.5rem; }
+  .kg-results__grid { grid-template-columns: 1fr 1fr; }
+  .kg-world { grid-template-columns: auto 1fr; gap: 0.7rem; }
+  .kg-world__bar { min-width: 0; }
+  .kg-world__levels { gap: 0.3rem; }
+  .kg-lvl { width: 40px; height: 40px; }
+  .kg-stick { width: 116px; height: 116px; }
+  .kg-touch__btn--jump { width: 84px; height: 84px; }
+  .kg-touch__btn--dash { width: 72px; height: 72px; }
+  .kg-title__logo { font-size: 3.6rem; }
+  .kg-title__card, .kg-intro__card, .kg-results__card,
+  .kg-pause__card, .kg-daily__card, .kg-panel__card { padding: 1.2rem; }
+}
+
+@media (max-height: 520px) {
+  .kg-objective { top: calc(3.6rem + var(--safe-t)); }
+  .kg-title__logo { font-size: 2.8rem; }
+}
+
+/* Desktop: hide the touch pad entirely. */
+@media (hover: hover) and (pointer: fine) {
+  .kg-touch { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

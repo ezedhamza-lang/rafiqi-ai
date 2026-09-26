@@ -49,6 +49,7 @@ const Admin = lazy(() => import('./pages/Admin.jsx'));
 const AccountSettings = lazy(() => import('./pages/AccountSettings.jsx'));
 const TeacherDashboard = lazy(() => import('./pages/teacher/TeacherDashboard.jsx'));
 const StudentSpace = lazy(() => import('./pages/student/StudentSpace.jsx'));
+const KnowledgeGarden = lazy(() => import('./pages/student/KnowledgeGarden.jsx'));
 const ParentSpace = lazy(() => import('./pages/parent/ParentSpace.jsx'));
 const DirectorDashboard = lazy(() => import('./pages/director/DirectorDashboard.jsx'));
 const SuperAdminDashboard = lazy(() => import('./pages/superadmin/SuperAdminDashboard.jsx'));
@@ -124,6 +125,11 @@ export default function App() {
                     <Route path="/admin" element={<RequireRole roles={['ADMIN', 'SUPER_ADMIN', 'SCHOOL_DIRECTOR']}><Admin /></RequireRole>} />
                     <Route path="/teacher/*" element={<RequireRole roles={['TEACHER']}><TeacherDashboard /></RequireRole>} />
                     <Route path="/student-space/*" element={<RequireRole roles={['STUDENT']}><StudentSpace /></RequireRole>} />
+                  {/* 🎮 الألعاب — حديقة المعرفة (3D educational adventure) */}
+                  <Route
+                    path="/games/letters-garden"
+                    element={<RequireRole roles={['STUDENT']}><KnowledgeGarden /></RequireRole>}
+                  />
                     <Route path="/parent/*" element={<RequireRole roles={['PARENT']}><ParentSpace /></RequireRole>} />
                     <Route path="/director/*" element={<RequireRole roles={['SCHOOL_DIRECTOR', 'ADMIN']}><DirectorDashboard /></RequireRole>} />
                     <Route path="/superadmin/*" element={<RequireRole roles={['SUPER_ADMIN']}><SuperAdminDashboard /></RequireRole>} />

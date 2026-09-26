@@ -151,65 +151,73 @@ model User {
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 
-  students             Student[]             @relation("ParentStudents")
-  school               School?               @relation("SchoolUsers", fields: [schoolId], references: [id], onDelete: SetNull)
-  studentAccount       Student?              @relation("StudentAccount")
-  registrations        Registration[]
-  helpRequests         HelpRequest[]
-  classesTaught        Class[]               @relation("ClassTeacher")
-  quizzes              Quiz[]
-  officialExams        OfficialExam[]
-  memos                Memo[]
-  resources            TeachingResource[]
-  annualPlans          AnnualPlan[]
-  schedules            Schedule[]            @relation("ScheduleTeacher")
-  suggestions          Suggestion[]
-  messagesSent         Message[]             @relation("MessageSender")
-  messagesRecv         Message[]             @relation("MessageRecipient")
-  notifications        Notification[]
-  subscriptions        Subscription[]
-  subscriptionRequests SubscriptionRequest[] @relation("SubscriptionRequestParent")
-  paymentsMade         Payment[]             @relation("PaymentPayer")
-  aiKey                AiKey?
-  badges               StudentBadge[]
-  activities           ActivityLog[]
-  chatMessages         StudentChat[]
-  submissions          Submission[]
-  officialSubs         OfficialSubmission[]
-  classSubjects        ClassSubject[]        @relation("ClassSubjectTeacher")
-  gameResults          GameResult[]
-  submittedExams       SubmittedExam[]       @relation("SubmittedExamStudent")
-  submittedExamsTaught SubmittedExam[]       @relation("SubmittedExamTeacher")
-  parentDocuments      ParentDocument[]      @relation("ParentDocuments")
-  attendanceRecords    AttendanceRecord[]    @relation("AttendanceStudent")
-  attendanceRecorded   AttendanceRecord[]    @relation("AttendanceRecorder")
-  calendarEvents       CalendarEvent[]
-  healthRecord         HealthRecord?
-  assignments          Assignment[]          @relation("AssignmentTeacher")
+  students              Student[]              @relation("ParentStudents")
+  school                School?                @relation("SchoolUsers", fields: [schoolId], references: [id], onDelete: SetNull)
+  studentAccount        Student?               @relation("StudentAccount")
+  registrations         Registration[]
+  helpRequests          HelpRequest[]
+  classesTaught         Class[]                @relation("ClassTeacher")
+  quizzes               Quiz[]
+  officialExams         OfficialExam[]
+  memos                 Memo[]
+  resources             TeachingResource[]
+  annualPlans           AnnualPlan[]
+  schedules             Schedule[]             @relation("ScheduleTeacher")
+  suggestions           Suggestion[]
+  messagesSent          Message[]              @relation("MessageSender")
+  messagesRecv          Message[]              @relation("MessageRecipient")
+  notifications         Notification[]
+  subscriptions         Subscription[]
+  subscriptionRequests  SubscriptionRequest[]  @relation("SubscriptionRequestParent")
+  paymentsMade          Payment[]              @relation("PaymentPayer")
+  aiKey                 AiKey?
+  badges                StudentBadge[]
+  activities            ActivityLog[]
+  chatMessages          StudentChat[]
+  submissions           Submission[]
+  officialSubs          OfficialSubmission[]
+  classSubjects         ClassSubject[]         @relation("ClassSubjectTeacher")
+  gameResults           GameResult[]
+  submittedExams        SubmittedExam[]        @relation("SubmittedExamStudent")
+  submittedExamsTaught  SubmittedExam[]        @relation("SubmittedExamTeacher")
+  parentDocuments       ParentDocument[]       @relation("ParentDocuments")
+  attendanceRecords     AttendanceRecord[]     @relation("AttendanceStudent")
+  attendanceRecorded    AttendanceRecord[]     @relation("AttendanceRecorder")
+  calendarEvents        CalendarEvent[]
+  healthRecord          HealthRecord?
+  assignments           Assignment[]           @relation("AssignmentTeacher")
   assignmentSubmissions AssignmentSubmission[]
-  paymentIntents       PaymentIntent[]
-  auditLogs            AuditLog[]
-  discountsCreated     DiscountCode[]        @relation("DiscountCreatedBy")
-  friendRequests       Friendship[]          @relation("FriendRequester")
-  friendReceived       Friendship[]          @relation("FriendAddressee")
-  refundsMade          Refund[]              @relation("RefundBy")
-  anomaliesResolved    FinancialAnomaly[]    @relation("AnomalyResolvedBy")
-  liveSessions         LiveSession[]         @relation("LiveSessionTeacher")
-  liveChatMessages     LiveChatMessage[]     @relation("LiveChatSender")
-  liveRaisedHands      LiveRaisedHand[]      @relation("LiveRaisedHandUser")
-  liveScreenShares     LiveScreenShare[]     @relation("LiveScreenShareUser")
-  announcementsCreated SchoolAnnouncement[] @relation("AnnouncementCreator")
-  notificationOutbox   NotificationOutbox[]
-  adaptiveCards        AdaptiveCard[]
-  lessonProgress       LessonProgress[]
-  lessonMemos          LessonMemo[]
-  refreshTokens        RefreshToken[]
-  parentNotesSent      ParentNote[]        @relation("ParentNoteParent")
-  parentNotesAbout     ParentNote[]        @relation("ParentNoteStudent")
-  parentNotesReceived  ParentNote[]        @relation("ParentNoteTeacher")
-  lessonSubmissions    LessonSubmission[]  @relation("UserLessonSubmissions")
-  lessonAttempts       LessonAttempt[]
-  mentalMathAttempts   MentalMathAttempt[]
+  paymentIntents        PaymentIntent[]
+  auditLogs             AuditLog[]
+  discountsCreated      DiscountCode[]         @relation("DiscountCreatedBy")
+  friendRequests        Friendship[]           @relation("FriendRequester")
+  friendReceived        Friendship[]           @relation("FriendAddressee")
+  refundsMade           Refund[]               @relation("RefundBy")
+  anomaliesResolved     FinancialAnomaly[]     @relation("AnomalyResolvedBy")
+  liveSessions          LiveSession[]          @relation("LiveSessionTeacher")
+  liveChatMessages      LiveChatMessage[]      @relation("LiveChatSender")
+  liveRaisedHands       LiveRaisedHand[]       @relation("LiveRaisedHandUser")
+  liveScreenShares      LiveScreenShare[]      @relation("LiveScreenShareUser")
+  announcementsCreated  SchoolAnnouncement[]   @relation("AnnouncementCreator")
+  notificationOutbox    NotificationOutbox[]
+  adaptiveCards         AdaptiveCard[]
+  lessonProgress        LessonProgress[]
+  lessonMemos           LessonMemo[]
+  refreshTokens         RefreshToken[]
+  parentNotesSent       ParentNote[]           @relation("ParentNoteParent")
+  parentNotesAbout      ParentNote[]           @relation("ParentNoteStudent")
+  parentNotesReceived   ParentNote[]           @relation("ParentNoteTeacher")
+  lessonSubmissions     LessonSubmission[]     @relation("UserLessonSubmissions")
+  lessonAttempts        LessonAttempt[]
+  mentalMathAttempts    MentalMathAttempt[]
+
+  // ===== Knowledge Garden Adventure (مغامرة رفيقي) =====
+  gardenProfile      GardenProfile?
+  gardenLevelResults GardenLevelResult[]
+  gardenSkills       GardenSkill[]
+  gardenBadges       GardenBadge[]
+  gardenDailies      GardenDaily[]
+  gardenRewards      GardenReward[]
 
   @@index([role])
   @@index([schoolId])
@@ -1370,4 +1378,111 @@ model Friendship {
 
   @@unique([requesterId, addresseeId])
   @@index([addresseeId])
+}
+
+// ===== مغامرة رفيقي – حديقة المعرفة (Knowledge Garden Adventure) =====
+// The 3D educational game keeps its own profile tables so the platform's
+// XP/coins tables stay untouched. All scoring is computed server-side.
+
+model GardenProfile {
+  id             Int      @id @default(autoincrement())
+  userId         Int      @unique
+  stars          Int      @default(0)
+  gems           Int      @default(0)
+  keys           Int      @default(0)
+  currentWorldId String   @default("letters-garden")
+  currentLevelId String   @default("w1-l1")
+  appearance     Json     @default("{\"cap\":\"graduation\",\"glasses\":\"round\",\"backpack\":\"none\",\"book\":\"none\",\"trail\":\"none\",\"jump\":\"puff\"}")
+  unlocked       Json     @default("{}")
+  totalCorrect   Int      @default(0)
+  totalMistakes  Int      @default(0)
+  bestScore      Int      @default(0)
+  dailyStreak    Int      @default(0)
+  lastDailyDay   String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model GardenLevelResult {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  levelId      String
+  worldId      String
+  isBoss       Boolean  @default(false)
+  bestScore    Int      @default(0)
+  stars        Int      @default(0)
+  bestTimeSec  Int      @default(0)
+  bestAccuracy Float    @default(0)
+  attempts     Int      @default(0)
+  plays        Int      @default(0)
+  mastered     Json     @default("[]")
+  completedAt  DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, levelId])
+  @@index([userId, worldId])
+}
+
+model GardenSkill {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  skillId       String
+  skillType     String
+  label         String
+  mastery       Int      @default(0)
+  attempts      Int      @default(0)
+  correct       Int      @default(0)
+  streak        Int      @default(0)
+  needsPractice Boolean  @default(true)
+  lastSeenAt    DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, skillId])
+  @@index([userId, needsPractice])
+}
+
+model GardenBadge {
+  id       Int      @id @default(autoincrement())
+  userId   Int
+  badgeKey String
+  name     String
+  icon     String
+  earnedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, badgeKey])
+}
+
+model GardenDaily {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  dayKey       String
+  correct      Int      @default(0)
+  total        Int      @default(0)
+  starsAwarded Int      @default(0)
+  gemsAwarded  Int      @default(0)
+  completedAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, dayKey])
+}
+
+model GardenReward {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  rewardKey String
+  kind      String
+  sourceId  String?
+  claimedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, rewardKey])
 }
