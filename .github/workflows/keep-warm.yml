@@ -56,10 +56,7 @@ jobs:
             gh issue create \
               --title "Site UNHEALTHY (HTTP ${{ steps.check.outputs.code }}, db ${{ steps.check.outputs.db }})" \
               --label "site-down" \
-              --body "Health check at $(date -u): HTTP ${{ steps.check.outputs.code }}, db ${{ steps.check.outputs.db }}.
-
-- db=down with HTTP 200 usually means Neon suspended the compute (free-plan quota) or the DB is unreachable — check console.neon.tech and /api/health?db=1.
-- HTTP != 200 means Render is down/redeploying — check Render → Deployments → Logs."
+              --body "Health check at $(date -u): HTTP ${{ steps.check.outputs.code }}, db ${{ steps.check.outputs.db }}. db=down with HTTP 200 means the DB is unreachable (Neon free-plan compute quota) - open console.neon.tech or retry /api/health?db=1. HTTP != 200 means Render is down or redeploying - check Render Deployments Logs."
           fi
 
       - name: Close alert issue if recovered
