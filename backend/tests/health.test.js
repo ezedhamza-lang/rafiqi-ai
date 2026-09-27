@@ -45,3 +45,31 @@ describe('parent health records (not shadowed by public health check)', () => {
     expect(res.body.status).toBe('ok');
   });
 });
+
+describe('/api/health DB probe caching (protects the free Neon CU-hour budget)', () => {
+  it('serves the cached probe instead of querying the DB on every ping', async () => {
+    const first = await request(app).get('/api/health');
+    expect(first.status).toBe(200);
+    expect(['up', 'down']).toContain(first.body.db);
+    expect(first.body.dbCheckedAt).toBeDefined();
+
+    // The keep-warm workflow pings every 5 minutes; a fresh query each time
+    // wakes Neon continuously and burned the 100 CU-hour quota in September.
+    const second = await request(app).get('/api/health');
+    expect(second.body.db).toBe(first.body.db);
+    expect(second.body.dbCheckedAt).toBe(first.body.dbCheckedAt);
+  });
+
+  it('forces a fresh probe with ?db=1 and keeps serving it until it expires', async () => {
+    const before = await request(app).get('/api/health');
+    const forced = await request(app).get('/api/health?db=1');
+    expect(forced.status).toBe(200);
+    expect(['up', 'down']).toContain(forced.body.db);
+    expect(new Date(forced.body.dbCheckedAt).getTime())
+      .toBeGreaterThanOrEqual(new Date(before.body.dbCheckedAt).getTime());
+
+    const after = await request(app).get('/api/health');
+    expect(after.body.db).toBe(forced.body.db);
+    expect(after.body.dbCheckedAt).toBe(forced.body.dbCheckedAt);
+  });
+});

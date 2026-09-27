@@ -218,20 +218,47 @@ app.use(express.json({ limit: config.bodyLimit }));
 // فحص الصحة — تستعمله منصات النشر (Render healthCheckPath). يرجع 200 ما دام
 // الخادم يعمل (liveness) حتى لا يفشل النشر عند برودة Neon، مع ذكر حالة قاعدة
 // البيانات داخل الجسم. فحص DB محدود بوقت قصير حتى لا يتعطّل الرد أثناء الإقلاع.
-app.get(['/api/health', '/health'], async (_req, res) => {
-  let db = 'down';
+//
+// ⚠️ كل استعلام يوقظ حاسوب Neon (scale-to-zero بعد 5 دقائق)، وحصّة الخطة
+// المجانية 100 CU-hour/شهر. المبّه المجاني يفحص الصحة كل 5 دقائق، فإن فحصنا
+// القاعدة مع كل نبضة استُنفد الحصّة في ~16 يوماً (حدث فعلياً في 27-09-2026
+// فتوقّف الموقع: Neon تُعلّق الحاسوب حتى بداية الفوترة القادمة). لذلك تُخزَّن
+// نتيجة فحص DB: ساعة كاملة عند "up"، و15 ثانية عند "down" (إعادة محاولة سريعة)،
+// ويمكن فرض فحص فوري بأي استعلام حقيقي عبر `?db=1`.
+let dbHealth = { value: 'unknown', at: 0 };
+const DB_HEALTH_UP_TTL_MS = 60 * 60 * 1000;
+const DB_HEALTH_DOWN_TTL_MS = 15 * 1000;
+
+async function probeDatabase() {
   try {
     await Promise.race([
       prisma.$queryRaw`SELECT 1`,
       new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 3000))
     ]);
-    db = 'up';
+    return 'up';
   } catch {
-    db = 'down';
+    return 'down';
   }
+}
+
+app.get(['/api/health', '/health'], async (req, res) => {
+  const force = req.query.db === '1' || req.query.db === 'fresh';
+  const ttl = dbHealth.value === 'down' ? DB_HEALTH_DOWN_TTL_MS : DB_HEALTH_UP_TTL_MS;
+  if (force || Date.now() - dbHealth.at >= ttl) {
+    dbHealth = { value: await probeDatabase(), at: Date.now() };
+  }
+  const db = dbHealth.value;
   let memoProfiles = 0;
   try { memoProfiles = (await import('./services/methodologyResolver.js')).listMethodologies().length; } catch { /* تجاهل */ }
-  res.json({ status: 'ok', db, uptime: Math.round(process.uptime()), at: new Date().toISOString(), pdf: browserPdfStatus().executable ? 'browser' : 'legacy', memoProfiles });
+  res.json({
+    status: 'ok',
+    db,
+    dbCheckedAt: new Date(dbHealth.at).toISOString(),
+    uptime: Math.round(process.uptime()),
+    at: new Date().toISOString(),
+    pdf: browserPdfStatus().executable ? 'browser' : 'legacy',
+    memoProfiles
+  });
 });
 
 // Batch 4: Global locale middleware - extracts ?lang= from all requests

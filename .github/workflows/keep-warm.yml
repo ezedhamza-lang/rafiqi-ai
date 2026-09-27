@@ -3,8 +3,13 @@ name: Keep Render awake + uptime alert
 # Render's free tier spins the service down after ~15 min of inactivity, causing
 # slow cold-starts / transient 502s. This free GitHub Action pings the health
 # endpoint every 5 minutes to keep the instance warm, AND doubles as an uptime
-# monitor: if the site does not return HTTP 200 it opens a GitHub issue to alert;
-# when the site recovers it closes that issue automatically.
+# monitor: it alerts when the site is unhealthy (HTTP != 200 **or** the body
+# reports "db":"down") and closes the issue automatically on recovery.
+#
+# The backend caches the DB probe (~1 hour when "up", 15 s when "down"), so these
+# pings do NOT wake Neon every 5 minutes anymore. Waking Neon 24/7 used up the
+# free plan's 100 CU-hour monthly compute quota around 27-09-2026 and Neon then
+# suspended the database (site logins started failing).
 
 on:
   schedule:
@@ -20,20 +25,28 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     steps:
-      - name: Ping health endpoint (wakes Render + Neon)
+      - name: Ping health endpoint (wakes Render; DB probe is cached upstream)
         id: check
         run: |
-          code=""
+          code=""; db=""; ok="false"
           for i in 1 2 3; do
-            code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 https://rafiqi-platform.onrender.com/api/health || echo "000")
-            echo "attempt $i -> HTTP $code"
-            [ "$code" = "200" ] && break
+            out=$(curl -s -w '\n%{http_code}' --max-time 30 https://rafiqi-platform.onrender.com/api/health || true)
+            code=$(printf '%s' "$out" | tail -n1)
+            body=$(printf '%s' "$out" | sed '$d')
+            [ -z "$code" ] && code="000"
+            db=$(printf '%s' "$body" | sed -n 's/.*"db":"\([a-z]*\)".*/\1/p')
+            echo "attempt $i -> HTTP $code db=${db:-unknown}"
+            if [ "$code" = "200" ] && { [ "$db" = "up" ] || [ -z "$db" ]; }; then
+              ok="true"; break
+            fi
             sleep 20
           done
           echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "db=${db:-unknown}" >> "$GITHUB_OUTPUT"
+          echo "ok=$ok" >> "$GITHUB_OUTPUT"
 
-      - name: Open alert issue if down
-        if: steps.check.outputs.code != '200'
+      - name: Open alert issue if unhealthy
+        if: steps.check.outputs.ok != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -41,17 +54,20 @@ jobs:
           open=$(gh issue list --state open --label "site-down" --json number -q 'length' 2>/dev/null || echo 0)
           if [ "$open" = "0" ]; then
             gh issue create \
-              --title "Site is DOWN (HTTP ${{ steps.check.outputs.code }})" \
+              --title "Site UNHEALTHY (HTTP ${{ steps.check.outputs.code }}, db ${{ steps.check.outputs.db }})" \
               --label "site-down" \
-              --body "Health check returned HTTP ${{ steps.check.outputs.code }} at $(date -u). Check Render → Deployments → Logs."
+              --body "Health check at $(date -u): HTTP ${{ steps.check.outputs.code }}, db ${{ steps.check.outputs.db }}.
+
+- db=down with HTTP 200 usually means Neon suspended the compute (free-plan quota) or the DB is unreachable — check console.neon.tech and /api/health?db=1.
+- HTTP != 200 means Render is down/redeploying — check Render → Deployments → Logs."
           fi
 
       - name: Close alert issue if recovered
-        if: steps.check.outputs.code == '200'
+        if: steps.check.outputs.ok == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           nums=$(gh issue list --state open --label "site-down" --json number -q '.[].number' 2>/dev/null || true)
           for n in $nums; do
-            gh issue close "$n" --comment "Site is back UP (HTTP 200) at $(date -u)." 2>/dev/null || true
+            gh issue close "$n" --comment "Site is back UP (HTTP 200, db up) at $(date -u)." 2>/dev/null || true
           done
