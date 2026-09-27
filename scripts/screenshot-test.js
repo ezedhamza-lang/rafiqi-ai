@@ -2,7 +2,9 @@ const puppeteer = require('puppeteer');
 const path = require('path');
 
 const BASE_URL = 'http://localhost:5173';
-const OUTPUT_DIR = 'D:\\mon projet\\rafiqi-كامل-محدث-02-09-2026\\rafiqi';
+const fs = require('fs');
+const OUTPUT_DIR = path.join(__dirname, '..', 'docs', 'qa-shots');
+fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
 (async () => {
   const browser = await puppeteer.launch({

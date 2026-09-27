@@ -1,7 +1,9 @@
 const puppeteer = require('puppeteer');
 const path = require('path');
 
-const SAVE_DIR = 'D:\\mon projet\\rafiqi-كامل-محدث-02-09-2026\\rafiqi';
+const fs = require('fs');
+const SAVE_DIR = path.join(__dirname, '..', 'docs', 'qa-shots');
+fs.mkdirSync(SAVE_DIR, { recursive: true });
 const URL = 'http://localhost:5173/student-space';
 const EMAIL = 'student@test.tn';
 const PASSWORD = 'qarn-zeft-7alib-2026!';
