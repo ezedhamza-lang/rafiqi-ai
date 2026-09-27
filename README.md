@@ -92,12 +92,12 @@ npm run dev
 
 ## حسابات تجريبية
 
-> **الأمان:** كلمات السر هذه للتجربة المحلية فقط. في الإنتاج نفّذ `node backend/scripts/reset-passwords.mjs` (من Render Shell) لتعيينها، أو غيّرها من فضاء المشرف. لا تُدخل حسابات تجريبية لبيانات حقيقية.
+> **الأمان:** كلمات السر هذه للتجربة المحلية فقط. في الإنتاج نفّذ `node backend/scripts/reset-passwords.mjs` (من Render Shell) لتعيينها، أو غيّرها من فضاء المشرف. لا تُدخل حسابات تجريبية لبيانات حقيقية. (`super@` et `admin@` ne sont **pas** annonces ici : mots de passe privilegies a definir/actualiser via `backend/scripts/set-super-password.mjs`.)
 
 | الدور | البريد | كلمة السر |
 |-------|--------|-----------|
-| نظامي (Super Admin) | `super@education.tn` | `Super-Owner-2026!` |
-| مدير عام | `admin@education.tn` | `qarn-zeft-7alib-2026!` |
+| نظامي (Super Admin) | `super@education.tn` | `non publiee - definie via backend/scripts/set-super-password.mjs` |
+| مدير عام | `admin@education.tn` | `non publiee - definie via backend/scripts/set-super-password.mjs` |
 | مدير مدرسة | `director@test.tn` | `qarn-zeft-7alib-2026!` |
 | أستاذ | `teacher@test.tn` | `qarn-zeft-7alib-2026!` |
 | ولي | `parent@test.tn` | `qarn-zeft-7alib-2026!` |

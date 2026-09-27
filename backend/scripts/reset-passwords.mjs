@@ -7,17 +7,22 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 const TEST_PW = 'qarn-zeft-7alib-2026!';
-const SUPER_PW = 'Super-Owner-2026!';
+const SUPER_PW = process.env.SUPER_ADMIN_PASSWORD || process.env.SEED_SUPER_ADMIN_PASSWORD || '';
 
 const MAP = {
-  'admin@education.tn': TEST_PW,
   'director@test.tn': TEST_PW,
   'teacher@test.tn': TEST_PW,
   'student@test.tn': TEST_PW,
   'parent@test.tn': TEST_PW,
   'explorer@test.tn': TEST_PW,
-  'super@education.tn': SUPER_PW
 };
+
+if (SUPER_PW) {
+  MAP['super@education.tn'] = SUPER_PW;
+  MAP['admin@education.tn'] = SUPER_PW;
+} else {
+  console.log('SKIP  super@education.tn / admin@education.tn (definissez SUPER_ADMIN_PASSWORD)');
+}
 
 async function main() {
   for (const [email, pw] of Object.entries(MAP)) {
@@ -30,7 +35,7 @@ async function main() {
       where: { id: user.id },
       data: { passwordHash: await bcrypt.hash(pw, 10) }
     });
-    console.log(`OK    ${email}  ←  ${pw}`);
+    console.log(`OK    ${email}`);
   }
   console.log('\nتمت إعادة التعيين. سجّل الدخول بالكلمات أعلاه.');
 }

@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
+import { randomBytes } from 'node:crypto';
 
 const prisma = new PrismaClient();
 
@@ -103,7 +104,7 @@ async function main() {
     throw new Error('SEED_DEMO_PASSWORD مطلوب لتشغيل البذور في الإنتاج');
   }
   const DEMO_PW = process.env.SEED_DEMO_PASSWORD || 'qarn-zeft-7alib-2026!';
-  const SUPER_PW = process.env.SEED_SUPER_ADMIN_PASSWORD || (isProd ? DEMO_PW : 'Super-Owner-2026!');
+  const SUPER_PW = process.env.SEED_SUPER_ADMIN_PASSWORD || (isProd ? null : 'Super-Owner-2026!');
 
   // upsert بمفتاح مستقر (العنوان/السؤال) — الصيغة القديمة where:{id:0}
   // كانت تُدرج نسخة مكررة من كل محتوى في كل تشغيل للـseed.
@@ -133,7 +134,7 @@ async function main() {
   }
 
   const demoUsers = [
-    { firstName: 'مدير', lastName: 'المنصة', email: 'admin@education.tn', phone: '70017032', password: DEMO_PW, role: 'ADMIN' },
+    { firstName: 'مدير', lastName: 'المنصة', email: 'admin@education.tn', phone: '70017032', password: SUPER_PW, role: 'ADMIN' },
     { firstName: 'أحمد', lastName: 'التلميذ', email: 'student@test.tn', phone: '20000001', password: DEMO_PW, role: 'STUDENT' },
     { firstName: 'محمد', lastName: 'الولي', email: 'parent@test.tn', phone: '20000002', password: DEMO_PW, role: 'PARENT' },
     { firstName: 'فاطمة', lastName: 'المعلمة', email: 'teacher@test.tn', phone: '20000003', password: DEMO_PW, role: 'TEACHER' },
@@ -149,8 +150,15 @@ async function main() {
   for (const u of demoUsers) {
     const existing = await prisma.user.findUnique({ where: { email: u.email } });
     let user;
+    const isPrivileged = u.role === 'SUPER_ADMIN' || u.role === 'ADMIN';
+    const keepExistingPw = isPrivileged && isProd && !u.password;
     if (existing) {
-      const update = { role: u.role, passwordHash: await bcrypt.hash(u.password, 10) };
+      const update = { role: u.role };
+      if (keepExistingPw) {
+        console.warn(`[SEED] ${u.email} : mot de passe conserve (SEED_SUPER_ADMIN_PASSWORD non defini).`);
+      } else {
+        update.passwordHash = await bcrypt.hash(u.password || randomBytes(18).toString('base64url'), 10);
+      }
       if (String(existing.firstName || '').includes('?')) update.firstName = u.firstName;
       if (String(existing.lastName || '').includes('?')) update.lastName = u.lastName;
       user = await prisma.user.update({
@@ -164,7 +172,7 @@ async function main() {
           lastName: u.lastName,
           email: u.email,
           phone: u.phone,
-          passwordHash: await bcrypt.hash(u.password, 10),
+          passwordHash: await bcrypt.hash(u.password || randomBytes(18).toString('base64url'), 10),
           role: u.role
         }
       });
