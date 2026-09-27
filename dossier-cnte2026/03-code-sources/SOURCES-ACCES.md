@@ -14,7 +14,7 @@ cd frontend && npm install && npx vite --port 5173                              
 Deploiement : `Dockerfile` + `docker-compose.yml` (image unique, demo publique sur Render).
 
 ## Comptes de demonstration (base de dev)
-`student@test.tn`, `teacher@test.tn`, `parent@test.tn`, `director@test.tn`
+`explorer@test.tn` (eleve sans classe), `teacher@test.tn`, `parent@test.tn`, `director@test.tn`
 Mot de passe (dev uniquement) : `qarn-zeft-7alib-2026!`
 
 ## IMPORTANT — acces du jury au code

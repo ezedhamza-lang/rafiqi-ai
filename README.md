@@ -101,8 +101,7 @@ npm run dev
 | مدير مدرسة | `director@test.tn` | `qarn-zeft-7alib-2026!` |
 | أستاذ | `teacher@test.tn` | `qarn-zeft-7alib-2026!` |
 | ولي | `parent@test.tn` | `qarn-zeft-7alib-2026!` |
-| تلميذ | `student@test.tn` | `qarn-zeft-7alib-2026!` |
-| تلميذ استكشاف (بلا قسم: يرى محتوى كل المستويات س1-س6) | `explorer@test.tn` | `qarn-zeft-7alib-2026!` |
+| تلميذ (حساب الاستكشاف: بلا قسم — يرى محتوى كل المستويات س1-س6) | `explorer@test.tn` | `qarn-zeft-7alib-2026!` |
 
 ## فضاء الأستاذ (20 تبويب)
 
