@@ -7,7 +7,7 @@ import { authMiddleware, optionalAuth } from '../auth.js';
 import { validateBody } from '../middleware/validate.js';
 import { helpRequestCreateSchema, contactMessageSchema } from '../validators/helpRequest.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
-import { validateUploadedFiles } from '../utils/fileSecurity.js';
+import { validateUploadedFiles, discardUploadsOnError } from '../utils/fileSecurity.js';
 import { strictExtFilter, safeFilename } from '../utils/uploadSafe.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -83,6 +83,7 @@ router.post(
   '/',
   optionalAuth,
   upload.single('attachment'),
+  discardUploadsOnError,
   validateBody(helpRequestCreateSchema),
   asyncHandler(async (req, res) => {
     const { firstName, lastName, phone, email, requestType, delegation, description } = req.body;

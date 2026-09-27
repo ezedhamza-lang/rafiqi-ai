@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { api } from '../api/client.js';
+import { api, getStoredUser } from '../api/client.js';
 import { useI18n } from '../i18n/index.jsx';
 
 const EMPTY_FORM = {
@@ -22,6 +22,10 @@ export default function HelpRequest() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+  // A help request is only useful if it can be tracked: anonymous ones stay with the
+  // general supervisor and are never shown to a school director (decision of the
+  // platform owner, ISS-008). The form stays readable, but sending requires an account.
+  const [signedIn, setSignedIn] = useState(() => Boolean(getStoredUser()));
 
   useEffect(() => {
     Promise.all([api.get('/help-requests/types'), api.get('/public/delegations')])
@@ -30,6 +34,18 @@ export default function HelpRequest() {
         setDelegations(d);
       })
       .catch(console.error);
+  }, []);
+
+  // Re-read the session when the tab regains focus or another tab signs in/out, so the
+  // notice and the disabled button follow the real state instead of the first render.
+  useEffect(() => {
+    const sync = () => setSignedIn(Boolean(getStoredUser()));
+    window.addEventListener('focus', sync);
+    window.addEventListener('storage', sync);
+    return () => {
+      window.removeEventListener('focus', sync);
+      window.removeEventListener('storage', sync);
+    };
   }, []);
 
   const submit = async (e) => {
@@ -68,6 +84,14 @@ export default function HelpRequest() {
       <p style={{ color: 'var(--muted)', marginBottom: '1.4rem', lineHeight: 1.8 }}>
         {t('helpRequest.subtitle')}
       </p>
+
+      {!signedIn && (
+        <div className="form-notice" role="status">
+          <span className="form-notice__title">{t('helpRequest.loginRequiredTitle')}</span>
+          {t('helpRequest.loginRequiredBody')}{' '}
+          <a href="/login">{t('helpRequest.loginCta')}</a>
+        </div>
+      )}
 
       {error && <div className="form-error">{error}</div>}
       {success && <div className="form-success">{success}</div>}
@@ -161,7 +185,7 @@ export default function HelpRequest() {
         </div>
 
         <div style={{ display: 'flex', gap: '0.75rem' }}>
-          <button className="btn btn-primary" type="submit" disabled={loading}>
+          <button className="btn btn-primary" type="submit" disabled={loading || !signedIn}>
             {loading ? t('helpRequest.sending') : t('helpRequest.submit')}
           </button>
           <button className="btn btn-ghost" type="button" onClick={() => setForm(EMPTY_FORM)}>

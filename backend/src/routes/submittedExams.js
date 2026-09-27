@@ -7,7 +7,7 @@ import prisma from '../db.js';
 import { authMiddleware, teacherMiddleware, studentMiddleware } from '../auth.js';
 import { notify } from '../services/notify.js';
 import { mergeImagesToPdf, ensureUploadDir, MAX_SCAN_PAGES } from '../services/scanService.js';
-import { validateUploadedFiles } from '../utils/fileSecurity.js';
+import { validateUploadedFiles, discardUploadsOnError } from '../utils/fileSecurity.js';
 import { SUBJECTS } from './classSubjects.js';
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
@@ -98,7 +98,7 @@ function statusLabel(status) {
  *       404:
  *         description: التلميذ غير موجود
  */
-router.post('/student/submitted-exams', studentMiddleware, upload.array('images', MAX_SCAN_PAGES), validateBody(submittedExamCreateSchema), asyncHandler(async (req, res) => {
+router.post('/student/submitted-exams', studentMiddleware, upload.array('images', MAX_SCAN_PAGES), discardUploadsOnError, validateBody(submittedExamCreateSchema), asyncHandler(async (req, res) => {
   if (req.user.role !== 'STUDENT') throw new ApiError(403, 'هذا الفضاء مخصص للتلميذ');
   const { subject, examTitle } = req.body;
 

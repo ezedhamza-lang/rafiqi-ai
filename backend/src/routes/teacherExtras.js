@@ -61,17 +61,24 @@ router.get('/gradebook', asyncHandler(async (req, res) => {
       const subs = item.type === 'assignment'
         ? assignments.find((a) => `a${a.id}` === item.id)?.submissions || []
         : quizzes.find((q) => `q${q.id}` === item.id)?.submissions || [];
-      const sub = subs.find((x) => x.studentId === s.id);
+      // `Submission.studentId` and `AssignmentSubmission.studentId` are foreign keys to
+      // User.id, so they must be matched against the student's account id — not the
+      // Student row id. Matching on `s.id` made every gradebook cell empty (ISS-009).
+      const sub = subs.find((x) => x.studentId === s.accountUserId);
       if (!sub) return null;
       if (item.type === 'assignment' && sub.graded === false) return null;
       return sub.totalPoints ? Math.round((sub.score / sub.totalPoints) * 100) : sub.score;
     };
-    const grades = items.map(cell).filter((g) => g !== null);
+    // Keep one slot per item (null when the student has no grade) so the table and
+    // the CSV export line up with `items` by index. Filtering the nulls out would
+    // shift every later grade one column to the left.
+    const grades = items.map(cell);
+    const scored = grades.filter((g) => g !== null && g !== undefined);
     return {
       studentId: s.id,
       name: s.account ? `${s.account.firstName} ${s.account.lastName}` : `${s.firstName} ${s.lastName}`,
       grades,
-      average: grades.length ? Math.round(grades.reduce((a, b) => a + b, 0) / grades.length) : null
+      average: scored.length ? Math.round(scored.reduce((a, b) => a + b, 0) / scored.length) : null
     };
   });
 

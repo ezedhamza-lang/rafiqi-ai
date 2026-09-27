@@ -33,18 +33,25 @@ router.get('/certificates', authMiddleware, async (req, res) => {
       });
     }
 
-    // Subject completion certificates (from progress)
-    const progress = await prisma.studentProgress.findMany({
+    // Subject completion certificates (from lesson progress)
+    const progress = await prisma.lessonProgress.findMany({
       where: { userId },
-      include: { lesson: { include: { subject: true } } },
+      select: { subjectId: true },
     });
 
+    const SUBJECT_LABELS = {
+      MATH: 'الرياضيات',
+      READING: 'القراءة',
+      SCIENCE: 'الإيقاظ العلمي',
+      STORIES: 'القصص',
+    };
+
     const subjectMap = {};
-    progress.forEach(p => {
-      const subName = p.lesson?.subject?.name;
-      if (subName && !subjectMap[subName]) subjectMap[subName] = 0;
-      if (subName && p.completed) subjectMap[subName]++;
-    });
+    for (const p of progress) {
+      const subName = SUBJECT_LABELS[p.subjectId] || p.subjectId;
+      if (!subName) continue;
+      subjectMap[subName] = (subjectMap[subName] || 0) + 1;
+    }
 
     Object.entries(subjectMap).forEach(([name, count]) => {
       if (count >= 5) { // certificate after 5 completed lessons in a subject
@@ -111,7 +118,14 @@ router.get('/certificates/:type/:id/pdf', authMiddleware, async (req, res) => {
     }
 
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `attachment; filename="certificate-${type}-${id}.pdf"`);
+    // HTTP headers are Latin-1 only. For a subject certificate `id` is the Arabic
+    // subject name, which used to throw ERR_INVALID_CHAR and turn the download into
+    // HTTP 500. Ship an ASCII fallback plus the real name in RFC 5987 form.
+    const asciiName = `certificate-${type}-${String(id).replace(/[^\w.-]+/g, '_')}`.slice(0, 120);
+    res.setHeader(
+      'Content-Disposition',
+      `attachment; filename="${asciiName}.pdf"; filename*=UTF-8''${encodeURIComponent(`certificate-${type}-${id}.pdf`)}`
+    );
     res.send(Buffer.from(pdfBytes));
   } catch (err) {
     console.error('Certificate PDF error:', err);

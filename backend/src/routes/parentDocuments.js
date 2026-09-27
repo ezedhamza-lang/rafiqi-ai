@@ -9,7 +9,7 @@ import { notify } from '../services/notify.js';
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 import { parentDocCreateSchema, docReviewSchema, parentDocStatusQuerySchema, parentDocIdParamSchema } from '../validators/parentDocument.js';
-import { validateUploadedFiles } from '../utils/fileSecurity.js';
+import { validateUploadedFiles, discardUploadsOnError } from '../utils/fileSecurity.js';
 import { strictExtFilter, safeFilename } from '../utils/uploadSafe.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -106,7 +106,7 @@ router.get('/documents/types', requireRole('PARENT'), asyncHandler(async (_req, 
  *       404:
  *         description: التلميذ غير موجود
  */
-router.post('/documents', requireRole('PARENT'), upload.single('file'), validateBody(parentDocCreateSchema), asyncHandler(async (req, res) => {
+router.post('/documents', requireRole('PARENT'), upload.single('file'), discardUploadsOnError, validateBody(parentDocCreateSchema), asyncHandler(async (req, res) => {
   const { studentId, docType, title, note } = req.body;
   if (!req.file) throw new ApiError(400, 'يرجى إرفاق ملف الوثيقة (PDF أو صورة)');
   const badFiles = validateUploadedFiles([req.file], ['pdf', 'jpeg', 'png', 'zip']);

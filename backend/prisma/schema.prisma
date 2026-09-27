@@ -93,9 +93,12 @@ enum AssignmentSubmissionStatus {
 }
 
 enum PaymentProvider {
+  DEMO
   STRIPE
   STB
-  DEMO
+  PAYPAL
+  PAYMOB
+  TAP
 }
 
 enum PaymentIntentStatus {
@@ -136,7 +139,7 @@ model User {
   email         String        @unique
   phone         String?
   passwordHash  String
-  googleId      String?   @unique
+  googleId      String?       @unique
   role          Role          @default(PARENT)
   accountStatus AccountStatus @default(ACTIVE)
   schoolId      Int?
@@ -239,19 +242,19 @@ model RefreshToken {
 }
 
 model ParentNote {
-  id        Int      @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   parentId  Int
   studentId Int
   teacherId Int
   content   String
   reply     String?
   readAt    DateTime?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
 
-  parent  User   @relation("ParentNoteParent", fields: [parentId], references: [id], onDelete: Cascade)
-  student User   @relation("ParentNoteStudent", fields: [studentId], references: [id], onDelete: Cascade)
-  teacher User   @relation("ParentNoteTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
+  parent  User @relation("ParentNoteParent", fields: [parentId], references: [id], onDelete: Cascade)
+  student User @relation("ParentNoteStudent", fields: [studentId], references: [id], onDelete: Cascade)
+  teacher User @relation("ParentNoteTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
 
   @@index([teacherId, readAt])
   @@index([studentId])
@@ -303,11 +306,12 @@ model Student {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  user          User?          @relation("ParentStudents", fields: [userId], references: [id], onDelete: Cascade)
-  account       User?          @relation("StudentAccount", fields: [accountUserId], references: [id], onDelete: SetNull)
-  class         Class?         @relation(fields: [classId], references: [id], onDelete: SetNull)
+  user          User?            @relation("ParentStudents", fields: [userId], references: [id], onDelete: Cascade)
+  account       User?            @relation("StudentAccount", fields: [accountUserId], references: [id], onDelete: SetNull)
+  class         Class?           @relation(fields: [classId], references: [id], onDelete: SetNull)
   registrations Registration[]
   documents     ParentDocument[]
+
   @@index([userId])
   @@index([classId])
 }
@@ -327,43 +331,44 @@ model Registration {
   user    User    @relation(fields: [userId], references: [id])
   student Student @relation(fields: [studentId], references: [id], onDelete: Cascade)
   class   Class?  @relation(fields: [classId], references: [id], onDelete: SetNull)
+
   @@index([userId])
   @@index([studentId])
   @@index([classId])
 }
 
 model Announcement {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String
-  titleEn       String?  // Batch 3.2: English translation (optional)
+  id            Int      @id @default(autoincrement())
+  title         String
+  description   String
+  titleEn       String? // Batch 3.2: English translation (optional)
   descriptionEn String? // Batch 3.2: English translation (optional)
-  imageUrl    String?
-  category    String
-  date        DateTime @default(now())
-  createdAt   DateTime @default(now())
+  imageUrl      String?
+  category      String
+  date          DateTime @default(now())
+  createdAt     DateTime @default(now())
 }
 
 model Article {
-  id          Int      @id @default(autoincrement())
-  title       String
-  description String
-  titleEn       String?  // Batch 3.2: English translation (optional)
+  id            Int      @id @default(autoincrement())
+  title         String
+  description   String
+  titleEn       String? // Batch 3.2: English translation (optional)
   descriptionEn String? // Batch 3.2: English translation (optional)
-  imageUrl    String?
-  category    String
-  date        DateTime @default(now())
-  createdAt   DateTime @default(now())
+  imageUrl      String?
+  category      String
+  date          DateTime @default(now())
+  createdAt     DateTime @default(now())
 }
 
 model Faq {
-  id       Int    @id @default(autoincrement())
-  question String
-  answer   String
+  id         Int     @id @default(autoincrement())
+  question   String
+  answer     String
   questionEn String? // Batch 3.2: English translation (optional)
-  answerEn  String? // Batch 3.2: English translation (optional)
-  category String @default("عام")
-  sort     Int    @default(0)
+  answerEn   String? // Batch 3.2: English translation (optional)
+  category   String  @default("عام")
+  sort       Int     @default(0)
 }
 
 model Delegation {
@@ -395,6 +400,7 @@ model Quiz {
   teacher     User         @relation(fields: [teacherId], references: [id])
   class       Class?       @relation(fields: [classId], references: [id], onDelete: SetNull)
   submissions Submission[]
+
   @@index([teacherId])
 }
 
@@ -431,6 +437,7 @@ model OfficialExam {
   teacher     User                 @relation(fields: [teacherId], references: [id])
   class       Class?               @relation(fields: [classId], references: [id], onDelete: SetNull)
   submissions OfficialSubmission[]
+
   @@index([teacherId])
 }
 
@@ -491,21 +498,21 @@ model TeachingResource {
 }
 
 model LessonMemo {
-  id                Int      @id @default(autoincrement())
-  teacherId         Int
-  bookId            String
-  lessonId          String
-  subject           String
-  level             String
-  lessonTitle       String
-  lessonType        String?
-  unit              String?
-  methodologyId     String
-  methodologyTitle  String?
-  hash              String   @unique
-  content           Json
-  createdAt         DateTime @default(now())
-  updatedAt         DateTime @updatedAt
+  id               Int      @id @default(autoincrement())
+  teacherId        Int
+  bookId           String
+  lessonId         String
+  subject          String
+  level            String
+  lessonTitle      String
+  lessonType       String?
+  unit             String?
+  methodologyId    String
+  methodologyTitle String?
+  hash             String   @unique
+  content          Json
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
 
   teacher User @relation(fields: [teacherId], references: [id], onDelete: Cascade)
 
@@ -525,6 +532,7 @@ model AnnualPlan {
   updatedAt DateTime @updatedAt
 
   teacher User @relation(fields: [teacherId], references: [id], onDelete: Cascade)
+
   @@index([teacherId])
 }
 
@@ -587,22 +595,22 @@ model Message {
 }
 
 model Notification {
-  id            Int      @id @default(autoincrement())
-  userId        Int
-  type          String
-  title         String
-  body          String?
-  link          String?
-  read          Boolean  @default(false)
-  readAt        DateTime?
-  channels      Json?
-  channelStatus Json?
-  priority      String   @default("NORMAL")
-  metadata      Json?
+  id                   Int       @id @default(autoincrement())
+  userId               Int
+  type                 String
+  title                String
+  body                 String?
+  link                 String?
+  read                 Boolean   @default(false)
+  readAt               DateTime?
+  channels             Json?
+  channelStatus        Json?
+  priority             String    @default("NORMAL")
+  metadata             Json?
   schoolAnnouncementId Int?
-  createdAt     DateTime @default(now())
+  createdAt            DateTime  @default(now())
 
-  user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   schoolAnnouncement SchoolAnnouncement? @relation(fields: [schoolAnnouncementId], references: [id], onDelete: SetNull)
 
   @@index([userId, read])
@@ -702,7 +710,7 @@ model Subscription {
   createdAt      DateTime         @default(now())
   updatedAt      DateTime         @updatedAt
 
-  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user           User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   payments       Payment[]
   paymentIntents PaymentIntent[]
   invoices       Invoice[]
@@ -838,6 +846,7 @@ model HelpRequest {
   createdAt   DateTime @default(now())
 
   user User? @relation(fields: [userId], references: [id])
+
   @@index([userId])
 }
 
@@ -858,7 +867,7 @@ model ClassSubject {
   level       String
   teacherId   Int?
   coefficient Int      @default(1)
-  createdAt DateTime @default(now())
+  createdAt   DateTime @default(now())
 
   class   Class @relation(fields: [classId], references: [id], onDelete: Cascade)
   teacher User? @relation("ClassSubjectTeacher", fields: [teacherId], references: [id], onDelete: SetNull)
@@ -908,7 +917,7 @@ model SubmittedExam {
 }
 
 model ParentDocument {
-  id            Int                @id @default(autoincrement())
+  id            Int                  @id @default(autoincrement())
   parentId      Int
   studentId     Int?
   docType       String
@@ -920,8 +929,8 @@ model ParentDocument {
   directorReply String?
   reviewedBy    Int?
   reviewedAt    DateTime?
-  createdAt     DateTime           @default(now())
-  updatedAt     DateTime           @updatedAt
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
 
   parent  User     @relation("ParentDocuments", fields: [parentId], references: [id], onDelete: Cascade)
   student Student? @relation(fields: [studentId], references: [id], onDelete: SetNull)
@@ -961,7 +970,7 @@ model CalendarEvent {
   createdBy   Int
   createdAt   DateTime          @default(now())
 
-  creator User   @relation(fields: [createdBy], references: [id])
+  creator User    @relation(fields: [createdBy], references: [id])
   school  School? @relation(fields: [schoolId], references: [id], onDelete: SetNull)
 
   @@index([date])
@@ -999,8 +1008,8 @@ model Assignment {
   createdAt   DateTime         @default(now())
   updatedAt   DateTime         @updatedAt
 
-  teacher     User                 @relation("AssignmentTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
-  class       Class?               @relation(fields: [classId], references: [id], onDelete: SetNull)
+  teacher     User                   @relation("AssignmentTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
+  class       Class?                 @relation(fields: [classId], references: [id], onDelete: SetNull)
   submissions AssignmentSubmission[]
 
   @@index([teacherId])
@@ -1008,7 +1017,7 @@ model Assignment {
 }
 
 model AssignmentSubmission {
-  id           Int                       @id @default(autoincrement())
+  id           Int                        @id @default(autoincrement())
   assignmentId Int
   studentId    Int
   answers      Json
@@ -1018,9 +1027,9 @@ model AssignmentSubmission {
   status       AssignmentSubmissionStatus @default(SUBMITTED)
   feedback     String?
   gradedAt     DateTime?
-  late         Boolean                   @default(false)
-  createdAt    DateTime                  @default(now())
-  updatedAt    DateTime                  @updatedAt
+  late         Boolean                    @default(false)
+  createdAt    DateTime                   @default(now())
+  updatedAt    DateTime                   @updatedAt
 
   assignment Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
   student    User       @relation(fields: [studentId], references: [id], onDelete: Cascade)
@@ -1031,14 +1040,14 @@ model AssignmentSubmission {
 }
 
 model PaymentIntent {
-  id                Int                  @id @default(autoincrement())
+  id                Int                 @id @default(autoincrement())
   subscriptionId    Int
   userId            Int
-  provider          PaymentProvider      @default(DEMO)
-  status            PaymentIntentStatus  @default(PENDING)
-  amount            Decimal              @db.Decimal(12, 3)
-  currency          String               @default("TND")
-  providerReference String?              @unique
+  provider          PaymentProvider     @default(DEMO)
+  status            PaymentIntentStatus @default(PENDING)
+  amount            Decimal             @db.Decimal(12, 3)
+  currency          String              @default("TND")
+  providerReference String?             @unique
   checkoutUrl       String?
   successUrl        String?
   cancelUrl         String?
@@ -1046,8 +1055,8 @@ model PaymentIntent {
   failureMessage    String?
   paidAt            DateTime?
   expiresAt         DateTime?
-  createdAt         DateTime             @default(now())
-  updatedAt         DateTime             @updatedAt
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
 
   subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
   user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -1105,7 +1114,7 @@ model DiscountCode {
   id          Int          @id @default(autoincrement())
   code        String       @unique
   type        DiscountType @default(PERCENTAGE)
-  value       Decimal @db.Decimal(12, 3)
+  value       Decimal      @db.Decimal(12, 3)
   description String?
   usageLimit  Int?
   usedCount   Int          @default(0)
@@ -1134,9 +1143,9 @@ model Refund {
   refundedAt     DateTime @default(now())
   createdAt      DateTime @default(now())
 
-  invoice      Invoice  @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
-  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
-  refundedByUser User    @relation("RefundBy", fields: [refundedBy], references: [id])
+  invoice        Invoice      @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+  subscription   Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  refundedByUser User         @relation("RefundBy", fields: [refundedBy], references: [id])
 
   @@unique([invoiceId])
   @@index([subscriptionId])
@@ -1145,20 +1154,20 @@ model Refund {
 }
 
 model FinancialAnomaly {
-  id          Int      @id @default(autoincrement())
-  key         String   @unique
+  id          Int       @id @default(autoincrement())
+  key         String    @unique
   type        String
-  severity    String   @default("MEDIUM")
+  severity    String    @default("MEDIUM")
   title       String
   description String?
   subjectType String?
   subjectId   Int?
   metadata    Json?
-  status      String   @default("OPEN")
+  status      String    @default("OPEN")
   resolvedBy  Int?
   resolvedAt  DateTime?
   resolution  String?
-  createdAt   DateTime @default(now())
+  createdAt   DateTime  @default(now())
 
   resolver User? @relation("AnomalyResolvedBy", fields: [resolvedBy], references: [id], onDelete: SetNull)
 
@@ -1169,24 +1178,24 @@ model FinancialAnomaly {
 }
 
 model LiveSession {
-  id              Int                 @id @default(autoincrement())
+  id              Int               @id @default(autoincrement())
   teacherId       Int
   classId         Int?
   title           String
   subject         String?
   description     String?
-  provider        VideoProvider       @default(LOCAL)
-  roomName        String              @unique
+  provider        VideoProvider     @default(LOCAL)
+  roomName        String            @unique
   startsAt        DateTime
   endsAt          DateTime
-  status          LiveSessionStatus   @default(SCHEDULED)
-  maxParticipants Int                 @default(30)
-  createdAt       DateTime            @default(now())
-  updatedAt       DateTime            @updatedAt
+  status          LiveSessionStatus @default(SCHEDULED)
+  maxParticipants Int               @default(30)
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime          @updatedAt
 
-  teacher    User             @relation("LiveSessionTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
-  class      Class?           @relation(fields: [classId], references: [id], onDelete: SetNull)
-  recordings LiveRecording[]
+  teacher      User              @relation("LiveSessionTeacher", fields: [teacherId], references: [id], onDelete: Cascade)
+  class        Class?            @relation(fields: [classId], references: [id], onDelete: SetNull)
+  recordings   LiveRecording[]
   chatMessages LiveChatMessage[]
   raisedHands  LiveRaisedHand[]
   screenShares LiveScreenShare[]
@@ -1258,25 +1267,25 @@ model LiveScreenShare {
 }
 
 model AdaptiveCard {
-  id            Int      @id @default(autoincrement())
-  userId        Int
-  itemKey       String
-  gradeId       String
-  subjectId     String
-  exerciseId    String
-  questionIndex Int
-  repetitions   Int      @default(0)
-  easeFactor    Float    @default(2.5)
-  intervalDays  Int      @default(0)
-  dueAt         DateTime @default(now())
-  difficulty    Int      @default(1)
-  reviewCount   Int      @default(0)
-  correctCount  Int      @default(0)
-  streak        Int      @default(0)
-  lastQuality   Int?
+  id             Int       @id @default(autoincrement())
+  userId         Int
+  itemKey        String
+  gradeId        String
+  subjectId      String
+  exerciseId     String
+  questionIndex  Int
+  repetitions    Int       @default(0)
+  easeFactor     Float     @default(2.5)
+  intervalDays   Int       @default(0)
+  dueAt          DateTime  @default(now())
+  difficulty     Int       @default(1)
+  reviewCount    Int       @default(0)
+  correctCount   Int       @default(0)
+  streak         Int       @default(0)
+  lastQuality    Int?
   lastReviewedAt DateTime?
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -1303,16 +1312,16 @@ model LessonProgress {
 }
 
 model LessonSubmission {
-  id          Int      @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   userId      Int
   lessonId    String
   lessonTitle String?
-  answers     Json     // { blockId: answer }
-  files       Json?    // [{ name, size, type, dataUrl }]
-  status      String   @default("SUBMITTED") // SUBMITTED, GRADED, RETURNED
-  grade       Int?     // /20
+  answers     Json // { blockId: answer }
+  files       Json? // [{ name, size, type, dataUrl }]
+  status      String    @default("SUBMITTED") // SUBMITTED, GRADED, RETURNED
+  grade       Int? // /20
   feedback    String?
-  submittedAt DateTime @default(now())
+  submittedAt DateTime  @default(now())
   gradedAt    DateTime?
   gradedBy    Int?
 
@@ -1355,7 +1364,7 @@ model MentalMathAttempt {
   studentAnswer String
   correct       Boolean
   errorPattern  String?
-  ms          Int?
+  ms            Int?
   hintUsed      Boolean  @default(false)
   createdAt     DateTime @default(now())
 
@@ -1366,12 +1375,12 @@ model MentalMathAttempt {
 }
 
 model Friendship {
-  id            String   @id @default(cuid())
-  requesterId   Int
-  addresseeId   Int
-  status        String   @default("PENDING")
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id          String   @id @default(cuid())
+  requesterId Int
+  addresseeId Int
+  status      String   @default("PENDING")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   requester User @relation("FriendRequester", fields: [requesterId], references: [id], onDelete: Cascade)
   addressee User @relation("FriendAddressee", fields: [addresseeId], references: [id], onDelete: Cascade)

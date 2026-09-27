@@ -14,8 +14,8 @@ export default function StudentLeaderboard() {
   useEffect(() => {
     api.get('/student/leaderboard')
       .then(d => {
-        setBoard(d.leaderboard || []);
-        setMyRank(d.currentRank || 0);
+        setBoard(d.rows || []);
+        setMyRank(d.me || 0);
       })
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -28,7 +28,7 @@ export default function StudentLeaderboard() {
       <div className="lb-hero">
         <span className="lb-hero__icon">🏆</span>
         <h2 className="lb-hero__title">{t('studentSpace.leaderboard.title', 'لوحة الشرف')}</h2>
-        <p className="lb-hero__sub">{t('studentSpace.leaderboard.subtitle', 'أفضل التلاميذ هذا الأسبوع')}</p>
+        <p className="lb-hero__sub">{t('studentSpace.leaderboard.subtitle', 'ترتيب زملائك في القسم حسب النقاط')}</p>
       </div>
 
       {myRank > 0 && (
@@ -45,7 +45,7 @@ export default function StudentLeaderboard() {
           </div>
         ) : (
           board.map((s, i) => (
-            <div key={s.id} className={`lb-row ${s.isMe ? 'lb-row--me' : ''} ${i < 3 ? 'lb-row--top' : ''}`}>
+            <div key={s.id} className={`lb-row ${s.current ? 'lb-row--me' : ''} ${i < 3 ? 'lb-row--top' : ''}`}>
               <span className="lb-row__rank" style={i < 3 ? { background: RANK_COLORS[i], color: '#fff' } : {}}>
                 {i < 3 ? RANK_ICONS[i] : `#${s.rank}`}
               </span>
@@ -57,10 +57,10 @@ export default function StudentLeaderboard() {
                 <span className="lb-row__level">{t('studentSpace.leaderboard.level', 'المستوى')} {s.level}</span>
               </div>
               <div className="lb-row__stats">
-                <span className="lb-row__xp">⭐ {s.xp}</span>
-                <span className="lb-row__streak">🔥 {s.streak}</span>
+                <span className="lb-row__xp">⭐ {s.points}</span>
+                <span className="lb-row__streak">🔥 {s.streak ?? 0}</span>
               </div>
-              {s.isMe && <span className="lb-row__me">{t('studentSpace.leaderboard.me', 'أنا')}</span>}
+              {s.current && <span className="lb-row__me">{t('studentSpace.leaderboard.me', 'أنا')}</span>}
             </div>
           ))
         )}

@@ -238,7 +238,7 @@
           "bookFile": "french-book.json",
           "lessonsFile": "french-units.json",
           "skillsMapFile": null,
-          "adapter": "math"
+          "adapter": "french"
         }
       ]
     },

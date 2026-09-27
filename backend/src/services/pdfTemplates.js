@@ -322,6 +322,102 @@ export function certificateHtml(cert) {
   return baseHtml(cert.period === 'annual' ? 'بطاقة المعدل السنوي' : 'بطاقة الأعداد', body);
 }
 
+// ===== شهادة التلميذ (مكافآت/إنجازات) — أفقية =====
+// Different document from the report card above: a landscape award certificate.
+// It used to be drawn with pdf-lib, whose only Arabic-capable path needs an
+// embedded TTF; the font directory it looked for never existed, so every Arabic
+// certificate died with `WinAnsi cannot encode 0x0631` (ISS-003). It is rendered
+// through the browser engine like every other official document on the platform,
+// which gives correct letter-joining and right-to-left order.
+export function rewardCertificateHtml(opts) {
+  const {
+    studentName = 'تلميذ',
+    title = 'شهادة إتمام الدروس',
+    description = 'قد أتم بنجاح الدروس والأنشطة التعليمية المقررة.',
+    subject = '',
+    className = '',
+    date = new Date().toLocaleDateString('ar-TN'),
+    teacherName = ''
+  } = opts;
+
+  const cell = (label, value) =>
+    `<div class="rc-cell"><span class="rc-k">${esc(label)}</span><span class="rc-v">${esc(value || '—')}</span></div>`;
+
+  return `<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<title>${esc(title)}</title>
+<style>
+  @page { size: A4 landscape; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0; background: #fcfaf5; color: #14315c;
+    font-family: "Noto Naskh Arabic", "Amiri", "Segoe UI", Tahoma, Arial, sans-serif;
+    -webkit-user-select: none; -moz-user-select: none; user-select: none;
+  }
+  .sheet {
+    position: relative; width: 297mm; height: 210mm; overflow: hidden;
+    border: 3px solid #d9a410; outline: 1px solid #d9a410; outline-offset: -9px;
+  }
+  .band-top, .band-bottom {
+    position: absolute; left: 0; right: 0; background: #215ea6; color: #fff;
+  }
+  .band-top { top: 0; height: 26mm; border-bottom: 1.5mm solid #d9a410; }
+  .band-bottom { bottom: 0; height: 15mm; border-top: 1mm solid #d9a410; }
+  .band-top .brand { text-align: center; padding-top: 5mm; }
+  .band-top .brand b { font-size: 21pt; letter-spacing: .5px; }
+  .band-top .brand span { display: block; font-size: 11pt; color: #f3dda0; }
+  .band-bottom .site { text-align: center; font-size: 9pt; color: #f3dda0; padding-top: 4mm; }
+  .body { position: absolute; top: 30mm; left: 22mm; right: 22mm; text-align: center; }
+  h1.rc-title { font-size: 34pt; color: #14315c; margin: 0 0 2mm; }
+  .rc-rule { width: 90mm; height: 1mm; background: #d9a410; margin: 0 auto 3mm; }
+  .rc-from {
+    display: inline-block; background: #d9a410; color: #14315c; font-weight: 700;
+    font-size: 12pt; padding: 1.2mm 7mm; border-radius: 2mm;
+  }
+  .rc-lead { color: #6b7280; font-size: 11.5pt; margin: 6mm 0 3mm; }
+  .rc-name {
+    display: inline-block; min-width: 130mm; border: 1.5px solid #215ea6; color: #14315c;
+    font-size: 24pt; font-weight: 700; padding: 2.5mm 6mm;
+  }
+  .rc-desc { color: #4b5563; font-size: 12pt; margin: 5mm 0 0; }
+  .rc-cells { display: flex; gap: 6mm; margin: 7mm 0 0; }
+  .rc-cell { flex: 1; border: 1px solid #d8e2ee; background: #fff; padding: 2.5mm 3mm; }
+  .rc-k { display: block; color: #215ea6; font-weight: 700; font-size: 11pt; }
+  .rc-v { display: block; color: #4b5563; font-size: 11.5pt; }
+  .rc-foot { position: absolute; bottom: 17mm; left: 0; right: 0; text-align: center; color: #d9a410; font-size: 9.5pt; }
+  .star { position: absolute; color: #d9a410; font-size: 14pt; }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="band-top"><div class="brand"><b>رفيقي</b><span>للحياة المدرسية</span></div></div>
+  <div class="band-bottom"><div class="site">https://rafiqi-platform.onrender.com</div></div>
+  <div class="body">
+    <h1 class="rc-title">${esc(title)}</h1>
+    <div class="rc-rule"></div>
+    <div class="rc-from">منفوها منصة رفيقي للحياة المدرسية</div>
+    <p class="rc-lead">تشهد منصة رفيقي للحياة المدرسية بأن التلميذ/التلميذة</p>
+    <div class="rc-name">${esc(studentName)}</div>
+    <p class="rc-desc">${esc(description)}</p>
+    <div class="rc-cells">
+      ${cell('القسم', className)}
+      ${cell('المادة', subject)}
+      ${cell('التاريخ', date)}
+      ${cell('الأستاذ(ة)', teacherName)}
+    </div>
+  </div>
+  <div class="rc-foot">رفيقي ... رفيقك في التعلم والحياة المدرسية</div>
+  <div class="star" style="top:34mm;right:14mm">★</div>
+  <div class="star" style="top:34mm;left:14mm">★</div>
+  <div class="star" style="top:96mm;right:9mm">★</div>
+  <div class="star" style="top:96mm;left:9mm">★</div>
+</div>
+</body>
+</html>`;
+}
+
 // ===== مذكرة بيداغوجية — قالب المواصفات الرسمية (v2) =====
 // GLES match: 3 tables from the official Word template
 //   Table 0: Banner — 1 row × 3 cols (التوقيت | العنوان | المستوى)

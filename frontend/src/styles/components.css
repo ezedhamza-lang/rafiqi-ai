@@ -1,5 +1,5 @@
 /* ============================================================
-   UI Components â€” Design System styles
+   UI Components — Design System styles
    ============================================================ */
 
 /* ---------- Button ---------- */
@@ -996,7 +996,7 @@
   color: var(--text-secondary);
 }
 
-/* ---------- Live room (Ø§Ù„Ø­ØµØµ Ø§Ù„Ù…Ø¨Ø§Ø´Ø±Ø© â€” 5.1) ---------- */
+/* ---------- Live room (Ø§Ù„Ø­ØµØµ Ø§Ù„Ù…Ø¨Ø§Ø´Ø±Ø© — 5.1) ---------- */
 .live-room-grid {
   display: grid;
   grid-template-columns: 1fr 280px;

@@ -95,7 +95,7 @@ router.get('/leaderboard', studentMiddleware, asyncHandler(async (req, res) => {
 
   const classmates = await prisma.student.findMany({
     where: { classId: me?.classId ?? -1, accountUserId: { not: null } },
-    include: { account: { select: { firstName: true, lastName: true, xp: true, level: true } } }
+    include: { account: { select: { firstName: true, lastName: true, xp: true, level: true, streakDays: true } } }
   });
 
   const rows = classmates
@@ -104,6 +104,7 @@ router.get('/leaderboard', studentMiddleware, asyncHandler(async (req, res) => {
       name: `${s.account.firstName} ${s.account.lastName}`,
       points: s.account.xp,
       level: s.account.level,
+      streak: s.account.streakDays || 0,
       avatar: (s.account.firstName || 'ط')[0],
       current: s.accountUserId === req.user.id
     }))

@@ -33,7 +33,7 @@ export function detectFileType(filePath) {
   }
 }
 
-// يتحقق أن كل الملفات المرفوعة تطابق واحداً من الأنواع المسموحة.
+// يتأكد أن كل الملفات المرفوعة تطابق واحداً من الأنواع المسموحة.
 // allowedTypes: مجموعة مثل ['jpeg','png','pdf','zip']. عند الفشل يحذف
 // الملفات المكتوبة على القرص ويرجع قائمة الأخطاء.
 export function validateUploadedFiles(files, allowedTypes) {
@@ -43,8 +43,38 @@ export function validateUploadedFiles(files, allowedTypes) {
     const type = detectFileType(f.path);
     if (!type || !allowedTypes.includes(type)) {
       errors.push(f.originalname || f.filename);
-      try { fs.unlinkSync(f.path); } catch { /* ignore */ }
+      removeUpload(f);
     }
   }
   return errors;
+}
+
+// يحذف ملفًا مرفوعًا من القرص. لا يرمي: الفشل في الحذف يجب ألا يُسقط الطلب.
+export function removeUpload(file) {
+  if (!file || !file.path) return false;
+  try {
+    fs.unlinkSync(file.path);
+    return true;
+  } catch (err) {
+    if (err.code !== 'ENOENT') {
+      console.error(`[uploads] could not remove ${file.path}: ${err.message}`);
+    }
+    return false;
+  }
+}
+
+// ===== تنظيف المرفقات عند فشل الطلب =====
+// multer يكتب الملف على القرص قبل التحقق من الجسم (zod) وقبل فحوص الصلاحيات،
+// فكان الطلب الفاشل يترك ملفًا يتيمًا يتراكم في uploads/.
+// هذا الوسيط يوضع مباشرة بعد multer: إن انتهى الطلب برد خطأ (>= 400) فلم يُنشأ
+// أي سجل يشير إلى الملف، فيُحذف. أما المسار الناجح (2xx) فلا يُمس فيه شيء.
+// ملاحظة: صالح لأن كل مسارات الرفع تنشئ سجلها وتردّ 201/200 في نفس المعالج؛
+// لا يوجد مسار يرد بخطأ بعد حفظ الملف.
+export function discardUploadsOnError(req, res, next) {
+  res.on('finish', () => {
+    if (res.statusCode < 400) return;
+    const files = [req.file, ...(Array.isArray(req.files) ? req.files : [])].filter(Boolean);
+    for (const f of files) removeUpload(f);
+  });
+  next();
 }

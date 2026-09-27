@@ -106,7 +106,8 @@ const SUBJECT_ALIASES = {
   math: ['math', 'maths', 'رياضيات', 'الرياضيات'],
   anisi: ['anisi', 'arabic', 'reading', 'قراءة', 'أنيسي', 'أنيس'],
   science: ['science', 'ايقاظ', 'إيقاظ', 'علوم'],
-  production: ['production', 'writing', 'إنتاج', 'إنتاج كتابي']
+  production: ['production', 'writing', 'إنتاج', 'إنتاج كتابي'],
+  french: ['french', 'français', 'francais', 'فرنسية', 'الفرنسية']
 };
 
 function findSubject(grade, subjectCode) {
@@ -127,11 +128,12 @@ function listBooks(country) {
       if (!bookFile) continue;
       const book = readJson(path.join(curriculumDir, grade.dir, bookFile));
       if (!book) continue;
-      let lessonsCount = 0;
-      if (subject.lessonsFile) {
-        const ldata = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile));
-        if (ldata) lessonsCount = Object.entries(ldata).filter(([k, v]) => k !== '_meta' && v && v.title).length;
-      }
+      // Single source of truth: count the pages the adapter actually produces, not a
+      // second, parallel guess over the file shape. The old counter only looked at
+      // top-level keys carrying `title`, so every book whose lessons are nested
+      // (`{_meta, title, units:[…]}` / `{book_title, …, units:[…]}`) reported 0 and
+      // the UI hid the lessons button — 14 of 31 books were unopenable (ISS-015).
+      const lessonsCount = getLessonPages(subject.id, null, grade.id, country).length;
       books.push({
         gradeId: grade.id,
         grade: grade.title,
@@ -554,6 +556,20 @@ function adaptProductionBook(book) {
 }
 
 export function getLessonPages(subjectCode, level, gradeId, country) {
+  // Curriculum content is immutable at runtime (the same assumption the existing
+  // _vocabGlossary cache makes), so pages are memoised. The catalogue needs a
+  // count for every book on each page load, and re-reading + re-adapting ~30 large
+  // JSON files per request is what made a direct call too expensive.
+  const cacheKey = JSON.stringify([subjectCode, level || null, gradeId || null, country || null]);
+  if (_pagesCache.has(cacheKey)) return _pagesCache.get(cacheKey);
+  const pages = buildLessonPages(subjectCode, level, gradeId, country);
+  _pagesCache.set(cacheKey, pages);
+  return pages;
+}
+
+const _pagesCache = new Map();
+
+function buildLessonPages(subjectCode, level, gradeId, country) {
   const registry = loadRegistry(country);
   const { curriculumDir } = baseDirs(country);
   let grade = gradeId ? (registry.grades || []).find((g) => g.id === gradeId) : null;
@@ -566,8 +582,16 @@ export function getLessonPages(subjectCode, level, gradeId, country) {
   if (code === 'math-sit' || code === 'math2') code = 'math';
   const adapter = String(subject.adapter || '').toLowerCase();
   let pages;
+  // A subject without `lessonsFile` has no lessons file — full stop. The old code
+  // guessed a default filename (`|| 'math-units.json'`), so `year2/math-rasmi` (a
+  // 128-page scan with no lessons of its own) silently served `math2`'s 63 lessons
+  // (identical ids y2m01…y2m63), and `year4/anisi` read a file that does not exist
+  // there and quietly came back empty (ISS-016 / CONTENT_GAP). The binding is now
+  // explicit: the registry decides, and only the science branch — where reading the
+  // book chapters *is* the design — keeps an intentional fallback.
   if (code === 'math' || adapter === 'math') {
-    const lessons = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile || 'math-units.json'));
+    if (!subject.lessonsFile) return [];
+    const lessons = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile));
     if (!lessons) return [];
     if (subject.adapter === 'generic') {
       pages = [];
@@ -587,12 +611,26 @@ export function getLessonPages(subjectCode, level, gradeId, country) {
     }
     pages = adaptMathUnits(lessons);
   } else if (code === 'anisi' || code === 'reading' || code === 'arabic' || adapter === 'anisi' || adapter === 'reading') {
-    const book = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile || 'anisi-lessons-full.json'));
+    if (!subject.lessonsFile) return [];
+    const book = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile));
     if (!book) return [];
     // السنة الأولى: محوّل الحروف (أنيسي). السنة 2-6: محوّل النصوص القرائية.
     const isLetterBook = Array.isArray(book.units) && book.units.some((u) => Array.isArray(u.lessons) && u.lessons.some((l) => l.letter));
     pages = isLetterBook ? adaptAnisiLessons(book) : adaptReadingBook(book);
+  } else if (code === 'french' || code === 'français' || adapter === 'french') {
+    // Français has its own subject id and its own units file. The units file is the
+    // same flat `{ id: { title, … } }` shape the other subjects use, so the shared
+    // generic reader is used — NOT the maths branch the registry used to claim
+    // (`adapter: math`, ISS-017). Today the file is empty, so the book is served as
+    // the PDF it is, with zero interactive lessons.
+    if (!subject.lessonsFile) return [];
+    const book = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile));
+    if (!book) return [];
+    pages = Array.isArray(book.units) ? adaptReadingBook(book) : adaptMathUnits(book);
   } else if (code === 'science' || adapter === 'science') {
+    // The one intentional fallback: a science book with no units file is read through
+    // its own chapters (year2/year3). It uses the subject's OWN bookFile — never
+    // another book's — so it cannot mix content.
     if (subject.lessonsFile) {
       const lessons = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile));
       if (lessons) pages = adaptMathUnits(lessons);
@@ -602,7 +640,8 @@ export function getLessonPages(subjectCode, level, gradeId, country) {
       pages = book ? adaptScienceBook(book) : [];
     }
   } else if (code === 'production' || code === 'writing' || adapter === 'production') {
-    const book = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile || 'production-units.json'));
+    if (!subject.lessonsFile) return [];
+    const book = readJson(path.join(curriculumDir, grade.dir, subject.lessonsFile));
     if (!book) return [];
     if (Array.isArray(book.units)) {
       pages = adaptProductionBook(book);

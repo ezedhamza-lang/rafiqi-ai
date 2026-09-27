@@ -29,7 +29,7 @@ export default function TeacherGradebook() {
     const head = ['التلميذ', ...book.items.map((i) => i.title), 'المعدل'];
     const lines = book.rows.map((r) => [
       r.name,
-      ...book.items.map((_, idx) => (r.grades[idx] !== undefined ? r.grades[idx] : '')),
+      ...book.items.map((_, idx) => (r.grades[idx] != null ? r.grades[idx] : '')),
       r.average ?? ''
     ]);
     const csv = '\uFEFF' + [head, ...lines].map((row) => row.map((c) => `"${c}"`).join(',')).join('\n');
@@ -78,7 +78,7 @@ export default function TeacherGradebook() {
                     <tr key={r.studentId}>
                       <td>{r.name}</td>
                       {book.items.map((_, idx) => (
-                        <td key={idx}>{r.grades[idx] !== undefined ? r.grades[idx] : '—'}</td>
+                        <td key={idx}>{r.grades[idx] != null ? r.grades[idx] : '—'}</td>
                       ))}
                       <td><strong>{r.average !== null ? `${r.average}%` : '—'}</strong></td>
                     </tr>

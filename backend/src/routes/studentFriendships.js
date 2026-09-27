@@ -101,10 +101,24 @@ router.get('/friends/search', authMiddleware, async (req, res) => {
 // POST /api/student/friends/request — send friend request
 router.post('/friends/request', authMiddleware, async (req, res) => {
   try {
-    const { userId: addresseeId } = req.body;
     const requesterId = req.user.id;
 
+    // Validate the addressee before touching the database. A missing or non-numeric
+    // `userId` used to reach prisma and surface as HTTP 500 (ISS-010); a string such
+    // as "9" also slipped past the strict `===` self-check.
+    const raw = req.body?.userId;
+    const addresseeId = Number(raw);
+    if (raw === undefined || raw === null || raw === '' || !Number.isInteger(addresseeId) || addresseeId <= 0) {
+      return res.status(400).json({ error: 'المعرّف مطلوب ويجب أن يكون رقمًا صحيحًا', field: 'userId' });
+    }
+
     if (addresseeId === requesterId) return res.status(400).json({ error: 'Cannot add yourself' });
+
+    const recipient = await prisma.user.findUnique({ where: { id: addresseeId }, select: { id: true, role: true } });
+    if (!recipient) return res.status(404).json({ error: 'المستخدم غير موجود' });
+    if (recipient.role !== 'STUDENT') {
+      return res.status(400).json({ error: 'يمكن إرسال طلب الصداقة إلى تلميذ فقط' });
+    }
 
     const existing = await prisma.friendship.findFirst({
       where: {

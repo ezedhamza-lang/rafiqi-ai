@@ -89,7 +89,7 @@ export default function StudentLearningPlan() {
                 </span>
                 <div className="plan-item-body">
                   <strong>{item.title}</strong>
-                  <span className="plan-item-meta">{sm.label} Â· {typeLabel}</span>
+                  <span className="plan-item-meta">{sm.label} · {typeLabel}</span>
                   {item.detail && <span className="muted" style={{ fontSize: '0.82rem' }}>{item.detail}</span>}
                 </div>
                 {item.link && (

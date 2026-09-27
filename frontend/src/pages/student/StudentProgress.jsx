@@ -13,15 +13,15 @@ const SUBJECT_META = {
   maths: { label: 'الرياضيات', color: '#E8A317', emoji: '🔢' },
   science: { label: 'العلوم', color: '#8b5cf6', emoji: '🔬' },
   ev: { label: 'التربية المدنية', color: '#ec4899', emoji: '🏛️' },
-  pe: { label: 'التربية البدنية', color: '#ef4444', emoji: 'âš½' },
+  pe: { label: 'التربية البدنية', color: '#ef4444', emoji: '⚽' },
   history: { label: 'التاريخ', color: '#92400e', emoji: '📜' },
   geography: { label: 'الجغرافيا', color: '#06b6d4', emoji: '🌍' },
   tajweed: { label: 'التلاوة', color: '#059669', emoji: '🕌' },
-  islamic: { label: 'التربية الإسلامية', color: '#047857', emoji: 'â˜ªï¸' },
+  islamic: { label: 'التربية الإسلامية', color: '#047857', emoji: '☪️' },
   art: { label: 'التربية التشكيلية', color: '#d946ef', emoji: '🎨' },
   music: { label: 'التربية الموسيقية', color: '#f472b6', emoji: '🎵' },
   computer: { label: 'المعلوماتية', color: '#6366f1', emoji: '💻' },
-  tech: { label: 'التكنولوجيا', color: '#4f46e5', emoji: 'âš™ï¸' },
+  tech: { label: 'التكنولوجيا', color: '#4f46e5', emoji: '⚙️' },
 };
 
 function getSubjectMeta(id) {
@@ -30,10 +30,13 @@ function getSubjectMeta(id) {
   return SUBJECT_META[lower] || SUBJECT_META[lower.split('_')[0]] || { label: id, color: '#94a3b8', emoji: '📚' };
 }
 
+// Reward milestones, in XP. This is a reward track, not a level ladder: the
+// platform's level is owned by the server (level = floor(xp / 100) + 1) and is
+// shown next to this track, so the two can never contradict each other (ISS-004).
 const MILESTONES = [
   { xp: 10, label: 'بداية', emoji: '🌱' },
   { xp: 50, label: 'مسار جيد', emoji: '🌿' },
-  { xp: 100, label: 'المستوى 2', emoji: 'â­' },
+  { xp: 100, label: 'مئة نقطة', emoji: '⭐' },
   { xp: 250, label: 'طالب مجتهد', emoji: '📚' },
   { xp: 500, label: 'نجم', emoji: '🌟' },
   { xp: 1000, label: 'متفوق', emoji: '🏆' },
@@ -84,7 +87,9 @@ export default function StudentProgress() {
             <span className="pg-milestone__emoji">{currentMilestone.emoji}</span>
             <div>
               <span className="pg-milestone__label">{currentMilestone.label}</span>
-              <span className="pg-milestone__xp">{user.xp} XP</span>
+              <span className="pg-milestone__xp">
+                {user.xp} XP · {t('studentSpace.profile.level', { n: user.level || 1 })}
+              </span>
             </div>
           </div>
           {nextMilestone && (
@@ -165,7 +170,7 @@ export default function StudentProgress() {
                   <span className="pg-milestone-chip__emoji">{m.emoji}</span>
                   <span className="pg-milestone-chip__label">{m.label}</span>
                   <span className="pg-milestone-chip__xp">{m.xp} XP</span>
-                  {reached && <span className="pg-milestone-chip__check">âœ“</span>}
+                  {reached && <span className="pg-milestone-chip__check">✓</span>}
                 </div>
               );
             })}

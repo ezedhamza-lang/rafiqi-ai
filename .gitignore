@@ -49,3 +49,14 @@ dossier-cnte2026/05-medias/*.avi
 dossier-cnte2026/05-medias/*.mkv
 # Classroom credential printouts (trial passwords - never ship)
 dossier-cnte2026/02-scenarios/cartes-eleves.html.pdf
+
+# QA screenshots produced by the dev tools in scripts/ (regenerated on demand)
+docs/qa-shots/
+
+# CNTE scenario videos (heavy — 628 MB total, delivered in the final zip only)
+dossier-cnte2026/02-scenarios/*.mp4
+
+# Submission package (915 MB — delivered via Google Drive, never in git)
+EZEDDINE.HAMZA.zip
+EZEDDINE.HAMZA/
+

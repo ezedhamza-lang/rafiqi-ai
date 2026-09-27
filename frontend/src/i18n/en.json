@@ -489,6 +489,9 @@
     "changeFile": "Click to choose another file",
     "dragDrop": "Drag files here or browse",
     "acceptedFormats": "Accepted formats: PDF, JPG, PNG, DOC, DOCX",
+    "loginRequiredTitle": "Sign in to send a request",
+    "loginRequiredBody": "You can fill in the form, but sending a request requires an account. Requests sent without an account stay with the general supervisor and are not shown to the school director.",
+    "loginCta": "Sign in",
     "sending": "Sending...",
     "submit": "Send",
     "cancel": "Cancel"
@@ -1357,7 +1360,7 @@
     "none": "None",
     "passwordColumn": "Password",
     "resetPassword": "Reset",
-    "resetPrompt": "New password for {name} (leave empty to auto-generate):",
+    "resetPrompt": "New password for {{name}} (leave empty to auto-generate):",
     "newPassword": "New password",
     "copy": "Copy",
     "copied": "Copied ✓",
@@ -1493,7 +1496,7 @@
     },
     "leaderboard": {
       "title": "Honor Board",
-      "subtitle": "Top students this week",
+      "subtitle": "Your classmates ranked by points",
       "yourRank": "Your rank",
       "level": "Level",
       "me": "Me"
@@ -1987,16 +1990,16 @@
       "recommendedTitle": "Suggested lesson",
       "flashcardsTitle": "Flashcards",
       "challengeDone": "Challenge status",
-      "xpReward": "+{n} XP",
+      "xpReward": "+{{n}} XP",
       "noAssignments": "No pending tasks today",
       "questions": "questions",
-      "dueReviews": "You have {n} due smart reviews",
-      "exerciseCount": "{n} suggested exercises",
+      "dueReviews": "You have {{n}} due smart reviews",
+      "exerciseCount": "{{n}} suggested exercises",
       "goToPlan": "Open learning plan",
       "noRecommendation": "Start learning to get suggestions",
       "flashcardsHint": "Review key concepts with quick cards",
       "goToFlashcards": "Start reviewing",
-      "greeting": "Hi {name}, enjoy a productive day"
+      "greeting": "Hi {{name}}, enjoy a productive day"
     },
     "flashcards": {
       "title": "Flashcards",
@@ -2723,8 +2726,8 @@
       "title": "Lesson progress",
       "subtitle": "How many students completed interactive lessons",
       "selectClass": "Select class",
-      "studentsCount": "{n} students in class",
-      "totalCompletions": "{n} completions"
+      "studentsCount": "{{n}} students in class",
+      "totalCompletions": "{{n}} completions"
     },
     "notes": {
       "title": "Parent notes",

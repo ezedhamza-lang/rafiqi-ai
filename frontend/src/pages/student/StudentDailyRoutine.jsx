@@ -41,7 +41,7 @@ export default function StudentDailyRoutine() {
               </div>
             ))}
             <p className="routine-xp">
-              {t('studentSpace.routine.challengeDone')}: {challenge?.completed ? 'âœ…' : 'â³'} ({t('studentSpace.routine.xpReward', { n: challenge?.xpReward || 0 })})
+              {t('studentSpace.routine.challengeDone')}: {challenge?.completed ? '✅' : '⏳'} ({t('studentSpace.routine.xpReward', { n: challenge?.xpReward || 0 })})
             </p>
           </div>
         </section>

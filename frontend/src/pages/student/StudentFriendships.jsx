@@ -54,7 +54,7 @@ export default function StudentFriendships() {
 
   const removeFriend = async (friendshipId) => {
     try {
-      await api.delete(`/student/friends/${friendshipId}`);
+      await api.del(`/student/friends/${friendshipId}`);
       flash(t('studentSpace.friendships.removed', 'تم حذف الصديق'));
       load();
     } catch { /* empty */ }

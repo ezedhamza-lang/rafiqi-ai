@@ -9,7 +9,7 @@ import { sendToUser, broadcastUnread } from '../ws.js';
 import { isAllowedContact, scopedRecipientIds, MESSAGE_POLICY, MESSAGE_POLICY_TEXT } from '../services/messagingPolicy.js';
 import { validateBody, validateQuery, validateParams } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
-import { validateUploadedFiles } from '../utils/fileSecurity.js';
+import { validateUploadedFiles, discardUploadsOnError } from '../utils/fileSecurity.js';
 import { strictExtFilter, safeFilename } from '../utils/uploadSafe.js';
 import {
   userIdParamSchema,
@@ -250,7 +250,7 @@ router.get('/unread-count', asyncHandler(async (req, res) => {
  *       404:
  *         description: المستلم غير موجود
  */
-router.post('/messages', upload.single('attachment'), validateBody(messageCreateSchema), asyncHandler(async (req, res) => {
+router.post('/messages', upload.single('attachment'), discardUploadsOnError, validateBody(messageCreateSchema), asyncHandler(async (req, res) => {
   const { recipientId, subject, body } = req.body;
   if (req.file) {
     const badFiles = validateUploadedFiles([req.file], MSG_MAGIC);
