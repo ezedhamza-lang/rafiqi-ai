@@ -9,20 +9,27 @@ import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 const router = Router();
 router.use(authMiddleware);
 
-const VALID_GAMES = ['QUICK_MATH', 'WORD_BUILD', 'MEMORY'];
+const VALID_GAMES = [
+  'QUICK_MATH', 'WORD_BUILD', 'MEMORY',
+  'SCIENCE_QUIZ', 'SCIENCE_CLASSIFY', 'EXPERIMENT_STEPS',
+  'ARABIC_SCRAMBLE', 'SENTENCE_BUILDER', 'FRENCH_MATCH'
+];
 export const GAME_DAILY_LIMIT = 10;
 
+const GAME_LABELS = {
+  QUICK_MATH: 'الحساب السريع',
+  WORD_BUILD: 'تركيب الكلمات',
+  MEMORY: 'اختبار الذاكرة',
+  SCIENCE_QUIZ: 'اختبار العلوم',
+  SCIENCE_CLASSIFY: 'تصنيف العلوم',
+  EXPERIMENT_STEPS: 'ترتيب التجربة',
+  ARABIC_SCRAMBLE: 'تكعيب الكلمة',
+  SENTENCE_BUILDER: 'صانع الجمل',
+  FRENCH_MATCH: 'مطابقة الفرنسية'
+};
+
 function gameLabel(game) {
-  switch (game) {
-    case 'QUICK_MATH':
-      return 'الحساب السريع';
-    case 'WORD_BUILD':
-      return 'تركيب الكلمات';
-    case 'MEMORY':
-      return 'اختبار الذاكرة';
-    default:
-      return game;
-  }
+  return GAME_LABELS[game] || game;
 }
 
 function dayStart() {
@@ -90,7 +97,7 @@ router.get(
  *             type: object
  *             required: [game]
  *             properties:
- *               game: { type: string, enum: [QUICK_MATH, WORD_BUILD, MEMORY] }
+ *               game: { type: string, enum: [QUICK_MATH, WORD_BUILD, MEMORY, SCIENCE_QUIZ, SCIENCE_CLASSIFY, EXPERIMENT_STEPS, ARABIC_SCRAMBLE, SENTENCE_BUILDER, FRENCH_MATCH] }
  *               score: { type: integer }
  *               correct: { type: integer }
  *               total: { type: integer }

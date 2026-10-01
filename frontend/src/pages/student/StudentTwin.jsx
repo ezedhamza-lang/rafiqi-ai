@@ -70,7 +70,7 @@ export default function StudentTwin() {
         ))}
       </div>
 
-      {/* â”€â”€ Daily Challenge â”€â”€ */}
+      {/* ── Daily Challenge ── */}
       <div className="twin-v3__challenge">
         <div className="twin-v3__challenge-head">
           <span className="sparkle-wrap"><span className="material-icons" style={{ color: '#E8A317' }}>emoji_events</span></span>
@@ -102,7 +102,7 @@ export default function StudentTwin() {
         </div>
       </div>
 
-      {/* â”€â”€ Stats Cards â”€â”€ */}
+      {/* ── Stats Cards ── */}
       <div className="twin-v3__stats">
         <div className="twin-v3__stat-card twin-v3__stat-card--gold">
           <span className="material-icons">emoji_events</span>
@@ -124,7 +124,7 @@ export default function StudentTwin() {
         </div>
       </div>
 
-      {/* â”€â”€ Strengths & Weaknesses â”€â”€ */}
+      {/* ── Strengths & Weaknesses ── */}
       <div className="twin-v3__sub-grid">
         <div className="twin-v3__analysis">
           <h4><span className="material-icons" style={{ color: '#10b981' }}>trending_up</span> {t('studentSpace.twin.strengths')}</h4>
@@ -136,7 +136,7 @@ export default function StudentTwin() {
         </div>
       </div>
 
-      {/* â”€â”€ Badges & Leaderboard â”€â”€ */}
+      {/* ── Badges & Leaderboard ── */}
       <div className="twin-v3__sub-grid" style={{ marginTop: '1.2rem' }}>
         <Card title={t('studentSpace.twin.badgesCount', { n: badges.length })} icon="military_tech">
           {badges.length === 0 ? (
@@ -175,7 +175,7 @@ export default function StudentTwin() {
         )}
       </div>
 
-      {/* â”€â”€ Activity Log â”€â”€ */}
+      {/* ── Activity Log ── */}
       <div style={{ marginTop: '1.2rem' }}>
         <Card title={t('studentSpace.twin.activityLog')} icon="history">
           {activities.length === 0 ? (

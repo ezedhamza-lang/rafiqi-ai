@@ -4,7 +4,7 @@ from PIL import Image
 import os, shutil
 
 SRC = r"D:\livres eleves\صور-غلاف-الكتب"
-DST = r"D:\mon projet\rafiqi-كامل-محدث-02-09-2026\rafiqi\frontend\public\covers"
+DST = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "public", "covers")
 os.makedirs(DST, exist_ok=True)
 
 mapping = {

@@ -1,5 +1,5 @@
 ﻿/**
- * Ø§Ù„Ø¹ÙˆØ§Ù„Ù… â€” procedural 3D worlds, geometry only (no external assets).
+ * Ø§Ù„Ø¹ÙˆØ§Ù„Ù… — procedural 3D worlds, geometry only (no external assets).
  *
  * Every world gets its own palette, sky, ground treatment and decor recipe, so
  * the student always knows where they are from one screenshot. The course is
@@ -215,7 +215,7 @@ export class World {
     return { x, top, z, hw, hd };
   }
 
-  /** A platform that slides sideways â€” used from the castle onwards. */
+  /** A platform that slides sideways — used from the castle onwards. */
   #movingPlatform(x, y, z) {
     const t = this.theme;
     const mesh = new THREE.Mesh(new THREE.BoxGeometry(7, 0.8, 5), lambert(t.accent));
@@ -300,7 +300,7 @@ export class World {
     this.group.add(g);
   }
 
-  /** A giant floating letter â€” the signature of the Letter Garden. */
+  /** A giant floating letter — the signature of the Letter Garden. */
   giantLetter(x, z) {
     const letter = pick(LETTERS);
     // Translucent and floating: a garden ornament, not a white billboard.
@@ -329,7 +329,7 @@ export class World {
     (this.butterflies ||= []).push(g);
   }
 
-  /** A giant book standing like a tree â€” the Word Forest signature. */
+  /** A giant book standing like a tree — the Word Forest signature. */
   bigBook(x, z) {
     const g = new THREE.Group();
     const cover = new THREE.Mesh(
@@ -383,7 +383,7 @@ export class World {
     this.group.add(g);
   }
 
-  /** A house shaped like a closed book â€” the Sentence Village signature. */
+  /** A house shaped like a closed book — the Sentence Village signature. */
   bookHouse(x, z) {
     const g = new THREE.Group();
     const walls = new THREE.Mesh(
@@ -435,7 +435,7 @@ export class World {
     this.group.add(rail);
   }
 
-  /** A castle tower with battlements â€” the Knowledge Castle signature. */
+  /** A castle tower with battlements — the Knowledge Castle signature. */
   tower(x, z) {
     const g = new THREE.Group();
     const h = rand(14, 22);
@@ -496,7 +496,7 @@ export class World {
     this.group.add(deck);
   }
 
-  /** A jagged rock formation â€” the Challenge Valley signature. */
+  /** A jagged rock formation — the Challenge Valley signature. */
   rock(x, z) {
     const g = new THREE.Group();
     for (let i = 0; i < 3; i++) {
@@ -539,7 +539,7 @@ export class World {
     (this.lavaPools ||= []).push(pool);
   }
 
-  /** A modern tower â€” the Knowledge City signature. */
+  /** A modern tower — the Knowledge City signature. */
   skyscraper(x, z) {
     const h = rand(18, 40);
     const g = new THREE.Group();
@@ -607,7 +607,7 @@ export class World {
     this.group.add(jet);
   }
 
-  /** A palm tree â€” the Champions Island signature. */
+  /** A palm tree — the Champions Island signature. */
   palm(x, z) {
     const g = new THREE.Group();
     const trunk = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.8, 11, 8), lambert(0xa1662f));
@@ -664,7 +664,7 @@ export class World {
     cup.position.set(x, 8, z);
   }
 
-  /** A floating crystal â€” pure decoration, purely pretty. */
+  /** A floating crystal — pure decoration, purely pretty. */
   crystal(x, z) {
     const color = pick([0xff6f91, 0x8e6bd6, 0x00bcd4]);
     const c = new THREE.Mesh(
@@ -692,7 +692,7 @@ export class World {
     const g = new THREE.Group();
 
     const colors = [0x8e6bd6, 0xe8544f, 0x00bcd4, 0xff7043, 0x4caf50];
-    // A rounded body with two eyes â€” readable as a creature at a glance.
+    // A rounded body with two eyes — readable as a creature at a glance.
     const body = new THREE.Mesh(new THREE.SphereGeometry(5, 22, 18), lambert(colors[0]));
     body.position.y = 7;
     g.add(body);
@@ -797,7 +797,7 @@ export class World {
 }
 
 /**
- * Decor recipe â†’ private method name.
+ * Decor recipe → private method name.
  * Keeps `#decor` readable and means a new world only needs a builder here.
  */
 const DECOR_BUILDERS = {
