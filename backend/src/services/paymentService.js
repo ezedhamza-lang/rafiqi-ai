@@ -14,7 +14,7 @@ export const PAYABLE_STATUSES = ['PENDING_PAYMENT', 'SUSPENDED'];
 
 async function canPayForSubscription(userId, role, subscription) {
   if (subscription.userId === userId) return true;
-  if (role === 'PARENT') {
+  if (role === 'PARENT' || role === 'TEACHER') {
     const child = await prisma.student.findFirst({
       where: { userId, accountUserId: subscription.userId }
     });

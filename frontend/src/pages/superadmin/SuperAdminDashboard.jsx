@@ -3,17 +3,25 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { getHomePath } from '../../roles.js';
 import { useI18n } from '../../i18n/index.jsx';
+const Overview = lazy(() => import('./Overview.jsx'));
 const Licenses = lazy(() => import('./Licenses.jsx'));
 const Subscriptions = lazy(() => import('./Subscriptions.jsx'));
 const UsersAdmin = lazy(() => import('./UsersAdmin.jsx'));
 const Schools = lazy(() => import('./Schools.jsx'));
+const AdminSubscriptions = lazy(() => import('../director/AdminSubscriptions.jsx'));
+const FinanceDashboard = lazy(() => import('../director/FinanceDashboard.jsx'));
+const DirectorNotifications = lazy(() => import('../director/DirectorNotifications.jsx'));
 import SpaceShell from '../../components/SpaceShell.jsx';
 
 const TABS = [
-  { to: '', end: true, icon: 'vpn_key', key: 'licenses', color: '#E8A317' },
-  { to: 'subscriptions', icon: 'subscriptions', key: 'subscriptions', color: '#0ea5e9' },
+  { to: '', end: true, icon: 'insights', key: 'overview', color: '#6366f1' },
   { to: 'users', icon: 'manage_accounts', key: 'users', color: '#10b981' },
-  { to: 'schools', icon: 'school', key: 'schools', color: '#8b5cf6' }
+  { to: 'schools', icon: 'school', key: 'schools', color: '#8b5cf6' },
+  { to: 'licenses', icon: 'vpn_key', key: 'licenses', color: '#E8A317' },
+  { to: 'subscriptions', icon: 'subscriptions', key: 'subscriptions', color: '#0ea5e9' },
+  { to: 'billing', icon: 'receipt_long', key: 'billing', color: '#06b6d4' },
+  { to: 'finance', icon: 'account_balance_wallet', key: 'finance', color: '#f43f5e' },
+  { to: 'broadcast', icon: 'campaign', key: 'broadcast', color: '#ef4444' }
 ];
 
 export default function SuperAdminDashboard() {
@@ -41,10 +49,14 @@ export default function SuperAdminDashboard() {
       >
         <Suspense fallback={null}>
         <Routes>
-          <Route index element={<Licenses />} />
-          <Route path="subscriptions" element={<Subscriptions />} />
+          <Route index element={<Overview />} />
           <Route path="users" element={<UsersAdmin />} />
           <Route path="schools" element={<Schools />} />
+          <Route path="licenses" element={<Licenses />} />
+          <Route path="subscriptions" element={<Subscriptions />} />
+          <Route path="billing" element={<AdminSubscriptions />} />
+          <Route path="finance" element={<FinanceDashboard />} />
+          <Route path="broadcast" element={<DirectorNotifications />} />
           <Route path="*" element={<Navigate to="." replace />} />
         </Routes>
       </Suspense>

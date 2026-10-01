@@ -29,7 +29,8 @@ const InstagramIcon = () => (
 export default function Footer() {
   const { user } = useAuth();
   const { t } = useI18n();
-  const isParent = user && user.role === 'PARENT';
+  // حساب دورين: يظهر رابطي الأولياء للوليّ وللمعلّم الذي هو وليّ أمر في نفس الوقت
+  const isParent = user && ['PARENT', 'TEACHER'].includes(user.role);
   return (
     <footer className="site-footer">
       <div className="container">
@@ -48,7 +49,10 @@ export default function Footer() {
                 </>
               )}
               <li><Link to="/help">{t('footer.requestHelp')}</Link></li>
-              <li><Link to="/dashboard">{t('footer.dashboard')}</Link></li>
+              {/* /dashboard لا يقبل SUPER_ADMIN/STUDENT ⇒ لا نعرض رابطًا يردّ صاحبه */}
+              {(!user || ['ADMIN', 'SCHOOL_DIRECTOR', 'TEACHER', 'PARENT'].includes(user.role)) && (
+                <li><Link to="/dashboard">{t('footer.dashboard')}</Link></li>
+              )}
             </ul>
           </div>
           <div className="footer-col">

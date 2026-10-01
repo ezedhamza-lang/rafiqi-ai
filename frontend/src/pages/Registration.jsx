@@ -27,7 +27,8 @@ export default function Registration() {
   const [user] = useState(() => {
     try { return JSON.parse(localStorage.getItem('school_user')); } catch { return null; }
   });
-  const canSubmit = user && user.role === 'PARENT';
+  // حساب دورين: معلّم وهو وليّ أمر يستطيع تقديم طلبات تسجيل أبنائه
+  const canSubmit = user && ['PARENT', 'TEACHER'].includes(user.role);
   const [step, setStep] = useState(1);
   const formRef = useRef(null);
   const goNext = () => {

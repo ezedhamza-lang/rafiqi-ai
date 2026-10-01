@@ -27,7 +27,7 @@ async function canAccessInvoice(req, invoice) {
   const ownerId = invoice.subscription?.userId;
   if (ownerId === req.user.id) return true;
   if (['ADMIN', 'SUPER_ADMIN'].includes(req.user.role)) return true;
-  if (req.user.role === 'PARENT' && ownerId != null) {
+  if (['PARENT', 'TEACHER'].includes(req.user.role) && ownerId != null) {
     const child = await prisma.student.findFirst({
       where: { userId: req.user.id, accountUserId: ownerId }
     });
@@ -240,7 +240,7 @@ router.get(
     });
 
     let children = [];
-    if (req.user.role === 'PARENT') {
+    if (['PARENT', 'TEACHER'].includes(req.user.role)) {
       const childRows = await prisma.student.findMany({
         where: { userId: req.user.id },
         select: { accountUserId: true, firstName: true, lastName: true }
@@ -292,7 +292,7 @@ router.get(
 router.post(
   '/checkout',
   authMiddleware,
-  requireRole('PARENT', 'ADMIN', 'SUPER_ADMIN'),
+  requireRole('PARENT', 'TEACHER', 'ADMIN', 'SUPER_ADMIN'),
   validateBody(checkoutSchema),
   asyncHandler(async (req, res) => {
     const { subscriptionId, provider, captchaToken, captchaAnswer, kind, discountCode } = req.body;
@@ -426,7 +426,7 @@ router.get(
   authMiddleware,
   asyncHandler(async (req, res) => {
     const where = { status: 'ACTIVE' };
-    if (req.user.role === 'PARENT') {
+    if (['PARENT', 'TEACHER'].includes(req.user.role)) {
       const childRows = await prisma.student.findMany({
         where: { userId: req.user.id },
         select: { accountUserId: true, firstName: true, lastName: true }
@@ -551,7 +551,7 @@ router.get(
       .findMany({ where: { userId: req.user.id }, select: { id: true } })
       .then((rows) => rows.map((r) => r.id));
     let childSubIds = [];
-    if (req.user.role === 'PARENT') {
+    if (['PARENT', 'TEACHER'].includes(req.user.role)) {
       const childRows = await prisma.student.findMany({
         where: { userId: req.user.id },
         select: { accountUserId: true }

@@ -50,7 +50,7 @@ function aiError(e) {
  *       404:
  *         description: الابن غير موجود
  */
-router.get('/insights/children/:studentId', requireRole('PARENT'), validateParams(analyticsStudentParamSchema), asyncHandler(async (req, res) => {
+router.get('/insights/children/:studentId', requireRole('PARENT', 'TEACHER'), validateParams(analyticsStudentParamSchema), asyncHandler(async (req, res) => {
   const child = await resolveChildOrThrow(req.user.id, Number(req.params.studentId));
   const data = await gatherStudentData(child.accountUserId);
   if (!data) throw new ApiError(404, 'الابن غير موجود');
@@ -97,7 +97,7 @@ router.get('/insights/children/:studentId', requireRole('PARENT'), validateParam
  *       502:
  *         description: تعذر الاتصال بالخدمة
  */
-router.post('/insights/children/:studentId/generate', requireRole('PARENT'), validateParams(analyticsStudentParamSchema), asyncHandler(async (req, res) => {
+router.post('/insights/children/:studentId/generate', requireRole('PARENT', 'TEACHER'), validateParams(analyticsStudentParamSchema), asyncHandler(async (req, res) => {
   const child = await resolveChildOrThrow(req.user.id, Number(req.params.studentId));
   const data = await gatherStudentData(child.accountUserId);
   if (!data) throw new ApiError(404, 'الابن غير موجود');

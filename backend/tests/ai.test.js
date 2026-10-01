@@ -4,6 +4,7 @@ import request from 'supertest';
 import prisma from '../src/db.js';
 import {
   saveAiKey,
+  savePlatformAiKey,
   __setCallProvider,
   __resetCallProvider,
   resolveLessonContext
@@ -126,6 +127,31 @@ describe('المرحلة 7.1 — رفيقي مربوط بمحتوى المنهج
     } finally {
       const teacher = await prisma.user.findFirst({ where: { email: 'teacher@test.tn' } });
       await saveAiKey(teacher.id, 'fake-gemini-key');
+    }
+  });
+
+  it('تلميذ بلا قسم (وضع حساب الاستكشاف) يستعمل مفتاح المنصة بدل رسالة «لا مفتاح»', async () => {
+    // explorer@test.tn مخلّق في seed بلا سجل Student — كان السطر
+    // «if (!teacherId) throw NO_AI_KEY» يقطع مفتاح المنصة/البيئة نهائيًا.
+    const user = await prisma.user.findFirst({ where: { email: 'student@test.tn' } });
+    const student = await prisma.student.findFirst({ where: { accountUserId: user.id } });
+    const savedClassId = student.classId;
+    await prisma.student.update({ where: { id: student.id }, data: { classId: null } });
+    await savePlatformAiKey(1, 'platform-key-for-chat');
+    __setCallProvider(async () => 'رد-من-مفتاح-المنصة');
+    try {
+      const res = await request(app)
+        .post('/api/ai/chat')
+        .set('Authorization', `Bearer ${studentToken}`)
+        .send({ message: 'مرحبا' });
+      expect(res.status).toBe(200);
+      expect(res.body.role).toBe('assistant');
+      expect(res.body.content).toContain('رد-من-مفتاح-المنصة');
+      expect(res.body.content).not.toContain('مفتاح الذكاء الاصطناعي');
+    } finally {
+      await prisma.student.update({ where: { id: student.id }, data: { classId: savedClassId } });
+      await prisma.systemSetting.deleteMany({ where: { key: 'ai_provider_key' } });
+      __setCallProvider(fakeProvider);
     }
   });
 });

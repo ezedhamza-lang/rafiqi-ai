@@ -64,7 +64,7 @@ export async function renewSubscription({ subscriptionId, actorId, provider, ref
 async function canManageRenewal(sub, actorId, role) {
   if (sub.userId === actorId) return true;
   if (['ADMIN', 'SUPER_ADMIN'].includes(role)) return true;
-  if (role === 'PARENT') {
+  if (role === 'PARENT' || role === 'TEACHER') {
     const child = await prisma.student.findFirst({
       where: { userId: actorId, accountUserId: sub.userId }
     });

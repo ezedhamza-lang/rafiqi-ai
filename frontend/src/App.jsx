@@ -115,8 +115,8 @@ export default function App() {
                   <Route path="/account" element={<RequireRole><AccountSettings /></RequireRole>} />
                   <Route element={<DashboardLayout />}>
                     <Route path="/dashboard" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR', 'TEACHER', 'PARENT']}><Dashboard /></RequireRole>} />
-                    <Route path="/students" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR', 'PARENT']}><Students /></RequireRole>} />
-                    <Route path="/registration" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR', 'PARENT']}><Registration /></RequireRole>} />
+                    <Route path="/students" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR', 'PARENT', 'TEACHER']}><Students /></RequireRole>} />
+                    <Route path="/registration" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR', 'PARENT', 'TEACHER']}><Registration /></RequireRole>} />
                     <Route path="/student" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR']}><StudentSection /></RequireRole>} />
                     <Route path="/my-requests" element={<RequireRole><MyRequests /></RequireRole>} />
                     <Route path="/payment" element={<RequireRole><PaymentCenter /></RequireRole>} />
@@ -130,7 +130,7 @@ export default function App() {
                     path="/games/letters-garden"
                     element={<RequireRole roles={['STUDENT']}><KnowledgeGarden /></RequireRole>}
                   />
-                    <Route path="/parent/*" element={<RequireRole roles={['PARENT']}><ParentSpace /></RequireRole>} />
+                    <Route path="/parent/*" element={<RequireRole roles={['PARENT', 'TEACHER']}><ParentSpace /></RequireRole>} />
                     <Route path="/director/*" element={<RequireRole roles={['SCHOOL_DIRECTOR', 'ADMIN']}><DirectorDashboard /></RequireRole>} />
                     <Route path="/superadmin/*" element={<RequireRole roles={['SUPER_ADMIN']}><SuperAdminDashboard /></RequireRole>} />
                   </Route>

@@ -52,7 +52,7 @@ router.use(authMiddleware);
  *       200:
  *         description: قائمة الوثائق
  */
-router.get('/documents', requireRole('PARENT'), asyncHandler(async (req, res) => {
+router.get('/documents', requireRole('PARENT', 'TEACHER'), asyncHandler(async (req, res) => {
   const docs = await prisma.parentDocument.findMany({
     where: { parentId: req.user.id },
     include: { student: { select: { id: true, firstName: true, lastName: true, level: true } } },
@@ -73,7 +73,7 @@ router.get('/documents', requireRole('PARENT'), asyncHandler(async (req, res) =>
  *       200:
  *         description: قائمة الأنواع
  */
-router.get('/documents/types', requireRole('PARENT'), asyncHandler(async (_req, res) => {
+router.get('/documents/types', requireRole('PARENT', 'TEACHER'), asyncHandler(async (_req, res) => {
   res.json(PARENT_DOC_TYPES);
 }));
 
@@ -106,7 +106,7 @@ router.get('/documents/types', requireRole('PARENT'), asyncHandler(async (_req, 
  *       404:
  *         description: التلميذ غير موجود
  */
-router.post('/documents', requireRole('PARENT'), upload.single('file'), discardUploadsOnError, validateBody(parentDocCreateSchema), asyncHandler(async (req, res) => {
+router.post('/documents', requireRole('PARENT', 'TEACHER'), upload.single('file'), discardUploadsOnError, validateBody(parentDocCreateSchema), asyncHandler(async (req, res) => {
   const { studentId, docType, title, note } = req.body;
   if (!req.file) throw new ApiError(400, 'يرجى إرفاق ملف الوثيقة (PDF أو صورة)');
   const badFiles = validateUploadedFiles([req.file], ['pdf', 'jpeg', 'png', 'zip']);
@@ -204,7 +204,7 @@ router.get('/documents/all', requireRole('SCHOOL_DIRECTOR', 'ADMIN', 'SUPER_ADMI
  *       404:
  *         description: الوثيقة غير موجودة
  */
-router.get('/documents/:id', requireRole('PARENT'), validateParams(parentDocIdParamSchema), asyncHandler(async (req, res) => {
+router.get('/documents/:id', requireRole('PARENT', 'TEACHER'), validateParams(parentDocIdParamSchema), asyncHandler(async (req, res) => {
   const doc = await prisma.parentDocument.findFirst({
     where: { id: Number(req.params.id), parentId: req.user.id },
     include: { student: { select: { id: true, firstName: true, lastName: true, level: true } } }

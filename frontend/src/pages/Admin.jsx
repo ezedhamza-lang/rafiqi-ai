@@ -11,10 +11,18 @@ const STATUS = ['PENDING', 'PROCESSING', 'VALIDATED', 'REJECTED'];
 export default function Admin() {
   const { t } = useI18n();
   const { user } = useAuth();
-  const [tab, setTab] = useState('help');
+  const [tab, setTab] = useState(() => (typeof window !== 'undefined' && window.location.hash === '#ai' ? 'ai' : 'help'));
   const [helpRequests, setHelpRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [msg, setMsg] = useState('');
+
+  // مدخل «مفتاح الذكاء الاصطناعي» في فضاء النظام يفتح تبويب المفتاح مباشرة (/admin#ai)
+  useEffect(() => {
+    const syncTab = () => setTab(window.location.hash === '#ai' ? 'ai' : 'help');
+    syncTab();
+    window.addEventListener('hashchange', syncTab);
+    return () => window.removeEventListener('hashchange', syncTab);
+  }, []);
 
   useEffect(() => {
     if (tab !== 'help') return;

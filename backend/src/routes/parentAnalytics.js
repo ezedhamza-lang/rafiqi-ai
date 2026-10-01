@@ -28,7 +28,7 @@ router.use(authMiddleware);
  *       404:
  *         description: الابن غير موجود
  */
-router.get('/analytics/children/:studentId', requireRole('PARENT'), validateParams(analyticsStudentParamSchema), asyncHandler(async (req, res) => {
+router.get('/analytics/children/:studentId', requireRole('PARENT', 'TEACHER'), validateParams(analyticsStudentParamSchema), asyncHandler(async (req, res) => {
   const student = await prisma.student.findFirst({
     where: { userId: req.user.id, accountUserId: Number(req.params.studentId) },
     include: { class: true }

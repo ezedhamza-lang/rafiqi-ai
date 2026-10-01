@@ -3,12 +3,13 @@ import DOMPurify from 'dompurify';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 
-const FRIEND_MOODS = [
-  { emoji: '🦊', name: 'ثعلبي', greeting: 'مرحباً يا صديقي! أنا ثعلبي، رفيقك التعليمي!' },
-  { emoji: '🦉', img: '/owl-mascot.webp', name: 'بومة', greeting: 'أهلاً! أنا بومة الحكمة، سأساعدك في تعلمك!' },
-  { emoji: '🐱', name: 'قطوتي', greeting: 'ميـاو! أنا قطوتي، أنا هنا لمساعدتك!' },
-  { emoji: '🐰', name: 'أرنبون', greeting: 'مرحباً! أنا أرنبون، صديقك المفضل!' },
-];
+// الهوية الموحّدة: بومتنا الزرقاء «رفيقي» — نفس اسم الشخصية في الخادم (chatRefeeqi).
+// لا أقنعة عشوائية (ثعلب/قط/أرنب): المنصة اسمها رفيقي وهويتها بومة واحدة.
+const FRIEND = {
+  img: '/owl-mascot.webp',
+  name: 'رفيقي',
+  greeting: 'أهلاً! أنا رفيقي 🦉 بومتك الزرقاء، هنا لمساعدتك في التعلم!'
+};
 
 const ENCOURAGEMENTS = [
   'أنت رائع! استمر في التعلم! 🌟',
@@ -41,7 +42,7 @@ function renderMarkdown(text) {
 
 export default function StudentVirtualFriend() {
   const { t } = useI18n();
-  const [friend] = useState(() => FRIEND_MOODS[Math.floor(Math.random() * FRIEND_MOODS.length)]);
+  const friend = FRIEND;
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -56,6 +57,23 @@ export default function StudentVirtualFriend() {
     }]);
   }, [friendMark, friend.greeting]);
 
+  // ذاكرة رفيقي: الخادم يحفظ المحادثات في studentChat — نسترجعها عند الفتح
+  // (نفس سجل «اسأل رفيقي»، فالرفيق واحد). الحارس يمنع التكرار في dev.
+  const historyLoaded = useRef(false);
+  useEffect(() => {
+    if (historyLoaded.current) return;
+    historyLoaded.current = true;
+    api.get('/ai/chat/history')
+      .then((rows) => {
+        if (!Array.isArray(rows) || !rows.length) return;
+        setMessages(prev => [
+          ...prev,
+          ...rows.map((r) => ({ role: r.role, content: r.content }))
+        ]);
+      })
+      .catch(() => { /* بلا سجل: نبقى على رسالة الترحيب */ });
+  }, []);
+
   useEffect(() => {
     endRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
@@ -69,12 +87,9 @@ export default function StudentVirtualFriend() {
     setShowQuick(false);
 
     try {
-      const systemPrompt = `أنت رفيق تعليمي ودود اسمك "${friend.name}". أنت تتحدث مع تلميذ في المدرسة الابتدائية. كن ودوداً ومشجعاً ومفيداً. استخدم لغة عربية بسيطة مناسبة للأطفال.`;
-      const res = await api.post('/ai/chat', {
-        messages: [...messages, userMsg].map(m => ({ role: m.role, content: m.content })),
-        systemPrompt
-      });
-      const reply = res?.reply || res?.message || 'أعتذر، لم أفهم. حاول مرة أخرى!';
+      // عقد الخادم: حقل message واحد فقط (aiChatSchema) والردّ يعود في content.
+      const res = await api.post('/ai/chat', { message: text });
+      const reply = res?.content || res?.reply || res?.message || 'أعتذر، لم أفهم. حاول مرة أخرى!';
       setMessages(prev => [...prev, { role: 'assistant', content: reply }]);
     } catch {
       setMessages(prev => [...prev, {

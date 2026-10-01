@@ -26,7 +26,7 @@ function percentOf(submission) {
  *       200:
  *         description: التكليفات حسب كل ابن
  */
-router.get('/assignments', requireRole('PARENT'), asyncHandler(async (req, res) => {
+router.get('/assignments', requireRole('PARENT', 'TEACHER'), asyncHandler(async (req, res) => {
   const students = await prisma.student.findMany({
     where: { userId: req.user.id },
     include: { class: { select: { id: true, name: true, teacherId: true } }, account: true }
@@ -103,7 +103,7 @@ router.get('/assignments', requireRole('PARENT'), asyncHandler(async (req, res) 
  *       404:
  *         description: التكليف غير موجود
  */
-router.get('/assignments/:id', requireRole('PARENT'), validateParams(assignmentIdParamSchema), asyncHandler(async (req, res) => {
+router.get('/assignments/:id', requireRole('PARENT', 'TEACHER'), validateParams(assignmentIdParamSchema), asyncHandler(async (req, res) => {
   const assignment = await prisma.assignment.findFirst({
     where: { id: Number(req.params.id) },
     include: { class: true }

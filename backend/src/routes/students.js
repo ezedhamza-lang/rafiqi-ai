@@ -23,12 +23,13 @@ const subscriptionsInclude = {
   select: { id: true, plan: true, status: true, amount: true, schoolYear: true }
 };
 
-function includeForRole(role) {
+function includeForRole(role, asParent) {
   const include = {
     class: { select: { id: true, name: true, level: true } },
-    account: { select: accountInclude }
+    // نسخة مبنية (لا الكائن المشترك) حتى لا ينتقل حقل subscriptions إلى أدوار أخرى بالخطأ
+    account: { select: { ...accountInclude } }
   };
-  if (role === 'PARENT' || ['ADMIN', 'SCHOOL_DIRECTOR', 'SUPER_ADMIN'].includes(role)) {
+  if (asParent || ['ADMIN', 'SCHOOL_DIRECTOR', 'SUPER_ADMIN'].includes(role)) {
     include.account.select.subscriptions = subscriptionsInclude;
   }
   return include;
@@ -51,7 +52,14 @@ router.get(
   asyncHandler(async (req, res) => {
     const role = req.user.role;
     let where = {};
-    if (role === 'PARENT') {
+    // حساب دورين (معلّم له أبناء مرتبطون مثل حساب إيمان) ⇒ يُعرض أبناءه بصفة وليّ،
+    // وإلا (المعلّم بلا أبناء) تلاميذ صفوفه كسابق فيعود سلوك الأستاذ دون تغيير.
+    let asParent = role === 'PARENT';
+    if (role === 'TEACHER') {
+      const linkedChildren = await prisma.student.count({ where: { userId: req.user.id } });
+      asParent = linkedChildren > 0;
+    }
+    if (asParent) {
       where = { userId: req.user.id };
     } else if (role === 'TEACHER') {
       where = { class: { teacherId: req.user.id } };
@@ -63,7 +71,7 @@ router.get(
     }
     const students = await prisma.student.findMany({
       where,
-      include: includeForRole(role),
+      include: includeForRole(role, asParent),
       orderBy: { createdAt: 'desc' }
     });
     res.json(students);
@@ -72,7 +80,7 @@ router.get(
 
 router.post(
   '/',
-  requireRole('PARENT'),
+  requireRole('PARENT', 'TEACHER'),
   asyncHandler(async (_req, res) => {
     res.status(403).json({
       error: 'إضافة تلميذ جديد تتم عبر طلب تسجيل جديد يقع عرضه على مدير المدرسة للمصادقة'
@@ -116,7 +124,7 @@ router.post(
  */
 router.put(
   '/:id',
-  requireRole('PARENT'),
+  requireRole('PARENT', 'TEACHER'),
   validateParams(idParamSchema),
   validateBody(studentUpdateSchema),
   asyncHandler(async (req, res) => {
@@ -163,7 +171,7 @@ router.put(
  */
 router.delete(
   '/:id',
-  requireRole('PARENT'),
+  requireRole('PARENT', 'TEACHER'),
   validateParams(idParamSchema),
   asyncHandler(async (req, res) => {
     const student = await prisma.student.findUnique({ where: { id: req.params.id } });

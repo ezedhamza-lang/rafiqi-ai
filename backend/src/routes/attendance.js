@@ -197,7 +197,7 @@ router.post(
  */
 router.get(
   '/attendance/children',
-  requireRole('PARENT'),
+  requireRole('PARENT', 'TEACHER'),
   validateQuery(attendanceQuerySchema),
   asyncHandler(async (req, res) => {
     const days = Math.min(Math.max(Number(req.query.days) || 30, 1), 90);

@@ -6,6 +6,13 @@ name: Keep Render awake + uptime alert
 # monitor: it alerts when the site is unhealthy (HTTP != 200 **or** the body
 # reports "db":"down") and closes the issue automatically on recovery.
 #
+# WARM WINDOW: only 08:00-22:00 Tunisia time (UTC+1) = cron 07:00-20:59 UTC.
+# Outside the window the free instance sleeps (~9h/night), saving ~300 of the
+# 750 shared free instance hours per month so a second free service can run
+# alongside without suspending the workspace. Use workflow_dispatch to warm the
+# site manually for a night demo. First ping 08:00 TU, last ping 21:55 TU,
+# instance sleeps ~22:10 TU.
+#
 # The backend caches the DB probe (~1 hour when "up", 15 s when "down"), so these
 # pings do NOT wake Neon every 5 minutes anymore. Waking Neon 24/7 used up the
 # free plan's 100 CU-hour monthly compute quota around 27-09-2026 and Neon then
@@ -13,7 +20,7 @@ name: Keep Render awake + uptime alert
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '*/5 7-20 * * *'
   workflow_dispatch:
 
 permissions:

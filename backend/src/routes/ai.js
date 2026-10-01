@@ -373,7 +373,9 @@ router.post('/chat', studentMiddleware, validateBody(aiChatSchema), asyncHandler
   });
 
   try {
-    if (!teacherId) throw new Error('NO_AI_KEY');
+    // لا نمنع تلميذًا بلا قسم (مثل حساب الاستكشاف): resolveApiKey ينحدر إلى
+    // مفتاح المنصة ثم متغير البيئة، ويرمي NO_AI_KEY بنفسه إن لم يوجد أي مفتاح
+    // (نفس الردّ اللطيف أدناه). السطر السابق جمّد الميزة عند «لا مفتاح» أبدًا.
     const reply = contextText
       ? await chatRefeeqiWithContext(req.user.id, teacherId, userMessage, studentName, contextText)
       : await chatRefeeqi(req.user.id, teacherId, userMessage, studentName);

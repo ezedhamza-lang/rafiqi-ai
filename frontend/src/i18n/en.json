@@ -65,6 +65,7 @@
     "suggestions": "Suggestions",
     "payment": "Online payment",
     "systemSpace": "System space",
+    "aiSettings": "Platform AI key",
     "mySummary": "My summary",
     "mySubjects": "My subjects",
     "myQuizzes": "My quizzes",
@@ -1297,12 +1298,32 @@
   },
   "superadmin": {
     "title": "System space (Super Admin)",
-    "subtitle": "Manage licenses, subscriptions and users",
+    "subtitle": "Platform overview and management: licenses, subscriptions, billing, finance and broadcast",
     "tabs": {
+      "overview": "Overview",
       "licenses": "Licenses",
       "subscriptions": "Subscriptions",
+      "billing": "Billing & Discounts",
+      "finance": "Finance",
       "users": "Users",
-      "schools": "Schools"
+      "schools": "Schools",
+      "broadcast": "Notifications & Broadcast"
+    },
+    "overview": {
+      "title": "Platform indicators",
+      "loading": "Loading indicators...",
+      "refresh": "Refresh",
+      "loadError": "Failed to load indicators",
+      "parents": "Parents",
+      "students": "Students",
+      "schools": "Schools",
+      "schoolsActive": "{{n}} active",
+      "licenses": "Active licenses",
+      "licensesOf": "of {{n}} license(s)",
+      "pendingRegistrations": "Pending registrations",
+      "registrations": "Total {{n}}",
+      "helpRequests": "Help requests",
+      "contactMessages": "Contact messages"
     }
   },
   "licenses": {

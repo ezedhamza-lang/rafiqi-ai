@@ -33,7 +33,7 @@ const studentParam = z.object({ studentId: z.coerce.number().int().positive() })
  *       404:
  *         description: الابن غير موجود
  */
-parentRouter.get('/analytics/children/:studentId', requireRole('PARENT'), validateParams(analyticsStudentParamSchema), asyncHandler(async (req, res) => {
+parentRouter.get('/analytics/children/:studentId', requireRole('PARENT', 'TEACHER'), validateParams(analyticsStudentParamSchema), asyncHandler(async (req, res) => {
   const student = await prisma.student.findFirst({
     where: { userId: req.user.id, accountUserId: Number(req.params.studentId) },
     include: { class: true }
@@ -63,7 +63,7 @@ parentRouter.get('/analytics/children/:studentId', requireRole('PARENT'), valida
  *       200:
  *         description: ملف PDF
  */
-parentRouter.get('/analytics/children/:studentId/pdf', requireRole('PARENT'), validateParams(studentParam), asyncHandler(async (req, res) => {
+parentRouter.get('/analytics/children/:studentId/pdf', requireRole('PARENT', 'TEACHER'), validateParams(studentParam), asyncHandler(async (req, res) => {
   const student = await prisma.student.findFirst({
     where: { userId: req.user.id, accountUserId: Number(req.params.studentId) },
     include: { class: true, account: true }
@@ -90,7 +90,7 @@ parentRouter.get('/analytics/children/:studentId/pdf', requireRole('PARENT'), va
  *     security:
  *       - bearerAuth: []
  */
-parentRouter.get('/notes', requireRole('PARENT'), asyncHandler(async (req, res) => {
+parentRouter.get('/notes', requireRole('PARENT', 'TEACHER'), asyncHandler(async (req, res) => {
   const notes = await prisma.parentNote.findMany({
     where: { parentId: req.user.id },
     include: {
@@ -122,7 +122,7 @@ parentRouter.get('/notes', requireRole('PARENT'), asyncHandler(async (req, res) 
  *     security:
  *       - bearerAuth: []
  */
-parentRouter.post('/notes', requireRole('PARENT'), validateBody(z.object({
+parentRouter.post('/notes', requireRole('PARENT', 'TEACHER'), validateBody(z.object({
   studentId: z.coerce.number().int().positive(),
   teacherId: z.coerce.number().int().positive(),
   content: z.string().trim().min(3, { error: 'الملاحظة قصيرة جداً' }).max(2000)
@@ -150,7 +150,7 @@ parentRouter.post('/notes', requireRole('PARENT'), validateBody(z.object({
  *     security:
  *       - bearerAuth: []
  */
-parentRouter.get('/notes/teachers', requireRole('PARENT'), asyncHandler(async (req, res) => {
+parentRouter.get('/notes/teachers', requireRole('PARENT', 'TEACHER'), asyncHandler(async (req, res) => {
   const students = await prisma.student.findMany({
     where: { userId: req.user.id },
     select: { accountUserId: true, firstName: true, lastName: true, class: { select: { id: true, name: true, teacher: { select: { id: true, firstName: true, lastName: true } } } } }

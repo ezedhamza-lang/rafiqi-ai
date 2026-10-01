@@ -70,7 +70,8 @@ export default function ParentSpace() {
     loadUnread();
   }, [load, loadUnread]);
 
-  if (!user || user.role !== 'PARENT') {
+  // دعم الدورين: معلّم وهو وليّ أمر (حساب إيمان) يبقى في المساحة
+  if (!user || !['PARENT', 'TEACHER'].includes(user.role)) {
     return <Navigate to={getHomePath(user)} replace />;
   }
 

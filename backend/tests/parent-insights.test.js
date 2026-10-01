@@ -111,17 +111,48 @@ afterAll(() => {
 });
 
 describe('المرحلة 7.3 — رؤى الولي الذكية (توقع التعثر + ملخص + أنشطة)', () => {
-  it('يتطلب دور ولي (403 للتلميذ والأستاذ)', async () => {
+  it('يتطلب دور ولي أو أستاذ (403 للتلميذ) — والأستاذ غير المربوط بأبنائه 404', async () => {
     const student = await prisma.student.findFirst();
     const res = await request(app)
       .get(`/api/parent/insights/children/${student.accountUserId}`)
       .set('Authorization', `Bearer ${studentToken}`);
     expect(res.status).toBe(403);
 
+    // دعم الدورين: الأستاذ لم يُعدَّم على الدور (البوابة تقبل PARENT وTEACHER)،
+    // لكن الملكية ما زالت تمنع الاطلاع: ابن غير مرتبط به ⇒ 404 لا بيانات.
     const res2 = await request(app)
       .get(`/api/parent/insights/children/${student.accountUserId}`)
       .set('Authorization', `Bearer ${teacherToken}`);
-    expect(res2.status).toBe(403);
+    expect(res2.status).toBe(404);
+  });
+
+  it('حساب دورين: أستاذ له ابن مرتبط يرى رؤى ابنه وتقدمه وبطاقة دخوله', async () => {
+    const teacher = await prisma.user.findFirst({ where: { role: 'TEACHER' } });
+    const student = await prisma.student.findFirst();
+    const savedUserId = student.userId;
+    await prisma.student.update({ where: { id: student.id }, data: { userId: teacher.id } });
+    try {
+      const insights = await request(app)
+        .get(`/api/parent/insights/children/${student.accountUserId}`)
+        .set('Authorization', `Bearer ${teacherToken}`);
+      expect(insights.status).toBe(200);
+      expect(insights.body.child.firstName).toBeTruthy();
+
+      const progress = await request(app)
+        .get('/api/parent/children/progress')
+        .set('Authorization', `Bearer ${teacherToken}`);
+      expect(progress.status).toBe(200);
+      expect(Array.isArray(progress.body)).toBe(true);
+      expect(progress.body.length).toBeGreaterThan(0);
+
+      const credentials = await request(app)
+        .get('/api/parent/children/credentials')
+        .set('Authorization', `Bearer ${teacherToken}`);
+      expect(credentials.status).toBe(200);
+      expect(Array.isArray(credentials.body)).toBe(true);
+    } finally {
+      await prisma.student.update({ where: { id: student.id }, data: { userId: savedUserId } });
+    }
   });
 
   it('يتطلب مصادقة (401 بدون توكن)', async () => {

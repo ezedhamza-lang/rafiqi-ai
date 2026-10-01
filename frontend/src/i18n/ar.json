@@ -65,6 +65,7 @@
     "suggestions": "اقتراحات",
     "payment": "الدفع الإلكتروني",
     "systemSpace": "فضاء النظام",
+    "aiSettings": "مفتاح الذكاء الاصطناعي للمنصة",
     "mySummary": "ملخصي",
     "mySubjects": "موادي",
     "myQuizzes": "اختباراتي",
@@ -1297,12 +1298,32 @@
   },
   "superadmin": {
     "title": "فضاء النظام (Super Admin)",
-    "subtitle": "إدارة الرخص والاشتراكات والمستخدمين",
+    "subtitle": "نظرة عامة على المنصة وإدارتها: الرخص، الاشتراكات، الفوترة، المالية والإذاعة",
     "tabs": {
+      "overview": "نظرة عامة",
       "licenses": "الرخص",
       "subscriptions": "الاشتراكات",
+      "billing": "الفوترة والخصومات",
+      "finance": "المالية",
       "users": "المستخدمون",
-      "schools": "المدارس"
+      "schools": "المدارس",
+      "broadcast": "الإشعارات والإذاعة"
+    },
+    "overview": {
+      "title": "مؤشرات المنصة",
+      "loading": "جارٍ تحميل المؤشرات...",
+      "refresh": "تحديث",
+      "loadError": "تعذر تحميل المؤشرات",
+      "parents": "أولياء أمور",
+      "students": "تلاميذ",
+      "schools": "مدارس",
+      "schoolsActive": "{{n}} فعّالة",
+      "licenses": "تراخيص فعّالة",
+      "licensesOf": "من {{n}} ترخيص",
+      "pendingRegistrations": "تسجيلات معلّقة",
+      "registrations": "الإجمالي {{n}}",
+      "helpRequests": "طلبات مساعدة",
+      "contactMessages": "رسائل تواصل"
     }
   },
   "licenses": {

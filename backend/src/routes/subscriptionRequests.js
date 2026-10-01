@@ -71,7 +71,7 @@ router.get(
  */
 router.post(
   '/',
-  requireRole('PARENT'),
+  requireRole('PARENT', 'TEACHER'),
   validateBody(subscriptionRequestSchema),
   asyncHandler(async (req, res) => {
     const { firstName, lastName, birthDate, cin, gender, level, schoolYear, schoolName, notes } = req.body;
@@ -121,15 +121,21 @@ router.post(
       where: { role: 'SCHOOL_DIRECTOR', ...(parentSchoolId != null ? { schoolId: parentSchoolId } : {}) },
       select: { id: true }
     });
-    const managers = await prisma.user.findMany({ where: { role: { in: ['ADMIN', 'SUPER_ADMIN'] } }, select: { id: true } });
-    const recipientIds = [...new Set([...directors.map((d) => d.id), ...managers.map((m) => m.id)])];
-    if (recipientIds.length) {
-      await notify(recipientIds, {
-        type: 'SUBSCRIPTION_REQUEST',
-        title: 'طلب إضافة تلميذ جديد',
-        body: `${firstName} ${lastName} (${level}) ينتظر المصادقة من طرف الولي`,
-        link: '/director/requests'
-      });
+    const managers = await prisma.user.findMany({ where: { role: { in: ['ADMIN', 'SUPER_ADMIN'] } }, select: { id: true, role: true } });
+    // الاعتماد على الطلب من صلاحيات مدير المدرسة فقط ⇒ الإداري يصلح رابطه /director/requests
+    // أما مدير النظام فلا توجد له شاشة اعتماد، فالرابط يقوده إلى فضائه بدل رابط ميّت.
+    const actionIds = [...new Set([...directors.map((d) => d.id), ...managers.filter((m) => m.role === 'ADMIN').map((m) => m.id)])];
+    const ownerIds = managers.filter((m) => m.role === 'SUPER_ADMIN').map((m) => m.id);
+    const notification = {
+      type: 'SUBSCRIPTION_REQUEST',
+      title: 'طلب إضافة تلميذ جديد',
+      body: `${firstName} ${lastName} (${level}) ينتظر المصادقة من طرف الولي`
+    };
+    if (actionIds.length) {
+      await notify(actionIds, { ...notification, link: '/director/requests' });
+    }
+    if (ownerIds.length) {
+      await notify(ownerIds, { ...notification, link: '/superadmin' });
     }
 
     res.status(201).json(request);
@@ -157,7 +163,7 @@ router.post(
  */
 router.put(
   '/:id/cancel',
-  requireRole('PARENT'),
+  requireRole('PARENT', 'TEACHER'),
   asyncHandler(async (req, res) => {
     const request = await prisma.subscriptionRequest.findUnique({ where: { id: Number(req.params.id) } });
     if (!request || request.parentId !== req.user.id) {

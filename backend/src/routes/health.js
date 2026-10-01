@@ -36,7 +36,7 @@ const SELECT = {
  */
 router.get(
   '/health',
-  requireRole('PARENT'),
+  requireRole('PARENT', 'TEACHER'),
   asyncHandler(async (req, res) => {
     const students = await prisma.student.findMany({
       where: { userId: req.user.id, accountUserId: { not: null } },
@@ -97,7 +97,7 @@ router.get(
  */
 router.put(
   '/health/:studentId',
-  requireRole('PARENT'),
+  requireRole('PARENT', 'TEACHER'),
   validateParams(healthStudentIdParamSchema),
   validateBody(healthRecordSchema),
   asyncHandler(async (req, res) => {

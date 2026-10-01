@@ -21,6 +21,7 @@ const MESSAGES_NAV = { to: '/messages', icon: 'mail', key: 'messages', unread: t
 
 const SUPERADMIN_SPACE_CHILDREN = [
   { to: '/superadmin', end: true, icon: 'admin_panel_settings', key: 'systemSpace' },
+  { to: '/admin#ai', icon: 'smart_toy', key: 'aiSettings' },
   { to: '/help', icon: 'support_agent', key: 'help', divider: true }
 ];
 
@@ -50,6 +51,8 @@ const ROLE_NAV = {
   TEACHER: [
     { to: '/', icon: 'home', key: 'home' },
     { to: '/teacher', icon: 'co_present', key: 'teacherSpace' },
+    // حساب دورين (معلّم وهو وليّ أمر): مدخل فضاء الأولياء — الخادم يعيد أبناءه فقط
+    { to: '/parent', icon: 'family_restroom', key: 'parentSpace', children: PARENT_SPACE_CHILDREN },
     MESSAGES_NAV
   ],
   STUDENT: [

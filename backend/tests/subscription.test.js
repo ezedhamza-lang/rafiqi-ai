@@ -73,13 +73,22 @@ describe('subscription-requests (طلبات الولي)', () => {
     expect(res.status).toBe(400);
   });
 
-  it('يمنع غير الولي من تقديم طلب', async () => {
-    const token = await getToken('teacher@test.tn', 'teacher123');
-    const res = await request(app)
+  it('يمنع التلميذ من تقديم طلب — ويدعم حساب دورين (الأستاذ الوليّ مقبول)', async () => {
+    const studentToken = await getToken('student@test.tn', 'student123');
+    const denied = await request(app)
       .post('/api/subscription-requests')
-      .set('Authorization', `Bearer ${token}`)
+      .set('Authorization', `Bearer ${studentToken}`)
       .send({ firstName: 'ياسين', lastName: 'بن علي', birthDate: '2020-05-10', level: 'السنة الأولى' });
-    expect(res.status).toBe(403);
+    expect(denied.status).toBe(403);
+
+    // معلّم هو وليّ أمر في نفس الوقت: الطلب يُنسب إليه هو (parentId) — قبله كان 403
+    const teacherToken = await getToken('teacher@test.tn', 'teacher123');
+    const allowed = await request(app)
+      .post('/api/subscription-requests')
+      .set('Authorization', `Bearer ${teacherToken}`)
+      .send({ firstName: 'سلمى', lastName: 'بن علي', birthDate: '2020-05-10', level: 'السنة الأولى' });
+    expect(allowed.status).toBe(201);
+    expect(allowed.body.parentId).toBeTruthy();
   });
 
   it('يعرض قائمة طلبات الولي', async () => {
@@ -98,6 +107,29 @@ describe('subscription-requests (طلبات الولي)', () => {
       .set('Authorization', `Bearer ${token}`);
     expect(res.status).toBe(200);
     expect(res.body).toEqual([]);
+  });
+
+  it('يوجّه إشعار الطلب للإداري برابط شاشته ولمدير النظام برابط فضائه (لا رابط ميّت)', async () => {
+    const prisma = (await import('../src/db.js')).default;
+    const token = await getToken('parent@test.tn', 'parent123');
+    const res = await request(app)
+      .post('/api/subscription-requests')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ firstName: 'ياسين', lastName: 'بن علي', birthDate: '2020-05-10', level: 'السنة الأولى أساسي' });
+    expect(res.status).toBe(201);
+
+    const admin = await prisma.user.findUnique({ where: { email: 'admin@education.tn' } });
+    const superAdmin = await prisma.user.findUnique({ where: { email: 'super@education.tn' } });
+
+    const adminNotif = await prisma.notification.findFirst({
+      where: { userId: admin.id, type: 'SUBSCRIPTION_REQUEST' }
+    });
+    expect(adminNotif?.link).toBe('/director/requests');
+
+    const superNotif = await prisma.notification.findFirst({
+      where: { userId: superAdmin.id, type: 'SUBSCRIPTION_REQUEST' }
+    });
+    expect(superNotif?.link).toBe('/superadmin');
   });
 });
 

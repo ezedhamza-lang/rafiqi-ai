@@ -94,11 +94,14 @@ describe('attendance (الحضور والغياب)', () => {
     expect(Array.isArray(res.body)).toBe(true);
   });
 
-  it('يمنع المعلمة من استعمال مسار الولي', async () => {
+  it('يدعم حساب دورين: الأستاذ يستعمل مسار الولي مع بقاء الملكية (أبناءه فقط)', async () => {
     const token = await getToken('teacher@test.tn', 'teacher123');
     const res = await request(app)
       .get('/api/parent/attendance/children')
       .set('Authorization', `Bearer ${token}`);
-    expect(res.status).toBe(403);
+    // قبل تعديل الدورين كان 403 — الآن الدور مقبول والملكية (userId) تقيّد النتيجة
+    expect(res.status).toBe(200);
+    expect(Array.isArray(res.body)).toBe(true);
+    expect(res.body.length).toBe(0);
   });
 });
