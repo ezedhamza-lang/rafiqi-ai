@@ -177,7 +177,7 @@ export default function StudentLearningPlan() {
 
       {noStudent ? (
         <div className="empty">
-          <img src="/owl-mascot.webp" alt="رفيقي" className="owl-img" style={{ width: 56, height: 56 }} />
+          <img src="/logo-rafiqi.png" alt="رفيقي" className="owl-img" style={{ width: 56, height: 56 }} />
           <strong>{t('studentSpace.learningPlan.noStudentTitle')}</strong>
           <p className="muted">{t('studentSpace.learningPlan.noStudentBody')}</p>
         </div>

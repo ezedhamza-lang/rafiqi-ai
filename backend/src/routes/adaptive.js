@@ -5,21 +5,37 @@ import { validateQuery, validateBody } from '../middleware/validate.js';
 import { sessionQuerySchema, summaryQuerySchema, reviewBodySchema, planSessionBodySchema } from '../validators/adaptive.js';
 import { buildSession, applyReview, summarize } from '../services/adaptiveService.js';
 import { buildLearningPlan, buildRecommendedSession } from '../services/adaptivePlanService.js';
-import { findGradeByLevel } from '../services/curriculumService.js';
+import { findGradeByLevel, listBooks } from '../services/curriculumService.js';
 import { getStudentLevel } from '../services/studentLevelService.js';
 
 const router = Router();
 
 router.use(authMiddleware);
 
+// تصلح طلب التلميذ بمحتوى مستواه وقتما يناسب:
+// • gradeId قد يصل كمعرف سجل (year1) أو كتسمية مستوى («السنة الأولى أساسي»)
+//   من الواجهة القديمة — نوحّده إلى معرّف مسجّل.
+// • منع تصفّح مستوى آخر يبقى، لكن بشرط أن يكون الطرفين معروفين.
+// • بلا مستوى يُعرف إطلاقًا: ردّ 400 واضح بدل الطلب المعلّق إلى الأبد
+//   (كانت بعض الأقسام تظلّ دون أي استجابة = «لا تعمل»).
 async function enforceOwnGrade(req, res, gradeId) {
   const level = await getStudentLevel(req.user.id);
   const ownGradeId = level ? findGradeByLevel(level)?.id || null : null;
-  if (gradeId && ownGradeId && gradeId !== ownGradeId) {
+  let g = gradeId ? String(gradeId).trim() : null;
+  if (g && !listBooks().some((b) => b.gradeId === g)) {
+    // تسمية مستوى أو معرّف مجهول: نحوّه لمعرّف مسجّل إن أمكن.
+    g = findGradeByLevel(g)?.id || null;
+  }
+  if (!g) g = ownGradeId;
+  if (g && ownGradeId && g !== ownGradeId) {
     res.status(403).json({ error: 'لا يمكنك تصفح محتوى مستوى آخر' });
     return null;
   }
-  return gradeId || ownGradeId || null;
+  if (!g) {
+    res.status(400).json({ error: 'مستوى التلميذ غير محدّد — اطلب من الإدارة تعيين قسمه' });
+    return null;
+  }
+  return g;
 }
 
 /**

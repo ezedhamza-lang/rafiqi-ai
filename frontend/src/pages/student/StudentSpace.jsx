@@ -29,7 +29,6 @@ const StudentExperiments = lazy(() => import('./StudentExperiments.jsx'));
 const StudentPortfolio = lazy(() => import('./StudentPortfolio.jsx'));
 const StudentDailyChallenge = lazy(() => import('./StudentDailyChallenge.jsx'));
 const StudentProgress = lazy(() => import('./StudentProgress.jsx'));
-const StudentVirtualFriend = lazy(() => import('./StudentVirtualFriend.jsx'));
 const StudentCertificates = lazy(() => import('./StudentCertificates.jsx'));
 const StudentLeaderboard = lazy(() => import('./StudentLeaderboard.jsx'));
 const StudentWeeklyChallenge = lazy(() => import('./StudentWeeklyChallenge.jsx'));
@@ -131,7 +130,6 @@ export default function StudentSpace() {
       { to: 'portfolio', icon: 'palette', label: L('portfolio'), color: '#8b5cf6' },
       { to: 'daily-challenge', icon: 'emoji_events', label: L('dailyChallenge'), color: '#ef4444' },
       { to: 'progress', icon: 'trending_up', label: L('progress'), color: '#3b82f6' },
-      { to: 'virtual-friend', icon: 'pets', label: L('virtualFriend'), color: '#06b6d4' },
     ] },
     { label: t('studentSpace.groups.rewards', 'المكافآت'), items: [
       { to: 'leaderboard', icon: 'leaderboard', label: L('leaderboard'), color: '#E8A317' },
@@ -193,7 +191,7 @@ export default function StudentSpace() {
           <Route path="portfolio" element={<StudentPortfolio />} />
           <Route path="daily-challenge" element={<StudentDailyChallenge />} />
           <Route path="progress" element={<StudentProgress />} />
-          <Route path="virtual-friend" element={<StudentVirtualFriend />} />
+          <Route path="virtual-friend" element={<Navigate to="../refeeqi" replace />} />
           <Route path="leaderboard" element={<StudentLeaderboard />} />
           <Route path="weekly-challenge" element={<StudentWeeklyChallenge />} />
           <Route path="certificates" element={<StudentCertificates />} />

@@ -19,7 +19,8 @@ import {
   generatePresentation,
   batchGradeSubmissions
 } from '../services/aiService.js';
-import { getLessonPages, getSubjectsForLevel, listBooks, normalizeArabic } from '../services/curriculumService.js';
+import { getLessonPages, getSubjectsForLevel, listBooks, normalizeArabic, levelToCurriculumTitle } from '../services/curriculumService.js';
+import { searchLessonAnswer } from '../services/lessonSearch.js';
 import { validateBody } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 import {
@@ -37,13 +38,6 @@ import {
 
 const router = Router();
 router.use(authMiddleware);
-
-// يحوّل تسمية مستوى من قاعدة البيانات (مثل «السنة الأولى أساسي»)
-// إلى تسمية المنهج (مثل «السنة الأولى ابتدائي») عند التطابق الجزئي.
-function levelToCurriculumTitle(level) {
-  const s = String(level || '').trim();
-  return s.replace(/أساسي/gi, 'ابتدائي').replace(/إعدادي/gi, 'ابتدائي');
-}
 
 function aiError(e) {
   if (e.message === 'NO_AI_KEY') return new ApiError(400, 'لم يتم ضبط مفتاح الذكاء الاصطناعي بعد. أضف مفتاحك من إعدادات AI');
@@ -362,6 +356,28 @@ router.post('/chat', studentMiddleware, validateBody(aiChatSchema), asyncHandler
     data: { studentId: req.user.id, role: 'user', content: userMessage }
   });
 
+  // المسار الأول: بحث محلي في دروس المنهج — يعمل دائمًا بلا مفتاح ذكاء
+  // اصطناعي (جذور الكلمات: جمع = الجمع = الجموع = الجامع). إن لم يجد
+  // مطابقة نسقط إلى المسار الاعتيادي أدناه (ذكاء اصطناعي أو رسالة لطيفة).
+  try {
+    const local = searchLessonAnswer({
+      message: userMessage,
+      level: student?.class?.level || student?.level || '',
+      gradeId,
+      subjectCode: subjectId,
+      lessonId
+    });
+    if (local) {
+      const savedLocal = await prisma.studentChat.create({
+        data: { studentId: req.user.id, role: 'assistant', content: local.reply }
+      });
+      return res.json(savedLocal);
+    }
+  } catch (e) {
+    // عطل في البحث لا يُسقط المحادثة: نكمل للمسار الاعتيادي.
+    console.error('[LESSON-SEARCH]', String(e?.message || e).slice(0, 300));
+  }
+
   const teacherId = student?.class?.teacherId ?? null;
   const studentName = student ? `${student.firstName} ${student.lastName}` : 'التلميذ';
   const contextText = resolveLessonContext({
@@ -391,7 +407,14 @@ router.post('/chat', studentMiddleware, validateBody(aiChatSchema), asyncHandler
       });
       return res.json(saved);
     }
-    throw new ApiError(502, 'تعذر الاتصال بخدمة الذكاء الاصطناعي');
+    // سجل الخادم يعرض السبب الحقيقي (404 موديل محذوف / 401 مفتاح / 429 حصة)
+    // حتى لا نظلّ عميان أمام فشل المزوّد في الإنتاج.
+    try {
+      console.error('[AI-CHAT-PROVIDER]', e?.providerStatus || '', String(e?.message || e).slice(0, 300), String(e?.providerBody || '').slice(0, 200));
+    } catch {
+      /* التسجيل لا يُفشل الاستجابة */
+    }
+    throw aiError(e);
   }
 }));
 

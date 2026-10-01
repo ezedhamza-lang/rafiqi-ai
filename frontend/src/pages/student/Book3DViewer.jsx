@@ -40,12 +40,31 @@ export default function Book3DViewer({ book, onClose }) {
     touchRef.current = { startX: e.touches[0].clientX, moved: false };
   };
   const onTouchEnd = (e) => {
+    // مُكبَّر ⇒ السحب يمرّر الصفحة لا يقلّبها (التمرير الأصلي يتحكّم بالتحريك).
+    if (zoom > 1) return;
     const dx = e.changedTouches[0].clientX - touchRef.current.startX;
     if (Math.abs(dx) > 50) {
       if (dx < 0) go(page + 1);
       else go(page - 1);
     }
   };
+
+  // سحب بالفأرة فوق محتوى ممرَّر (تكبير > 1): نمرّر الصندوق يدويًا.
+  const dragRef = useRef(null);
+  const onPointerDown = (e) => {
+    if (zoom <= 1) return;
+    const el = sceneRef.current;
+    if (!el) return;
+    dragRef.current = { x: e.clientX, y: e.clientY, sl: el.scrollLeft, st: el.scrollTop };
+  };
+  const onPointerMove = (e) => {
+    const d = dragRef.current;
+    const el = sceneRef.current;
+    if (!d || !el) return;
+    el.scrollLeft = d.sl - (e.clientX - d.x);
+    el.scrollTop = d.st - (e.clientY - d.y);
+  };
+  const onPointerUp = () => { dragRef.current = null; };
 
   const prevSrc = pageUrl(book.imageBase, book.imageExt, Math.max(1, page - 1));
   const currSrc = pageUrl(book.imageBase, book.imageExt, page);
@@ -101,14 +120,23 @@ export default function Book3DViewer({ book, onClose }) {
 
       {/* 3D Book Scene — fullscreen */}
       <div
-        className="book3d-scene"
+        className={`book3d-scene${zoom > 1 ? ' is-zoomed' : ''}`}
         ref={sceneRef}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerLeave={onPointerUp}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="book3d-wrapper" style={{ transform: `scale(${zoom})` }}>
-          <div className="book3d-book">
+        <div className="book3d-wrapper">
+          <div
+            className="book3d-book"
+            /* التكبير بقياس الصفحة لا بـ transform: يعيد المتصفح رسم الصورة
+               بدقة في كل تكبير (النصّ يبقى حادًّا) ويسمح بالتمرير للتحريك */
+            style={{ width: `calc(min(96vw, 2400px) * ${zoom})`, height: `calc(min(80vh, 1040px) * ${zoom})` }}
+          >
             {/* Spine */}
             <div className="book3d-spine" style={{ background: book.color || '#E91E63' }}>
               <span className="book3d-spine-title">{book.title}</span>

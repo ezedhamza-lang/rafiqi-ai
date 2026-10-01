@@ -50,6 +50,10 @@ router.get('/profile', studentMiddleware, asyncHandler(async (req, res) => {
   const lessonsCompleted = await countLessonsCompleted(req.user.id);
 
   const exploreAll = config.exploreAllGradesEmails.includes(String(user.email || '').toLowerCase());
+  // مستوى التلميذ: من القسم أولًا، ثم من سجل التلميذ نفسه (بلا قسم بعد).
+  // سابقًا كان القسم وحده هو المصدر — تلميذ بلا قسم يسقط إلى gradeId: null
+  // فتتعامل الواجهات بعدئذٍ باسم المستوى خامًا فينهار التصفّح في بعض الأقسام.
+  const profileLevel = student?.class?.level || student?.level || null;
 
   res.json({
     user: {
@@ -62,7 +66,7 @@ router.get('/profile', studentMiddleware, asyncHandler(async (req, res) => {
     },
     class: student?.class || null,
     canSeeAllGrades: exploreAll,
-    gradeId: student?.class?.level ? findGradeByLevel(student.class.level)?.id || null : null,
+    gradeId: profileLevel ? findGradeByLevel(profileLevel)?.id || null : null,
     studentLevel: student?.level || null,
     badges: badges.map((b) => b.badge),
     activities,

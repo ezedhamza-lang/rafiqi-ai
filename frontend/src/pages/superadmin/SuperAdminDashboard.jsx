@@ -11,6 +11,7 @@ const Schools = lazy(() => import('./Schools.jsx'));
 const AdminSubscriptions = lazy(() => import('../director/AdminSubscriptions.jsx'));
 const FinanceDashboard = lazy(() => import('../director/FinanceDashboard.jsx'));
 const DirectorNotifications = lazy(() => import('../director/DirectorNotifications.jsx'));
+const AdminAiKey = lazy(() => import('../AdminAiKey.jsx'));
 import SpaceShell from '../../components/SpaceShell.jsx';
 
 const TABS = [
@@ -21,7 +22,8 @@ const TABS = [
   { to: 'subscriptions', icon: 'subscriptions', key: 'subscriptions', color: '#0ea5e9' },
   { to: 'billing', icon: 'receipt_long', key: 'billing', color: '#06b6d4' },
   { to: 'finance', icon: 'account_balance_wallet', key: 'finance', color: '#f43f5e' },
-  { to: 'broadcast', icon: 'campaign', key: 'broadcast', color: '#ef4444' }
+  { to: 'broadcast', icon: 'campaign', key: 'broadcast', color: '#ef4444' },
+  { to: 'ai-key', icon: 'smart_toy', key: 'aiKey', color: '#ec4899' }
 ];
 
 export default function SuperAdminDashboard() {
@@ -57,6 +59,7 @@ export default function SuperAdminDashboard() {
           <Route path="billing" element={<AdminSubscriptions />} />
           <Route path="finance" element={<FinanceDashboard />} />
           <Route path="broadcast" element={<DirectorNotifications />} />
+          <Route path="ai-key" element={<AdminAiKey />} />
           <Route path="*" element={<Navigate to="." replace />} />
         </Routes>
       </Suspense>

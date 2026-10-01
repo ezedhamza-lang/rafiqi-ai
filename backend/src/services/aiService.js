@@ -79,7 +79,9 @@ export async function resolveApiKey(teacherId) {
     }
   }
   const platform = await getPlatformAiKey();
-  if (platform) return { key: platform, provider: 'gemini' };
+  // كشف المزوّد من صيغة المفتاح (AIza→gemini, gsk_→groq, sk-→openai, nvapi-→nvidia):
+  // الفرض السابق لـ gemini كلّف أي مفتاح آخر بخطأ 400/502.
+  if (platform) return { key: platform, provider: detectProvider(platform) };
   if (process.env.GEMINI_API_KEY) return { key: process.env.GEMINI_API_KEY, provider: 'gemini' };
   return null;
 }
@@ -95,8 +97,13 @@ function detectProvider(apiKey) {
   return 'openai'; // افتراضي: OpenAI-compatible
 }
 
+// موديل حيّ: gemini-1.5-flash أُلغي من Google نهائيًا (قائمة نماذج 2026 لا تتضمنه)
+// فكل نداءات رفيقي كانت ترتدّ 404 → 502 حتى بمفتاح صحيح من AI Studio.
+// gemini-3.8-flash: موديل مستقرّ جديد ومجاني في Free Tier (وثائق Google التسعيرية الرسمية).
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
+
 async function callGemini(prompt, apiKey, maxTokens = 800) {
-  const url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
   const res = await fetch(`${url}?key=${apiKey}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -275,7 +282,7 @@ export async function chatRefeeqi(studentId, teacherId, userMessage, studentName
 
 // ===== المرحلة 7.1 — ربط رفيقي بمحتوى المنهج (المرحلة 6) =====
 
-function lessonTextOf(page, limit = 1400) {
+export function lessonTextOf(page, limit = 1400) {
   if (!page) return '';
   const parts = [];
   if (page.title) parts.push(`الدرس: ${page.title}`);

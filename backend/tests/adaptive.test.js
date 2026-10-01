@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import { resetDatabase, seedTestData, login } from './helpers.js';
 import request from 'supertest';
+import prisma from '../src/db.js';
 import {
   sm2Next,
   qualityFromCorrect,
@@ -223,5 +224,30 @@ describe('واجهات التكيف (المرحلة 6.5) — مصادقة وجل
     expect(res.status).toBe(200);
     expect(res.body.total).toBeGreaterThanOrEqual(2);
     expect(res.body.hasActiveFilters).toBe(false);
+  });
+});
+
+describe('عمل المراجعة الذكية مع كل الأقسام (تصحيح تسمية المستوى)', () => {
+  it('تسمية مستوى بدل المعرّف تُوحَّد ولا تُعيد 403 ولا صفحة فارغة', async () => {
+    const res = await request(app)
+      .get(`/api/student/adaptive/session?gradeId=${encodeURIComponent('السنة الأولى أساسي')}&subjectId=math&limit=3`)
+      .set('Authorization', `Bearer ${token}`);
+    expect(res.status).toBe(200);
+    expect(res.body.items.length).toBe(3);
+  });
+
+  it('بلا قسم وبلا مستوى: ردّ 400 واضح بدل طلب معلّق بلا استجابة', async () => {
+    const user = await prisma.user.findFirst({ where: { email: 'student@test.tn' } });
+    // level حقل نصّي غير nullable في المخطّط — سلسلة فارغة تعني «بلا مستوى»
+    // (getStudentLevel يرجّع null للفارغ) وclassId nullable يقبل الإفراغ.
+    await prisma.student.updateMany({
+      where: { accountUserId: user.id },
+      data: { classId: null, level: '' }
+    });
+    const res = await request(app)
+      .get('/api/student/adaptive/session?subjectId=math')
+      .set('Authorization', `Bearer ${token}`);
+    expect(res.status).toBe(400);
+    expect(String(res.body.error || '')).toContain('غير محدّد');
   });
 });

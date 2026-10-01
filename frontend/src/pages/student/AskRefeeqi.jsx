@@ -3,6 +3,16 @@ import DOMPurify from 'dompurify';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 
+// أزرار البداية السريعة — موروثة من «صديقي الافتراضي» بعد الدمج في هذه
+// الصفحة الوحيدة. رفيقي واحد: الهوية + السياق + الأزرار كلها هنا.
+const QUICK_ACTIONS = [
+  { label: 'معلومة مفيدة', prompt: 'أعطني معلومة مفيدة', emoji: '💡' },
+  { label: 'نكتة', prompt: 'احكِ لي نكتة مناسبة للأطفال', emoji: '😄' },
+  { label: 'معلومة عن الحيوانات', prompt: 'أعطني معلومة مثيرة عن الحيوانات', emoji: '🐾' },
+  { label: 'نصيحة للدراسة', prompt: ' أعطني نصيحة مفيدة للدراسة', emoji: '📝' },
+  { label: 'معلومة عن الفضاء', prompt: 'أعطني معلومة مثيرة عن الفضاء', emoji: '🚀' }
+];
+
 function renderMarkdown(text) {
   if (!text) return null;
   const lines = text.split('\n');
@@ -71,10 +81,8 @@ export default function AskRefeeqi() {
     window.speechSynthesis.speak(utterance);
   };
 
-  const send = async (e) => {
-    e.preventDefault();
-    if (!input.trim() || loading) return;
-    const text = input.trim();
+  const sendText = async (text) => {
+    if (!text.trim() || loading) return;
     setInput('');
     setMessages((m) => [...m, { id: Date.now(), role: 'user', content: text }]);
     setLoading(true);
@@ -93,13 +101,18 @@ export default function AskRefeeqi() {
     }
   };
 
+  const send = (e) => {
+    e.preventDefault();
+    sendText(input);
+  };
+
   const selectedSubject = context?.subjects?.find((s) => s.id === subjectId) || null;
   const lessons = selectedSubject?.lessons || [];
 
   return (
     <div className="panel chat-panel">
       <div className="panel-head">
-        <h3><img src="/owl-mascot.webp" alt="رفيقي" className="owl-img" style={{ width: 30, height: 30 }} /> {t('studentSpace.askRefeeqi.title')}</h3>
+        <h3><img src="/logo-rafiqi.png" alt="رفيقي" className="owl-img" style={{ width: 34, height: 34 }} /> {t('studentSpace.askRefeeqi.title')}</h3>
         <p className="muted">{t('studentSpace.askRefeeqi.subtitle')}</p>
       </div>
 
@@ -122,8 +135,16 @@ export default function AskRefeeqi() {
       <div className="chat-box">
         {messages.length === 0 && (
           <div className="chat-welcome">
-            <img src="/owl-mascot.webp" alt="رفيقي" className="owl-img" style={{ width: 48, height: 48 }} />
+            <img src="/logo-rafiqi.png" alt="رفيقي" className="owl-img" style={{ width: 56, height: 56 }} />
             <p>{t('studentSpace.askRefeeqi.welcome')}</p>
+            <div className="vf-quick__grid">
+              {QUICK_ACTIONS.map((a, i) => (
+                <button key={i} type="button" className="vf-quick__btn" onClick={() => sendText(a.prompt)}>
+                  <span>{a.emoji}</span>
+                  <span>{a.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
         )}
         {messages.map((m) => (

@@ -16,7 +16,10 @@ export function useStudentLevel() {
       inflight = api
         .get('/student/profile')
         .then((p) => {
-          cached = p?.canSeeAllGrades ? null : (p?.gradeId || p?.studentLevel || null);
+          // المعرّف وحده: اسم المستوى الخام ليس معرّف سنة، وكل المستهلكين
+          // (الكتب/التوافق/البطاقات/القصص/الفيديوهات) يقارنون gradeId —
+          // إرجاع الاسم الخام كان يفرّغ القوائم في بعض الأقسام.
+          cached = p?.canSeeAllGrades ? null : (p?.gradeId || null);
           return cached;
         })
         .catch(() => {

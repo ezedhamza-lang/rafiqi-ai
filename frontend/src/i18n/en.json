@@ -1307,7 +1307,8 @@
       "finance": "Finance",
       "users": "Users",
       "schools": "Schools",
-      "broadcast": "Notifications & Broadcast"
+      "broadcast": "Notifications & Broadcast",
+      "aiKey": "AI Key"
     },
     "overview": {
       "title": "Platform indicators",

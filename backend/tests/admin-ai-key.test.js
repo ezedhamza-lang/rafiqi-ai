@@ -9,7 +9,8 @@ import {
   generateText,
   getPlatformAiKey,
   savePlatformAiKey,
-  deletePlatformAiKey
+  deletePlatformAiKey,
+  resolveApiKey
 } from '../src/services/aiService.js';
 
 let app;
@@ -142,6 +143,17 @@ describe('المرحلة 7.3 — إدارة مفتاح الذكاء الاصطن
     expect(row.value).not.toContain('ultra-secret-platform-value');
     const decrypted = await getPlatformAiKey();
     expect(decrypted).toBe('ultra-secret-platform-value');
+    await deletePlatformAiKey();
+  });
+
+  it('مفتاح المنصة يكتشف مزوّده من صيغة المفتاح (لا يُجبر gemini)', async () => {
+    await savePlatformAiKey(1, 'gsk_platform-key');
+    const groqResolved = await resolveApiKey(null);
+    expect(groqResolved.provider).toBe('groq');
+
+    await savePlatformAiKey(1, 'AIza_platform-key');
+    const gemResolved = await resolveApiKey(null);
+    expect(gemResolved.provider).toBe('gemini');
     await deletePlatformAiKey();
   });
 });

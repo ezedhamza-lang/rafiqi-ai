@@ -18,6 +18,14 @@ export function normalizeArabic(text) {
     .toLowerCase();
 }
 
+// تسمية مستوى من قاعدة البيانات (مثل «السنة الأولى أساسي»)
+// إلى تسمية المنهج (مثل «السنة الأولى ابتدائي») عند التطابق الجزئي.
+// تستعملها مسارات المحادثة والبحث في الدروس — هنا مرجعها الوحيد.
+export function levelToCurriculumTitle(level) {
+  const s = String(level || '').trim();
+  return s.replace(/أساسي/gi, 'ابتدائي').replace(/إعدادي/gi, 'ابتدائي');
+}
+
 function readJson(abs) {
   if (!fs.existsSync(abs)) return null;
   try {

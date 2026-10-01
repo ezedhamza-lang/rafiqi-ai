@@ -461,8 +461,9 @@ button {
   color: inherit;
 }
 
+/* الهوية الرسمية: بومة رفيقي (logo-rafiqi) — ضِعف الحجم في الهيدر كطلب رسمي */
 .brand-owl {
-  height: 42px;
+  height: 84px;
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
@@ -474,7 +475,7 @@ button {
 }
 
 .brand img {
-  height: 42px;
+  height: 84px;
   width: auto;
   object-fit: contain;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
@@ -8414,10 +8415,14 @@ tr:hover td {
 .book3d-scene {
   flex: 1;
   display: flex;
+  /* centered when it fits; falls back to start when it overflows so the
+     zoomed page stays reachable by scrolling (safe keyword + auto fallback) */
   align-items: center;
+  align-items: safe center;
   justify-content: center;
+  justify-content: safe center;
   perspective: 2000px;
-  overflow: hidden;
+  overflow: auto;
   position: relative;
   cursor: grab;
 }
@@ -8425,16 +8430,17 @@ tr:hover td {
 
 .book3d-wrapper {
   transform-origin: center center;
-  transition: transform 0.3s ease;
 }
 
 .book3d-book {
   position: relative;
   display: flex;
-  width: min(68vw, 860px);
-  height: min(82vh, 680px);
+  /* أكتُب أكبر: صفحات أوضح للقراءة (المصدر 1132×1600 — كان يُعرض 420×680 فقط) */
+  width: min(96vw, 2400px);
+  height: min(80vh, 1040px);
   transform-style: preserve-3d;
   filter: drop-shadow(0 8px 30px rgba(0,0,0,0.45));
+  transition: width 0.2s ease, height 0.2s ease;
 }
 
 /* Spine */
@@ -8580,7 +8586,9 @@ tr:hover td {
 }
 
 @media (max-width: 700px) {
-  .book3d-book { width: 92vw; height: 70vh; }
+  /* الجوال: صفحة واحدة بعرض الشاشة بلا مشرِح — النصّ يملأ الشاشة ويُقرأ بوضوح */
+  .book3d-page-left, .book3d-spine, .book3d-turning { display: none !important; }
+  .book3d-page-right { border-radius: 4px; border: none; background: #fff; }
   .book3d-spine { width: 12px; left: -12px; }
   .book3d-spine-title { font-size: 0.55rem; }
   .book3d-arrow { width: 44px; height: 44px; }

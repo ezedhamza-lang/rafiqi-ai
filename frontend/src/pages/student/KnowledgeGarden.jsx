@@ -28,7 +28,7 @@ export default function KnowledgeGarden() {
 
       {loading && (
         <div className="kg-page__loading">
-          <div className="kg-page__owl" aria-hidden="true">🦉</div>
+          <div className="kg-page__owl" aria-hidden="true"><img src="/logo-rafiqi.png" alt="" style={{ width: 56, height: 56 }} /></div>
           <p>جارٍ تحميل حديقة المعرفة…</p>
         </div>
       )}
