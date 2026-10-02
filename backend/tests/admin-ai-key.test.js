@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll, vi } from 'vitest';
 import { resetDatabase, seedTestData, login } from './helpers.js';
 import request from 'supertest';
 import prisma from '../src/db.js';
@@ -162,5 +162,33 @@ describe('المرحلة 7.3 — إدارة مفتاح الذكاء الاصطن
     expect(authResolved.provider).toBe('gemini');
 
     await deletePlatformAiKey();
+  });
+
+  it('عند 503 (ذروة طلب على موديل جديد) يُسقط تلقائيًّا إلى الموديل الاحتياطي', async () => {
+    await savePlatformAiKey(1, 'AQ.test-auth-key');
+    const urls = [];
+    vi.stubGlobal('fetch', async (url) => {
+      urls.push(String(url));
+      if (urls.length === 1) {
+        // رفض مؤقت من Google على الموديل الأساسي (كما حدث في الإنتاج يوم الإعلان)
+        return new Response(
+          JSON.stringify({ error: { code: 503, status: 'UNAVAILABLE', message: 'high demand' } }),
+          { status: 503, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+      return new Response(
+        JSON.stringify({ candidates: [{ content: { parts: [{ text: 'رد رفيقي الاحتياطي' }] } }] }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      );
+    });
+    try {
+      const out = await generateText(null, 'system', 'user');
+      expect(out).toBe('رد رفيقي الاحتياطي');
+      expect(urls[0]).toContain('gemini-3.8-flash');
+      expect(urls[1]).toContain('gemini-3.5-flash-lite');
+    } finally {
+      vi.unstubAllGlobals();
+      await deletePlatformAiKey();
+    }
   });
 });

@@ -104,27 +104,39 @@ function detectProvider(apiKey) {
 // فكل نداءات رفيقي كانت ترتدّ 404 → 502 حتى بمفتاح صحيح من AI Studio.
 // gemini-3.8-flash: موديل مستقرّ جديد ومجاني في Free Tier (وثائق Google التسعيرية الرسمية).
 const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
+// الموديل الاحتياطي الموصى به من Google للمشاريع الجديدة (3.5 Flash-Lite):
+// يُستدعى تلقائيًّا عند 503 (ذروة طلب — كرهاث إعلان 3.8 اليوم) أو 429 أو 404
+// حتى لا يرتدّ «رفيقي» للطالب بسبب ضغط مؤقت على موديل واحد.
+const GEMINI_MODEL_FALLBACK = process.env.GEMINI_MODEL_FALLBACK || 'gemini-3.5-flash-lite';
+const GEMINI_FALLBACK_STATUSES = new Set([404, 429, 503]);
 
 async function callGemini(prompt, apiKey, maxTokens = 800) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
-  const res = await fetch(url, {
-    method: 'POST',
-    // التوثيق الرسمي الحالي: المفتاح في ترويسة x-goog-api-key (تعمل مع المفاتيح
-    // القياسية والمفاتيح الجديدة AQ.، وتُبقي المفتاح خارج عنوان الطلب/السجلّات).
-    headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: { temperature: 0.7, maxOutputTokens: maxTokens }
-    })
-  });
-  if (!res.ok) {
-    const err = new Error(`AI service error: ${res.status}`);
-    err.providerStatus = res.status;
-    try { err.providerBody = (await res.text()).slice(0, 300); } catch { err.providerBody = ''; }
-    throw err;
+  const candidates = [GEMINI_MODEL, GEMINI_MODEL_FALLBACK];
+  let lastErr = null;
+  for (let i = 0; i < candidates.length; i += 1) {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${candidates[i]}:generateContent`;
+    const res = await fetch(url, {
+      method: 'POST',
+      // التوثيق الرسمي الحالي: المفتاح في ترويسة x-goog-api-key (تعمل مع المفاتيح
+      // القياسية والمفاتيح الجديدة AQ.، وتُبقي المفتاح خارج عنوان الطلب/السجلّات).
+      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.7, maxOutputTokens: maxTokens }
+      })
+    });
+    if (!res.ok) {
+      const err = new Error(`AI service error: ${res.status}`);
+      err.providerStatus = res.status;
+      try { err.providerBody = (await res.text()).slice(0, 300); } catch { err.providerBody = ''; }
+      lastErr = err;
+      if (GEMINI_FALLBACK_STATUSES.has(res.status) && i < candidates.length - 1) continue;
+      throw err;
+    }
+    const data = await res.json();
+    return data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
   }
-  const data = await res.json();
-  return data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+  throw lastErr;
 }
 
 async function callOpenAI(prompt, apiKey) {
