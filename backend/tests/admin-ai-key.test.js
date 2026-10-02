@@ -154,6 +154,13 @@ describe('المرحلة 7.3 — إدارة مفتاح الذكاء الاصطن
     await savePlatformAiKey(1, 'AIza_platform-key');
     const gemResolved = await resolveApiKey(null);
     expect(gemResolved.provider).toBe('gemini');
+
+    // مفاتيح AI Studio الجديدة (auth keys، الصيغة AQ.… منذ ماي 2026) = Google أيضًا:
+    // سابقًا كانت تسقط في فرع openai فتُرفض 401 في الإنتاج.
+    await savePlatformAiKey(1, 'AQ.Ab8RN-platform-key-49wA');
+    const authResolved = await resolveApiKey(null);
+    expect(authResolved.provider).toBe('gemini');
+
     await deletePlatformAiKey();
   });
 });
