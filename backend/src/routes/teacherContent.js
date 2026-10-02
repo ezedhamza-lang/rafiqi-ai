@@ -656,7 +656,9 @@ router.get('/exams/from-books', teacherMiddleware, asyncHandler(async (req, res)
  *       201:
  *         description: الاختبار المولد
  *       400:
- *         description: بيانات غير صالحة أو مفتاح Gemini مفقود
+ *         description: بيانات غير صالحة أو غياب مفتاح المنصة
+ *       502:
+ *         description: تعذّر الاتصال بالمزوّد أو توليد صيغة الأسئلة (أعد المحاولة)
  */
 router.post('/exams/generate-ai', teacherMiddleware, asyncHandler(async (req, res) => {
   const { subject, level, trimester, title, lessonTitle, count, classId, durationMinutes } = req.body || {};
@@ -671,11 +673,21 @@ router.post('/exams/generate-ai', teacherMiddleware, asyncHandler(async (req, re
       lessonTitle: lessonTitle || title || '',
       count: Math.min(Math.max(Number(count) || 6, 1), 15)
     });
-  } catch {
-    aiQuestions = null;
+  } catch (e) {
+    // رسالة صادقة لكل حالة — كانت «أضف مفتاحك» تظهر حتى مع مفتاح سليم
+    // كلّما فشلت قراءة JSON أو ضغط المزوّد مؤقتًا (سببتها الحقيقية مسجَّلة هنا).
+    if (e?.message === 'NO_AI_KEY') {
+      throw new ApiError(400, 'لم يتم ضبط مفتاح الذكاء الاصطناعي للمنصة — اضبطه من لوحة المشرف العام');
+    }
+    if (e?.message === 'AI_BAD_JSON') {
+      console.warn('[AI-QUIZ] bad JSON after retry:', String(e.providerSnippet || '').slice(0, 200));
+      throw new ApiError(502, 'تعذّر توليد صيغة الأسئلة — أعد المحاولة بعد لحظات');
+    }
+    console.warn('[AI-QUIZ] provider failure:', e?.message, 'status=' + (e?.providerStatus || ''), String(e?.providerBody || '').slice(0, 300));
+    throw new ApiError(502, 'تعذّر الاتصال بمزوّد الذكاء الاصطناعي — أعد المحاولة بعد لحظات');
   }
-  if (!aiQuestions || !Array.isArray(aiQuestions) || aiQuestions.length === 0) {
-    throw new ApiError(400, 'تعذر التوليد: أضف مفتاح Gemini الخاص بك أولاً ثم حاول مجددا');
+  if (!Array.isArray(aiQuestions) || aiQuestions.length === 0) {
+    throw new ApiError(502, 'تعذّر توليد صيغة الأسئلة — أعد المحاولة بعد لحظات');
   }
 
   const questions = aiQuestions.map((q, i) => ({

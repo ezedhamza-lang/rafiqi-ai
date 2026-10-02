@@ -7,6 +7,7 @@ import {
   __setCallProvider,
   __resetCallProvider,
   generateText,
+  generateQuizQuestions,
   getPlatformAiKey,
   savePlatformAiKey,
   deletePlatformAiKey,
@@ -186,6 +187,80 @@ describe('المرحلة 7.3 — إدارة مفتاح الذكاء الاصطن
       expect(out).toBe('رد رفيقي الاحتياطي');
       expect(urls[0]).toContain('gemini-3.8-flash');
       expect(urls[1]).toContain('gemini-3.5-flash-lite');
+    } finally {
+      vi.unstubAllGlobals();
+      await deletePlatformAiKey();
+    }
+  });
+
+  it('توليد الاختبار يطلب JSON رسميًّا (responseMimeType) بحدّ رموز 3000', async () => {
+    await savePlatformAiKey(1, 'AQ.quiz-json-key');
+    const bodies = [];
+    vi.stubGlobal('fetch', async (url, init) => {
+      bodies.push(JSON.parse(init.body));
+      const text = JSON.stringify([{ type: 'MCQ', prompt: 'ما 2+2؟', options: ['3', '4'], correctOption: '4', points: 1 }]);
+      return new Response(
+        JSON.stringify({ candidates: [{ content: { parts: [{ text }] } }] }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      );
+    });
+    try {
+      const qs = await generateQuizQuestions(null, { subject: 'الرياضيات', level: 'الأول', lessonTitle: 'الجمع', count: 1 });
+      expect(Array.isArray(qs)).toBe(true);
+      expect(qs).toHaveLength(1);
+      expect(bodies[0].generationConfig.responseMimeType).toBe('application/json');
+      expect(bodies[0].generationConfig.maxOutputTokens).toBe(3000);
+    } finally {
+      vi.unstubAllGlobals();
+      await deletePlatformAiKey();
+    }
+  });
+
+  it('إن رُفض وضع JSON بـ400 يُعيد النداء بدونه (تدهور آمن بلا كسر)', async () => {
+    await savePlatformAiKey(1, 'AQ.degrade-key');
+    const bodies = [];
+    vi.stubGlobal('fetch', async (url, init) => {
+      const b = JSON.parse(init.body);
+      bodies.push(b);
+      if (b.generationConfig.responseMimeType) {
+        return new Response(
+          JSON.stringify({ error: { code: 400, message: 'response_mime_type is not supported' } }),
+          { status: 400, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+      const text = '[{"type":"MCQ","prompt":"س؟","options":["أ"],"correctOption":"أ","points":1}]';
+      return new Response(
+        JSON.stringify({ candidates: [{ content: { parts: [{ text }] } }] }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      );
+    });
+    try {
+      const qs = await generateQuizQuestions(null, { subject: 'رياضيات', level: '', lessonTitle: '', count: 1 });
+      expect(qs).toHaveLength(1);
+      expect(bodies).toHaveLength(2);
+      expect(bodies[0].generationConfig.responseMimeType).toBe('application/json');
+      expect(bodies[1].generationConfig.responseMimeType).toBeUndefined();
+    } finally {
+      vi.unstubAllGlobals();
+      await deletePlatformAiKey();
+    }
+  });
+
+  it('قراءة فاشلة بعد محاولتين ترمي AI_BAD_JSON (بلا صمت ولا رسالة مفتاح كاذبة)', async () => {
+    await savePlatformAiKey(1, 'AQ.badjson-key');
+    let calls = 0;
+    vi.stubGlobal('fetch', async () => {
+      calls += 1;
+      return new Response(
+        JSON.stringify({ candidates: [{ content: { parts: [{ text: 'الموديل أعاد كلامًا حرًّا بلا JSON' }] } }] }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      );
+    });
+    try {
+      await expect(
+        generateQuizQuestions(null, { subject: 'رياضيات', level: '', lessonTitle: '', count: 2 })
+      ).rejects.toThrow('AI_BAD_JSON');
+      expect(calls).toBe(2);
     } finally {
       vi.unstubAllGlobals();
       await deletePlatformAiKey();

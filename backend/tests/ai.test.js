@@ -205,6 +205,20 @@ describe('المرحلة 7.2 — مساعد الأستاذ (خطة/ملخص/شر
     expect(Array.isArray(res.body.questions)).toBe(true);
   });
 
+  it('عند تعذّر قراءة JSON مرتين: 502 برسالة صادقة لا «أضف مفتاحك» + إعادة محاولة واحدة', async () => {
+    let calls = 0;
+    __setCallProvider(async () => { calls += 1; return 'نص حر لا يحوي أي مصفوفة أسئلة.'; });
+    const res = await request(app)
+      .post('/api/ai/generate-quiz')
+      .set('Authorization', `Bearer ${teacherToken}`)
+      .send({ subject: 'الرياضيات', level: 'السنة الأولى', lessonTitle: 'الجمع', count: 3 });
+    expect(res.status).toBe(502);
+    expect(res.body.error).toContain('صيغة الأسئلة');
+    expect(res.body.error).not.toContain('أضف مفتاح');
+    expect(calls).toBe(2);
+    __setCallProvider(fakeProvider);
+  });
+
   it('مولدات الأستاذ تتطلب مصادقة أستاذ (رفض للتلميذ)', async () => {
     const res = await request(app)
       .post('/api/ai/generate-lesson-plan')

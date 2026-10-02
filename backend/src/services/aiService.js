@@ -110,21 +110,37 @@ const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
 const GEMINI_MODEL_FALLBACK = process.env.GEMINI_MODEL_FALLBACK || 'gemini-3.5-flash-lite';
 const GEMINI_FALLBACK_STATUSES = new Set([404, 429, 503]);
 
-async function callGemini(prompt, apiKey, maxTokens = 800) {
+function geminiFetch(model, prompt, apiKey, maxTokens, jsonMode) {
+  const generationConfig = { temperature: 0.7, maxOutputTokens: maxTokens };
+  // وضع JSON الرسمي (وثائق Google — structured outputs): يضمن مخرَج JSON صالحًا
+  // بدل نصٍّ حرّ أحيانًا كان يُفشل قراءة أسئلة الاختبار فيظهر خطأ مفتاح مضلِّل.
+  if (jsonMode) generationConfig.responseMimeType = 'application/json';
+  return fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+    method: 'POST',
+    // التوثيق الرسمي الحالي: المفتاح في ترويسة x-goog-api-key (تعمل مع المفاتيح
+    // القياسية والمفاتيح الجديدة AQ.، وتُبقي المفتاح خارج عنوان الطلب/السجلّات).
+    headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig
+    })
+  });
+}
+
+async function callGemini(prompt, apiKey, maxTokens = 800, opts = {}) {
+  const jsonMode = !!opts.jsonMode;
   const candidates = [GEMINI_MODEL, GEMINI_MODEL_FALLBACK];
   let lastErr = null;
+  let jsonDegraded = false;
   for (let i = 0; i < candidates.length; i += 1) {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${candidates[i]}:generateContent`;
-    const res = await fetch(url, {
-      method: 'POST',
-      // التوثيق الرسمي الحالي: المفتاح في ترويسة x-goog-api-key (تعمل مع المفاتيح
-      // القياسية والمفاتيح الجديدة AQ.، وتُبقي المفتاح خارج عنوان الطلب/السجلّات).
-      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': apiKey },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.7, maxOutputTokens: maxTokens }
-      })
-    });
+    const useJson = jsonMode && !jsonDegraded;
+    let res = await geminiFetch(candidates[i], prompt, apiKey, maxTokens, useJson);
+    // إن رُفض وضع JSON بـ400 (بعض النماذج لا تدعمه) نُعيد النداء بدونه مرة واحدة —
+    // نفس سلوك اليوم بالضبط، أي لا تدهور أبدًا عند أي طارئ.
+    if (!res.ok && res.status === 400 && useJson) {
+      jsonDegraded = true;
+      res = await geminiFetch(candidates[i], prompt, apiKey, maxTokens, false);
+    }
     if (!res.ok) {
       const err = new Error(`AI service error: ${res.status}`);
       err.providerStatus = res.status;
@@ -220,7 +236,7 @@ async function callProviderByType(prompt, apiKey, provider, opts) {
   const maxTokens = opts && Number(opts.maxTokens) > 0 ? Number(opts.maxTokens) : 800;
   switch (provider) {
     case 'claude': return callClaude(prompt, apiKey);
-    case 'gemini': return callGemini(prompt, apiKey, maxTokens);
+    case 'gemini': return callGemini(prompt, apiKey, maxTokens, opts);
     case 'groq': return callGroq(prompt, apiKey);
     case 'nvidia': return callNvidia(prompt, apiKey, Math.max(maxTokens, 2000));
     case 'openai':
@@ -259,13 +275,29 @@ export async function generateText(teacherId, system, user, opts) {
 export async function generateQuizQuestions(teacherId, { subject, level, lessonTitle, count = 5 }) {
   const system = 'أنت مدرّس تونسي خبير في التعليم الابتدائي. أنشئ أسئلة اختبار مناسبة لمستوى التلميذ باللغة العربية.';
   const user = `المادة: ${subject}\nالمستوى: ${level}\nالدرس: ${lessonTitle}\nأنجز ${count} أسئلة بصيغة JSON على الشكل:\n[{"type":"MCQ","prompt":"...","options":["أ","ب","ج"],"correctOption":"أ","points":1}] مع أنواع متنوعة (MCQ, TRUE_FALSE, FILL_BLANK). أعد JSON فقط.`;
-  const text = await generateText(teacherId, system, user);
-  try {
-    const match = text.match(/\[[\s\S]*\]/);
-    return JSON.parse(match ? match[0] : text);
-  } catch {
-    return null;
+  // حدّ رموز 3000 لـ15 سؤالًا (كانت 800 تقصّ المصفوفة فتفشل القراءة)،
+  // + وضع JSON الرسمي + إعادة محاولة واحدة — والقراءة تُتحقّق من المصفوفة فعليًّا.
+  const opts = { maxTokens: 3000, jsonMode: true };
+  let lastText = '';
+  for (let attempt = 1; attempt <= 2; attempt += 1) {
+    lastText = await generateText(teacherId, system, user, opts);
+    const parsed = parseQuizQuestions(lastText);
+    if (parsed) return parsed;
+    console.warn('[AI-QUIZ] invalid quiz JSON, attempt', attempt, String(lastText).slice(0, 150));
   }
+  const err = new Error('AI_BAD_JSON');
+  err.providerSnippet = String(lastText).slice(0, 200);
+  throw err;
+}
+
+function parseQuizQuestions(text) {
+  if (!text) return null;
+  const match = String(text).match(/\[[\s\S]*\]/);
+  let parsed = null;
+  try { parsed = JSON.parse(match ? match[0] : text); } catch { return null; }
+  if (!Array.isArray(parsed)) return null;
+  const items = parsed.filter((q) => q && typeof q === 'object' && (q.prompt || q.text));
+  return items.length ? items : null;
 }
 
 export async function generateStory(teacherId, { level, theme, words = 100 }) {

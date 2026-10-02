@@ -41,8 +41,10 @@ router.use(authMiddleware);
 
 function aiError(e) {
   if (e.message === 'NO_AI_KEY') return new ApiError(400, 'لم يتم ضبط مفتاح الذكاء الاصطناعي بعد. أضف مفتاحك من إعدادات AI');
+  if (e.message === 'AI_BAD_JSON') return new ApiError(502, 'تعذّر توليد صيغة الأسئلة — أعد المحاولة بعد لحظات');
   if (e.code === 'AI_PLAN_INVALID') return new ApiError(422, e.message);
   const st = e.providerStatus || Number(String(e.message || '').match(/AI service error:\s*(\d+)/)?.[1] || 0);
+  if (st) console.warn('[AI-PROVIDER]', e.message, 'status=' + st, String(e.providerBody || e.providerSnippet || '').slice(0, 300));
   if (st === 400) return new ApiError(400, 'طلب مرفوض من خدمة الذكاء الاصطناعي — تحقق من صياغة الدرس وأعد المحاولة');
   if (st === 401 || st === 403) return new ApiError(401, 'مفتاح الذكاء الاصطناعي مرفوض — تحقق من نسخه كاملاً من Google AI Studio وأعد حفظه');
   if (st === 404) return new ApiError(502, 'نموذج الذكاء غير متاح حالياً — حاول لاحقاً');
