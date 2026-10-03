@@ -11,6 +11,7 @@ import { GENERATABLE_TYPES } from './question-validator.js';
 import { subjectLabel } from './subject-labels.js';
 import { buildStimuli } from './sind.js';
 import { resolveProfiles, defaultStimulusType } from './profiles/index.js';
+import { SCOPE_MONEY, SCOPE_GEO, SCOPE_MEASURE, stripDiacritics } from './subject-validators.js';
 
 /**
  * برومبت التوليد (§1): لا يبدأ بلا معلومة — كل سؤال يحمل السنة والمادة والثلاثي
@@ -54,6 +55,30 @@ export function buildExamPrompt(blueprint = {}, { previousIssues } = {}) {
     ? `- هذا اختبار «${subjectName}» حصراً: كل سؤال يقيس مكتسبًا في هذه المادة — لا تخلطه بأسئلة لغة أو قراءة أو علوم أو مادة أخرى (§55)`
     : `- هذا اختبار «${subjectName}» حصراً: كل سؤال يقيس مكتسبًا في هذه المادة — لا تخلطه بأسئلة حساب أو رياضيات (§55)`;
 
+  // محاذاة التوليد مع مدقّقات الشريحة الموسّعة (§D5,§D11,§D12,§B3): كل قاعدة يُرفض
+  // عندها المخرَج تُقال للنموذج صراحةً هنا — لا مدقّق بلا قاعدة معلنة (نفس شروط المدقّق حرفيًّا).
+  const yearIdx = Number(String(blueprint.grade || '').match(/year\s*(\d+)/i)?.[1] || 0);
+  const scopeText = stripDiacritics((blueprint.scopeLessons || [])
+    .map((l) => [l.title, ...(l.competencies || [])].join(' '))
+    .join(' \n '));
+  const strictRules = [
+    '- سؤال الترتيب (ORDER) بلا حقلين يُرفض: "orderItems" (عناصر مبعثرة ≥ 2) و"correctAnswer" (التسلسل الصحيح كاملًا في ترتيبه الصحيح)'
+  ];
+  strictRules.push('- لا يكشف سؤال لاحق إجابة سؤال سابق: لا تُكرَّر إجابة سؤال (ولا خيارها الصحيح) متنًا أو بدائلًا في سؤال لاحق (§D11)');
+  if (quant && yearIdx >= 3) {
+    strictRules.push('- رياضيات السنة الرابعة فما فوق: سنّان مترابطان (§D5) — الأول يغذّي ≥ 4 أسئلة، والثاني يكمّل سياقه لا أن يفتح وضعية جديدة، ويتقاطعان لغويًّا (نفس الأسماء والموضوع)');
+    strictRules.push('- رياضيات y3+: أدرج سؤالًا واحدًا على الأقل لعملية حسابية حاملًا "layout": "vertical" (مساحة مستقلة للعملية العمودية §D12) — وحين يطلب السؤال رسمًا أو إتمام مسار استعمل "layout": "drawing" (§B3-هندسة-4)');
+  }
+  if (quant && SCOPE_MONEY.test(scopeText)) {
+    strictRules.push('- النقود من تعلمات هذه الوحدة: أدرج وضعية نقود فعلية واحدة على الأقل بقيم تونسية صحيحة متداولة (1 دينار = 1000 مليم) (§B3-نقود-1,3)');
+  }
+  if (quant && SCOPE_GEO.test(scopeText)) {
+    strictRules.push('- الهندسة من تعلمات هذه الوحدة: أدرج سؤالًا هندسيًّا يوظّف خاصية فعلية لا مجرد ذكر شكل (§B3-هندسة-1)');
+  }
+  if (quant && SCOPE_MEASURE.test(scopeText)) {
+    strictRules.push('- وحدات القياس من تعلمات هذه الوحدة: أدرج سؤالًا يوظّف قياسًا أو تحويل وحدات فعليًّا (§B3-قياس)');
+  }
+
   const system = `أنت مختصّ تونسي في بناء الاختبارات التقويمية للتعليم الابتدائي (المركز الوطني البيداغوجي). تبني اختبارًا وفق المخطّط المعطى وطبقات ملفات المادة والسنة الظاهرة فيه، لا سؤالًا عامًّا.`;
 
   const user = `ابنِ اختبارًا تقويميًّا تونسيًّا وفق الطبقات التالية حرفياً:
@@ -87,6 +112,7 @@ ${ruleLines(mode.promptRules)}
 [6] قواعد إلزامية (Core مشترك):
 - أخرج كائن JSON واحدًا بالشكل: {"stimuli":[{"id":"s1","title":"السند 1","text":"…","purpose":"…"}],"questions":[…]} — بلا شرح ولا markdown
 ${stimulusRules}
+${strictRules.join('\n')}
 - لا تغيّر الوحدات (مليم/دينار/سم…) ولا أسماء الأشخاص والأماكن بين المثير والسؤال (§45,§46)، ولا تستعمل «الثاني» إلا إن ورد في المثير (§159)
 - ${purityRule}
 - كل سؤال يحمل الحقول كاملة (§76): id, grade, subject, term, domain, lesson, competency, objective, type, difficulty (1 تعرف → 5 إدماج), points, prompt, options (للـMCQ), correctAnswer, acceptedAnswers, expectedResponseType (للـOPEN), estimatedTime, sindId

@@ -608,7 +608,7 @@ export default function OfficialExams({ classes }) {
                 })}
                 {aiResult.savedToBank ? ' — ' + t('teacherSpace.officialExams.aiSaved') : ''}
               </p>
-              {/* بطاقة تقرير الفحص §65,§126 — رسالة صادقة لا «نجاح» كاذب */}
+              {/* بطاقة تقرير الفحص §65,§126 — موجز يقرأه المعلّم + تفاصيل فنية مطويّة */}
               <div className={`audit-report ${aiResult.valid ? 'audit-ok' : 'audit-warn'}`}>
                 <strong>{aiResult.message}</strong>
                 {!!aiResult.report?.length && (
@@ -616,19 +616,29 @@ export default function OfficialExams({ classes }) {
                     {aiResult.report.map((line, i) => (<li key={i}>{line}</li>))}
                   </ul>
                 )}
-                {!!aiResult.issues?.length && (
-                  <ul>
-                    {aiResult.issues.map((iss, i) => (
-                      <li key={i}>
-                        {iss.severity === 'error' ? '✗' : iss.severity === 'warn' ? '⚠' : '✓'} {iss.message}
-                      </li>
-                    ))}
-                  </ul>
-                )}
                 {!!aiResult.warnings?.length && (
                   <ul>
                     {aiResult.warnings.map((w, i) => (<li key={i}>⚠ {w?.message || String(w)}</li>))}
                   </ul>
+                )}
+                {(!!aiResult.reportFull?.length || !!aiResult.issues?.length) && (
+                  <details className="audit-details">
+                    <summary>{t('teacherSpace.officialExams.reportFullDetails')}</summary>
+                    {!!aiResult.reportFull?.length && (
+                      <ul>
+                        {aiResult.reportFull.map((line, i) => (<li key={i}>{line}</li>))}
+                      </ul>
+                    )}
+                    {!!aiResult.issues?.length && (
+                      <ul>
+                        {aiResult.issues.map((iss, i) => (
+                          <li key={i}>
+                            {iss.severity === 'error' ? '✗' : iss.severity === 'warn' ? '⚠' : '✓'} {iss.message}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </details>
                 )}
               </div>
               <div className="btn-group">

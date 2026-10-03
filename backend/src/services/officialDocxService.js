@@ -275,6 +275,18 @@ function answerLines(n = 3, width = 60) {
   return out.join('');
 }
 
+/* مساحات §D12 و§B3-هندسة-4: إطار مقفول يكتب التلميذ فيه — بلاه تُطبع ورقة بلا
+   مكان للعملية العمودية ولا للرسم (شكاوى exam-20). */
+function verticalSpaceBox() {
+  const cell = cellXml(Array.from({ length: 4 }, () => cellPara('')).join(''), { width: 2500 });
+  return table([cell], { width: 2500, cols: 1, jc: 'right' });
+}
+
+function drawingSpaceBox() {
+  const cell = cellXml(Array.from({ length: 6 }, () => cellPara('')).join(''), { width: 9500 });
+  return table([cell], { width: 9500, cols: 1 });
+}
+
 /* ══════════════════════════════════════════════════════════════════
    QUESTION TYPES (official rendering)
    ══════════════════════════════════════════════════════════════════ */
@@ -343,6 +355,13 @@ function buildOrdering(q) {
   const items = q.items || q.orderItems || [];
   const lines = [];
   if (q.prompt || q.text) lines.push(paragraph([run(q.prompt || q.text, { sz: 28 })], { after: 80 }));
+  if (!items.length) {
+    // مخرَج بلا عناصر: أسطر مرقّمة بدل صمت يُفقد التلميذ مكان إجابته تمامًا
+    for (let i = 1; i <= 4; i += 1) {
+      lines.push(paragraph([run(`${i}) `, { sz: 28 }), run(dottedLine(48), { sz: 26 })], { after: 60 }));
+    }
+    return lines.join('');
+  }
   items.forEach((item) => {
     const text = typeof item === 'string' ? item : (item.text || '');
     lines.push(paragraph(
@@ -615,6 +634,9 @@ export async function buildOfficialDocx(examData, context = {}) {
       if (!hasOwnPrompt) bodyQ.prompt = '';
       else if (!bodyQ.prompt && !bodyQ.text && instruction) bodyQ.prompt = instruction;
       bodyParts.push(buildQuestionBody(bodyQ));
+      // مساحة مخصّصة §D12/§B3: عملية عمودية أو رسم — بلاها تُطبع الورقة بلا مكان للحل
+      if ((q.layout || '') === 'vertical') bodyParts.push(verticalSpaceBox());
+      else if ((q.layout || '') === 'drawing') bodyParts.push(drawingSpaceBox());
       bodyParts.push(emptyPara());
     });
   });
@@ -657,7 +679,8 @@ export function prepareExamForDocx(content, context = {}) {
     orderItems: q.orderItems, points: q.points || 1,
     answerLines: q.answerLines || 4,
     items: q.items, leftItems: q.leftItems, rightItems: q.rightItems,
-    statements: q.statements, visual: q.visual || q.image, image: q.image || q.visual
+    statements: q.statements, visual: q.visual || q.image, image: q.image || q.visual,
+    layout: q.layout
   }));
 
   return {

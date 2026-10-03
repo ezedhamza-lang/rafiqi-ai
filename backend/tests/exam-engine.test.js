@@ -27,7 +27,7 @@ import { validateQuestion, GENERATABLE_TYPES } from '../src/exams/question-valid
 import { findDuplicates, similarity } from '../src/exams/duplicate-detector.js';
 import { distributePoints, verifyTotal, totalPoints, TARGET_POINTS } from '../src/exams/points-engine.js';
 import { verifyAnswer } from '../src/exams/answer-verifier.js';
-import { validateExam, assertPublishable, auditReportLines } from '../src/exams/exam-pipeline.js';
+import { validateExam, assertPublishable, auditReportLines, teacherReportLines } from '../src/exams/exam-pipeline.js';
 import { parseGeneratedPayload, normalizeGeneratedQuestions, buildExamPrompt } from '../src/exams/generation.js';
 import { criteriaFor } from '../src/exams/criteria-grids.js';
 import {
@@ -698,6 +698,64 @@ describe('مولّد الاختبار', () => {
     expect(fb.user).toContain('إخراجك السابق رُفض');
     expect(fb.user).toContain('الإجابة ليست ضمن البدائل');
   });
+
+  it('برومبت رياضيات y3+ يعلن قواعد المدقّق الموسّع: ترتيب/كشف/D5/D12 (§D5,§D11,§D12)', () => {
+    const bp = buildBlueprint({ level: 'year4', subject: 'math', trimester: TERM, questionCount: 8, targetPoints: 20 });
+    bp.scopeLessons = [{ title: 'الأعداد والنقود', competencies: ['يدخر مبلغًا', 'يشتري بثمنًا'] }];
+    const p = buildExamPrompt(bp, {});
+    expect(p.user).toContain('orderItems'); // سؤال الترتيب بلا عناصر يُرفض — يُقال له
+    expect(p.user).toContain('correctAnswer');
+    expect(p.user).toContain('§D11'); // لا يكشف سؤال لاحق إجابة سؤال سابق
+    expect(p.user).toContain('§D5'); // سنّان مترابطان
+    expect(p.user).toContain('§D12'); // مساحة العملية العمودية
+    expect(p.user).toContain('§B3-نقود'); // وضعية نقود فعلية حين في التعلمات
+  });
+
+  it('برومبت غير مشدّد لا يُلقِّم قواعد لا يفحصها المدقّق (لا §D5/§B3 للغة)', () => {
+    const arabic = buildExamPrompt(buildBlueprint({ level: LEVEL, subject: 'arabic', trimester: TERM, questionCount: 6, targetPoints: 15 }), {});
+    expect(arabic.user).toContain('orderItems'); // قاعدة عامة (ORDER مسموح في كل المواد)
+    expect(arabic.user).not.toContain('§D5');
+    expect(arabic.user).not.toContain('§B3-نقود');
+    expect(arabic.user).not.toContain('§D12');
+  });
+});
+
+/* ══════════════════════════════════════════════════════════════════
+   6ب) تقرير المعلّم الموجز — يقرأه معلّم لا مدقّق (§126)
+   ══════════════════════════════════════════════════════════════════ */
+describe('تقرير المعلّم الموجز:3 أسطر لا جدار رموز', () => {
+  const passRow = { id: 'blueprint', label: 'المخطّط مكتمل (سنة/مادة/ثلاثي/عدد/مجموع)', status: 'pass', detail: '' };
+  const warnRow = { id: 'review', label: 'حالة المراجعة (التوليد الآلي لا يُنشر مباشرة)', status: 'warn', detail: 'يحتاج مراجعة' };
+
+  it('ورقة بلا ملاحظات → نتيجة ✓ + «نجح الفحص في N وجهًا» بلا رموز §', () => {
+    const lines = teacherReportLines([passRow, warnRow], []);
+    expect(lines[0]).toContain('✓ جاهز للاعتماد');
+    expect(lines.join('\n')).toContain('نجح الفحص في 1 وجهًا');
+    expect(lines.join('\n')).not.toContain('§');
+  });
+
+  it('ورقة مرفوضة → نتيجة ✗ + عدّ الأخطاء + أخطاء مقروءة بلا (§42,§158)', () => {
+    const audit = [
+      passRow,
+      { id: 'grounding', label: 'ارتباط الأسئلة بالسند (لا سؤال يتيم §7)', status: 'fail', detail: 'السؤال 1: 4000 ليست في السند (§42,§158)' }
+    ];
+    const issues = [{ severity: 'error', message: 'السؤال 1: 4000 ليست في السند ولا ناتجة عنه (§42,§158)' }];
+    const lines = teacherReportLines(audit, issues);
+    expect(lines[0]).toContain('✗ غير جاهز للاعتماد');
+    expect(lines[0]).toContain('1 خطأ');
+    expect(lines[1]).toContain('السؤال 1: 4000 ليست في السند');
+    expect(lines.join('\n')).not.toContain('§');
+    expect(lines.join('\n')).toContain('نجح الفحص في');
+  });
+
+  it('كثرة الملاحظات → حدّ8 + سطر «ملاحظات أخرى» لا جدار طويل', () => {
+    const issues = Array.from({ length: 12 }, (_, i) => ({ severity: 'error', message: `ملاحظة ${i + 1}` }));
+    const lines = teacherReportLines([], issues);
+    expect(lines.length).toBeLessThanOrEqual(10); // نتيجة + 8 + «و… أخريات»
+    expect(lines.join('\n')).toContain('ملاحظات أخرى');
+    expect(lines.join('\n')).toContain('ملاحظة 8');
+    expect(lines.join('\n')).not.toContain('ملاحظة 9');
+  });
 });
 
 /* ══════════════════════════════════════════════════════════════════
@@ -751,6 +809,9 @@ describe('المسار الحيّ: /teacher/exams/generate-ai وبوابة ال�
     expect(content.subjectLabel).toBe('اللغة العربية');
     expect(content.blueprint.grade).toBe('year3');
     expect(content.report.join('\n')).toContain('✓');
+    // تقرير المعلّم الموجز بلا رموز § (يقرأه معلّم) + الفني الكامل محفوظ خلفه (§126)
+    expect(res.body.report.join('\n')).not.toContain('§');
+    expect(res.body.reportFull.join('\n')).toContain('§');
     expect(totalPoints(content.questions)).toBe(20);
     expect(content.questions.every((q) => q.criterion)).toBe(true);
     expect(Array.isArray(content.stimuli), 'السند محفوظ في المحتوى (§105)').toBe(true);
@@ -782,6 +843,55 @@ describe('المسار الحيّ: /teacher/exams/generate-ai وبوابة ال�
     expect(res.body.savedToBank).toBe(false);
   });
 
+  it('محاولة أولى بلا سند ثم ثانية كاملة → التغذية الراجعة تُصلح والسند يصل (§49)', async () => {
+    const prompts = [];
+    let calls = 0;
+    __setCallProvider(async (prompt) => {
+      prompts.push(String(prompt || ''));
+      calls += 1;
+      return JSON.stringify(calls === 1 ? rawQuestions() : rawExam());
+    });
+    const res = await generate({
+      subject: SUBJECT, level: LEVEL, trimester: TERM, count: 8, targetPoints: 20,
+      title: 'اختبار يتعافى بالتغذية الراجعة'
+    });
+    expect(res.status).toBe(201);
+    expect(calls, 'محاولتان: أولى مرفوضة ثم ثانية بعد التغذية الراجعة').toBe(2);
+    expect(prompts[1], 'سبب رفض السند يُقال للنموذج صراحةً').toContain('لم تُرجع أي سند صالح');
+    expect(res.body.valid).toBe(true);
+    expect(res.body.content.stimuli.length).toBeGreaterThan(0);
+    expect(res.body.content.passages.length).toBeGreaterThan(0);
+  });
+
+  it('حفظ ورقة يدوية تشير إلى «سند» بلا سند → 400 برسالة محدّدة لا حفظ معيب (§7,§18)', async () => {
+    const res = await request(app)
+      .post('/api/teacher/exams')
+      .set('Authorization', `Bearer ${teacherToken}`)
+      .send({
+        title: 'ورقة بلا سند',
+        subject: 'math',
+        trimester: 1,
+        content: { questions: [{ id: 'q1', type: 'OPEN', prompt: 'حسب السند 1 كم عدد الكتب؟', points: 2 }] }
+      });
+    expect(res.status).toBe(400);
+    expect(res.body.error).toContain('سند');
+    expect(res.body.error).toContain('لا يوجد سند');
+  });
+
+  it('حفظ ورقة يدوية بلا إشارة سند → 201 (الحارس لا يعترض المسار السليم)', async () => {
+    const res = await request(app)
+      .post('/api/teacher/exams')
+      .set('Authorization', `Bearer ${teacherToken}`)
+      .send({
+        title: 'ورقة يدوية سليمة',
+        subject: 'math',
+        trimester: 1,
+        content: { questions: [{ id: 'q1', type: 'OPEN', prompt: 'ما مجموع العددين 2 و3 ؟', points: 2 }] }
+      });
+    expect(res.status).toBe(201);
+    expect(res.body.id).toBeTruthy();
+  });
+
   it('مخطّط غير صالح (بلا ثلاثي) → 400 برسالة محدّدة لا 500', async () => {
     const res = await generate({ subject: SUBJECT, level: LEVEL, trimester: 9 });
     expect(res.status).toBe(400);
@@ -794,7 +904,7 @@ describe('المسار الحيّ: /teacher/exams/generate-ai وبوابة ال�
     expect(res.body.error).toContain('المادة مطلوبة');
   });
 
-  it('إخراج غير JSON بعد محاولتين → 502 صادق لا «نجاح» زائف', async () => {
+  it('إخراج غير JSON بعد ثلاث محاولات → 502 صادق لا «نجاح» زائف', async () => {
     __setCallProvider(async () => 'هذا نص حر لا يحوي أي مصفوفة أسئلة.');
     const res = await generate({ subject: SUBJECT, level: LEVEL, trimester: TERM, count: 4 });
     expect(res.status).toBe(502);

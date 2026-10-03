@@ -113,7 +113,7 @@ function SolveInputBody({ q, answers, onAnswer }) {
       </div>
     );
   }
-  if (q.type === 'ORDER') {
+  if (q.type === 'ORDER' && (q.orderItems || []).length) {
     const arr = Array.isArray(val) ? val : [];
     return (
       <div className="form-group">
@@ -195,9 +195,12 @@ function PrintAnswerSpace({ q }) {
     );
   }
   if (q.type === 'ORDER') {
+    const items = q.orderItems || [];
+    // مخرَج بلا عناصر: أسطر كافية لكتابة الترتيب بدل فراغ يُفقد التلميذ مكان إجابته
+    if (!items.length) return <DottedLines n={4} />;
     return (
       <div>
-        {(q.orderItems || []).map((item, i) => (
+        {items.map((item, i) => (
           <div key={i} className="print-order-row">
             <span className="order-slot" />
             <span>{item}</span>

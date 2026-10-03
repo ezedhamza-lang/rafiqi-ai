@@ -36,6 +36,48 @@ export function auditReportLines(audit = []) {
   return audit.map((c) => `${STATUS_ICON[c.status] || '•'} ${c.label}${c.detail ? ` — ${c.detail}` : ''}`);
 }
 
+/** تنظيف رسالة يقرأها معلّم: بلا أرقام أقسام (§51) ولا رموز داخل أقواس — المعنى يبقى. */
+function stripSectionRefs(text) {
+  return String(text || '')
+    .replace(/[(][^()]*§[^()]*[)]/g, '')
+    .replace(/§[\w\-.،,§]+/g, '')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/\s*[،؛-]+\s*$/, '')
+    .trim();
+}
+
+/**
+ * تقرير المعلّم الموجز (§126): سطر النتيجة + الملاحظات بفعل عربي مقروء (بلا رموز
+ * § ولا جداول) + سطر «نجح الفحص في N وجهًا» — يحلّ محلّ جدار الفحص الطويل في الواجهة.
+ * التقرير الفني الكامل يبقى متاحًّا في `report` (لا معلومات تُحجب عن المدقّق).
+ */
+export function teacherReportLines(audit = [], issues = []) {
+  const errs = issues.filter((i) => i.severity === 'error');
+  const warns = issues.filter((i) => i.severity === 'warn');
+  const failRows = audit.filter((c) => c.status === 'fail');
+  const blocking = errs.length || failRows.length;
+  const lines = [];
+  if (blocking) {
+    lines.push(`✗ غير جاهز للاعتماد — ${blocking} خطأ${warns.length ? ` و${warns.length} تنبيه` : ''}:`);
+  } else if (warns.length) {
+    lines.push(`⚠ جاهز للمراجعة — ${warns.length} تنبيه${warns.length > 1 ? 'ات' : ''}:`);
+  } else {
+    lines.push('✓ جاهز للاعتماد — بلا ملاحظات.');
+  }
+  const actionable = errs.length
+    ? errs
+    : failRows.map((c) => ({ message: `${c.label}${c.detail ? ' — ' + c.detail : ''}` }));
+  [...actionable, ...warns].slice(0, 8).forEach((i) => lines.push(`• ${stripSectionRefs(i.message)}`));
+  const rest = actionable.length + warns.length - 8;
+  if (rest > 0) lines.push(`• … و${rest} ملاحظات أخرى في التقرير الفني الكامل.`);
+  const passed = audit.filter((c) => c.status === 'pass');
+  if (passed.length) {
+    const names = passed.slice(0, 8).map((c) => stripSectionRefs(String(c.label).split('(')[0].trim()));
+    lines.push(`نجح الفحص في ${passed.length} وجهًا: ${names.join(' · ')}${passed.length > 8 ? ' …' : ''}`);
+  }
+  return lines;
+}
+
 /**
  * يدقّق اختبارًا كاملًا مكوّنًا من blueprint + questions (+passages).
  * @param {object} exam { blueprint, questions, passages?, durationMinutes?, title? }
@@ -85,7 +127,7 @@ export function validateExam(exam = {}, opts = {}) {
   if (!questions.length) {
     issues.push(issue('error', 'NO_QUESTIONS', 'لا أسئلة في الاختبار'));
     checks.push({ id: 'questions', label: 'وجود أسئلة', status: 'fail', detail: 'لا أسئلة' });
-    return { approved: false, status: 'rejected', questions, issues, audit: buildAudit(checks), coverage: {}, report: auditReportLines(buildAudit(checks)), repairNotes, stimuli: repaired.stimuli };
+    return { approved: false, status: 'rejected', questions, issues, audit: buildAudit(checks), coverage: {}, report: auditReportLines(buildAudit(checks)), reportShort: teacherReportLines(buildAudit(checks), issues), repairNotes, stimuli: repaired.stimuli };
   }
 
   // 2) عقد السؤال الفردي: منهج + إجابة + غموض + عمر + لغة (§50,§55)
@@ -461,11 +503,13 @@ export function validateExam(exam = {}, opts = {}) {
 
   const approved = !hasError;
   const status = hasError ? 'rejected' : 'needs_review';
-  const report = auditReportLines(buildAudit(checks));
+  const audit = buildAudit(checks);
+  const report = auditReportLines(audit);
   // سطور التقرير التحليلي (معيار←مؤشر←نقاط←عتبات←تشخيص) تُرفق بتقرير المعلّم
   if (analyticalLines.length) report.push(...analyticalLines);
+  const reportShort = teacherReportLines(audit, issues);
   return {
-    approved, status, questions, issues, audit: buildAudit(checks), coverage, report, repairNotes, stimuli,
+    approved, status, questions, issues, audit, coverage, report, reportShort, repairNotes, stimuli,
     specMatrix,
     analyticalReport: analyticalLines
   };

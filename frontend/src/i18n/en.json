@@ -2459,6 +2459,7 @@
       "generateAiBtn": "Generate exam",
       "aiNoKey": "Add your Gemini API key first, then try again",
       "aiSaved": "Auto-saved to bank",
+      "reportFullDetails": "Full technical report & details",
       "updateExam": "Save changes",
       "cancelEdit": "Cancel editing",
       "qImageLabel": "Question image (optional)",

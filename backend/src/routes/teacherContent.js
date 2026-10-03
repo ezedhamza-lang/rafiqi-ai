@@ -51,6 +51,21 @@ import {
 const router = Router();
 router.use(authMiddleware);
 
+// حارس «لا سؤال يتيم» (§7,§18): أسئلة تشير إلى «سند» بلا سند محفوظ = ورقة تُطبع
+// بلا سند ويسقط فيها التلميذ (حالة exam-20) — يُمنع الحفظ برسالة تحدّى أين الإشكال
+// بدل حفظ صامت معيب. يُستدعى في المسار اليدوي الذي لا يمرّ على مدقّق المحرّك.
+function assertNoOrphanSindRefs(content) {
+  const questions = Array.isArray(content?.questions) ? content.questions : [];
+  if (!questions.length) return;
+  const hasSind = !!((Array.isArray(content?.stimuli) && content.stimuli.length) ||
+    (Array.isArray(content?.passages) && content.passages.length));
+  if (hasSind) return;
+  const refs = questions.filter((q) => q?.sindId ||
+    /السند/.test(`${q?.prompt || ''} ${q?.text || ''} ${q?.label || ''}`));
+  if (!refs.length) return;
+  throw new ApiError(400, `لا يمكن حفظ الاختبار: ${refs.length} سؤال يشير إلى «سند» بينما لا يوجد سند محفوظ — أضِف نصّ السند (حقل السندات) أو احذف الإشارة من السؤال`);
+}
+
 const __tcDirname = path.dirname(fileURLToPath(import.meta.url));
 const EXAM_IMG_DIR = path.join(__tcDirname, '../../uploads/exams');
 if (!fs.existsSync(EXAM_IMG_DIR)) {
@@ -534,6 +549,7 @@ router.get('/exams', teacherMiddleware, asyncHandler(async (req, res) => {
 router.post('/exams', teacherMiddleware, validateBody(teacherExamCreateSchema), asyncHandler(async (req, res) => {
   const { title, subject, classId, trimester, content } = req.body;
   await assertClassInSchool(prisma, req, classId, ApiError);
+  assertNoOrphanSindRefs(content);
   const exam = await prisma.officialExam.create({
     data: {
       teacherId: req.user.id,
@@ -752,11 +768,11 @@ router.post('/exams/generate-ai', teacherMiddleware, asyncHandler(async (req, re
   const examTitle = givenTitle ||
     `اختبار ${blueprint.subjectLabel} — ${blueprint.gradeLabel} (الثلاثي ${blueprint.trimester})`;
 
-  // 2) التوليد المخطّطي + التدقيق + إعادة محاولة واحدة بتغذية راجعة (§49,§126)
+  // 2) التوليد المخطّطي + التدقيق + إعادة محاولة بتغذية راجعة (§49,§126)
   let validation = null;
   let previousIssues = null;
   let stimuli = []; // سندات آخر محاولة ناجحة القراءة (تبقى من المحاولة السابقة عند فشل لاحق)
-  for (let attempt = 1; attempt <= 2; attempt += 1) {
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
     let text = null;
     try {
       const prompt = buildExamPrompt(blueprint, { previousIssues });
@@ -776,11 +792,12 @@ router.post('/exams/generate-ai', teacherMiddleware, asyncHandler(async (req, re
 
     const parsed = parseGeneratedExamPayload(text);
     const questions = parsed ? normalizeGeneratedQuestions(parsed.questions, blueprint) : null;
-    stimuli = parsed ? normalizeGeneratedStimuli(parsed.stimuli, blueprint).stimuli : [];
+    const stimNorm = parsed ? normalizeGeneratedStimuli(parsed.stimuli, blueprint) : { stimuli: [], invalid: [] };
+    stimuli = stimNorm.stimuli;
     if (!questions) {
       console.warn('[AI-EXAM] invalid exam JSON, attempt', attempt, String(text || '').slice(0, 150));
       previousIssues = 'إخراجك السابق لم يكن JSON صالحًا — أعد الإخراج كائنًا فيه stimuli وquestions فقط دون شرح';
-      if (attempt === 2) break;
+      if (attempt === 3) break;
       continue;
     }
 
@@ -796,12 +813,21 @@ router.post('/exams/generate-ai', teacherMiddleware, asyncHandler(async (req, re
     stimuli = validation.stimuli || stimuli; // المثيرات بعد الإصلاح الحتمي هي المحفوظة
     if (validation.approved) break;
     const errs = validation.issues.filter((i) => i.severity === 'error');
-    // التغذية الراجعة تُبنى من الأخطاء + مخالفات العقد الهيكلية (مرجع سند معلّق،
-    // نوع مثير خارج الملف) — إصلاحات أخرى تمت أصلًا داخل repairExam لا حاجة لإعادة طلبها.
+    // التغذية الراجعة تُبنى من الأخطاء + أسباب رفض السندات عند التطبيع + مخالفات
+    // العقد الهيكلية (مرجع سند معلّق، نوع مثير خارج الملف) — لا سبب يُكتشف ثم يُهمل.
     const contractFeedback = (validation.repairNotes || [])
       .filter((n) => n.code === 'SIND_REF_REBOUND' || n.code === 'STIMULUS_TYPE_FIXED')
       .map((n) => n.message);
-    previousIssues = [...new Set([...errs.slice(0, 5).map((i) => i.message), ...contractFeedback])].slice(0, 6).join('؛ ') || null;
+    const sindFeedback = [];
+    if (parsed && stimNorm.stimuli.length === 0) {
+      sindFeedback.push('لم تُرجع أي سند صالح في "stimuli" — اختبار سنّدي بلا سند يُرفض: أعِد الإخراج كائنًا فيه stimuli (نصّ ≥ 8 أحرف لكل سند) وquestions مع sindId');
+    }
+    if (stimNorm.invalid.length) {
+      sindFeedback.push(`سندات مرفوضة عند التطبيع: ${stimNorm.invalid.join('؛ ')}`);
+    }
+    previousIssues = [...new Set([...sindFeedback, ...errs.slice(0, 8).map((i) => i.message), ...contractFeedback])]
+      .join('؛ ')
+      .slice(0, 1200) || null;
     if (!previousIssues) break; // تنبيهات فقط (لا error) → لا إعادة محاولة
     console.warn('[AI-EXAM] validation feedback, attempt', attempt, previousIssues.slice(0, 200));
   }
@@ -902,7 +928,9 @@ router.post('/exams/generate-ai', teacherMiddleware, asyncHandler(async (req, re
     valid: validation.approved,
     issues: validation.issues,
     audit: validation.audit,
-    report: validation.report,
+    // المعلّم يقرأ الموجز أولًا (بلا رموز §)؛ الفني الكامل (مع التحليلي) خلف «تفاصيل»
+    report: validation.reportShort || validation.report,
+    reportFull: validation.report,
     warnings: [...(blueprint.warnings || [])],
     message
   });
@@ -997,6 +1025,8 @@ router.put('/exams/:id', teacherMiddleware, validateParams(teacherContentIdParam
       questions: v.questions
     };
   }
+  // محتوى بلا مخطّط (مسار يدوي) لا يمرّ على المدقّق أعلاه → حارس «لا سؤال يتيم» هنا
+  if (contentUpdate && !contentUpdate.blueprint) assertNoOrphanSindRefs(contentUpdate);
   if (published !== undefined) {
     const existing = await prisma.officialExam.findFirst({ where: { id: Number(req.params.id), teacherId: req.user.id } });
     if (!existing) throw new ApiError(404, 'الاختبار غير موجود');
