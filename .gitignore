@@ -60,3 +60,9 @@ dossier-cnte2026/02-scenarios/*.mp4
 EZEDDINE.HAMZA.zip
 EZEDDINE.HAMZA/
 
+# ملفات متروكة عمّدًا — لا تُدفع أبدًا (fixplan §3، قرار المستخدم 03-10-2026)
+# (*.log مغطّى أعلاه أيضًا)
+tasks/
+tudentest.txt
+backend/content-deep.txt
+
