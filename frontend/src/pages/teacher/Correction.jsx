@@ -19,6 +19,9 @@ export default function Correction() {
 
   const [submissions, setSubmissions] = useState([]);
   const [examSubs, setExamSubs] = useState([]);
+  const [exams, setExams] = useState([]);
+  const [selectedExamId, setSelectedExamId] = useState('');
+  const [examGrading, setExamGrading] = useState({});
   const [lessonSubs, setLessonSubs] = useState([]);
   const [suggestion, setSuggestion] = useState('');
   const [paperExams, setPaperExams] = useState([]);
@@ -54,11 +57,49 @@ export default function Correction() {
     load();
     loadPaperExams();
     loadLessonSubs();
-  }, [load, loadPaperExams, loadLessonSubs]);
+    loadExams();
+  }, [load, loadPaperExams, loadLessonSubs, loadExams]);
 
   const loadExamSubs = async (examId) => {
-    const data = await api.get(`/teacher/exams/${examId}/submissions`);
-    setExamSubs(data);
+    setSelectedExamId(examId || '');
+    if (!examId) {
+      setExamSubs([]);
+      return;
+    }
+    try {
+      const data = await api.get(`/teacher/exams/${examId}/submissions`);
+      setExamSubs(data);
+    } catch (e) {
+      setError(e.message);
+    }
+  };
+
+  // قائمة اختبارات المعلّم الرسمية: كانت القائمة تُبنى من «التسليمات» فلم يمكن
+  // اختيار أي اختبار ⇒ التصحيح الرسمي مستحيل من الواجهة.
+  const loadExams = useCallback(async () => {
+    try {
+      const data = await api.get('/teacher/exams');
+      setExams(data);
+    } catch (e) {
+      setError(e.message);
+    }
+  }, []);
+
+  const selectedExam = exams.find((e) => String(e.id) === String(selectedExamId)) || null;
+  const selectedExamMax = Number(selectedExam?.content?.totalPoints) || 20;
+
+  const saveExamGrade = async (subId) => {
+    const g = examGrading[subId] || {};
+    try {
+      await api.put(`/teacher/exams/${selectedExamId}/submissions/${subId}`, {
+        score: g.score !== '' && g.score !== undefined ? Number(g.score) : undefined,
+        status: g.status || 'CORRECTED'
+      });
+      await loadExamSubs(selectedExamId);
+      setExamGrading((prev) => ({ ...prev, [subId]: {} }));
+    } catch (e) {
+      setError(e.message);
+    }
   };
 
   const askSuggestion = async (question, studentAnswer) => {
@@ -218,14 +259,27 @@ export default function Correction() {
 
       <h4 style={{ marginTop: 24 }}>{t('teacherSpace.correction.officialExamsTitle')}</h4>
       <div className="form-row">
-        <div className="form-group">
+        <div className="form-group grow">
           <label>{t('teacherSpace.correction.selectExamLabel')}</label>
-          <select onChange={(e) => e.target.value && loadExamSubs(e.target.value)}>
-            <option value="">...</option>
-            {examSubs.length === 0 && <option value="" disabled>{t('teacherSpace.correction.loadFromTab')}</option>}
+          <select
+            value={selectedExamId}
+            onChange={(e) => loadExamSubs(e.target.value)}
+          >
+            <option value="">{t('teacherSpace.correction.selectExamPlaceholder')}</option>
+            {exams.map((ex) => (
+              <option key={ex.id} value={ex.id}>
+                {ex.title} — {ex.class?.name || t('teacherSpace.common.noClass')} ({ex.published ? t('teacherSpace.correction.examPublished') : t('teacherSpace.correction.examDraft')})
+              </option>
+            ))}
           </select>
         </div>
       </div>
+      {exams.length === 0 && (
+        <div className="empty">{t('teacherSpace.correction.noExamsYet')}</div>
+      )}
+      {selectedExamId && examSubs.length === 0 && (
+        <div className="empty">{t('teacherSpace.correction.noExamSubmissions')}</div>
+      )}
       {examSubs.length > 0 && (
         <div className="table-wrap">
           <table className="data-table">
@@ -234,16 +288,55 @@ export default function Correction() {
                 <th>{t('teacherSpace.correction.studentCol')}</th>
                 <th>{t('teacherSpace.correction.statusCol')}</th>
                 <th>{t('teacherSpace.correction.scoreCol')}</th>
+                <th>{t('teacherSpace.correction.gradingCol')}</th>
               </tr>
             </thead>
             <tbody>
-              {examSubs.map((s) => (
-                <tr key={s.id}>
-                  <td>{s.student.firstName} {s.student.lastName}</td>
-                  <td>{s.status}</td>
-                  <td>{s.score ?? t('teacherSpace.correction.noValue')}</td>
-                </tr>
-              ))}
+              {examSubs.map((s) => {
+                const g = examGrading[s.id] || {};
+                const st = STATUS_STYLES[s.status] || STATUS_STYLES.SENT;
+                const needsManual = s.status !== 'CORRECTED';
+                return (
+                  <tr key={s.id}>
+                    <td>{s.student?.firstName} {s.student?.lastName}</td>
+                    <td>
+                      <span className={`badge ${st.cls}`}>{st.label}</span>
+                      {needsManual && (
+                        <span className="muted" style={{ marginInlineStart: 6 }}>
+                          {t('teacherSpace.correction.needsManual')}
+                        </span>
+                      )}
+                    </td>
+                    <td>
+                      {typeof s.score === 'number' ? `${s.score} / ${selectedExamMax}` : '—'}
+                    </td>
+                    <td className="paper-grade-cell">
+                      <input
+                        type="number"
+                        min="0"
+                        max={selectedExamMax}
+                        step="0.5"
+                        placeholder={t('teacherSpace.correction.scorePlaceholder')}
+                        value={g.score ?? ''}
+                        onChange={(e) => setExamGrading({ ...examGrading, [s.id]: { ...g, score: e.target.value } })}
+                        className="grade-input"
+                      />
+                      <select
+                        value={g.status ?? 'CORRECTED'}
+                        onChange={(e) => setExamGrading({ ...examGrading, [s.id]: { ...g, status: e.target.value } })}
+                        className="grade-status-select"
+                      >
+                        <option value="SENT">{t('teacherSpace.correction.status.SENT')}</option>
+                        <option value="IN_REVIEW">{t('teacherSpace.correction.status.IN_REVIEW')}</option>
+                        <option value="CORRECTED">{t('teacherSpace.correction.status.CORRECTED')}</option>
+                      </select>
+                      <button className="btn btn-sm btn-primary" onClick={() => saveExamGrade(s.id)}>
+                        {t('teacherSpace.correction.save')}
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

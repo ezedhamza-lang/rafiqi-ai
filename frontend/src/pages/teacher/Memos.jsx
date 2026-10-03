@@ -11,6 +11,17 @@ const LEVELS = [
   'السنة السادسة أساسي'
 ];
 
+// بروفايلات المذكرات تُسمّى «أساسي» بينما أقسام المنصة «ابتدائي» — نعرض للمعلم
+// اسم قسمه (المتعارف عليه في المنصة) ونرسل للمولّد المفتاح الذي يفهمه.
+const LEVEL_LABELS = {
+  'السنة الأولى أساسي': 'السنة الأولى ابتدائي',
+  'السنة الثانية أساسي': 'السنة الثانية ابتدائي',
+  'السنة الثالثة أساسي': 'السنة الثالثة ابتدائي',
+  'السنة الرابعة أساسي': 'السنة الرابعة ابتدائي',
+  'السنة الخامسة أساسي': 'السنة الخامسة ابتدائي',
+  'السنة السادسة أساسي': 'السنة السادسة ابتدائي'
+};
+
 function yearOf(level) {
   const m = String(level || '').match(/السنة\s+(الأولى|الثانية|الثالثة|الرابعة|الخامسة|السادسة)/);
   if (!m) return '';
@@ -36,11 +47,14 @@ export default function Memos({ onChanged }) {
     setForm((f) => ({ ...f, officialRef: '' }));
     if (!form.subject) return;
     let alive = true;
-    api.get(`/memos/official?subject=${encodeURIComponent(form.subject)}`)
+    // المستوى جزء من الطلب: بدونه كانت الخدمة تُرجع دروس السنة الثانية لأي مستوى
+    const q = new URLSearchParams({ subject: form.subject });
+    if (form.level) q.set('level', form.level);
+    api.get(`/memos/official?${q.toString()}`)
       .then((list) => { if (alive && Array.isArray(list)) setOfficialList(list); })
       .catch(() => {});
     return () => { alive = false; };
-  }, [form.subject]);
+  }, [form.subject, form.level]);
   const [view, setView] = useState(null);
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState('');
@@ -207,7 +221,7 @@ export default function Memos({ onChanged }) {
                 <label>{t('teacherSpace.memos.levelLabel')}</label>
                 <select value={form.level} onChange={(e) => setForm({ ...form, level: e.target.value })}>
                   {LEVELS.map((l) => (
-                    <option key={l} value={l}>{l}</option>
+                    <option key={l} value={l}>{LEVEL_LABELS[l] || l}</option>
                   ))}
                 </select>
               </div>
@@ -305,7 +319,7 @@ export default function Memos({ onChanged }) {
                     <tr key={m.id}>
                       <td>{m.lessonTitle}</td>
                       <td>{m.subject}</td>
-                      <td>{m.level}</td>
+                      <td>{LEVEL_LABELS[m.level] || m.level}</td>
                       <td>
                         <span className="badge good">{m.methodologyTitle || t('teacherSpace.memos.defaultMethodology')}</span>
                       </td>

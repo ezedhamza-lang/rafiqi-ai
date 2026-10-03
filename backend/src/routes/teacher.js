@@ -328,24 +328,146 @@ router.get('/results', teacherMiddleware, asyncHandler(async (req, res) => {
     select: { id: true }
   });
   const ids = quizzes.map((q) => q.id);
-  const submissions = await prisma.submission.findMany({
-    where: { quizId: { in: ids } },
-    include: {
-      quiz: { select: { id: true, title: true, subject: true } },
-      student: { select: { id: true, firstName: true, lastName: true } }
-    }
-  });
-  const byStudent = {};
-  for (const s of submissions) {
-    if (!byStudent[s.studentId]) byStudent[s.studentId] = { student: s.student, attempts: [], avgPercent: 0 };
-    byStudent[s.studentId].attempts.push(s);
+  const [quizSubs, officialExams, assignments] = await Promise.all([
+    prisma.submission.findMany({
+      where: { quizId: { in: ids } },
+      include: {
+        quiz: { select: { id: true, title: true, subject: true } },
+        student: { select: { id: true, firstName: true, lastName: true } }
+      },
+      orderBy: { createdAt: 'desc' },
+      take: 200
+    }),
+    prisma.officialExam.findMany({
+      where: { teacherId: req.user.id },
+      select: { id: true, title: true, subject: true, content: true }
+    }),
+    prisma.assignment.findMany({
+      where: { teacherId: req.user.id },
+      select: { id: true, title: true, subject: true }
+    })
+  ]);
+
+  const officialSubs = officialExams.length
+    ? await prisma.officialSubmission.findMany({
+        where: { examId: { in: officialExams.map((e) => e.id) } },
+        orderBy: { createdAt: 'desc' },
+        take: 200
+      })
+    : [];
+  const assignmentSubs = assignments.length
+    ? await prisma.assignmentSubmission.findMany({
+        where: { assignmentId: { in: assignments.map((a) => a.id) } },
+        orderBy: { createdAt: 'desc' },
+        take: 200
+      })
+    : [];
+
+  const studentByUserId = new Map();
+  const accountIds = [
+    ...new Set([...officialSubs.map((s) => s.studentId), ...assignmentSubs.map((s) => s.studentId)])
+  ];
+  if (accountIds.length) {
+    const students = await prisma.student.findMany({
+      where: { accountUserId: { in: accountIds } },
+      select: {
+        accountUserId: true,
+        firstName: true,
+        lastName: true
+      }
+    });
+    for (const s of students) studentByUserId.set(s.accountUserId, s);
   }
-  const results = Object.values(byStudent).map((r) => {
-    const total = r.attempts.length;
-    const sum = r.attempts.reduce((acc, a) => acc + (a.score / (a.totalPoints || 1)) * 100, 0);
-    r.avgPercent = total ? Math.round(sum / total) : 0;
-    return r;
-  });
+
+  const examById = new Map(officialExams.map((e) => [e.id, e]));
+  const assignmentById = new Map(assignments.map((a) => [a.id, a]));
+  const pct = (score, max) => (max > 0 ? Math.round((score / max) * 100) : null);
+
+  const attempts = [
+    ...quizSubs.map((s) => ({
+      kind: 'quiz',
+      title: s.quiz?.title || '',
+      subject: s.quiz?.subject || null,
+      createdAt: s.createdAt,
+      score: s.score,
+      max: s.totalPoints || 0,
+      percent: pct(s.score, s.totalPoints || 0),
+      status: null,
+      student: s.student
+    })),
+    ...officialSubs.map((s) => {
+      const exam = examById.get(s.examId);
+      const max = Number(exam?.content?.totalPoints) || 20;
+      return {
+        kind: 'exam',
+        title: exam?.title || '',
+        subject: exam?.subject || null,
+        createdAt: s.createdAt,
+        score: s.score,
+        max,
+        percent: pct(s.score ?? 0, max),
+        status: s.status,
+        pendingManualGrading: s.status !== 'CORRECTED',
+        student: studentByUserId.get(s.studentId)
+          ? {
+              id: s.studentId,
+              firstName: studentByUserId.get(s.studentId).firstName,
+              lastName: studentByUserId.get(s.studentId).lastName
+            }
+          : null
+      };
+    }),
+    ...assignmentSubs.map((s) => {
+      const assignment = assignmentById.get(s.assignmentId);
+      const max = s.totalPoints || 0;
+      return {
+        kind: 'assignment',
+        title: assignment?.title || '',
+        subject: assignment?.subject || null,
+        createdAt: s.createdAt,
+        score: s.score,
+        max,
+        percent: s.percent ?? pct(s.score ?? 0, max),
+        status: s.status,
+        late: s.late,
+        student: studentByUserId.get(s.studentId)
+          ? {
+              id: s.studentId,
+              firstName: studentByUserId.get(s.studentId).firstName,
+              lastName: studentByUserId.get(s.studentId).lastName
+            }
+          : null
+      };
+    })
+  ].filter((a) => a.student);
+
+  const byStudent = {};
+  for (const a of attempts) {
+    const sid = a.student.id;
+    if (!byStudent[sid]) {
+      byStudent[sid] = {
+        student: a.student,
+        attempts: [],
+        avgPercent: 0,
+        breakdown: { quizzes: 0, exams: 0, assignments: 0 },
+        pendingManual: 0
+      };
+    }
+    byStudent[sid].attempts.push(a);
+    byStudent[sid].breakdown[a.kind + 's'] += 1;
+    if (a.pendingManualGrading) byStudent[sid].pendingManual += 1;
+  }
+
+  const results = Object.values(byStudent)
+    .map((r) => {
+      const scored = r.attempts.filter((a) => typeof a.percent === 'number');
+      const sum = scored.reduce((acc, a) => acc + a.percent, 0);
+      r.avgPercent = scored.length ? Math.round(sum / scored.length) : 0;
+      r.attempts.sort((x, y) => new Date(y.createdAt) - new Date(x.createdAt));
+      return r;
+    })
+    .sort((a, b) => a.student.lastName.localeCompare(b.student.lastName, 'ar'));
+
   res.json(results);
 }));
 
@@ -377,9 +499,54 @@ router.get('/averages', teacherMiddleware, asyncHandler(async (req, res) => {
       subject: q.subject,
       className: q.class?.name || 'بدون قسم',
       attempts: total,
-      avgPercent: avg
+      avgPercent: avg,
+      kind: 'quiz'
     };
   });
+
+  // الاختبارات الرسمية والواجبات: المعدلات كانت محصورة في الاختبارات السريعة فقط،
+  // فلا يرى المعلّم ما صحّحه فعليًّا من امتحانات وواجبات أقسامه.
+  const avgOf = (list, maxFn) => {
+    const scored = list.filter((s) => typeof s.score === 'number' && maxFn(s) > 0);
+    if (!scored.length) return null;
+    return Math.round(scored.reduce((acc, s) => acc + (s.score / maxFn(s)) * 100, 0) / scored.length);
+  };
+
+  const [officialExams, assignments] = await Promise.all([
+    prisma.officialExam.findMany({
+      where: { teacherId: req.user.id },
+      include: { class: { select: { name: true } }, submissions: true }
+    }),
+    prisma.assignment.findMany({
+      where: { teacherId: req.user.id },
+      include: { class: { select: { name: true } }, submissions: true }
+    })
+  ]);
+
+  for (const e of officialExams) {
+    const max = Number(e.content?.totalPoints) || 20;
+    data.push({
+      id: e.id,
+      title: e.title,
+      subject: e.subject,
+      className: e.class?.name || 'بدون قسم',
+      attempts: e.submissions.length,
+      avgPercent: avgOf(e.submissions, () => max),
+      kind: 'exam'
+    });
+  }
+  for (const a of assignments) {
+    data.push({
+      id: a.id,
+      title: a.title,
+      subject: a.subject,
+      className: a.class?.name || 'بدون قسم',
+      attempts: a.submissions.length,
+      avgPercent: avgOf(a.submissions, (s) => s.totalPoints || 0),
+      kind: 'assignment'
+    });
+  }
+
   res.json(data);
 }));
 

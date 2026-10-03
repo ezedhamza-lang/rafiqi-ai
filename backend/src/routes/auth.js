@@ -188,7 +188,15 @@ router.post(
 router.get(
   '/config',
   asyncHandler(async (req, res) => {
-    res.json({ googleClientId: config.googleClientId || null });
+    const clientId = config.googleClientId || null;
+    const allowed = config.googleAllowedOrigins || [];
+    const origin = String(req.headers.origin || '').replace(/\/$/, '');
+    const originAllowed = allowed.length === 0 || allowed.includes(origin);
+    res.json({
+      // نطاق غير مصرّح به في Google ⇒ لا نعرض زرًا معطّلًا
+      googleClientId: clientId && originAllowed ? clientId : null,
+      googleOriginBlocked: Boolean(clientId && !originAllowed)
+    });
   })
 );
 function readCookie(req, name) {

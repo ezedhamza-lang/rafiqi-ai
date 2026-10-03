@@ -9,7 +9,9 @@ export const assignmentCreateSchema = z.object({
   description: z.string().trim().max(5000, { error: 'الوصف طويل جدا' }).optional().nullable(),
   dueDate: z
     .string()
-    .regex(/^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?)?$/, { error: 'تاريخ التسليم غير صحيح' })
+    // يقبل تاريخًا فقط أو تاريخًا ووقتًا، مع صيغة ISO كاملة من الواجهة
+    // (‎2026-10-05T19:00:00.000Z) — الخلط بين الصيغ كان يمنع حفظ كل واجب له مهلة.
+    .regex(/^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?(\.\d{1,3})?(Z|[+-]\d{2}:?\d{2})?)?$/, { error: 'تاريخ التسليم غير صحيح' })
     .optional()
     .nullable(),
   status: z.enum(['DRAFT', 'PUBLISHED', 'CLOSED']).optional(),

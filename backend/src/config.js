@@ -63,5 +63,11 @@ export const config = {
   },
   // Google OAuth sign-in (bouton « Continuer avec Google »).
   // Vide = désactivé (le frontend masque le bouton, l'API répond 501).
-  googleClientId: process.env.GOOGLE_CLIENT_ID || ''
+  googleClientId: process.env.GOOGLE_CLIENT_ID || '',
+  // نطاقات مسموح لها بدخول Google (مفصولة بفواصل). إذا ضُبطت ولم يكن النطاق الحالي
+  // منها ⇒ يُخفى زر Google بدل إظهار زر لا يعمل (رسالة GSI: origin not allowed).
+  googleAllowedOrigins: (process.env.GOOGLE_ALLOWED_ORIGINS || '')
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean)
 };

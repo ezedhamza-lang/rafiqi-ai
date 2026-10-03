@@ -76,17 +76,22 @@ export default function TeacherDashboard() {
   const [classes, setClasses] = useState([]);
   const [quizCount, setQuizCount] = useState(0);
   const [memoCount, setMemoCount] = useState(0);
+  const [examCount, setExamCount] = useState(0);
 
   const load = useCallback(async () => {
     try {
-      const [cls, quizzes, memos] = await Promise.all([
+      // المذكرات تُقرأ من /memos (نفس مصدر صفحة المذكرات) — /teacher/memos عدّاد قديم يبقى 0.
+      // والامتحانات الرسمية تُقرأ من /teacher/exams؛ العدّاد القديم كان يعدّ السريعة فقط.
+      const [cls, quizzes, memos, exams] = await Promise.all([
         api.get('/teacher/classes'),
         api.get('/teacher/quizzes'),
-        api.get('/teacher/memos')
+        api.get('/memos'),
+        api.get('/teacher/exams')
       ]);
       setClasses(cls);
       setQuizCount(quizzes.length);
       setMemoCount(memos.length);
+      setExamCount(exams.length);
     } catch {
       /* ignore */
     }
@@ -111,6 +116,7 @@ export default function TeacherDashboard() {
             </p>
           </div>
           <div className="space-stats">
+            <Badge variant="info" icon="fact_check">{t('teacherSpace.officialExamCount', { n: examCount })}</Badge>
             <Badge variant="info" icon="quiz">{t('teacherSpace.quizCount', { n: quizCount })}</Badge>
             <Badge variant="accent" icon="description">{t('teacherSpace.memoCount', { n: memoCount })}</Badge>
           </div>

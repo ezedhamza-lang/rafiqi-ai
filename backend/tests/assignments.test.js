@@ -114,6 +114,52 @@ describe('assignments (المرحلة 3.1 — التكليفات)', () => {
     expect(studentList.body[0].done).toBe(false);
   });
 
+  it('يقبل مهلة بصيغة ISO كاملة (ما ترسله الواجهة فعلًا) ويرفض صيغة فاسدة', async () => {
+    const prisma = (await import('../src/db.js')).default;
+    const klass = await prisma.class.findFirst();
+    const teacherToken = await getToken('teacher@test.tn', 'teacher123');
+
+    // الواجهة ترسل new Date(datetime-local).toISOString() ⇒‎2026-10-05T19:00:00.000Z
+    const iso = await request(app)
+      .post('/api/teacher/assignments')
+      .set('Authorization', `Bearer ${teacherToken}`)
+      .send({
+        title: 'واجب بمهلة كاملة',
+        subject: 'MATH',
+        classId: klass.id,
+        dueDate: '2026-10-05T19:00:00.000Z',
+        questions: SAMPLE_QUESTIONS
+      });
+    expect(iso.status).toBe(201);
+    expect(new Date(iso.body.dueDate).toISOString()).toBe('2026-10-05T19:00:00.000Z');
+
+    // صيغة قصيرة (كما ترسلها الواجهة عند التحرير) ما زالت مقبولة
+    const short = await request(app)
+      .post('/api/teacher/assignments')
+      .set('Authorization', `Bearer ${teacherToken}`)
+      .send({
+        title: 'واجب بمهلة قصيرة',
+        subject: 'MATH',
+        classId: klass.id,
+        dueDate: '2026-10-06T20:00',
+        questions: SAMPLE_QUESTIONS
+      });
+    expect(short.status).toBe(201);
+
+    const bad = await request(app)
+      .post('/api/teacher/assignments')
+      .set('Authorization', `Bearer ${teacherToken}`)
+      .send({
+        title: 'واجب بمهلة فاسدة',
+        subject: 'MATH',
+        classId: klass.id,
+        dueDate: 'غدًا',
+        questions: SAMPLE_QUESTIONS
+      });
+    expect(bad.status).toBe(400);
+    expect(JSON.stringify(bad.body)).toContain('تاريخ التسليم غير صحيح');
+  });
+
   it('أمان: التلميذ لا يتلقى مفاتيح الإجابات لا في القائمة ولا التفاصيل', async () => {
     const prisma = (await import('../src/db.js')).default;
     const klass = await prisma.class.findFirst();

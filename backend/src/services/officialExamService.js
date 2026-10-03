@@ -193,9 +193,44 @@ function masteryFromRatio(ratio) {
   return MASTERY_KEYS.below;
 }
 
+// أنواع يمكن تصحيحها آليًّا؛ ما عداها (OPEN/MATCHING) يبقى يدويًّا بصراحة
+const AUTO_GRADABLE_TYPES = new Set([
+  QUESTION_TYPES.MCQ,
+  QUESTION_TYPES.TRUE_FALSE,
+  QUESTION_TYPES.ORDER,
+  QUESTION_TYPES.EXTRACT,
+  QUESTION_TYPES.FILL_BLANK
+]);
+
+function hasAnswerKey(question) {
+  if (!question || !AUTO_GRADABLE_TYPES.has(question.type)) return false;
+  if (Array.isArray(question.orderItems) && question.orderItems.length > 0) return true;
+  if (question.correct !== undefined && question.correct !== null && String(question.correct).trim() !== '') return true;
+  if (question.correctAnswer !== undefined && question.correctAnswer !== null && String(question.correctAnswer).trim() !== '') return true;
+  return false;
+}
+
 export function gradeOfficialExam(content, answers = {}) {
   const criteria = Array.isArray(content?.criteria) ? content.criteria : [];
   const questions = Array.isArray(content?.questions) ? content.questions : [];
+  const totalMaxFallback = Number(content?.totalPoints) || 20;
+
+  // بلا جدول إسناد (criteria) لا يُصحَّح أي سؤال آليًّا.
+  // بلا جدول إسناد (criteria) لا يُصحَّح أي سؤال آليًّا.
+// سجل كان 0/20 بحالة «مصحَّح» ⇒ صفر ظالم بلا طلب تصحيح يدوي.
+  if (criteria.length === 0) {
+    return {
+      criteria: [],
+      total: 0,
+      totalMax: totalMaxFallback,
+      percent: 0,
+      manualCriteria: questions.length
+        ? [{ criterion: 'الورقة كاملة', label: 'الورقة كاملة — لا توجد جداول إسناد' }]
+        : [],
+      needsManualGrading: true,
+      reason: 'NO_CRITERIA'
+    };
+  }
 
   const byCriterion = new Map();
   for (const q of questions) {
@@ -204,22 +239,35 @@ export function gradeOfficialExam(content, answers = {}) {
     byCriterion.get(key).push(q);
   }
 
+  const unkeyedLabels = [];
+
   const criterionResults = criteria.map((criterion) => {
     const group = byCriterion.get(criterion.id) || [];
     const closed = group.filter((q) => q.type !== QUESTION_TYPES.OPEN);
     const open = group.filter((q) => q.type === QUESTION_TYPES.OPEN);
+    // مقفول بمفتاح = يُصحَّح آليًّا؛ مقفول بلا مفتاح = لا يُصحَّح آليًّا (بلا صفر ظالم)
+    const keyed = closed.filter(hasAnswerKey);
+    const unkeyed = closed.filter((q) => !hasAnswerKey(q));
+    unkeyed.forEach((q) => {
+      unkeyedLabels.push({
+        criterion: criterion.id,
+        label: criterion.label || criterion.id,
+        questionLabel: q.prompt || q.label || '',
+        missingKey: true
+      });
+    });
 
     let masteryKey = null;
     let earned = 0;
     let correctCount = 0;
     let autoCorrected = false;
 
-    if (closed.length > 0) {
+    if (keyed.length > 0) {
       autoCorrected = true;
-      for (const q of closed) {
+      for (const q of keyed) {
         if (gradeClosedQuestion(q, answers[q.id])) correctCount += 1;
       }
-      const ratio = correctCount / closed.length;
+      const ratio = correctCount / keyed.length;
       masteryKey = masteryFromRatio(ratio);
       earned = criterion.mastery[masteryKey] ?? 0;
     }
@@ -234,21 +282,26 @@ export function gradeOfficialExam(content, answers = {}) {
       autoCorrected,
       masteryKey,
       masteryLabel: masteryKey ? MASTERY_LABELS[masteryKey] : 'تقويم يدوي',
-      earned
+      earned,
+      pendingManualCount: unkeyed.length + open.length
     };
   });
 
   const totalMax = criteria.reduce((s, c) => s + (c.mastery.max ?? 0), 0);
   const total = criterionResults.reduce((s, r) => s + r.earned, 0);
-  const manualCriteria = criterionResults.filter((r) => !r.autoCorrected);
+  const manualCriteria = criterionResults
+    .filter((r) => !r.autoCorrected)
+    .map((r) => ({ criterion: r.criterion, label: r.label }));
 
   return {
     criteria: criterionResults,
     total,
-    totalMax: totalMax || 20,
+    totalMax: totalMax || totalMaxFallback,
     percent: totalMax ? Math.round((total / totalMax) * 100) : 0,
-    manualCriteria: manualCriteria.map((r) => ({ criterion: r.criterion, label: r.label })),
-    needsManualGrading: manualCriteria.length > 0
+    manualCriteria,
+    unkeyedQuestions: unkeyedLabels,
+    needsManualGrading: manualCriteria.length > 0 || unkeyedLabels.length > 0,
+    reason: criteria.length === 0 ? 'NO_CRITERIA' : unkeyedLabels.length > 0 ? 'MISSING_ANSWER_KEYS' : manualCriteria.length > 0 ? 'OPEN_QUESTIONS' : null
   };
 }
 

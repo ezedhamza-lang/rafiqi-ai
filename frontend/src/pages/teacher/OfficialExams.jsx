@@ -18,6 +18,15 @@ const LEVELS = [
 const SUBJECT_CODES = ['math', 'anisi', 'science', 'production', 'handwriting', 'arabic', 'french', 'islamic'];
 const SUBJECTS = SUBJECT_CODES.map((code) => ({ code, label: utilSubjectLabel(code) }));
 
+// أنواع يمكن تصحيحها آليًّا (MATCHING يبقى يدويًّا بصراحة)
+const AUTO_KEY_TYPES = new Set(['MCQ', 'TRUE_FALSE', 'FILL_BLANK', 'EXTRACT', 'ORDERING']);
+
+function questionHasKey(q) {
+  if (!q || !AUTO_KEY_TYPES.has(q.type)) return false;
+  if (q.type === 'ORDERING') return Array.isArray(q.orderItems) && q.orderItems.length > 0;
+  return q.correctAnswer !== undefined && q.correctAnswer !== null && String(q.correctAnswer).trim() !== '';
+}
+
 export default function OfficialExams({ classes }) {
   const { t } = useI18n();
   const [exams, setExams] = useState([]);
@@ -99,6 +108,21 @@ export default function OfficialExams({ classes }) {
 
   const submit = async (e) => {
     e.preventDefault();
+    setError('');
+    const questions = draft.content.questions || [];
+    const closed = questions.filter((q) => q.type && q.type !== 'OPEN');
+    const criteria = draft.content.criteria || [];
+    const pointsSum = questions.reduce((s, q) => s + Number(q.points || 0), 0);
+
+    // صدق: اختبار فيه أسئلة مقفلة بلا جدول إسناد لا يمكن تصحيحه آليًّا ⇒ نمنع الحفظ صراحةً
+    if (closed.length > 0 && criteria.length === 0) {
+      setError(t('teacherSpace.officialExams.gradingErrNoCriteria'));
+      return;
+    }
+    const content = {
+      ...draft.content,
+      totalPoints: pointsSum || Number(draft.content.totalPoints) || 20
+    };
     try {
       if (editingId) {
         await api.put(`/teacher/exams/${editingId}`, {
@@ -106,7 +130,7 @@ export default function OfficialExams({ classes }) {
           subject: draft.subject,
           classId: draft.classId ? Number(draft.classId) : undefined,
           trimester: Number(draft.trimester),
-          content: draft.content
+          content
         });
         setEditingId(null);
       } else {
@@ -116,7 +140,7 @@ export default function OfficialExams({ classes }) {
           classId: draft.classId ? Number(draft.classId) : undefined,
           trimester: Number(draft.trimester),
           // لا ترويسة رسمية لاختبار ألّفه المدرس (§4) — وزارة التربية لمنشأ official فقط
-          content: { ...draft.content, header: '' }
+          content: { ...content, header: '' }
         });
       }
       setDraft({ title: '', subject: 'math', classId: '', trimester: 1, content: {} });
@@ -295,6 +319,28 @@ export default function OfficialExams({ classes }) {
     const list = draft.content.criteria || [];
     if (list.length === 0) return [{ id: 'مع1' }, { id: 'مع2' }, { id: 'مع3' }];
     return list;
+  };
+
+  // زرّ واحد يبني جدول إسناد لمعيار واحد = مجموع نقاط الأسئلة (بلا اختراع أوزان)
+  const autoCreateCriterion = () => {
+    const pointsSum = (draft.content.questions || []).reduce((s, q) => s + Number(q.points || 0), 0);
+    const target = pointsSum || Number(draft.content.totalPoints) || 20;
+    const round2 = (n) => Math.round(n * 2) / 2;
+    setDraft({
+      ...draft,
+      content: {
+        ...draft.content,
+        totalPoints: target,
+        criteria: [
+          {
+            id: 'مع1',
+            label: t('teacherSpace.officialExams.critAutoLabel'),
+            excellence: false,
+            mastery: { none: 0, below: round2(target * 0.25), min: round2(target * 0.5), max: target }
+          }
+        ]
+      }
+    });
   };
 
   const generateAi = async (e) => {
@@ -822,12 +868,102 @@ export default function OfficialExams({ classes }) {
                     <input type="number" min="1" max="12" value={q.answerLines ?? 4} onChange={(e) => updateQuestion(i, { answerLines: Number(e.target.value) })} />
                   </div>
                 )}
+                {/* مفتاح الإجابة: بدونه لا يُصحَّح السؤال آليًّا ويبقى للتصحيح اليدوي */}
+                {q.type === 'MCQ' && (
+                  <div className="form-group">
+                    <label>{t('teacherSpace.officialExams.qKeyLabel')}</label>
+                    <select
+                      value={q.correctAnswer ?? ''}
+                      onChange={(e) => updateQuestion(i, { correctAnswer: e.target.value, correct: e.target.value })}
+                    >
+                      <option value="">{t('teacherSpace.officialExams.qKeyNone')}</option>
+                      {(q.options || []).map((opt, oi) => (
+                        <option key={oi} value={opt}>{`${oi + 1}) ${opt}`}</option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+                {(q.type === 'TRUE_FALSE') && (
+                  <div className="form-group">
+                    <label>{t('teacherSpace.officialExams.qKeyLabel')}</label>
+                    <select
+                      value={q.correctAnswer ?? ''}
+                      onChange={(e) => updateQuestion(i, { correctAnswer: e.target.value })}
+                    >
+                      <option value="">{t('teacherSpace.officialExams.qKeyNone')}</option>
+                      <option value="true">{t('teacherSpace.officialExams.qKeyTrue')}</option>
+                      <option value="false">{t('teacherSpace.officialExams.qKeyFalse')}</option>
+                    </select>
+                  </div>
+                )}
+                {(q.type === 'FILL_BLANK' || q.type === 'EXTRACT') && (
+                  <div className="form-group">
+                    <label>{t('teacherSpace.officialExams.qKeyLabel')}</label>
+                    <input
+                      value={q.correctAnswer ?? ''}
+                      onChange={(e) => updateQuestion(i, { correctAnswer: e.target.value })}
+                      placeholder={t('teacherSpace.officialExams.qKeyFillPh')}
+                    />
+                  </div>
+                )}
+                {q.type === 'ORDERING' && (
+                  <div className="form-group">
+                    <label>{t('teacherSpace.officialExams.qKeyLabel')}</label>
+                    <textarea
+                      rows="3"
+                      value={(q.orderItems || []).join('\n')}
+                      onChange={(e) => updateQuestion(i, { orderItems: e.target.value.split('\n').map((x) => x.trim()).filter(Boolean) })}
+                      placeholder={t('teacherSpace.officialExams.qKeyOrderPh')}
+                    />
+                  </div>
+                )}
+                {q.type === 'MATCHING' && (
+                  <p className="muted" style={{ margin: '4px 0 0' }}>{t('teacherSpace.officialExams.qKeyMatchingNote')}</p>
+                )}
               </div>
             ))}
             <button type="button" className="btn btn-sm" onClick={addQuestion}>+ {t('teacherSpace.officialExams.addQuestion')}</button>
           </div>
           <div className="form-group">
             <label>{t('teacherSpace.officialExams.critSectionLabel')}</label>
+            {/* لوحة جاهزية التصحيح: مجموع جداول الإسناد = مجموع نقاط الأسئلة (Σ = TARGET) */}
+            {(() => {
+              const questions = draft.content.questions || [];
+              const criteria = draft.content.criteria || [];
+              const closed = questions.filter((q) => q.type && q.type !== 'OPEN');
+              const withKey = closed.filter(questionHasKey).length;
+              const criteriaMax = criteria.reduce((s, c) => s + Number(c.mastery?.max || 0), 0);
+              const pointsSum = questions.reduce((s, q) => s + Number(q.points || 0), 0);
+              const target = Number(draft.content.totalPoints) || 20;
+              const open = questions.length - closed.length;
+              return (
+                <div className="form-info" style={{ marginBottom: 8 }}>
+                  {criteria.length === 0
+                    ? `⚠ ${t('teacherSpace.officialExams.gradingWarnNoCriteria')}`
+                    : `Σ أسئلة = ${pointsSum} / هدف الورقة = ${target} · Σ جداول الإسناد = ${criteriaMax}`}
+                  {criteria.length > 0 && criteriaMax !== pointsSum && ` · ⚠ ${t('teacherSpace.officialExams.gradingWarnSigma')}`}
+                  {closed.length > 0 && (
+                    <span>
+                      {' '}
+                      {withKey === closed.length
+                        ? `✓ ${t('teacherSpace.officialExams.gradingKeysAll', { n: closed.length })}`
+                        : `⚠ ${t('teacherSpace.officialExams.gradingWarnKeys', { a: withKey, b: closed.length })}`}
+                    </span>
+                  )}
+                  {open > 0 && <span> {`⚠ ${t('teacherSpace.officialExams.gradingWarnOpen', { n: open })}`}</span>}
+                  {criteria.length === 0 && closed.length > 0 && (
+                    <button
+                      type="button"
+                      className="btn btn-sm"
+                      style={{ marginInlineStart: 8 }}
+                      onClick={autoCreateCriterion}
+                    >
+                      {t('teacherSpace.officialExams.gradingAutoCriterion')}
+                    </button>
+                  )}
+                </div>
+              );
+            })()}
             {(draft.content.criteria || []).map((c, i) => (
               <div key={c.id || i} className="card-item">
                 <div className="form-row">

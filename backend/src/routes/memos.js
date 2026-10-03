@@ -9,6 +9,7 @@ import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 import {
   memoGenerateSchema,
   memosListQuerySchema,
+  memosOfficialQuerySchema,
   memoIdParamSchema
 } from '../validators/memos.js';
 
@@ -36,12 +37,17 @@ function toApiError(e) {
  *         name: subject
  *         schema: { type: string }
  *         description: 'تصفية بالمادة (رياضيات/إيقاظ)'
+ *       - in: query
+ *         name: level
+ *         schema: { type: string }
+ *         description: 'تصفية بالمستوى — المذكرات الرسمية متوفّرة للسنة الثانية؛ ما عداها تُرجع قائمة فارغة'
  *     responses:
  *       200:
  *         description: المذكرات الرسمية (معرف/موضوع/توقيت)
  */
-router.get('/official', teacherMiddleware, asyncHandler(async (req, res) => {
-  res.json(listOfficialMemos({ subject: req.query.subject, level: 'السنة الثانية أساسي' }));
+router.get('/official', teacherMiddleware, validateQuery(memosOfficialQuerySchema), asyncHandler(async (req, res) => {
+  // كان المستوى مثبّتًا على «السنة الثانية» ⇒ معلّم أي مستوى آخر يرى دروسًا ليست له.
+  res.json(listOfficialMemos({ subject: req.query.subject, level: req.query.level || undefined }));
 }));
 
 /**

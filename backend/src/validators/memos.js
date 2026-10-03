@@ -27,4 +27,9 @@ export const memosListQuerySchema = z.object({
   limit: z.coerce.number().int().min(1).max(200).optional().nullable()
 });
 
+export const memosOfficialQuerySchema = z.object({
+  subject: z.string().trim().max(100, { error: 'المادة طويلة جدا' }).optional().nullable(),
+  level: z.string().trim().max(100, { error: 'المستوى طويل جدا' }).optional().nullable()
+});
+
 export { idParamSchema as memoIdParamSchema };

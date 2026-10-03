@@ -37,9 +37,19 @@ async function ensureClasses(prisma) {
 }
 
 async function ensureStudentCredentials(prisma) {
-  // لكل طالب له حساب وليس لديه كلمة سر مؤقتة: أنشئ كلمة سهلة، اضبط حسابَه، خزّنها، وأخطر وليّه مرة واحدة.
+  // لكل طالب له حساب وليس لديه كلمة سر مؤقتة ولم يدخل بحسابه إطلاقًا:
+  // أنشئ كلمة سهلة، اضبط حسابَه، خزّنها، وأخطر وليّه مرة واحدة.
+  //
+  // حارس أساسي (إصلاح عطل قاتل): التلميذ الذي غيّر كلمة سره بنفسه لا بد أن يحتفظ بها.
+  // دليل الدخول = وجود رمز تجديد واحد على الأقل (يُصدر عند أول دخول).
+  // بدون هذا الحارس كان كل إقلاع خادم (Render free = إقلاع بارد كل ~15 دقيقة)
+  // يعيد كتابة كلمة سر كل تلميذ غيّرها بقيمة عشوائية ⇒ حسابات التلاميذ تُبطَل بلا سبب.
   const students = await prisma.student.findMany({
-    where: { accountUserId: { not: null }, tempPassword: null },
+    where: {
+      accountUserId: { not: null },
+      tempPassword: null,
+      account: { refreshTokens: { none: {} } }
+    },
     include: { account: { select: { id: true, email: true } }, user: { select: { id: true, firstName: true, lastName: true } } }
   });
   let fixed = 0;

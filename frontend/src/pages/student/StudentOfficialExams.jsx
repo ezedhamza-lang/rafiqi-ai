@@ -70,6 +70,7 @@ export default function StudentOfficialExams({ onChanged }) {
   };
 
   if (result) {
+    const pendingManual = Boolean(result.result?.needsManualGrading);
     const total = result.result?.total ?? result.score;
     const totalMax = result.result?.totalMax ?? 20;
     const percent = totalMax ? Math.round((total / totalMax) * 100) : 0;
@@ -78,11 +79,24 @@ export default function StudentOfficialExams({ onChanged }) {
         <div className="panel-head">
           <h3>{t('studentSpace.officialExams.resultTitle')}</h3>
         </div>
-        <div className={`result-big ${percent >= 70 ? 'good' : percent >= 45 ? 'warn' : 'bad'}`}>
-          {total} / {totalMax}
-        </div>
-        <p className="muted">{t('studentSpace.officialExams.percentLabel', { n: percent })}</p>
-        {result.result?.needsManualGrading && (
+        {/* صدق: ما زال التصحيح اليدوي جاريًا ⇒ لا نعرض صفرًا كأنه نتيجة */}
+        {pendingManual ? (
+          <div className="form-info">
+            {t('studentSpace.officialExams.pendingManualTitle')}
+            {result.result?.reason === 'MISSING_ANSWER_KEYS' &&
+              ` ${t('studentSpace.officialExams.pendingManualMissingKeys')}`}
+            {result.result?.reason === 'NO_CRITERIA' &&
+              ` ${t('studentSpace.officialExams.pendingManualNoCriteria')}`}
+          </div>
+        ) : (
+          <>
+            <div className={`result-big ${percent >= 70 ? 'good' : percent >= 45 ? 'warn' : 'bad'}`}>
+              {total} / {totalMax}
+            </div>
+            <p className="muted">{t('studentSpace.officialExams.percentLabel', { n: percent })}</p>
+          </>
+        )}
+        {!pendingManual && result.result?.needsManualGrading && (
           <div className="form-error">
             {t('studentSpace.officialExams.manualGradingNotice')}
           </div>
