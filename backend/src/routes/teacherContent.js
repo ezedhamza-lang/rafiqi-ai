@@ -817,7 +817,7 @@ router.post('/exams/generate-ai', teacherMiddleware, asyncHandler(async (req, re
   // الاصطناعي فقط؛ الرمز الداخلي (مع1..5) يبقى للتنقيط ولا يُعرض رسميًّا بدله.
   const criteria = criteriaFor(subject, blueprint.targetPoints).map((c) => ({
     ...c,
-    ...(criteriaDisplay(c.id) || {})
+    ...(criteriaDisplay(c.id, subject) || {})
   }));
   const questions = validation.questions.map((q, i) => ({
     ...q,
@@ -842,6 +842,10 @@ router.post('/exams/generate-ai', teacherMiddleware, asyncHandler(async (req, re
     blueprint,
     audit: validation.audit,
     report: validation.report,
+    // التقرير التحليلي §D8/§C4: معيار ← مؤشر ← صيغ ← نقاط ← عتبات ← أخطاء متوقعة ← تشخيص
+    analyticalReport: Array.isArray(validation.analyticalReport) && validation.analyticalReport.length
+      ? validation.analyticalReport
+      : null,
     issues: validation.issues,
     criteria,
     // السند هو الأصل (§1-3,§105): نخزّن السندات كاملة + نسخة passages للتوافق

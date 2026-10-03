@@ -18,7 +18,8 @@ export const GRADE_PROFILES = {
     // طول نصّ القراءة (§6 MASTER): y3+ ≥ 10 أسطر قاعدة تصميمية معلنة؛ y1-2 تقدير
     // تصميمي أدنى (نصّ السنة الأولى قصير بالفعل). يُطبَّق فقط على مواد textStimulus.
     minStimulusLines: 4,
-    readingItems: [] // السنة الأولى: الفهم المباشر والصور — بلا قرينة/رأي إلزامية
+    readingItems: [], // السنة الأولى: الفهم المباشر والصور — بلا قرينة/رأي إلزامية
+    scienceItems: [] // y1: allowedTypes بلا OPEN — تعليل/إصلاح الخطأ يبدأان من y2 (§C7)
   },
   year2: {
     id: 'year2',
@@ -31,7 +32,8 @@ export const GRADE_PROFILES = {
     scaffolding: 'high',
     allowedTypes: ['MCQ', 'TRUE_FALSE', 'MATCHING', 'FILL_BLANK', 'EXTRACT', 'ORDER', 'OPEN'],
     minStimulusLines: 6,
-    readingItems: ['evidence'] // السنة الثانية: استخراج قرينة صريحة — التعليل والرأي في y3+
+    readingItems: ['evidence'], // السنة الثانية: استخراج قرينة صريحة — التعليل والرأي في y3+
+    scienceItems: ['justification', 'errorFix'] // §C7: تعليل + اكتشف/أصلح الخطأ (y2 فما فوق)
   },
   year3: {
     id: 'year3',
@@ -44,7 +46,10 @@ export const GRADE_PROFILES = {
     scaffolding: 'medium',
     allowedTypes: ['MCQ', 'TRUE_FALSE', 'MATCHING', 'FILL_BLANK', 'EXTRACT', 'ORDER', 'OPEN'],
     minStimulusLines: 10, // §6 MASTER: السنة الثالثة انتقال — نصّ ≥ 10 أسطر مشكّل
-    readingItems: ['evidence', 'justification', 'opinion'] // §8-§10: قرينة + تعليل + رأي
+    minStimulusWords: 120, // §C9: نصّ القراءة 120-200 كلمة (متوسط المكتبة 150)
+    maxStimulusWords: 200,
+    readingItems: ['evidence', 'justification', 'opinion'], // §8-§10: قرينة + تعليل + رأي
+    scienceItems: ['justification', 'errorFix']
   },
   year4: {
     id: 'year4',
@@ -57,7 +62,10 @@ export const GRADE_PROFILES = {
     scaffolding: 'medium',
     allowedTypes: ['MCQ', 'TRUE_FALSE', 'MATCHING', 'FILL_BLANK', 'EXTRACT', 'ORDER', 'OPEN'],
     minStimulusLines: 10,
-    readingItems: ['evidence', 'justification', 'opinion']
+    minStimulusWords: 120,
+    maxStimulusWords: 200,
+    readingItems: ['evidence', 'justification', 'opinion'],
+    scienceItems: ['justification', 'errorFix']
   },
   year5: {
     id: 'year5',
@@ -70,7 +78,10 @@ export const GRADE_PROFILES = {
     scaffolding: 'medium',
     allowedTypes: ['MCQ', 'TRUE_FALSE', 'MATCHING', 'FILL_BLANK', 'EXTRACT', 'ORDER', 'OPEN'],
     minStimulusLines: 10,
-    readingItems: ['evidence', 'justification', 'opinion']
+    minStimulusWords: 120,
+    maxStimulusWords: 200,
+    readingItems: ['evidence', 'justification', 'opinion'],
+    scienceItems: ['justification', 'errorFix']
   },
   year6: {
     id: 'year6',
@@ -83,7 +94,10 @@ export const GRADE_PROFILES = {
     scaffolding: 'independent',
     allowedTypes: ['MCQ', 'TRUE_FALSE', 'MATCHING', 'FILL_BLANK', 'EXTRACT', 'ORDER', 'OPEN'],
     minStimulusLines: 10,
-    readingItems: ['evidence', 'justification', 'opinion']
+    minStimulusWords: 120,
+    maxStimulusWords: 200,
+    readingItems: ['evidence', 'justification', 'opinion'],
+    scienceItems: ['justification', 'errorFix']
   }
 };
 

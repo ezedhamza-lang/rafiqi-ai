@@ -71,6 +71,19 @@ export function buildBlueprint(input = {}) {
     scopeLessons: lessons.map((l) => ({ id: l.id, title: l.title, unitId: l.unitId, period: l.period, competencies: l.competencies.slice(0, 4) })),
     competencies: Array.isArray(input.competencies) && input.competencies.length ? input.competencies : [...new Set(lessons.flatMap((l) => l.competencies))],
     domains: Array.isArray(input.domains) && input.domains.length ? input.domains : [...new Set(lessons.map((l) => l.domain).filter(Boolean))],
+    // قسم الحساب الذهني المستقل (§A2,§D6,§C13) — اختياري ويُطلب صراحةً:
+    // افتراضاته 4 عمليات في س1 + 8 في س2-3، ≤ 10 دقائق، تنقيطه 0→4 (§D6 قرار 6).
+    ...(input.mentalMath
+      ? {
+          mentalMath: {
+            title: 'الحساب الذهني',
+            points: 4,
+            minutes: 10,
+            ops: { s1: 4, s2: 8, s3: 8 },
+            ...(typeof input.mentalMath === 'object' ? input.mentalMath : {})
+          }
+        }
+      : {}),
     warnings
   };
   return blueprint;

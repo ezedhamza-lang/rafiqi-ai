@@ -8,6 +8,9 @@
 //
 // لا يُخلط بـ criteria-grids.js (شبكة النقاط والتحجيم — id مع1..5 هي الطبقة
 // البرمجية للتنقيط): هذا الملف طبقة **المعنى والإسناد** — أي سؤال يقيس أي معيار.
+// (يستورد criteria-grids لتمييز شبكة الرياضيات عند نسبة الرموز الرسمية — لا حلقة.)
+
+import { criteriaGrid, DEFAULT_CRITERIA } from './criteria-grids.js';
 
 /** شبكة الرياضيات الرسمية: رمز ظاهر ← معيار ← مصدر ← رمز داخلي. */
 export const MATH_CRITERIA = {
@@ -20,7 +23,7 @@ export const MATH_CRITERIA = {
 };
 
 /** رمز الشبكة الداخلي (مع1..5 في criteria-grids) ← المفتاح الرسمي. */
-const GRID_ID_TO_KEY = {
+export const GRID_ID_TO_KEY = {
   مع1: 'MAT_INTERPRET',
   مع2: 'MAT_CALC',
   مع3: 'MAT_MEASURE',
@@ -31,9 +34,16 @@ const GRID_ID_TO_KEY = {
 /**
  * بيانات العرض المزدوج لرمز شبكة (مع1..) — للمعلّم في الواجهة (§B2):
  * الرمز الرسمي الظاهر + المصدر، والرمز الداخلي يبقى للتنقيط.
- * @returns {{officialCode:string, source:string}|null} null لغير الرياضيات (شبكات أخرى بلا ترميز رسمي موثّق)
+ * الرموز M1..D **وثائق رسمية S1 لشبكة الرياضيات فقط** — إن حُدّد subject وشبكته
+ * ليست شبكة الرياضيات تُرجع null (لا نُنسب رمز رسمي لغير حامله §القاعدة الذهبية).
+ * @param {string} gridId رمز الشبكة مع1..
+ * @param {string} [subject] راسم المادة — يُمرَّر فيمنع نسبة الرمز لغير الرياضيات
+ * @returns {{officialCode:string, source:string}|null}
  */
-export function criteriaDisplay(gridId) {
+export function criteriaDisplay(gridId, subject) {
+  if (subject !== undefined && subject !== null && String(subject).trim() !== '') {
+    if (criteriaGrid(subject) !== DEFAULT_CRITERIA.math) return null;
+  }
   const key = GRID_ID_TO_KEY[String(gridId || '').trim()];
   if (!key) return null;
   const c = MATH_CRITERIA[key];

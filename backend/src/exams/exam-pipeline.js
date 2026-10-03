@@ -16,8 +16,10 @@ import { matchesScopeText } from './curriculum-index.js';
 import { subjectLabel } from './subject-labels.js';
 import { forbidsArithmetic, getSubjectProfile, getGradeProfile } from './profiles/index.js';
 import { runSubjectValidators, arithmeticSignal } from './subject-validators.js';
-import { checkStimulusText, checkReadingItems, checkFormatVariety, checkAnswerChain, checkStimulusMeta } from './structure.js';
-import { MATH_CRITERIA, mapMathCriterion, criteriaTable, criteriaDistribution } from './criterion-map.js';
+import { checkStimulusText, checkReadingItems, checkFormatVariety, checkAnswerChain, checkStimulusMeta, checkScienceItems, checkFormatLabels, checkMentalShape } from './structure.js';
+import { MATH_CRITERIA, criteriaTable, criteriaDistribution } from './criterion-map.js';
+import { criteriaGrid } from './criteria-grids.js';
+import { assignCriterion, buildSpecMatrix, analyticalReport } from './spec-matrix.js';
 import { repairExam } from './repair.js';
 import { normalizeArabic } from '../services/curriculumService.js';
 
@@ -235,15 +237,20 @@ export function validateExam(exam = {}, opts = {}) {
 
   // 2e′) اشتقاق حتمي للبنية (§D12,§B2) — قبل محقّق المادة كي يراها محقّق الرياضيات:
   //   - layout: «عمودي» ← إطار مستقل للعملية العمودية، فعل رسم ← مساحة رسم.
-  //   - criterion: إسناد معيار رسمي موسَّم (M1–M4/D/HC) لكل سؤال رياضي (§B2).
+  //   - criterion: إجباري لكل سؤال **بكل المواد** (قرار المستخدم §D8): الرموز
+  //     الرسمية M1–M4/D/HC للرياضيات، وشبكة التنقيط (مع1..) لبقية المواد.
   //   يُشغَّل مع requireStructure فقط حتى لا تتغيّر وحدات الاختبار القائمة.
   const DRAW_VERB = /ارسم|أرسم|أكمل (?:المسار|الرسم|الشكل)/;
+  let specMatrix = null;
+  let analyticalLines = [];
   if (opts.requireStructure) {
+    const grid = criteriaGrid(bp.subject);
     questions.forEach((q) => {
       const p = String(q?.prompt || '');
       if (!q.layout && /عمودي/.test(p)) q.layout = 'vertical';
       if (!q.layout && DRAW_VERB.test(p)) q.layout = 'drawing';
-      if (bp.subject === 'math') q.criterion = MATH_CRITERIA[mapMathCriterion(q)].code;
+      // القيمة الصريحة إن كانت مشروعية، وإلا الاشتقاق الحتمي من نصّ المهمّة
+      q.criterion = assignCriterion(q, { subject: bp.subject, grid });
     });
   }
 
@@ -270,7 +277,20 @@ export function validateExam(exam = {}, opts = {}) {
     const variety = checkFormatVariety(questions);
     const chainIssues = checkAnswerChain(questions, stimuli);
     const metaIssues = checkStimulusMeta(stimuli);
-    const structureIssues = [...textIssues, ...itemIssues, ...variety.issues, ...chainIssues, ...metaIssues];
+    // §C7 الإيقاظ: تعليل + اكتشف/أصلح الخطأ بصيغة صحيحة (يُشترط من y2)
+    const scienceIssues = checkScienceItems({ questions, gradeProfile: gp, subjectProfile: sp });
+    // §C1,§C11: الصيغ من نصّ التعليمة + جدول التكرار + حدود العربية
+    const labelStats = checkFormatLabels(questions, bp.subject);
+    // §A2,§C13,§D6: قسم الحساب الذهني إن وُجد في المخطّط أو الأسئلة
+    const mental = checkMentalShape({
+      mentalMath: exam.mentalMath || bp.mentalMath || null,
+      questions,
+      targetPoints: Number(bp.targetPoints) || 20
+    });
+    const structureIssues = [
+      ...textIssues, ...itemIssues, ...variety.issues, ...chainIssues, ...metaIssues,
+      ...scienceIssues, ...labelStats.issues, ...mental.issues
+    ];
     structureIssues.forEach((i) => issues.push(issue(i.severity, i.code, i.message, i.qIndex)));
     checks.push({
       id: 'text',
@@ -287,12 +307,38 @@ export function validateExam(exam = {}, opts = {}) {
         detail: readErr.length ? readErr.map((i) => i.message).join('؛ ') : 'الفرص الثلاث متوفرة'
       });
     }
+    if (sp?.id === 'science' && (Array.isArray(gp.scienceItems) ? gp.scienceItems.length : 0)) {
+      const sciErr = scienceIssues.filter((i) => i.severity === 'error');
+      checks.push({
+        id: 'scienceItems',
+        label: 'الإيقاظ: تعليل + اكتشف/أصلح الخطأ بصيغة صحيحة (§C7)',
+        status: sciErr.length ? 'fail' : scienceIssues.length ? 'warn' : 'pass',
+        detail: sciErr.length ? sciErr.map((i) => i.message).join('؛ ') : 'فرصتا التعليل والإصلاح متوفرتان'
+      });
+    }
     checks.push({
       id: 'formats',
       label: 'تنويع صيغ الأسئلة (لا هيمنة قالب §36)',
       status: variety.issues.some((i) => i.severity === 'error') ? 'fail' : variety.issues.length ? 'warn' : 'pass',
       detail: `${variety.distinct} صيغ في ${variety.total}: ${variety.table}`
     });
+    checks.push({
+      id: 'formatLabels',
+      label: 'كاشف الصيغ من نصّ التعليمة + جدول التكرار (§C1,§C11)',
+      status: labelStats.issues.some((i) => i.severity === 'error') ? 'fail' : labelStats.issues.length ? 'warn' : 'pass',
+      detail: labelStats.issues.length
+        ? labelStats.issues.map((i) => i.message).join('؛ ')
+        : `${labelStats.distinct} صيغ: ${labelStats.table}`
+    });
+    if (mental.ran) {
+      const menErr = mental.issues.filter((i) => i.severity === 'error');
+      checks.push({
+        id: 'mental',
+        label: 'شكل قسم الحساب الذهني المستقل (§A2,§C13,§D6)',
+        status: menErr.length ? 'fail' : mental.issues.length ? 'warn' : 'pass',
+        detail: menErr.length ? menErr.map((i) => i.message).join('؛ ') : 'عنوانه وزمنه وتنقيطه مطابقون'
+      });
+    }
     checks.push({
       id: 'chain',
       label: 'لا يكشف سؤال لاحق إجابة سؤال سابق (§D11)',
@@ -359,6 +405,27 @@ export function validateExam(exam = {}, opts = {}) {
     detail: totalCheck.ok ? '' : `الفعلي: ${totalCheck.total}`
   });
 
+  // 4b) مصفوفة المواصفات + التقرير التحليلي (§D8,§A4,§C4) — تُبنى بعد تصحيح
+  //     النقاط حتى تحمل الأرقام النهائية: معيار ← مؤشر ← صيغة ← نقاط ← عتبات ←
+  //     أخطاء متوقعة ← تشخيص. CRITERION_MISSING إن تعذّر إسناد أي سؤال.
+  if (opts.requireStructure) {
+    const grid = criteriaGrid(bp.subject);
+    specMatrix = buildSpecMatrix({ questions, grid, subject: bp.subject, targetPoints: target });
+    analyticalLines = analyticalReport(specMatrix);
+    const missingCrit = questions.filter((q) => !q.criterion);
+    missingCrit.forEach((q) => {
+      issues.push(issue('error', 'CRITERION_MISSING', `سؤال بلا معيار من مخطّط المعايير القابل للتهيئة («${String(q.prompt || '').slice(0, 40)}…») — حقل criterion إجباري لكل سؤال (§D8)`));
+    });
+    checks.push({
+      id: 'specMatrix',
+      label: 'مصفوفة المواصفات: معيار مُسند لكل سؤال + تقرير تحليلي (§D8)',
+      status: missingCrit.length ? 'fail' : 'pass',
+      detail: missingCrit.length
+        ? `${missingCrit.length} سؤال بلا معيار (CRITERION_MISSING)`
+        : `${specMatrix.rows.length} معيار · مقاس ${specMatrix.covered}/${specMatrix.standards} · التقرير التحليلي مرفق`
+    });
+  }
+
   // 5) التغطية والحمل (§9,§37,§38,§118)
   const coverage = analyzeCoverage(questions, { ...bp, durationMinutes: exam.durationMinutes || bp.durationMinutes });
   issues.push(...coverage.warnings);
@@ -395,7 +462,13 @@ export function validateExam(exam = {}, opts = {}) {
   const approved = !hasError;
   const status = hasError ? 'rejected' : 'needs_review';
   const report = auditReportLines(buildAudit(checks));
-  return { approved, status, questions, issues, audit: buildAudit(checks), coverage, report, repairNotes, stimuli };
+  // سطور التقرير التحليلي (معيار←مؤشر←نقاط←عتبات←تشخيص) تُرفق بتقرير المعلّم
+  if (analyticalLines.length) report.push(...analyticalLines);
+  return {
+    approved, status, questions, issues, audit: buildAudit(checks), coverage, report, repairNotes, stimuli,
+    specMatrix,
+    analyticalReport: analyticalLines
+  };
 }
 
 /** عقد النشر النهائي (§125) — يُستدعى قبل `published:true`. */
