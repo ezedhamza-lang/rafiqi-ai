@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import { levelLabel } from '../../utils/labels.js';
 
 export default function ChildCredentials() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [flipped, setFlipped] = useState({});
@@ -49,7 +50,7 @@ export default function ChildCredentials() {
                 <span className="cred-ribbon" />
                 <span className="material-icons cred-icon">child_care</span>
                 <div className="cred-name">{c.name}</div>
-                <div className="cred-level">{c.level}</div>
+                <div className="cred-level">{levelLabel(c.level, lang)}</div>
                 <div className="cred-tap">{flipped[c.id] ? '⇲' : 'اضغط لعرض البيانات'}</div>
               </div>
               <div className="cred-face cred-back">

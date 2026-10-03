@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
-import { subjectLabel } from '../../utils/labels';
+import { subjectLabel, levelLabel } from '../../utils/labels';
 
 const DAYS = [
   { n: 1, key: 'mon' }, { n: 2, key: 'tue' }, { n: 3, key: 'wed' },
@@ -10,7 +10,7 @@ const DAYS = [
 const DAY_LABELS_FALLBACK = ['', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
 
 export default function Schedules() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [data, setData] = useState(null);
   const [classId, setClassId] = useState('');
   const [grid, setGrid] = useState({});
@@ -100,7 +100,7 @@ export default function Schedules() {
           <select value={classId} onChange={(e) => setClassId(e.target.value)}>
             <option value="">{t('teacherSpace.schedules.pickClass')}</option>
             {data.classes.map(({ class: c }) => (
-              <option key={c.id} value={c.id}>{c.name} — {c.level}</option>
+              <option key={c.id} value={c.id}>{c.name} — {levelLabel(c.level, lang)}</option>
             ))}
           </select>
         </div>

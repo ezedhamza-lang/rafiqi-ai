@@ -3,6 +3,7 @@
 // الرموز غير الموجودة في i18n (arabic/math/french/islamic/handwriting…) تمرّ على
 // utils/subjectLabels.js — لا نُرجع «arabic» خامًّا أبدًا للواجهة (§78).
 import { subjectLabel as utilSubjectLabel } from './subjectLabels.js';
+import { levelLabel as utilLevelLabel } from './levels.js';
 
 const SUBJECT_KEYS = {
   MATH: 'subjects.MATH',
@@ -99,6 +100,11 @@ export function statusLabel(code, lang = 'ar') {
 /** تسمية نوع العمل (امتحان رسمي/واجب/اختبار سريع…). */
 export function kindLabel(code, lang = 'ar') {
   return pickPair(KIND, code, lang);
+}
+
+/** تسمية المستوى: «السنة الثانية ابتدائي» / year2 / «السنة الثانية أساسي» ⇒ الرسمي. */
+export function levelLabel(level, lang = 'ar') {
+  return utilLevelLabel(level, lang);
 }
 
 export const STATUS_CODES = Object.keys(STATUS);

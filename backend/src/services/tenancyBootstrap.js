@@ -1,20 +1,11 @@
 import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import { notify } from './notify.js';
+import { OFFICIAL_LEVELS } from '../curriculum/levels.js';
 
-// العناوين الرسمية للأقسام من السنة الأولى ابتدائي إلى الرابعة ثانوي
-export const OFFICIAL_LEVELS = [
-  'السنة الأولى ابتدائي',
-  'السنة الثانية ابتدائي',
-  'السنة الثالثة ابتدائي',
-  'السنة الرابعة ابتدائي',
-  'السنة الخامسة ابتدائي',
-  'السنة السادسة ابتدائي',
-  'السنة الأولى ثانوي',
-  'السنة الثانية ثانوي',
-  'السنة الثالثة ثانوي',
-  'السنة الرابعة ثانوي'
-];
+// العناوين الرسمية للأقسام تأتي من السجلّ الواحد curriculum/levels.js
+// (كان هنا قائمة مستقلة من 10 مستويات ⇒ غير متسقة مع public/levels الذي فيه 13).
+export { OFFICIAL_LEVELS };
 
 function easyPassword() {
   // رقم سري من 6 أرقام يسهل على الأسرة كتابته

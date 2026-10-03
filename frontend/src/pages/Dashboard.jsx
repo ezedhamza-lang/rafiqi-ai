@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { api } from '../api/client.js';
 import { REQUEST_STATUS_LABEL_KEYS, statusBadgeClass } from '../roles.js';
 import { useI18n } from '../i18n/index.jsx';
+import { levelLabel } from '../utils/labels.js';
 import { Button, Card, Badge, EmptyState, PointsCard, Spinner } from '../components/ui/index.js';
 
 export default function Dashboard() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [students, setStudents] = useState([]);
   const [requests, setRequests] = useState([]);
   const [helpRequests, setHelpRequests] = useState([]);
@@ -66,7 +67,7 @@ export default function Dashboard() {
                   <tr key={s.id}>
                     <td>{s.firstName}</td>
                     <td>{s.lastName}</td>
-                    <td>{s.level}</td>
+                    <td>{levelLabel(s.level, lang)}</td>
                     <td>{s.schoolYear}</td>
                   </tr>
                 ))}
@@ -103,7 +104,7 @@ export default function Dashboard() {
                   {requests.slice(0, 5).map((r) => (
                     <tr key={r.id}>
                       <td>{r.firstName} {r.lastName}</td>
-                      <td>{r.level}</td>
+                      <td>{levelLabel(r.level, lang)}</td>
                       <td>{r.schoolYear}</td>
                       <td>
                         <Badge variant={statusBadgeClass(r.status) === 'rejected' ? 'danger' : statusBadgeClass(r.status) === 'approved' ? 'success' : statusBadgeClass(r.status) === 'warn' ? 'warning' : 'info'}>

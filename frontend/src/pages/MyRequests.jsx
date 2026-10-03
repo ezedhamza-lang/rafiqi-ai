@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../api/client.js';
 import { useI18n } from '../i18n/index.jsx';
 import { REQUEST_STATUS_LABEL_KEYS, helpStatusLabel, statusBadgeClass } from '../roles.js';
+import { levelLabel } from '../utils/labels.js';
 
 export default function MyRequests() {
   const { lang, t } = useI18n();
@@ -62,7 +63,7 @@ export default function MyRequests() {
                     {subscriptionRequests.map((r) => (
                       <tr key={r.id}>
                         <td>{r.firstName} {r.lastName}</td>
-                        <td>{r.level}</td>
+                        <td>{levelLabel(r.level, lang)}</td>
                         <td>{r.schoolYear}</td>
                         <td>
                           <span className={`badge badge-${statusBadgeClass(r.status)}`}>

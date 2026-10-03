@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import { levelLabel } from '../../utils/labels.js';
 
 const LEVEL_SUGGESTIONS = [
   'السنة الأولى أساسي',
@@ -15,7 +16,7 @@ const LEVEL_SUGGESTIONS = [
 ];
 
 export default function DirectorClasses() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [stats, setStats] = useState(null);
   const [teachers, setTeachers] = useState([]);
   const [form, setForm] = useState({ name: '', level: '', teacherId: '' });
@@ -125,7 +126,7 @@ export default function DirectorClasses() {
             {stats.perClass.map((c) => (
               <tr key={c.id}>
                 <td>{c.name}</td>
-                <td>{c.level}</td>
+                <td>{levelLabel(c.level, lang)}</td>
                 <td>{c.students}</td>
                 <td>{c.attempts}</td>
                 <td>{c.avgPercent}%</td>

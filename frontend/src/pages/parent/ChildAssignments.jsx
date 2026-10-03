@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 import { formatDate as fmtDate } from '../../utils/formatUtils.js';
-import { subjectLabel } from '../../utils/labels.js';
+import { subjectLabel, levelLabel } from '../../utils/labels.js';
 
 
 export default function ChildAssignments() {
@@ -34,7 +34,7 @@ export default function ChildAssignments() {
       {children.map(({ student, assignments }) => (
         <div key={student.id} className="child-card" style={{ marginBottom: 20 }}>
           <h4>{student.firstName} {student.lastName}</h4>
-          <p className="sub">{student.level} — {student.class?.name || ''}</p>
+          <p className="sub">{levelLabel(student.level, lang)} — {student.class?.name || ''}</p>
 
           {assignments.length === 0 ? (
             <p className="muted">{t('childAssignments.noAssignments')}</p>

@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { api } from '../api/client.js';
 import { REQUEST_STATUS_LABEL_KEYS, statusBadgeClass } from '../roles.js';
 import { useI18n } from '../i18n/index.jsx';
+import { levelLabel } from '../utils/labels.js';
 
 const EMPTY_FORM = {
   firstName: '',
@@ -221,7 +222,7 @@ export default function Registration() {
                   {requests.map((r) => (
                     <tr key={r.id}>
                       <td>{r.firstName} {r.lastName}</td>
-                      <td>{r.level}</td>
+                      <td>{levelLabel(r.level, lang)}</td>
                       <td>{r.schoolYear}</td>
                       <td>
                         <span className={`badge badge-${statusBadgeClass(r.status)}`}>

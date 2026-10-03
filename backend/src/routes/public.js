@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import prisma from '../db.js';
 import { asyncHandler } from '../middleware/errorHandler.js';
+import { OFFICIAL_LEVELS } from '../curriculum/levels.js';
 import {
   validateLang,
   localizeRecords,
@@ -181,21 +182,8 @@ router.get('/story-map', asyncHandler(async (req, res) => {
  *         description: قائمة المستويات
  */
 router.get('/levels', asyncHandler(async (_req, res) => {
-  res.json([
-    'السنة الأولى ابتدائي',
-    'السنة الثانية ابتدائي',
-    'السنة الثالثة ابتدائي',
-    'السنة الرابعة ابتدائي',
-    'السنة الخامسة ابتدائي',
-    'السنة السادسة ابتدائي',
-    'السنة الأولى إعدادي',
-    'السنة الثانية إعدادي',
-    'السنة الثالثة إعدادي',
-    'السنة الأولى ثانوي',
-    'السنة الثانية ثانوي',
-    'السنة الثالثة ثانوي',
-    'السنة الرابعة ثانوي'
-  ]);
+  // السجلّ الواحد (13 مستوى: 6 ابتدائي + 3 إعدادي + 4 ثانوي) — لا قائمة مكرّرة هنا
+  res.json(OFFICIAL_LEVELS);
 }));
 
 /**

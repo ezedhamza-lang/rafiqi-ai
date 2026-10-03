@@ -12,9 +12,8 @@ const SRC = path.resolve(here, '../src');
 const DIRS = [path.join(SRC, 'pages'), path.join(SRC, 'components')];
 
 // حقول تُخزَّن كأكواد ⇒ يجب أن تمرّ عبر utils/labels قبل العرض.
-// ملاحظة: level وplan وrole لا تُدرج هنا — الخادم يرسلها نصًّا عربيًا
-// («السنة الثانية ابتدائي»، «اشتراك تلميذ»)؛ أي تغيير مسارها يبقى موضعًا للمرحلة B.
-const WATCHED = ['subject', 'status', 'kind'];
+// level أُضيف في المرحلة B (levels.js)؛ plan/role يبقيان نصًّا عربيًا/اختيارًا.
+const WATCHED = ['subject', 'status', 'kind', 'level'];
 
 // استثناءات موثّقة: [المسار الجزئي, السبب]
 const ALLOWED = [
@@ -39,7 +38,15 @@ const ALLOWED = [
   ['pages/teacher/Memos.jsx', 'spec.competencies.subject = نصّ كفاية بيداغوجي عربي من البروفايل (لا رمز مادة)'],
   ['pages/superadmin/Schools.jsx', 't.status داخل <th> هو عنوان مترجم من كائن الترجمات لا حالة'],
   ['pages/student/StudentCertificates.jsx', 'الخادم يرسل subject نصًّا عربيًا (backend studentRewards SUBJECT_LABELS)'],
-  ['pages/student/StudentWeeklyChallenge.jsx', 'بيانات محلية ثابتة بمواد عربية («الرياضيات»…)']
+  ['pages/student/StudentWeeklyChallenge.jsx', 'بيانات محلية ثابتة بمواد عربية («الرياضيات»…)'],
+  // مستويات رقمية (مستوى اللاعب/الخبرة) لا مستويات دراسية
+  ['pages/parent/ParentDashboard.jsx', 'مستوى اللاعب رقمي'],
+  ['pages/student/StudentLeaderboard.jsx', 'مستوى اللاعب رقمي'],
+  ['pages/student/StudentProfile.jsx', 'مستوى اللاعب رقمي'],
+  ['pages/student/StudentRewards.jsx', 'مستوى اللاعب رقمي'],
+  ['pages/student/StudentTwin.jsx', 'مستوى اللاعب رقمي'],
+  ['pages/parent/ChildProgress.jsx', 'مستوى اللاعب رقمي (progress.level)'],
+  ['pages/student/StudentAdaptive.jsx', 'مستوى صعوبة النجوم رقمي']
 ];
 
 function walk(dir, out = []) {

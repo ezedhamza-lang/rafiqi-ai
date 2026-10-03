@@ -3,6 +3,7 @@ import { api } from '../../api/client.js';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useI18n } from '../../i18n/index.jsx';
 import { REQUEST_STATUS_LABEL_KEYS, statusBadgeClass, canApproveRequests } from '../../roles.js';
+import { levelLabel } from '../../utils/labels.js';
 
 const FILTERS = [
   { key: 'PENDING_APPROVAL', labelKey: 'directorRequests.filters.PENDING_APPROVAL' },
@@ -122,7 +123,7 @@ export default function DirectorRequests() {
                   <td>{r.parent.firstName} {r.parent.lastName}</td>
                   <td>{r.firstName} {r.lastName}</td>
                   <td>{new Date(r.birthDate).toLocaleDateString(lang === 'ar' ? 'ar-TN' : 'en-GB')}</td>
-                  <td>{r.level}</td>
+                  <td>{levelLabel(r.level, lang)}</td>
                   <td>{r.schoolYear}</td>
                   <td>
                     <span className={`badge badge-${statusBadgeClass(r.status)}`}>

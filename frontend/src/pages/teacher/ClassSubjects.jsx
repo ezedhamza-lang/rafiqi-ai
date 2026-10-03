@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import { levelLabel } from '../../utils/labels.js';
 
 export default function ClassSubjects({ classes }) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [data, setData] = useState(null);
   const [error, setError] = useState('');
   const [draft, setDraft] = useState({ classId: '', subject: 'MATH', coefficient: '' });
@@ -81,7 +82,7 @@ export default function ClassSubjects({ classes }) {
             <select value={draft.classId} onChange={(e) => setDraft({ ...draft, classId: e.target.value })}>
               <option value="">{t('teacherSpace.classSubjects.selectClass')}</option>
               {classes.map((c) => (
-                <option key={c.id} value={c.id}>{c.name} ({c.level})</option>
+                <option key={c.id} value={c.id}>{c.name} ({levelLabel(c.level, lang)})</option>
               ))}
             </select>
           </div>
@@ -109,7 +110,7 @@ export default function ClassSubjects({ classes }) {
       ) : (
         Object.entries(subjectsByClass).map(([classId, group]) => (
           <div key={classId} className="card-item" style={{ marginTop: 16 }}>
-            <h4>{group.className} <span className="muted">({group.level})</span></h4>
+            <h4>{group.className} <span className="muted">({levelLabel(group.level, lang)})</span></h4>
             {group.items.length === 0 ? (
               <p className="muted">{t('teacherSpace.classSubjects.noSubjects')}</p>
             ) : (

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
-import { subjectLabel, SUBJECT_CODES } from '../../utils/labels';
+import { subjectLabel, levelLabel, SUBJECT_CODES } from '../../utils/labels';
 import ResourcePaper from '../../components/ResourcePaper.jsx';
 
 const RESOURCE_KIND_CODES = ['WORKSHEET', 'HOMEWORK', 'FLASHCARDS', 'PRESENTATION', 'LESSON_PLAN'];
@@ -14,7 +14,7 @@ const LEVELS = [
   'السنة السادسة أساسي'
 ];
 export default function Library() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [resources, setResources] = useState([]);
   const [filters, setFilters] = useState({ subject: '', level: '', kind: '' });
   const [query, setQuery] = useState('');
@@ -122,7 +122,7 @@ export default function Library() {
                   <tr key={r.id}>
                     <td>{r.title}</td>
                     <td>{subjectLabel(t, r.subject)}</td>
-                    <td>{r.level}</td>
+                    <td>{levelLabel(r.level, lang)}</td>
                     <td>{t(`teacherSpace.common.resourceKinds.${r.kind}`) || r.kind}</td>
                     <td>{r.teacher ? `${r.teacher.firstName} ${r.teacher.lastName}` : '—'}</td>
                     <td className="actions">

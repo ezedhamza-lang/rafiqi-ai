@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { api } from '../api/client.js';
 import { ACCOUNT_STATUS_LABEL_KEYS, statusBadgeClass } from '../roles.js';
+import { levelLabel } from '../utils/labels.js';
 import { useI18n } from '../i18n/index.jsx';
 
 export default function Students() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -70,7 +71,7 @@ export default function Students() {
                 <tr key={s.id}>
                   <td>{s.firstName}</td>
                   <td>{s.lastName}</td>
-                  <td>{s.level}</td>
+                  <td>{levelLabel(s.level, lang)}</td>
                   <td>{s.class?.name || '-'}</td>
                   <td>{s.schoolYear}</td>
                   <td>

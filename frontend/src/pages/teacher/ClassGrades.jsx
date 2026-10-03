@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import { levelLabel } from '../../utils/labels.js';
 
 const PERIODS = [
   { v: '1', k: 't1' },
@@ -10,7 +11,7 @@ const PERIODS = [
 ];
 
 export default function ClassGrades() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [classes, setClasses] = useState([]);
   const [classId, setClassId] = useState('');
   const [period, setPeriod] = useState('1');
@@ -64,7 +65,7 @@ export default function ClassGrades() {
           <select value={classId} onChange={(e) => setClassId(e.target.value)}>
             <option value="">{t('teacherSpace.classGrades.pickClass')}</option>
             {classes.map((c) => (
-              <option key={c.id} value={c.id}>{c.name} — {c.level}</option>
+              <option key={c.id} value={c.id}>{c.name} — {levelLabel(c.level, lang)}</option>
             ))}
           </select>
         </div>

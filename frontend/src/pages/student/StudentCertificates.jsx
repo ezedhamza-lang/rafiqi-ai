@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useI18n } from '../../i18n/index.jsx';
 import { api } from '../../api/client.js';
+import { levelLabel } from '../../utils/labels.js';
 
 const CERT_ICONS = { level: '🏆', subject: '📚', xp: '⭐' };
 
 export default function StudentCertificates() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [certs, setCerts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [downloading, setDownloading] = useState(null);
@@ -58,7 +59,7 @@ export default function StudentCertificates() {
               <h3 className="cert-card__title">{c.title}</h3>
               <p className="cert-card__desc">{c.description}</p>
               {c.subject && <span className="cert-card__subject">📚 {c.subject}</span>}
-              {c.level && <span className="cert-card__level">🏅 المستوى {c.level}</span>}
+              {c.level && <span className="cert-card__level">🏅 المستوى {levelLabel(c.level, lang)}</span>}
               <button
                 className="cert-download"
                 onClick={() => download(c.type, c.id)}
