@@ -1,4 +1,4 @@
-import { Router } from 'express';
+﻿import { Router } from 'express';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
@@ -10,7 +10,15 @@ import { buildMemo, rebuildMemo } from '../services/memoService.js';
 import { buildResource, rebuildResource } from '../services/resourceService.js';
 import { getBankExam, buildExamContent, officialExamSummary, saveAiExamToBank } from '../services/officialExamService.js';
 import { buildExam, SUBJECT_KEYS, subjectFold } from '../services/examBuilder.js';
-import { generateQuizQuestions } from '../services/aiService.js';
+import { generateText } from '../services/aiService.js';
+// محرك الاختبارات التقويمي (src/exams) — مخطّط ← توليد ← تدقيق ← حفظ (§1,§10)
+import { buildBlueprint, validateBlueprint, blueprintScopeOptions } from '../exams/exam-blueprint.js';
+import { validateExam, assertPublishable } from '../exams/exam-pipeline.js';
+import { buildExamPrompt, parseGeneratedExamPayload, normalizeGeneratedQuestions, normalizeGeneratedStimuli } from '../exams/generation.js';
+import { criteriaFor } from '../exams/criteria-grids.js';
+import { criteriaDisplay } from '../exams/criterion-map.js';
+import { subjectLabel } from '../exams/subject-labels.js';
+import { resolveGradeId, gradeTitle } from '../exams/curriculum-index.js';
 // Dynamic import for docx service — loaded lazily to avoid crashing server if docx package unavailable
 let _docxService = null;
 async function getDocxService() {
@@ -630,9 +638,65 @@ router.get('/exams/from-books', teacherMiddleware, asyncHandler(async (req, res)
 
 /**
  * @swagger
+ * /api/teacher/exams/blueprint-options:
+ *   get:
+ *     summary: خيارات مخطّط الاختبار (دروس الثلاثي مجمّعة في وحدات + قيم هدف النقاط)
+ *     tags: [teacher-content]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: level
+ *         schema: { type: string, example: year6 }
+ *       - in: query
+ *         name: subject
+ *         required: true
+ *         schema: { type: string, example: arabic }
+ *       - in: query
+ *         name: trimester
+ *         schema: { type: integer, example: 1 }
+ *     responses:
+ *       200: { description: الوحدات والدروس + القيم المسموحة }
+ *       400: { description: مدخلات غير صالحة }
+ */
+router.get('/exams/blueprint-options', teacherMiddleware, asyncHandler(async (req, res) => {
+  const { level, subject, trimester } = req.query;
+  if (!subject) throw new ApiError(400, 'المادة مطلوبة');
+  const t = [1, 2, 3].includes(Number(trimester)) ? Number(trimester) : null;
+  if (trimester !== undefined && String(trimester).trim() !== '' && t === null) {
+    throw new ApiError(400, 'الثلاثي يجب أن يكون 1 أو 2 أو 3');
+  }
+  const grade = resolveGradeId(level);
+  const opts = blueprintScopeOptions({ level, subject, trimester: t });
+  res.json({
+    ...opts,
+    grade,
+    gradeLabel: gradeTitle(grade),
+    subjectLabel: subjectLabel(subject),
+    trimester: t,
+    targetPoints: [10, 15, 20],
+    assessmentTypes: [
+      { value: 'written', label: 'تحريري' },
+      { value: 'oral', label: 'شفوي' },
+      { value: 'practical', label: 'عملي' },
+      { value: 'diagnostic', label: 'تشخيصي' },
+      { value: 'formative', label: 'تكويني' },
+      { value: 'unit', label: 'اختبار وحدة' },
+      { value: 'term', label: 'اختبار ثلاثي' },
+      { value: 'cumulative', label: 'تراكمي' },
+      { value: 'remedial', label: 'علاجي' }
+    ]
+  });
+}));
+
+/**
+ * @swagger
  * /api/teacher/exams/generate-ai:
  *   post:
- *     summary: توليد اختبار بالذكاء الاصطناعي (مفتاح Gemini الخاص بالأستاذ) وحفظه في البنك
+ *     summary: توليد اختبار تقويمي وفق مخطّط (مخطّط ← توليد ← تدقيق §50-§53) وحفظه للمراجعة
+ *     description: >
+ *       لا يُنشر مباشرة أبدًا (§61): يُحفظ بحالة needs_review عند نظافة التدقيق،
+ *       أو draft مع قائمة الملاحظات عند وجود أخطاء — والرد صادق لا «نجاح» زائف.
  *     tags: [teacher-content]
  *     security:
  *       - bearerAuth: []
@@ -644,113 +708,200 @@ router.get('/exams/from-books', teacherMiddleware, asyncHandler(async (req, res)
  *             type: object
  *             required: [subject]
  *             properties:
- *               subject: { type: string }
- *               level: { type: string }
- *               trimester: { type: integer }
+ *               subject: { type: string, example: arabic }
+ *               level: { type: string, example: year6 }
+ *               trimester: { type: integer, example: 1 }
  *               title: { type: string }
  *               lessonTitle: { type: string }
- *               count: { type: integer }
+ *               count: { type: integer, minimum: 1, maximum: 20 }
  *               classId: { type: integer }
  *               durationMinutes: { type: integer }
+ *               targetPoints: { type: integer, enum: [10, 15, 20] }
+ *               assessmentType: { type: string, example: term }
+ *               domains: { type: array, items: { type: string } }
+ *               competencies: { type: array, items: { type: string } }
+ *               difficulty: { type: string, example: balanced }
  *     responses:
  *       201:
- *         description: الاختبار المولد
+ *         description: الاختبار المحفوظ + تقرير الفحص (issues/audit/report/message)
  *       400:
- *         description: بيانات غير صالحة أو غياب مفتاح المنصة
+ *         description: مخطّط غير صالح أو غياب مفتاح المنصة
  *       502:
  *         description: تعذّر الاتصال بالمزوّد أو توليد صيغة الأسئلة (أعد المحاولة)
  */
 router.post('/exams/generate-ai', teacherMiddleware, asyncHandler(async (req, res) => {
-  const { subject, level, trimester, title, lessonTitle, count, classId, durationMinutes } = req.body || {};
+  const {
+    subject, level, trimester, title, lessonTitle, count, classId, durationMinutes,
+    targetPoints, assessmentType, domains, competencies, difficulty
+  } = req.body || {};
   if (!subject) throw new ApiError(400, 'المادة مطلوبة');
   await assertClassInSchool(prisma, req, classId, ApiError);
 
-  let aiQuestions = null;
-  try {
-    aiQuestions = await generateQuizQuestions(req.user.id, {
-      subject,
-      level: level || '',
-      lessonTitle: lessonTitle || title || '',
-      count: Math.min(Math.max(Number(count) || 6, 1), 15)
-    });
-  } catch (e) {
-    // رسالة صادقة لكل حالة — كانت «أضف مفتاحك» تظهر حتى مع مفتاح سليم
-    // كلّما فشلت قراءة JSON أو ضغط المزوّد مؤقتًا (سببتها الحقيقية مسجَّلة هنا).
-    if (e?.message === 'NO_AI_KEY') {
-      throw new ApiError(400, 'لم يتم ضبط مفتاح الذكاء الاصطناعي للمنصة — اضبطه من لوحة المشرف العام');
-    }
-    if (e?.message === 'AI_BAD_JSON') {
-      console.warn('[AI-QUIZ] bad JSON after retry:', String(e.providerSnippet || '').slice(0, 200));
-      throw new ApiError(502, 'تعذّر توليد صيغة الأسئلة — أعد المحاولة بعد لحظات');
-    }
-    console.warn('[AI-QUIZ] provider failure:', e?.message, 'status=' + (e?.providerStatus || ''), String(e?.providerBody || '').slice(0, 300));
-    throw new ApiError(502, 'تعذّر الاتصال بمزوّد الذكاء الاصطناعي — أعد المحاولة بعد لحظات');
+  // 1) المخطّط أولًا (§1,§10): لا سؤال يُخلَق قبل قبوله — أخطاء المخطّط تُرفض هنا
+  const blueprint = buildBlueprint({
+    level, subject, trimester, assessmentType, lessonTitle, domains, competencies, difficulty,
+    questionCount: count, targetPoints, durationMinutes
+  });
+  const bpCheck = validateBlueprint(blueprint);
+  if (!bpCheck.valid) {
+    throw new ApiError(400, bpCheck.issues.filter((i) => i.severity === 'error').map((i) => i.message).join(' — '));
   }
-  if (!Array.isArray(aiQuestions) || aiQuestions.length === 0) {
+
+  // عنوان صافٍ: لا «بالذكاء الاصطناعي» في عنوان يراه التلميذ (§5) — تسمية داخلية فقط
+  const givenTitle = String(title || '').replace(/[,،]?\s*بالذكاء الاصطناعي/g, '').trim();
+  const examTitle = givenTitle ||
+    `اختبار ${blueprint.subjectLabel} — ${blueprint.gradeLabel} (الثلاثي ${blueprint.trimester})`;
+
+  // 2) التوليد المخطّطي + التدقيق + إعادة محاولة واحدة بتغذية راجعة (§49,§126)
+  let validation = null;
+  let previousIssues = null;
+  let stimuli = []; // سندات آخر محاولة ناجحة القراءة (تبقى من المحاولة السابقة عند فشل لاحق)
+  for (let attempt = 1; attempt <= 2; attempt += 1) {
+    let text = null;
+    try {
+      const prompt = buildExamPrompt(blueprint, { previousIssues });
+      text = await generateText(req.user.id, prompt.system, prompt.user, {
+        maxTokens: prompt.maxTokens || 4000,
+        jsonMode: true
+      });
+    } catch (e) {
+      if (e?.message === 'NO_AI_KEY') {
+        throw new ApiError(400, 'لم يتم ضبط مفتاح الذكاء الاصطناعي للمنصة — اضبطه من لوحة المشرف العام');
+      }
+      // نداء فاشل بعد نجاح محاولة سابقة → نحتفظ بالنتيجة بدل ضياعها
+      if (validation) break;
+      console.warn('[AI-EXAM] provider failure:', e?.message, 'status=' + (e?.providerStatus || ''), String(e?.providerBody || '').slice(0, 300));
+      throw new ApiError(502, 'تعذّر الاتصال بمزوّد الذكاء الاصطناعي — أعد المحاولة بعد لحظات');
+    }
+
+    const parsed = parseGeneratedExamPayload(text);
+    const questions = parsed ? normalizeGeneratedQuestions(parsed.questions, blueprint) : null;
+    stimuli = parsed ? normalizeGeneratedStimuli(parsed.stimuli, blueprint).stimuli : [];
+    if (!questions) {
+      console.warn('[AI-EXAM] invalid exam JSON, attempt', attempt, String(text || '').slice(0, 150));
+      previousIssues = 'إخراجك السابق لم يكن JSON صالحًا — أعد الإخراج كائنًا فيه stimuli وquestions فقط دون شرح';
+      if (attempt === 2) break;
+      continue;
+    }
+
+    validation = validateExam({
+      blueprint,
+      questions,
+      stimuli,
+      // اختبار سنّدي: بلا سند حقيقي = رفض (§18,§105) — لا نستبدل السند بقائمة أسئلة
+      stimulusRequired: true,
+      durationMinutes: blueprint.durationMinutes,
+      title: examTitle
+    }, { requireCount: true, requireStructure: true }); // سلامة العدّاد (§51) + بنية الورقة: طول/تشكيل النص + تنوع الصيغ + فرص قياس القراءة (MASTER §4,§6,§36)
+    stimuli = validation.stimuli || stimuli; // المثيرات بعد الإصلاح الحتمي هي المحفوظة
+    if (validation.approved) break;
+    const errs = validation.issues.filter((i) => i.severity === 'error');
+    // التغذية الراجعة تُبنى من الأخطاء + مخالفات العقد الهيكلية (مرجع سند معلّق،
+    // نوع مثير خارج الملف) — إصلاحات أخرى تمت أصلًا داخل repairExam لا حاجة لإعادة طلبها.
+    const contractFeedback = (validation.repairNotes || [])
+      .filter((n) => n.code === 'SIND_REF_REBOUND' || n.code === 'STIMULUS_TYPE_FIXED')
+      .map((n) => n.message);
+    previousIssues = [...new Set([...errs.slice(0, 5).map((i) => i.message), ...contractFeedback])].slice(0, 6).join('؛ ') || null;
+    if (!previousIssues) break; // تنبيهات فقط (لا error) → لا إعادة محاولة
+    console.warn('[AI-EXAM] validation feedback, attempt', attempt, previousIssues.slice(0, 200));
+  }
+  if (!validation) {
     throw new ApiError(502, 'تعذّر توليد صيغة الأسئلة — أعد المحاولة بعد لحظات');
   }
 
-  const questions = aiQuestions.map((q, i) => ({
-    id: `ai-q${i + 1}`,
-    criterion: `مع${(i % 3) + 1}`,
-    type: ['MCQ', 'TRUE_FALSE', 'FILL_BLANK'].includes(q.type) ? q.type : 'MCQ',
-    prompt: q.prompt || q.text || '',
-    options: q.options,
-    correct: q.correct ?? q.correctOption,
-    correctAnswer: q.correctAnswer,
-    points: q.points || 1
+  // 3) الحفظ الصادق (§61,§126): نظيف ← needs_review، أخطاء ← generated + قائمة الملاحظات
+  const errIssues = validation.issues.filter((i) => i.severity === 'error');
+  const status = validation.approved ? 'needs_review' : 'generated';
+  // §B2 (قرار2026-10-03): عرض المعايير للمعلّم «الاثنان مع وسم المصدر» —
+  // الرمز الرسمي (M1–M4/D) + المصدر يُضافان إلى شبكة التنقيط في مسار الذكاء
+  // الاصطناعي فقط؛ الرمز الداخلي (مع1..5) يبقى للتنقيط ولا يُعرض رسميًّا بدله.
+  const criteria = criteriaFor(subject, blueprint.targetPoints).map((c) => ({
+    ...c,
+    ...(criteriaDisplay(c.id) || {})
+  }));
+  const questions = validation.questions.map((q, i) => ({
+    ...q,
+    // إسناد حتمي من خط التوليد (§B2: أي سؤال يقيس أي معيار) يسبق التوزيع الدائري
+    criterion: q.criterion || criteria[i % criteria.length].id
   }));
 
-  const criteria = [
-    { id: 'مع1', label: 'الفهم', mastery: { none: 0, below: 1, min: 2, max: 3 } },
-    { id: 'مع2', label: 'اللغة', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
-    { id: 'مع3', label: 'الإنتاج', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } }
-  ];
-
+  const y = new Date().getFullYear();
   const content = {
-    header: 'الجمهورية التونسية — وزارة التربية',
+    header: '', // لا ترويسة رسمية لاختبار غير رسمي (§4) — وزارة التربية لـ source:official فقط
     school: req.user.school || '',
-    date: new Date().getFullYear() + '/' + (new Date().getFullYear() + 1),
-    durationMinutes: durationMinutes || 60,
-    totalPoints: 20,
+    date: `${y}/${y + 1}`,
+    durationMinutes: blueprint.durationMinutes,
+    totalPoints: blueprint.targetPoints,
     source: 'ai-generated',
+    status,
+    grade: blueprint.grade,
+    gradeLabel: blueprint.gradeLabel,
+    subjectLabel: blueprint.subjectLabel,
+    assessmentType: blueprint.assessmentType,
+    curriculumVersion: blueprint.curriculumVersion,
+    blueprint,
+    audit: validation.audit,
+    report: validation.report,
+    issues: validation.issues,
     criteria,
-    passages: [],
+    // السند هو الأصل (§1-3,§105): نخزّن السندات كاملة + نسخة passages للتوافق
+    stimulusRequired: true,
+    stimuli,
+    passages: stimuli.map((s) => ({ id: s.id, title: s.title, text: s.text })),
     questions
   };
 
   const exam = await prisma.officialExam.create({
     data: {
       teacherId: req.user.id,
-      title: title || `اختبار ${subject} — بالذكاء الاصطناعي`,
+      title: examTitle,
       subject,
       classId: classId ? Number(classId) : null,
-      trimester: trimester ? Number(trimester) : null,
+      trimester: blueprint.trimester,
       content
     }
   });
 
-  // حفظ تلقائي في بنك الاختبارات لإعادة الاستخدام دون اتصال
+  // حفظ في بنك الاختبارات فقط عند نظافة التديق — الاختبار المعيب لا يُدخَل البنك
   let savedToBank = false;
-  try {
-    savedToBank = saveAiExamToBank({
-      id: `ai-${exam.id}-${Date.now()}`,
-      level: typeof level === 'string' ? level : '',
-      subject,
-      trimester: trimester ? Number(trimester) : null,
-      title: exam.title,
-      durationMinutes: content.durationMinutes,
-      totalPoints: 20,
-      source: 'ai-generated',
-      criteria,
-      passages: [],
-      questions: questions.map((q) => ({ ...q }))
-    });
-  } catch {
-    savedToBank = false;
+  if (validation.approved) {
+    try {
+      savedToBank = saveAiExamToBank({
+        id: `ai-${exam.id}-${Date.now()}`,
+        level: blueprint.grade || '',
+        subject,
+        trimester: blueprint.trimester,
+        title: exam.title,
+        durationMinutes: content.durationMinutes,
+        totalPoints: blueprint.targetPoints,
+        source: 'ai-generated',
+        criteria,
+        passages: content.passages,
+        stimuli: content.stimuli,
+        questions: questions.map((q) => ({ ...q }))
+      });
+    } catch {
+      savedToBank = false;
+    }
   }
 
-  res.status(201).json({ ...exam, summary: officialExamSummary(content), savedToBank });
+  // ردّ صادق (§126): لا «تم الإنشاء بنجاح» حين توجد أخطاء — بل عدّها وقائمة الملاحظات
+  const message = validation.approved
+    ? `تم إنشاء الاختبار (${questions.length} سؤالًا، ${blueprint.targetPoints} نقطة) — ينتظر مراجعتك واعتمادك`
+    : `يوجد ${errIssues.length} عناصر تحتاج إلى مراجعة`;
+
+  res.status(201).json({
+    ...exam,
+    summary: officialExamSummary(content),
+    savedToBank,
+    status,
+    valid: validation.approved,
+    issues: validation.issues,
+    audit: validation.audit,
+    report: validation.report,
+    warnings: [...(blueprint.warnings || [])],
+    message
+  });
 }));
 
 /**
@@ -816,13 +967,73 @@ router.get('/exams/:id/preview', teacherMiddleware, validateParams(teacherConten
 router.put('/exams/:id', teacherMiddleware, validateParams(teacherContentIdParamSchema), validateBody(teacherExamUpdateSchema), asyncHandler(async (req, res) => {
   const { title, classId, trimester, content, published } = req.body;
   if (classId !== undefined) await assertClassInSchool(prisma, req, classId, ApiError);
+
+  // إعادة فحص محتوى المحرّك عند تعديله (§61,§126): لا نثق بما يأتي من العميل —
+  // نعيد تشغيل المدقّق نفسه ونعكس نتيجته الصادقة على الحالة. سليم ← needs_review
+  // (يصلح للنشر بعد مراجعة)، معيب ← generated. بلا هذه الخطوة يبقى اختبار «generated»
+  // محجوبًا عن النشر إلى الأبد رغم إصلاح المدرس له (مخرج مسدود).
+  let contentUpdate = content;
+  if (contentUpdate?.blueprint && Array.isArray(contentUpdate.questions)) {
+    const v = validateExam({
+      blueprint: contentUpdate.blueprint,
+      questions: contentUpdate.questions,
+      // إعادة الفحص تشمل التأصيل أيضًا (§7): لا يمرّ تعديل يكسر ارتباط السؤال بسندته
+      stimuli: Array.isArray(contentUpdate.stimuli) ? contentUpdate.stimuli : [],
+      stimulusRequired: contentUpdate.stimulusRequired === true,
+      durationMinutes: contentUpdate.durationMinutes ?? contentUpdate.blueprint.durationMinutes,
+      title
+    });
+    contentUpdate = {
+      ...contentUpdate,
+      status: v.approved ? 'needs_review' : 'generated',
+      issues: v.issues,
+      audit: v.audit,
+      report: v.report,
+      coverage: v.coverage,
+      questions: v.questions
+    };
+  }
+  if (published !== undefined) {
+    const existing = await prisma.officialExam.findFirst({ where: { id: Number(req.params.id), teacherId: req.user.id } });
+    if (!existing) throw new ApiError(404, 'الاختبار غير موجود');
+    const eff = contentUpdate || existing.content;
+
+    // عقد النشر (§125,§61): اختبارات المحرّك (ذات blueprint) لا تُنشر وهي مسودة
+    // أو فيها أخطاء فحص — النشر فعل بشري بعد المراجعة، والمدقّق لا يثق بالمحتوى.
+    // الاختبارات المستوردة من البنك (بلا blueprint / بلا status) لا تتأثر.
+    if (published === true && eff?.blueprint) {
+      const gate = assertPublishable({
+        blueprint: eff.blueprint,
+        questions: eff.questions || [],
+        stimuli: eff.stimuli || eff.passages || [],
+        stimulusRequired: eff.stimulusRequired === true
+      });
+      const hasErrors = (eff.issues || []).some((i) => i?.severity === 'error');
+      const st = String(eff.status || '');
+      if (!gate.ok || hasErrors || ['draft', 'generated', 'rejected'].includes(st)) {
+        const detail = [
+          ...(!gate.ok ? [`حقول ناقصة: ${gate.missing.join('، ')}`] : []),
+          ...(hasErrors ? ['يوجد أخطاء فحص لم تُراجَع'] : []),
+          ...(['draft', 'generated', 'rejected'].includes(st) ? [`الحالة «${st}» لا تسمح بالنشر`] : [])
+        ].join('؛ ');
+        throw new ApiError(409, `لا يمكن النشر — ${detail}`);
+      }
+    }
+
+    if (eff?.status) {
+      contentUpdate = { ...eff };
+      if (published && eff.status !== 'published') contentUpdate.status = 'published';
+      if (!published && eff.status === 'published') contentUpdate.status = 'approved';
+    }
+  }
+
   const r = await prisma.officialExam.updateMany({
     where: { id: Number(req.params.id), teacherId: req.user.id },
     data: {
       ...(title ? { title: String(title).trim() } : {}),
       ...(classId !== undefined ? { classId: classId ? Number(classId) : null } : {}),
       ...(trimester !== undefined ? { trimester: trimester ? Number(trimester) : null } : {}),
-      ...(content ? { content } : {}),
+      ...(contentUpdate ? { content: contentUpdate } : {}),
       ...(published !== undefined ? { published: !!published } : {})
     }
   });
@@ -1118,3 +1329,5 @@ router.get('/memos/:id/pdf', teacherMiddleware, validateParams(teacherContentIdP
 }));
 
 export default router;
+
+

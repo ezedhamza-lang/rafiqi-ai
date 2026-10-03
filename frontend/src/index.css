@@ -5971,29 +5971,45 @@ tr:hover td {
   }
 }
 
-/* ---------- Exam paper (Tunisian official-paper visual language) ---------- */
+/* ---------- Exam paper (الشكل الرسمي التونسي — S6a-e) ---------- */
+/* إطار الصفحة المزدوج كما في ورقات المعلّم المطبوعة (double border) */
 .exam-paper {
   background: #fff;
   color: #1a2340;
-  border: 2px solid #1e50b4;
-  border-radius: 12px;
-  padding: 1rem 1.2rem;
-  max-width: 820px;
+  border: 6px double #1e50b4;
+  border-radius: 0;
+  padding: 1.1rem 1.3rem;
+  max-width: 830px;
   margin: 0 auto;
 }
+/* S6a: ترويسة ثلاثية الخلايا المسطّرة: مدرسة/سنة/معلّم · عنوان+مادة+ثلاثي+العدد · الاسم والمدة */
 .paper-head {
   display: grid;
-  grid-template-columns: 1fr 1.4fr 1fr;
-  gap: 0.8rem;
-  align-items: start;
+  grid-template-columns: 1fr 1.45fr 1fr;
+  gap: 0;
+  align-items: stretch;
   border: 2px solid #1e50b4;
-  border-radius: 10px;
-  padding: 0.7rem 0.9rem;
-  margin-bottom: 0.9rem;
-  line-height: 2;
-  font-size: 0.95rem;
+  background: #fff;
+  margin-bottom: 1rem;
+  line-height: 1.9;
+  font-size: 0.93rem;
+  break-inside: avoid;
 }
-.paper-title { text-align: center; }
+.ph-cell {
+  padding: 0.55rem 0.8rem;
+  border-inline-start: 1.5px solid #1e50b4;
+  min-height: 5.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.15rem;
+}
+.ph-cell:last-child { border-inline-start: 0; }
+.ph-center { text-align: center; align-items: center; }
+.ph-center h3 { margin: 0.15rem 0; color: #0d2a7a; font-size: 1.12rem; line-height: 1.6; }
+.ph-line b { color: #0d2a7a; }
+.ph-sub { font-size: 0.85rem; color: #3a4a75; }
+.ph-dots { border-bottom: 2px dotted #333; height: 1.4rem; margin: 0.2rem 0 0.5rem; }
 .paper-republic { font-size: 0.8rem; color: #555; }
 .paper-title h3 { margin: 0.2rem 0; color: #0d2a7a; font-size: 1.15rem; }
 .paper-sub { font-size: 0.82rem; color: #555; }
@@ -6006,6 +6022,7 @@ tr:hover td {
   padding: 0.1rem 0.7rem;
   font-weight: 800;
   color: #0d2a7a;
+  white-space: nowrap;
 }
 .sanad-box {
   border: 1.5px solid #9db8e8;
@@ -6026,6 +6043,66 @@ tr:hover td {
   margin-bottom: 0.3rem;
 }
 .sanad-box p { margin: 0.2rem 0 0; }
+/* S6c: «السند n:» ثم تعليمياته — بلا صندوق، كما في ورقات الوورد الرسمية */
+.sanad-block { margin-bottom: 1.1rem; break-inside: avoid; }
+.sanad-title { font-weight: 800; color: #0d2a7a; font-size: 1.05rem; margin: 0.35rem 0 0.15rem; }
+.sanad-hint { font-weight: 600; font-size: 0.82rem; color: #5b6699; }
+.sanad-text { margin: 0 0 0.6rem; line-height: 2.15; white-space: pre-line; /* نصّ القراءة سطرًا سطرًا كورقة الرسم §6 */ }
+.sanad-img { max-width: 100%; border: 1px solid #c6d4f2; border-radius: 6px; margin-bottom: 0.5rem; }
+.talimia-list { display: flex; flex-direction: column; gap: 0.6rem; }
+/* S6c/S6d: عمود هامشي ضيق محاذي لكل تعليمة: وسم «مع n» + مربّع فارغ للمعلّم */
+.talimia-row {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 0.6rem;
+  align-items: start;
+  break-inside: avoid;
+}
+.talimia-margin {
+  border: 1.5px solid #333;
+  border-radius: 3px;
+  background: #fff;
+  padding: 0.45rem 0.25rem;
+  min-height: 3.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #0d2a7a;
+}
+.crit-tag { white-space: nowrap; }
+/* §B2: عرض المعايير «الاثنان مع وسم المصدر» — الرمز الرسمي + المصدر والرمز الداخلي */
+.crit-internal {
+  display: inline-block;
+  margin-inline-start: 4px;
+  font-size: 0.78em;
+  font-weight: 500;
+  opacity: 0.65;
+}
+.crit-source {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.7em;
+  font-weight: 600;
+  color: #5b6b7d;
+  white-space: nowrap;
+}
+.tick-box {
+  width: 1.05rem;
+  height: 1.05rem;
+  border: 2px solid #333;
+  border-radius: 2px;
+  display: inline-block;
+  background: #fff;
+}
+.talimia-main { min-width: 0; }
+.talimia-margin .q-points { flex-direction: column; gap: 0.2rem; }
+.talimia-margin .q-points .q-max { font-size: 0.72rem; padding: 0 0.35rem; border-radius: 5px; }
+.talimia-prompt { margin: 0; font-weight: 700; line-height: 2; }
+.talimia-num { font-weight: 800; color: #0d2a7a; margin-inline-end: 0.35rem; }
 .paper-questions { display: flex; flex-direction: column; gap: 0.9rem; }
 .paper-q {
   display: grid;
@@ -6081,6 +6158,42 @@ tr:hover td {
 }
 .answer-dots { margin-top: 0.35rem; }
 .answer-line { border-bottom: 2px dotted #555; height: 32px; }
+/* §D12: مساحتان مستقلّتان — إطار للعملية العمودية + إطار للرسم (لا يختلطان بالأفقية) */
+.calc-frame {
+  min-height: 120px;
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.6rem;
+  border: 1.5px solid #333;
+  border-radius: 6px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.3rem;
+}
+.calc-frame .frame-hint { font-size: 0.78rem; color: #777; }
+.calc-frame.solve-frame input,
+.calc-frame.solve-frame textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 2px dotted #999;
+  background: transparent;
+  font: inherit;
+}
+.drawing-frame {
+  width: min(230px, 60vw);
+  aspect-ratio: 1 / 1;
+  margin-top: 0.5rem;
+  border: 1.5px solid #333;
+  border-radius: 6px;
+  background: #fff;
+}
+.drawing-frame.solve-frame { padding: 0.4rem; }
+.drawing-frame.solve-frame textarea { width: 100%; height: 100%; border: none; background: transparent; font: inherit; resize: none; }
+@media print {
+  .calc-frame { min-height: 110px; break-inside: avoid; }
+  .drawing-frame { break-inside: avoid; }
+}
 .print-options { display: flex; flex-direction: column; gap: 0.3rem; margin-top: 0.4rem; }
 .print-option { display: flex; align-items: center; gap: 0.5rem; line-height: 2; }
 .print-option .box {
@@ -6116,26 +6229,46 @@ tr:hover td {
 .paper-table th, .paper-table td { border: 1.5px solid #333; padding: 0.3rem 0.5rem; text-align: center; }
 .paper-table thead th { background: #e3ebfd; }
 .paper-total td { background: #eef3ff; font-weight: 800; }
+/* S6e: الصيغة الرسمية — صفوف = مستويات التملك، أعمدة = «مع n»، + عمود «الحد •/20» */
+.paper-table.official { font-size: 0.9rem; }
+.paper-table.official thead th { background: #e3ebfd; color: #0d2a7a; }
+.paper-table.official thead .crit-id { font-weight: 800; }
+.paper-table.official thead .crit-label { font-weight: 600; font-size: 0.78rem; background: #f2f6ff; color: #3a4a75; }
+.paper-table.official .crit-level { background: #f2f6ff; font-weight: 700; color: #0d2a7a; white-space: nowrap; }
+.paper-table.official .crit-limit-head,
+.paper-table.official .crit-limit { background: #0d2a7a; color: #fff; font-weight: 800; min-width: 4.6rem; }
+.paper-table.official tbody td { background: #fff; font-weight: 600; }
 .paper-instructions { margin-top: 0.8rem; font-size: 0.85rem; color: #444; }
 .paper-key-toggle { margin-top: 0.8rem; }
 .paper-key { margin-top: 0.6rem; border: 2px dashed #d32f2f; border-radius: 10px; padding: 0.6rem 0.9rem; }
 .paper-key h4 { color: #d32f2f; margin: 0 0 0.4rem; }
 
 @media print {
+  /* S6b: A4 بهوامش الطباعة + الورقة كاملة بلا قصّ للجدول أو التعليمة */
   @page { size: A4 portrait; margin: 12mm; }
   body * { visibility: hidden; }
   .exam-paper, .exam-paper * { visibility: visible; }
   .exam-paper {
     position: absolute;
     inset: 0;
-    border: 0;
+    border: 5px double #1e50b4;
     border-radius: 0;
     max-width: none;
     margin: 0;
-    padding: 0;
+    padding: 4mm;
+    box-shadow: none;
   }
   .no-print, .paper-key, .paper-key-toggle { display: none !important; }
-  .paper-q, .sanad-box, .paper-criteria { break-inside: avoid; }
+  .paper-head,
+  .sanad-block,
+  .talimia-row,
+  .paper-criteria,
+  .sanad-box,
+  .paper-q {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  .paper-table { break-inside: avoid; }
 }
 
 /* ---------- Cahier interactif (plein ÃƒÆ’Ã‚Â©cran + lignage SeyÃƒÆ’Ã‚Â¨s, 6-10 ans) ---------- */

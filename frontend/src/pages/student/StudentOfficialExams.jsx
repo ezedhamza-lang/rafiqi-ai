@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 import ExamPaper from '../../components/ExamPaper.jsx';
+import { subjectLabel } from '../../utils/subjectLabels.js';
 
 function ResultCriteriaTable({ result, t }) {
   if (!result?.criteria) return null;
@@ -30,7 +31,7 @@ function ResultCriteriaTable({ result, t }) {
 }
 
 export default function StudentOfficialExams({ onChanged }) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [exams, setExams] = useState([]);
   const [active, setActive] = useState(null);
   const [answers, setAnswers] = useState({});
@@ -143,7 +144,8 @@ export default function StudentOfficialExams({ onChanged }) {
             <div key={x.id} className={`card-item ${x.done ? 'done' : ''}`}>
               <h4>{x.title}</h4>
               <p className="sub">
-                {x.subject} — {x.trimester ? t('studentSpace.officialExams.trimester', { n: x.trimester }) : ''}
+                {/* المادة بالتسمية لا بالرمز (§78) — «اللغة العربية» لا «arabic» */}
+                {subjectLabel(x.subject, lang)} — {x.trimester ? t('studentSpace.officialExams.trimester', { n: x.trimester }) : ''}
               </p>
               {x.done && x.mySubmission ? (
                 <div>

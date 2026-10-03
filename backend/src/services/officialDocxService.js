@@ -18,13 +18,14 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
    ══════════════════════════════════════════════════════════════════ */
 
 const SUBJECT_MAP = {
-  arabic: 'اللغة العربية', french: 'اللغة الفرنسية', english: 'اللغة الإنجليزية',
-  math: 'الرياضيات', science: 'العلوم الطبيعية', 'history-geography': 'التاريخ والجغرافيا',
-  history: 'التاريخ', geography: 'الجغرافيا', islamic: 'التربية الإسلامية',
-  civic: 'التربية المدنية', art: 'التربية التشكيلية',
-  music: 'التربية الموسيقية', pe: 'التربية البدنية', technology: 'التكنولوجيا',
-  reading: 'القراءة', grammar: 'قواعد اللغة', writing: 'الإنتاج الكتابي',
-  'قواعد اللغة': 'قواعد اللغة', 'الإنتاج الكتابي': 'الإنتاج الكتابي'
+  // رموز خاصة بتصدير DOCX غير موجودة في المعجم المركزي
+  'history-geography': 'التاريخ والجغرافيا',
+  history: 'التاريخ', geography: 'الجغرافيا', civic: 'التربية المدنية',
+  grammar: 'قواعد اللغة', writing: 'الإنتاج الكتابي', pe: 'التربية البدنية',
+  technology: 'التكنولوجيا',
+  'قواعد اللغة': 'قواعد اللغة', 'الإنتاج الكتابي': 'الإنتاج الكتابي',
+  // المعجم المركزي (src/exams/subject-labels.js) هو المرجع — لا تكرار (§79)
+  ...SUBJECT_LABELS
 };
 
 const LEVEL_NAMES = {
@@ -36,47 +37,11 @@ const TRIMESTER_NAMES = {
   1: 'الثلاثي الأول', 2: 'الثلاثي الثاني', 3: 'الثلاثي الثالث'
 };
 
-/* Official Tunisian criteria (Ministry grids — Gabès referential):
-   معايير الحد الأدنى (minimum, total 15) + معيار التميز (excellence, 5) = 20.
-   Mastery symbols: [---] none, [+---] below, [-++] min, [+++] max. */
-const DEFAULT_CRITERIA = {
-  arabic: [
-    { id: 'مع1', label: 'القراءة الجهرية', mastery: { none: 0, below: 1.5, min: 3, max: 4.5 } },
-    { id: 'مع2', label: 'معالجة النص', mastery: { none: 0, below: 2, min: 4, max: 6 } },
-    { id: 'مع3', label: 'التصرف في النص وإبداء الرأي', excellence: true, mastery: { none: 0, below: 1, min: 2.5, max: 4.5 } }
-  ],
-  math: [
-    { id: 'مع1', label: 'التأويل الملائم', mastery: { none: 0, below: 1, min: 2, max: 3 } },
-    { id: 'مع2', label: 'صحة الحساب', mastery: { none: 0, below: 2, min: 4, max: 6 } },
-    { id: 'مع3', label: 'الصحيح لوحدات القيس', mastery: { none: 0, below: 1, min: 2, max: 3 } },
-    { id: 'مع4', label: 'خصائص الأشكال الهندسية', mastery: { none: 0, below: 1, min: 2, max: 3 } },
-    { id: 'مع5', label: 'الدقة', excellence: true, mastery: { none: 0, below: 1, min: 3, max: 5 } }
-  ],
-  science: [
-    { id: 'مع1', label: 'تحليل وضعية', mastery: { none: 0, below: 1.5, min: 3, max: 5 } },
-    { id: 'مع2', label: 'تعليل إجابة', mastery: { none: 0, below: 1.5, min: 3, max: 5 } },
-    { id: 'مع3', label: 'إصلاح خطأ', mastery: { none: 0, below: 1, min: 2.5, max: 5 } },
-    { id: 'مع4', label: 'التميز العلمي', excellence: true, mastery: { none: 0, below: 1, min: 2, max: 5 } }
-  ],
-  french: [
-    { id: 'مع1', label: 'الفهم القرائي', mastery: { none: 0, below: 1.5, min: 3, max: 5 } },
-    { id: 'مع2', label: 'اللغة والمفردات', mastery: { none: 0, below: 1.5, min: 3, max: 5 } },
-    { id: 'مع3', label: 'الإنتاج الكتابي', mastery: { none: 0, below: 1, min: 2.5, max: 5 } },
-    { id: 'مع4', label: 'التميز اللغوي', excellence: true, mastery: { none: 0, below: 1, min: 2, max: 5 } }
-  ],
-  islamic: [
-    { id: 'مع1', label: 'الحفظ والاستظهار', mastery: { none: 0, below: 1.5, min: 3, max: 5 } },
-    { id: 'مع2', label: 'الفهم', mastery: { none: 0, below: 1.5, min: 3, max: 5 } },
-    { id: 'مع3', label: 'السلوك والقيم', mastery: { none: 0, below: 1, min: 2.5, max: 5 } },
-    { id: 'مع4', label: 'التميز', excellence: true, mastery: { none: 0, below: 1, min: 2, max: 5 } }
-  ],
-  production: [
-    { id: 'مع1', label: 'الملاءمة', mastery: { none: 0, below: 1, min: 2, max: 3 } },
-    { id: 'مع2', label: 'سلامة بناء النص', mastery: { none: 0, below: 2, min: 4, max: 6 } },
-    { id: 'مع3', label: 'التصرف في نمط الكتابة', mastery: { none: 0, below: 2, min: 4, max: 6 } },
-    { id: 'مع4', label: 'الثراء والطرافة', excellence: true, mastery: { none: 0, below: 1, min: 2, max: 5 } }
-  ]
-};
+// المعايير الرسمية منقولة إلى src/exams/criteria-grids.js — مصدر واحد مشترك
+// بين تصدير DOCX ومحرّك الاختبارات (§79) مع إمكانية تحجيمها لأي هدف 10/15/20.
+import { DEFAULT_CRITERIA } from '../exams/criteria-grids.js';
+// معجم المادة المركزي (§78,§79): تسمية واحدة لكل واجهة — لا ادّعاء رسمية.
+import { SUBJECT_LABELS, subjectLabel as centralSubjectLabel } from '../exams/subject-labels.js';
 
 function esc(text) {
   return String(text ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -252,7 +217,7 @@ function emptyPara() {
 
 function buildHeader(context = {}) {
   const school = context.school || 'المدرسة الابتدائية';
-  const subjectLabel = SUBJECT_MAP[context.subject] || context.subject || '';
+  const subjectLabel = SUBJECT_MAP[context.subject] || centralSubjectLabel(context.subject) || '';
   const levelLabel = LEVEL_NAMES[context.level] || context.level || '';
   const trimesterLabel = TRIMESTER_NAMES[context.trimester] || (context.trimester ? `الثلاثي ${context.trimester}` : '');
   const year = new Date().getFullYear();
@@ -696,7 +661,7 @@ export function prepareExamForDocx(content, context = {}) {
   }));
 
   return {
-    title: content.title || context.title || 'اختبار رسمي',
+    title: content.title || context.title || 'اختبار',
     subject: content.subject || context.subject,
     level: content.level ?? context.level,
     trimester: content.trimester ?? context.trimester,

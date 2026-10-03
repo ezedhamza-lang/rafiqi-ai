@@ -1,18 +1,34 @@
 import { useState } from 'react';
 import SvgArt from './SvgArt.jsx';
+import { subjectLabel as subjectName } from '../utils/subjectLabels.js';
 
-// Shared exam-paper renderer (Tunisian official-paper visual language):
-// header shafts (name/subject/score), colored sanad boxes, numbered
-// questions with points beside each one, dotted answer space below,
-// margin score boxes, criteria table. Used in print mode (teacher) and
-// solve mode (student on device). Content shapes: bank template or
-// instantiated exam content { header, school, date, durationMinutes,
-// totalPoints, criteria[], passages[], questions[], instructions }.
-const SANAD_TINTS = ['#e8f1ff', '#e9f7ef', '#fdf1e7', '#f3ecfd'];
+// ورقة الاختبار بالشكل الرسمي التونسي (S6a-e):
+//   ترويسة ثلاثية الخلايا المسطّرة (مدرسة/سنة/معلّم · عنوان+مادة+ثلاثي+العدد · الاسم واللقب/المدة)
+//   إطار الصفحة المزدوج · «السند n:» ثم تعليمياته «التعلمية n:» مرقّمة متصلة عبر الورقة
+//   عمود هامشي محاذي لكل تعليمة يحمل وسم «مع n» + مربّع فارغ للمعلّم
+//   وجدول إسناد الأعداد بالصيغة الرسمية: صفوف = مستويات التملك، أعمدة = «مع n»، + عمود «الحد •/20»
+// يُستعمل في طباعة المعلّم وفي وضع حلّ التلميذ. أشكال المحتوى: بنك/مختبر/معلّم
+// { header, school, date, durationMinutes, totalPoints, criteria[], stimuli[]|passages[], questions[] }.
+// الترويسة الرسمية (§4) تُعرض فقط إن كان content.header مضبوطًا — لا ندّعي
+// رسمية اختبار مُولَّد أو مُلَّف من المدرس.
+// مستويات التملك الأربعة في جدول الإسناد (مفاتيح objectiv في criteria-grids).
+const MASTERY_LEVELS = [
+  ['none', 'انعدام التملك'],
+  ['below', 'دون الأدنى'],
+  ['min', 'الأدنى'],
+  ['max', 'الأقصى']
+];
 
 export function criterionMax(criteria, criterionId) {
   const c = (criteria || []).find((x) => x.id === criterionId);
   return c?.mastery?.max ?? null;
+}
+
+/** عنوان السند المعروض: «السند n:» + اسمه إن وُجد (title قد يأتي مسبقًا بـ«السند n:»). */
+function sanadHeading(sind, gi) {
+  const t = String(sind?.title || '').trim();
+  if (!t) return `السند ${gi + 1}:`;
+  return /^السند\s*\d+\s*[:：]/.test(t) ? t : `السند ${gi + 1}: ${t}`;
 }
 
 function DottedLines({ n }) {
@@ -26,17 +42,32 @@ function DottedLines({ n }) {
   );
 }
 
-function QuestionPoints({ q, criteria }) {
-  const max = criterionMax(criteria, q.criterion);
+function QuestionPoints({ q, criteria, hideCriterion }) {
+  // نقاط السؤال المفردة (§8): تُفضَّل فوق حصيلة المعيار إن وُجدت
+  const qPoints = Number(q.points);
+  const critMax = criterionMax(criteria, q.criterion);
+  const shown = Number.isFinite(qPoints) && qPoints > 0 ? qPoints : critMax;
   return (
     <span className="q-points">
-      <span className="q-crit">{q.criterion}</span>
-      {max !== null && <span className="q-max">{max} ن</span>}
+      {!hideCriterion && <span className="q-crit">{q.criterion}</span>}
+      {shown !== null && shown !== undefined && <span className="q-max">{shown} ن</span>}
     </span>
   );
 }
 
+/** §D12: في وضع الحل تُغلَّف الإجابة بإطار مساحة مستقلة (عمودي/رسم). */
 function SolveInput({ q, answers, onAnswer }) {
+  const body = <SolveInputBody q={q} answers={answers} onAnswer={onAnswer} />;
+  if (q.layout === 'vertical') {
+    return <div className="calc-frame solve-frame">{body}</div>;
+  }
+  if (q.layout === 'drawing') {
+    return <div className="drawing-frame solve-frame">{body}</div>;
+  }
+  return body;
+}
+
+function SolveInputBody({ q, answers, onAnswer }) {
   const val = answers[q.id] ?? '';
   if (q.type === 'MCQ') {
     return (
@@ -135,6 +166,17 @@ function SolveInput({ q, answers, onAnswer }) {
 }
 
 function PrintAnswerSpace({ q }) {
+  // §D12: مساحة مستقلة للعملية العمودية / مساحة للرسم — تسبق الشكل النوعي.
+  if (q.layout === 'vertical') {
+    return (
+      <div className="calc-frame" aria-label="مساحة تنفيذ العملية العمودية">
+        <span className="frame-hint">أنجز العملية هنا:</span>
+      </div>
+    );
+  }
+  if (q.layout === 'drawing') {
+    return <div className="drawing-frame" aria-label="مساحة الرسم" />;
+  }
   if (q.type === 'MCQ') {
     return (
       <div className="print-options">
@@ -169,95 +211,169 @@ function PrintAnswerSpace({ q }) {
   return <DottedLines n={2} />;
 }
 
+/** تعليمة واحدة: عمود هامشي «مع n + النقاط + مربّع» ثم متن التعليمة مرقّمًا متصلًا. */
+function Instruction({ num, q, criteria, solve, answers, onAnswer }) {
+  return (
+    <div className="talimia-row">
+      <aside className="talimia-margin" aria-hidden="true">
+        <span className="crit-tag">{q.criterion || ''}</span>
+        <QuestionPoints q={q} criteria={criteria} hideCriterion />
+        <span className="tick-box" />
+      </aside>
+      <div className="talimia-main">
+        <p className="talimia-prompt">
+          <span className="talimia-num">التعلمية {num}:</span>
+          {q.prompt}
+        </p>
+        {q.art && <SvgArt id={q.art} size={150} />}
+        {solve
+          ? <SolveInput q={q} answers={answers || {}} onAnswer={onAnswer || (() => {})} />
+          : <PrintAnswerSpace q={q} />}
+      </div>
+    </div>
+  );
+}
+
 export default function ExamPaper({ content, meta, mode, answers, onAnswer }) {
   const solve = mode === 'solve';
-  const questions = content?.questions || [];
-  const passages = content?.passages || [];
   const criteria = content?.criteria || [];
-  const totalMax = criteria.reduce((s, c) => s + (Number(c.mastery?.max) || 0), 0) || content?.totalPoints || 20;
+  // المجموع المعروض: totalPoints المخزَّن (10/15/20 حسب المخطّط) ثم حصيلة المعيار
+  const criteriaSum = criteria.reduce((s, c) => s + (Number(c.mastery?.max) || 0), 0);
+  const totalMax = Number(content?.totalPoints) || criteriaSum || 20;
   const [showKey, setShowKey] = useState(false);
+
+  // المادة: التسمية لا الرمز (§78) — نفضّل subjectLabel المخزَّن ثم معجم الواجهة
+  const subjectText = content?.subjectLabel || subjectName(meta?.subject);
+  // الترويسة الرسمية (§4): header فارغ يعني اختبار مدرس/مولَّد
+  const republic = content?.header;
+
+  // ── S6c: السند أصل — نجمّع تعليمياته تحته ونرقّمها متصلًا عبر الورقة ──
+  const stimuli = (Array.isArray(content?.stimuli) && content.stimuli.length
+    ? content.stimuli
+    : content?.passages) || [];
+  const all = content?.questions || [];
+  const groups = [];
+  if (stimuli.length) {
+    stimuli.forEach((s) => groups.push({ sind: s, items: [] }));
+    const loose = { sind: null, items: [] };
+    all.forEach((q) => {
+      const gi = groups.findIndex((g) => g.sind && g.sind.id === q.sindId);
+      if (gi >= 0) groups[gi].items.push(q);
+      else if (stimuli.length === 1) groups[0].items.push(q); // سند واحد فقط — الربط محسوس
+      else loose.items.push(q); // بلا sindId وسندات متعددة — نعرضه بعد السندات لا نُسقطه
+    });
+    if (loose.items.length) groups.push(loose);
+  } else {
+    groups.push({ sind: null, items: all });
+  }
+  let counter = 0;
+  const laid = groups.map((g) => ({
+    ...g,
+    items: g.items.map((q) => ({ q, num: (counter += 1) }))
+  }));
+
+  const title = meta?.title || content?.title || 'اختبار';
+  const trimester = meta?.trimester || content?.trimester || '';
 
   return (
     <div className="exam-paper" dir="rtl">
-      {/* Header shafts */}
+      {/* ── S6a: ترويسة بثلاث خلايا مسطّرة (مدرسة/سنة/معلّم · عنوان · اسم) ── */}
       <div className="paper-head">
-        <div className="paper-id">
-          <div>الاسم: ............................</div>
-          <div>اللقب: ............................</div>
+        <div className="ph-cell">
+          <div className="ph-line"><b>المدرسة:</b> {content?.school || '......................'}</div>
+          <div className="ph-line"><b>السنة الدراسية:</b> {content?.date || '..................'}</div>
+          <div className="ph-line"><b>المعلّم(ة):</b> {content?.teacher || '..................'}</div>
         </div>
-        <div className="paper-title">
-          <div className="paper-republic">الجمهورية التونسية — وزارة التربية</div>
-          <h3>{meta?.title || content?.title || 'اختبار'}</h3>
-          {(content?.school || content?.date) && (
-            <div className="paper-sub">{content?.school || ''} {content?.date || ''}</div>
-          )}
+        <div className="ph-cell ph-center">
+          {republic ? <div className="paper-republic">{republic}</div> : null}
+          <h3>{title}</h3>
+          <div className="ph-sub">المادة: {subjectText}</div>
+          <div className="ph-sub">
+            {content?.gradeLabel ? `${content.gradeLabel} · ` : ''}
+            {trimester ? `الثلاثي ${trimester}` : content?.assessmentType || ''}
+          </div>
+          <div className="paper-score">العدد: .... / <bdi>{totalMax}</bdi></div>
         </div>
-        <div className="paper-meta">
-          <div>المادة: {meta?.subject || ''}</div>
-          <div>الثلاثي: {meta?.trimester || ''}</div>
-          <div className="paper-score">العدد: .... / {totalMax}</div>
+        <div className="ph-cell">
+          <div className="ph-line">الاسم واللقب:</div>
+          <div className="ph-dots" />
+          <div className="ph-line">القسم: ..................</div>
+          <div className="ph-line">
+            المدة الزمنية: {content?.durationMinutes ? `${content.durationMinutes} د` : '..................'}
+          </div>
         </div>
       </div>
 
-      {/* Sanads */}
-      {passages.length > 0 && passages.map((p, i) => (
-        <div key={p.id || i} className="sanad-box" style={{ background: SANAD_TINTS[i % SANAD_TINTS.length] }}>
-          <span className="sanad-tag">{p.title || `السند ${i + 1}`}</span>
-          <p>{p.text}</p>
-        </div>
+      {/* ── السندات وتعليمياتها ── */}
+      {laid.map((g, gi) => (
+        <section key={g.sind?.id || `g${gi}`} className="sanad-block">
+          {g.sind && (
+            <>
+              <div className="sanad-title">
+                {sanadHeading(g.sind, gi)}
+                {g.sind.purpose ? <span className="sanad-hint"> — {g.sind.purpose}</span> : null}
+              </div>
+              <p className="sanad-text">{g.sind.text}</p>
+              {g.sind.image && <img className="sanad-img" src={g.sind.image} alt={g.sind.title || ''} />}
+            </>
+          )}
+          <div className="talimia-list">
+            {g.items.map(({ q, num }) => (
+              <Instruction
+                key={q.id || num}
+                num={num}
+                q={q}
+                criteria={criteria}
+                solve={solve}
+                answers={answers}
+                onAnswer={onAnswer}
+              />
+            ))}
+          </div>
+        </section>
       ))}
 
-      {/* Questions: prompt + points beside, ruled answer space below */}
-      <div className="paper-questions">
-        {questions.map((q, i) => (
-          <div key={q.id || i} className="paper-q">
-            <div className="paper-q-side">
-              <span className="paper-q-num">{i + 1}</span>
-              <span className="paper-q-crit">{q.criterion}</span>
-            </div>
-            <div className="paper-q-main">
-              <div className="paper-q-head">
-                <p className="paper-q-prompt">{q.prompt}</p>
-                <QuestionPoints q={q} criteria={criteria} />
-              </div>
-              {q.art && <SvgArt id={q.art} size={150} />}
-              {solve
-                ? <SolveInput q={q} answers={answers || {}} onAnswer={onAnswer || (() => {})} />
-                : <PrintAnswerSpace q={q} />}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Grading table */}
+      {/* ── S6e: جدول إسناد الأعداد بالصيغة الرسمية ── */}
       {criteria.length > 0 && (
         <div className="paper-criteria">
           <h4>جدول إسناد الأعداد</h4>
-          <table className="paper-table">
+          <table className="paper-table official">
             <thead>
               <tr>
-                <th>المعيار</th>
-                <th>انعدام التملك</th>
-                <th>دون الأدنى</th>
-                <th>الأدنى</th>
-                <th>الأقصى</th>
+                <th className="crit-levels-head" rowSpan={2}>مستويات التملك</th>
+                {criteria.map((c) => (
+                  <th key={c.id} className="crit-id">
+                    {c.officialCode || c.id}
+                    {c.officialCode && c.officialCode !== c.id && (
+                      <span className="crit-internal" title="الرمز الداخلي للتنقيط">{c.id}</span>
+                    )}
+                  </th>
+                ))}
+                <th className="crit-limit-head" rowSpan={2}>الحد</th>
+              </tr>
+              <tr>
+                {criteria.map((c) => (
+                  <th key={c.id} className="crit-label">
+                    {c.label || ''}
+                    {c.source && <span className="crit-source">{c.source}</span>}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
-              {criteria.map((c) => (
-                <tr key={c.id}>
-                  <td>{c.label || c.id}</td>
-                  <td>{c.mastery?.none ?? '—'}</td>
-                  <td>{c.mastery?.below ?? '—'}</td>
-                  <td>{c.mastery?.min ?? '—'}</td>
-                  <td><strong>{c.mastery?.max ?? '—'}</strong></td>
+              {MASTERY_LEVELS.map(([key, label], li) => (
+                <tr key={key}>
+                  <th className="crit-level" scope="row">{label}</th>
+                  {criteria.map((c) => (
+                    <td key={c.id}>{c.mastery?.[key] ?? '—'}</td>
+                  ))}
+                  {li === 0 && (
+                    <td className="crit-limit" rowSpan={MASTERY_LEVELS.length}>
+                      • / <bdi>{totalMax}</bdi>
+                    </td>
+                  )}
                 </tr>
               ))}
-              <tr className="paper-total">
-                <td>المجموع</td>
-                <td colSpan={3} />
-                <td><strong>{totalMax} / 20</strong></td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -276,9 +392,9 @@ export default function ExamPaper({ content, meta, mode, answers, onAnswer }) {
         <div className="paper-key">
           <h4>مفاتيح الإجابة — للمعلم فقط (لا تُطبع)</h4>
           <ol>
-            {questions.map((q) => (
+            {all.map((q) => (
               <li key={q.id}>
-                {q.type === 'MCQ' && String(q.correct ?? '')}
+                {q.type === 'MCQ' && String(q.correct ?? q.correctAnswer ?? '')}
                 {q.type === 'TRUE_FALSE' && String(q.correctAnswer ?? '')}
                 {(q.type === 'FILL_BLANK' || q.type === 'EXTRACT') && String(q.correctAnswer ?? '')}
                 {q.type === 'ORDER' && (q.orderItems || []).join(' ← ')}

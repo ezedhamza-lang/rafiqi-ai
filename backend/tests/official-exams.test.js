@@ -203,9 +203,19 @@ describe('المرحلة 6.3 — بنك الاختبارات الرسمية وم
       .get(`/api/teacher/student/official-exams/${created.body.id}`)
       .set(authHeader(studentToken));
     expect(detail.status).toBe(200);
+    expect(detail.body.content.questions.length).toBeGreaterThan(0);
     for (const q of detail.body.content.questions) {
       expect(q.correct, 'مفتاح الإجابة (correct) يجب ألا يصل للتلميذ').toBeUndefined();
       expect(q.correctAnswer, 'مفتاح الإجابة (correctAnswer) يجب ألا يصل للتلميذ').toBeUndefined();
+      // صيغ بديلة للإجابة كانت تتسرب رغم حذف correctAnswer (§72,§100)
+      expect(q.acceptedAnswers, 'الصيغ المقبولة يجب ألا تصل للتلميذ').toBeUndefined();
+      expect(q.explanation, 'تفسير الإجابة يجب ألا يصل للتلميذ').toBeUndefined();
+      expect(q.explanationText, 'تفسير الإجابة يجب ألا يصل للتلميذ').toBeUndefined();
+      expect(q.prompt, 'نص السؤال يبقى للتلميذ').toBeTruthy();
+    }
+    // البيانات الداخلية للمخطّط/التدقيق لا تظهر في النسخة التلميذية (§104)
+    for (const k of ['blueprint', 'audit', 'issues', 'report', 'coverage', 'generationMethod']) {
+      expect(detail.body.content[k], `content.${k} يجب ألا يصل للتلميذ`).toBeUndefined();
     }
   });
 });

@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 import { imgSrc, restoreOriginalImg } from '../../utils/imgSrc';
+import { subjectLabel as utilSubjectLabel } from '../../utils/subjectLabels.js';
 import ExamPaper from '../../components/ExamPaper.jsx';
 
 const LEVELS = [
@@ -13,16 +14,9 @@ const LEVELS = [
   { code: 'year6', label: 'السنة السادسة' }
 ];
 
-const SUBJECTS = [
-  { code: 'math', label: 'الرياضيات' },
-  { code: 'anisi', label: 'القراءة' },
-  { code: 'science', label: 'الإيقاظ العلمي' },
-  { code: 'production', label: 'الإنتاج الكتابي' },
-  { code: 'handwriting', label: 'الخط والإملاء' },
-  { code: 'arabic', label: 'اللغة العربية' },
-  { code: 'french', label: 'اللغة الفرنسية' },
-  { code: 'islamic', label: 'التربية الإسلامية' }
-];
+// أكواد المواد فقط — التسميات من utils/subjectLabels.js (المصدر الوحيد §78، لا تكرار للقاموس)
+const SUBJECT_CODES = ['math', 'anisi', 'science', 'production', 'handwriting', 'arabic', 'french', 'islamic'];
+const SUBJECTS = SUBJECT_CODES.map((code) => ({ code, label: utilSubjectLabel(code) }));
 
 export default function OfficialExams({ classes }) {
   const { t } = useI18n();
@@ -35,9 +29,12 @@ export default function OfficialExams({ classes }) {
   const [error, setError] = useState('');
   const [draft, setDraft] = useState({ title: '', subject: 'math', classId: '', trimester: 1, content: {} });
   const [editingId, setEditingId] = useState(null);
-  const [aiForm, setAiForm] = useState({ subject: 'arabic', level: 'year3', trimester: 1, title: '', lessonTitle: '', count: 6, classId: '', durationMinutes: 60 });
+  const [aiForm, setAiForm] = useState({ subject: 'arabic', level: 'year3', trimester: 1, title: '', lessonTitle: '', count: 8, classId: '', durationMinutes: 60, targetPoints: 20, assessmentType: 'term' });
   const [aiLoading, setAiLoading] = useState(false);
   const [aiResult, setAiResult] = useState(null);
+  // خيارات المخطّط (§58,§62): دروس الثلاثي مجمّعة في وحدات + قيم مسموحة
+  const [bpOptions, setBpOptions] = useState(null);
+  const [bpLoading, setBpLoading] = useState(false);
 
   const load = useCallback(() => {
     api
@@ -70,6 +67,23 @@ export default function OfficialExams({ classes }) {
     if (view === 'bank') loadBank();
   }, [view, loadBank]);
 
+  // جلب دروس النطاق لمخطّط التوليد (§62) — يعاد عند تغيير السنة/المادة/الثلاثي
+  useEffect(() => {
+    if (view !== 'ai') return undefined;
+    let alive = true;
+    setBpLoading(true);
+    const q = new URLSearchParams();
+    q.set('level', aiForm.level);
+    q.set('subject', aiForm.subject);
+    if (aiForm.trimester) q.set('trimester', String(aiForm.trimester));
+    api
+      .get(`/teacher/exams/blueprint-options?${q.toString()}`)
+      .then((d) => { if (alive) setBpOptions(d); })
+      .catch(() => { if (alive) setBpOptions(null); })
+      .finally(() => { if (alive) setBpLoading(false); });
+    return () => { alive = false; };
+  }, [view, aiForm.level, aiForm.subject, aiForm.trimester]);
+
   const importBank = async (exam) => {
     try {
       await api.post('/teacher/exams/instantiate', {
@@ -101,7 +115,8 @@ export default function OfficialExams({ classes }) {
           subject: draft.subject,
           classId: draft.classId ? Number(draft.classId) : undefined,
           trimester: Number(draft.trimester),
-          content: { ...draft.content, header: 'الجمهورية التونسية — وزارة التربية' }
+          // لا ترويسة رسمية لاختبار ألّفه المدرس (§4) — وزارة التربية لمنشأ official فقط
+          content: { ...draft.content, header: '' }
         });
       }
       setDraft({ title: '', subject: 'math', classId: '', trimester: 1, content: {} });
@@ -114,7 +129,13 @@ export default function OfficialExams({ classes }) {
   };
 
   const togglePublish = async (exam) => {
-    await api.put(`/teacher/exams/${exam.id}`, { published: !exam.published });
+    try {
+      await api.put(`/teacher/exams/${exam.id}`, { published: !exam.published });
+      setError('');
+    } catch (err) {
+      // بوابة النشر §125: رسالة 409 صادقة تُعرض للمدرس بدل الفشل الصامت
+      setError(err.message);
+    }
     load();
   };
 
@@ -288,9 +309,11 @@ export default function OfficialExams({ classes }) {
         trimester: Number(aiForm.trimester),
         title: aiForm.title || undefined,
         lessonTitle: aiForm.lessonTitle || undefined,
-        count: Number(aiForm.count) || 6,
+        count: Number(aiForm.count) || 8,
         classId: aiForm.classId ? Number(aiForm.classId) : undefined,
-        durationMinutes: Number(aiForm.durationMinutes) || 60
+        durationMinutes: Number(aiForm.durationMinutes) || 60,
+        targetPoints: Number(aiForm.targetPoints) || 20,
+        assessmentType: aiForm.assessmentType || 'term'
       });
       setAiResult(data);
       load();
@@ -301,8 +324,15 @@ export default function OfficialExams({ classes }) {
     }
   };
 
-  const subjectLabel = (code) => SUBJECTS.find((s) => s.code === code)?.label || code;
+  const subjectLabel = (code) => utilSubjectLabel(code);
   const levelLabel = (code) => LEVELS.find((l) => l.code === code)?.label || code;
+  // حالة الاختبار §61 (من content.status) مع بقاء published للقائمة
+  const statusLabel = (exam) => {
+    if (exam.published) return t('teacherSpace.officialExams.published');
+    const st = exam.content?.status;
+    if (st && st !== 'published') return t(`teacherSpace.officialExams.statuses.${st}`);
+    return t('teacherSpace.officialExams.draft');
+  };
 
   return (
     <div className="panel">
@@ -352,7 +382,12 @@ export default function OfficialExams({ classes }) {
                     <td>{e.trimester ? t(`teacherSpace.officialExams.trimesters.${e.trimester}`) : t('teacherSpace.officialExams.noValue')}</td>
                     <td>{e.class?.name || t('teacherSpace.officialExams.allClasses')}</td>
                     <td>
-                      <span className={`badge ${e.published ? 'good' : ''}`}>{e.published ? t('teacherSpace.officialExams.published') : t('teacherSpace.officialExams.draft')}</span>
+                      <span className={`badge ${e.published ? 'good' : ''}`}>{statusLabel(e)}</span>
+                      {e.content?.source === 'ai-generated' && (
+                        <span className="badge" title={t('teacherSpace.officialExams.aiBadgeHint')}>
+                          {t('teacherSpace.officialExams.aiBadge')}
+                        </span>
+                      )}
                     </td>
                     <td className="actions">
                       <button className="btn btn-sm" onClick={() => { setActive(e); setView('preview'); }}>
@@ -467,10 +502,11 @@ export default function OfficialExams({ classes }) {
       {view === 'ai' && (
         <form className="card-form" onSubmit={generateAi}>
           <h4>{t('teacherSpace.officialExams.aiTitle')}</h4>
+          <p className="muted">{t('teacherSpace.officialExams.aiBlueprintNote')}</p>
           <div className="form-row">
             <div className="form-group grow">
               <label>{t('teacherSpace.officialExams.subjectLabel')}</label>
-              <select value={aiForm.subject} onChange={(e) => setAiForm({ ...aiForm, subject: e.target.value })}>
+              <select value={aiForm.subject} onChange={(e) => setAiForm({ ...aiForm, subject: e.target.value, lessonTitle: '' })}>
                 {SUBJECTS.map((s) => (
                   <option key={s.code} value={s.code}>{s.label}</option>
                 ))}
@@ -478,7 +514,7 @@ export default function OfficialExams({ classes }) {
             </div>
             <div className="form-group">
               <label>{t('teacherSpace.officialExams.yearLabel')}</label>
-              <select value={aiForm.level} onChange={(e) => setAiForm({ ...aiForm, level: e.target.value })}>
+              <select value={aiForm.level} onChange={(e) => setAiForm({ ...aiForm, level: e.target.value, lessonTitle: '' })}>
                 {LEVELS.map((l) => (
                   <option key={l.code} value={l.code}>{l.label}</option>
                 ))}
@@ -486,7 +522,7 @@ export default function OfficialExams({ classes }) {
             </div>
             <div className="form-group">
               <label>{t('teacherSpace.officialExams.trimesterLabel')}</label>
-              <select value={aiForm.trimester} onChange={(e) => setAiForm({ ...aiForm, trimester: e.target.value })}>
+              <select value={aiForm.trimester} onChange={(e) => setAiForm({ ...aiForm, trimester: e.target.value, lessonTitle: '' })}>
                 <option value="1">{t('teacherSpace.officialExams.trimesters.1')}</option>
                 <option value="2">{t('teacherSpace.officialExams.trimesters.2')}</option>
                 <option value="3">{t('teacherSpace.officialExams.trimesters.3')}</option>
@@ -494,18 +530,69 @@ export default function OfficialExams({ classes }) {
             </div>
             <div className="form-group">
               <label>{t('teacherSpace.officialExams.countLabel')}</label>
-              <input type="number" min="1" max="15" value={aiForm.count} onChange={(e) => setAiForm({ ...aiForm, count: e.target.value })} />
+              <input type="number" min="1" max="20" value={aiForm.count} onChange={(e) => setAiForm({ ...aiForm, count: e.target.value })} />
+            </div>
+            <div className="form-group">
+              <label>{t('teacherSpace.officialExams.targetPointsLabel')}</label>
+              <select value={aiForm.targetPoints} onChange={(e) => setAiForm({ ...aiForm, targetPoints: e.target.value })}>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label>{t('teacherSpace.officialExams.assessmentTypeLabel')}</label>
+              <select value={aiForm.assessmentType} onChange={(e) => setAiForm({ ...aiForm, assessmentType: e.target.value })}>
+                {(bpOptions?.assessmentTypes || [
+                  { value: 'written' }, { value: 'oral' }, { value: 'practical' }, { value: 'diagnostic' },
+                  { value: 'formative' }, { value: 'unit' }, { value: 'term' }, { value: 'cumulative' }, { value: 'remedial' }
+                ]).map((a) => {
+                  const label = t(`teacherSpace.officialExams.assessmentTypes.${a.value}`);
+                  return (<option key={a.value} value={a.value}>{label || a.label || a.value}</option>);
+                })}
+              </select>
+            </div>
+            <div className="form-group">
+              <label>{t('teacherSpace.officialExams.durationLabel')}</label>
+              <input type="number" min="5" max="120" value={aiForm.durationMinutes} onChange={(e) => setAiForm({ ...aiForm, durationMinutes: e.target.value })} />
             </div>
           </div>
           <div className="form-row">
             <div className="form-group grow">
               <label>{t('teacherSpace.officialExams.examTitleLabel')}</label>
-              <input value={aiForm.title} onChange={(e) => setAiForm({ ...aiForm, title: e.target.value })} placeholder={t('teacherSpace.officialExams.examTitleLabel')} />
+              <input value={aiForm.title} onChange={(e) => setAiForm({ ...aiForm, title: e.target.value })} placeholder={t('teacherSpace.officialExams.examTitlePh')} />
             </div>
             <div className="form-group grow">
               <label>{t('teacherSpace.officialExams.lessonLabel')}</label>
-              <input value={aiForm.lessonTitle} onChange={(e) => setAiForm({ ...aiForm, lessonTitle: e.target.value })} placeholder={t('teacherSpace.officialExams.lessonPlaceholder')} />
+              {bpLoading ? (
+                <input value={aiForm.lessonTitle} onChange={(e) => setAiForm({ ...aiForm, lessonTitle: e.target.value })} placeholder={t('teacherSpace.officialExams.scopeLoading')} />
+              ) : (
+                <select value={aiForm.lessonTitle} onChange={(e) => setAiForm({ ...aiForm, lessonTitle: e.target.value })}>
+                  <option value="">{t('teacherSpace.officialExams.scopeAll')}</option>
+                  {(bpOptions?.units || []).map((u) => (
+                    <optgroup key={u.id} label={u.title}>
+                      {u.lessons.map((l) => (
+                        <option key={l.id} value={l.title}>{l.title}</option>
+                      ))}
+                    </optgroup>
+                  ))}
+                </select>
+              )}
             </div>
+          </div>
+          {(bpOptions?.warnings?.length || 0) > 0 && (
+            <ul className="muted" style={{ margin: '0 0 0.75rem', paddingInlineStart: '1.25rem' }}>
+              {bpOptions.warnings.map((w, i) => (<li key={i}>{w}</li>))}
+            </ul>
+          )}
+          <div className="form-group">
+            <label>{t('teacherSpace.officialExams.classCol')}</label>
+            <select value={aiForm.classId} onChange={(e) => setAiForm({ ...aiForm, classId: e.target.value })}>
+              <option value="">{t('teacherSpace.officialExams.all')}</option>
+              {classes.map((c) => (
+                <option key={c.id} value={c.id}>{c.name}</option>
+              ))}
+            </select>
           </div>
           <button className="btn btn-primary" type="submit" disabled={aiLoading}>
             {aiLoading ? '...' : t('teacherSpace.officialExams.generateAiBtn')}
@@ -513,7 +600,37 @@ export default function OfficialExams({ classes }) {
           {aiResult && (
             <div className="card-item">
               <h5>{aiResult.title}</h5>
-              <p className="sub">{t('teacherSpace.officialExams.questionsLabel', { n: aiResult.content?.questions?.length || 0 })} {aiResult.savedToBank ? '— ' + t('teacherSpace.officialExams.aiSaved') : ''}</p>
+              <p className="sub">
+                {t('teacherSpace.officialExams.questionsLabel', { n: aiResult.content?.questions?.length || 0 })}
+                {' — ' + t('teacherSpace.officialExams.totalPointsLine', {
+                  duration: aiResult.content?.durationMinutes || 0,
+                  points: aiResult.content?.totalPoints || 0
+                })}
+                {aiResult.savedToBank ? ' — ' + t('teacherSpace.officialExams.aiSaved') : ''}
+              </p>
+              {/* بطاقة تقرير الفحص §65,§126 — رسالة صادقة لا «نجاح» كاذب */}
+              <div className={`audit-report ${aiResult.valid ? 'audit-ok' : 'audit-warn'}`}>
+                <strong>{aiResult.message}</strong>
+                {!!aiResult.report?.length && (
+                  <ul>
+                    {aiResult.report.map((line, i) => (<li key={i}>{line}</li>))}
+                  </ul>
+                )}
+                {!!aiResult.issues?.length && (
+                  <ul>
+                    {aiResult.issues.map((iss, i) => (
+                      <li key={i}>
+                        {iss.severity === 'error' ? '✗' : iss.severity === 'warn' ? '⚠' : '✓'} {iss.message}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {!!aiResult.warnings?.length && (
+                  <ul>
+                    {aiResult.warnings.map((w, i) => (<li key={i}>⚠ {w?.message || String(w)}</li>))}
+                  </ul>
+                )}
+              </div>
               <div className="btn-group">
                 <button type="button" className="btn btn-sm" onClick={() => { setActive(aiResult); setView('preview'); }}>
                   {t('teacherSpace.officialExams.preview')}

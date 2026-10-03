@@ -592,7 +592,10 @@ router.get('/student/profile', studentMiddleware, asyncHandler(async (req, res) 
   });
 }));
 
-const OFFICIAL_EXAM_ANSWER_KEYS = new Set(['correct', 'correctAnswer', 'orderItems']);
+// مفاتيح الإجابة + البيانات الداخلية للنسخة التلميذية (§72): لا يصل للتلميذ
+// أي مفتاح تصحيح أو بيانات مخطّط/تدقيق داخلية — تُحذف قبل الإرسال.
+const OFFICIAL_EXAM_ANSWER_KEYS = new Set(['correct', 'correctAnswer', 'orderItems', 'acceptedAnswers', 'explanation', 'explanationText']);
+const OFFICIAL_EXAM_INTERNAL_CONTENT_KEYS = ['blueprint', 'audit', 'issues', 'report', 'coverage', 'generationMethod'];
 
 function sanitizeOfficialExamForStudent(exam) {
   const content = exam.content ? { ...exam.content, questions: (exam.content.questions || []).map((q) => {
@@ -600,6 +603,7 @@ function sanitizeOfficialExamForStudent(exam) {
     OFFICIAL_EXAM_ANSWER_KEYS.forEach((k) => delete clean[k]);
     return clean;
   }) } : exam.content;
+  if (content) OFFICIAL_EXAM_INTERNAL_CONTENT_KEYS.forEach((k) => delete content[k]);
   return { ...exam, content };
 }
 

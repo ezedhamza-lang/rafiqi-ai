@@ -1,9 +1,16 @@
 import fs from 'fs';
+import os from 'os';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const BANK_PATH = path.join(__dirname, '../../content/banks/official-exams-bank.json');
+// القراءة دائمًا من ملف البنك الحقيقي، لكن **الكتابة أثناء الاختبارات** تذهب إلى
+// ملف مؤقّت: الاختبارات لا تُعدّل محتوى مُرحَّلًا في git (شجرة عمل نظيفة + أعداد
+// البنك لا تتغيّر بين ملف اختبار وآخر).
+const WRITE_PATH = process.env.NODE_ENV === 'test'
+  ? path.join(os.tmpdir(), `rafiqi-official-exams-bank.test.${process.pid}.json`)
+  : BANK_PATH;
 
 const QUESTION_TYPES = {
   MCQ: 'MCQ',
@@ -90,6 +97,9 @@ export function sanitizeBankExamForStudent(bankExam) {
       delete clean.correct;
       delete clean.correctAnswer;
       delete clean.orderItems;
+      delete clean.acceptedAnswers;
+      delete clean.explanation;
+      delete clean.explanationText;
       return clean;
     })
   };
@@ -107,8 +117,12 @@ export function sanitizeBankExamForStudent(bankExam) {
  * الاستدعاء داخل routes/teacherContent.js.
  */
 export function buildExamContent(bankExam, context = {}) {
+  // الترويسة الرسمية (§4): وزارة التربية لمنشأ official فقط — اختبار مولَّد
+  // (ai-generated / generated-bank-*) أو مُلَّف بلا ترويسة لا يدّعي رسمية.
+  const src = String(bankExam?.source || '');
+  const isOfficialSrc = !/^(ai-|generated-)/i.test(src);
   return {
-    header: 'الجمهورية التونسية — وزارة التربية',
+    header: isOfficialSrc ? 'الجمهورية التونسية — وزارة التربية' : '',
     school: context.school || '',
     date: context.schoolYear || '',
     durationMinutes: bankExam.durationMinutes || 45,
@@ -148,7 +162,8 @@ function gradeClosedQuestion(question, answer) {
 
   switch (type) {
     case QUESTION_TYPES.MCQ:
-      correct = String(answer ?? '') === String(question.correct ?? '');
+      // احتياطي: اختبارات قديمة تحمل `correct` ومحرّك التوليد يحفظ `correctAnswer`
+      correct = String(answer ?? '') === String(question.correct ?? question.correctAnswer ?? '');
       break;
     case QUESTION_TYPES.TRUE_FALSE:
       correct = normalizeArabic(answer) === normalizeArabic(question.correctAnswer ?? '');
@@ -258,10 +273,9 @@ export function saveAiExamToBank(bankExam) {
     const bank = loadOfficialExamBank();
     const exams = Array.isArray(bank.exams) ? bank.exams : [];
     if (exams.some((e) => e.id === bankExam.id)) return false;
-    exams.push(bankExam);
-    bank.exams = exams;
-    cache = bank;
-    fs.writeFileSync(BANK_PATH, JSON.stringify(bank, null, 2), 'utf8');
+    const next = { ...bank, exams: [...exams, bankExam] };
+    if (process.env.NODE_ENV !== 'test') cache = next;
+    fs.writeFileSync(WRITE_PATH, JSON.stringify(next, null, 2), 'utf8');
     return true;
   } catch {
     return false;
