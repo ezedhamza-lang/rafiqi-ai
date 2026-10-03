@@ -53,6 +53,18 @@ export default function Correction() {
       .catch((e) => setError(e.message));
   }, []);
 
+  // قائمة اختبارات المعلّم الرسمية: كانت القائمة تُبنى من «التسليمات» فلم يمكن
+  // اختيار أي اختبار ⇒ التصحيح الرسمي مستحيل من الواجهة.
+  // (معرَّفة قبل useEffect: مصفوفة الاعتماديات تُقيَّم أثناء الرسم)
+  const loadExams = useCallback(async () => {
+    try {
+      const data = await api.get('/teacher/exams');
+      setExams(data);
+    } catch (e) {
+      setError(e.message);
+    }
+  }, []);
+
   useEffect(() => {
     load();
     loadPaperExams();
@@ -73,17 +85,6 @@ export default function Correction() {
       setError(e.message);
     }
   };
-
-  // قائمة اختبارات المعلّم الرسمية: كانت القائمة تُبنى من «التسليمات» فلم يمكن
-  // اختيار أي اختبار ⇒ التصحيح الرسمي مستحيل من الواجهة.
-  const loadExams = useCallback(async () => {
-    try {
-      const data = await api.get('/teacher/exams');
-      setExams(data);
-    } catch (e) {
-      setError(e.message);
-    }
-  }, []);
 
   const selectedExam = exams.find((e) => String(e.id) === String(selectedExamId)) || null;
   const selectedExamMax = Number(selectedExam?.content?.totalPoints) || 20;
