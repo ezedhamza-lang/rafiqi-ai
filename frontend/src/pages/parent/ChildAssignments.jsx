@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 import { formatDate as fmtDate } from '../../utils/formatUtils.js';
+import { subjectLabel } from '../../utils/labels.js';
 
 
 export default function ChildAssignments() {
@@ -54,7 +55,7 @@ export default function ChildAssignments() {
                   {assignments.map((a) => (
                     <tr key={a.id}>
                       <td>{a.title}</td>
-                      <td>{a.subject}</td>
+                      <td>{subjectLabel(a.subject, lang)}</td>
                       <td>{fmtDate(a.dueDate, lang)}</td>
                       <td>
                         {a.done ? (

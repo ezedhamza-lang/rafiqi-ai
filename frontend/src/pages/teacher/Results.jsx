@@ -1,15 +1,10 @@
 import { useState, useEffect, useCallback, Fragment } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
-
-const KIND_LABEL = {
-  quiz: 'اختبار سريع',
-  exam: 'امتحان رسمي',
-  assignment: 'واجب'
-};
+import { kindLabel } from '../../utils/labels.js';
 
 export default function Results() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -102,7 +97,7 @@ export default function Results() {
                               {r.attempts.map((a, idx) => (
                                 <tr key={`${a.kind}-${idx}`}>
                                   <td>{a.title || '—'}</td>
-                                  <td>{KIND_LABEL[a.kind] || a.kind}</td>
+                                  <td>{kindLabel(a.kind, lang)}</td>
                                   <td>{a.score === null || a.score === undefined ? '—' : `${a.score} / ${a.max}`}</td>
                                   <td>{typeof a.percent === 'number' ? `${a.percent}%` : '—'}</td>
                                   <td>

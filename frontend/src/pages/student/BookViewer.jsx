@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useI18n } from '../../i18n/index.jsx';
 import { imgSrc, restoreOriginalImg } from '../../utils/imgSrc';
+import { subjectLabel } from '../../utils/labels.js';
 
 function pageUrl(imageBase, imageExt, page) {
   const num = String(page).padStart(3, '0');
@@ -8,7 +9,7 @@ function pageUrl(imageBase, imageExt, page) {
 }
 
 export default function BookViewer({ book, onClose }) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [page, setPage] = useState(book.totalPages ? 1 : 0);
   const [imgError, setImgError] = useState(false);
   const [lift, setLift] = useState(null); // { next, angle, anim }
@@ -93,7 +94,7 @@ export default function BookViewer({ book, onClose }) {
         <div className="modal-head">
           <div>
             <h3>{book.title}</h3>
-            <p className="viewer-sub">{book.grade} - {book.subject}</p>
+            <p className="viewer-sub">{book.grade} - {subjectLabel(book.subject, lang)}</p>
           </div>
           <div style={{ display: 'flex', gap: '0.4rem' }}>
             <button

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import { statusLabel } from '../../utils/labels.js';
 
 export default function Licenses() {
   const { lang, t } = useI18n();
@@ -78,7 +79,7 @@ export default function Licenses() {
                   <td><code>{l.key}</code></td>
                   <td>{l.entityName}</td>
                   <td>
-                    <span className={`badge ${l.status === 'ACTIVE' ? 'good' : 'bad'}`}>{l.status}</span>
+                    <span className={`badge ${l.status === 'ACTIVE' ? 'good' : 'bad'}`}>{statusLabel(l.status, lang)}</span>
                   </td>
                   <td>{new Date(l.createdAt).toLocaleDateString(lang === 'ar' ? 'ar-TN' : 'en-GB')}</td>
                   <td>{l.expiresAt ? new Date(l.expiresAt).toLocaleDateString(lang === 'ar' ? 'ar-TN' : 'en-GB') : '—'}</td>

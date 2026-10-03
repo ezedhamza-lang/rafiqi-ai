@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 import { formatDate as fmtDate } from '../../utils/formatUtils.js';
+import { subjectLabel } from '../../utils/labels.js';
 
 export default function StudentAssignments({ onChanged }) {
   const { t, lang } = useI18n();
@@ -174,7 +175,7 @@ export default function StudentAssignments({ onChanged }) {
           {assignments.map((a) => (
             <div key={a.id} className={`card-item ${a.done ? 'done' : ''}`}>
               <h4>{a.title}</h4>
-              <p className="sub">{t('studentSpace.assignments.questionsCount', { subject: a.subject, n: a.questions.length })}</p>
+              <p className="sub">{t('studentSpace.assignments.questionsCount', { subject: subjectLabel(a.subject, lang), n: a.questions.length })}</p>
               <p className="muted">{a.description}</p>
               <p className="muted">{t('studentSpace.assignments.dueDate', { date: fmtDate(a.dueDate, lang) })}</p>
               {a.done ? (

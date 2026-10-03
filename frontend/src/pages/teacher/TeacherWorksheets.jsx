@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react';
+import { subjectLabel } from '../../utils/labels.js';
 
 const EMPTY_WORKSHEET = {
   schoolName: '',
@@ -146,7 +147,7 @@ function PrintWorksheet({ data }) {
           </tr>
           <tr>
             <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6' }}>المادة</td>
-            <td style={{ border: '1px solid #333', padding: '6px' }}>{data.subject}</td>
+            <td style={{ border: '1px solid #333', padding: '6px' }}>{subjectLabel(data.subject)}</td>
             <td style={{ border: '1px solid #333', padding: '6px', fontWeight: 700, background: '#e8eaf6' }}>القسم</td>
             <td style={{ border: '1px solid #333', padding: '6px' }}>{data.className || '...'}</td>
           </tr>

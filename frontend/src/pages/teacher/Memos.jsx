@@ -1,6 +1,7 @@
 ﻿import { useState, useEffect, useCallback, useMemo } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import { subjectLabel } from '../../utils/labels.js';
 
 const LEVELS = [
   'السنة الأولى أساسي',
@@ -34,7 +35,7 @@ function matchesLevel(book, level) {
 }
 
 export default function Memos({ onChanged }) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [methodologies, setMethodologies] = useState([]);
   const [memos, setMemos] = useState([]);
   const [books, setBooks] = useState([]);
@@ -318,7 +319,7 @@ export default function Memos({ onChanged }) {
                   {memos.map((m) => (
                     <tr key={m.id}>
                       <td>{m.lessonTitle}</td>
-                      <td>{m.subject}</td>
+                      <td>{subjectLabel(m.subject, lang)}</td>
                       <td>{LEVEL_LABELS[m.level] || m.level}</td>
                       <td>
                         <span className="badge good">{m.methodologyTitle || t('teacherSpace.memos.defaultMethodology')}</span>

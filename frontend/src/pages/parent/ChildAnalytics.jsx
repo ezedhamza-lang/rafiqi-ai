@@ -2,18 +2,8 @@ import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 import TrendChart from '../../components/TrendChart.jsx';
-
-const SUBJECT_LABEL_KEYS = {
-  MATH: 'subjects.MATH',
-  READING: 'subjects.READING',
-  SCIENCE: 'subjects.SCIENCE',
-  STORIES: 'subjects.STORIES',
-  GENERAL: 'subjects.GENERAL'
-};
-
-function subjectLabel(t, code) {
-  return SUBJECT_LABEL_KEYS[code] ? t(SUBJECT_LABEL_KEYS[code]) : code || t('subjects.GENERAL');
-}
+// معجم المواد صار واحدًا في utils/labels.js (كان معجمًا خاصًا هنا ⇒ تسرّب أكواد)
+import { subjectLabel as subjectName } from '../../utils/labels.js';
 
 function shortLabel(title) {
   if (!title) return '#';
@@ -134,7 +124,7 @@ export default function ChildAnalytics({ childrenData }) {
                   {report.strengths.map((s) => (
                     <li key={s.subject}>
                       <span className="material-icons good-text">check_circle</span>
-                      {subjectLabel(t, s.subject)} — <strong>{s.avgPercent}%</strong>
+                      {subjectName(s.subject, lang)} — <strong>{s.avgPercent}%</strong>
                     </li>
                   ))}
                 </ul>
@@ -149,7 +139,7 @@ export default function ChildAnalytics({ childrenData }) {
                   {report.weaknesses.map((s) => (
                     <li key={s.subject}>
                       <span className="material-icons bad-text">cancel</span>
-                      {subjectLabel(t, s.subject)} — <strong>{s.avgPercent}%</strong>
+                      {subjectName(s.subject, lang)} — <strong>{s.avgPercent}%</strong>
                     </li>
                   ))}
                 </ul>

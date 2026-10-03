@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
 import { ROLE_LABEL_KEYS } from '../../roles.js';
+import { statusLabel } from '../../utils/labels.js';
 
 const ROLE_OPTIONS = [
   { value: 'STUDENT', labelKey: ROLE_LABEL_KEYS.STUDENT },
@@ -13,7 +14,7 @@ const ROLE_OPTIONS = [
 ];
 
 export default function UsersAdmin() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [users, setUsers] = useState([]);
   const [schools, setSchools] = useState([]);
   const [query, setQuery] = useState('');
@@ -221,7 +222,7 @@ export default function UsersAdmin() {
                 <td>
                   {u.subscriptions?.length > 0 ? (
                     <span className={`badge ${u.subscriptions[0].status === 'ACTIVE' ? 'good' : 'bad'}`}>
-                      {u.subscriptions[0].status}
+                      {statusLabel(u.subscriptions[0].status, lang)}
                     </span>
                   ) : (
                     <span className="badge">{t('usersAdmin.none')}</span>

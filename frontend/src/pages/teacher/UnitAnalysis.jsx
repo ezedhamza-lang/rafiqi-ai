@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import { subjectLabel } from '../../utils/labels.js';
 
 export default function UnitAnalysis({ classes }) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const [selected, setSelected] = useState('');
   const [averages, setAverages] = useState([]);
 
@@ -52,7 +53,7 @@ export default function UnitAnalysis({ classes }) {
                 return (
                   <tr key={a.id}>
                     <td>{a.title}</td>
-                    <td>{a.subject}</td>
+                    <td>{subjectLabel(a.subject, lang)}</td>
                     <td>{a.className}</td>
                     <td>{a.attempts}</td>
                     <td>{a.avgPercent}%</td>

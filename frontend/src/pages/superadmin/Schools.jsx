@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { api } from '../../api/client.js';
 import { useI18n } from '../../i18n/index.jsx';
+import { statusLabel } from '../../utils/labels.js';
 
 const L = {
   ar: {
@@ -131,7 +132,7 @@ export default function Schools() {
                   <td>{s._count?.users ?? 0}</td>
                   <td>{s._count?.classes ?? 0}</td>
                   <td>
-                    <span className={`badge ${s.status === 'ACTIVE' ? 'good' : 'bad'}`}>{s.status}</span>
+                    <span className={`badge ${s.status === 'ACTIVE' ? 'good' : 'bad'}`}>{statusLabel(s.status, lang)}</span>
                   </td>
                   <td>
                     <button className="btn btn-sm btn-outline" onClick={() => setStatus(s.id, s.status === 'ACTIVE' ? 'SUSPENDED' : 'ACTIVE')}>
