@@ -39,3 +39,32 @@ export const directorClassUpdateSchema = z.object({
 });
 
 export { idParamSchema as directorClassIdParamSchema };
+
+// ── بطاقات الدخول (المرحلة C) ────────────────────────────────────────────────
+const cardPassword = z
+  .string({ error: 'كلمة السر غير صالحة' })
+  .trim()
+  .min(6, { error: 'كلمة السر قصيرة جدا (6 أحرف على الأقل)' })
+  .max(64, { error: 'كلمة السر طويلة جدا' })
+  .refine((v) => !/\s/.test(v), { error: 'كلمة السر لا يجب أن تحتوي فراغات' })
+  .optional()
+  .nullable();
+
+export const directorCredentialsStudentParamSchema = z.object({
+  studentId: z.coerce.number({ error: 'معرّف التلميذ غير صحيح' }).int().positive({ error: 'معرّف التلميذ غير صحيح' })
+});
+
+export const directorCredentialsIssueSchema = z.object({  // كلمة سر اختيارية: إن تُركت يولّدها الخادم رقمًا من 6 أرقام
+  password: cardPassword,
+  // card = بطاقة تُطبع وتبقى صالحة · temporary = كلمة سر تُسلَّم ويغيّرها التلميذ عند أول دخول
+  mode: z.enum(['card', 'temporary'], { error: 'نوع البطاقة غير معروف' }).optional()
+});
+
+export const directorCredentialsBulkSchema = z.object({
+  classId: z.coerce.number({ error: 'يرجى اختيار القسم' }).int().positive({ error: 'يرجى اختيار القسم' }),
+  mode: z.enum(['card', 'temporary'], { error: 'نوع البطاقة غير معروف' }).optional(),
+  // يسلّم كلمة سر واحدة لكل تلميذ (أبسط للطباعة)؛ إن تُركت يولّد الخادم واحدة لكل تلميذ
+  password: cardPassword,
+  // افتراضيًا: نُصدر لمن لا كلمة سر له فقط — لا نكتب فوق كلمة سر حيّة
+  onlyMissing: z.boolean().optional()
+});

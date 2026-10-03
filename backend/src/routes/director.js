@@ -5,6 +5,7 @@ import prisma from '../db.js';
 import { authMiddleware, adminMiddleware, requireRole } from '../auth.js';
 import { actorSchoolId, leadParentFilter } from '../tenant.js';
 import { notify, notifyRole } from '../services/notify.js';
+import { issueStudentCredentials, safeStudentRow } from '../services/studentCredentials.js';
 import { schoolYearBounds, priceForType } from '../services/schoolYear.js';
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
@@ -16,7 +17,10 @@ import {
   directorRequestIdParamSchema,
   directorClassCreateSchema,
   directorClassUpdateSchema,
-  directorClassIdParamSchema
+  directorClassIdParamSchema,
+  directorCredentialsIssueSchema,
+  directorCredentialsBulkSchema,
+  directorCredentialsStudentParamSchema
 } from '../validators/director.js';
 
 const router = Router();
@@ -202,6 +206,218 @@ router.get('/teachers', requireRole('SCHOOL_DIRECTOR', 'ADMIN', 'SUPER_ADMIN'), 
   });
   res.json(teachers);
 }));
+
+/**
+ * @swagger
+ * /api/director/classes/{id}/credentials:
+ *   get:
+ *     summary: تلاميذ القسم مع حالة بيانات الدخول (بلا كلمة سر)
+ *     description: >
+ *       قائمة آمنة للطباعة/العرض: لا تحتوي كلمة سر ولا hash. كلمة السر تُعرض
+ *       مرة واحدة فقط عند الإصدار (POST /api/director/credentials/:studentId).
+ *     tags: [director]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema: { type: integer }
+ *     responses:
+ *       200:
+ *         description: تلاميذ القسم وحالة بيانات دخولهم
+ *       404:
+ *         description: القسم غير موجود
+ */
+router.get(
+  '/classes/:id/credentials',
+  requireRole('SCHOOL_DIRECTOR', 'ADMIN', 'SUPER_ADMIN'),
+  validateParams(directorClassIdParamSchema),
+  asyncHandler(async (req, res) => {
+    const sid = actorSchoolId(req);
+    const klass = await prisma.class.findFirst({
+      where: { id: Number(req.params.id), ...(sid != null ? { schoolId: sid } : {}) },
+      select: { id: true, name: true, level: true, schoolYear: true }
+    });
+    if (!klass) throw new ApiError(404, 'القسم غير موجود');
+
+    const students = await prisma.student.findMany({
+      where: { classId: klass.id },
+      include: {
+        account: { select: { id: true, email: true, accountStatus: true, lastActiveAt: true } }
+      },
+      orderBy: [{ firstName: 'asc' }, { lastName: 'asc' }]
+    });
+
+    res.json({
+      class: klass,
+      students: students.map((s) => safeStudentRow(s))
+    });
+  })
+);
+
+/**
+ * @swagger
+ * /api/director/credentials/bulk:
+ *   post:
+ *     summary: إصدار بطاقات دخول لكل تلاميذ قسم
+ *     description: >
+ *       افتراضيًا (onlyMissing) لا نكتب فوق كلمة سر حيّة: نُصدر لمن لم تُصدر له
+ *       بيانات دخول بعد. إن مرّر المدير كلمة سر واحدة تُسلَّم لكل التلاميذ.
+ *     tags: [director]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [classId]
+ *             properties:
+ *               classId: { type: integer }
+ *               mode: { type: string, enum: [card, temporary] }
+ *               password: { type: string }
+ *               onlyMissing: { type: boolean }
+ *     responses:
+ *       200:
+ *         description: البطاقات الصادرة (+ المتجاوزة والأخطاء)
+ *       404:
+ *         description: القسم غير موجود
+ */
+router.post(
+  '/credentials/bulk',
+  requireRole('SCHOOL_DIRECTOR', 'ADMIN', 'SUPER_ADMIN'),
+  validateBody(directorCredentialsBulkSchema),
+  asyncHandler(async (req, res) => {
+    const sid = actorSchoolId(req);
+    const { classId, mode = 'card', password, onlyMissing = true } = req.body;
+    const klass = await prisma.class.findFirst({
+      where: { id: Number(classId), ...(sid != null ? { schoolId: sid } : {}) },
+      select: { id: true, name: true, level: true, schoolYear: true }
+    });
+    if (!klass) throw new ApiError(404, 'القسم غير موجود');
+
+    const students = await prisma.student.findMany({
+      where: { classId: klass.id },
+      include: { account: { select: { id: true, email: true, accountStatus: true } } }
+    });
+
+    const cards = [];
+    const failures = [];
+    let skipped = 0;
+    for (const s of students) {
+      if (!s.account) {
+        skipped++; // بلا حساب تلميذ بعد (لم يُعتمد طلبه) ⇒ لا بطاقة له
+        continue;
+      }
+      if (onlyMissing && s.credentialsIssuedAt) {
+        skipped++;
+        continue;
+      }
+      try {
+        cards.push(
+          await issueStudentCredentials(
+            prisma,
+            {
+              studentId: s.id,
+              accountId: s.account.id,
+              email: s.account.email,
+              firstName: s.firstName,
+              lastName: s.lastName,
+              className: klass.name,
+              level: s.level,
+              schoolYear: s.schoolYear
+            },
+            { password: password || undefined, mode }
+          )
+        );
+      } catch (e) {
+        // تلميذ واحد لا يوقف الباقي: يُسجَّل الفشل ويُكمل
+        failures.push({ studentId: s.id, name: `${s.firstName} ${s.lastName}`, reason: e.message });
+      }
+    }
+
+    res.json({ classId: klass.id, className: klass.name, mode, issued: cards.length, skipped, failures, cards });
+  })
+);
+
+/**
+ * @swagger
+ * /api/director/credentials/{studentId}:
+ *   post:
+ *     summary: إصدار/تعيين كلمة سر تلميذ وإرجاع البطاقة مرة واحدة
+ *     tags: [director]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: studentId
+ *         required: true
+ *         schema: { type: integer }
+ *     requestBody:
+ *       required: false
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               password: { type: string, description: 'إن تُركت يولّدها الخادم (6 أرقام)' }
+ *               mode: { type: string, enum: [card, temporary] }
+ *     responses:
+ *       200:
+ *         description: البطاقة (بريد + كلمة سر صريحة — مرة واحدة)
+ *       404:
+ *         description: التلميذ غير موجود أو لا يملك حسابا
+ */
+router.post(
+  '/credentials/:studentId',
+  requireRole('SCHOOL_DIRECTOR', 'ADMIN', 'SUPER_ADMIN'),
+  validateParams(directorCredentialsStudentParamSchema),
+  validateBody(directorCredentialsIssueSchema),
+  asyncHandler(async (req, res) => {
+    const sid = actorSchoolId(req);
+    const student = await prisma.student.findFirst({
+      where: { id: Number(req.params.studentId) },
+      include: {
+        account: { select: { id: true, email: true, accountStatus: true, schoolId: true } },
+        class: { select: { id: true, name: true, schoolId: true } }
+      }
+    });
+    if (!student) throw new ApiError(404, 'التلميذ غير موجود');
+    if (!student.account) throw new ApiError(400, 'هذا التلميذ ليس له حساب دخول بعد');
+    if (sid != null && student.account.schoolId !== sid && student.class?.schoolId !== sid) {
+      throw new ApiError(404, 'التلميذ غير موجود');
+    }
+
+    const card = await issueStudentCredentials(
+      prisma,
+      {
+        studentId: student.id,
+        accountId: student.account.id,
+        email: student.account.email,
+        firstName: student.firstName,
+        lastName: student.lastName,
+        className: student.class?.name ?? null,
+        level: student.level,
+        schoolYear: student.schoolYear
+      },
+      { password: req.body.password || undefined, mode: req.body.mode || 'card' }
+    );
+
+    // ولي الأمر يُخطَر بالبيانات الجديدة (كما في الموافقة على الطلب)
+    if (student.userId && student.userId !== student.account.id) {
+      await notify([student.userId], {
+        type: 'CREDENTIALS',
+        title: `بيانات دخول جديدة لابنك ${student.firstName} ${student.lastName}`,
+        body: `البريد: ${card.email} — كلمة السر: ${card.password}`,
+        link: '/parent'
+      });
+    }
+
+    res.json(card);
+  })
+);
 
 /**
  * @swagger
@@ -450,7 +666,8 @@ router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validatePara
         level: request.level,
         schoolYear: request.schoolYear,
         schoolName: request.schoolName,
-        tempPassword: temporaryPassword
+        tempPassword: temporaryPassword,
+        credentialsIssuedAt: new Date()
       }
     });
 

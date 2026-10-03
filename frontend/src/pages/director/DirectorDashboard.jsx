@@ -6,6 +6,7 @@ import { useI18n } from '../../i18n/index.jsx';
 import PromoCarousel from '../../components/PromoCarousel.jsx';
 const DirectorHome = lazy(() => import('./DirectorHome.jsx'));
 const DirectorClasses = lazy(() => import('./DirectorClasses.jsx'));
+const DirectorCredentials = lazy(() => import('./DirectorCredentials.jsx'));
 const DirectorNotifications = lazy(() => import('./DirectorNotifications.jsx'));
 const DirectorRequests = lazy(() => import('./DirectorRequests.jsx'));
 const DirectorDocuments = lazy(() => import('./DirectorDocuments.jsx'));
@@ -19,6 +20,7 @@ const TABS = [
   { to: 'requests', icon: 'how_to_reg', key: 'requests' },
   { to: 'documents', icon: 'folder_shared', key: 'documents' },
   { to: 'classes', icon: 'school', key: 'classes' },
+  { to: 'credentials', icon: 'confirmation_number', key: 'credentials' },
   { to: 'calendar', icon: 'calendar_month', key: 'calendar' },
   { to: 'notifications', icon: 'notifications', key: 'notifications' }
 ];
@@ -80,6 +82,7 @@ export default function DirectorDashboard() {
           <Route path="requests" element={<DirectorRequests />} />
           <Route path="documents" element={<DirectorDocuments />} />
           <Route path="classes" element={<DirectorClasses />} />
+          <Route path="credentials" element={<DirectorCredentials />} />
           <Route path="calendar" element={<SchoolCalendar manageable />} />
           <Route path="notifications" element={<DirectorNotifications />} />
           {canManageFinance(user) && <Route path="subscriptions" element={<AdminSubscriptions />} />}

@@ -303,6 +303,9 @@ model Student {
   schoolYear    String   @default("2026-2027")
   schoolName    String?
   tempPassword  String?
+  // آخر مرة أصدر فيها المدير بيانات الدخول لهذا التلميذ. وجود هذا الحقل يعني
+  // أن كلمة السر قرار إداري نهائي: لا يعيدها الإقلاع ولا تفقد البطاقة صلاحيتها.
+  credentialsIssuedAt DateTime?
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 

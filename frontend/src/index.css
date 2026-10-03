@@ -9038,3 +9038,27 @@ html:not(.mi-ready) .material-icons{color:transparent !important}
 .reg-steps2 li.reg-steps2__sep{flex:0 0 34px;height:2px;background:var(--border);border-radius:99px;padding:0}
 .reg-card{padding:1rem}
 .reg-card__title{margin:0 0 .9rem}
+
+/* ---------- بطاقات دخول التلاميذ (المرحلة C) ---------- */
+.creds-toolbar{display:flex;flex-wrap:wrap;gap:.9rem;align-items:flex-end;margin-bottom:1rem}
+.creds-field{display:flex;flex-direction:column;gap:.25rem;font-size:.85rem;color:var(--muted)}
+.creds-field select,.creds-field input{padding:.35rem .5rem;border-radius:8px;border:1.5px solid var(--border);font:inherit;min-width:12rem}
+.creds-modes{display:flex;gap:.4rem}
+.creds-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-inline-start:auto}
+.creds-cards-wrap{margin-top:1.4rem;border-top:1px solid var(--border);padding-top:1rem}
+.creds-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:.7rem;margin-top:.6rem}
+.creds-card{border:1.5px dashed var(--border);border-radius:10px;padding:.7rem .8rem;background:#fffdf6;display:flex;flex-direction:column;gap:.35rem;break-inside:avoid}
+.creds-card__head{display:flex;flex-direction:column;gap:.1rem;border-bottom:1px solid var(--border);padding-bottom:.35rem}
+.creds-card__head span{font-size:.75rem;color:var(--muted)}
+.creds-card__row{display:flex;justify-content:space-between;gap:.5rem;font-size:.8rem;color:var(--muted)}
+.creds-card__row code{font-size:.95rem;color:var(--ink);font-weight:700;word-break:break-all;direction:ltr}
+.creds-card__foot{font-size:.72rem;color:var(--muted);border-top:1px solid var(--border);padding-top:.3rem;display:flex;flex-direction:column;gap:.15rem}
+.creds-card__foot em{font-style:normal;color:#b45309;font-weight:700}
+
+@media print {
+  /* نطبع البطاقات وحدها: لا أزرار ولا جداول ولا تنقّل */
+  .creds-toolbar,.creds-cards-wrap h4,.creds-cards-wrap .muted{display:none !important}
+  .creds-cards-wrap{border:0;margin:0;padding:0}
+  .creds-cards{grid-template-columns:repeat(2,1fr);gap:.5rem}
+  .creds-card{border:1px solid #999;background:#fff}
+}
