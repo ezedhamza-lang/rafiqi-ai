@@ -34,6 +34,7 @@ async function getDocxService() {
 }
 import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
+import { assertExamContentPublishable } from '../exams/examContentGuard.js';
 import {
   memoGenerateSchema,
   memoContentSchema,
@@ -550,6 +551,10 @@ router.post('/exams', teacherMiddleware, validateBody(teacherExamCreateSchema), 
   const { title, subject, classId, trimester, content } = req.body;
   await assertClassInSchool(prisma, req, classId, ApiError);
   assertNoOrphanSindRefs(content);
+  // حارس الورقة (مصدر واحد مع الواجهة): ورقة فيها أسئلة مقفلة بلا جدول إسناد
+  // أو كفاية يتيمة أو Σ جدول الإسناد ≠ Σ نقاط الأسئلة لا تُحفظ أصلاً.
+  // (قبل هذا كان الحفظ مسموحًا من الـAPI وحده = «الباب الخلفي»).
+  assertExamContentPublishable(content);
   const exam = await prisma.officialExam.create({
     data: {
       teacherId: req.user.id,
@@ -603,6 +608,9 @@ router.post('/exams/instantiate', teacherMiddleware, asyncHandler(async (req, re
     school: req.user.school || '',
     schoolYear: new Date().getFullYear() + '/' + (new Date().getFullYear() + 1),
   });
+  // الحارس نفسه على مسار البنك (قياس: 342 ورقة بنك تمرّ ⇒ لا كسر)،
+  // حتى لا يختلف سلوك Instantiate عن الإنشاء اليدوي.
+  assertExamContentPublishable(content);
   const exam = await prisma.officialExam.create({
     data: {
       teacherId: req.user.id,
@@ -1026,11 +1034,22 @@ router.put('/exams/:id', teacherMiddleware, validateParams(teacherContentIdParam
     };
   }
   // محتوى بلا مخطّط (مسار يدوي) لا يمرّ على المدقّق أعلاه → حارس «لا سؤال يتيم» هنا
-  if (contentUpdate && !contentUpdate.blueprint) assertNoOrphanSindRefs(contentUpdate);
+  if (contentUpdate && !contentUpdate.blueprint) {
+    assertNoOrphanSindRefs(contentUpdate);
+    // نفس حارس الواجهة: يُمنع الحفظ لا محرّك فقط ⇒ لا باب خلفي
+    assertExamContentPublishable(contentUpdate);
+  }
   if (published !== undefined) {
     const existing = await prisma.officialExam.findFirst({ where: { id: Number(req.params.id), teacherId: req.user.id } });
     if (!existing) throw new ApiError(404, 'الاختبار غير موجود');
     const eff = contentUpdate || existing.content;
+
+    // فحص المحتوى الفعلي عند النشر — حتى لو لم يُرسل المحتوى مع الطلب.
+    // (بلا هذا كانت ورقة قديمة بلا جدول إسناد تُنشر بـ PUT {published:true} فقط:
+    //  ثقب ثانٍ في الباب الخلفي نفسه، اكتُشف بالقراءة لا بالتخمين.)
+    if (published === true && !eff?.blueprint) {
+      assertExamContentPublishable(eff, { status: 409 });
+    }
 
     // عقد النشر (§125,§61): اختبارات المحرّك (ذات blueprint) لا تُنشر وهي مسودة
     // أو فيها أخطاء فحص — النشر فعل بشري بعد المراجعة، والمدقّق لا يثق بالمحتوى.

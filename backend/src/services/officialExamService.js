@@ -12,7 +12,7 @@ const WRITE_PATH = process.env.NODE_ENV === 'test'
   ? path.join(os.tmpdir(), `rafiqi-official-exams-bank.test.${process.pid}.json`)
   : BANK_PATH;
 
-const QUESTION_TYPES = {
+export const QUESTION_TYPES = {
   MCQ: 'MCQ',
   TRUE_FALSE: 'TRUE_FALSE',
   ORDER: 'ORDER',

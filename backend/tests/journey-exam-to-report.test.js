@@ -12,7 +12,6 @@ import { describe, it, expect, beforeAll } from 'vitest';
 import { resetDatabase, seedTestData, login } from './helpers.js';
 import request from 'supertest';
 import bcrypt from 'bcryptjs';
-import { gradeOfficialExam } from '../src/services/officialExamService.js';
 
 let app;
 let prisma;
@@ -109,30 +108,30 @@ describe('الرحلة الكاملة: إنشاء ← نشر ← تسليم ← 
     expect(res.body.content.questions).toHaveLength(4);
   });
 
-  it('١ب) ورقة بلا سند تُقبل كمسوّدة، وتُبقي التصحيح «بانتظار» — لا صفر مُختلق', async () => {
-    // سلوك موثّق: الخادم يقبل بناء المسوّدة يدويًا بلا جدول إسناد (المحرّك يفرضه
-    // في الواجهة). الأهم أخلاقيًا: عند التصحيح لا يدّعي تصحيحًا ولا يكتب صفرًا.
+  it('١ب) ورقة بلا سند تُرفض عند الإنشاء برسالة عربية (الباب الخلفي مغلق)', async () => {
+    // كان هذا السلوك مقبولًا ومسجَّلًا كـ«مسموح كمسوّدة» — تغيّر بإصلاح 04-10:
+    // الخادم يرفض الآن ما ترفضه الواجهة تمامًا (ورقة فيها أسئلة مقفلة بلا
+    // جدول إسناد لا تُحفظ من أي طريق).
     const draft = await request(app)
       .post('/api/teacher/exams')
       .set(auth(teacherToken))
       .send({ title: 'مسوّدة بلا سند', subject: 'MATH', classId: klass.id, content: { totalPoints: 20, questions: examPaper().questions } });
-    expect(draft.status).toBe(201);
+    expect(draft.status).toBe(400);
+    expect(draft.body.error).toMatch(/بلا جدول إسناد/);
+    expect(draft.body.details?.code).toBe('NO_CRITERIA');
 
-    const pub = await request(app).put(`/api/teacher/exams/${draft.body.id}`).set(auth(teacherToken)).send({ published: true });
-    expect(pub.status).toBe(200);
-
-    await request(app)
-      .post(`/api/teacher/student/official-exams/${draft.body.id}/submit`)
-      .set(auth(students[2].token))
-      .send({ answers: students[0].answers });
-    const sub = await prisma.officialSubmission.findFirst({ where: { examId: draft.body.id } });
-    const graded = gradeOfficialExam(draft.body.content, sub.answers);
-    expect(graded.needsManualGrading).toBe(true);
-    expect(graded.reason).toBe('NO_CRITERIA');
-
-    // تنظيف: ورقة المسوّدة ليست جزءًا من الرحلة
-    await prisma.officialSubmission.deleteMany({ where: { examId: draft.body.id } });
-    await prisma.officialExam.delete({ where: { id: draft.body.id } });
+    // الاستثناء المشروع: أسئلة مفتوحة فقط ⇒ تُقبل (تصحيح يدوي معرَّف)
+    const openOnly = await request(app)
+      .post('/api/teacher/exams')
+      .set(auth(teacherToken))
+      .send({
+        title: 'ورقة مفتوحة',
+        subject: 'MATH',
+        classId: klass.id,
+        content: { totalPoints: 20, questions: [{ id: 'q1', type: 'OPEN', prompt: 'اشرح طريقة الجمع', points: 20 }] }
+      });
+    expect(openOnly.status).toBe(201);
+    await request(app).delete(`/api/teacher/exams/${openOnly.body.id}`).set(auth(teacherToken));
   });
 
   it('٢) قبل النشر: لا يظهر لأي تلميذ', async () => {
