@@ -9062,3 +9062,41 @@ html:not(.mi-ready) .material-icons{color:transparent !important}
   .creds-cards{grid-template-columns:repeat(2,1fr);gap:.5rem}
   .creds-card{border:1px solid #999;background:#fff}
 }
+
+/* ---------- تقرير القسم (المرحلة D) ---------- */
+.rpt-head{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.rpt-head__actions{display:flex;gap:.5rem}
+.rpt-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.6rem;margin:.8rem 0}
+.rpt-stat{border:1px solid var(--border);border-radius:10px;padding:.6rem .8rem;display:flex;flex-direction:column;gap:.15rem;background:#fff}
+.rpt-stat span{font-size:.78rem;color:var(--muted)}
+.rpt-stat strong{font-size:1.35rem;color:var(--ink)}
+.rpt-stat--warn{border-color:#e8a317;background:#fffaf0}
+.rpt-honesty{display:flex;align-items:center;gap:.4rem;font-size:.85rem;color:var(--muted);background:#f5f7fa;border-radius:8px;padding:.5rem .7rem;margin:0 0 .8rem}
+.rpt-matrix th{text-align:center;vertical-align:top}
+.rpt-matrix th:first-child,.rpt-matrix td:first-child{text-align:start}
+.rpt-item-kind{display:block;font-size:.7rem;color:var(--primary);font-weight:700}
+.rpt-item-title{display:block;font-size:.85rem;color:var(--ink)}
+.rpt-item-sub{display:block;font-size:.7rem;color:var(--muted);font-weight:400}
+.rpt-cell{text-align:center;font-weight:700}
+.rpt-cell--good{color:#1B7F5A}
+.rpt-cell--warn{color:#b45309}
+.rpt-cell--bad{color:#b91c1c}
+.rpt-cell--pending{color:#b45309}
+.rpt-cell--submitted{color:var(--muted);font-weight:600}
+.rpt-cell--missing{color:#b6bcc6;font-weight:500}
+.rpt-reason{display:block;font-size:.66rem;font-weight:500;color:var(--muted)}
+.rpt-absent{display:block;font-size:.7rem;color:#b91c1c}
+.rpt-criteria{margin-top:1.3rem;border-top:1px solid var(--border);padding-top:.9rem}
+.rpt-mastery-scale{display:flex;flex-wrap:wrap;gap:.3rem;font-size:.72rem;color:var(--muted)}
+.rpt-dist{display:flex;flex-wrap:wrap;gap:.25rem}
+.rpt-dist__max{border-color:#1B7F5A;color:#1B7F5A}
+.rpt-dist__min{border-color:#0e7490;color:#0e7490}
+.rpt-dist__below{border-color:#b45309;color:#b45309}
+.rpt-dist__none{border-color:#b91c1c;color:#b91c1c}
+
+@media print {
+  .rpt-head__actions,.creds-toolbar,.rpt-honesty{display:none !important}
+  .panel{border:none;box-shadow:none;padding:0}
+  .rpt-matrix{font-size:.75rem}
+  .rpt-cell{font-weight:700}
+}

@@ -1034,6 +1034,54 @@
     "typeInfo": "Info",
     "view": "View"
   },
+  "classReport": {
+    "title": "Class report",
+    "subtitle": "Attendance + every piece of work (official exam / homework / quiz) + mastery per criterion. Anything not manually graded shows as \"pending grading\" and is never counted as zero.",
+    "classLabel": "Class",
+    "noClasses": "No classes",
+    "fromLabel": "From date",
+    "toLabel": "To date",
+    "print": "Print",
+    "csvBtn": "Export CSV",
+    "statStudents": "Students",
+    "statItems": "Works",
+    "statAttendanceDays": "Recorded days",
+    "statPending": "Pending grading",
+    "honestyNote": "{{n}} cells pending teacher grading — never counted as zero.",
+    "noItems": "This class has no work yet.",
+    "noDate": "No date",
+    "colStudent": "Student",
+    "colAttendance": "Attendance",
+    "absentCount": "{{n}} absent",
+    "criteriaTitle": "Criterion mastery (from the blueprint)",
+    "colCriterion": "Criterion",
+    "colMastery": "Mastery scale",
+    "colMasteryIndex": "Average /4",
+    "colEarned": "Points",
+    "colDistribution": "Distribution",
+    "pendingCount": "{{n}} pending",
+    "mastery": {
+      "max": "Full mastery",
+      "min": "Minimum mastery",
+      "below": "Below minimum",
+      "none": "No mastery"
+    },
+    "state": {
+      "missing": "Not submitted",
+      "pending": "Pending grading",
+      "submitted": "Submitted",
+      "gradedNoScore": "No score"
+    },
+    "reason": {
+      "NO_CRITERIA": "No blueprint",
+      "MISSING_ANSWER_KEYS": "Missing answer keys",
+      "OPEN_QUESTIONS": "Open questions"
+    },
+    "csv": {
+      "student": "Student",
+      "attendance": "Attendance"
+    }
+  },
   "directorCredentials": {
     "title": "Student login cards",
     "subtitle": "Issue a card per student (email + password), then print it or export CSV. The password is shown once at issuance and never stored in this page.",

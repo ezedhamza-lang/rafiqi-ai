@@ -5,8 +5,11 @@ import { assertClassInSchool } from '../tenant.js';
 import { gradeQuiz } from '../services/gradingService.js';
 import { awardXp, checkBadges, registerDailyActivity, XP_QUIZ } from '../services/gamificationService.js';
 import { gradeOfficialExam } from '../services/officialExamService.js';
-import { validateBody, validateParams } from '../middleware/validate.js';
+import { validateBody, validateParams, validateQuery } from '../middleware/validate.js';
 import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
+import { classIdParamSchema } from '../validators/attendance.js';
+import { classReportQuerySchema } from '../validators/teacher.js';
+import { buildClassReport } from '../services/classReport.js';
 import { quizCreateSchema, quizUpdateSchema, quizSubmitSchema, quizIdParamSchema } from '../validators/teacher.js';
 
 const router = Router();
@@ -470,6 +473,52 @@ router.get('/results', teacherMiddleware, asyncHandler(async (req, res) => {
 
   res.json(results);
 }));
+
+/**
+ * @swagger
+ * /api/teacher/classes/:classId/report:
+ *   get:
+ *     summary: تقرير قسم كامل (حضور + مصفوفة أعمال + إتقان الكفايات)
+ *     description: >
+ *       تقرير واحد يجمع: سجل الحضور، مصفوفة (تلميذ × امتحان/واجب/اختبار)،
+ *       وإتقان كل كفاية من جدول الإسناد. ما لم يُصحَّح يدويًّا يظهر
+ *       «بانتظار التصحيح» ولا يُحسب صفرًا (صدق أولًا).
+ *     tags: [teacher]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: classId
+ *         required: true
+ *         schema: { type: integer }
+ *       - in: query
+ *         name: from
+ *         schema: { type: string, format: date }
+ *       - in: query
+ *         name: to
+ *         schema: { type: string, format: date }
+ *     responses:
+ *       200:
+ *         description: التقرير
+ *       404:
+ *         description: القسم غير موجود أو ليس للقسم نفس الأستاذ
+ */
+router.get(
+  '/classes/:classId/report',
+  teacherMiddleware,
+  validateParams(classIdParamSchema),
+  validateQuery(classReportQuerySchema),
+  asyncHandler(async (req, res) => {
+    const report = await buildClassReport(prisma, {
+      classId: req.params.classId,
+      teacherId: req.user.id,
+      from: req.query.from ?? null,
+      to: req.query.to ?? null
+    });
+    if (!report) throw new ApiError(404, 'القسم غير موجود');
+    res.json(report);
+  })
+);
 
 /**
  * @swagger

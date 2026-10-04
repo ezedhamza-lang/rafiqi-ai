@@ -447,6 +447,13 @@ async function start() {
       await runSqlFileOnce(prisma, path.join(migDir, '20260919120000_explorer_name_fix/migration.sql'));
       await runSqlFileOnce(prisma, path.join(migDir, '20260926120000_knowledge_garden/migration.sql'));
       await runSqlFileOnce(prisma, path.join(migDir, '20260926140000_friendships/migration.sql'));
+      // مزوّدي الدفع: PAYPAL/PAYMOB/TAP موجودة في السجل البرمجي لكنها لم تكن
+      // مطبَّقة في الإنتاج ⇒ أي دفعة بهذه المزوّدات تفشل بخطأ enum.
+      // idempotent (ADD VALUE IF NOT EXISTS) — تُطبَّق قبل هجرة المرحلة C.
+      await runSqlFileOnce(prisma, path.join(migDir, '20260925160000_payment_providers/migration.sql'));
+      // Phase C: عمود «صدرت بيانات الدخول» — يُطبَّق هنا لأن الاستضافة (Render
+      // مجاني) لا تشغّل prisma migrate deploy؛ بدونه يفشل استعلام البطاقات والبوتستراب.
+      await runSqlFileOnce(prisma, path.join(migDir, '20260927100000_student_credentials_issued/migration.sql'));
       await runTenancyBootstrap(prisma);
     }).catch((err) => {
       console.error('startup migrations skipped:', err.message);

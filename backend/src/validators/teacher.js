@@ -14,6 +14,20 @@ export const questionSchema = z
   })
   .passthrough();
 
+// تقرير القسم (المرحلة D): نافذة تاريخ اختيارية بصيغة YYYY-MM-DD
+export const classReportQuerySchema = z.object({
+  from: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, { error: 'تاريخ البداية غير صحيح (YYYY-MM-DD)' })
+    .optional()
+    .nullable(),
+  to: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, { error: 'تاريخ النهاية غير صحيح (YYYY-MM-DD)' })
+    .optional()
+    .nullable()
+});
+
 export const quizCreateSchema = z.object({
   title: z.string({ error: 'العنوان مطلوب' }).trim().min(1, { error: 'العنوان مطلوب' }).max(200, { error: 'العنوان طويل جدا' }),
   subject: z.enum(['MATH', 'READING', 'SCIENCE', 'STORIES'], { error: 'مادة غير صالحة' }),

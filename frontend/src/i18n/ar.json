@@ -1034,6 +1034,54 @@
     "typeInfo": "معلومة",
     "view": "عرض"
   },
+  "classReport": {
+    "title": "تقرير القسم",
+    "subtitle": "حضور + كل الأعمال (امتحان رسمي/واجب/اختبار) + إتقان كل كفاية. ما لم يُصحَّح يدويًّا يظهر «بانتظار التصحيح» ولا يُحسب صفرًا.",
+    "classLabel": "القسم",
+    "noClasses": "لا توجد أقسام",
+    "fromLabel": "من تاريخ",
+    "toLabel": "إلى تاريخ",
+    "print": "طباعة",
+    "csvBtn": "تصدير CSV",
+    "statStudents": "تلاميذ",
+    "statItems": "أعمال",
+    "statAttendanceDays": "أيام مسجَّلة",
+    "statPending": "بانتظار التصحيح",
+    "honestyNote": "{{n}} خانة بانتظار تصحيح الأستاذ — لا تُحسب صفرًا.",
+    "noItems": "لا توجد أعمال لهذا القسم بعد.",
+    "noDate": "بلا تاريخ",
+    "colStudent": "التلميذ",
+    "colAttendance": "الحضور",
+    "absentCount": "غياب {{n}}",
+    "criteriaTitle": "إتقان الكفايات (من جدول الإسناد)",
+    "colCriterion": "الكفاية",
+    "colMastery": "سلّم الإتقان",
+    "colMasteryIndex": "المتوسط /4",
+    "colEarned": "النقاط",
+    "colDistribution": "التوزيع",
+    "pendingCount": "بانتظار {{n}}",
+    "mastery": {
+      "max": "التملك الأقصى",
+      "min": "التملك الأدنى",
+      "below": "دون الأدنى",
+      "none": "انعدام التملك"
+    },
+    "state": {
+      "missing": "لم يُسلّم",
+      "pending": "بانتظار التصحيح",
+      "submitted": "مُسلَّم",
+      "gradedNoScore": "بلا درجة"
+    },
+    "reason": {
+      "NO_CRITERIA": "بلا جدول إسناد",
+      "MISSING_ANSWER_KEYS": "مفاتيح ناقصة",
+      "OPEN_QUESTIONS": "أسئلة مفتوحة"
+    },
+    "csv": {
+      "student": "التلميذ",
+      "attendance": "الحضور"
+    }
+  },
   "directorCredentials": {
     "title": "بطاقات دخول التلاميذ",
     "subtitle": "أصدر بطاقة لكل تلميذ (بريد + كلمة سر) ثم اطبعها أو صدّرها CSV. كلمة السر تُعرض مرة واحدة عند الإصدار ولا تُحفظ في الصفحة.",

@@ -33,6 +33,7 @@ const TeacherLessonProgress = lazy(() => import('./TeacherLessonProgress.jsx'));
 const TeacherNotes = lazy(() => import('./TeacherNotes.jsx'));
 const TeacherWorksheets = lazy(() => import('./TeacherWorksheets.jsx'));
 const ClassGrades = lazy(() => import('./ClassGrades.jsx'));
+const ClassReport = lazy(() => import('./ClassReport.jsx'));
 
 const TEACHER_GROUPS = [
   { label: 'الرئيسية', items: [
@@ -57,6 +58,7 @@ const TEACHER_GROUPS = [
     { to: 'averages', icon: 'percent', label: 'المعدلات', color: '#E8A317' },
     { to: 'gradebook', icon: 'menu_book', label: 'سجل الدرجات', color: '#E8A317' },
     { to: 'grades', icon: 'workspace_premium', label: 'درجات الفصول', color: '#E8A317' },
+    { to: 'report', icon: 'summarize', label: 'تقرير القسم', color: '#1B7F5A' },
     { to: 'analytics', icon: 'monitoring', label: 'التحليل والتصدير', color: '#E8A317' },
   ] },
   { label: 'المتابعة والأدوات', items: [
@@ -156,6 +158,7 @@ export default function TeacherDashboard() {
               <Route path="worksheets" element={<TeacherWorksheets />} />
               <Route path="suggestions" element={<Suggestions />} />
               <Route path="grades" element={<ClassGrades />} />
+              <Route path="report" element={<ClassReport />} />
               <Route path="*" element={<Navigate to="." replace />} />
             </Routes>
           </Suspense>
