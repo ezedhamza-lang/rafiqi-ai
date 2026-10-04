@@ -401,6 +401,10 @@ router.get('/results', teacherMiddleware, asyncHandler(async (req, res) => {
     ...officialSubs.map((s) => {
       const exam = examById.get(s.examId);
       const max = Number(exam?.content?.totalPoints) || 20;
+      // الامتحان الذي لم يُصحَّح بعده لا نسبة له — نفس قاعدة تقرير القسم
+      // (كنّا نحسب النسبة ثم نضع pendingManualGrading، فيظهر للمعلم 70%
+      //  لتسليم لم يُنهَ تصحيحه: تناقض في الصدق بين شاشتين لنفس البيانات).
+      const pendingManual = s.status !== 'CORRECTED';
       return {
         kind: 'exam',
         title: exam?.title || '',
@@ -408,9 +412,9 @@ router.get('/results', teacherMiddleware, asyncHandler(async (req, res) => {
         createdAt: s.createdAt,
         score: s.score,
         max,
-        percent: pct(s.score ?? 0, max),
+        percent: pendingManual ? null : pct(s.score ?? 0, max),
         status: s.status,
-        pendingManualGrading: s.status !== 'CORRECTED',
+        pendingManualGrading: pendingManual,
         student: studentByUserId.get(s.studentId)
           ? {
               id: s.studentId,
