@@ -12,6 +12,7 @@
     "prisma:deploy": "prisma migrate deploy",
     "prisma:push": "prisma db push",
     "seed": "node prisma/seed.js",
+    "issue-credentials": "node src/cli/issue-credentials.js",
     "check:book-access": "node scripts/check-book-access.mjs",
     "check:answer-keys": "node scripts/check-answer-keys.mjs",
     "check:content-images": "node scripts/check-content-images.mjs",

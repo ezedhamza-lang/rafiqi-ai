@@ -1,16 +1,8 @@
-import crypto from 'crypto';
-import bcrypt from 'bcryptjs';
-import { notify } from './notify.js';
 import { OFFICIAL_LEVELS } from '../curriculum/levels.js';
 
 // العناوين الرسمية للأقسام تأتي من السجلّ الواحد curriculum/levels.js
 // (كان هنا قائمة مستقلة من 10 مستويات ⇒ غير متسقة مع public/levels الذي فيه 13).
 export { OFFICIAL_LEVELS };
-
-function easyPassword() {
-  // رقم سري من 6 أرقام يسهل على الأسرة كتابته
-  return String(100000 + crypto.randomInt(0, 900000));
-}
 
 async function ensureClasses(prisma) {
   const schools = await prisma.school.findMany({ select: { id: true } });
@@ -27,43 +19,18 @@ async function ensureClasses(prisma) {
   return created;
 }
 
-async function ensureStudentCredentials(prisma) {
-  // لكل طالب له حساب ولم يُصدر له المدير بيانات دخول ولا دخل بحسابه إطلاقًا:
-  // أنشئ كلمة سهلة، اضبط حسابَه، خزّنها، وأخطر وليّه مرة واحدة.
-  //
-  // حواجز ثلاثة، كلّها تمنع نزع كلمة سر المالك بلا سبب (المرحلة C):
-  //  1) التلميذ غيّر كلمة سره بنفسه ⇒ دليل الدخول = وجود رمز تجديد واحد على الأقل.
-  //  2) المدير أصدر بطاقة مطبوعة (credentialsIssuedAt) ⇒ البطاقة قرار إداري نهائي،
-  //     ولا يجوز أن يعيدها الإقلاع حتى لو لم يدخل التلميذ بعدُ.
-  //  3) كلمة سر مؤقتة مُسلَّمة (tempPassword) ⇒ لا تُمسّ.
-  // بدون هذه الحوارات كان كل إقلاع خادم (Render free = إقلاع بارد كل ~15 دقيقة)
-  // يعيد كتابة كلمة سر كل تلميذ غيّرها بقيمة عشوائية ⇒ حسابات التلاميذ تُبطَل.
-  const students = await prisma.student.findMany({
+// إحصاء تلاميذ بلا بيانات دخول — للعرض والتشخيص فقط.
+// لا يكتب ولا يغيّر أي كلمة سر (المرحلة E): كلمة سر المستخدم ملكه، ولا يجوز
+// لعملية إقلاع أن تولّد له واحدة دون أمر صريح من المدير.
+export async function countStudentsWithoutCredentials(prisma) {
+  return prisma.student.count({
     where: {
       accountUserId: { not: null },
       tempPassword: null,
       credentialsIssuedAt: null,
       account: { refreshTokens: { none: {} } }
-    },
-    include: { account: { select: { id: true, email: true } }, user: { select: { id: true, firstName: true, lastName: true } } }
-  });
-  let fixed = 0;
-  for (const s of students) {
-    if (!s.account) continue;
-    const pw = easyPassword();
-    await prisma.user.update({ where: { id: s.account.id }, data: { passwordHash: await bcrypt.hash(pw, 10) } });
-    await prisma.student.update({ where: { id: s.id }, data: { tempPassword: pw } });
-    if (s.user?.id && s.user.id !== s.account.id) {
-      await notify([s.user.id], {
-        type: 'CREDENTIALS',
-        title: `بيانات دخول ابنك ${s.firstName} ${s.lastName}`,
-        body: `البريد: ${s.account.email} — كلمة السر: ${pw}. ننصح بتغييرها بعد أول تسجيل دخول.`,
-        link: '/parent'
-      });
     }
-    fixed++;
-  }
-  return fixed;
+  });
 }
 
 async function dedupePendingRequests(prisma) {
@@ -83,9 +50,14 @@ async function dedupePendingRequests(prisma) {
   return toDelete.length;
 }
 
+/**
+ * إقلاع الخادم: ينشئ الأقسام الناقصة ويزيل الطلبات المكرّرة فقط.
+ * لا يمسّ بيانات الدخول إطلاقًا (المرحلة E) — الإصدار تم عبر
+ * services/studentCredentials.js: من صفحة المدير، أو من أداة الإدارة
+ * `npm run issue-credentials -- --class 33`، أو من موافقة طلب التسجيل.
+ */
 export async function runTenancyBootstrap(prisma) {
   const classes = await ensureClasses(prisma);
-  const creds = await ensureStudentCredentials(prisma);
   const dupes = await dedupePendingRequests(prisma);
-  if (classes || creds || dupes) console.log(`tenancy bootstrap: +${classes} classes, ${creds} cred sets, ${dupes} duplicate requests removed`);
+  if (classes || dupes) console.log(`tenancy bootstrap: +${classes} classes, ${dupes} duplicate requests removed`);
 }

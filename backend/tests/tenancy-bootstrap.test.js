@@ -1,11 +1,13 @@
 import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest';
 import prisma from '../src/db.js';
 import bcrypt from 'bcryptjs';
-import { runTenancyBootstrap } from '../src/services/tenancyBootstrap.js';
+import { runTenancyBootstrap, countStudentsWithoutCredentials } from '../src/services/tenancyBootstrap.js';
 
-// حارس قاتل: إقلاع الخادم (Render free = إقلاع بارد متكرّر) كان يعيد كتابة كلمة سر
-// كل تلميذ غيّر كلمة سره بنفسه بقيمة عشوائية ⇒ حسابات التلاميذ تُبطَل بلا سبب.
-describe('tenancyBootstrap — كلمة سر التلميذ الذي غيّرها بنفسه', () => {
+// المرحلة E: الإقلاع لا يلمس بيانات الدخول إطلاقًا.
+// السبب: Render المجاني = إقلاع بارد كل دقائق؛ أي كتابة تلقائية لكلمة سر تعني
+// أن كلمة سر المستخدم (أو بطاقته المطبوعة) قد تتبدّل بلا سبب مرئي.
+// الإصدار صار قرارًا صريحًا: صفحة المدير · أداة issue-credentials · موافقة الطلب.
+describe('tenancyBootstrap — الإقلاع لا يكتب كلمة سر (المرحلة E)', () => {
   const hash = (pw) => bcrypt.hash(pw, 4);
 
   beforeAll(async () => {
@@ -88,7 +90,7 @@ describe('tenancyBootstrap — كلمة سر التلميذ الذي غيّره�
     expect(afterStudent.tempPassword).toBeNull();
   });
 
-  it('يولّد بيانات دخول لتلميذ حسابه لم يُستخدم قط (بلا رمز تجديد)', async () => {
+  it('لا يكتب كلمة سر لمصغّر حسابه لم يُستخدم قط (بلا رمز تجديد)', async () => {
     const { account, student } = await makeStudent({
       email: 'boot-fresh@classe.tn',
       password: 'قيمة-قديمة',
@@ -96,12 +98,20 @@ describe('tenancyBootstrap — كلمة سر التلميذ الذي غيّره�
     });
 
     await runTenancyBootstrap(prisma);
+    await runTenancyBootstrap(prisma);
 
     const afterAccount = await prisma.user.findUnique({ where: { id: account.id } });
     const afterStudent = await prisma.student.findUnique({ where: { id: student.id } });
-    expect(afterStudent.tempPassword).toMatch(/^\d{6}$/);
-    expect(await bcrypt.compare(afterStudent.tempPassword, afterAccount.passwordHash)).toBe(true);
-    expect(await bcrypt.compare('قيمة-قديمة', afterAccount.passwordHash)).toBe(false);
+    expect(await bcrypt.compare('قيمة-قديمة', afterAccount.passwordHash)).toBe(true);
+    expect(afterStudent.tempPassword).toBeNull();
+    // ويظلّ محسوبًا ضمن «بلا بيانات دخول» ليصدرها المدير متى شاء
+    expect(await countStudentsWithoutCredentials(prisma)).toBeGreaterThan(0);
+  });
+
+  it('الإقلاع ينشئ الأقسام الناقصة فقط (لا يمسّ شيئًا آخر)', async () => {
+    await runTenancyBootstrap(prisma);
+    const created = await prisma.class.findFirst({ where: { schoolId: (await prisma.school.findUnique({ where: { code: 'SCH-BOOT' } })).id, level: 'السنة الأولى ابتدائي' } });
+    expect(created).toBeTruthy();
   });
 
   it('لا يمسّ التلميذ الذي ما زال يحمل كلمة سر مؤقتة من موافقة المدير', async () => {

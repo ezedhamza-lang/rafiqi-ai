@@ -185,14 +185,15 @@ describe('بطاقات دخول التلاميذ — إصدار وقراءة', (
     expect(res.status).toBe(404);
   });
 
-  it('البطاقةIssued محفوظة من إعادة كتابة الإقلاع (tenancyBootstrap)', async () => {
+  it('البطاقة محفوظة من إعادة كتابة الإقلاع (المرحلة E: الإقلاع لا يكتب أصلًا)', async () => {
     const issued = await asDirector(request(app).post(`/api/director/credentials/${student.id}`)).send({
       password: '77889900'
     });
     expect(issued.status).toBe(200);
-    // لا رمز تجديد (تلميذ لم يدخل بعد) ⇒ الحالة التي كان يعيد فيها الإقلاع الكتابة
+    // لا رمز تجديد (تلميذ لم يدخل بعد) — الحالة التي كان الإقلاع يعيد فيها الكتابة
     await prisma.refreshToken.deleteMany({ where: { userId: student.accountUserId } });
 
+    await runTenancyBootstrap(prisma);
     await runTenancyBootstrap(prisma);
 
     const loginRes = await login(issued.body.email, '77889900');
