@@ -38,7 +38,11 @@ export default function DirectorDashboard() {
       .catch(() => {});
   }, [user]);
 
-  if (!user || !['SCHOOL_DIRECTOR', 'ADMIN'].includes(user.role)) {
+  // SUPER_ADMIN مسموح: الـAPI يسمح به (adminMiddleware = ADMIN|SCHOOL_DIRECTOR|SUPER_ADMIN)
+  // وكان محجوبًا هنا فقط ⇒ واجهة مغلقة على صاحب المنصّة.
+  // الإجراءات الحسّاسة تبقى محروسة: الموافقة للمدير وحده (canApproveRequests)،
+  // والمالية لـADMIN|SUPER_ADMIN — مطابقةً لما يسمح به الخادم.
+  if (!user || !['SCHOOL_DIRECTOR', 'ADMIN', 'SUPER_ADMIN'].includes(user.role)) {
     return <Navigate to={getHomePath(user)} replace />;
   }
 

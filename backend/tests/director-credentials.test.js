@@ -28,6 +28,30 @@ beforeAll(async () => {
 
 const asDirector = (req) => req.set('Authorization', `Bearer ${directorToken}`);
 
+// حساب SUPER_ADMIN: البذور لا تحتوي واحدًا، فننشئه عند الحاجة فقط (كجزء من الاختبار)
+let superAdminCache = null;
+async function superAdminToken() {
+  if (superAdminCache) return superAdminCache;
+  const { default: p } = await import('../src/db.js');
+  const email = 'super.cards@test.tn';
+  let user = await p.user.findUnique({ where: { email } });
+  if (!user) {
+    user = await p.user.create({
+      data: {
+        firstName: 'مدير',
+        lastName: 'عام',
+        email,
+        passwordHash: await (await import('bcryptjs')).default.hash('super12345', 4),
+        role: 'SUPER_ADMIN'
+      }
+    });
+  }
+  const res = await login(email, 'super12345');
+  expect(res.status).toBe(200);
+  superAdminCache = res.body.token;
+  return superAdminCache;
+}
+
 describe('بطاقات دخول التلاميذ — إصدار وقراءة', () => {
   it('يرفض بلا مصادقة (401)', async () => {
     const res = await request(app).get(`/api/director/classes/${klass.id}/credentials`);
@@ -62,6 +86,28 @@ describe('بطاقات دخول التلاميذ — إصدار وقراءة', (
   it('قسم غير موجود (404)', async () => {
     const res = await asDirector(request(app).get('/api/director/classes/999999/credentials'));
     expect(res.status).toBe(404);
+  });
+
+  it('المدير العام SUPER_ADMIN يقرأ البطاقات (نفس صلاحية ADMIN في الخادم)', async () => {
+    // كان الواجهة تحجبه عن صفحة البطاقات بينما الـAPI يسمح له ⇒ إصلاح 04-10.
+    const superToken = await superAdminToken();
+    const res = await request(app)
+      .get(`/api/director/classes/${klass.id}/credentials`)
+      .set('Authorization', `Bearer ${superToken}`);
+    expect(res.status).toBe(200);
+    expect(res.body.students.length).toBeGreaterThan(0);
+    expect(JSON.stringify(res.body)).not.toMatch(/passwordHash|tempPassword/i);
+  });
+
+  it('SUPER_ADMIN يستطيع الإصدار أيضًا', async () => {
+    const token = await superAdminToken();
+    const res = await request(app)
+      .post(`/api/director/credentials/${student.id}`)
+      .set('Authorization', `Bearer ${token}`)
+      .send({ password: '55443322' });
+    expect(res.status).toBe(200);
+    expect(res.body.password).toBe('55443322');
+    expect((await login(res.body.email, '55443322')).status).toBe(200);
   });
 
   it('إصدار بطاقة: يعيد كلمة السر مرة واحدة، والدخول بها يعمل، ولا إجبار على التغيير', async () => {

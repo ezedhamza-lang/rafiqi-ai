@@ -131,7 +131,8 @@ export default function App() {
                     element={<RequireRole roles={['STUDENT']}><KnowledgeGarden /></RequireRole>}
                   />
                     <Route path="/parent/*" element={<RequireRole roles={['PARENT', 'TEACHER']}><ParentSpace /></RequireRole>} />
-                    <Route path="/director/*" element={<RequireRole roles={['SCHOOL_DIRECTOR', 'ADMIN']}><DirectorDashboard /></RequireRole>} />
+                    {/* SUPER_ADMIN داخل فضاء المدير: الـAPI يسمح به، والواجهة كانت تحجبه */}
+                    <Route path="/director/*" element={<RequireRole roles={['SCHOOL_DIRECTOR', 'ADMIN', 'SUPER_ADMIN']}><DirectorDashboard /></RequireRole>} />
                     <Route path="/superadmin/*" element={<RequireRole roles={['SUPER_ADMIN']}><SuperAdminDashboard /></RequireRole>} />
                   </Route>
                   <Route path="*" element={<NotFound />} />
