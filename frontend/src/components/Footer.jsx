@@ -66,6 +66,21 @@ export default function Footer() {
             </ul>
           </div>
           <div className="footer-col">
+            <h4>{t('footer.freeBooks')}</h4>
+            <ul>
+              <li>
+                <a href="https://rafiqitn.blogspot.com" target="_blank" rel="noopener noreferrer">
+                  {t('footer.freeBooksBlog')}
+                </a>
+              </li>
+              <li>
+                <a href="https://www.mediafire.com/file/jgds3cbxh8vl8ns/rafiqi-books-free-pack.zip" target="_blank" rel="noopener noreferrer">
+                  {t('footer.freeBooksPack')}
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div className="footer-col">
             <h4>{t('footer.contactUs')}</h4>
             <ul className="footer-contact">
               <li>
@@ -82,13 +97,13 @@ export default function Footer() {
               <a href="https://www.facebook.com/profile.php?id=61591553832110" target="_blank" rel="noopener noreferrer" className="social-icon social-facebook" aria-label="Facebook">
                 <FacebookIcon />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="social-icon social-youtube" aria-label="YouTube">
+              <a href="https://rafiqitn.blogspot.com" target="_blank" rel="noopener noreferrer" className="social-icon social-youtube" aria-label="YouTube">
                 <YouTubeIcon />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="social-icon social-linkedin" aria-label="LinkedIn">
+              <a href="https://rafiqitn.blogspot.com" target="_blank" rel="noopener noreferrer" className="social-icon social-linkedin" aria-label="LinkedIn">
                 <LinkedInIcon />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="social-icon social-instagram" aria-label="Instagram">
+              <a href="https://rafiqitn.blogspot.com" target="_blank" rel="noopener noreferrer" className="social-icon social-instagram" aria-label="Instagram">
                 <InstagramIcon />
               </a>
             </div>

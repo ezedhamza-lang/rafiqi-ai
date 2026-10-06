@@ -166,9 +166,28 @@
     "facebook": "Facebook",
     "youtube": "YouTube",
     "linkedin": "LinkedIn",
+    "freeBooks": "Free books",
+    "freeBooksBlog": "Free books blog",
+    "freeBooksPack": "Full pack (ZIP)",
     "rightsReserved": "All rights reserved © 2026 Mr. Hamza Ben Amor Ezzedine",
     "brandDescription": "A comprehensive Tunisian educational platform for students, teachers, and parents",
-    "privacy": "Privacy Policy"
+    "privacy": "Privacy Policy",
+    "freeBooks": {
+      "title": "Free books",
+      "subtitle": "The «Rafiq» series for primary school years 1 and 2 — free PDF downloads in full quality.",
+      "b1": "Written expression — Year 1",
+      "m1": "156 pages",
+      "b2": "Maths — workbook",
+      "m2": "129 pages",
+      "b3": "Reading — pupil book",
+      "m3": "Year 2",
+      "b4": "Comprehensive reading",
+      "m4": "Year 2",
+      "b5": "Science — pupil book",
+      "m5": "Year 2",
+      "packButton": "Download the full pack (ZIP · 36 MB)",
+      "blogButton": "Visit the blog"
+    }
   },
   "login": {
     "title": "Sign in",

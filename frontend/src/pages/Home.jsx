@@ -61,6 +61,14 @@ const STATS = [
   { key: 'institutions', field: 'schools' }
 ];
 
+const FREE_BOOKS = [
+  { titleKey: 'home.freeBooks.b1', metaKey: 'home.freeBooks.m1', url: 'https://www.mediafire.com/file/4sk4rr3nnwo5ktl/rafiqi-production-s1-pupil-book.pdf' },
+  { titleKey: 'home.freeBooks.b2', metaKey: 'home.freeBooks.m2', url: 'https://www.mediafire.com/file/0egiul329ldh4yk/rafiqi-math-s1-workbook.pdf' },
+  { titleKey: 'home.freeBooks.b3', metaKey: 'home.freeBooks.m3', url: 'https://www.mediafire.com/file/a606nq1faw4q3k3/rafiqi-reading-s2-pupil-book.pdf' },
+  { titleKey: 'home.freeBooks.b4', metaKey: 'home.freeBooks.m4', url: 'https://www.mediafire.com/file/y2pyitwjc3hvqjy/rafiqi-reading-comprehensive-s2-full-book.pdf' },
+  { titleKey: 'home.freeBooks.b5', metaKey: 'home.freeBooks.m5', url: 'https://www.mediafire.com/file/fr2bq84mzejoouh/rafiqi-iqaid-sciences-s2-pupil-book.pdf' }
+];
+
 function formatStat(n) {
   if (n == null || Number.isNaN(Number(n))) return '…';
   const v = Number(n);
@@ -223,6 +231,54 @@ export default function Home() {
       </section>
 
       <BooksShowcase />
+
+      <section className="section fade-in-section" id="free-books" style={{ background: 'var(--bg-elevated)' }}>
+        <div className="container">
+          <h2 className="section-title">{t('home.freeBooks.title')}</h2>
+          <div className="title-bar" />
+          <p style={{ marginBottom: '1.5rem', maxWidth: 720 }}>
+            {t('home.freeBooks.subtitle')}
+          </p>
+          <div className="services-grid">
+            {FREE_BOOKS.map((b) => (
+              <a
+                key={b.titleKey}
+                href={b.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="service-card"
+                style={{ borderTop: '4px solid #0ea5e9' }}
+              >
+                <span className="material-icons" style={{ color: '#0ea5e9', background: '#0ea5e91a' }}>
+                  menu_book
+                </span>
+                <h4>{t(b.titleKey)}</h4>
+                <small style={{ display: 'block', marginTop: 4, opacity: 0.75 }}>
+                  {t(b.metaKey)}
+                </small>
+              </a>
+            ))}
+          </div>
+          <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <a
+              className="btn btn-primary"
+              href="https://www.mediafire.com/file/jgds3cbxh8vl8ns/rafiqi-books-free-pack.zip"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t('home.freeBooks.packButton')}
+            </a>
+            <a
+              className="btn btn-outline"
+              href="https://rafiqitn.blogspot.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {t('home.freeBooks.blogButton')}
+            </a>
+          </div>
+        </div>
+      </section>
 
       <section className="section fade-in-section" style={{ background: 'var(--gradient-brand)', padding: '3rem 0' }}>
         <div className="container">
