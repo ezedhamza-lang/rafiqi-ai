@@ -181,12 +181,12 @@ cd backend && npx prisma migrate deploy
 ### حسابات تجريبية
 | الدور | البريد | كلمة السر |
 |---|---|---|
-| نظامي | super@education.tn | super123 |
-| مدير عام | admin@education.tn | admin123 |
-| مدير مدرسة | director@test.tn | director123 |
-| أستاذ | teacher@test.tn | teacher123 |
-| ولي | parent@test.tn | parent123 |
-| تلميذ | student@test.tn | student123 |
+| نظامي | super@education.tn | <كلمة-السر-تجريبية> |
+| مدير عام | admin@education.tn | <كلمة-السر-تجريبية> |
+| مدير مدرسة | director@test.tn | <كلمة-السر-تجريبية> |
+| أستاذ | teacher@test.tn | <كلمة-السر-تجريبية> |
+| ولي | parent@test.tn | <كلمة-السر-تجريبية> |
+| تلميذ | student@test.tn | <كلمة-السر-تجريبية> |
 
 ---
 

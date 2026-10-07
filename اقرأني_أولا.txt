@@ -34,12 +34,17 @@
 
 --- حسابات تجريبية للدخول ---
 
-المدير (ADMIN):     admin@education.tn / admin123
-تلميذ (STUDENT):    student@test.tn / student123
-ولي أمر (PARENT):   parent@test.tn / parent123
-أستاذ (TEACHER):    teacher@test.tn / teacher123
-مدير مدرسة:         director@test.tn / director123
-نظامي (SUPER_ADMIN): super@education.tn / super123
+تُنشأ هذه الحسابات تلقائيًّا عند تعبئة قاعدة البيانات، وأدوارها:
+
+    مدير النظام      admin@education.tn
+    مدير مدرسة       director@test.tn
+    أستاذ             teacher@test.tn
+    ولي أمر           parent@test.tn
+    تلميذ             student@test.tn
+
+كلمة السرّ لا تُكتب في أي ملف — لأن هذا المخزن عام ومقروء للجميع.
+تُضبط قبل التعبئة عبر متغيّر البيئة SEED_DEMO_PASSWORD.
+وفي الإنتاج يشترط وجودها، فإن لم توجد يرفض النظام التعبئة.
 
 
 --- ملاحظة مهمة ---
