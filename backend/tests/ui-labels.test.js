@@ -1,16 +1,17 @@
 // حارس طبقة التسمية — المرحلة A.
-// 1) اختبارات دوال التسمية (سلوكها مع كل الصيغ، بلا 'undefined' ولا أكواد مسرّبة).
-// 2) تشغيل حارس العرض (AST) الذي يمنع تمرير الأكواد الخام إلى المستخدم.
+// اختبارات دوال التسمية (سلوكها مع كل الصيغ، بلا 'undefined' ولا أكواد مسرّبة).
+//
+// ⚠️ ملاحظة هامة (07/10/2026): كان هذا الملف يشغّل أيضًا
+// `frontend/scripts/check-raw-codes.mjs` عبر execFileSync. ذلك عيب بنيوي:
+// السكربت يستورد `@babel/parser` فتُحلّ من `frontend/node_modules`، وهي لا
+// توجد داخل وظيفة الخادم في CI (تعمل `npm ci` في `backend/` فقط) ⇒
+// ERR_MODULE_NOT_FOUND ⇐ أفشل CI متتابعًا منذ 04/10/2026.
+// النقل الصحيح: الفحص البصري يخصّ الواجهة، فأُقيم في وظيفة `frontend`
+// بالـCI (خطوة «Check raw codes / i18n / mojibake»). هنا بقيت اختبارات
+// منطق التسمية وحدها — بلا اعتماد على حزم الواجهة.
 import { describe, it, expect } from 'vitest';
-import { execFileSync } from 'node:child_process';
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 
 import { subjectLabel, statusLabel, kindLabel, STATUS_CODES, KIND_CODES } from '../../frontend/src/utils/labels.js';
-
-const here = path.dirname(fileURLToPath(import.meta.url));
-const FRONTEND = path.resolve(here, '../../frontend');
 
 describe('طبقة التسمية الموحّدة (المرحلة A)', () => {
   it('كل حالة/نوع له تسمية عربية وإنجليزية تختلف عن الرمز', () => {
@@ -42,20 +43,5 @@ describe('طبقة التسمية الموحّدة (المرحلة A)', () => {
     expect(statusLabel('')).toBe('—');
     expect(kindLabel(null)).toBe('—');
     expect(statusLabel('ZZZ_UNKNOWN')).toBe('ZZZ_UNKNOWN'); // نُبقيه مرئيًّا لا نخفيه
-  });
-
-  it('حارس العرض (AST): لا أكواد خام في JSX', () => {
-    const script = path.join(FRONTEND, 'scripts', 'check-raw-codes.mjs');
-    expect(fs.existsSync(script)).toBe(true);
-    let out = '';
-    let failed = false;
-    try {
-      out = execFileSync(process.execPath, [script], { cwd: FRONTEND, encoding: 'utf8' });
-    } catch (e) {
-      failed = true;
-      out = `${e.stdout || ''}${e.stderr || ''}`;
-    }
-    expect(failed, `مواضع تسرّب:\n${out}`).toBe(false);
-    expect(out).toContain('✓');
   });
 });

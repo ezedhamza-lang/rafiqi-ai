@@ -75,6 +75,15 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
       - name: Install dependencies
         run: npm ci
+      # ── حرّاس واجهة مكتوبون مسبقًا لكن لم يكن CI يشغّلهم إطلاقًا ──────────
+      # (اكتُشف 07/10/2026: اثنان منهم كانا شغّالين يدويًّا فقط، والثالث
+      #  كان في اختبارات الخادم فيفشل لأن frontend/node_modules غير موجودة هناك.)
+      - name: Check raw codes (AST guard)
+        run: npm run check:raw-codes
+      - name: Check i18n keys
+        run: npm run check:i18n
+      - name: Check mojibake
+        run: npm run check:mojibake
       - name: Lint
         run: npm run lint
       - name: Build
