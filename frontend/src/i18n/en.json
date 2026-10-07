@@ -171,7 +171,21 @@
     "freeBooksPack": "Full pack (ZIP)",
     "rightsReserved": "All rights reserved © 2026 Mr. Hamza Ben Amor Ezzedine",
     "brandDescription": "A comprehensive Tunisian educational platform for students, teachers, and parents",
-    "privacy": "Privacy Policy",
+    "privacy": "Privacy Policy"
+  },
+  "login": {
+    "title": "Sign in",
+    "subtitle": "Rafiqi School Life Portal",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "signingIn": "Signing in...",
+    "submit": "Sign in",
+    "noAccount": "Don't have an account?",
+    "createAccount": "Create account",
+    "showPw": "Show password",
+    "hidePw": "Hide password"
+  },
+  "home": {
     "freeBooks": {
       "title": "Free books",
       "subtitle": "The «Rafiq» series for primary school years 1 and 2 — free PDF downloads in full quality.",
@@ -187,21 +201,7 @@
       "m5": "Year 2",
       "packButton": "Download the full pack (ZIP · 36 MB)",
       "blogButton": "Visit the blog"
-    }
-  },
-  "login": {
-    "title": "Sign in",
-    "subtitle": "Rafiqi School Life Portal",
-    "emailLabel": "Email",
-    "passwordLabel": "Password",
-    "signingIn": "Signing in...",
-    "submit": "Sign in",
-    "noAccount": "Don't have an account?",
-    "createAccount": "Create account",
-    "showPw": "Show password",
-    "hidePw": "Hide password"
-  },
-  "home": {
+    },
     "servicesTitle": "Digital services",
     "serviceGroups": {
       "student": "For Students",
