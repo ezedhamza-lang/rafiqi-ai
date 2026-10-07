@@ -262,14 +262,6 @@ export default function Home() {
           <div style={{ marginTop: '1.5rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
             <a
               className="btn btn-primary"
-              href="https://www.mediafire.com/file/jgds3cbxh8vl8ns/rafiqi-books-free-pack.zip"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t('home.freeBooks.packButton')}
-            </a>
-            <a
-              className="btn btn-outline"
               href="https://rafiqitn.blogspot.com"
               target="_blank"
               rel="noopener noreferrer"

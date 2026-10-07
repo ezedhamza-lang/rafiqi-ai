@@ -73,11 +73,6 @@ export default function Footer() {
                   {t('footer.freeBooksBlog')}
                 </a>
               </li>
-              <li>
-                <a href="https://www.mediafire.com/file/jgds3cbxh8vl8ns/rafiqi-books-free-pack.zip" target="_blank" rel="noopener noreferrer">
-                  {t('footer.freeBooksPack')}
-                </a>
-              </li>
             </ul>
           </div>
           <div className="footer-col">
