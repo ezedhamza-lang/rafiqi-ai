@@ -7,6 +7,20 @@ on:
   workflow_dispatch:
 
 jobs:
+  # حارس ملفات الترجمة — يمنع سقوط المنصة بيضاء بسبب مفتاح مكرّر.
+  # وُلد بعد حادثة 07/10/2026 (مفتاح freeBooks مكرّر داخل footer ⇒ React #31).
+  # خفيف جدًا: لا تثبيت حزم، ثانية واحدة.
+  i18n-guard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check i18n keys (types + duplicates + no ZIP link)
+        run: node tools/rafiqi-publishing/check_i18n.js
+
   backend:
     runs-on: ubuntu-latest
     defaults:
