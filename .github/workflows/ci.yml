@@ -84,6 +84,8 @@ jobs:
         run: npm run check:i18n
       - name: Check mojibake
         run: npm run check:mojibake
+      - name: Check no secrets served from public/
+        run: npm run check:public-secrets
       - name: Lint
         run: npm run lint
       - name: Build
