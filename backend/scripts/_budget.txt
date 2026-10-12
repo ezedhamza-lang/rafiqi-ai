@@ -1,0 +1,13 @@
+auth budget BEFORE the measurement: remaining=38 (a failed login still counts)
+refresh token present in the session: true
+
+ONE page load of /student-space/leaderboard produced 1 /api/auth/* call(s):
+   GET /api/auth/config -> 429
+
+auth budget after ONE page load: remaining=36
+
+FIVE more page loads produced 0 /api/auth/* call(s):
+
+auth budget after SIX page loads total: remaining=35
+=> 3 of the 50-request auth budget consumed by 6 page loads of ONE student (plus the probes)
+=> extrapolated: a class of 30 students each loading 6 pages behind one NAT IP would need ~90 auth requests, against a shared ceiling of 50 per 15 minutes.

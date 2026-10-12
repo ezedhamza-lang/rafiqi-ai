@@ -1,0 +1,6126 @@
+{
+ "generatedAt": "2026-09-27T07:06:11.592Z",
+ "viewports": [
+  {
+   "name": "desktop",
+   "width": 1440,
+   "height": 900
+  },
+  {
+   "name": "tablet",
+   "width": 820,
+   "height": 1180
+  },
+  {
+   "name": "mobile",
+   "width": 390,
+   "height": 844
+  }
+ ],
+ "results": [
+  {
+   "role": "student",
+   "route": "/student-space",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/dashboard",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/books",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/subjects",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/stories",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/progress",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/leaderboard",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/friendships",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/routine",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/plan",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/quizzes",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/assignments",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/official-exams",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/certificates",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/daily-challenge",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/weekly-challenge",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/play",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/twin",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/live",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/calendar",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/messages",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/portfolio",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/adaptive",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/flashcards",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/paper-exam",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/virtual-friend",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/dashboard",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/books",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/subjects",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/stories",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/progress",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/leaderboard",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/friendships",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/routine",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/plan",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/quizzes",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/assignments",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/official-exams",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/certificates",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/daily-challenge",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/weekly-challenge",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/play",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/twin",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/live",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/calendar",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/messages",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/portfolio",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/adaptive",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/flashcards",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/paper-exam",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/virtual-friend",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/dashboard",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/books",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/subjects",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/stories",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/progress",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/leaderboard",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/friendships",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/routine",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/plan",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/quizzes",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/assignments",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/official-exams",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/certificates",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/daily-challenge",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/weekly-challenge",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/play",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/twin",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/live",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/calendar",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "student",
+   "route": "/student-space/messages",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/portfolio",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/adaptive",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/flashcards",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/paper-exam",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "student",
+   "route": "/student-space/virtual-friend",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/assignments",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/quizzes",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/gradebook",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/results",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/averages",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/correction",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/lesson-plan",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/memos",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/class-subjects",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/schedules",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/library",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/resources",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/attendance",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/lesson-progress",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/exams",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/worksheets",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/assignments",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/quizzes",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/gradebook",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/results",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/averages",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/correction",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/lesson-plan",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/memos",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/class-subjects",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/schedules",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/library",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/resources",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/attendance",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/lesson-progress",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/exams",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/worksheets",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/assignments",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/quizzes",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/gradebook",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/results",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/averages",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/correction",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/lesson-plan",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/memos",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/class-subjects",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/schedules",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/library",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/resources",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/attendance",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/lesson-progress",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/exams",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "teacher",
+   "route": "/teacher/worksheets",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/children",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/progress",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/attendance",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/messages",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/documents",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/payments",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/children",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/progress",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/attendance",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/messages",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/documents",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/payments",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/children",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/progress",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/attendance",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/messages",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/documents",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "parent",
+   "route": "/parent/payments",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "director",
+   "route": "/director",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "director",
+   "route": "/director/classes",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "director",
+   "route": "/director/registrations",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "director",
+   "route": "/director/documents",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "director",
+   "route": "/director/attendance",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "director",
+   "route": "/director",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "director",
+   "route": "/director/classes",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "director",
+   "route": "/director/registrations",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "director",
+   "route": "/director/documents",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "director",
+   "route": "/director/attendance",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "director",
+   "route": "/director",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "director",
+   "route": "/director/classes",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "director",
+   "route": "/director/registrations",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "director",
+   "route": "/director/documents",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "director",
+   "route": "/director/attendance",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "admin",
+   "route": "/admin",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "admin",
+   "route": "/admin/users",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "admin",
+   "route": "/admin/subscriptions",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "admin",
+   "route": "/admin/help-requests",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "admin",
+   "route": "/admin/finance",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "admin",
+   "route": "/admin",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "admin",
+   "route": "/admin/users",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "admin",
+   "route": "/admin/subscriptions",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "admin",
+   "route": "/admin/help-requests",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "admin",
+   "route": "/admin/finance",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "admin",
+   "route": "/admin",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "admin",
+   "route": "/admin/users",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "admin",
+   "route": "/admin/subscriptions",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "admin",
+   "route": "/admin/help-requests",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "admin",
+   "route": "/admin/finance",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "public",
+   "route": "/",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "public",
+   "route": "/login",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "public",
+   "route": "/register",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "public",
+   "route": "/help",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "public",
+   "route": "/privacy",
+   "vp": "desktop",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 1440,
+   "clientWidth": 1440,
+   "hOverflow": false,
+   "bodyScrollW": 1440,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 11263,
+     "right": 11439,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "public",
+   "route": "/",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "public",
+   "route": "/login",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "public",
+   "route": "/register",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "public",
+   "route": "/help",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "public",
+   "route": "/privacy",
+   "vp": "tablet",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 820,
+   "clientWidth": 820,
+   "hOverflow": false,
+   "bodyScrollW": 820,
+   "vScroll": false,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10643,
+     "right": 10819,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "public",
+   "route": "/",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "public",
+   "route": "/login",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "public",
+   "route": "/register",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+   ]
+  },
+  {
+   "role": "public",
+   "route": "/help",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  },
+  {
+   "role": "public",
+   "route": "/privacy",
+   "vp": "mobile",
+   "dir": "rtl",
+   "lang": "ar",
+   "scrollWidth": 390,
+   "clientWidth": 390,
+   "hOverflow": false,
+   "bodyScrollW": 390,
+   "vScroll": true,
+   "text": "تخطَّ إلى المحتوى الرئيسي بوابة رفيقي للحياة المدرسية EN acc",
+   "hasContent": true,
+   "offenders": [
+    {
+     "tag": "a",
+     "cls": "skip-link",
+     "w": 176,
+     "left": 10213,
+     "right": 10389,
+     "text": "تخطَّ إلى المحتوى الرئيسي"
+    }
+   ],
+   "offenderCount": 1,
+   "clipped": [],
+   "clippedCount": 0,
+   "dirOk": true,
+   "consoleErrors": []
+  }
+ ]
+}
