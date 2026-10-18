@@ -30,7 +30,7 @@ permissions:
 jobs:
   ping:
     runs-on: ubuntu-latest
-    timeout-minutes: 3
+    timeout-minutes: 15
     steps:
       - name: Ping health endpoint (wakes Render; DB probe is cached upstream)
         id: check
@@ -52,8 +52,34 @@ jobs:
           echo "db=${db:-unknown}" >> "$GITHUB_OUTPUT"
           echo "ok=$ok" >> "$GITHUB_OUTPUT"
 
-      - name: Open alert issue if unhealthy
+      # False-alarm guard: Render's free tier answers 429 (rate limit) while the
+      # instance is spinning up or going down, and 502/503 while it boots. Both
+      # clear on their own within a couple of minutes (observed 04-10 and 14-10).
+      # So a failed fast check is NOT alerted on directly - it must fail a second,
+      # slower confirmation round first. Real outages fail both rounds.
+      - name: Confirm before alerting (avoids 429/boot false alarms)
+        id: confirm
         if: steps.check.outputs.ok != 'true'
+        run: |
+          code=""; db=""; ok="false"
+          for i in 1 2 3 4; do
+            out=$(curl -s -w '\n%{http_code}' --max-time 45 https://rafiqi-platform.onrender.com/api/health || true)
+            code=$(printf '%s' "$out" | tail -n1)
+            body=$(printf '%s' "$out" | sed '$d')
+            [ -z "$code" ] && code="000"
+            db=$(printf '%s' "$body" | sed -n 's/.*"db":"\([a-z]*\)".*/\1/p')
+            echo "confirm $i -> HTTP $code db=${db:-unknown}"
+            if [ "$code" = "200" ] && { [ "$db" = "up" ] || [ -z "$db" ]; }; then
+              ok="true"; break
+            fi
+            sleep 45
+          done
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "db=${db:-unknown}" >> "$GITHUB_OUTPUT"
+          echo "ok=$ok" >> "$GITHUB_OUTPUT"
+
+      - name: Open alert issue if unhealthy
+        if: steps.confirm.outputs.ok != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_REPO: ${{ github.repository }}
@@ -62,9 +88,9 @@ jobs:
           open=$(gh issue list --state open --label "site-down" --json number -q 'length' 2>/dev/null || echo 0)
           if [ "$open" = "0" ]; then
             gh issue create \
-              --title "Site UNHEALTHY (HTTP ${{ steps.check.outputs.code }}, db ${{ steps.check.outputs.db }})" \
+              --title "Site UNHEALTHY (HTTP ${{ steps.confirm.outputs.code }}, db ${{ steps.confirm.outputs.db }})" \
               --label "site-down" \
-              --body "Health check at $(date -u): HTTP ${{ steps.check.outputs.code }}, db ${{ steps.check.outputs.db }}. db=down with HTTP 200 means the DB is unreachable (Neon free-plan compute quota) - open console.neon.tech or retry /api/health?db=1. HTTP != 200 means Render is down or redeploying - check Render Deployments Logs."
+              --body "Confirmed after 2 rounds at $(date -u): HTTP ${{ steps.confirm.outputs.code }}, db ${{ steps.confirm.outputs.db }}. First round saw HTTP ${{ steps.check.outputs.code }}. db=down with HTTP 200 means the DB is unreachable (Neon free-plan compute quota) - open console.neon.tech or retry /api/health?db=1. HTTP != 200 means Render is down or redeploying - check Render Deployments Logs. HTTP 429/502/503 usually clears on its own, so it only alerts after 2 failed rounds."
           fi
 
       - name: Close alert issue if recovered
