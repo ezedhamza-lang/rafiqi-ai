@@ -1,40 +1,45 @@
 {
- "title": "سلسلة المواقف الرياضية",
- "subtitle": "السنة الثانية — مواقف رياضية مشكّلة بأسئلتها التفاعلية",
- "paperOnly": true,
- "totalPages": 40,
- "units": [
-  {
-   "id": "u1",
-   "title": "الفترة 1",
-   "icon": "📘",
-   "color": "#4CAF50",
-   "startPage": 1,
-   "endPage": 12
-  },
-  {
-   "id": "u2",
-   "title": "الفترة 2",
-   "icon": "📗",
-   "color": "#2196F3",
-   "startPage": 13,
-   "endPage": 24
-  },
-  {
-   "id": "u3",
-   "title": "الفترة 3",
-   "icon": "📙",
-   "color": "#FF9800",
-   "startPage": 25,
-   "endPage": 36
-  },
-  {
-   "id": "u4",
-   "title": "الفترة 4",
-   "icon": "📕",
-   "color": "#F44336",
-   "startPage": 37,
-   "endPage": 40
+  "title": "سلسلة المواقف الرياضية",
+  "subtitle": "السنة الثانية — مواقف رياضية مشكّلة بأسئلتها التفاعلية",
+  "paperOnly": true,
+  "totalPages": 40,
+  "units": [
+    {
+      "id": "u1",
+      "title": "الفترة 1",
+      "icon": "📘",
+      "color": "#4CAF50",
+      "startPage": 1,
+      "endPage": 12
+    },
+    {
+      "id": "u2",
+      "title": "الفترة 2",
+      "icon": "📗",
+      "color": "#2196F3",
+      "startPage": 13,
+      "endPage": 24
+    },
+    {
+      "id": "u3",
+      "title": "الفترة 3",
+      "icon": "📙",
+      "color": "#FF9800",
+      "startPage": 25,
+      "endPage": 36
+    },
+    {
+      "id": "u4",
+      "title": "الفترة 4",
+      "icon": "📕",
+      "color": "#F44336",
+      "startPage": 37,
+      "endPage": 40
+    }
+  ],
+  "imageBase": "/assets/books/gen-math/",
+  "imageExt": ".webp",
+  "_meta": {
+    "generatedCover": "stu-world-math.webp"
   }
- ]
 }

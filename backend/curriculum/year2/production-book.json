@@ -1,8 +1,8 @@
 {
   "title": "إنتاج كتابي",
   "subtitle": "السنة الثانية ابتدائي",
-  "imageBase": null,
-  "imageExt": ".jpg",
+  "imageBase": "/assets/books/gen-production/",
+  "imageExt": ".webp",
   "totalPages": 60,
   "units": [
     {
@@ -53,5 +53,8 @@
       "startPage": 51,
       "endPage": 60
     }
-  ]
+  ],
+  "_meta": {
+    "generatedCover": "tea-memo.webp"
+  }
 }

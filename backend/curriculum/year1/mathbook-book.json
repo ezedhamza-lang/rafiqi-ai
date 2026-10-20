@@ -2,11 +2,12 @@
   "title": "رياضيّات — كتابي في الرياضيات",
   "subtitle": "السّنة الأولى من التعليم الأساسيّ",
   "imageBase": "/assets/books/math/",
-  "imageExt": ".jpg",
+  "imageExt": ".webp",
   "totalPages": 122,
   "_meta": {
     "note": "حدود الوحدات مبنية على قراءة فعلية لمحتوى الصفحات (كلمات مفتاحية + فحص بصري لعيّنة من الصفحات)، وليس على استشهادات math-units.json النظرية التي تبيّن أنها لا تُطابق محتوى هذا الملف. الكتاب يتداخل فيه أحيانًا أكثر من محور في نفس الصفحات، لذا الحدود تقريبية عند أطراف كل وحدة.",
-    "verifiedAgainst": "mathematique.pdf (122 صفحة)"
+    "verifiedAgainst": "mathematique.pdf (122 صفحة)",
+    "generatedCover": "stu-world-math.webp"
   },
   "units": [
     {

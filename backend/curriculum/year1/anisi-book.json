@@ -2,7 +2,7 @@
   "title": "كتابي في القراءة — أنيسي",
   "subtitle": "السنة الأولى من التعليم الأساسي",
   "imageBase": "/assets/books/anisi/",
-  "imageExt": ".jpg",
+  "imageExt": ".webp",
   "totalPages": 113,
   "units": [
     {
@@ -85,5 +85,8 @@
       "startPage": 113,
       "endPage": 113
     }
-  ]
+  ],
+  "_meta": {
+    "generatedCover": "stu-world-reading.webp"
+  }
 }

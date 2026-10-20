@@ -2926,5 +2926,10 @@
         }
       ]
     }
-  ]
+  ],
+  "imageBase": "/assets/books/gen-science/",
+  "imageExt": ".webp",
+  "_meta": {
+    "generatedCover": "stu-world-science.webp"
+  }
 }

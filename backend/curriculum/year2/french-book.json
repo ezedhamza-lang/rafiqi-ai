@@ -6,5 +6,10 @@
   "pdfUrl": "/assets/books/y2french.pdf",
   "totalPages": 122,
   "hasImages": false,
-  "hasPDF": true
+  "hasPDF": true,
+  "imageBase": "/assets/books/gen-french/",
+  "imageExt": ".webp",
+  "_meta": {
+    "generatedCover": "tea-classroom.webp"
+  }
 }
