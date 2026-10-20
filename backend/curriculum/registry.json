@@ -126,6 +126,325 @@
           "lessonsFile": "production-units.json",
           "skillsMapFile": "skills-map-production.json",
           "adapter": "production"
+        },
+        {
+          "id": "our-math-book-01",
+          "title": "رياضيات",
+          "aliases": [
+            "كراس الرياضيات مع الحلول — السنة الأولى ابتدائي",
+            "رياضيات",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-01-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-02",
+          "title": "رياضيات",
+          "aliases": [
+            "سلسلة رفيقي في الرياضيات مع الحلول — السنة الأولى ابتدائي",
+            "رياضيات",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-02-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-03",
+          "title": "رياضيات",
+          "aliases": [
+            "رفيقي في الرياضيات مع الحلول — السنة الأولى ابتدائي",
+            "رياضيات",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-03-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-04",
+          "title": "رياضيات",
+          "aliases": [
+            "رفيقي في الرياضيات مع الحلول — السنة الأولى",
+            "رياضيات",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-04-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-05",
+          "title": "رياضيات",
+          "aliases": [
+            "math g1",
+            "رياضيات",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-05-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-08",
+          "title": "رياضيات",
+          "aliases": [
+            "كتاب الرياضيات — السنة الأولى ابتدائي — تونس",
+            "رياضيات",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-08-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-10",
+          "title": "رياضيات",
+          "aliases": [
+            "رفيقي في الرياضيات — السنة الأولى ابتدائي",
+            "رياضيات",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-10-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-production-book-02",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "رفيقي في الإنتاج الكتابي السنة الأولى",
+            "إنتاج كتابي",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-production-book-02-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-math-book-12",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa G1 Math Complete",
+            "رياضيات",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-12-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-13",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa Math G1",
+            "رياضيات",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-13-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-14",
+          "title": "رياضيات",
+          "aliases": [
+            "خطوة بخطوة — رياضيات — الأولى ابتدائي",
+            "رياضيات",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-14-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-23",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa AR G1 Complete v2",
+            "عربية",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-23-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-24",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa AR2 02 g1",
+            "عربية",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-24-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-production-book-08",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "Kitab Ikhtibarat Intaj Kitabi S1 306p",
+            "إنتاج كتابي",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-production-book-08-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-production-book-09",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "Silsilati Intaj Kitabi S1 FULL",
+            "إنتاج كتابي",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-production-book-09-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-production-book-15",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "كتاب الإنتاج الكتابي — السنة الأولى ابتدائي — تونس",
+            "إنتاج كتابي",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-production-book-15-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-production-book-17",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "Silsilati Intaj Kitabi S1 41p",
+            "إنتاج كتابي",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-production-book-17-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-production-book-19",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "رفيقي في الإنتاج الكتابي 1 الاول",
+            "إنتاج كتابي",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-production-book-19-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-science-book-01",
+          "title": "إيقاظ علمي",
+          "aliases": [
+            "خطوة بخطوة — علوم — الأولى ابتدائي",
+            "علوم",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-science-book-01-book.json",
+          "adapter": "science"
+        },
+        {
+          "id": "our-science-book-03",
+          "title": "إيقاظ علمي",
+          "aliases": [
+            "رفيقي في الإيقاظ العلمي — السنة الأولى ابتدائي",
+            "علوم",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-science-book-03-book.json",
+          "adapter": "science"
+        },
+        {
+          "id": "our-math-book-35",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa French G1",
+            "فرنسي",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-35-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-french-book-04",
+          "title": "فرنسي",
+          "aliases": [
+            "Step — by — Step — Francais — S1",
+            "فرنسي",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-french-book-04-book.json",
+          "adapter": "french"
+        },
+        {
+          "id": "our-math-book-40",
+          "title": "رياضيات",
+          "aliases": [
+            "رفيقي للتربية الإسلامية — السنة الأولى ابتدائي (المنهج التونسي)",
+            "أخرى",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-40-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-41",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa Sci G1",
+            "أخرى",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-41-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-anisi-book-01",
+          "title": "قراءة",
+          "aliases": [
+            "كراس القراءة والنسخ — السنة الأولى ابتدائي",
+            "قراءة ولغة",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-anisi-book-01-book.json",
+          "adapter": "anisi"
+        },
+        {
+          "id": "our-anisi-book-02",
+          "title": "قراءة",
+          "aliases": [
+            "كتاب القراءة واللغة العربية — السنة الأولى ابتدائي — تونس",
+            "قراءة ولغة",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-anisi-book-02-book.json",
+          "adapter": "anisi"
+        },
+        {
+          "id": "our-anisi-book-03",
+          "title": "قراءة",
+          "aliases": [
+            "رفيقي في القراءة — السنة الأولى ابتدائي",
+            "قراءة ولغة",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-anisi-book-03-book.json",
+          "adapter": "anisi"
+        },
+        {
+          "id": "our-math-book-45",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa English G1",
+            "قراءة ولغة",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-math-book-45-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-anisi-book-04",
+          "title": "قراءة",
+          "aliases": [
+            "G1 Book 1of6 p001",
+            "قراءة ولغة",
+            "السنة الأولى ابتدائي"
+          ],
+          "bookFile": "our-anisi-book-04-book.json",
+          "adapter": "anisi"
         }
       ]
     },
@@ -239,6 +558,193 @@
           "lessonsFile": "french-units.json",
           "skillsMapFile": null,
           "adapter": "french"
+        },
+        {
+          "id": "our-math-book-06",
+          "title": "رياضيات",
+          "aliases": [
+            "رفيقي في الرياضيات — السنة الثانية ابتدائي",
+            "رياضيات",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-math-book-06-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-production-book-01",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "رفيقي في الإنتاج الكتابي السنة الثانية",
+            "إنتاج كتابي",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-production-book-01-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-production-book-03",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "رفيقي في الإنتاج الكتابي — السنة الثانية ابتدائي",
+            "إنتاج كتابي",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-production-book-03-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-production-book-04",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "كتاب الانتاج الكتابي السنة الثانية",
+            "إنتاج كتابي",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-production-book-04-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-production-book-07",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "سلسلة 100 اختبار الانتاج الكتابي السنة الثانية",
+            "إنتاج كتابي",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-production-book-07-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-math-book-15",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa Math G2",
+            "رياضيات",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-math-book-15-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-25",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa AR2 03 g2",
+            "عربية",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-math-book-25-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-production-book-11",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "سلسلة 70 اختبار الانتاج الكتابي السنة الثانية",
+            "إنتاج كتابي",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-production-book-11-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-production-book-12",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "سلسلة 50 اختبار الانتاج الكتابي السنة الثانية",
+            "إنتاج كتابي",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-production-book-12-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-production-book-14",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "حلول نموذجية لسلسلة 100 اختبار الانتاج الكتابي السنة الثانية",
+            "إنتاج كتابي",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-production-book-14-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-production-book-20",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "رفيقي في الإنتاج الكتابي 2 الثاني",
+            "إنتاج كتابي",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-production-book-20-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-math-book-36",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa French G2",
+            "فرنسي",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-math-book-36-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-french-book-05",
+          "title": "فرنسي",
+          "aliases": [
+            "Step — by — Step — Francais — S2",
+            "فرنسي",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-french-book-05-book.json",
+          "adapter": "french"
+        },
+        {
+          "id": "our-math-book-42",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa Sci G2",
+            "أخرى",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-math-book-42-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-43",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa WB Anissi Complete",
+            "أخرى",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-math-book-43-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-46",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa English G2",
+            "قراءة ولغة",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-math-book-46-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-anisi-book-05",
+          "title": "قراءة",
+          "aliases": [
+            "G2 Book 1of6 p001",
+            "قراءة ولغة",
+            "السنة الثانية ابتدائي"
+          ],
+          "bookFile": "our-anisi-book-05-book.json",
+          "adapter": "anisi"
         }
       ]
     },
@@ -306,6 +812,160 @@
           "lessonsFile": "production-units.json",
           "skillsMapFile": "skills-map-production.json",
           "adapter": "production"
+        },
+        {
+          "id": "our-math-book-16",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa Math G3",
+            "رياضيات",
+            "السنة الثالثة ابتدائي"
+          ],
+          "bookFile": "our-math-book-16-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-17",
+          "title": "رياضيات",
+          "aliases": [
+            "سلسلة رفيقي للرياضيات — من السنة الثالثة إلى السنة السادسة",
+            "رياضيات",
+            "السنة الثالثة ابتدائي"
+          ],
+          "bookFile": "our-math-book-17-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-26",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa AR2 04 g3",
+            "عربية",
+            "السنة الثالثة ابتدائي"
+          ],
+          "bookFile": "our-math-book-26-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-29",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa AR2 07 g6",
+            "عربية",
+            "السنة الثالثة ابتدائي"
+          ],
+          "bookFile": "our-math-book-29-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-30",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa AR2 08 g7",
+            "عربية",
+            "السنة الثالثة ابتدائي"
+          ],
+          "bookFile": "our-math-book-30-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-production-book-10",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "سلسلة 100 اختبار الانتاج الكتابي السنة الثالثة",
+            "إنتاج كتابي",
+            "السنة الثالثة ابتدائي"
+          ],
+          "bookFile": "our-production-book-10-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-production-book-13",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "حلول نموذجية لسلسلة 100 اختبار الانتاج الكتابي السنة الثالثة",
+            "إنتاج كتابي",
+            "السنة الثالثة ابتدائي"
+          ],
+          "bookFile": "our-production-book-13-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-production-book-16",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "رفيقي في الإنتاج الكتابي 3 الثالث",
+            "إنتاج كتابي",
+            "السنة الثالثة ابتدائي"
+          ],
+          "bookFile": "our-production-book-16-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-production-book-18",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "حلول كتاب الانتاج الكتابي السنة الثالثة",
+            "إنتاج كتابي",
+            "السنة الثالثة ابتدائي"
+          ],
+          "bookFile": "our-production-book-18-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-science-book-02",
+          "title": "إيقاظ علمي",
+          "aliases": [
+            "رفيقي في الإيقاظ العلمي س3 كتاب التلميذ",
+            "علوم",
+            "السنة الثالثة ابتدائي"
+          ],
+          "bookFile": "our-science-book-02-book.json",
+          "adapter": "science"
+        },
+        {
+          "id": "our-math-book-31",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa Sci G3",
+            "علوم",
+            "السنة الثالثة ابتدائي"
+          ],
+          "bookFile": "our-math-book-31-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-37",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa French G3",
+            "فرنسي",
+            "السنة الثالثة ابتدائي"
+          ],
+          "bookFile": "our-math-book-37-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-french-book-01",
+          "title": "فرنسي",
+          "aliases": [
+            "Step — by — Step — Francais — S3",
+            "فرنسي",
+            "السنة الثالثة ابتدائي"
+          ],
+          "bookFile": "our-french-book-01-book.json",
+          "adapter": "french"
+        },
+        {
+          "id": "our-math-book-47",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa English G3",
+            "قراءة ولغة",
+            "السنة الثالثة ابتدائي"
+          ],
+          "bookFile": "our-math-book-47-book.json",
+          "adapter": "math"
         }
       ]
     },
@@ -373,6 +1033,94 @@
           "lessonsFile": "production-units.json",
           "skillsMapFile": "skills-map-production.json",
           "adapter": "production"
+        },
+        {
+          "id": "our-math-book-07",
+          "title": "رياضيات",
+          "aliases": [
+            "رفيقي في الرياضيات — السنة الرابعة ابتدائي",
+            "رياضيات",
+            "السنة الرابعة ابتدائي"
+          ],
+          "bookFile": "our-math-book-07-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-production-book-06",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "كتاب الانتاج الكتابي السنة الرابعة",
+            "إنتاج كتابي",
+            "السنة الرابعة ابتدائي"
+          ],
+          "bookFile": "our-production-book-06-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-math-book-18",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa Math G4",
+            "رياضيات",
+            "السنة الرابعة ابتدائي"
+          ],
+          "bookFile": "our-math-book-18-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-28",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa AR2 05 g4",
+            "عربية",
+            "السنة الرابعة ابتدائي"
+          ],
+          "bookFile": "our-math-book-28-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-32",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa Sci G4",
+            "علوم",
+            "السنة الرابعة ابتدائي"
+          ],
+          "bookFile": "our-math-book-32-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-38",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa French G4",
+            "فرنسي",
+            "السنة الرابعة ابتدائي"
+          ],
+          "bookFile": "our-math-book-38-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-french-book-02",
+          "title": "فرنسي",
+          "aliases": [
+            "Step — by — Step — Francais — S4",
+            "فرنسي",
+            "السنة الرابعة ابتدائي"
+          ],
+          "bookFile": "our-french-book-02-book.json",
+          "adapter": "french"
+        },
+        {
+          "id": "our-math-book-48",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa English G4",
+            "قراءة ولغة",
+            "السنة الرابعة ابتدائي"
+          ],
+          "bookFile": "our-math-book-48-book.json",
+          "adapter": "math"
         }
       ]
     },
@@ -454,6 +1202,105 @@
           "lessonsFile": "production-units.json",
           "skillsMapFile": "skills-map-production.json",
           "adapter": "production"
+        },
+        {
+          "id": "our-math-book-09",
+          "title": "رياضيات",
+          "aliases": [
+            "رفيقي في الرياضيات — السنة الخامسة ابتدائي",
+            "رياضيات",
+            "السنة الخامسة ابتدائي"
+          ],
+          "bookFile": "our-math-book-09-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-production-book-05",
+          "title": "إنتاج كتابي",
+          "aliases": [
+            "كتاب الانتاج الكتابي السنة الخامسة",
+            "إنتاج كتابي",
+            "السنة الخامسة ابتدائي"
+          ],
+          "bookFile": "our-production-book-05-book.json",
+          "adapter": "production"
+        },
+        {
+          "id": "our-math-book-19",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa Math G5",
+            "رياضيات",
+            "السنة الخامسة ابتدائي"
+          ],
+          "bookFile": "our-math-book-19-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-27",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa AR2 06 g5",
+            "عربية",
+            "السنة الخامسة ابتدائي"
+          ],
+          "bookFile": "our-math-book-27-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-33",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa Sci G5",
+            "علوم",
+            "السنة الخامسة ابتدائي"
+          ],
+          "bookFile": "our-math-book-33-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-39",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa French G5",
+            "فرنسي",
+            "السنة الخامسة ابتدائي"
+          ],
+          "bookFile": "our-math-book-39-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-french-book-03",
+          "title": "فرنسي",
+          "aliases": [
+            "Step — by — Step — Francais — S5",
+            "فرنسي",
+            "السنة الخامسة ابتدائي"
+          ],
+          "bookFile": "our-french-book-03-book.json",
+          "adapter": "french"
+        },
+        {
+          "id": "our-math-book-44",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa WB 06 letters56",
+            "أخرى",
+            "السنة الخامسة ابتدائي"
+          ],
+          "bookFile": "our-math-book-44-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-49",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa English G5",
+            "قراءة ولغة",
+            "السنة الخامسة ابتدائي"
+          ],
+          "bookFile": "our-math-book-49-book.json",
+          "adapter": "math"
         }
       ]
     },
@@ -565,6 +1412,61 @@
           "lessonsFile": "production-units.json",
           "skillsMapFile": "skills-map-production.json",
           "adapter": "production"
+        },
+        {
+          "id": "our-math-book-11",
+          "title": "رياضيات",
+          "aliases": [
+            "رفيقي في الرياضيات — السنة السادسة ابتدائي",
+            "رياضيات",
+            "السنة السادسة ابتدائي"
+          ],
+          "bookFile": "our-math-book-11-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-20",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa Math G6",
+            "رياضيات",
+            "السنة السادسة ابتدائي"
+          ],
+          "bookFile": "our-math-book-20-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-21",
+          "title": "رياضيات",
+          "aliases": [
+            "rafiqi — math",
+            "رياضيات",
+            "السنة السادسة ابتدائي"
+          ],
+          "bookFile": "our-math-book-21-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-22",
+          "title": "رياضيات",
+          "aliases": [
+            "rafiqi — y2 — math",
+            "رياضيات",
+            "السنة السادسة ابتدائي"
+          ],
+          "bookFile": "our-math-book-22-book.json",
+          "adapter": "math"
+        },
+        {
+          "id": "our-math-book-34",
+          "title": "رياضيات",
+          "aliases": [
+            "Khatwa Sci G6",
+            "علوم",
+            "السنة السادسة ابتدائي"
+          ],
+          "bookFile": "our-math-book-34-book.json",
+          "adapter": "math"
         }
       ]
     }
