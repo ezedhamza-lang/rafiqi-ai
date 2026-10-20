@@ -1954,7 +1954,7 @@
         "science": "Science — Discovery",
         "production": "Written Production",
         "french": "🇫🇷 French"
-      }
+      , "arabic": "Arabic", "english": "English", "other": "Other" }
     },
     "adaptive": {
       "title": "Smart Review — Adaptive Learning",

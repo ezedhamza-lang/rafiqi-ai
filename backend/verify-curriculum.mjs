@@ -16,9 +16,12 @@ function bookTab(b) {
   if (k.includes('ايقاظ') || k.includes('علوم')) return 'science';
   if (k.includes('انتاج')) return 'production';
   if (k.includes('فرنس') || k.includes('french') || k.includes('francais')) return 'french';
+  if (k.includes('عربي')) return 'arabic';
+  if (k.includes('انجليز') || k.includes('english')) return 'english';
+  if (k.includes('اخرى') || k.includes('اخري')) return 'other';
   return b.subjectId || 'math';
 }
-const TABS = ['math', 'anisi', 'science', 'production', 'french'];
+const TABS = ['math', 'anisi', 'science', 'production', 'french', 'arabic', 'english', 'other'];
 
 const ours = books.filter((b) => String(b.subjectId).startsWith('our-'));
 const theirs = books.filter((b) => !String(b.subjectId).startsWith('our-'));

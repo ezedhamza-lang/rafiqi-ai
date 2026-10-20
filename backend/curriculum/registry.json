@@ -250,7 +250,7 @@
         },
         {
           "id": "our-math-book-23",
-          "title": "رياضيات",
+          "title": "عربية",
           "aliases": [
             "Khatwa AR G1 Complete v2",
             "عربية",
@@ -261,7 +261,7 @@
         },
         {
           "id": "our-math-book-24",
-          "title": "رياضيات",
+          "title": "عربية",
           "aliases": [
             "Khatwa AR2 02 g1",
             "عربية",
@@ -349,7 +349,7 @@
         },
         {
           "id": "our-math-book-35",
-          "title": "رياضيات",
+          "title": "فرنسي",
           "aliases": [
             "Khatwa French G1",
             "فرنسي",
@@ -371,7 +371,7 @@
         },
         {
           "id": "our-math-book-40",
-          "title": "رياضيات",
+          "title": "أخرى",
           "aliases": [
             "رفيقي للتربية الإسلامية — السنة الأولى ابتدائي (المنهج التونسي)",
             "أخرى",
@@ -382,10 +382,10 @@
         },
         {
           "id": "our-math-book-41",
-          "title": "رياضيات",
+          "title": "إيقاظ علمي",
           "aliases": [
             "Khatwa Sci G1",
-            "أخرى",
+            "إيقاظ علمي",
             "السنة الأولى ابتدائي"
           ],
           "bookFile": "our-math-book-41-book.json",
@@ -426,10 +426,10 @@
         },
         {
           "id": "our-math-book-45",
-          "title": "رياضيات",
+          "title": "إنجليزية",
           "aliases": [
             "Khatwa English G1",
-            "قراءة ولغة",
+            "إنجليزية",
             "السنة الأولى ابتدائي"
           ],
           "bookFile": "our-math-book-45-book.json",
@@ -627,7 +627,7 @@
         },
         {
           "id": "our-math-book-25",
-          "title": "رياضيات",
+          "title": "عربية",
           "aliases": [
             "Khatwa AR2 03 g2",
             "عربية",
@@ -682,7 +682,7 @@
         },
         {
           "id": "our-math-book-36",
-          "title": "رياضيات",
+          "title": "فرنسي",
           "aliases": [
             "Khatwa French G2",
             "فرنسي",
@@ -704,10 +704,10 @@
         },
         {
           "id": "our-math-book-42",
-          "title": "رياضيات",
+          "title": "إيقاظ علمي",
           "aliases": [
             "Khatwa Sci G2",
-            "أخرى",
+            "إيقاظ علمي",
             "السنة الثانية ابتدائي"
           ],
           "bookFile": "our-math-book-42-book.json",
@@ -715,7 +715,7 @@
         },
         {
           "id": "our-math-book-43",
-          "title": "رياضيات",
+          "title": "أخرى",
           "aliases": [
             "Khatwa WB Anissi Complete",
             "أخرى",
@@ -726,10 +726,10 @@
         },
         {
           "id": "our-math-book-46",
-          "title": "رياضيات",
+          "title": "إنجليزية",
           "aliases": [
             "Khatwa English G2",
-            "قراءة ولغة",
+            "إنجليزية",
             "السنة الثانية ابتدائي"
           ],
           "bookFile": "our-math-book-46-book.json",
@@ -837,7 +837,7 @@
         },
         {
           "id": "our-math-book-26",
-          "title": "رياضيات",
+          "title": "عربية",
           "aliases": [
             "Khatwa AR2 04 g3",
             "عربية",
@@ -848,7 +848,7 @@
         },
         {
           "id": "our-math-book-29",
-          "title": "رياضيات",
+          "title": "عربية",
           "aliases": [
             "Khatwa AR2 07 g6",
             "عربية",
@@ -859,7 +859,7 @@
         },
         {
           "id": "our-math-book-30",
-          "title": "رياضيات",
+          "title": "عربية",
           "aliases": [
             "Khatwa AR2 08 g7",
             "عربية",
@@ -925,10 +925,10 @@
         },
         {
           "id": "our-math-book-31",
-          "title": "رياضيات",
+          "title": "إيقاظ علمي",
           "aliases": [
             "Khatwa Sci G3",
-            "علوم",
+            "إيقاظ علمي",
             "السنة الثالثة ابتدائي"
           ],
           "bookFile": "our-math-book-31-book.json",
@@ -936,7 +936,7 @@
         },
         {
           "id": "our-math-book-37",
-          "title": "رياضيات",
+          "title": "فرنسي",
           "aliases": [
             "Khatwa French G3",
             "فرنسي",
@@ -958,10 +958,10 @@
         },
         {
           "id": "our-math-book-47",
-          "title": "رياضيات",
+          "title": "إنجليزية",
           "aliases": [
             "Khatwa English G3",
-            "قراءة ولغة",
+            "إنجليزية",
             "السنة الثالثة ابتدائي"
           ],
           "bookFile": "our-math-book-47-book.json",
@@ -1069,7 +1069,7 @@
         },
         {
           "id": "our-math-book-28",
-          "title": "رياضيات",
+          "title": "عربية",
           "aliases": [
             "Khatwa AR2 05 g4",
             "عربية",
@@ -1080,10 +1080,10 @@
         },
         {
           "id": "our-math-book-32",
-          "title": "رياضيات",
+          "title": "إيقاظ علمي",
           "aliases": [
             "Khatwa Sci G4",
-            "علوم",
+            "إيقاظ علمي",
             "السنة الرابعة ابتدائي"
           ],
           "bookFile": "our-math-book-32-book.json",
@@ -1091,7 +1091,7 @@
         },
         {
           "id": "our-math-book-38",
-          "title": "رياضيات",
+          "title": "فرنسي",
           "aliases": [
             "Khatwa French G4",
             "فرنسي",
@@ -1113,10 +1113,10 @@
         },
         {
           "id": "our-math-book-48",
-          "title": "رياضيات",
+          "title": "إنجليزية",
           "aliases": [
             "Khatwa English G4",
-            "قراءة ولغة",
+            "إنجليزية",
             "السنة الرابعة ابتدائي"
           ],
           "bookFile": "our-math-book-48-book.json",
@@ -1238,7 +1238,7 @@
         },
         {
           "id": "our-math-book-27",
-          "title": "رياضيات",
+          "title": "عربية",
           "aliases": [
             "Khatwa AR2 06 g5",
             "عربية",
@@ -1249,10 +1249,10 @@
         },
         {
           "id": "our-math-book-33",
-          "title": "رياضيات",
+          "title": "إيقاظ علمي",
           "aliases": [
             "Khatwa Sci G5",
-            "علوم",
+            "إيقاظ علمي",
             "السنة الخامسة ابتدائي"
           ],
           "bookFile": "our-math-book-33-book.json",
@@ -1260,7 +1260,7 @@
         },
         {
           "id": "our-math-book-39",
-          "title": "رياضيات",
+          "title": "فرنسي",
           "aliases": [
             "Khatwa French G5",
             "فرنسي",
@@ -1282,7 +1282,7 @@
         },
         {
           "id": "our-math-book-44",
-          "title": "رياضيات",
+          "title": "أخرى",
           "aliases": [
             "Khatwa WB 06 letters56",
             "أخرى",
@@ -1293,10 +1293,10 @@
         },
         {
           "id": "our-math-book-49",
-          "title": "رياضيات",
+          "title": "إنجليزية",
           "aliases": [
             "Khatwa English G5",
-            "قراءة ولغة",
+            "إنجليزية",
             "السنة الخامسة ابتدائي"
           ],
           "bookFile": "our-math-book-49-book.json",
@@ -1459,10 +1459,10 @@
         },
         {
           "id": "our-math-book-34",
-          "title": "رياضيات",
+          "title": "إيقاظ علمي",
           "aliases": [
             "Khatwa Sci G6",
-            "علوم",
+            "إيقاظ علمي",
             "السنة السادسة ابتدائي"
           ],
           "bookFile": "our-math-book-34-book.json",

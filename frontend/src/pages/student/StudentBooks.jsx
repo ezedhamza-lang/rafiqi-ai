@@ -12,7 +12,10 @@ const SUBJECTS = [
   { code: 'anisi', key: 'anisi', icon: 'menu_book', color: '#b06b00', bg: 'linear-gradient(135deg, #F5B942, #fd8b15)' },
   { code: 'science', key: 'science', icon: 'science', color: '#0e6b4f', bg: 'linear-gradient(135deg, #0e6b4f, #17a076)' },
   { code: 'production', key: 'production', icon: 'edit', color: '#6b3fa0', bg: 'linear-gradient(135deg, #6b3fa0, #9d6bdc)' },
-  { code: 'french', key: 'french', icon: 'translate', color: '#E91E63', bg: 'linear-gradient(135deg, #E91E63, #F06292)' }
+  { code: 'french', key: 'french', icon: 'translate', color: '#E91E63', bg: 'linear-gradient(135deg, #E91E63, #F06292)' },
+  { code: 'arabic', key: 'arabic', icon: 'spellcheck', color: '#0F766E', bg: 'linear-gradient(135deg, #0F766E, #14B8A6)' },
+  { code: 'english', key: 'english', icon: 'language', color: '#1D4ED8', bg: 'linear-gradient(135deg, #1D4ED8, #3B82F6)' },
+  { code: 'other', key: 'other', icon: 'folder_open', color: '#4B5563', bg: 'linear-gradient(135deg, #4B5563, #6B7280)' }
 ];
 
 // كل كتب المادة الواحدة (كثيرًا ما للسنة كتب متعددة لنفس المادة) تُجمّع تحت تبويب واحد
@@ -27,6 +30,9 @@ function bookTab(b) {
   if (k.includes('ايقاظ') || k.includes('علوم')) return 'science';
   if (k.includes('انتاج')) return 'production';
   if (k.includes('فرنس') || k.includes('french') || k.includes('francais')) return 'french';
+  if (k.includes('عربي')) return 'arabic';
+  if (k.includes('انجليز') || k.includes('english')) return 'english';
+  if (k.includes('اخرى') || k.includes('اخري')) return 'other';
   return b.subjectId || 'math';
 }
 
