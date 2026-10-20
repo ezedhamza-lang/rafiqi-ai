@@ -3,6 +3,16 @@ import react from '@vitejs/plugin-react';
 
 const target = process.env.VITE_PROXY_TARGET || 'http://localhost:3001';
 const wsTarget = target.replace(/^http/, 'ws');
+// محلي فقط:allows the proxied API to accept requests coming from the Vite dev server
+// (the backend's CORS allow-list usually contains the production origin only).
+const proxyOrigin = process.env.VITE_PROXY_ORIGIN || '';
+const originRewrite = proxyOrigin
+  ? {
+      configure(proxy) {
+        proxy.on('proxyReq', (proxyReq) => proxyReq.setHeader('Origin', proxyOrigin));
+      }
+    }
+  : {};
 
 export default defineConfig({
   plugins: [react()],
@@ -12,27 +22,33 @@ export default defineConfig({
     proxy: {
       '/api': {
         target,
-        changeOrigin: true
+        changeOrigin: true,
+        ...originRewrite
       },
       '/uploads': {
         target,
-        changeOrigin: true
+        changeOrigin: true,
+        ...originRewrite
       },
       '/assets': {
         target,
-        changeOrigin: true
+        changeOrigin: true,
+        ...originRewrite
       },
       '/images': {
         target,
-        changeOrigin: true
+        changeOrigin: true,
+        ...originRewrite
       },
       '/media': {
         target,
-        changeOrigin: true
+        changeOrigin: true,
+        ...originRewrite
       },
       '/plans': {
         target,
-        changeOrigin: true
+        changeOrigin: true,
+        ...originRewrite
       },
       '/ws': {
         target: wsTarget,
