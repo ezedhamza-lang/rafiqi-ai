@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { api, getToken, getStoredUser } from '../api/client.js';
+import { useI18n } from '../i18n/index.jsx';
 
 function spaceForRole(role) {
   if (role === 'STUDENT') return 'student';
@@ -13,6 +14,7 @@ function fmtTime(iso) {
 }
 
 export default function LiveRoom({ session, joinData, canPublish, onExit }) {
+  const { t } = useI18n();
   const [users, setUsers] = useState([]);
   const [messages, setMessages] = useState([]);
   const [chatInput, setChatInput] = useState('');
@@ -22,6 +24,7 @@ export default function LiveRoom({ session, joinData, canPublish, onExit }) {
   const [camError, setCamError] = useState('');
   const [screenError, setScreenError] = useState('');
   const [notice, setNotice] = useState('');
+  const [useJitsi, setUseJitsi] = useState(false);
 
   const localVideoRef = useRef(null);
   const screenVideoRef = useRef(null);
@@ -41,6 +44,22 @@ export default function LiveRoom({ session, joinData, canPublish, onExit }) {
   meRef.current = me;
   const space = spaceForRole(me?.role);
   const myId = me?.id;
+
+  // Jitsi: غرفة مجانية بلا حساب ولا مفاتيح — تُفتح داخل المنصّة أو في نافذة مستقلّة
+  const jitsiRoom = String(session.roomName || '').replace(/[^a-zA-Z0-9_-]/g, '');
+  const jitsiBase = jitsiRoom ? `https://meet.jit.si/${jitsiRoom}` : '';
+  const jitsiEmbed = jitsiBase
+    ? `${jitsiBase}#config.prejoinPageEnabled=false&config.startWithVideoMuted=false&config.disableDeepLinking=true&interfaceConfig.SHOW_JITSI_WATERMARK=false`
+    : '';
+
+  // عند التحويل إلى Jitsi نُغلق كاميرا المنصّة (فهي لم تعد مستعملة)
+  useEffect(() => {
+    if (useJitsi && streamRef.current) {
+      streamRef.current.getTracks().forEach((t) => t.stop());
+      streamRef.current = null;
+      setLocalReady(false);
+    }
+  }, [useJitsi]);
 
   const myShare = screenShares.find((s) => s.userId === myId);
   const sharingScreen = !!myShare;
@@ -293,9 +312,42 @@ export default function LiveRoom({ session, joinData, canPublish, onExit }) {
       {camError && <div className="form-error" style={{ marginBottom: '0.8rem' }}>{camError}</div>}
       {screenError && <div className="form-error" style={{ marginBottom: '0.8rem' }}>{screenError}</div>}
 
+      <div className="live-room-toolbar" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.8rem', alignItems: 'center' }}>
+        {!useJitsi ? (
+          <button
+            className="btn btn-outline btn-sm"
+            onClick={() => { setUseJitsi(true); setNotice(t('teacherSpace.liveSessions.jitsiNote')); }}
+            disabled={!jitsiEmbed}
+          >
+            <span className="material-icons" style={{ fontSize: '16px' }}>video_call</span>
+            {t('teacherSpace.liveSessions.jitsiOpen')}
+          </button>
+        ) : (
+          <>
+            <a className="btn btn-ghost btn-sm" href={jitsiBase} target="_blank" rel="noreferrer">
+              <span className="material-icons" style={{ fontSize: '16px' }}>open_in_new</span>
+              {t('teacherSpace.liveSessions.jitsiNewTab')}
+            </a>
+            <button className="btn btn-ghost btn-sm" onClick={() => setUseJitsi(false)}>
+              <span className="material-icons" style={{ fontSize: '16px' }}>close</span>
+              {t('teacherSpace.liveSessions.jitsiBack')}
+            </button>
+          </>
+        )}
+      </div>
+
       <div className="live-room-grid">
         <div className="live-stage">
-          {provider === 'LIVEKIT' && joinData?.serverUrl ? (
+          {useJitsi && jitsiEmbed ? (
+            <div className="live-tracks" style={{ padding: 0 }}>
+              <iframe
+                title="Jitsi"
+                src={jitsiEmbed}
+                allow="camera; microphone; fullscreen; display-capture; autoplay; encrypted-media"
+                style={{ width: '100%', height: '100%', minHeight: '380px', border: 0, borderRadius: '12px', background: '#000' }}
+              />
+            </div>
+          ) : provider === 'LIVEKIT' && joinData?.serverUrl ? (
             <div className="live-tracks" ref={roomContainerRef} />
           ) : (
             <div className="live-tracks" ref={roomContainerRef}>

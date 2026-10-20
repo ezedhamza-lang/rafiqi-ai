@@ -134,13 +134,24 @@ export default function StudentBooks() {
         </div>
       ) : (
         <div className="card-grid">
-          {filtered.map((book) => (
+          {filtered.map((book) => {
+            const sub = SUBJECTS.find((s) => s.code === bookTab(book)) || SUBJECTS[0];
+            const cover = book.imageBase ? `${book.imageBase}thumb-001.webp` : '';
+            return (
             <div key={`${book.gradeId}-${book.subjectId}-${book.title}`} className="card">
-              <div className="lesson-head" style={{ background: (SUBJECTS.find((s) => s.code === bookTab(book)) || SUBJECTS[0]).bg }}>
-                <span className="material-icons" style={{ fontSize: '2.4rem', color: '#fff' }}>
-                  {(SUBJECTS.find((s) => s.code === bookTab(book)) || SUBJECTS[0]).icon}
-                </span>
-                <span className="lesson-num">{book.grade}</span>
+              <div className="book-cover" style={{ background: sub.bg }}>
+                {cover && (
+                  <img
+                    className="book-cover-img"
+                    src={cover}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                  />
+                )}
+                <span className="material-icons book-cover-icon">{sub.icon}</span>
+                <span className="book-cover-grade">{book.grade}</span>
               </div>
               <div className="card-body">
                 <h3>{book.title}</h3>
@@ -174,7 +185,8 @@ export default function StudentBooks() {
                 </div>
               </div>
             </div>
-          ))}
+            );
+          })}
         </div>
       )}
 
