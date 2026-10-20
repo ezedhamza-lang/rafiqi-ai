@@ -39,7 +39,7 @@ const bad = ours.filter((b) => !b.hasPDF || !b.pdfUrl || !b.totalPages);
 console.log('our books missing hasPDF/pdfUrl/totalPages:', bad.length, bad.slice(0, 4).map((b) => b.subjectId));
 
 const noCover = ours.filter((b) => {
-  const p = 'D:/WORK/03-education/rafiqi-full-2026-09-02-2/rafiqi/backend' + b.imageBase + '001' + (b.imageExt || '.jpg');
+  const p = 'D:/WORK/03-education/rafiqi-full-2026-09-02-2/rafiqi/backend/curriculum' + b.imageBase.replace('/assets/books/', '/assets-books/');
   return !fs.existsSync(p);
 });
 console.log('our books missing cover file:', noCover.length, noCover.slice(0, 4).map((b) => b.subjectId));
