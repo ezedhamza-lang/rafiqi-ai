@@ -124,6 +124,20 @@ export default function TeacherDashboard() {
           </div>
         </div>
 
+        <a
+          className="teacher-books-banner"
+          href="https://rafiqitn.blogspot.com/search/label/%D8%B3%D9%84%D8%B3%D9%84%D8%A9%20%D8%B1%D9%81%D9%8A%D9%82%D9%8A"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span className="material-icons">menu_book</span>
+          <span className="teacher-books-banner-text">
+            <strong>{t('teacherSpace.ourBooks.title')}</strong>
+            <span>{t('teacherSpace.ourBooks.subtitle')}</span>
+          </span>
+          <span className="material-icons">open_in_new</span>
+        </a>
+
         <PromoCarousel slides={[
           { key: 's1', image: '/tea-classroom.webp', tone: 'navy', title: t('teacherSpace.promo.s1t'), subtitle: t('teacherSpace.promo.s1s') },
           { key: 's2', image: '/tea-analytics.webp', tone: 'blue', title: t('teacherSpace.promo.s2t'), subtitle: t('teacherSpace.promo.s2s') },

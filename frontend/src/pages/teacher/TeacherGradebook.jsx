@@ -10,7 +10,14 @@ export default function TeacherGradebook() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    api.get('/teacher/classes').then(setClasses).catch(() => {});
+    // القسم يُختار تلقائيًا (أول قسم) وإلا بقي الجدول فارغًا وقرأ الأستاذ «لا توجد بيانات».
+    api
+      .get('/teacher/classes')
+      .then((cs) => {
+        setClasses(cs);
+        if (cs && cs.length) load(cs[0].id);
+      })
+      .catch(() => {});
   }, []);
 
   const load = (id) => {

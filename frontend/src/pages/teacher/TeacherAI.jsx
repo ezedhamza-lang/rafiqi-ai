@@ -221,12 +221,32 @@ export default function TeacherAI() {
           <p className="muted">{t('teacherSpace.teacherAI.keyNotConfiguredNote')}</p>
         )}
         {!configured ? (
-          <form className="form-row" onSubmit={saveKey}>
-            <div className="form-group grow">
-              <input type="password" value={apiKey} onChange={(e) => setApiKey(e.target.value)} placeholder={t('teacherSpace.teacherAI.keyPlaceholder')} required />
+          <>
+            <form className="form-row" onSubmit={saveKey}>
+              <div className="form-group grow">
+                <input type="password" value={apiKey} onChange={(e) => setApiKey(e.target.value)} placeholder={t('teacherSpace.teacherAI.keyPlaceholder')} required />
+              </div>
+              <button className="btn btn-primary" type="submit">{t('teacherSpace.teacherAI.saveKey')}</button>
+            </form>
+            <div className="ai-key-help">
+              <h5>{t('teacherSpace.teacherAI.keyHelpTitle')}</h5>
+              <ol>
+                <li>{t('teacherSpace.teacherAI.keyHelpStep1')}</li>
+                <li>{t('teacherSpace.teacherAI.keyHelpStep2')}</li>
+                <li>{t('teacherSpace.teacherAI.keyHelpStep3')}</li>
+              </ol>
+              <a
+                className="btn btn-secondary ai-key-help-cta"
+                href="https://aistudio.google.com/app/apikey"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="material-icons">open_in_new</span>
+                {t('teacherSpace.teacherAI.keyHelpCta')}
+              </a>
+              <p className="muted">{t('teacherSpace.teacherAI.keyHelpNote')}</p>
             </div>
-            <button className="btn btn-primary" type="submit">{t('teacherSpace.teacherAI.saveKey')}</button>
-          </form>
+          </>
         ) : (
           <button className="btn btn-danger" onClick={removeKey}>{t('teacherSpace.teacherAI.removeKey')}</button>
         )}

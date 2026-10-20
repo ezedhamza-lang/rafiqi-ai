@@ -9100,3 +9100,41 @@ html:not(.mi-ready) .material-icons{color:transparent !important}
   .rpt-matrix{font-size:.75rem}
   .rpt-cell{font-weight:700}
 }
+
+
+/* ===== RFQ teacher-space improvements (2026-10-20) =====
+   1) شريط «كتبنا» داخل فضاء الأستاذ
+   2) دليل obtaining مفتاح Gemini داخل «رفيقي AI»
+   3) تنبيه الوضع التجريبي في «الحصص المباشرة» */
+.teacher-books-banner{
+  display:flex;align-items:center;gap:.75rem;
+  margin:0 0 1rem;padding:.85rem 1.1rem;border-radius:14px;
+  background:linear-gradient(135deg,var(--primary-light),#fff);
+  border:1px solid var(--border);color:var(--text);
+  text-decoration:none;transition:transform .15s ease,box-shadow .15s ease;
+}
+.teacher-books-banner:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(21,94,239,.14);color:var(--text)}
+.teacher-books-banner .material-icons:first-child{color:var(--primary)}
+.teacher-books-banner .material-icons:last-child{color:var(--muted)}
+.teacher-books-banner-text{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
+.teacher-books-banner-text strong{font-size:.98rem}
+.teacher-books-banner-text span{font-size:.82rem;color:var(--muted)}
+
+.ai-key-help{
+  margin-top:.9rem;padding:.9rem 1rem;border-radius:12px;
+  background:var(--primary-light);border:1px dashed var(--primary);
+}
+.ai-key-help h5{margin:0 0 .5rem;font-size:.95rem;color:var(--primary-dark)}
+.ai-key-help ol{margin:0 0 .7rem;padding-inline-start:1.2rem;font-size:.86rem;line-height:1.7;color:var(--text)}
+.ai-key-help .muted{font-size:.78rem;margin:.6rem 0 0}
+.ai-key-help-cta{display:inline-flex;align-items:center;gap:.35rem;text-decoration:none}
+.ai-key-help-cta .material-icons{font-size:18px}
+
+.live-demo-note{
+  display:flex;gap:.7rem;align-items:flex-start;
+  padding:.8rem 1rem;border-radius:12px;
+  background:var(--accent-light);border:1px solid var(--accent);
+}
+.live-demo-note .material-icons{color:var(--accent-dark);font-size:22px}
+.live-demo-note strong{display:block;font-size:.9rem;color:var(--accent-ink)}
+.live-demo-note p{margin:.25rem 0 0;font-size:.82rem;line-height:1.6}

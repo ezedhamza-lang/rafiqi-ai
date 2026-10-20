@@ -33,6 +33,7 @@ export default function LiveSessions() {
   const [error, setError] = useState('');
   const [active, setActive] = useState(null);
   const [busyId, setBusyId] = useState(null);
+  const [videoConfig, setVideoConfig] = useState(null);
 
   const load = useCallback(() => {
     api
@@ -51,6 +52,11 @@ export default function LiveSessions() {
       .get('/teacher/classes')
       .then(setClasses)
       .catch((e) => setError(e.message));
+    // حالة مزوّد الفيديو: مع LOCAL لا يوجد بثّ صورة/صوت حقيقي (وضع تجريبي).
+    api
+      .get('/live/config')
+      .then(setVideoConfig)
+      .catch(() => {});
   }, [load]);
 
   const setField = (key, value) => setForm((f) => ({ ...f, [key]: value }));
@@ -161,6 +167,16 @@ export default function LiveSessions() {
 
       {error && <div className="form-error" style={{ marginBottom: '0.8rem' }}>{error}</div>}
       {msg && <div className="form-success" style={{ marginBottom: '0.8rem' }}>{msg}</div>}
+
+      {videoConfig && videoConfig.provider !== 'LIVEKIT' && (
+        <div className="live-demo-note" style={{ marginBottom: '1rem' }}>
+          <span className="material-icons">info</span>
+          <div>
+            <strong>{t('teacherSpace.liveSessions.demoTitle')}</strong>
+            <p className="muted">{t('teacherSpace.liveSessions.demoBody')}</p>
+          </div>
+        </div>
+      )}
 
       {showForm && (
         <div className="form-card" style={{ marginBottom: '1rem' }}>
