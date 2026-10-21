@@ -59,7 +59,10 @@ export const config = {
     livekitUrl: process.env.LIVEKIT_URL || '',
     livekitApiKey: process.env.LIVEKIT_API_KEY || '',
     livekitApiSecret: process.env.LIVEKIT_API_SECRET || '',
-    recordingDir: process.env.RECORDING_DIR || 'uploads/recordings'
+    recordingDir: process.env.RECORDING_DIR || 'uploads/recordings',
+    // Google Meet: غرفة دائمة مجانية (بلا مفاتيح ولا تكلفة). يمكن تغييرها من
+    // متغيّر البيئة GOOGLE_MEET_URL على الخادم دون إعادة بناء الواجهة.
+    meetUrl: process.env.GOOGLE_MEET_URL || 'https://meet.google.com/ffu-wbdu-pdk'
   },
   // Google OAuth sign-in (bouton « Continuer avec Google »).
   // Vide = désactivé (le frontend masque le bouton, l'API répond 501).

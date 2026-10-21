@@ -25,6 +25,7 @@ export default function LiveRoom({ session, joinData, canPublish, onExit }) {
   const [screenError, setScreenError] = useState('');
   const [notice, setNotice] = useState('');
   const [useJitsi, setUseJitsi] = useState(false);
+  const [meetUrl, setMeetUrl] = useState('');
 
   const localVideoRef = useRef(null);
   const screenVideoRef = useRef(null);
@@ -60,6 +61,32 @@ export default function LiveRoom({ session, joinData, canPublish, onExit }) {
       setLocalReady(false);
     }
   }, [useJitsi]);
+
+  // Google Meet: غرفة دائمة مجانية يأتي رابطها من إعدادات الخادم (بلا مفاتيح).
+  useEffect(() => {
+    let alive = true;
+    api
+      .get('/live/config')
+      .then((cfg) => {
+        if (alive && cfg?.meetUrl) setMeetUrl(cfg.meetUrl);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  // قبل الانتقال إلى Meet نحرّر الكاميرا/الميكروفون حتى لا يتعارض الجهاز مع المكالمة
+  const openMeet = () => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((t) => t.stop());
+      streamRef.current = null;
+    }
+    stopScreenStream();
+    setLocalReady(false);
+    setUseJitsi(false);
+    setNotice(t('teacherSpace.liveSessions.meetNote'));
+  };
 
   const myShare = screenShares.find((s) => s.userId === myId);
   const sharingScreen = !!myShare;
@@ -313,6 +340,19 @@ export default function LiveRoom({ session, joinData, canPublish, onExit }) {
       {screenError && <div className="form-error" style={{ marginBottom: '0.8rem' }}>{screenError}</div>}
 
       <div className="live-room-toolbar" style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.8rem', alignItems: 'center' }}>
+        {meetUrl && (
+          <a
+            className="btn btn-success btn-sm"
+            href={meetUrl}
+            target="_blank"
+            rel="noreferrer"
+            onClick={openMeet}
+            title={t('teacherSpace.liveSessions.meetNewTab')}
+          >
+            <span className="material-icons" style={{ fontSize: '16px' }}>videocam</span>
+            {t('teacherSpace.liveSessions.meetOpen')}
+          </a>
+        )}
         {!useJitsi ? (
           <button
             className="btn btn-outline btn-sm"
