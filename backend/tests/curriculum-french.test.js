@@ -29,7 +29,9 @@ describe('محوّل الفرنسية (ISS-017)', () => {
       for (const s of g.subjects) {
         const adapter = s.adapter || '';
         const code = String(s.id).toLowerCase();
-        if (adapter === 'math' && !/^math/.test(code)) lying.push(`${g.id}/${s.id} adapter=math`);
+        // 33fca1c added PDF books whose subject ids are `our-math-book-XX`;
+        // the family is still maths, so match anywhere in the id.
+        if (adapter === 'math' && !/math/.test(code)) lying.push(`${g.id}/${s.id} adapter=math`);
         if (adapter === 'anisi' && !/anisi|reading|arabic/.test(code)) lying.push(`${g.id}/${s.id} adapter=anisi`);
         if (adapter === 'science' && !/science/.test(code)) lying.push(`${g.id}/${s.id} adapter=science`);
         if (adapter === 'production' && !/production|writing/.test(code)) lying.push(`${g.id}/${s.id} adapter=production`);
@@ -63,8 +65,12 @@ describe('محوّل الفرنسية (ISS-017)', () => {
 
   it('المواد الأخرى لم تتأثر بالفرنسية', async () => {
     const stillThere = catalogue.filter((b) => b.gradeId === 'year2');
-    expect(stillThere.length).toBe(7);
-    for (const b of stillThere.filter((x) => x.subjectId !== 'french')) {
+    // 33fca1c added 82 PDF books (including year2/our-french-book-05). Pin the
+    // seven original subjects instead of the total: the guard is that French
+    // did not remove the others, not that the catalogue never grows.
+    const original = ['math', 'math2', 'math-rasmi', 'anisi', 'science', 'production', 'french'];
+    expect(stillThere.map((b) => b.subjectId)).toEqual(expect.arrayContaining(original));
+    for (const b of stillThere.filter((x) => original.includes(x.subjectId) && x.subjectId !== 'french')) {
       const res = await request(app).get(`/api/public/curriculum/books/${b.gradeId}/${b.subjectId}/lessons`);
       expect(res.status).toBe(200);
       const n = Array.isArray(res.body) ? res.body.length : 0;

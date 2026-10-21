@@ -270,16 +270,23 @@ describe('محرّك المناهج — وصول المحتوى للتلميذ',
     }
   });
 
-  it('لا مواد مزيّفة — الفرنسية س2 فقط بمصدر حقيقي وس1 بلا فرنسية', async () => {
+  it('لا مواد مزيّفة — كل كتاب فرنسي له PDF حقيقي، والفرنسية التفاعلية تبقى س2', async () => {
     const res = await request(app).get('/api/public/curriculum/books').send();
-    for (const book of res.body) {
-      if (book.subject.includes('فرنسية')) {
-        expect(book.gradeId, 'الفرنسية محتواها الحالي س2 فقط').toBe('year2');
-      }
+    const french = res.body.filter((book) => book.subject.includes('فرنسية'));
+    expect(french.length, 'كتب الفرنسية موجودة').toBeGreaterThan(0);
+    for (const book of french) {
+      // 33fca1c added real French PDF books to years 1..5. The anti-fake rule
+      // now means each one must be backed by a direct PDF, not an empty subject.
+      expect(book.hasPDF, `${book.gradeId}/${book.subjectId}`).toBe(true);
+      // legacy year2/french is a local asset (/assets/books/y2french.pdf),
+      // the new books point directly at MediaFire over https.
+      expect(book.pdfUrl, `${book.gradeId}/${book.subjectId}`).toMatch(/^(https:\/\/|\/assets\/)/);
     }
     const subjects = await request(app).get('/api/public/curriculum/subjects?level=السنة الأولى').send();
     const ids = subjects.body.map((s) => s.id);
     expect(ids).toEqual(expect.arrayContaining(['math', 'anisi', 'science']));
+    // only the legacy interactive French subject lives in year2; year1's French
+    // is the PDF book `our-french-book-04`, not the interactive `french` subject.
     expect(ids).not.toContain('french');
   });
 

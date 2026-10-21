@@ -28,6 +28,12 @@ function scanPages(imageBase) {
   const n = fs.readdirSync(dir).filter((f) => /^page-\d+\./i.test(f));
   if (!n.length) return null;
   const nums = n.map((f) => Number(f.match(/page-(\d+)/i)[1]));
+  // Since f184cf4 every book has a generated cover at page-001 (and a
+  // thumb-001 for cards). A lone page-001 is a cover, not a scan: PDF-only
+  // books carry the real 144-page PDF behind `pdfUrl`, not 144 local images.
+  // Counting that cover as a one-page scan made every paper-only book look
+  // truncated. Real scans always continue with page-002 (math5, math6, …).
+  if (Math.max(...nums) < 2) return null;
   return { count: nums.length, max: Math.max(...nums) };
 }
 
