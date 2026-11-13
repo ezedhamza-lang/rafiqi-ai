@@ -118,6 +118,15 @@ async function request(path, options = {}, retried = false) {
     throw new Error(data.error || 'بيانات الدخول غير صحيحة');
   }
 
+  if (res.status === 403) {
+    // 403 = صلاحية غير كافية أو حساب لم يُفعَّل بعد. الرسالة العربية من
+    // الخادم تُعرض كما هي (مفهومة)، لكن نضيف حالة الخطأ للواجهة.
+    const err = new Error(data.error || 'ليست لديك صلاحية لهذه العملية');
+    err.status = 403;
+    err.accountStatus = data.status || null;
+    throw err;
+  }
+
   if (!res.ok) {
     const err = new Error(data.error || 'حدث خطأ ما');
     err.status = res.status;

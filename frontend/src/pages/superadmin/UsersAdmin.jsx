@@ -114,6 +114,17 @@ export default function UsersAdmin() {
     }
   };
 
+  // «الوضع المفتوح» المؤقت: مصادقة/إيقاف حساب (أستاذ سجّل بنفسه) —
+  // نقطة واحدة فوق المسار القديم، بلا حذف أي شاشة أو منطق.
+  const changeStatus = async (u, status) => {
+    try {
+      await api.put(`/superadmin/users/${u.id}/status`, { status });
+      load(query, role);
+    } catch (e) {
+      window.alert(e.message);
+    }
+  };
+
   const roleLabel = (r) => (ROLE_LABEL_KEYS[r] ? t(ROLE_LABEL_KEYS[r]) : r);
 
   return (
@@ -202,6 +213,7 @@ export default function UsersAdmin() {
               <th>{t('usersAdmin.subscriptionColumn')}</th>
               <th>{t('usersAdmin.changeRoleColumn')}</th>
               <th>{t('usersAdmin.passwordColumn')}</th>
+              <th>{t('usersAdmin.statusColumn')}</th>
             </tr>
           </thead>
           <tbody>
@@ -246,6 +258,31 @@ export default function UsersAdmin() {
                         {copied ? t('usersAdmin.copied') : t('usersAdmin.copy')}
                       </button>
                     </div>
+                  )}
+                </td>
+                <td>
+                  <span className={`badge ${u.accountStatus === 'ACTIVE' ? 'good' : (u.accountStatus === 'SUSPENDED' ? 'bad' : '')}`}>
+                    {t(`accountStatusLabels.${u.accountStatus || 'PENDING_APPROVAL'}`)}
+                  </span>
+                  {u.accountStatus !== 'ACTIVE' && (
+                    <button
+                      type="button"
+                      className="btn btn-primary btn-sm"
+                      style={{ marginTop: '0.3rem' }}
+                      onClick={() => changeStatus(u, 'ACTIVE')}
+                    >
+                      {t('usersAdmin.approve')}
+                    </button>
+                  )}
+                  {u.accountStatus === 'ACTIVE' && u.role !== 'SUPER_ADMIN' && (
+                    <button
+                      type="button"
+                      className="btn btn-sm"
+                      style={{ marginTop: '0.3rem' }}
+                      onClick={() => changeStatus(u, 'SUSPENDED')}
+                    >
+                      {t('usersAdmin.suspend')}
+                    </button>
                   )}
                 </td>
               </tr>

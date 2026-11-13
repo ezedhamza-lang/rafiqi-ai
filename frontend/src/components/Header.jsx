@@ -229,6 +229,13 @@ export default function Header() {
               <span className="header-username" style={{ fontWeight: 800, fontSize: '0.85rem' }}>
                 {user.firstName} {user.lastName}
                 <span className="role-chip">({roleLabel(t, user.role) || t('header.userFallback')})</span>
+                {/* «الوضع المفتوح» المؤقت: أستاذ سجّل بنفسه — دخوله مفتوح
+                    والعلامة تذكّر بأن المراجعة جارية (بلا أي عائق على الدخول). */}
+                {user.role === 'TEACHER' && user.accountStatus === 'PENDING_APPROVAL' && (
+                  <span className="role-chip" title={t('header.pendingApprovalHint')}>
+                    {t('header.pendingApprovalBadge')}
+                  </span>
+                )}
               </span>
             </>
           ) : (

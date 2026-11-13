@@ -257,7 +257,10 @@ app.get(['/api/health', '/health'], async (req, res) => {
     uptime: Math.round(process.uptime()),
     at: new Date().toISOString(),
     pdf: browserPdfStatus().executable ? 'browser' : 'legacy',
-    memoProfiles
+    memoProfiles,
+    // «الوضع المفتوح» المؤقت: مرئي في الفحص الصحي (بلا أي سرّ).
+    openMode: config.openMode,
+    openModeUntil: config.openModeUntil || null
   });
 });
 
@@ -273,7 +276,11 @@ app.use('/api', limiter);
 
 const authLimiter = rateLimit({
   windowMs: config.rateLimitWindowMs,
-  max: Math.min(50, config.rateLimitMax),
+  // «الوضع المفتوح» المؤقت: التسجيل مفتوح للجميع ⇒ حدّ أضيق (سبام حسابات).
+  // خارج الوضع المفتوح: الحدّ القديم (50) كما هو.
+  max: config.openMode
+    ? Math.min(config.openModeAuthLimit, config.rateLimitMax)
+    : Math.min(50, config.rateLimitMax),
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: 'طلبات كثيرة جدا، يرجى المحاولة لاحقا' }

@@ -109,6 +109,8 @@
     "classGrades": "Grades & Certificates"
   },
   "header": {
+    "pendingApprovalBadge": "Pending review",
+    "pendingApprovalHint": "Your account is fully open — the review is running and will not block you.",
     "account": "My account",
     "teacherGuide": "Teacher guide",
     "brandAlt": "Rafiqi logo",
@@ -303,6 +305,10 @@
     }
   },
   "register": {
+    "roleLabel": "You are a…",
+    "roleParent": "Parent",
+    "roleTeacher": "Teacher",
+    "roleTeacherHint": "Your account opens right away and stays “pending approval” only for a later review.",
     "title": "Create account",
     "subtitle": "Join the Rafiqi School Life Portal",
     "firstName": "First name",
@@ -334,6 +340,8 @@
     "accountStatus": "Account / subscription status"
   },
   "registration": {
+    "successOpenMode": "{{name}} has been registered and can now sign in. Credentials:\nEmail: {{email}}\nTemporary password: {{password}}",
+    "reviewNoteOpenMode": "Temporary open mode: the request is processed immediately without waiting for the administration.",
     "title": "Student registration request",
     "subtitle": "The parent registers their child's details, then the request is submitted to the school director for approval, and after approval it is handed to the general director to complete the subscription (147 TND / school year) and activate the account.",
     "welcomeShimmer": "A step from you today makes a big difference in your child's future. Register now with Rafiqi.",
@@ -1478,6 +1486,9 @@
     "teacher": "Teacher"
   },
   "usersAdmin": {
+    "statusColumn": "Status",
+    "approve": "Approve",
+    "suspend": "Suspend",
     "title": "User management",
     "searchPlaceholder": "Search by name or email...",
     "allRoles": "All roles",

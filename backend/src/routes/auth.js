@@ -8,6 +8,7 @@ import {
   signToken,
   authMiddleware,
   accountStatusMessage,
+  isLoginBlocked,
   issueRefreshToken,
   rotateRefreshToken,
   revokeRefreshToken,
@@ -92,11 +93,17 @@ router.post(
   '/register',
   validateBody(registerSchema),
   asyncHandler(async (req, res) => {
-    const { firstName, lastName, email, phone, password, schoolId } = req.body;
+    const { firstName, lastName, email, phone, password, schoolId, role } = req.body;
     const emailNorm = email.toLowerCase();
 
     const existing = await prisma.user.findUnique({ where: { email: emailNorm } });
     if (existing) throw new ApiError(409, AR.EMAIL_TAKEN);
+
+    // ===== «الوضع المفتوح» المؤقت: اختيار الدور عند التسجيل =====
+    // خارج الوضع المفتوح: التسجيل = وليّ فقط (المسار القديم كما هو حرفيًا).
+    // في الوضع المفتوح: يُسمح باختيار «أستاذ» ⇒ حسابه يُنشأ بحالة «قيد
+    // المصادقة» (يدخل في الوضع المفتوح، ويقف تلقائيًا عند إطفائه حتى توافق).
+    const wantsTeacher = config.openMode && role === 'TEACHER';
 
     // تحديد المدرسة: يحدّدها الولي من القائمة؛ وإن وُجدت مدرسة نشطة واحدة فقط، تُسنَد تلقائياً.
     let resolvedSchoolId = schoolId != null ? Number(schoolId) : null;
@@ -116,6 +123,8 @@ router.post(
         email: emailNorm,
         phone: phone || null,
         passwordHash,
+        role: wantsTeacher ? 'TEACHER' : 'PARENT',
+        accountStatus: wantsTeacher ? 'PENDING_APPROVAL' : 'ACTIVE',
         schoolId: resolvedSchoolId
       }
     });
@@ -163,7 +172,7 @@ router.post(
     const valid = await bcrypt.compare(password, user.passwordHash);
     if (!valid) throw new ApiError(401, AR.INVALID_CREDENTIALS);
 
-    if (['STUDENT', 'TEACHER'].includes(user.role) && user.accountStatus !== 'ACTIVE') {
+    if (isLoginBlocked(user)) {
       return res.status(403).json({ error: accountStatusMessage(user.accountStatus), status: user.accountStatus });
     }
 
@@ -195,7 +204,11 @@ router.get(
     res.json({
       // نطاق غير مصرّح به في Google ⇒ لا نعرض زرًا معطّلًا
       googleClientId: clientId && originAllowed ? clientId : null,
-      googleOriginBlocked: Boolean(clientId && !originAllowed)
+      googleOriginBlocked: Boolean(clientId && !originAllowed),
+      // ===== «الوضع المفتوح» المؤقت =====
+      // راية تشغيلية تُقرأ من الخادم ⇒ الواجهة تعرف её دون إعادة بناء.
+      openMode: config.openMode,
+      openModeUntil: config.openModeUntil || null
     });
   })
 );
@@ -249,7 +262,7 @@ async function resolveGoogleUser(idToken) {
 }
 
 function ensureActiveRole(user) {
-  if (['STUDENT', 'TEACHER'].includes(user.role) && user.accountStatus !== 'ACTIVE') {
+  if (isLoginBlocked(user)) {
     throw new ApiError(403, accountStatusMessage(user.accountStatus));
   }
 }
@@ -396,7 +409,7 @@ router.post(
     const nextRefreshToken = await rotateRefreshToken(user.id, refreshToken);
     if (!nextRefreshToken) throw new ApiError(401, AR.SESSION_EXPIRED);
 
-    if (['STUDENT', 'TEACHER'].includes(user.role) && user.accountStatus !== 'ACTIVE') {
+    if (isLoginBlocked(user)) {
       return res.status(403).json({ error: accountStatusMessage(user.accountStatus), status: user.accountStatus });
     }
 

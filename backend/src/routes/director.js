@@ -2,6 +2,7 @@ import { Router } from 'express';
 import crypto from 'crypto';
 import bcrypt from 'bcryptjs';
 import prisma from '../db.js';
+import { config } from '../config.js';
 import { authMiddleware, adminMiddleware, requireRole } from '../auth.js';
 import { actorSchoolId, leadParentFilter } from '../tenant.js';
 import { notify, notifyRole } from '../services/notify.js';
@@ -648,7 +649,9 @@ router.put('/requests/:id/approve', requireRole('SCHOOL_DIRECTOR'), validatePara
         email: studentEmail,
         passwordHash,
         role: 'STUDENT',
-        accountStatus: 'PENDING_PAYMENT',
+        // «الوضع المفتوح» المؤقت: يُنشأ الحساب مفعّلًا فيدخل التلميذ فورًا.
+        // خارج الوضع المفتوح: PENDING_PAYMENT كما كان (الدفع يُفعّل الحساب).
+        accountStatus: config.openMode ? 'ACTIVE' : 'PENDING_PAYMENT',
         schoolId
       }
     });

@@ -1,6 +1,9 @@
 import { Router } from 'express';
+import crypto from 'crypto';
+import bcrypt from 'bcryptjs';
 import prisma from '../db.js';
 import { authMiddleware, requireRole } from '../auth.js';
+import { config } from '../config.js';
 import { notify } from '../services/notify.js';
 import { currentSchoolYear } from '../services/schoolYear.js';
 import { validateBody } from '../middleware/validate.js';
@@ -10,6 +13,77 @@ import { ApiError, asyncHandler } from '../middleware/errorHandler.js';
 const router = Router();
 
 router.use(authMiddleware);
+
+// ===== «الوضع المفتوح» المؤقت (2026-11) =====
+// في الوضع المفتوح: طلب «تسجيل ابني» يُنفَّذ فورًا — يُنشأ التلميذ وحسابه
+// بحالة ACTIVE مع بيانات دخول مؤقتة، بلا انتظار موافقة المدير ولا الدفع.
+// خارج الوضع المفتوح: المسار القديم كما هو (طلب ⇒ موافقة ⇒ دفع).
+// ملاحظة: لا اشتراك ولا فاتورة في الوضع المفتوح (الإيراد صفر مؤقتًا).
+async function provisionChildImmediately(request, parent) {
+  // القسم: أول قسم نشط في مدرسة الولي يطابق المستوى، وإلا أول قسم بلا أستاذ.
+  const classes = await prisma.class.findMany({
+    where: { ...(parent.schoolId != null ? { schoolId: parent.schoolId } : {}) },
+    select: { id: true, name: true, level: true, teacherId: true, schoolId: true },
+    orderBy: { name: 'asc' }
+  });
+  const klass =
+    classes.find((c) => c.level === request.level) ||
+    classes.find((c) => c.teacherId == null) ||
+    classes[0] ||
+    null;
+
+  // بريد مؤقّت للتلميذ (كما في مسار المدير) + كلمة سر مؤقتة من 6 أرقام.
+  const temporaryPassword = String(100000 + crypto.randomInt(0, 900000));
+  let studentEmail = `t${Date.now().toString(36)}@refeeqi.tn`;
+  for (let i = 0; i < 8; i++) {
+    const candidate = `t${crypto.randomBytes(3).toString('hex')}@refeeqi.tn`;
+    const taken = await prisma.user.findUnique({ where: { email: candidate } });
+    if (!taken) { studentEmail = candidate; break; }
+  }
+
+  const { student } = await prisma.$transaction(async (tx) => {
+    const account = await tx.user.create({
+      data: {
+        firstName: request.firstName,
+        lastName: request.lastName,
+        email: studentEmail,
+        passwordHash: await bcrypt.hash(temporaryPassword, 10),
+        role: 'STUDENT',
+        accountStatus: 'ACTIVE',
+        schoolId: klass?.schoolId ?? parent.schoolId ?? null
+      }
+    });
+    const student = await tx.student.create({
+      data: {
+        userId: parent.id,
+        accountUserId: account.id,
+        classId: klass?.id ?? null,
+        firstName: request.firstName,
+        lastName: request.lastName,
+        birthDate: new Date(request.birthDate),
+        cin: request.cin || null,
+        gender: request.gender || null,
+        level: request.level,
+        schoolYear: request.schoolYear,
+        schoolName: request.schoolName || null,
+        tempPassword: temporaryPassword,
+        credentialsIssuedAt: new Date()
+      }
+    });
+    return { student };
+  });
+
+  const updated = await prisma.subscriptionRequest.update({
+    where: { id: request.id },
+    data: { status: 'ACTIVE', studentId: student.id, classId: klass?.id ?? null },
+    include: {
+      class: { select: { id: true, name: true, level: true } },
+      parent: { select: { id: true, firstName: true, lastName: true, email: true, phone: true } }
+    }
+  });
+
+  return { updated, credentials: { email: studentEmail, password: temporaryPassword } };
+}
 
 /**
  * @swagger
@@ -78,10 +152,14 @@ router.post(
     const finalYear = schoolYear || currentSchoolYear();
 
     // منع التكرار: طلب معلّق مماثل لنفس الابن من نفس الولي ⇒ نعيد الموجود بدل إنشاء مكرر.
+    // في الوضع المفتوح يُحسب أيضًا الطلب المنفَّذ (ACTIVE) منعًا لتكرار الطفل.
     const includeReq = {
       class: { select: { id: true, name: true, level: true } },
       parent: { select: { id: true, firstName: true, lastName: true, email: true, phone: true } }
     };
+    const dedupeStatuses = config.openMode
+      ? ['PENDING_APPROVAL', 'PENDING_PAYMENT', 'ACTIVE']
+      : ['PENDING_APPROVAL', 'PENDING_PAYMENT'];
     const existing = await prisma.subscriptionRequest.findFirst({
       where: {
         parentId: req.user.id,
@@ -89,7 +167,7 @@ router.post(
         lastName: String(lastName).trim(),
         level,
         schoolYear: finalYear,
-        status: { in: ['PENDING_APPROVAL', 'PENDING_PAYMENT'] }
+        status: { in: dedupeStatuses }
       },
       include: includeReq
     });
@@ -136,6 +214,17 @@ router.post(
     }
     if (ownerIds.length) {
       await notify(ownerIds, { ...notification, link: '/superadmin' });
+    }
+
+    // ===== «الوضع المفتوح» المؤقت: تنفيذ فوري بلا موافقة ولا دفع =====
+    if (config.openMode) {
+      const { updated, credentials } = await provisionChildImmediately(request, req.user);
+      res.status(201).json({
+        ...updated,
+        _openMode: true,
+        _credentials: credentials
+      });
+      return;
     }
 
     res.status(201).json(request);

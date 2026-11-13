@@ -18,14 +18,19 @@ export default function Register() {
     phone: '',
     password: '',
     confirm: '',
-    schoolId: ''
+    schoolId: '',
+    role: 'PARENT'
   });
   const [schools, setSchools] = useState([]);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  // «الوضع المفتوح» المؤقت: اختيار الدور متاح فقط إذا أعلنه الخادم
+  // (/auth/config) — لا تغيّر في البناء ولا في المسار القديم.
+  const [openMode, setOpenMode] = useState(false);
 
   useEffect(() => {
     api.get('/public/schools').then((d) => setSchools(Array.isArray(d) ? d : [])).catch(() => {});
+    api.get('/auth/config').then((d) => setOpenMode(Boolean(d && d.openMode))).catch(() => {});
   }, []);
 
   const submit = async (e) => {
@@ -43,7 +48,8 @@ export default function Register() {
         email: form.email,
         phone: form.phone,
         password: form.password,
-        schoolId: form.schoolId ? Number(form.schoolId) : undefined
+        schoolId: form.schoolId ? Number(form.schoolId) : undefined,
+        role: openMode ? form.role : undefined
       });
       navigate(getHomePath(user));
     } catch (err) {
@@ -122,6 +128,27 @@ export default function Register() {
               autoComplete="new-password"
             />
           </div>
+          {openMode && (
+            <div className="form-group" style={{ marginBottom: '0.8rem' }}>
+              <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.3rem' }}>
+                {t('register.roleLabel', 'أنت؟')}
+              </label>
+              <select
+                required
+                value={form.role}
+                onChange={(e) => setForm({ ...form, role: e.target.value })}
+                className="auth-select"
+              >
+                <option value="PARENT">{t('register.roleParent', 'وليّ')}</option>
+                <option value="TEACHER">{t('register.roleTeacher', 'أستاذ')}</option>
+              </select>
+              {form.role === 'TEACHER' && (
+                <p style={{ fontSize: 13, color: '#5A6478', marginTop: '0.35rem' }}>
+                  {t('register.roleTeacherHint', 'حسابك يُفتح مباشرة، ويبقى قيد المصادقة فقط لتتم المراجعة لاحقًا.')}
+                </p>
+              )}
+            </div>
+          )}
           {schools.length > 1 && (
             <div className="form-group" style={{ marginBottom: '0.8rem' }}>
               <label style={{ display: 'block', fontWeight: 600, marginBottom: '0.3rem' }}>{t('register.schoolLabel', 'المدرسة')}</label>

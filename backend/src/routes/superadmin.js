@@ -17,7 +17,8 @@ import {
   schoolCreateSchema,
   schoolUpdateSchema,
   assignSchoolSchema,
-  userSchoolAssignSchema
+  userSchoolAssignSchema,
+  userStatusUpdateSchema
 } from '../validators/superadmin.js';
 
 const router = Router();
@@ -352,6 +353,9 @@ router.get('/users', validateQuery(superAdminUsersQuerySchema), asyncHandler(asy
     where,
     select: {
       id: true, firstName: true, lastName: true, email: true, phone: true, role: true, createdAt: true, schoolId: true,
+      // «الوضع المفتوح» المؤقت: حالة الحساب ظاهرة هنا ليتمكّن المالك من
+      // مصادقة الأستاذ الذاتي (المسار القديم موجود — هذه نقطة).
+      accountStatus: true,
       school: { select: { id: true, name: true } },
       studentAccount: { select: { id: true, class: { select: { name: true } } } },
       subscriptions: { select: { id: true, plan: true, endDate: true, status: true } }
@@ -503,6 +507,20 @@ router.put('/users/:id/password', validateParams(superAdminIdParamSchema), valid
  *       200:
  *         description: قائمة التلاميذ
  */
+// «الوضع المفتوح» المؤقت: تفعيل حساب (أستاذ سجّل بنفسه ⇒ حالته «قيد المصادقة»)
+// أو إيقافه. позволяет للمالك مصادقة الأستاذين لاحقًا دون تغيير المسار القديم:
+// البوابة القديمة تبقى كما هي، وهذه نقطةоскّع نطاقها فقط.
+router.put('/users/:id/status', validateParams(superAdminIdParamSchema), validateBody(userStatusUpdateSchema), asyncHandler(async (req, res) => {
+  const userId = Number(req.params.id);
+  const { status } = req.body;
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (!user) throw new ApiError(404, 'المستخدم غير موجود');
+  const updated = await prisma.user.update({ where: { id: userId }, data: { accountStatus: status } });
+  // تغيير الحالة يُبطل الجلسات القائمة حتى لا يبقى دخول قديم بحالة قديمة.
+  await revokeAllUserTokens(userId);
+  res.json({ id: updated.id, email: updated.email, role: updated.role, accountStatus: updated.accountStatus });
+}));
+
 router.get('/students', asyncHandler(async (req, res) => {
   const students = await prisma.student.findMany({
     include: {

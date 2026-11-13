@@ -30,6 +30,8 @@ export default function Registration() {
   });
   // حساب دورين: معلّم وهو وليّ أمر يستطيع تقديم طلبات تسجيل أبنائه
   const canSubmit = user && ['PARENT', 'TEACHER'].includes(user.role);
+  // «الوضع المفتوح» المؤقت: يُعلنه الخادم (/auth/config) — لا تغيير في البناء.
+  const [openMode, setOpenMode] = useState(false);
   const [step, setStep] = useState(1);
   const formRef = useRef(null);
   const goNext = () => {
@@ -40,10 +42,15 @@ export default function Registration() {
   };
 
   useEffect(() => {
-    Promise.all([api.get('/public/levels'), canSubmit ? api.get('/subscription-requests/mine') : Promise.resolve([])])
-      .then(([l, r]) => {
+    Promise.all([
+      api.get('/public/levels'),
+      canSubmit ? api.get('/subscription-requests/mine') : Promise.resolve([]),
+      api.get('/auth/config').catch(() => ({}))
+    ])
+      .then(([l, r, cfg]) => {
         setLevels(l);
         setRequests(r);
+        setOpenMode(Boolean(cfg && cfg.openMode));
       })
       .catch(console.error)
       .finally(() => setLoading(false));
@@ -56,10 +63,19 @@ export default function Registration() {
     setSuccess('');
     setSubmitting(true);
     try {
-      await api.post('/subscription-requests', form);
+      // «الوضع المفتوح» المؤقت: الطلب يُنفَّذ فورًا ⇒ نعرض بطاقة دخول الطفل.
+      const created = await api.post('/subscription-requests', form);
       const fresh = canSubmit ? await api.get('/subscription-requests/mine') : [];
       setRequests(fresh);
-      setSuccess(t('registration.success'));
+      if (created && created._openMode && created._credentials) {
+        setSuccess(t('registration.successOpenMode', {
+          name: `${form.firstName} ${form.lastName}`,
+          email: created._credentials.email,
+          password: created._credentials.password
+        }));
+      } else {
+        setSuccess(t('registration.success'));
+      }
       setForm(EMPTY_FORM);
       setStep(1);
     } catch (err) {
@@ -82,7 +98,7 @@ export default function Registration() {
   return (
     <div className="container reg-wizard" style={{ maxWidth: 960, paddingTop: '.75rem', paddingBottom: '2rem' }}>
       {error && <div className="form-error">{error}</div>}
-      {success && <div className="form-success">{success}</div>}
+      {success && <div className="form-success" style={{ whiteSpace: 'pre-line' }}>{success}</div>}
 
       {canSubmit && (
         <>
@@ -166,7 +182,9 @@ export default function Registration() {
                 </div>
                 <div className="reg-note">
                   <span className="material-icons">lock</span>
-                  <span>{t('registration.reviewNote')}</span>
+                  <span>{openMode
+                    ? t('registration.reviewNoteOpenMode')
+                    : t('registration.reviewNote')}</span>
                 </div>
                 <div className="reg-actions">
                   <button className="btn btn-outline" type="button" onClick={() => setStep(1)}>

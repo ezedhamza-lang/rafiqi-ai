@@ -72,5 +72,19 @@ export const config = {
   googleAllowedOrigins: (process.env.GOOGLE_ALLOWED_ORIGINS || '')
     .split(',')
     .map((s) => s.trim())
-    .filter(Boolean)
+    .filter(Boolean),
+
+  // ===== «الوضع المفتوح» المؤقت (2026-11) =====
+  // راية تشغيلية تُطفأ بإعادة النشر فقط (OPEN_MODE=false ⇒ إعادة نشر ≈ 3 دقائق).
+  // لا تُلغي المصادقة: تُلغي «بوابة الموافقة» فقط (انتظار موافقة المدير والدفع).
+  // المسار القديم لم يُحذف بل صار مشروطًا بها ⇒ تراجع فوري وبلا أثر على البيانات.
+  openMode: process.env.OPEN_MODE === 'true',
+  // تاريخ نهاية الوضع المفتوح — للتذكير والتنبيه فقط، لا يُطفئ تلقائيًا حتى لا
+  // تنقطع المنصة بسبب خطأ في التاريخ. مثال: 2026-12-31
+  openModeUntil: (process.env.OPEN_MODE_UNTIL || '').trim(),
+  // حالات الحساب التي تبقى محجوبة حتى في الوضع المفتوح: عقوبات (إيقاف/انتهاء
+  // اشتراك) لا بوابات موافقة. حالة «قيد المصادقة/الدفع» هي التي تُفتح.
+  openModeBlockedStatuses: ['SUSPENDED', 'EXPIRED'],
+  // حدّ أعلى لطلبات التسجيل/الدخول في الوضع المفتوح (سبام حسابات).
+  openModeAuthLimit: Number(process.env.OPEN_MODE_AUTH_LIMIT || 20)
 };
