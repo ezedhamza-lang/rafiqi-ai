@@ -65,3 +65,10 @@ export const assignSchoolSchema = z.object({
 export const userSchoolAssignSchema = z.object({
   schoolId: z.preprocess((v) => (v === '' || v === null || v === undefined ? null : v), z.coerce.number().int().positive({ error: 'معرف المدرسة غير صحيح' }).nullable())
 });
+
+// «الوضع المفتوح» المؤقت: تفعيل/إيقاف حساب (مثلاً أستاذ سجّل بنفسه في
+// الوضع المفتوح وحالته «قيد المصادقة»). الحالة значения محدودة بما يسمح به
+// Prisma (AccountStatus) — لا حالة جديدة، فتبقى كل الشاشات القديمة تعمل.
+export const userStatusUpdateSchema = z.object({
+  status: z.enum(['PENDING_APPROVAL', 'PENDING_PAYMENT', 'ACTIVE', 'SUSPENDED', 'EXPIRED'])
+});

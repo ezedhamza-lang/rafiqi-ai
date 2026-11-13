@@ -12,7 +12,11 @@ export const registerSchema = z.object({
   email: emailSchema,
   phone: z.string().trim().optional().nullable(),
   password: z.string().min(6, { error: 'كلمة السر يجب أن تحتوي على 6 أحرف على الأقل' }),
-  schoolId: z.coerce.number().int().positive({ error: 'المدرسة غير صالحة' }).optional().nullable()
+  schoolId: z.coerce.number().int().positive({ error: 'المدرسة غير صالحة' }).optional().nullable(),
+  // «الوضع المفتوح» المؤقت: اختيار الدور عند التسجيل. يُقبل فقط PARENT أو
+  // TEACHER (لا ADMIN/SCHOOL_DIRECTOR/SUPER_ADMIN أبدًا)، ولا يُطبَّق إلا إذا
+  // كانت راية OPEN_MODE مفعّلة (انظر routes/auth.js).
+  role: z.enum(['PARENT', 'TEACHER']).optional().nullable()
 });
 
 export const loginSchema = z.object({

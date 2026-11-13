@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import prisma from './db.js';
+import { config } from './config.js';
 import { AR } from './middleware/messages.js';
 
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -90,6 +91,26 @@ export function accountStatusMessage(status) {
   }
 }
 
+// ===== «الوضع المفتوح» المؤقت (2026-11) =====
+// البوابة القديمة (حساب غير ACTIVE ⇒ 403) تبقى كما هي خارج الوضع المفتوح.
+// في الوضع المفتوح تُفتح بوابة «الموافقة/الدفع» فقط: الحسابات التي تنتظر
+// المصادقة أو الدفع تدخل مباشرة. أما العقوبات (SUSPENDED/EXPIRED) فتبقى
+// سارية — إيقافها قرار إداري لا بوابة موافقة.
+// ملاحظة: هذا لا يلغي المصادقة إطلاقًا (العزل بين المدارس قائم على
+// role + schoolId ويبقى سليمًا).
+export function isAccountBlocked(status) {
+  if (!status || status === 'ACTIVE') return false;
+  if (config.openMode && !config.openModeBlockedStatuses.includes(status)) return false;
+  return true;
+}
+
+// نفس القاعدة لكن للأدوار التي كانت محجوبة حصريًا عند الدخول (تلميذ/أستاذ).
+export function isLoginBlocked(user) {
+  if (!user) return true;
+  if (!['STUDENT', 'TEACHER'].includes(user.role)) return false;
+  return isAccountBlocked(user.accountStatus);
+}
+
 export async function authMiddleware(req, res, next) {
   const header = req.headers.authorization || '';
   const token = header.startsWith('Bearer ') ? header.slice(7) : null;
@@ -106,7 +127,7 @@ export async function authMiddleware(req, res, next) {
         select: { accountStatus: true }
       });
       const accountStatus = user?.accountStatus || null;
-      if (accountStatus !== 'ACTIVE') {
+      if (isAccountBlocked(accountStatus)) {
         return res.status(403).json({ error: accountStatusMessage(accountStatus) });
       }
       payload.accountStatus = accountStatus;
@@ -145,7 +166,7 @@ export async function optionalAuth(req, _res, next) {
         where: { id: payload.id },
         select: { accountStatus: true }
       });
-      if (user && user.accountStatus === 'ACTIVE') req.user = payload;
+      if (user && !isAccountBlocked(user.accountStatus)) req.user = payload;
     } catch {
       /* مجهول */
     }
