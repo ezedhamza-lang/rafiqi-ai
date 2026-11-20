@@ -45,11 +45,16 @@ function sanitizeQuizForStudent(quiz) {
   return { ...quiz, questions };
 }
 
-// عزل: التلميذ يُقيَّد بقسمه دائماً؛ تلميذ بلا قسم ⇒ صنف مستحيل المطابقة
-// (لا يرى بنوك بقية المدارس). الأدوار غير التلميذية (معلّم/إدارة) بلا قيد.
+// عزل: التلميذ يُقيَّد بقسمه، ويرى أيضًا المحتوى العام (classId = null)
+// الذي يعرضه المعلّم باسم «الكل» — وإلا يبقى محتوى «الكل» مخفيًا عن كل التلاميذ.
+// تلميذ بلا قسم يرى المحتوى العام فقط (لا بنوك أقسام المدارس الأخرى).
+// الأدوار غير التلميذية (معلّم/إدارة) بلا قيد.
 function studentClassFilter(req, studentRecord) {
-  if (studentRecord?.classId) return { classId: studentRecord.classId };
-  if (req.user.role === 'STUDENT') return { classId: -1 };
+  // Prisma لا يقبل null داخل `in` على حقل Int? ⇒ نستخدم OR صريح.
+  if (studentRecord?.classId) {
+    return { OR: [{ classId: studentRecord.classId }, { classId: null }] };
+  }
+  if (req.user.role === 'STUDENT') return { classId: null };
   return {};
 }
 
@@ -619,9 +624,8 @@ router.get('/student/quizzes', studentMiddleware, asyncHandler(async (req, res) 
   const studentRecord = await prisma.student.findFirst({
     where: { accountUserId: req.user.id }
   });
-  if (!studentRecord?.classId) return res.json([]);
   const quizzes = await prisma.quiz.findMany({
-    where: { classId: studentRecord.classId },
+    where: studentClassFilter(req, studentRecord),
     include: { _count: { select: { submissions: true } } },
     orderBy: { createdAt: 'desc' }
   });
@@ -843,9 +847,8 @@ router.get('/student/official-exams', studentMiddleware, asyncHandler(async (req
   const studentRecord = await prisma.student.findFirst({
     where: { accountUserId: req.user.id }
   });
-  if (!studentRecord?.classId) return res.json([]);
   const exams = await prisma.officialExam.findMany({
-    where: { published: true, classId: studentRecord.classId },
+    where: { published: true, ...studentClassFilter(req, studentRecord) },
     include: { _count: { select: { submissions: true } } },
     orderBy: { createdAt: 'desc' }
   });
