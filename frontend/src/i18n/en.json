@@ -1727,7 +1727,7 @@
     },
     "quizzes": {
       "title": "My Quizzes",
-      "empty": "No quizzes assigned to your class yet.",
+      "empty": "No quizzes available for you right now. If you are not assigned to a class, ask your parent or teacher to assign you.",
       "questionsCount": "{{subject}} — {{n}} questions",
       "done": "Completed ✓",
       "start": "Start Quiz",
@@ -1746,7 +1746,7 @@
     },
     "officialExams": {
       "title": "Exam Bank",
-      "empty": "Your teacher hasn't published any exam for your class yet.",
+      "empty": "No exams available for you right now. If you are not assigned to a class, ask your parent or teacher to assign you.",
       "trimester": "Term {{n}}",
       "done": "Completed",
       "yourScore": "Your score: {{score}} / 20",

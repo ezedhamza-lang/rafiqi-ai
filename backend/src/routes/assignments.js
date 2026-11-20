@@ -39,6 +39,23 @@ async function getStudentRecord(userId) {
   return prisma.student.findFirst({ where: { accountUserId: userId } });
 }
 
+// التكليف العام (classId = null) يعرضه المعلّم باسم «الكل» ويجب أن يصل لكل تلميذ،
+// سواء كان مسندًا إلى قسم أو بلا قسم. تكليف قسم محدد يبقى حكرًا على ذلك القسم.
+function studentAssignmentWhere(studentRecord, extra = {}) {
+  // Prisma لا يقبل null داخل `in` على حقل Int? ⇒ OR صريح.
+  return {
+    ...(studentRecord?.classId
+      ? { OR: [{ classId: studentRecord.classId }, { classId: null }] }
+      : { classId: null }),
+    ...extra
+  };
+}
+
+function canAccessAssignment(studentRecord, assignment) {
+  if (!studentRecord?.classId) return assignment.classId == null;
+  return assignment.classId == null || assignment.classId === studentRecord.classId;
+}
+
 // أمان: أسئلة الواجبات تحمل مفاتيح الإجابة (correctOption/correctAnswer/orderItems).
 // لا تُرسل للتلميذ أبداً — نتائج الفردي تعرضها submission.graded.
 const ASSIGNMENT_ANSWER_KEYS = new Set(['correctOption', 'correctAnswer', 'orderItems']);
@@ -434,13 +451,11 @@ router.put('/assignments/:id/submissions/:submissionId', teacherMiddleware, vali
  */
 router.get('/student/assignments', studentMiddleware, asyncHandler(async (req, res) => {
   const studentRecord = await getStudentRecord(req.user.id);
-  if (!studentRecord?.classId) return res.json([]);
 
   const assignments = await prisma.assignment.findMany({
-    where: {
-      classId: studentRecord.classId,
+    where: studentAssignmentWhere(studentRecord, {
       status: { in: ['PUBLISHED', 'CLOSED'] }
-    },
+    }),
     include: { class: true },
     orderBy: { dueDate: 'asc' }
   });
@@ -502,7 +517,7 @@ router.get('/student/assignments/:id', studentMiddleware, validateParams(assignm
   if (!assignment) throw new ApiError(404, 'التكليف غير موجود');
 
   const studentRecord = await getStudentRecord(req.user.id);
-  if (!studentRecord?.classId || assignment.classId !== studentRecord.classId) {
+  if (!canAccessAssignment(studentRecord, assignment)) {
     throw new ApiError(400, 'هذا التكليف ليس لقسمك');
   }
 
@@ -567,7 +582,7 @@ router.post('/student/assignments/:id/submit', studentMiddleware, validateParams
   }
 
   const studentRecord = await getStudentRecord(req.user.id);
-  if (!studentRecord?.classId || assignment.classId !== studentRecord.classId) {
+  if (!canAccessAssignment(studentRecord, assignment)) {
     throw new ApiError(400, 'هذا التكليف ليس لقسمك');
   }
 
