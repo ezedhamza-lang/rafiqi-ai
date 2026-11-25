@@ -49,6 +49,7 @@ const Admin = lazy(() => import('./pages/Admin.jsx'));
 const AccountSettings = lazy(() => import('./pages/AccountSettings.jsx'));
 const TeacherDashboard = lazy(() => import('./pages/teacher/TeacherDashboard.jsx'));
 const StudentSpace = lazy(() => import('./pages/student/StudentSpace.jsx'));
+const StudentPreview = lazy(() => import('./pages/student/StudentPreview.jsx'));
 const KnowledgeGarden = lazy(() => import('./pages/student/KnowledgeGarden.jsx'));
 const ParentSpace = lazy(() => import('./pages/parent/ParentSpace.jsx'));
 const DirectorDashboard = lazy(() => import('./pages/director/DirectorDashboard.jsx'));
@@ -112,12 +113,14 @@ export default function App() {
                   />
                   <Route path="/login" element={<GuestOnly><Login /></GuestOnly>} />
                   <Route path="/register" element={<GuestOnly><Register /></GuestOnly>} />
+                  {/* معاينة عامة لفضاء التلميذ — بلا تسجيل، ليعرف الزائر قيمة المنصة قبل الالتزام */}
+                  <Route path="/student" element={<StudentPreview />} />
                   <Route path="/account" element={<RequireRole><AccountSettings /></RequireRole>} />
                   <Route element={<DashboardLayout />}>
                     <Route path="/dashboard" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR', 'TEACHER', 'PARENT']}><Dashboard /></RequireRole>} />
                     <Route path="/students" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR', 'PARENT', 'TEACHER']}><Students /></RequireRole>} />
                     <Route path="/registration" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR', 'PARENT', 'TEACHER']}><Registration /></RequireRole>} />
-                    <Route path="/student" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR']}><StudentSection /></RequireRole>} />
+                    <Route path="/students-section" element={<RequireRole roles={['ADMIN', 'SCHOOL_DIRECTOR']}><StudentSection /></RequireRole>} />
                     <Route path="/my-requests" element={<RequireRole><MyRequests /></RequireRole>} />
                     <Route path="/payment" element={<RequireRole><PaymentCenter /></RequireRole>} />
                     <Route path="/messages" element={<RequireRole><Messages /></RequireRole>} />

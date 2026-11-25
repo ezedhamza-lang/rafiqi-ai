@@ -22,9 +22,8 @@ export default function HelpRequest() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
-  // A help request is only useful if it can be tracked: anonymous ones stay with the
-  // general supervisor and are never shown to a school director (decision of the
-  // platform owner, ISS-008). The form stays readable, but sending requires an account.
+  // Guests can send a help request too (the API accepts optional auth). Anonymous
+  // requests go to the general supervisor only, so a contact email is required.
   const [signedIn, setSignedIn] = useState(() => Boolean(getStoredUser()));
 
   useEffect(() => {
@@ -87,8 +86,8 @@ export default function HelpRequest() {
 
       {!signedIn && (
         <div className="form-notice" role="status">
-          <span className="form-notice__title">{t('helpRequest.loginRequiredTitle')}</span>
-          {t('helpRequest.loginRequiredBody')}{' '}
+          <span className="form-notice__title">{t('helpRequest.guestAllowedTitle')}</span>
+          {t('helpRequest.guestAllowedBody')}{' '}
           <a href="/login">{t('helpRequest.loginCta')}</a>
         </div>
       )}
@@ -114,8 +113,8 @@ export default function HelpRequest() {
             <input type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} />
           </div>
           <div className="form-group">
-            <label>{t('helpRequest.email')}</label>
-            <input type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
+            <label>{t('helpRequest.email')}{!signedIn ? ' *' : ''}</label>
+            <input type="email" required={!signedIn} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} />
           </div>
         </div>
 
@@ -185,7 +184,7 @@ export default function HelpRequest() {
         </div>
 
         <div style={{ display: 'flex', gap: '0.75rem' }}>
-          <button className="btn btn-primary" type="submit" disabled={loading || !signedIn}>
+          <button className="btn btn-primary" type="submit" disabled={loading}>
             {loading ? t('helpRequest.sending') : t('helpRequest.submit')}
           </button>
           <button className="btn btn-ghost" type="button" onClick={() => setForm(EMPTY_FORM)}>

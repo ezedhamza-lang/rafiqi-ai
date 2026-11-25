@@ -496,6 +496,8 @@
     "classLabel": "Class: {{class}}"
   },
   "helpRequest": {
+    "guestAllowedTitle": "You can send this without an account",
+    "guestAllowedBody": "Your message reaches the general administration. Leave an email so we can reply, or sign in to link the request to your account.",
     "title": "Request help",
     "subtitle": "If you encounter a problem creating an account or with any service, you can submit a help request and our support team will take care of it.",
     "errorGeneric": "Something went wrong",
@@ -1519,6 +1521,10 @@
     "accountCreated": "Account created:"
   },
   "studentSpace": {
+      "noClassBanner": {
+        "title": "You are not assigned to a class yet",
+        "text": "Ask your parent or teacher to assign you to a class so your subjects and class quizzes appear. General (“all”) content is already available to you."
+      },
     "sidebarTitle": "Sections",
     "groups": {
       "main": "Home",
@@ -2184,6 +2190,14 @@
     }
   },
   "teacherSpace": {
+    "onboarding": {
+      "title": "Get started in 4 simple steps",
+      "hint": "Each step is checked off automatically — you do not have to set everything up at once.",
+      "stepclass": "Create a class and add its subjects",
+      "stepquiz": "Create a quick quiz",
+      "stepmemo": "Generate a lesson memo",
+      "stepexam": "Add an official exam"
+    },
     "title": "Teacher Space",
     "welcome": "Welcome {{firstName}} {{lastName}} — {{count}} classes under your supervision",
     "quizCount": "{{n}} quick quizzes",
@@ -2699,6 +2713,10 @@
       "back": "Back"
     },
     "teacherAI": {
+      "platformReadyTitle": "AI service is ready",
+      "platformReadyNote": "The platform provides a shared key — you can generate right away without entering any key.",
+      "optionalKeyPlaceholder": "Your own key (optional — for unlimited generation)",
+      "optionalSaveKey": "Save my key (optional)",
       "title": "Rafeeqi AI",
       "subtitle": "Teacher assistant — generate lesson plans, questions, summaries, and slides.",
       "keyConfigured": "Gemini key active",
@@ -3019,6 +3037,29 @@
     "rightsBody": "You have the right to view, correct and delete your data. Simply contact your school administration or the platform team via the help page.",
     "contactTitle": "6. Contact us",
     "contactBody": "For any privacy question: phone +216 96 035 997 — email ensp75882@education.tn."
+  },
+  "studentPreview": {
+    "title": "Try the student space before signing up",
+    "subtitle": "Interactive books, instantly graded quizzes and rewards that keep you learning — here is a glimpse of what awaits you.",
+    "register": "Create a free parent account",
+    "login": "Sign in",
+    "featuresLabel": "What is inside the student space",
+    "title1": "My interactive books",
+    "body1": "Hundreds of books and stories by grade, readable page by page with no download.",
+    "title2": "My quizzes",
+    "body2": "Questions graded instantly with your score and explanation, plus progress tracking.",
+    "title3": "My rewards",
+    "body3": "XP points, badges and a daily challenge that make learning fun.",
+    "demoLabel": "Try a sample question",
+    "demoTitle": "A quick sample from the quizzes",
+    "question": "2 + 3 = ?",
+    "optiona": "4",
+    "optionb": "5",
+    "optionc": "6",
+    "correct": "Well done! 5 is the right answer 🎉",
+    "tryAgain": "Try again — the answer is the sum.",
+    "demoNote": "This is a fixed demo question; after signing up you get real automatically graded questions.",
+    "footnote": "The platform is free — start with a parent account, then register your child."
   },
   "auth": {
     "or": "or"

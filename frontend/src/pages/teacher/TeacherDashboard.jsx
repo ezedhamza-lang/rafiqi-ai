@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext.jsx';
 import { useI18n } from '../../i18n/index.jsx';
 import { api } from '../../api/client.js';
@@ -79,8 +79,10 @@ export default function TeacherDashboard() {
   const [quizCount, setQuizCount] = useState(0);
   const [memoCount, setMemoCount] = useState(0);
   const [examCount, setExamCount] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   const load = useCallback(async () => {
+    setLoading(true);
     try {
       // المذكرات تُقرأ من /memos (نفس مصدر صفحة المذكرات) — /teacher/memos عدّاد قديم يبقى 0.
       // والامتحانات الرسمية تُقرأ من /teacher/exams؛ العدّاد القديم كان يعدّ السريعة فقط.
@@ -96,6 +98,8 @@ export default function TeacherDashboard() {
       setExamCount(exams.length);
     } catch {
       /* ignore */
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -114,15 +118,37 @@ export default function TeacherDashboard() {
           <div>
             <h2>{t('teacherSpace.title')}</h2>
             <p className="sub">
-              {t('teacherSpace.welcome', { firstName: user.firstName, lastName: user.lastName, count: classes.length })}
+              {t('teacherSpace.welcome', { firstName: user.firstName, lastName: user.lastName, count: loading ? '…' : classes.length })}
             </p>
           </div>
           <div className="space-stats">
-            <Badge variant="info" icon="fact_check">{t('teacherSpace.officialExamCount', { n: examCount })}</Badge>
-            <Badge variant="info" icon="quiz">{t('teacherSpace.quizCount', { n: quizCount })}</Badge>
-            <Badge variant="accent" icon="description">{t('teacherSpace.memoCount', { n: memoCount })}</Badge>
+            <Badge variant="info" icon="fact_check">{loading ? '…' : t('teacherSpace.officialExamCount', { n: examCount })}</Badge>
+            <Badge variant="info" icon="quiz">{loading ? '…' : t('teacherSpace.quizCount', { n: quizCount })}</Badge>
+            <Badge variant="accent" icon="description">{loading ? '…' : t('teacherSpace.memoCount', { n: memoCount })}</Badge>
           </div>
         </div>
+
+        {!loading && (
+          <section className="teacher-onboarding" aria-label={t('teacherSpace.onboarding.title')}>
+            <div className="teacher-onboarding__head">
+              <strong>{t('teacherSpace.onboarding.title')}</strong>
+              <span>{t('teacherSpace.onboarding.hint')}</span>
+            </div>
+            <div className="teacher-onboarding__steps">
+              {[
+                { key: 'class', to: 'class-subjects', done: classes.length > 0 },
+                { key: 'quiz', to: 'quizzes', done: quizCount > 0 },
+                { key: 'memo', to: 'memos', done: memoCount > 0 },
+                { key: 'exam', to: 'exams', done: examCount > 0 }
+              ].map((s, i) => (
+                <Link key={s.key} to={s.to} className="teacher-onboarding__step" data-done={s.done ? 'true' : 'false'}>
+                  <span className="teacher-onboarding__num">{s.done ? '✓' : i + 1}</span>
+                  <span>{t(`teacherSpace.onboarding.step${s.key}`)}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         <a
           className="teacher-books-banner"
