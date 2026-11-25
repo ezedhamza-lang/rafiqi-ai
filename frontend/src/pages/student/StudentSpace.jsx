@@ -172,6 +172,15 @@ export default function StudentSpace() {
       <Suspense fallback={null}>
         <StudentProfile profile={profile} />
       </Suspense>
+      {profile && !profile.class && (
+        <div className="student-space__no-class card" role="status">
+          <span className="material-icons" aria-hidden="true">info</span>
+          <div>
+            <strong>{t('studentSpace.noClassBanner.title')}</strong>
+            <p>{t('studentSpace.noClassBanner.text')}</p>
+          </div>
+        </div>
+      )}
       <SpaceShell base="/student-space" title={t('studentSpace.sidebarTitle')} storageKey="rafiqi-student-sidebar" sections={GROUPS} fullWidth={isFullWidth}>
         <Suspense fallback={null}>
         <Routes>

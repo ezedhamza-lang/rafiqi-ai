@@ -12,6 +12,7 @@ export default function TeacherAI() {
 
   const [tab, setTab] = useState('plan');
   const [configured, setConfigured] = useState(false);
+  const [platformConfigured, setPlatformConfigured] = useState(false);
   const [apiKey, setApiKey] = useState('');
   const [generating, setGenerating] = useState(false);
   const [error, setError] = useState('');
@@ -29,7 +30,7 @@ export default function TeacherAI() {
   const load = useCallback(() => {
     api
       .get('/ai/key')
-      .then((d) => setConfigured(d.configured))
+      .then((d) => { setConfigured(d.configured); setPlatformConfigured(Boolean(d.platformConfigured)); })
       .catch((e) => setError(e.message));
   }, []);
 
@@ -214,38 +215,56 @@ export default function TeacherAI() {
       </div>
 
       <div className="card-item ai-key-card">
-        <h4>{configured ? t('teacherSpace.teacherAI.keyConfigured') : t('teacherSpace.teacherAI.keyNotConfigured')}</h4>
-        {configured ? (
-          <p className="muted">{t('teacherSpace.teacherAI.keyConfiguredNote')}</p>
-        ) : (
-          <p className="muted">{t('teacherSpace.teacherAI.keyNotConfiguredNote')}</p>
-        )}
+        <h4>
+          {configured
+            ? t('teacherSpace.teacherAI.keyConfigured')
+            : platformConfigured
+              ? t('teacherSpace.teacherAI.platformReadyTitle')
+              : t('teacherSpace.teacherAI.keyNotConfigured')}
+        </h4>
+        <p className="muted">
+          {configured
+            ? t('teacherSpace.teacherAI.keyConfiguredNote')
+            : platformConfigured
+              ? t('teacherSpace.teacherAI.platformReadyNote')
+              : t('teacherSpace.teacherAI.keyNotConfiguredNote')}
+        </p>
         {!configured ? (
           <>
             <form className="form-row" onSubmit={saveKey}>
               <div className="form-group grow">
-                <input type="password" value={apiKey} onChange={(e) => setApiKey(e.target.value)} placeholder={t('teacherSpace.teacherAI.keyPlaceholder')} required />
+                <input
+                  type="password"
+                  value={apiKey}
+                  onChange={(e) => setApiKey(e.target.value)}
+                  placeholder={t(platformConfigured ? 'teacherSpace.teacherAI.optionalKeyPlaceholder' : 'teacherSpace.teacherAI.keyPlaceholder')}
+                  required={!platformConfigured}
+                />
               </div>
-              <button className="btn btn-primary" type="submit">{t('teacherSpace.teacherAI.saveKey')}</button>
+              <button className="btn btn-primary" type="submit">
+                {t(platformConfigured ? 'teacherSpace.teacherAI.optionalSaveKey' : 'teacherSpace.teacherAI.saveKey')}
+              </button>
             </form>
-            <div className="ai-key-help">
-              <h5>{t('teacherSpace.teacherAI.keyHelpTitle')}</h5>
-              <ol>
-                <li>{t('teacherSpace.teacherAI.keyHelpStep1')}</li>
-                <li>{t('teacherSpace.teacherAI.keyHelpStep2')}</li>
-                <li>{t('teacherSpace.teacherAI.keyHelpStep3')}</li>
-              </ol>
-              <a
-                className="btn btn-secondary ai-key-help-cta"
-                href="https://aistudio.google.com/app/apikey"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="material-icons">open_in_new</span>
-                {t('teacherSpace.teacherAI.keyHelpCta')}
-              </a>
-              <p className="muted">{t('teacherSpace.teacherAI.keyHelpNote')}</p>
-            </div>
+            {!platformConfigured && (
+              <div className="ai-key-help">
+                <h5>{t('teacherSpace.teacherAI.keyHelpTitle')}</h5>
+                <ol>
+                  <li>{t('teacherSpace.teacherAI.keyHelpStep1')}</li>
+                  <li>{t('teacherSpace.teacherAI.keyHelpStep2')}</li>
+                  <li>{t('teacherSpace.teacherAI.keyHelpStep3')}</li>
+                </ol>
+                <a
+                  className="btn btn-secondary ai-key-help-cta"
+                  href="https://aistudio.google.com/app/apikey"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="material-icons">open_in_new</span>
+                  {t('teacherSpace.teacherAI.keyHelpCta')}
+                </a>
+                <p className="muted">{t('teacherSpace.teacherAI.keyHelpNote')}</p>
+              </div>
+            )}
           </>
         ) : (
           <button className="btn btn-danger" onClick={removeKey}>{t('teacherSpace.teacherAI.removeKey')}</button>

@@ -1235,12 +1235,21 @@ button {
   }
   .hero-carousel__slide {
     max-width: 100%;
-    padding: 0 0.5rem;
+    padding: 1rem 0.9rem;
     text-align: center;
+    /* لوحة خلف النص حتى لا يتداخل مع الرسم على الشاشات الصغيرة */
+    background: linear-gradient(to top, rgba(9, 22, 48, 0.94), rgba(9, 22, 48, 0.76) 72%, rgba(9, 22, 48, 0.2));
+    border-radius: 18px;
+    backdrop-filter: blur(2px);
+  }
+  .hero-carousel__title {
+    font-size: clamp(1.35rem, 7vw, 1.9rem);
+    line-height: 1.25;
   }
   .hero-carousel__sub {
     max-width: 100%;
-    font-size: 0.9rem;
+    font-size: 0.82rem;
+    line-height: 1.6;
   }
   .hero-carousel__cta {
     justify-content: center;
@@ -9193,3 +9202,39 @@ html:not(.mi-ready) .material-icons{color:transparent !important}
 .live-demo-note .material-icons{color:var(--accent-dark);font-size:22px}
 .live-demo-note strong{display:block;font-size:.9rem;color:var(--accent-ink)}
 .live-demo-note p{margin:.25rem 0 0;font-size:.82rem;line-height:1.6}
+
+/* دليل أول استخدام للأستاذ */
+.teacher-onboarding{margin:1rem 0;padding:1rem 1.15rem;border-radius:14px;border:1px solid rgba(18,58,107,.12);background:linear-gradient(135deg,rgba(237,243,251,.95),rgba(247,243,234,.85))}
+.teacher-onboarding__head{display:flex;flex-wrap:wrap;gap:.4rem 1rem;align-items:baseline;margin-bottom:.75rem}
+.teacher-onboarding__head strong{font-size:1.02rem;color:var(--primary,#123A6B)}
+.teacher-onboarding__head span{font-size:.86rem;opacity:.78}
+.teacher-onboarding__steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:.6rem}
+.teacher-onboarding__step{display:flex;align-items:center;gap:.6rem;padding:.6rem .75rem;border-radius:10px;background:#fff;border:1px solid rgba(18,58,107,.12);text-decoration:none;color:inherit;font-size:.9rem}
+.teacher-onboarding__step[data-done="true"]{border-color:#0b8a4b;background:rgba(11,138,75,.06)}
+.teacher-onboarding__num{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;border-radius:50%;background:var(--primary,#123A6B);color:#fff;font-size:.8rem;font-weight:700}
+.teacher-onboarding__step[data-done="true"] .teacher-onboarding__num{background:#0b8a4b}
+
+/* تنبيه التلميذ غير المُسند إلى قسم */
+.student-space__no-class{display:flex;gap:.75rem;align-items:flex-start;margin:1rem auto;max-width:1100px;padding:1rem 1.25rem;border-inline-start:5px solid var(--accent,#F5B942)}
+.student-space__no-class .material-icons{color:var(--accent-dark,#b06b00);font-size:28px}
+.student-space__no-class strong{display:block;margin-bottom:.25rem}
+.student-space__no-class p{margin:0;line-height:1.7;font-size:.92rem;opacity:.9}
+
+/* ===== معاينة فضاء التلميذ للزوار (بلا تسجيل) ===== */
+.student-preview{padding-top:2rem;padding-bottom:3rem;display:grid;gap:1.25rem}
+.student-preview__hero{text-align:center;padding:2rem 1.25rem}
+.student-preview__hero h1{margin:.6rem 0;font-size:clamp(1.6rem,4vw,2.4rem)}
+.student-preview__hero p{max-width:720px;margin:0 auto 1.2rem;line-height:1.8;opacity:.9}
+.student-preview__cta,.student-preview__options{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center}
+.student-preview__features{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem}
+.student-preview__feature{padding:1.25rem;text-align:center}
+.student-preview__feature h2{font-size:1.1rem;margin:.6rem 0 .35rem}
+.student-preview__feature p{margin:0;line-height:1.7;font-size:.92rem;opacity:.88}
+.student-preview__demo{padding:1.5rem}
+.student-preview__demo h2{margin:0 0 .6rem}
+.student-preview__question{font-weight:700;font-size:1.05rem;margin-bottom:1rem}
+.student-preview__feedback{margin:1rem 0 .4rem;font-weight:700}
+.student-preview__feedback[data-correct="true"]{color:#0b8a4b}
+.student-preview__feedback[data-correct="false"]{color:#b06b00}
+.student-preview__note,.student-preview__footnote{font-size:.85rem;opacity:.75;line-height:1.7;margin:.75rem 0 0}
+.student-preview__footnote{text-align:center}

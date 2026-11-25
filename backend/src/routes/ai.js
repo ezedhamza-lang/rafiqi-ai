@@ -6,6 +6,7 @@ import {
   saveAiKey,
   deleteAiKey,
   hasAiKey,
+  getPlatformAiKey,
   generateQuizQuestions,
   generateStory,
   gradeShortAnswer,
@@ -65,8 +66,9 @@ function aiError(e) {
  *         description: حالة التهيئة
  */
 router.get('/key', teacherMiddleware, asyncHandler(async (req, res) => {
-  const key = await hasAiKey(req.user.id);
-  res.json({ configured: !!key });
+  const [key, platform] = await Promise.all([hasAiKey(req.user.id), getPlatformAiKey()]);
+  // الخدمات تعمل بمفتاح المعلّم أو بمفتاح المنصة (resolveApiKey يتكفل بذلك).
+  res.json({ configured: !!key, platformConfigured: !!platform });
 }));
 
 /**

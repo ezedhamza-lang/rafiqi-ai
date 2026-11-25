@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import rateLimit from 'express-rate-limit';
 import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -24,6 +25,15 @@ const upload = multer({
   storage,
   limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: strictExtFilter(HELP_EXT)
+});
+
+// الضيوف يستطيعون إرسال طلب مساعدة، لكن بسقف منخفض لمنع الإساءة/ال spam.
+const publicHelpLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 8,
+  standardHeaders: 'draft-7',
+  legacyHeaders: false,
+  message: { error: 'أرسلت عدة طلبات مؤخرًا — انتظر قليلًا أو سجّل الدخول' }
 });
 
 const router = Router();
@@ -81,6 +91,7 @@ router.get('/types', asyncHandler(async (_req, res) => {
  */
 router.post(
   '/',
+  publicHelpLimiter,
   optionalAuth,
   upload.single('attachment'),
   discardUploadsOnError,
@@ -101,6 +112,8 @@ router.post(
       description: description || null,
       attachment: req.file ? `/uploads/${req.file.filename}` : null
     };
+    // ملاحظة: واجهة الضيف تطلب بريدًا للتواصل، لكن الـ API يحتفظ بسلوكه القديم
+    // (طلب مجهول بلا وسيلة تواصل مقبول) حتى لا ينكسر العقد مع الاختبارات الأمنية.
     // أمان: لا يُربط الحساب إلا لمستخدم مصادَق فعلاً — لا من جسم الطلب
     if (req.user?.id) data.userId = req.user.id;
     const request = await prisma.helpRequest.create({ data });
